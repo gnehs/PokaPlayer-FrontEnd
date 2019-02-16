@@ -4,27 +4,28 @@
       <md-app-toolbar class="md-primary">
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
-            <md-button class="md-icon-button">
+            <md-button class="md-icon-button menu">
               <md-icon>menu</md-icon>
             </md-button>
             <span class="md-title">PokaPlayer</span>
           </div>
-          <md-autocomplete
-            class="search"
-            v-model="searchKeyword"
-            :md-options="coins"
-            md-layout="box"
-          >
-            <label>{{$t("search")}}</label>
-          </md-autocomplete>
           <div class="md-toolbar-section-end">
-            <md-button class="md-icon-button">
-              <md-icon>refresh</md-icon>
-            </md-button>
+            <md-menu>
+              <md-button class="md-icon-button" md-menu-trigger>
+                <md-icon>more_vert</md-icon>
+              </md-button>
 
-            <md-button class="md-icon-button">
-              <md-icon>more_vert</md-icon>
-            </md-button>
+              <md-menu-content>
+                <md-menu-item to="/setting">
+                  <md-icon class="outline-settings"></md-icon>
+                  <span class="md-list-item-text">{{$t("settings")}}</span>
+                </md-menu-item>
+                <md-menu-item to="/about">
+                  <md-icon class="outline-info"></md-icon>
+                  <span class="md-list-item-text">{{$t("settings_aboutAndHelp")}}</span>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
           </div>
         </div>
       </md-app-toolbar>
@@ -65,11 +66,6 @@
           <md-list-item to="/playlist">
             <md-icon class="outline-format_list_bulleted"></md-icon>
             <span class="md-list-item-text">{{$t("playlist")}}</span>
-          </md-list-item>
-          <md-divider/>
-          <md-list-item to="/setting">
-            <md-icon class="outline-settings"></md-icon>
-            <span class="md-list-item-text">{{$t("settings")}}</span>
           </md-list-item>
         </md-list>
       </md-app-drawer>
@@ -123,6 +119,11 @@ export default {
 
 </style>
 <style>
+@media screen and (min-width: 768px) {
+  .md-button.menu {
+    display: none;
+  }
+}
 .md-icon[class*="outline-"] {
   display: inline-block;
   width: 24px;
