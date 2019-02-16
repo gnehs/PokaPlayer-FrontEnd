@@ -42,32 +42,32 @@
           </md-list-item>
 
           <md-divider/>
-          <md-list-item>
+          <md-list-item to="/search">
             <md-icon class="outline-search"></md-icon>
             <span class="md-list-item-text">{{$t("search")}}</span>
           </md-list-item>
-          <md-list-item>
+          <md-list-item to="/album">
             <md-icon class="outline-album"></md-icon>
             <span class="md-list-item-text">{{$t("album")}}</span>
           </md-list-item>
-          <md-list-item>
+          <md-list-item to="/folder">
             <md-icon class="outline-folder"></md-icon>
             <span class="md-list-item-text">{{$t("folder")}}</span>
           </md-list-item>
-          <md-list-item>
+          <md-list-item to="/artist">
             <md-icon class="outline-mic_none"></md-icon>
             <span class="md-list-item-text">{{$t("artist")}}</span>
           </md-list-item>
-          <md-list-item>
+          <md-list-item to="/composer">
             <md-icon class="outline-music_note"></md-icon>
             <span class="md-list-item-text">{{$t("composer")}}</span>
           </md-list-item>
-          <md-list-item>
+          <md-list-item to="/playlist">
             <md-icon class="outline-format_list_bulleted"></md-icon>
             <span class="md-list-item-text">{{$t("playlist")}}</span>
           </md-list-item>
           <md-divider/>
-          <md-list-item>
+          <md-list-item to="/setting">
             <md-icon class="outline-settings"></md-icon>
             <span class="md-list-item-text">{{$t("settings")}}</span>
           </md-list-item>

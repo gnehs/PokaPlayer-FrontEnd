@@ -10,14 +10,12 @@
           <md-field>
             <label for="server">Server</label>
             <md-input type="text" name="server" id="server" :disabled="logining"/>
-            <span class="md-error">The email is required</span>
-            <span class="md-error">Invalid email</span>
+            <span class="md-error">Unable to connect to server</span>
           </md-field>
           <md-field>
             <label for="password">Password</label>
             <md-input type="password" name="password" id="password" :disabled="logining"/>
-            <span class="md-error">The email is required</span>
-            <span class="md-error">Invalid email</span>
+            <span class="md-error">Wrong password</span>
           </md-field>
         </md-card-content>
 
