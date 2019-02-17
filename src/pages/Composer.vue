@@ -1,16 +1,18 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div>
+    <headerWrapper :title="$t('composer')"/>
   </div>
 </template>
 
 <script>
+import headerWrapper from "@/components/header-wrapper";
 export default {
   name: "Composer",
+  components: {
+    headerWrapper
+  },
   data() {
-    return {
-      msg: "Composer"
-    };
+    return {};
   }
 };
 </script>

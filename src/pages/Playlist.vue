@@ -1,11 +1,12 @@
 <template>
   <div>
-    <h1>{{ msg }}</h1>
+    <headerWrapper :title="$t('playlist')"/>
     <pre>{{ data }}</pre>
   </div>
 </template>
 
 <script>
+import headerWrapper from "@/components/header-wrapper";
 export default {
   name: "Playlist",
   created() {
@@ -15,8 +16,10 @@ export default {
         this.data = response.data;
       });
   },
+  components: {
+    headerWrapper
+  },
   data: () => ({
-    msg: "Playlist",
     data: null
   })
 };
