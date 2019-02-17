@@ -4,7 +4,7 @@
       <md-app-toolbar class="md-primary">
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
-            <md-button class="md-icon-button menu">
+            <md-button class="md-icon-button menu" @click="toggleMenu">
               <md-icon>menu</md-icon>
             </md-button>
             <span class="md-title">PokaPlayer</span>
@@ -81,10 +81,17 @@
 export default {
   name: "App",
   data: () => ({
-    menuVisible: false,
-    searchKeyword: null,
-    coins: ["可愛幣幣", "開心幣幣", "傷心幣幣", "吼吼幣幣"]
+    menuVisible: false
   }),
+  created() {
+    this.axios.defaults.withCredentials = true;
+    if (!localStorage.BASE_URL) this.$router.push("/login");
+    this.axios.defaults.baseURL = this.server;
+    //看看能不能用
+    this.axios.get(localStorage.BASE_URL + "info/").then(response => {
+      if (!response.data.version) this.$router.push("/login");
+    });
+  },
   methods: {
     toggleMenu() {
       this.menuVisible = !this.menuVisible;
@@ -99,8 +106,8 @@ export default {
 @include md-register-theme(
   "default",
   (
-    primary: #5c8565,
-    accent: #1a11e8
+    primary: #27a09e,
+    accent: #205374
   )
 );
 
@@ -114,12 +121,12 @@ export default {
 		width: 230px
 		max-width: calc(100vw - 125px)
 	
-	.md-list .md-icon
-		opacity: .54
-
 </style>
 <style>
-@media screen and (min-width: 768px) {
+.md-list .md-icon {
+  opacity: 0.54;
+}
+@media screen and (min-width: 600px) {
   .md-button.menu {
     display: none;
   }

@@ -1,26 +1,28 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
-import NowPlaying from '@/components/NowPlaying'
-import Install from '@/components/Install'
-import Notfound from '@/components/Notfound'
-import Login from '@/components/Login'
-import Album from '@/components/Album'
-import Artist from '@/components/Artist'
-import Composer from '@/components/Composer'
-import Folder from '@/components/Folder'
-import Playlist from '@/components/Playlist'
-import Search from '@/components/Search'
-import Setting from '@/components/Setting'
+
+import About from '@/pages/About'
+import Album from '@/pages/Album'
+import Artist from '@/pages/Artist'
+import Composer from '@/pages/Composer'
+import Folder from '@/pages/Folder'
+import Home from '@/pages/Home'
+import Install from '@/pages/Install'
+import Login from '@/pages/Login'
+import NowPlaying from '@/pages/NowPlaying'
+import Notfound from '@/pages/Notfound'
+import Playlist from '@/pages/Playlist'
+import Search from '@/pages/Search'
+import Setting from '@/pages/Setting'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [{
-    path: '/now',
-    name: 'NowPlaying',
-    component: NowPlaying
+    path: '/about',
+    name: 'About',
+    component: About
   }, {
     path: '/album',
     name: 'Album',
@@ -38,6 +40,18 @@ export default new Router({
     name: 'Folder',
     component: Folder
   }, {
+    path: '/install',
+    name: 'Install',
+    component: Install
+  }, {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  }, {
+    path: '/now',
+    name: 'NowPlaying',
+    component: NowPlaying
+  }, {
     path: '/playlist',
     name: 'Playlist',
     component: Playlist
@@ -49,14 +63,6 @@ export default new Router({
     path: '/setting',
     name: 'Setting',
     component: Setting
-  }, {
-    path: '/install',
-    name: 'Install',
-    component: Install
-  }, {
-    path: '/login',
-    name: 'Login',
-    component: Login
   }, {
     path: '/',
     name: 'Home',

@@ -1,7 +1,7 @@
 {
 	"loading": "載入中...",
 	"header_welcome": "歡迎使用",
-	"header_version": "PokaPlayer {{version}}",
+	"header_version": "PokaPlayer {version}",
 
 	"checkUpdate_poka": "有新版本可供更新：{{version}}",
 	"checkUpdate_pokaEle": "有新版本 PokaPlayer-electron 可供更新：{{version}}",
