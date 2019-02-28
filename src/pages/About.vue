@@ -1,6 +1,6 @@
 <template>
   <div>
-    <headerWrapper
+    <poka-header
       :title="$t('settings_aboutAndHelp')"
       :subtitle="$t('settings_aboutAndHelp_description')"
     />
@@ -47,16 +47,12 @@
 
 </style>
 <script>
-import headerWrapper from "@/components/header-wrapper";
 export default {
   name: "About",
   data: () => ({
     poka_version: "",
     poka_author: ""
   }),
-  components: {
-    headerWrapper
-  },
   created() {
     this.axios.get(localStorage.BASE_URL + "info/").then(response => {
       if (!response.data.version) this.$router.push("/login");

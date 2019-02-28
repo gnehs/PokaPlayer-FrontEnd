@@ -85,16 +85,20 @@ export default {
   }),
   created() {
     this.axios.defaults.withCredentials = true;
-    if (!localStorage.BASE_URL) this.$router.push("/login");
-    this.axios.defaults.baseURL = this.server;
-    //看看能不能用
-    this.axios.get(localStorage.BASE_URL + "info/").then(response => {
-      if (!response.data.version) this.$router.push("/login");
-    });
+    this.axios.defaults.baseURL = _setting(`server`);
+    this.testConnection();
   },
   methods: {
     toggleMenu() {
       this.menuVisible = !this.menuVisible;
+    },
+    testConnection() {
+      this.axios
+        .get(_setting(`server`) + "info/")
+        .then(response => {
+          console.log(response.data.version);
+        })
+        .catch(e => this.$router.push("/login"));
     }
   }
 };
@@ -114,13 +118,20 @@ export default {
 @import "~vue-material/dist/theme/all"; // Apply the theme
 </style>
 <style lang="sass" scoped>
-	.md-app 
-		min-height: 100vh
+.md-app-content
+  max-height: calc(100vh - 64px)
+  overflow-y: auto
+  overflow-x: hidden
 
-	.md-drawer 
-		width: 230px
-		max-width: calc(100vw - 125px)
-	
+.md-toolbar, .md-toolbar-row 
+    min-height: 64px
+
+.md-app
+  min-height: 100vh
+
+.md-drawer 
+  width: 230px
+  max-width: calc(100vw - 125px)
 </style>
 <style>
 .md-list .md-icon {

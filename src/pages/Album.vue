@@ -1,16 +1,12 @@
 <template>
   <div>
-    <headerWrapper :title="$t('album')"/>
+    <poka-header :title="$t('album')"/>
   </div>
 </template>
 
 <script>
-import headerWrapper from "@/components/header-wrapper";
 export default {
   name: "Album",
-  components: {
-    headerWrapper
-  },
   data() {
     return {};
   }

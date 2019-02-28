@@ -48,9 +48,9 @@ export default {
     passwordError: null
   }),
   created() {
-    if (localStorage.remember) this.remember = localStorage.remember == "true";
-    if (localStorage.password) this.password = localStorage.password;
-    if (localStorage.BASE_URL) this.server = localStorage.BASE_URL;
+    this.remember = _setting(`rememberPass`);
+    this.password = _setting(`password`);
+    this.server = _setting(`server`);
   },
   methods: {
     login() {
@@ -84,10 +84,9 @@ export default {
         .then(response => {
           this.logining = false;
           if (response == "success") {
-            localStorage.BASE_URL = this.server;
-            localStorage.remember = this.remember;
-            localStorage.password = this.remember ? this.password : null;
-            this.axios.defaults.baseURL = this.server;
+            _setting(`rememberPass`, this.remember);
+            _setting(`password`, this.remember ? this.password : null);
+            _setting(`server`, this.server);
             this.$router.push("/");
           }
           if (response == "fail") {

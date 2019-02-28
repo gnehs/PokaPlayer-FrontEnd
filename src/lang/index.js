@@ -4,8 +4,6 @@ import VueI18n from 'vue-i18n'
 import zh_CN from './zh-CN/index.json'
 import zh_TW from './zh-TW/index.json'
 import en_US from './en-US/index.json'
-// import tw from './tw.json'
-// import es from './es.json'
 
 Vue.use(VueI18n)
 const locale = 'zh_TW'
