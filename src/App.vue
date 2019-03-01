@@ -31,43 +31,67 @@
       </md-app-toolbar>
 
       <md-app-drawer md-permanent="clipped" :md-active.sync="menuVisible" id="drawer">
-        <md-list>
-          <md-list-item to="/home">
-            <md-icon class="outline-home"></md-icon>
-            <span class="md-list-item-text">{{$t("home")}}</span>
-          </md-list-item>
+        <div class="drawer-list">
+          <md-list>
+            <md-list-item to="/home">
+              <md-icon class="outline-home"></md-icon>
+              <span class="md-list-item-text">{{$t("home")}}</span>
+            </md-list-item>
 
-          <md-list-item to="/now">
-            <md-icon class="outline-playlist_play"></md-icon>
-            <span class="md-list-item-text">{{$t("nowplaying")}}</span>
-          </md-list-item>
+            <md-list-item to="/now">
+              <md-icon class="outline-playlist_play"></md-icon>
+              <span class="md-list-item-text">{{$t("nowplaying")}}</span>
+            </md-list-item>
 
-          <md-divider/>
-          <md-list-item to="/search">
-            <md-icon class="outline-search"></md-icon>
-            <span class="md-list-item-text">{{$t("search")}}</span>
-          </md-list-item>
-          <md-list-item to="/album">
-            <md-icon class="outline-album"></md-icon>
-            <span class="md-list-item-text">{{$t("album")}}</span>
-          </md-list-item>
-          <md-list-item to="/folder">
-            <md-icon class="outline-folder"></md-icon>
-            <span class="md-list-item-text">{{$t("folder")}}</span>
-          </md-list-item>
-          <md-list-item to="/artist">
-            <md-icon class="outline-mic_none"></md-icon>
-            <span class="md-list-item-text">{{$t("artist")}}</span>
-          </md-list-item>
-          <md-list-item to="/composer">
-            <md-icon class="outline-music_note"></md-icon>
-            <span class="md-list-item-text">{{$t("composer")}}</span>
-          </md-list-item>
-          <md-list-item to="/playlist">
-            <md-icon class="outline-format_list_bulleted"></md-icon>
-            <span class="md-list-item-text">{{$t("playlist")}}</span>
-          </md-list-item>
-        </md-list>
+            <md-divider/>
+            <md-list-item to="/search">
+              <md-icon class="outline-search"></md-icon>
+              <span class="md-list-item-text">{{$t("search")}}</span>
+            </md-list-item>
+            <md-list-item to="/album">
+              <md-icon class="outline-album"></md-icon>
+              <span class="md-list-item-text">{{$t("album")}}</span>
+            </md-list-item>
+            <md-list-item to="/folder">
+              <md-icon class="outline-folder"></md-icon>
+              <span class="md-list-item-text">{{$t("folder")}}</span>
+            </md-list-item>
+            <md-list-item to="/artist">
+              <md-icon class="outline-mic_none"></md-icon>
+              <span class="md-list-item-text">{{$t("artist")}}</span>
+            </md-list-item>
+            <md-list-item to="/composer">
+              <md-icon class="outline-music_note"></md-icon>
+              <span class="md-list-item-text">{{$t("composer")}}</span>
+            </md-list-item>
+            <md-list-item to="/playlist">
+              <md-icon class="outline-format_list_bulleted"></md-icon>
+              <span class="md-list-item-text">{{$t("playlist")}}</span>
+            </md-list-item>
+          </md-list>
+        </div>
+
+        <div class="drawer-player">
+          <md-divider></md-divider>
+          <div class="song-info">
+            <div
+              class="cover"
+              style="background-image:url('https://cn.bing.com/az/hprichbg/rb/PhillisWheatley_ZH-CN8917971934_1920x1080.jpg')"
+            >
+              <md-button class="md-icon-button md-mini">
+                <md-icon>play_arrow</md-icon>
+              </md-button>
+            </div>
+            <div class="info">
+              <div class="title">逼比之歌</div>
+              <div class="artist">吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼</div>
+            </div>
+            <md-button class="md-icon-button md-mini next">
+              <md-icon>skip_next</md-icon>
+            </md-button>
+          </div>
+          <md-progress-bar class="md-accent" md-mode="buffer" :md-value="25" :md-buffer="40"></md-progress-bar>
+        </div>
       </md-app-drawer>
 
       <md-app-content>
@@ -111,13 +135,68 @@ export default {
   "default",
   (
     primary: #27a09e,
-    accent: #205374
+    accent: #767676
   )
 );
 
 @import "~vue-material/dist/theme/all"; // Apply the theme
 </style>
 <style lang="sass" scoped>
+.md-toolbar .md-title
+  font-family: var(--product-font)
+  font-weight: bold
+#drawer
+  display: flex
+  flex-direction: column
+  .drawer-list
+    flex: 1
+    overflow: auto
+    max-height: calc(100vh - 70px - 64px)
+.drawer-player
+  background: rgba(255, 255, 255, 0.3)
+  border-radius: 8px
+  bottom: 0
+  .song-info
+    display: flex
+    align-items: center
+    box-sizing: border-box
+    width: 230px
+    max-width: 230px
+    .cover
+      height: 64px
+      min-width: 64px
+      position: relative
+      background-size: cover
+      background-position: center
+      mask-image: linear-gradient(to right, black 80%, rgba(0,0,0,0.2) 100%)
+      -webkit-mask-image: linear-gradient(to right, black 80%, rgba(0,0,0,0.2) 100%)
+      .md-button
+        position: absolute 
+        top: 50%
+        left: 50%
+        transform: translate(-70%, -50%)
+        background-color: rgba(255, 255, 255, 0.7)
+        opacity: 0
+      &:hover .md-button
+        opacity: 1
+    .info
+      flex: 1
+      overflow: hidden
+      .title,.artist
+        padding-left: 2px
+        overflow: hidden
+        text-overflow: ellipsis
+        white-space: nowrap
+        line-height: 24px
+      .title
+        font-weight: bold
+    .md-button.next
+      width: 30px
+      min-width: 30px
+      height: 30px
+      margin: 0
+  .md-progress-bar
+    width: 230px
 .md-app-content
   max-height: calc(100vh - 64px)
   overflow-y: auto
@@ -136,6 +215,25 @@ export default {
   background: rgba(0, 0, 0, 0.05)
 </style>
 <style>
+:root {
+  --default-font: Roboto, "SF Pro TC", "SF Pro Text", "SF Pro Icons",
+    "PingFang TC", "Helvetica Neue", "Helvetica", "Arial", "Source Hans",
+    "思源黑體", "Noto Sans CJK TC", "Noto Sans TC", "Microsoft JhengHei",
+    "Microsoft Yahei", wf_SegoeUI, "Segoe UI", Segoe, "Segoe WP", Tahoma,
+    Verdana, Ubuntu, "Bitstream Vera Sans", "DejaVu Sans", Tahoma, 微軟正黑體,
+    "LiHei Pro", "WenQuanYi Micro Hei", "Droid Sans Fallback", "AR PL UMing TW",
+    "Helvetica Neue", "Hiragino Maru Gothic ProN", メイリオ,
+    "ヒラギノ丸ゴ ProN W4", Meiryo, "Droid Sans", sans-serif;
+  --product-font: "Product Sans", Roboto, "SF Pro TC", "SF Pro Text",
+    "SF Pro Icons", "PingFang TC", "Helvetica Neue", "Helvetica", "Arial",
+    "Source Hans", "思源黑體", "Noto Sans CJK TC", "Noto Sans TC",
+    "Microsoft JhengHei", "Microsoft Yahei", wf_SegoeUI, "Segoe UI", Segoe,
+    "Segoe WP", Tahoma, Verdana, Ubuntu, "Bitstream Vera Sans", "DejaVu Sans",
+    Tahoma, 微軟正黑體, "LiHei Pro", "WenQuanYi Micro Hei",
+    "Droid Sans Fallback", "AR PL UMing TW", "Helvetica Neue",
+    "Hiragino Maru Gothic ProN", メイリオ, "ヒラギノ丸ゴ ProN W4", Meiryo,
+    "Droid Sans", sans-serif;
+}
 .md-list .md-icon {
   opacity: 0.54;
 }

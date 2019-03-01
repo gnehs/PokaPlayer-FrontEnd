@@ -21,6 +21,7 @@
         </div>
       </md-list-item>
     </md-list>
+    <md-divider></md-divider>
     <md-list>
       <md-subheader>{{$t("settings_about_externalLink")}}</md-subheader>
       <md-list-item href="https://github.com/gnehs/PokaPlayer/" target="_blank">
@@ -54,7 +55,6 @@ export default {
     poka_author: ""
   }),
   created() {
-    this.axios.get(localStorage.BASE_URL + "info/").then(response => {
       if (!response.data.version) this.$router.push("/login");
       this.poka_version = response.data.version;
       this.poka_author = response.data.author;

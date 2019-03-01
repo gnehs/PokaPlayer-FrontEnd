@@ -27,8 +27,8 @@
   </div>
 </template>
 <style lang="sass" scoped>
-.md-tabs.md-theme-default .md-tabs-navigation 
-    background-color: transparent
+.poka-parse-multiple
+    --md-theme-default-background-on-background: transparent
 .poka-parse-multiple>div
     margin-left: 16px
 .poka-parse-multiple>div>h1
