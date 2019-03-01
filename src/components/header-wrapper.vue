@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "headerWrapper",
+  name: "poka-header",
   props: {
     title: {
       type: String,

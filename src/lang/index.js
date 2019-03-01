@@ -17,7 +17,11 @@ const i18n = new VueI18n({
     /** 默認值 */
     locale,
     fallbackLocale: 'en_US',
-    messages
+    messages,
+    missing: (locale, key, vm) => {
+        console.log(locale, key, vm)
+        return key
+    },
 })
 
 

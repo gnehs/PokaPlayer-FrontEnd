@@ -4,8 +4,7 @@
       :title="$t('header_welcome')"
       :subtitle="$t('header_version',{version:poka_version})"
     />
-    <h1>{{ msg }}</h1>
-    <pre>{{ data }}</pre>
+    <poka-parse-multiple :data="data"/>
   </div>
 </template>
 
@@ -22,7 +21,6 @@ export default {
   },
   data() {
     return {
-      msg: "首頁",
       data: null,
       poka_version: null
     };

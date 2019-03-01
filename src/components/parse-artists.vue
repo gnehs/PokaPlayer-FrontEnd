@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "poka-parse-playlists",
+  name: "poka-parse-artists",
   props: ["data"],
   data: () => ({
     server: _setting(`server`)

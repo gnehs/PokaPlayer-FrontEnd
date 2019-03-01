@@ -1,6 +1,6 @@
 console.log("poka")
 
-window._setting = (setting, value = undefined) => {
+window._setting = (setting, value) => {
     let pokaSetting = JSON.parse(localStorage.pokaSetting || `{}`)
     let defaultPokaSetting = {
         "audioQuality": "High",

@@ -2,7 +2,7 @@
     a.card(:title="pokaTitle+`\n`+pokaSubtitle")
         .image(:style="{backgroundImage:`url(\"${pokaBg}\")`}",v-if="pokaBg")
         .image(v-else)
-            <md-icon :class="pokaIcon+' icon-white'"></md-icon>
+            <md-icon class="icon-white" :class="pokaIcon"></md-icon>
         .title {{pokaTitle}}
         .subtitle {{pokaSubtitle}}
 </template>

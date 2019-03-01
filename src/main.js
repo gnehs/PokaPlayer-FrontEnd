@@ -15,25 +15,8 @@ import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 Vue.use(VueMaterial)
 
-import headerWrapper from '@/components/header-wrapper.vue'
-import pokaCard from '@/components/card.vue'
-import pokaCards from '@/components/cards.vue'
-import pokaLoader from '@/components/loader.vue'
-Vue.component("poka-header", headerWrapper)
-Vue.component("poka-card", pokaCard)
-Vue.component("poka-cards", pokaCards)
-Vue.component("poka-loader", pokaLoader)
-// parse
-import parsePlaylists from '@/components/parse-playlists.vue'
-import parseArtists from '@/components/parse-artists.vue'
-import parseAlbums from '@/components/parse-albums.vue'
-import parseComposers from '@/components/parse-composers.vue'
-import parseFolders from '@/components/parse-folders.vue'
-Vue.component("poka-parse-playlists", parsePlaylists)
-Vue.component("poka-parse-artists", parseArtists)
-Vue.component("poka-parse-albums", parseAlbums)
-Vue.component("poka-parse-composers", parseComposers)
-Vue.component("poka-parse-folders", parseFolders)
+import * as PokaComponents from './poka-component.js'
+Object.values(PokaComponents).forEach(PokaComponents => Vue.component(PokaComponents.name, PokaComponents))
 
 Vue.config.productionTip = false
 /* eslint-disable no-new */
