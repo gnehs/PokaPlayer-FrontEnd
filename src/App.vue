@@ -32,7 +32,7 @@
 
       <md-app-drawer md-permanent="clipped" :md-active.sync="menuVisible" id="drawer">
         <md-list>
-          <md-list-item to="/">
+          <md-list-item to="/home">
             <md-icon class="outline-home"></md-icon>
             <span class="md-list-item-text">{{$t("home")}}</span>
           </md-list-item>
@@ -132,6 +132,8 @@ export default {
 .md-drawer 
   width: 230px
   max-width: calc(100vw - 125px)
+.router-link-active
+  background: rgba(0, 0, 0, 0.05)
 </style>
 <style>
 .md-list .md-icon {

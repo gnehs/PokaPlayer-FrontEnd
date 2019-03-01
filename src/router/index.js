@@ -64,12 +64,18 @@ export default new Router({
     name: 'Setting',
     component: Setting
   }, {
-    path: '/',
+    path: '/home',
     name: 'Home',
     component: Home
   }, {
-    path: '*',
+    path: '/notfound',
     name: 'Notfound',
     component: Notfound
+  }, {
+    path: '/',
+    redirect: '/home'
+  }, {
+    path: '*',
+    redirect: '/notfound'
   }]
 })

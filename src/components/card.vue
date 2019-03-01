@@ -1,8 +1,8 @@
 <template lang="pug">
-    a.card(v-bind="$props",:title="pokaTitle+`&#10;`+pokaSubtitle")
-        .image(:style="{backgroundImage:`url('${pokaBg}')`}",v-if="pokaBg!=false")
+    a.card(:title="pokaTitle+`\n`+pokaSubtitle")
+        .image(:style="{backgroundImage:`url(\"${pokaBg}\")`}",v-if="pokaBg")
         .image(v-else)
-            <md-icon class="outline-play_circle_filled icon-white"></md-icon>
+            <md-icon :class="pokaIcon+' icon-white'"></md-icon>
         .title {{pokaTitle}}
         .subtitle {{pokaSubtitle}}
 </template>
@@ -11,16 +11,10 @@
 export default {
   name: "poka-card",
   props: {
-    pokaBg: String,
+    pokaBg: { default: false, type: String },
     pokaTitle: String,
     pokaSubtitle: String,
-    download: String,
-    href: String,
-    hreflang: String,
-    ping: String,
-    rel: String,
-    target: String,
-    type: String
+    pokaIcon: { default: "outline-play_circle_filled", type: String }
   }
 };
 </script>

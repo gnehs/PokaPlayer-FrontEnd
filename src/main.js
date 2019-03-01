@@ -24,11 +24,16 @@ Vue.component("poka-card", pokaCard)
 Vue.component("poka-cards", pokaCards)
 Vue.component("poka-loader", pokaLoader)
 // parse
-
 import parsePlaylists from '@/components/parse-playlists.vue'
 import parseArtists from '@/components/parse-artists.vue'
+import parseAlbums from '@/components/parse-albums.vue'
+import parseComposers from '@/components/parse-composers.vue'
+import parseFolders from '@/components/parse-folders.vue'
 Vue.component("poka-parse-playlists", parsePlaylists)
 Vue.component("poka-parse-artists", parseArtists)
+Vue.component("poka-parse-albums", parseAlbums)
+Vue.component("poka-parse-composers", parseComposers)
+Vue.component("poka-parse-folders", parseFolders)
 
 Vue.config.productionTip = false
 /* eslint-disable no-new */
