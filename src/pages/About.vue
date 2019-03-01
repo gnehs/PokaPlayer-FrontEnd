@@ -55,6 +55,7 @@ export default {
     poka_author: ""
   }),
   created() {
+    this.axios.get(_setting(`server`) + "/info/").then(response => {
       if (!response.data.version) this.$router.push("/login");
       this.poka_version = response.data.version;
       this.poka_author = response.data.author;
