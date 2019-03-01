@@ -19,12 +19,16 @@ import headerWrapper from '@/components/header-wrapper.vue'
 import pokaCard from '@/components/card.vue'
 import pokaCards from '@/components/cards.vue'
 import pokaLoader from '@/components/loader.vue'
-import parsePlaylists from '@/components/parse-playlists.vue'
 Vue.component("poka-header", headerWrapper)
 Vue.component("poka-card", pokaCard)
 Vue.component("poka-cards", pokaCards)
 Vue.component("poka-loader", pokaLoader)
+// parse
+
+import parsePlaylists from '@/components/parse-playlists.vue'
+import parseArtists from '@/components/parse-artists.vue'
 Vue.component("poka-parse-playlists", parsePlaylists)
+Vue.component("poka-parse-artists", parseArtists)
 
 Vue.config.productionTip = false
 /* eslint-disable no-new */

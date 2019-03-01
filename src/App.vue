@@ -94,7 +94,7 @@ export default {
     },
     testConnection() {
       this.axios
-        .get(_setting(`server`) + "info/")
+        .get(_setting(`server`) + "/info/")
         .then(response => {
           console.log(response.data.version);
         })

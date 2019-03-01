@@ -56,10 +56,7 @@ export default {
     login() {
       this.passwordError = null;
       this.serverError = null;
-      if (
-        this.server.substring(this.server.length - 1, this.server.length) != "/"
-      )
-        this.server += "/";
+      this.server = this.server.replace(/\/$/, ""); // remove last "/"
       if (!this.password || !this.server) {
         if (!this.password) {
           this.passwordError = "Wrong password";
@@ -75,7 +72,7 @@ export default {
 
       axios({
         method: "post",
-        url: this.server + "login/",
+        url: this.server + "/login/",
         data: formData,
         config: { headers: { "Content-Type": "multipart/form-data" } }
       })

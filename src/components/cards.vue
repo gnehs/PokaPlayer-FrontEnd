@@ -119,23 +119,23 @@ export default {
 		&:nth-child(14n+14) .image
 			background-color: #9E9E9E
 	&.two.cards .card
-		--size: calc(100% / 2 - 2em)
+		--size: calc(100% / 2 - 1em)
 	&.three.cards .card
-		--size: calc(100% / 3 - 2em)
+		--size: calc(100% / 3 - 1em)
 	&.four.cards .card
-		--size: calc(100% / 4 - 2em)
+		--size: calc(100% / 4 - 1em)
 	&.five.cards .card
-		--size: calc(100% / 5 - 2em)
+		--size: calc(100% / 5 - 1em)
 	&.six.cards .card
-		--size: calc(100% / 6 - 2em)
+		--size: calc(100% / 6 - 1em)
 	&.sever.cards .card
-		--size: calc(100% / 7 - 2em)
+		--size: calc(100% / 7 - 1em)
 	&.eight.cards .card
-		--size: calc(100% / 8 - 2em)
+		--size: calc(100% / 8 - 1em)
 	&.nine.cards .card
-		--size: calc(100% / 9 - 2em)
+		--size: calc(100% / 9 - 1em)
 	&.ten.cards .card
-		--size: calc(100% / 10 - 2em)
+		--size: calc(100% / 10 - 1em)
 	&.color.picker.cards
 		margin: 0 -24px
 		> .card
@@ -153,33 +153,33 @@ export default {
 @media (max-width: 575.98px)
 	.poka
 		&.cards .card
-			--size: calc(50% - 2em)
+			--size: calc(50% - 1em)
 			font-size: 9px
 		&.doubling.four.cards .card
-			--size: calc(50% - 2em)
+			--size: calc(50% - 1em)
 
 @media (min-width: 576px) and (max-width: 767.98px)
 	.poka.cards .card
-		--size: calc(33.3% - 2em)
+		--size: calc(33.3% - 1em)
 		.image i
 			font-size: 5em
 
 @media (min-width: 768px) and (max-width: 991.98px)
 	.poka.cards .card
-		--size: calc(25% - 2em)
+		--size: calc(25% - 1em)
 
 @media (min-width: 992px) and (max-width: 1199.98px)
 	.poka.cards .card
-		--size: calc(20% - 2em)
+		--size: calc(20% - 1em)
 
 @media (min-width: 1200px)
 	.poka.cards .card
-		--size: calc(16.6% - 2em)
+		--size: calc(16.6% - 1em)
 
 @media (max-width: 575.98px)
 	.poka
 		&.doubling.ten.cards .card
-	 		--size: calc(20% - 2em)
+	 		--size: calc(20% - 1em)
 		&.color.picker.cards > .card
 		  	--size: calc(20%)
 </style>

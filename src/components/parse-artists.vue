@@ -1,9 +1,9 @@
 <template>
   <poka-cards>
     <poka-card
-      v-for="{name, image, id, source} in data"
+      v-for="{name, cover, id, source} in data"
       :key="id"
-      :poka-bg="image?server+image:false"
+      :poka-bg="cover?server+cover:false"
       :poka-title="name"
       :poka-subtitle="source"
     />
