@@ -22,6 +22,7 @@
 <style lang="sass" scoped>
 /* 專輯歌曲頁面 - 專輯簡介 */
 .info-header
+	position: relative
 	padding: 16px
 	display: flex
 	flex-direction: row

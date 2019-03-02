@@ -7,6 +7,9 @@
         <span class="md-headline">{{item.source}}</span>
       </h1>
       <md-tabs>
+        <md-tab :md-label="$t('song')" v-if="item.songs&&item.songs.length>0">
+          <poka-parse-songs :data="item.songs"/>
+        </md-tab>
         <md-tab :md-label="$t('album')" v-if="item.albums&&item.albums.length>0">
           <poka-parse-albums :data="item.albums"/>
         </md-tab>

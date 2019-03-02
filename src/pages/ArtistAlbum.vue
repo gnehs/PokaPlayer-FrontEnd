@@ -1,11 +1,6 @@
 <template>
   <div>
-    <poka-header
-      :title="$route.params.id"
-      :subtitle="$t('artist')"
-      :blurbg="true"
-      :bg="server+cover||null"
-    />
+    <poka-header :title="name" :subtitle="$t('artist')" :blurbg="true" :bg="server+cover||null"/>
     <poka-parse-albums v-if="data" :data="data.albums"/>
     <poka-loader v-else/>
   </div>
@@ -27,8 +22,9 @@ export default {
     this.axios.get(url).then(response => {
       this.data = response.data;
     });
-    //取得封面
+    //取得封面與名字
     if (ArtistSource == "DSM") {
+      this.name = ArtistId;
       this.cover = `/pokaapi/cover/?moduleName=${encodeURIComponent(
         ArtistSource
       )}&data=${encodeURIComponent(
@@ -46,12 +42,14 @@ export default {
         )
         .then(response => {
           this.cover = response.data.cover;
+          this.name = response.data.name;
         });
     }
   },
   data: () => ({
     data: null,
     cover: false,
+    name: "",
     server: _setting(`server`)
   })
 };

@@ -1,7 +1,8 @@
 <template lang="pug">
-.header-wrapper
-	.bg(:style=`{backgroundImage: 'url("'+bg+'")'}`,:class="{blur: blurbg}")
-	.title(style="max-width: 950px !important;")
+div
+	.header-wrapper
+		.bg(:style=`{backgroundImage: 'url("'+bg+'")'}`,:class="{blur: blurbg}")
+	.header
 		.title(style="line-height: normal;") {{title}}
 		.subtitle {{subtitle}}
 </template>
@@ -28,27 +29,26 @@ export default {
 </script>
 <style lang="sass" scoped>
 .header-wrapper
-	width: calc(100% + 16px * 2)
-	overflow: hidden
+	width: 100%
 	position: relative
-	margin-bottom: -200px
+	min-height: 1px
 	.bg
 		transform: scale(1.05)
-		min-height: 350px
 		background-size: cover
 		background-position: center
 		mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 10%, transparent 90%)
 		-webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 10%, transparent 90%)
 		width: 100%
+		position: absolute
+		min-height: 300px
 	.bg.blur
 		filter: blur(5px)
-	> .title
-		font-weight: bold
-		margin-top: -300px
-		margin-left: 32px
-		position: absolute
-		.title
-			font-size: 3.5em
-		.subtitle
-			font-size: 1.5em
+.header
+	font-weight: bold
+	margin: 32px
+	position: relative
+	>.title
+		font-size: 3.5em
+	>.subtitle
+		font-size: 1.5em
 </style>
