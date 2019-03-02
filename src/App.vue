@@ -74,23 +74,26 @@
         <div class="drawer-player">
           <md-divider></md-divider>
           <div class="song-info">
-            <div
-              class="cover"
-              style="background-image:url('https://cn.bing.com/az/hprichbg/rb/PhillisWheatley_ZH-CN8917971934_1920x1080.jpg')"
-            >
-              <md-button class="md-icon-button md-mini">
-                <md-icon>play_arrow</md-icon>
+            <div class="cover" :style="`background-image: url('${audio_cover}')`">
+              <md-button class="md-icon-button md-mini" @click="audio_toggle">
+                <md-icon v-if="audio_paused">play_arrow</md-icon>
+                <md-icon v-else>pause</md-icon>
               </md-button>
             </div>
             <div class="info">
-              <div class="title">逼比之歌</div>
-              <div class="artist">吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼吼</div>
+              <div class="title">{{audio_title}}</div>
+              <div class="artist">{{audio_artist}}</div>
             </div>
-            <md-button class="md-icon-button md-mini next">
+            <md-button class="md-icon-button md-mini next" @click="audio_next">
               <md-icon>skip_next</md-icon>
             </md-button>
           </div>
-          <md-progress-bar class="md-accent" md-mode="buffer" :md-value="25" :md-buffer="40"></md-progress-bar>
+          <md-progress-bar
+            class="md-accent"
+            md-mode="buffer"
+            :md-value="audio_currentTime"
+            :md-buffer="audio_buffer"
+          ></md-progress-bar>
         </div>
       </md-app-drawer>
 
@@ -108,6 +111,12 @@ export default {
   name: "App",
   data: () => ({
     menuVisible: false,
+    audio_currentTime: 100,
+    audio_buffer: 100,
+    audio_paused: true,
+    audio_cover: _setting(`randomImgSource`),
+    audio_title: "等待播放中",
+    audio_artist: "：Ｄ",
     transitionName: "fade"
   }),
   created() {
@@ -126,8 +135,29 @@ export default {
     this.axios.defaults.withCredentials = true;
     this.axios.defaults.baseURL = _setting(`server`);
     this.testConnection();
+    setInterval(() => {
+      let nowPlaying = _player.list.audios[_player.list.index];
+      let buffered = _player.audio.buffered;
+      let audioBuffered =
+          _player.audio.currentTime > 1
+            ? (buffered.end(buffered.length - 1) / _player.audio.duration) * 100
+            : 0,
+        cent = (_player.audio.currentTime / _player.audio.duration) * 100;
+      this.audio_currentTime = cent;
+      this.audio_buffer = audioBuffered;
+      this.audio_paused = _player.paused;
+      this.audio_title = nowPlaying.name;
+      this.audio_artist = nowPlaying.artist;
+      this.audio_cover = nowPlaying.cover;
+    }, 1000);
   },
   methods: {
+    audio_toggle() {
+      _player.toggle();
+    },
+    audio_next() {
+      _player.skipForward();
+    },
     toggleMenu() {
       this.menuVisible = !this.menuVisible;
     },

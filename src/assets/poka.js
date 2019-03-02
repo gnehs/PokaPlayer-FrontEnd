@@ -2,7 +2,6 @@ import APlayer from 'APlayer';
 window._player = new APlayer({
     container: document.getElementById('player')
 });
-
 window._setting = (setting, value) => {
     let pokaSetting = JSON.parse(localStorage.pokaSetting || `{}`)
     let defaultPokaSetting = {
