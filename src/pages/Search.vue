@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="md-layout md-gutter" :class="`md-alignment-center-center`">
+    <div class="md-layout md-gutter md-alignment-center-center">
       <div
         class="md-layout-item md-medium-size-50 md-large-size-50 md-xlarge-size-50 md-small-size-100"
       >
