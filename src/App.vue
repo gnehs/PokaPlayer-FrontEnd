@@ -95,7 +95,9 @@
       </md-app-drawer>
 
       <md-app-content>
-        <router-view/>
+        <transition :name="transitionName" mode="out-in">
+          <router-view/>
+        </transition>
       </md-app-content>
     </md-app>
   </div>
@@ -105,9 +107,21 @@
 export default {
   name: "App",
   data: () => ({
-    menuVisible: false
+    menuVisible: false,
+    transitionName: "fade"
   }),
   created() {
+    this.$router.beforeEach((to, from, next) => {
+      let transitionName =
+        to.meta.transitionName || from.meta.transitionName || "fade";
+      if (transitionName === "slide") {
+        const toDepth = to.path.split("/").length;
+        const fromDepth = from.path.split("/").length;
+        transitionName = toDepth < fromDepth ? "slide-right" : "slide-left";
+      }
+      this.transitionName = transitionName;
+      next();
+    });
     this.axios.defaults.withCredentials = true;
     this.axios.defaults.baseURL = _setting(`server`);
     this.testConnection();
@@ -168,8 +182,8 @@ export default {
       position: relative
       background-size: cover
       background-position: center
-      mask-image: linear-gradient(to right, black 80%, rgba(0,0,0,0.2) 100%)
-      -webkit-mask-image: linear-gradient(to right, black 80%, rgba(0,0,0,0.2) 100%)
+      mask-image: linear-gradient(to right, black 70%, rgba(0,0,0,0) 100%)
+      -webkit-mask-image: linear-gradient(to right, black 70%, rgba(0,0,0,0) 100%)
       .md-button
         position: absolute 
         top: 50%
@@ -215,6 +229,34 @@ export default {
   background: rgba(0, 0, 0, 0.05)
 </style>
 <style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.35s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition-duration: 0.35s;
+  transition-property: height, opacity, transform;
+  transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.slide-left-enter,
+.slide-right-leave-active {
+  opacity: 0;
+  transform: translate(3em, 0);
+}
+
+.slide-left-leave-active,
+.slide-right-enter {
+  opacity: 0;
+  transform: translate(-3em, 0);
+}
 :root {
   --default-font: Roboto, "SF Pro TC", "SF Pro Text", "SF Pro Icons",
     "PingFang TC", "Helvetica Neue", "Helvetica", "Arial", "Source Hans",
@@ -233,6 +275,9 @@ export default {
     "Droid Sans Fallback", "AR PL UMing TW", "Helvetica Neue",
     "Hiragino Maru Gothic ProN", メイリオ, "ヒラギノ丸ゴ ProN W4", Meiryo,
     "Droid Sans", sans-serif;
+}
+.md-app-content {
+  padding: 0;
 }
 .md-list .md-icon {
   opacity: 0.54;

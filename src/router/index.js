@@ -4,7 +4,9 @@ import Router from 'vue-router'
 import About from '@/pages/About'
 import Album from '@/pages/Album'
 import Artist from '@/pages/Artist'
+import ArtistAlbum from '@/pages/ArtistAlbum'
 import Composer from '@/pages/Composer'
+import ComposerAlbum from '@/pages/ComposerAlbum'
 import Folder from '@/pages/Folder'
 import Home from '@/pages/Home'
 import Install from '@/pages/Install'
@@ -28,9 +30,21 @@ export default new Router({
     name: 'Album',
     component: Album
   }, {
+    path: '/artist/:source/:id',
+    component: ArtistAlbum,
+    meta: {
+      transitionName: 'slide'
+    }
+  }, {
     path: '/artist',
     name: 'Artist',
     component: Artist
+  }, {
+    path: '/composer/:source/:id',
+    component: ComposerAlbum,
+    meta: {
+      transitionName: 'slide'
+    }
   }, {
     path: '/composer',
     name: 'Composer',
