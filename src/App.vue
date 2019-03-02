@@ -154,6 +154,7 @@ export default {
   methods: {
     audio_toggle() {
       _player.toggle();
+      this.audio_paused = _player.paused;
     },
     audio_next() {
       _player.skipForward();
