@@ -23,6 +23,10 @@
     flex-direction: row
     .md-list-item
         width: 50%
+@media screen and (max-width: 600px) 
+    .md-list
+        .md-list-item
+            width: 100%
 </style>
 <script>
 export default {

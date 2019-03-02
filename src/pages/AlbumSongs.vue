@@ -2,7 +2,7 @@
   <div>
     <poka-header :blurbg="true" :bg="server+cover||null"/>
     <div class="info-header">
-      <div class="cover" :style="`background-image: url(${server+cover})`"/>
+      <div class="cover" :style="`background-image: url('${server+cover}')`"/>
       <div class="info">
         <div class="album-name" :title="name">{{name}}</div>
         <div class="artist-name" :title="artist">{{artist}}</div>
@@ -98,7 +98,7 @@ export default {
         albumSource
       )}&data=${encodeURIComponent(
         JSON.stringify({ type: "album", info: JSON.parse(albumID) })
-      )}`;
+      )}`.replace(/'/, "\\'");
 
     if (albumSource == "DSM") {
       let albumData = JSON.parse(albumID);
@@ -124,7 +124,7 @@ export default {
           this.songs = response.data.songs;
           this.name = response.data.name;
           this.artist = response.data.artist;
-          this.cover = response.data.cover;
+          this.cover = response.data.cover.replace(/'/, "\\'");
         });
     }
   },

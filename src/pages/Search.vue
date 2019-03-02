@@ -1,26 +1,20 @@
 <template>
   <div>
-    <div class="md-layout md-gutter md-alignment-center-center">
-      <div
-        class="md-layout-item md-medium-size-50 md-large-size-50 md-xlarge-size-50 md-small-size-100"
+    <div class="search-box" :class="{focus: searchBoxFocus}">
+      <input
+        class="search-input"
+        type="text"
+        v-on:keyup.enter="search"
+        v-model.trim="keyword"
+        :placeholder="$t('search')"
+        autocomplete="off"
+        @focus="searchBoxFocus = true"
+        @blur="searchBoxFocus = false"
+        required
       >
-        <div class="search-box" :class="{focus: searchBoxFocus}">
-          <input
-            class="search-input"
-            type="text"
-            v-on:keyup.enter="search"
-            v-model.trim="keyword"
-            :placeholder="$t('search')"
-            autocomplete="off"
-            @focus="searchBoxFocus = true"
-            @blur="searchBoxFocus = false"
-            required
-          >
-          <button class="search-button" @click="search">
-            <md-icon>search</md-icon>
-          </button>
-        </div>
-      </div>
+      <button class="search-button" @click="search">
+        <md-icon>search</md-icon>
+      </button>
     </div>
     <poka-loader v-if="isLoading"/>
     <poka-parse-multiple v-if="!isLoading&&searchResult" :data="searchResult"/>
@@ -29,12 +23,16 @@
 
 <style lang="sass" scoped>
 .search-box
-	margin: 18px 0
+	width: calc(100vw - 60px)
+	max-width: 360px
+	margin: 18px auto
 	display: flex
 	border: 1px solid #90909061
 	border-radius: 24px
 	overflow: hidden
-	transition: all .3s ease
+	transition-duration: 0.3s;
+	transition-property: border, box-shadow
+  	transition-timing-function: ease
 	background-color: white
 	&:hover,&.focus
 		box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28)

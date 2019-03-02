@@ -33,38 +33,38 @@
       <md-app-drawer md-permanent="clipped" :md-active.sync="menuVisible" id="drawer">
         <div class="drawer-list">
           <md-list>
-            <md-list-item to="/home">
+            <md-list-item to="/home" @click="toggleMenu">
               <md-icon class="outline-home"></md-icon>
               <span class="md-list-item-text">{{$t("home")}}</span>
             </md-list-item>
 
-            <md-list-item to="/now">
+            <md-list-item to="/now" @click="toggleMenu">
               <md-icon class="outline-playlist_play"></md-icon>
               <span class="md-list-item-text">{{$t("nowplaying")}}</span>
             </md-list-item>
 
             <md-divider/>
-            <md-list-item to="/search">
+            <md-list-item to="/search" @click="toggleMenu">
               <md-icon class="outline-search"></md-icon>
               <span class="md-list-item-text">{{$t("search")}}</span>
             </md-list-item>
-            <md-list-item to="/album">
+            <md-list-item to="/album" @click="toggleMenu">
               <md-icon class="outline-album"></md-icon>
               <span class="md-list-item-text">{{$t("album")}}</span>
             </md-list-item>
-            <md-list-item to="/folder">
+            <md-list-item to="/folder" @click="toggleMenu">
               <md-icon class="outline-folder"></md-icon>
               <span class="md-list-item-text">{{$t("folder")}}</span>
             </md-list-item>
-            <md-list-item to="/artist">
+            <md-list-item to="/artist" @click="toggleMenu">
               <md-icon class="outline-mic_none"></md-icon>
               <span class="md-list-item-text">{{$t("artist")}}</span>
             </md-list-item>
-            <md-list-item to="/composer">
+            <md-list-item to="/composer" @click="toggleMenu">
               <md-icon class="outline-music_note"></md-icon>
               <span class="md-list-item-text">{{$t("composer")}}</span>
             </md-list-item>
-            <md-list-item to="/playlist">
+            <md-list-item to="/playlist" @click="toggleMenu">
               <md-icon class="outline-format_list_bulleted"></md-icon>
               <span class="md-list-item-text">{{$t("playlist")}}</span>
             </md-list-item>
@@ -277,9 +277,6 @@ export default {
     "Hiragino Maru Gothic ProN", メイリオ, "ヒラギノ丸ゴ ProN W4", Meiryo,
     "Droid Sans", sans-serif;
 }
-.md-app-content {
-  padding: 0;
-}
 .md-list .md-icon {
   opacity: 0.54;
 }
@@ -301,8 +298,5 @@ export default {
   -o-filter: contrast(4) invert(1);
   -ms-filter: contrast(4) invert(1);
   filter: contrast(4) invert(1);
-}
-.search {
-  max-width: 500px;
 }
 </style>

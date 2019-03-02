@@ -33,7 +33,7 @@ export default {
 	position: relative
 	min-height: 1px
 	.bg
-		transform: scale(1.05)
+		transform: scale(1.12)
 		background-size: cover
 		background-position: center
 		mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 10%, transparent 90%)
