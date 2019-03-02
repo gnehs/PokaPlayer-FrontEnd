@@ -10,7 +10,8 @@
 export default {
   name: "Album",
   created() {
-    this.axios.get(_setting(`server`) + "/pokaapi/albums/").then(response => {
+    let url = _setting(`server`) + "/pokaapi/albums/";
+    this.axios.get(url).then(response => {
       this.data = response.data;
     });
   },

@@ -1,7 +1,6 @@
 <template lang="pug">
 .header-wrapper
-	.bg2
-	.bg(:style=`{backgroundImage: 'url("'+bg+'")'}`)
+	.bg(:style=`{backgroundImage: 'url("'+bg+'")'}`,:class="{blur: blurbg}")
 	.title(style="max-width: 950px !important;")
 		.title(style="line-height: normal;") {{title}}
 		.subtitle {{subtitle}}
@@ -22,7 +21,8 @@ export default {
     bg: {
       type: String,
       default: _setting(`randomImgSource`)
-    }
+    },
+    blurbg: { type: Boolean, default: false }
   }
 };
 </script>
