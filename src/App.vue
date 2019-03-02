@@ -118,6 +118,7 @@ export default {
         const toDepth = to.path.split("/").length;
         const fromDepth = from.path.split("/").length;
         transitionName = toDepth < fromDepth ? "slide-right" : "slide-left";
+        // transitionName = toDepth == fromDepth ? "fade" : transitionName; //同一層
       }
       this.transitionName = transitionName;
       next();

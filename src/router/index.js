@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import About from '@/pages/About'
 import Album from '@/pages/Album'
+import AlbumSongs from '@/pages/AlbumSongs'
 import Artist from '@/pages/Artist'
 import ArtistAlbum from '@/pages/ArtistAlbum'
 import Composer from '@/pages/Composer'
@@ -25,6 +26,13 @@ export default new Router({
     path: '/about',
     name: 'About',
     component: About
+  }, {
+    path: '/album/songs/:source/:id',
+    name: 'AlbumSongs',
+    component: AlbumSongs,
+    meta: {
+      transitionName: 'slide'
+    }
   }, {
     path: '/album',
     name: 'Album',

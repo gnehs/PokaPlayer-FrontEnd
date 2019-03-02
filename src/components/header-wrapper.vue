@@ -31,7 +31,6 @@ export default {
 	width: calc(100% + 16px * 2)
 	overflow: hidden
 	position: relative
-	margin: -16px
 	margin-bottom: -200px
 	.bg
 		transform: scale(1.05)

@@ -5,6 +5,7 @@ import pokaCards from '@/components/cards.vue'
 import pokaLoader from '@/components/loader.vue'
 // parseData
 import parsePlaylists from '@/components/parse-playlists.vue'
+import parseSongs from '@/components/parse-songs.vue'
 import parseArtists from '@/components/parse-artists.vue'
 import parseAlbums from '@/components/parse-albums.vue'
 import parseComposers from '@/components/parse-composers.vue'
@@ -16,6 +17,7 @@ export {
     pokaCards,
     pokaLoader,
     parsePlaylists,
+    parseSongs,
     parseArtists,
     parseAlbums,
     parseComposers,
