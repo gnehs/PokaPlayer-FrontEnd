@@ -1,14 +1,18 @@
 <template lang="pug">
-  router-link.card(:title="pokaTitle+`\n`+pokaSubtitle" v-if="to" :to="to")
+  router-link.card(v-if="to",:to="to")
       .image(:style="{backgroundImage:`url(\"${pokaBg}\")`}",v-if="pokaBg")
+        md-tooltip {{pokaTitle}}
       .image(v-else)
-          <md-icon class="icon-white" :class="pokaIcon"></md-icon>
+        md-icon(class="icon-white", :class="pokaIcon")
+        md-tooltip {{pokaTitle}}
       .title {{pokaTitle}}
       .subtitle {{pokaSubtitle}}
-  a.card(:title="pokaTitle+`\n`+pokaSubtitle" v-else)
+  a.card(v-else)
       .image(:style="{backgroundImage:`url(\"${pokaBg}\")`}",v-if="pokaBg")
+        md-tooltip {{pokaTitle}}
       .image(v-else)
-          <md-icon class="icon-white" :class="pokaIcon"></md-icon>
+        md-icon(class="icon-white", :class="pokaIcon")
+        md-tooltip {{pokaTitle}}
       .title {{pokaTitle}}
       .subtitle {{pokaSubtitle}}
 </template>

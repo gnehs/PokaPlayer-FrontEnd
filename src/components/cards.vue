@@ -77,6 +77,10 @@ export default {
 			left: 0
 			position: absolute
 			transform: scale(2)
+		.title,.subtitle
+			overflow: hidden
+			text-overflow: ellipsis
+			white-space: nowrap
 		.title
 			font-size: 1.8em
 			padding-top: 5px
