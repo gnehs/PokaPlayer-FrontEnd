@@ -1,6 +1,9 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div>
+    <poka-header/>
+    <div style="position: relative">
+      <h1>{{ msg }}</h1>
+    </div>
   </div>
 </template>
 

@@ -15,6 +15,7 @@ import Login from '@/pages/Login'
 import NowPlaying from '@/pages/NowPlaying'
 import Notfound from '@/pages/Notfound'
 import Playlist from '@/pages/Playlist'
+import PlaylistSongs from '@/pages/PlaylistSongs'
 import Search from '@/pages/Search'
 import Setting from '@/pages/Setting'
 
@@ -39,6 +40,7 @@ export default new Router({
     component: Album
   }, {
     path: '/artist/:source/:id',
+    name: 'ArtistAlbum',
     component: ArtistAlbum,
     meta: {
       transitionName: 'slide'
@@ -49,6 +51,7 @@ export default new Router({
     component: Artist
   }, {
     path: '/composer/:source/:id',
+    name: 'ComposerAlbum',
     component: ComposerAlbum,
     meta: {
       transitionName: 'slide'
@@ -58,9 +61,20 @@ export default new Router({
     name: 'Composer',
     component: Composer
   }, {
+    path: '/folder/:source/:id',
+    name: 'folderFiles',
+    component: Folder,
+    meta: {
+      transitionName: 'slide',
+      root: false
+    }
+  }, {
     path: '/folder',
     name: 'Folder',
-    component: Folder
+    component: Folder,
+    meta: {
+      root: true
+    }
   }, {
     path: '/install',
     name: 'Install',
@@ -73,6 +87,13 @@ export default new Router({
     path: '/now',
     name: 'NowPlaying',
     component: NowPlaying
+  }, {
+    path: '/playlist/:source/:id',
+    component: PlaylistSongs,
+    name: 'PlaylistSongs',
+    meta: {
+      transitionName: 'slide'
+    }
   }, {
     path: '/playlist',
     name: 'Playlist',

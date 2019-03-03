@@ -99,7 +99,7 @@
 
       <md-app-content>
         <transition :name="transitionName" mode="out-in">
-          <router-view/>
+          <router-view :key="$route.path"/>
         </transition>
       </md-app-content>
     </md-app>
@@ -136,19 +136,39 @@ export default {
     this.axios.defaults.baseURL = _setting(`server`);
     this.testConnection();
     setInterval(() => {
-      let nowPlaying = _player.list.audios[_player.list.index];
-      let buffered = _player.audio.buffered;
-      let audioBuffered =
-          _player.audio.currentTime > 1
-            ? (buffered.end(buffered.length - 1) / _player.audio.duration) * 100
-            : 0,
-        cent = (_player.audio.currentTime / _player.audio.duration) * 100;
-      this.audio_currentTime = cent;
-      this.audio_buffer = audioBuffered;
-      this.audio_paused = _player.paused;
-      this.audio_title = nowPlaying.name;
-      this.audio_artist = nowPlaying.artist;
-      this.audio_cover = nowPlaying.cover;
+      if (_player.list.audios.length > 0) {
+        let nowPlaying = _player.list.audios[_player.list.index];
+        let buffered = _player.audio.buffered;
+        let audioBuffered =
+            _player.audio.currentTime > 1
+              ? (buffered.end(buffered.length - 1) / _player.audio.duration) *
+                100
+              : 0,
+          cent = (_player.audio.currentTime / _player.audio.duration) * 100;
+        this.audio_currentTime = cent;
+        this.audio_buffer = audioBuffered;
+        this.audio_paused = _player.paused;
+        this.audio_title = nowPlaying.name;
+        this.audio_artist = nowPlaying.artist;
+        this.audio_cover = nowPlaying.cover;
+        if ("mediaSession" in navigator) {
+          navigator.mediaSession.metadata = new MediaMetadata({
+            title: nowPlaying.name,
+            artist: nowPlaying.artist,
+            artwork: [
+              {
+                src: nowPlaying.cover,
+                type: "image/png"
+              }
+            ]
+          });
+          navigator.mediaSession
+            .setActionHandler("play", () => _player.toggle())
+            .setActionHandler("pause", () => _player.pause())
+            .setActionHandler("previoustrack", () => _player.skipBack())
+            .setActionHandler("nexttrack", () => _player.skipForward());
+        }
+      }
     }, 1000);
   },
   methods: {
@@ -174,6 +194,9 @@ export default {
 };
 </script>
 
+<style lang="sass">
+@import "@/assets/pokaList.sass"
+</style>
 <style lang="scss">
 @import "~vue-material/dist/theme/engine"; // Import the theme engine
 
@@ -263,7 +286,7 @@ export default {
 <style>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.35s ease;
+  transition: opacity 0.25s ease;
 }
 .fade-enter,
 .fade-leave-to {
@@ -307,6 +330,11 @@ export default {
     "Droid Sans Fallback", "AR PL UMing TW", "Helvetica Neue",
     "Hiragino Maru Gothic ProN", メイリオ, "ヒラギノ丸ゴ ProN W4", Meiryo,
     "Droid Sans", sans-serif;
+}
+.md-content.md-tabs-content {
+  transition-duration: 0.3s;
+  transition-property: height;
+  transition-timing-function: ease;
 }
 .md-list .md-icon {
   opacity: 0.54;

@@ -21,8 +21,11 @@
     flex-wrap: wrap
     width: 100%
     flex-direction: row
+    background-color: transparent
     .md-list-item
         width: 50%
+        border-radius: 8px
+        overflow: hidden
 @media screen and (max-width: 600px) 
     .md-list
         .md-list-item
