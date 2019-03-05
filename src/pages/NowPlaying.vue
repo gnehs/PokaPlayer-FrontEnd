@@ -10,10 +10,11 @@
         :md-value="audio_currentTime"
         :md-buffer="audio_buffer"
       ></md-progress-bar>
-      <md-list class="md-double-line">
+
+      <transition-group name="songlist" tag="md-list" class="md-double-line">
         <md-list-item
           v-for="(song,index) of audio_queue"
-          :key="index"
+          :key="song.name"
           :class="{active:index==audio_index}"
         >
           <md-avatar>
@@ -38,7 +39,7 @@
             <md-icon>close</md-icon>
           </md-button>
         </md-list-item>
-      </md-list>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -112,15 +113,27 @@ export default {
 };
 </script>
 <style lang="sass" scoped>
+.songlist-enter, .songlist-leave-to
+	opacity: 0
+	transform: scaleY(0) scaleX(0.9)
+	transform-origin: center top
+.songlist-leave-active 
+  	position: absolute
+.songlist-move
+	transition: 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
+	transition-property: opacity, transform
+
 .md-list
 	width: 100%
 	background-color: transparent
+	position: relative
+	display: block
 	.md-list-item
+		display: block
 		border-radius: 8px
+		width: 100%
 		overflow: hidden
-		transition-duration: 0.6s
-		transition-property: background-color, box-shadow
-		transition-timing-function: ease
+		transition: all 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
 		*
 	  		cursor: pointer
 		&:hover
