@@ -169,6 +169,16 @@ export default {
             .setActionHandler("previoustrack", () => _player.skipBack())
             .setActionHandler("nexttrack", () => _player.skipForward());
         }
+      } else {
+        this.audio_currentTime = 100;
+        this.audio_buffer = 100;
+        this.audio_paused = _player.paused;
+        this.audio_title = "等待播放中~";
+        this.audio_artist = "：Ｄ";
+        this.audio_cover = _setting(`randomImgSource`);
+        if ("mediaSession" in navigator) {
+          navigator.mediaSession.metadata = null;
+        }
       }
     }, 1000);
   },

@@ -78,8 +78,9 @@ export default {
       }
     },
     updatePlayer() {
+      let nowPlaying = _player.list.audios[_player.list.index];
+      this.audio_queue = _player.list.audios;
       if (_player.list.audios.length > 0) {
-        let nowPlaying = _player.list.audios[_player.list.index];
         let buffered = _player.audio.buffered;
         let audioBuffered =
             _player.audio.currentTime > 1
@@ -90,11 +91,15 @@ export default {
         this.audio_index = _player.list.index;
         this.audio_currentTime = cent;
         this.audio_buffer = audioBuffered;
-        this.audio_paused = _player.paused;
         this.audio_title = nowPlaying.name;
         this.audio_artist = nowPlaying.artist;
         this.audio_cover = nowPlaying.cover;
-        this.audio_queue = _player.list.audios;
+      } else {
+        this.audio_currentTime = 100;
+        this.audio_buffer = 100;
+        this.audio_title = "等待播放中";
+        this.audio_artist = "：Ｄ";
+        this.audio_cover = _setting(`randomImgSource`);
       }
     },
     playSong(i) {
