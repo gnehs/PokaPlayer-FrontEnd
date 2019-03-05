@@ -74,13 +74,14 @@
         <div class="drawer-player">
           <md-divider></md-divider>
           <div class="song-info">
-            <div class="cover" :style="`background-image: url('${audio_cover}')`">
+            <div class="cover">
+              <img :src="audio_cover">
               <md-button class="md-icon-button md-mini" @click="audio_toggle">
                 <md-icon v-if="audio_paused">play_arrow</md-icon>
                 <md-icon v-else>pause</md-icon>
               </md-button>
             </div>
-            <div class="info">
+            <div class="info" @click="$router.push('/now')">
               <div class="title">{{audio_title}}</div>
               <div class="artist">{{audio_artist}}</div>
             </div>
@@ -239,6 +240,12 @@ export default {
       background-position: center
       mask-image: linear-gradient(to right, black 70%, rgba(0,0,0,0) 100%)
       -webkit-mask-image: linear-gradient(to right, black 70%, rgba(0,0,0,0) 100%)
+      img    
+        width: 64px
+        height: 64px
+        max-width: 64px
+        max-height: 64px
+        object-fit: cover
       .md-button
         position: absolute 
         top: 50%
@@ -251,6 +258,7 @@ export default {
     .info
       flex: 1
       overflow: hidden
+      cursor: pointer
       .title,.artist
         padding-left: 2px
         overflow: hidden
