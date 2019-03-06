@@ -46,6 +46,10 @@
 		padding-right: 24px
 		padding-top: 8px
 		overflow: hidden
+		>.album-name,>.artist-name
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
 		>.album-name
 			font-size: 40px
 			line-height: 48px
