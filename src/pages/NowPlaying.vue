@@ -22,6 +22,17 @@
           >
         </label>
       </div>
+
+      <md-button class="md-icon-button" @click="audio_previous">
+        <md-icon>skip_previous</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" @click="audio_toggle">
+        <md-icon v-if="audio_paused">play_arrow</md-icon>
+        <md-icon v-else>pause</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" @click="audio_next">
+        <md-icon>skip_next</md-icon>
+      </md-button>
       <transition-group name="songlist" tag="md-list" class="md-double-line">
         <md-list-item
           v-for="(song,index) of audio_queue"
@@ -91,6 +102,7 @@ export default {
     updatePlayer() {
       let nowPlaying = _player.list.audios[_player.list.index];
       this.audio_queue = _player.list.audios;
+      this.audio_paused = _player.paused;
       if (_player.list.audios.length > 0) {
         let buffered = _player.audio.buffered;
         let audioBuffered =
@@ -120,6 +132,12 @@ export default {
     removeSong(i) {
       _player.list.remove(i);
       this.updatePlayer();
+    },
+    audio_next() {
+      _player.skipForward();
+    },
+    audio_previous() {
+      _player.skipBack();
     },
     audio_toggle() {
       _player.toggle();
