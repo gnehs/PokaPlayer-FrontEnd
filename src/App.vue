@@ -298,8 +298,11 @@ export default {
       min-width: 30px
       height: 30px
       margin: 0
-  .md-progress-bar
-    width: 230px
+  
+  .progress-bar 
+    overflow: hidden
+    .md-progress-bar
+      width: 230px
 .md-app-content
   max-height: calc(100vh - 64px)
   overflow-y: auto
