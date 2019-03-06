@@ -4,13 +4,24 @@
     <div style="position: relative">
       <h1>{{ audio_title }}</h1>
       <h2>{{ audio_artist }}</h2>
-      <md-progress-bar
-        class="md-accent"
-        md-mode="buffer"
-        :md-value="audio_currentTime"
-        :md-buffer="audio_buffer"
-      ></md-progress-bar>
-
+      <div class="progress-bar">
+        <md-progress-bar
+          class="md-accent"
+          md-mode="buffer"
+          :md-value="audio_currentTime"
+          :md-buffer="audio_buffer"
+        ></md-progress-bar>
+        <label class="pure-material-slider">
+          <input
+            type="range"
+            min="0"
+            max="100"
+            step="0.000001"
+            v-model="audio_currentTime"
+            v-on:input="audio_seek"
+          >
+        </label>
+      </div>
       <transition-group name="songlist" tag="md-list" class="md-double-line">
         <md-list-item
           v-for="(song,index) of audio_queue"
@@ -113,11 +124,20 @@ export default {
     audio_toggle() {
       _player.toggle();
       this.audio_paused = _player.paused;
+    },
+    audio_seek() {
+      _player.seek((this.audio_currentTime / 100) * _player.audio.duration);
     }
   }
 };
 </script>
 <style lang="sass" scoped>
+.progress-bar
+  position: relative
+  .pure-material-slider
+    position: absolute
+    top: -15px
+    opacity: 0
 .songlist-enter, .songlist-leave-to
 	opacity: 0
 	transform: scaleY(0) scaleX(0.9)
