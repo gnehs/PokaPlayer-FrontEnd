@@ -150,12 +150,6 @@ export default {
 };
 </script>
 <style lang="sass" scoped>
-.progress-bar
-  position: relative
-  .pure-material-slider
-    position: absolute
-    top: -15px
-    opacity: 0
 .songlist-enter, .songlist-leave-to
 	opacity: 0
 	transform: scaleY(0) scaleX(0.9)

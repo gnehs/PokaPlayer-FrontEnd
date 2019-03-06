@@ -89,12 +89,24 @@
               <md-icon>skip_next</md-icon>
             </md-button>
           </div>
-          <md-progress-bar
-            class="md-accent"
-            md-mode="buffer"
-            :md-value="audio_currentTime"
-            :md-buffer="audio_buffer"
-          ></md-progress-bar>
+          <div class="progress-bar">
+            <md-progress-bar
+              class="md-accent"
+              md-mode="buffer"
+              :md-value="audio_currentTime"
+              :md-buffer="audio_buffer"
+            ></md-progress-bar>
+            <label class="pure-material-slider">
+              <input
+                type="range"
+                min="0"
+                max="100"
+                step="0.000001"
+                v-model="audio_currentTime"
+                v-on:input="audio_seek"
+              >
+            </label>
+          </div>
         </div>
       </md-app-drawer>
 
@@ -189,6 +201,9 @@ export default {
     },
     audio_next() {
       _player.skipForward();
+    },
+    audio_seek() {
+      _player.seek((this.audio_currentTime / 100) * _player.audio.duration);
     },
     toggleMenu() {
       this.menuVisible = !this.menuVisible;

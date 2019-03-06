@@ -1,5 +1,15 @@
 /*https://codepen.io/finnhvman/pen/LJWJVR*/
 
+.progress-bar {
+    position: relative
+}
+
+.progress-bar>.pure-material-slider {
+    position: absolute;
+    top: -15px;
+    opacity: 0
+}
+
 .pure-material-slider {
     --pure-material-safari-helper1: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.04);
     --pure-material-safari-helper2: rgba(var(--pure-material-primary-rgb, 33, 150, 243), 0.12);
