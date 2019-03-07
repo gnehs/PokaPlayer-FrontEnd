@@ -2,7 +2,7 @@
   <md-list class="md-double-line">
     <md-list-item v-for="(song,index) of data" :key="index">
       <md-avatar>
-        <img :src="server+song.cover" alt="cover">
+        <img :src="song.cover?server+song.cover:defaultCover" alt="cover">
       </md-avatar>
       <div class="md-list-item-text" @click="addSongs({songlist:data,index:index})">
         <span>{{song.name}}</span>
@@ -46,6 +46,7 @@ export default {
   props: ["data"],
   data: () => ({
     server: _setting(`server`),
+    defaultCover: _setting(`randomImgSource`),
     isInSongList: []
   }),
   methods: {
@@ -60,7 +61,9 @@ export default {
           name = nowsong.name,
           artist = nowsong.artist,
           album = nowsong.album,
-          cover = this.server + nowsong.cover,
+          cover = nowsong.cover
+            ? this.server + nowsong.cover
+            : this.defaultCover,
           source = nowsong.source;
         playlist.push({
           url: src,
