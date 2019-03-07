@@ -89,7 +89,7 @@
               <md-icon>skip_next</md-icon>
             </md-button>
           </div>
-          <div class="progress-bar">
+          <div class="app-progress-bar">
             <md-progress-bar
               class="md-accent"
               md-mode="buffer"
@@ -265,12 +265,14 @@ export default {
 .md-toolbar .md-title
   font-family: var(--product-font)
   font-weight: bold
+
 #drawer
   display: flex
   flex-direction: column
   .drawer-list
     flex: 1
     overflow: auto
+
 .md-app-content
   overflow-y: auto
   overflow-x: hidden
@@ -352,14 +354,13 @@ export default {
     background: rgba(255, 255, 255, 0.3)
     border-radius: 8px
     bottom: 0
-    .progress-bar 
+    .app-progress-bar
       overflow: hidden
       .md-progress-bar
         width: 230px
 
 .md-toolbar, .md-toolbar-row 
     min-height: 64px
-
 
 .md-drawer 
   width: 230px
@@ -422,6 +423,9 @@ export default {
 }
 .md-list .md-icon {
   opacity: 0.54;
+}
+.md-tab {
+  padding: 16px 0;
 }
 @media screen and (min-width: 600px) {
   .md-button.menu {

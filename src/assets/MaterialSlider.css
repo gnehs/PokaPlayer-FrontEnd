@@ -1,10 +1,32 @@
 /*https://codepen.io/finnhvman/pen/LJWJVR*/
 
-.progress-bar {
+.now-playing-progress-bar {
+    display: flex;
+    align-items: center;
+}
+
+.now-playing-progress-bar .md-progress-bar {
+    border-radius: 2.5px;
+}
+
+.now-playing-progress-bar>span {
+    font-family: var(--product-font);
+    margin: 0 5px;
+    width: 2.5em;
+    text-align: center;
+}
+
+.now-playing-progress-bar>.bar {
+    width: 100%;
+}
+
+.app-progress-bar,
+.now-playing-progress-bar>.bar {
     position: relative;
 }
 
-.progress-bar>.pure-material-slider {
+.now-playing-progress-bar>.bar>.pure-material-slider,
+.app-progress-bar>.pure-material-slider {
     position: absolute;
     top: -15px;
     opacity: 0
