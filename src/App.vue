@@ -116,6 +116,30 @@
         </transition>
       </md-app-content>
     </md-app>
+    <div class="bottom-player">
+      <div class="song-info">
+        <div class="cover">
+          <img :src="audio_cover">
+          <md-button class="md-icon-button md-mini" @click="audio_toggle">
+            <md-icon v-if="audio_paused">play_arrow</md-icon>
+            <md-icon v-else>pause</md-icon>
+          </md-button>
+        </div>
+        <div class="info" @click="$router.push('/now')">
+          <div class="title">{{audio_title}}</div>
+          <div class="artist">{{audio_artist}}</div>
+        </div>
+        <md-button class="md-icon-button md-mini next" @click="audio_next">
+          <md-icon>skip_next</md-icon>
+        </md-button>
+      </div>
+      <md-progress-bar
+        class="md-accent"
+        md-mode="buffer"
+        :md-value="audio_currentTime"
+        :md-buffer="audio_buffer"
+      ></md-progress-bar>
+    </div>
   </div>
 </template>
 
@@ -247,72 +271,95 @@ export default {
   .drawer-list
     flex: 1
     overflow: auto
-    max-height: calc(100vh - 70px - 64px)
-.drawer-player
-  background: rgba(255, 255, 255, 0.3)
-  border-radius: 8px
-  bottom: 0
-  .song-info
-    display: flex
-    align-items: center
-    box-sizing: border-box
-    width: 230px
-    max-width: 230px
-    .cover
-      height: 64px
-      min-width: 64px
-      position: relative
-      background-size: cover
-      background-position: center
-      mask-image: linear-gradient(to right, black 70%, rgba(0,0,0,0) 100%)
-      -webkit-mask-image: linear-gradient(to right, black 70%, rgba(0,0,0,0) 100%)
-      img    
-        width: 64px
-        height: 64px
-        max-width: 64px
-        max-height: 64px
-        object-fit: cover
-      .md-button
-        position: absolute 
-        top: 50%
-        left: 50%
-        transform: translate(-70%, -50%)
-        background-color: rgba(255, 255, 255, 0.7)
-        opacity: 0
-      &:hover .md-button
-        opacity: 1
-    .info
-      flex: 1
-      overflow: hidden
-      cursor: pointer
-      .title,.artist
-        padding-left: 2px
-        overflow: hidden
-        text-overflow: ellipsis
-        white-space: nowrap
-        line-height: 24px
-      .title
-        font-weight: bold
-    .md-button.next
-      width: 30px
-      min-width: 30px
-      height: 30px
-      margin: 0
-  
-  .progress-bar 
-    overflow: hidden
-    .md-progress-bar
-      width: 230px
 .md-app-content
-  max-height: calc(100vh - 64px)
   overflow-y: auto
   overflow-x: hidden
+
+.song-info
+  display: flex
+  align-items: center
+  box-sizing: border-box
+  width: 100%
+  max-width: 100%
+  .cover
+    height: 64px
+    min-width: 64px
+    position: relative
+    background-size: cover
+    background-position: center
+    mask-image: linear-gradient(to right, black 70%, rgba(0,0,0,0) 100%)
+    -webkit-mask-image: linear-gradient(to right, black 70%, rgba(0,0,0,0) 100%)
+    img    
+      width: 64px
+      height: 64px
+      max-width: 64px
+      max-height: 64px
+      object-fit: cover
+    .md-button
+      position: absolute 
+      top: 50%
+      left: 50%
+      transform: translate(-70%, -50%)
+      background-color: rgba(255, 255, 255, 0.7)
+      opacity: 0
+    &:hover .md-button
+      opacity: 1
+  .info
+    flex: 1
+    overflow: hidden
+    cursor: pointer
+    .title,.artist
+      padding-left: 2px
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+      line-height: 24px
+    .title
+      font-weight: bold
+  .md-button.next
+    width: 30px
+    min-width: 30px
+    height: 30px
+    margin: 0
+@media screen and (max-width: 600px) 
+  .md-app
+    min-height: calc(100vh - 69px)
+    max-height: calc(100vh - 69px)
+  #drawer
+    .drawer-player
+      display: none
+  .md-app-content
+    max-height: calc(100vh - 64px - 69px)
+  .bottom-player
+    box-sizing: border-box
+    height: 69px
+    max-height: 69px
+    .progress-bar 
+      overflow: hidden
+      .md-progress-bar
+        width: 230px
+@media screen and (min-width: 601px) 
+  .md-app
+    min-height: 100vh
+  .bottom-player
+    display: none
+  .md-app-content
+    max-height: calc(100vh - 64px)
+  #drawer
+    .drawer-list
+      max-height: calc(100vh - 70px - 64px)
+  .drawer-player
+    background: rgba(255, 255, 255, 0.3)
+    border-radius: 8px
+    bottom: 0
+    .progress-bar 
+      overflow: hidden
+      .md-progress-bar
+        width: 230px
 
 .md-toolbar, .md-toolbar-row 
     min-height: 64px
 
-.md-app
-  min-height: 100vh
 
 .md-drawer 
   width: 230px
