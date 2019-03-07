@@ -1,5 +1,5 @@
 <template lang="pug">
-  router-link.card(v-if="to",:to="to")
+  router-link.card(v-if="to",:to="to",:data-source="source||undefined")
       .image(:style="{backgroundImage:`url(\"${pokaBg}\")`}",v-if="pokaBg")
         md-tooltip {{pokaTitle}}
       .image(v-else)
@@ -7,7 +7,7 @@
         md-tooltip {{pokaTitle}}
       .title {{pokaTitle}}
       .subtitle {{pokaSubtitle}}
-  a.card(v-else)
+  a.card(v-else,:data-source="source||undefined")
       .image(:style="{backgroundImage:`url(\"${pokaBg}\")`}",v-if="pokaBg")
         md-tooltip {{pokaTitle}}
       .image(v-else)
@@ -21,7 +21,8 @@
 export default {
   name: "poka-card",
   props: {
-    pokaBg: { default: false, type: String },
+    pokaBg: { default: false },
+    source: { default: "" },
     pokaTitle: String,
     pokaSubtitle: String,
     to: String,
