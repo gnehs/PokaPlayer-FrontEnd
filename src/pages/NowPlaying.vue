@@ -44,7 +44,7 @@
               >
             </label>
           </div>
-          <span>4:00</span>
+          <span>{{audio_totalTime}}</span>
         </div>
       </div>
     </div>
