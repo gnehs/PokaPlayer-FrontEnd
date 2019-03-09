@@ -5,7 +5,7 @@
       <transition-group name="songlist" tag="md-list" class="md-double-line">
         <md-list-item
           v-for="(song,index) of audio_queue"
-          :key="song"
+          :key="JSON.stringify(song)"
           :class="{active:index==audio_index}"
         >
           <md-avatar>

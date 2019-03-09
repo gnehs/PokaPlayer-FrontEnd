@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
     <md-app>
-      <md-app-toolbar class="md-primary" md-elevation="0">
+      <md-app-toolbar class="md-primary">
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
             <md-button class="md-icon-button menu" @click="toggleMenu">
@@ -39,6 +39,10 @@
           <md-list-item to="/now" @click="closeMenu">
             <md-icon class="outline-playlist_play"></md-icon>
             <span class="md-list-item-text">{{$t("nowplaying")}}</span>
+          </md-list-item>
+          <md-list-item to="/lyric" @click="closeMenu">
+            <md-icon class="outline-subtitles"></md-icon>
+            <span class="md-list-item-text">{{$t("lrc")}}</span>
           </md-list-item>
           <md-divider/>
           <md-list-item to="/search" @click="closeMenu">

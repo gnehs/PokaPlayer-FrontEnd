@@ -16,6 +16,7 @@ import NowPlaying from '@/pages/NowPlaying'
 import Notfound from '@/pages/Notfound'
 import Playlist from '@/pages/Playlist'
 import PlaylistSongs from '@/pages/PlaylistSongs'
+import Lyric from '@/pages/Lyric'
 import Search from '@/pages/Search'
 import Setting from '@/pages/Setting'
 
@@ -27,6 +28,10 @@ export default new Router({
     path: '/about',
     name: 'About',
     component: About
+  }, {
+    path: '/lyric',
+    name: 'Lyric',
+    component: Lyric
   }, {
     path: '/album/songs/:source/:id',
     name: 'AlbumSongs',

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div v-if="!noloadedLyric"></div>
+    <div v-if="lyric.length>0">
+      <p v-for="(item, index) of lyric" :key="index">{{item.text}}</p>
+    </div>
     <div v-else></div>
   </div>
 </template>
@@ -11,9 +13,8 @@ export default {
   data: () => ({
     audio_title: null,
     audio_artist: null,
-    noloadedLyric: true,
-    lyric: null,
-    Lyric_updatePlayer: null
+    lyric: [],
+    Lyric_Update: null
   }),
   created() {
     this.updateLyric();
@@ -24,11 +25,11 @@ export default {
   },
   methods: {
     startUpdateLyric() {
-      this.Lyric_updatePlayer = setInterval(() => this.updatePlayer(), 400);
+      this.Lyric_Update = setInterval(() => this.updateLyric(), 400);
     },
     stopUpdateLyric() {
-      if (this.Lyric_updatePlayer) {
-        clearInterval(this.Lyric_updatePlayer);
+      if (this.Lyric_Update) {
+        clearInterval(this.Lyric_Update);
       }
     },
     updateLyric() {
@@ -36,23 +37,24 @@ export default {
       if (_player.list.audios.length > 0) {
         if (this.audio_title != nowPlaying.name) {
           //找歌詞囉
+          window._lrc.load(`[00:00.000]`);
           this.getLyric(
             nowPlaying.name,
             nowPlaying.artist,
             nowPlaying.id,
             nowPlaying.source
           );
+          this.audio_title = nowPlaying.name;
         } else {
+          this.lyric = window._lrc.getLyrics();
           //更新時間就好
         }
       } else {
         this.noloadedLyric = true;
       }
     },
-    getLyric: async (title, artist, id = false, source) => {
+    getLyric(title, artist, id = false, source) {
       let lyricRegex = /\[([0-9.:]*)\]/i;
-      this.noloadedLyric = true;
-      this.lyric = null;
       let response, url;
       if (id) {
         url =
@@ -60,34 +62,48 @@ export default {
           `/pokaapi/lyric/?moduleName=${encodeURIComponent(
             source
           )}&id=${encodeURIComponent(id)}`;
-        response = await this.axios.get(url);
-        if (
-          response.data.lyrics[0].lyric &&
-          response.data.lyrics[0].lyric.match(lyricRegex)
-        ) {
-          window._lrc.load(result.data.lyrics[0].lyric);
-          this.noloadedLyric = false;
-          this.lyric = window._lrc.getLyrics();
-          return; //透過 id 找到歌詞ㄌ
-        }
-      }
-      response = (await this.axios.get(
-        `/pokaapi/searchLyrics/?keyword=${encodeURIComponent(
-          title + " " + artist
-        )}`
-      )).data;
 
-      if (result.lyrics[i]) {
-        let lrcTitle = result.lyrics[i].name
-          .toLowerCase()
-          .replace(/\.|\*|\~|\&|。|，|\ |\-|\!|！|\(|\)/g, "");
-        let songTitle = title
-          .toLowerCase()
-          .replace(/\.|\*|\~|\&|。|，|\ |\-|\!|！|\(|\)/g, "");
-        if (lrcTitle == songTitle && result.lyrics[i].lyric.match(lyricRegex))
-          return result.lyrics[i].lyric;
+        axios(url).then(response => {
+          if (
+            response.data.lyrics[0].lyric &&
+            response.data.lyrics[0].lyric.match(lyricRegex)
+          ) {
+            //透過 id 找到歌詞ㄌ
+            loadLrc(response.data.lyrics[0].lyric);
+          } else {
+            //沒找到，拿 title 跟 artist 找找看
+            getLyricByKeyword(title, artist);
+          }
+        });
+      } else {
+        getLyricByKeyword(title, artist);
       }
-      this.lyric = window._lrc.getLyrics();
+      function getLyricByKeyword(title, artist) {
+        axios(
+          _setting(`server`) +
+            `/pokaapi/searchLyrics/?keyword=${encodeURIComponent(
+              title + " " + artist
+            )}`
+        )
+          .then(result => result.data)
+          .then(result => {
+            // console.log(result);
+            for (let { name, lyric } of result.lyrics) {
+              let lrcTitle = name
+                .toLowerCase()
+                .replace(/\.|\*|\~|\&|。|，|\ |\-|\!|！|\(|\)/g, "");
+              let songTitle = title
+                .toLowerCase()
+                .replace(/\.|\*|\~|\&|。|，|\ |\-|\!|！|\(|\)/g, "");
+              if (lrcTitle == songTitle && lyric.match(lyricRegex)) {
+                loadLrc(lyric);
+              }
+            }
+          });
+      }
+      function loadLrc(lrc) {
+        window._lrc.load(lrc);
+      }
     }
   }
 };
