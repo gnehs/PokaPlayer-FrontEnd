@@ -1,7 +1,7 @@
 <template>
   <poka-cards>
     <poka-card
-      v-for="{name,artist, cover, id, source} in data"
+      v-for="{name, artist, cover, id, source} in data"
       :key="id"
       :to="`/album/songs/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
       :poka-bg="cover?server+cover:false"

@@ -45,8 +45,13 @@ export default {
 		filter: blur(5px)
 .header
 	font-weight: bold
-	margin: 32px
+	margin-left: 16px
+	margin-top: 32px
 	position: relative
+	>.title,>.subtitle
+		overflow: hidden
+		text-overflow: ellipsis
+		white-space: nowrap
 	>.title
 		font-size: 3.5em
 	>.subtitle

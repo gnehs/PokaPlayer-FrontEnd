@@ -7,6 +7,7 @@
       :poka-bg="image?server+image:false"
       :poka-title="name"
       :poka-subtitle="source"
+      :source="source"
     />
   </poka-cards>
 </template>

@@ -41,9 +41,6 @@
 <script>
 export default {
   name: "poka-parse-multiple",
-  props: ["data"],
-  data: () => ({
-    server: _setting(`server`)
-  })
+  props: ["data"]
 };
 </script>

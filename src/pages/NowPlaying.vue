@@ -1,58 +1,11 @@
 <template>
   <div>
     <poka-header :blurbg="true" :bg="audio_cover"/>
-    <div class="audio-info">
-      <div class="top">
-        <div class="cover">
-          <img :src="audio_cover">
-        </div>
-        <div class="info">
-          <div class="title">{{ audio_title }}</div>
-          <div class="artist">{{ audio_artist }}</div>
-          <div class="control">
-            <md-button class="md-icon-button" @click="audio_previous">
-              <md-icon>skip_previous</md-icon>
-            </md-button>
-            <md-button class="md-icon-button md-raised md-primary" @click="audio_toggle">
-              <md-icon v-if="audio_paused">play_arrow</md-icon>
-              <md-icon v-else>pause</md-icon>
-            </md-button>
-            <md-button class="md-icon-button" @click="audio_next">
-              <md-icon>skip_next</md-icon>
-            </md-button>
-          </div>
-        </div>
-      </div>
-      <div class="bottom-bar">
-        <div class="now-playing-progress-bar">
-          <span>{{audio_currentTime}}</span>
-          <div class="bar">
-            <md-progress-bar
-              class="md-accent"
-              md-mode="buffer"
-              :md-value="audio_currentTimePercent"
-              :md-buffer="audio_buffer"
-            ></md-progress-bar>
-            <label class="pure-material-slider">
-              <input
-                type="range"
-                min="0"
-                max="100"
-                step="0.000001"
-                v-model="audio_currentTimePercent"
-                v-on:input="audio_seek"
-              >
-            </label>
-          </div>
-          <span>{{audio_totalTime}}</span>
-        </div>
-      </div>
-    </div>
     <div style="position: relative">
       <transition-group name="songlist" tag="md-list" class="md-double-line">
         <md-list-item
           v-for="(song,index) of audio_queue"
-          :key="song.name+index"
+          :key="song"
           :class="{active:index==audio_index}"
         >
           <md-avatar>
@@ -109,7 +62,7 @@ export default {
     startUpdatePlayer() {
       this.NowPlaying_updatePlayer = setInterval(
         () => this.updatePlayer(),
-        350
+        400
       );
     },
     stopUpdatePlayer() {
@@ -199,17 +152,16 @@ export default {
     position: relative
     align-items: center
     >.cover    
-      --cover-size: 280px
+      --cover-size: 200px
       width: var(--cover-size)
       height: 0
       overflow: hidden
       padding-bottom: var(--cover-size)
       border-radius: calc(var(--cover-size) * .08)
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3)
-      >img
-        object-fit: cover
-        width: var(--cover-size)
-        height: var(--cover-size)
+      background-size: cover
+      background-position: center
+      background-color: #0000
     >.info
       margin: 16px
       margin-left: 24px

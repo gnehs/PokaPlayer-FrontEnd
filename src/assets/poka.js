@@ -2,6 +2,7 @@ import APlayer from 'APlayer';
 window._player = new APlayer({
     container: document.getElementById('player')
 });
+window._lrc = new(require('@/assets/lyrics.min.js'))(`[00:00.000]`);
 window._setting = (setting, value) => {
     let pokaSetting = JSON.parse(localStorage.pokaSetting || `{}`)
     let defaultPokaSetting = {

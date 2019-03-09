@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
     <md-app>
-      <md-app-toolbar class="md-primary">
+      <md-app-toolbar class="md-primary" md-elevation="0">
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
             <md-button class="md-icon-button menu" @click="toggleMenu">
@@ -30,86 +30,43 @@
         </div>
       </md-app-toolbar>
 
-      <md-app-drawer md-permanent="clipped" :md-active.sync="menuVisible" id="drawer">
-        <div class="drawer-list">
-          <md-list>
-            <md-list-item to="/home" @click="toggleMenu">
-              <md-icon class="outline-home"></md-icon>
-              <span class="md-list-item-text">{{$t("home")}}</span>
-            </md-list-item>
-
-            <md-list-item to="/now" @click="toggleMenu">
-              <md-icon class="outline-playlist_play"></md-icon>
-              <span class="md-list-item-text">{{$t("nowplaying")}}</span>
-            </md-list-item>
-
-            <md-divider/>
-            <md-list-item to="/search" @click="toggleMenu">
-              <md-icon class="outline-search"></md-icon>
-              <span class="md-list-item-text">{{$t("search")}}</span>
-            </md-list-item>
-            <md-list-item to="/album" @click="toggleMenu">
-              <md-icon class="outline-album"></md-icon>
-              <span class="md-list-item-text">{{$t("album")}}</span>
-            </md-list-item>
-            <md-list-item to="/folder" @click="toggleMenu">
-              <md-icon class="outline-folder"></md-icon>
-              <span class="md-list-item-text">{{$t("folder")}}</span>
-            </md-list-item>
-            <md-list-item to="/artist" @click="toggleMenu">
-              <md-icon class="outline-mic_none"></md-icon>
-              <span class="md-list-item-text">{{$t("artist")}}</span>
-            </md-list-item>
-            <md-list-item to="/composer" @click="toggleMenu">
-              <md-icon class="outline-music_note"></md-icon>
-              <span class="md-list-item-text">{{$t("composer")}}</span>
-            </md-list-item>
-            <md-list-item to="/playlist" @click="toggleMenu">
-              <md-icon class="outline-format_list_bulleted"></md-icon>
-              <span class="md-list-item-text">{{$t("playlist")}}</span>
-            </md-list-item>
-          </md-list>
-        </div>
-
-        <div class="drawer-player">
-          <md-divider></md-divider>
-          <div class="song-info">
-            <div class="cover">
-              <img :src="audio_cover">
-              <md-button class="md-icon-button md-mini" @click="audio_toggle">
-                <md-icon v-if="audio_paused">play_arrow</md-icon>
-                <md-icon v-else>pause</md-icon>
-              </md-button>
-            </div>
-            <div class="info" @click="$router.push('/now')">
-              <div class="title">{{audio_title}}</div>
-              <div class="artist">{{audio_artist}}</div>
-            </div>
-            <md-button class="md-icon-button md-mini next" @click="audio_next">
-              <md-icon>skip_next</md-icon>
-            </md-button>
-          </div>
-          <div class="app-progress-bar">
-            <md-progress-bar
-              class="md-accent"
-              md-mode="buffer"
-              :md-value="audio_currentTime"
-              :md-buffer="audio_buffer"
-            ></md-progress-bar>
-            <label class="pure-material-slider">
-              <input
-                type="range"
-                min="0"
-                max="100"
-                step="0.000001"
-                v-model="audio_currentTime"
-                v-on:input="audio_seek"
-              >
-            </label>
-          </div>
-        </div>
+      <md-app-drawer :md-active.sync="menuVisible" md-permanent="clipped">
+        <md-list>
+          <md-list-item to="/home" @click="closeMenu">
+            <md-icon class="outline-home"></md-icon>
+            <span class="md-list-item-text">{{$t("home")}}</span>
+          </md-list-item>
+          <md-list-item to="/now" @click="closeMenu">
+            <md-icon class="outline-playlist_play"></md-icon>
+            <span class="md-list-item-text">{{$t("nowplaying")}}</span>
+          </md-list-item>
+          <md-divider/>
+          <md-list-item to="/search" @click="closeMenu">
+            <md-icon class="outline-search"></md-icon>
+            <span class="md-list-item-text">{{$t("search")}}</span>
+          </md-list-item>
+          <md-list-item to="/album" @click="closeMenu">
+            <md-icon class="outline-album"></md-icon>
+            <span class="md-list-item-text">{{$t("album")}}</span>
+          </md-list-item>
+          <md-list-item to="/folder" @click="closeMenu">
+            <md-icon class="outline-folder"></md-icon>
+            <span class="md-list-item-text">{{$t("folder")}}</span>
+          </md-list-item>
+          <md-list-item to="/artist" @click="closeMenu">
+            <md-icon class="outline-mic_none"></md-icon>
+            <span class="md-list-item-text">{{$t("artist")}}</span>
+          </md-list-item>
+          <md-list-item to="/composer" @click="closeMenu">
+            <md-icon class="outline-music_note"></md-icon>
+            <span class="md-list-item-text">{{$t("composer")}}</span>
+          </md-list-item>
+          <md-list-item to="/playlist" @click="closeMenu">
+            <md-icon class="outline-format_list_bulleted"></md-icon>
+            <span class="md-list-item-text">{{$t("playlist")}}</span>
+          </md-list-item>
+        </md-list>
       </md-app-drawer>
-
       <md-app-content>
         <transition :name="transitionName" mode="out-in">
           <router-view :key="$route.path"/>
@@ -117,28 +74,63 @@
       </md-app-content>
     </md-app>
     <div class="bottom-player">
+      <div class="app-progress-bar">
+        <md-progress-bar
+          class="md-accent"
+          md-mode="buffer"
+          :md-value="audio_currentTimePercent"
+          :md-buffer="audio_bufferPercent"
+        ></md-progress-bar>
+        <label class="pure-material-slider">
+          <input
+            type="range"
+            min="0"
+            max="100"
+            step="0.000001"
+            v-model="audio_currentTimePercent"
+            v-on:input="audio_seek"
+          >
+        </label>
+      </div>
       <div class="song-info">
-        <div class="cover">
-          <img :src="audio_cover">
-          <md-button class="md-icon-button md-mini" @click="audio_toggle">
+        <div class="left">
+          <div class="cover">
+            <img :src="audio_cover">
+            <md-button class="md-icon-button md-mini" @click="audio_toggle">
+              <md-icon v-if="audio_paused">play_arrow</md-icon>
+              <md-icon v-else>pause</md-icon>
+            </md-button>
+          </div>
+          <div class="info" @click="$router.push('/now')">
+            <div class="title">{{audio_title}}</div>
+            <div class="artist">{{audio_artist}}</div>
+          </div>
+        </div>
+        <div class="center">
+          <span class="time">{{audio_currentTime}}</span>
+          <md-button class="md-icon-button" @click="audio_previous">
+            <md-icon>skip_previous</md-icon>
+          </md-button>
+          <md-button class="md-icon-button md-raised md-primary" @click="audio_toggle">
             <md-icon v-if="audio_paused">play_arrow</md-icon>
             <md-icon v-else>pause</md-icon>
           </md-button>
+          <md-button class="md-icon-button" @click="audio_next">
+            <md-icon>skip_next</md-icon>
+          </md-button>
+          <span class="time">{{audio_totalTime}}</span>
         </div>
-        <div class="info" @click="$router.push('/now')">
-          <div class="title">{{audio_title}}</div>
-          <div class="artist">{{audio_artist}}</div>
+        <div class="right">
+          <md-button class="md-icon-button" @click="audio_next">
+            <md-icon>skip_next</md-icon>
+          </md-button>
         </div>
-        <md-button class="md-icon-button md-mini next" @click="audio_next">
-          <md-icon>skip_next</md-icon>
-        </md-button>
+        <div class="right-s">
+          <md-button class="md-icon-button" @click="audio_next">
+            <md-icon>skip_next</md-icon>
+          </md-button>
+        </div>
       </div>
-      <md-progress-bar
-        class="md-accent"
-        md-mode="buffer"
-        :md-value="audio_currentTime"
-        :md-buffer="audio_buffer"
-      ></md-progress-bar>
     </div>
   </div>
 </template>
@@ -148,8 +140,10 @@ export default {
   name: "App",
   data: () => ({
     menuVisible: false,
-    audio_currentTime: 100,
-    audio_buffer: 100,
+    audio_currentTimePercent: 100,
+    audio_bufferPercent: 100,
+    audio_currentTime: "0:00",
+    audio_totalTime: "0:00",
     audio_paused: true,
     audio_cover: _setting(`randomImgSource`),
     audio_title: "等待播放中",
@@ -173,6 +167,7 @@ export default {
     this.axios.defaults.baseURL = _setting(`server`);
     this.testConnection();
     setInterval(() => {
+      this.audio_paused = _player.paused;
       if (_player.list.audios.length > 0) {
         let nowPlaying = _player.list.audios[_player.list.index];
         let buffered = _player.audio.buffered;
@@ -182,12 +177,14 @@ export default {
                 100
               : 0,
           cent = (_player.audio.currentTime / _player.audio.duration) * 100;
-        this.audio_currentTime = cent;
-        this.audio_buffer = audioBuffered;
+        this.audio_currentTimePercent = cent;
+        this.audio_bufferPercent = audioBuffered;
         this.audio_paused = _player.paused;
         this.audio_title = nowPlaying.name;
         this.audio_artist = nowPlaying.artist;
         this.audio_cover = nowPlaying.cover;
+        this.audio_currentTime = this.secondToTime(_player.audio.currentTime);
+        this.audio_totalTime = this.secondToTime(_player.audio.duration);
         if ("mediaSession" in navigator) {
           navigator.mediaSession.metadata = new MediaMetadata({
             title: nowPlaying.name,
@@ -206,8 +203,10 @@ export default {
             .setActionHandler("nexttrack", () => _player.skipForward());
         }
       } else {
-        this.audio_currentTime = 100;
-        this.audio_buffer = 100;
+        this.audio_currentTime = "0:00";
+        this.audio_totalTime = "0:00";
+        this.audio_currentTimePercent = 100;
+        this.audio_bufferPercent = 100;
         this.audio_paused = _player.paused;
         this.audio_title = "等待播放中~";
         this.audio_artist = "：Ｄ";
@@ -216,9 +215,16 @@ export default {
           navigator.mediaSession.metadata = null;
         }
       }
-    }, 1000);
+    }, 400);
   },
   methods: {
+    secondToTime(second) {
+      //秒數轉時間
+      let MM = Math.floor(second / 60);
+      let SS = Math.floor(second % 60);
+      SS = SS < 10 ? "0" + SS : SS;
+      return MM + ":" + SS;
+    },
     audio_toggle() {
       _player.toggle();
       this.audio_paused = _player.paused;
@@ -226,8 +232,16 @@ export default {
     audio_next() {
       _player.skipForward();
     },
+    audio_previous() {
+      _player.skipBack();
+    },
     audio_seek() {
-      _player.seek((this.audio_currentTime / 100) * _player.audio.duration);
+      _player.seek(
+        (this.audio_currentTimePercent / 100) * _player.audio.duration
+      );
+    },
+    closeMenu() {
+      this.menuVisible = false;
     },
     toggleMenu() {
       this.menuVisible = !this.menuVisible;
@@ -263,110 +277,126 @@ export default {
 </style>
 <style lang="sass" scoped>
 .md-toolbar .md-title
-  font-family: var(--product-font)
-  font-weight: bold
-
-#drawer
-  display: flex
-  flex-direction: column
-  .drawer-list
-    flex: 1
-    overflow: auto
+	font-family: var(--product-font)
+	font-weight: bold
+.page-container
+	overflow: hidden
 
 .md-app-content
-  overflow-y: auto
-  overflow-x: hidden
+	overflow-y: auto
+	overflow-x: hidden
 
-.song-info
-  display: flex
-  align-items: center
-  box-sizing: border-box
-  width: 100%
-  max-width: 100%
-  .cover
-    height: 64px
-    min-width: 64px
-    position: relative
-    background-size: cover
-    background-position: center
-    mask-image: linear-gradient(to right, black 70%, rgba(0,0,0,0) 100%)
-    -webkit-mask-image: linear-gradient(to right, black 70%, rgba(0,0,0,0) 100%)
-    img    
-      width: 64px
-      height: 64px
-      max-width: 64px
-      max-height: 64px
-      object-fit: cover
-    .md-button
-      position: absolute 
-      top: 50%
-      left: 50%
-      transform: translate(-70%, -50%)
-      background-color: rgba(255, 255, 255, 0.7)
-      opacity: 0
-    &:hover .md-button
-      opacity: 1
-  .info
-    flex: 1
-    overflow: hidden
-    cursor: pointer
-    .title,.artist
-      padding-left: 2px
-      overflow: hidden
-      text-overflow: ellipsis
-      white-space: nowrap
-      line-height: 24px
-    .title
-      font-weight: bold
-  .md-button.next
-    width: 30px
-    min-width: 30px
-    height: 30px
-    margin: 0
+.bottom-player
+	box-sizing: border-box
+	height: 69px
+	max-height: 69px
+	.song-info
+		display: flex
+		align-items: center
+		width: 100vw
+		max-width: 100vw
+		box-sizing: border-box
+		.left
+			display: flex
+			align-items: center
+			height: 64px
+			width: 25vw
+			.info
+				flex: 1
+				overflow: hidden
+				cursor: pointer
+				.title,.artist
+					padding-left: 2px
+					overflow: hidden
+					text-overflow: ellipsis
+					white-space: nowrap
+					line-height: 24px
+				.title
+					font-weight: bold
+			.cover
+				margin: 0 8px
+				--cover-size: 56px
+				height: var(--cover-size)
+				min-width: var(--cover-size)
+				position: relative
+				background-size: cover
+				background-position: center 
+				background-position: center 
+				border-radius: 4px
+				overflow: hidden
+				img    
+					transition: all .6s cubic-bezier(0.55, 0, 0.1, 1)
+					width: var(--cover-size)
+					height: var(--cover-size)
+					max-width: var(--cover-size)
+					max-height: var(--cover-size)
+					object-fit: cover
+				.md-button
+					position: absolute 
+					top: 50%
+					left: 50%
+					transform: translate(-70%, -50%) scale(.9)
+					background-color: rgba(255, 255, 255, 0.7)
+					opacity: 0
+				&:hover 
+					img
+						filter: brightness(50%) blur(1px)
+					.md-button
+						transform: translate(-70%, -50%) scale(1)
+						opacity: 1
+		.center
+			display: flex
+			align-items: center
+			height: 64px
+			flex: 1
+			justify-content: center
+			span.time
+				font-family: var(--product-font)
+				width: 2.8em
+				text-align: center
+		.right
+			width: 25vw
+			display: flex
+			align-items: center
+			height: 64px
+			justify-content: right
+		.right-s
+			display: none
+			align-items: center
+			height: 64px
+			justify-content: right
+		.md-button.next
+			width: 30px
+			min-width: 30px
+			height: 30px
+			margin: 0
+
 @media screen and (max-width: 600px) 
-  .md-app
-    min-height: calc(100vh - 69px)
-    max-height: calc(100vh - 69px)
-  #drawer
-    .drawer-player
-      display: none
-  .md-app-content
-    max-height: calc(100vh - 64px - 69px)
-  .bottom-player
-    box-sizing: border-box
-    height: 69px
-    max-height: 69px
-    .progress-bar 
-      overflow: hidden
-      .md-progress-bar
-        width: 230px
-@media screen and (min-width: 601px) 
-  .md-app
-    min-height: 100vh
-  .bottom-player
-    display: none
-  .md-app-content
-    max-height: calc(100vh - 64px)
-  #drawer
-    .drawer-list
-      max-height: calc(100vh - 70px - 64px)
-  .drawer-player
-    background: rgba(255, 255, 255, 0.3)
-    border-radius: 8px
-    bottom: 0
-    .app-progress-bar
-      overflow: hidden
-      .md-progress-bar
-        width: 230px
+	.bottom-player
+		.song-info
+			.left
+				flex: 1
+			.center,.right
+				display: none
+			.right-s
+				display: flex
+.md-app
+	min-height: calc(100vh - 69px)
+	max-height: calc(100vh - 69px)
+#drawer
+	.drawer-player
+		display: none
+.md-app-content
+	max-height: calc(100vh - 64px - 69px)
 
 .md-toolbar, .md-toolbar-row 
-    min-height: 64px
+		min-height: 64px
 
 .md-drawer 
-  width: 230px
-  max-width: calc(100vw - 125px)
+	width: 230px
+	max-width: calc(100vw - 125px)
 .router-link-active
-  background: rgba(0, 0, 0, 0.05)
+	background: rgba(0, 0, 0, 0.05)
 </style>
 <style>
 .fade-enter-active,

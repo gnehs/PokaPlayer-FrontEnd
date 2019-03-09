@@ -14,6 +14,7 @@ export default {
 	--text-color: #000
 	display: flex
 	flex-wrap: wrap
+	max-width: 100%
 	width: 100%
 	.card
 		--size: calc(16.6% - 1em)
@@ -154,6 +155,13 @@ export default {
 					transform: none
 					box-shadow: inset 0 0 0 100em #00000015
 
+@media (max-width: 380px)
+	.poka
+		&.cards .card
+			--size: calc(100% - 1em)
+			font-size: 9px
+		&.doubling.four.cards .card
+			--size: calc(100% - 1em)
 @media (max-width: 575.98px)
 	.poka
 		&.cards .card
