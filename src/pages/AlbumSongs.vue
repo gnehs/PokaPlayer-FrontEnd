@@ -1,8 +1,8 @@
 <template>
   <div>
-    <poka-header :blurbg="true" :bg="server+cover||null"/>
+    <poka-header :blurbg="true" :bg="cover||null"/>
     <div class="info-header">
-      <div class="cover" :style="`background-image: url('${server+cover}')`"/>
+      <div class="cover" :style="`background-image: url('${cover}')`"/>
       <div class="info">
         <div class="album-name" :title="name">{{name}}</div>
         <div class="artist-name" :title="artist">{{artist}}</div>
@@ -97,40 +97,18 @@ export default {
   created() {
     let albumSource = this.$route.params.source;
     let albumID = this.$route.params.id;
-    if (albumSource == "DSM")
-      this.cover = `/pokaapi/cover/?moduleName=${encodeURIComponent(
-        albumSource
-      )}&data=${encodeURIComponent(
-        JSON.stringify({ type: "album", info: JSON.parse(albumID) })
-      )}`.replace(/'/, "\\'");
-
-    if (albumSource == "DSM") {
-      let albumData = JSON.parse(albumID);
-      this.name = albumData.album_name;
-      this.artist = albumData.album_artist_name;
-      this.axios
-        .get(
-          `${this.server}/pokaapi/albumSongs/?moduleName=${encodeURIComponent(
-            albumSource
-          )}&data=${encodeURIComponent(albumID)}`
-        )
-        .then(response => {
-          this.songs = response.data.songs;
-        });
-    } else {
-      this.axios
-        .get(
-          `${this.server}/pokaapi/album?moduleName=${encodeURIComponent(
-            albumSource
-          )}&id=${encodeURIComponent(albumID)}`
-        )
-        .then(response => {
-          this.songs = response.data.songs;
-          this.name = response.data.name;
-          this.artist = response.data.artist;
-          this.cover = response.data.cover.replace(/'/, "\\'");
-        });
-    }
+    this.axios
+      .get(
+        `${this.server}/pokaapi/album?moduleName=${encodeURIComponent(
+          albumSource
+        )}&id=${encodeURIComponent(albumID)}`
+      )
+      .then(response => {
+        this.songs = response.data.songs;
+        this.name = response.data.name;
+        this.artist = response.data.artist;
+        this.cover = this.server + response.data.cover.replace(/'/, "\\'");
+      });
   },
   data: () => ({
     data: null,

@@ -23,28 +23,16 @@ export default {
       this.data = response.data;
     });
     //取得封面與名字
-    if (ArtistSource == "DSM") {
-      this.name = ArtistId;
-      this.cover = `/pokaapi/cover/?moduleName=${encodeURIComponent(
-        ArtistSource
-      )}&data=${encodeURIComponent(
-        JSON.stringify({
-          type: "artist",
-          info: ArtistId
-        })
-      )}`;
-    } else {
-      this.axios
-        .get(
-          `/pokaapi/artist/?moduleName=${encodeURIComponent(
-            ArtistSource
-          )}&id=${encodeURIComponent(ArtistId)}`
-        )
-        .then(response => {
-          this.cover = response.data.cover;
-          this.name = response.data.name;
-        });
-    }
+    this.axios
+      .get(
+        `/pokaapi/artist/?moduleName=${encodeURIComponent(
+          ArtistSource
+        )}&id=${encodeURIComponent(ArtistId)}`
+      )
+      .then(response => {
+        this.cover = response.data.cover;
+        this.name = response.data.name;
+      });
   },
   data: () => ({
     data: null,

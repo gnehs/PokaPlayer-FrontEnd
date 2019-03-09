@@ -15,25 +15,29 @@
 export default {
   name: "ComposerAlbum",
   created() {
+    let ComposerSource = this.$route.params.source;
     let ComposerId =
       this.$route.params.id == "unknown" ? "" : this.$route.params.id;
-    if (this.$route.params.source == "DSM")
-      this.cover = `/pokaapi/cover/?moduleName=${encodeURIComponent(
-        this.$route.params.source
-      )}&data=${encodeURIComponent(
-        JSON.stringify({
-          type: "composer",
-          info: ComposerId
-        })
-      )}`;
     let url = `${
       this.server
     }/pokaapi/composerAlbums/?moduleName=${encodeURIComponent(
-      this.$route.params.source
+      ComposerSource
     )}&id=${encodeURIComponent(ComposerId)}`;
     this.axios.get(url).then(response => {
       this.data = response.data;
     });
+
+    //取得封面與名字
+    this.axios
+      .get(
+        `/pokaapi/composer/?moduleName=${encodeURIComponent(
+          ComposerSource
+        )}&id=${encodeURIComponent(ComposerId)}`
+      )
+      .then(response => {
+        this.cover = response.data.cover;
+        this.name = response.data.name;
+      });
   },
   data: () => ({
     data: null,
