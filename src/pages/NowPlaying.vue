@@ -2,7 +2,12 @@
   <div>
     <poka-header :blurbg="true" :bg="audio_cover"/>
     <div style="position: relative">
-      <transition-group name="songlist" tag="md-list" class="md-double-line">
+      <transition-group
+        name="songlist"
+        tag="md-list"
+        class="md-double-line"
+        v-if="audio_queue.length>0"
+      >
         <md-list-item
           v-for="(song,index) of audio_queue"
           :key="JSON.stringify(song)"
@@ -31,6 +36,19 @@
           </md-button>
         </md-list-item>
       </transition-group>
+      <md-empty-state
+        v-else
+        md-icon="queue_music"
+        md-label="佇列中尚未有歌曲"
+        md-description="加入一些歌曲，或是點選底下的隨機播放"
+      >
+        <md-button
+          class="md-primary md-raised"
+          @click="randomPlay"
+          v-if="!loadingRandom"
+        >{{$t('playlist_random')}}</md-button>
+        <poka-loader v-else/>
+      </md-empty-state>
     </div>
   </div>
 </template>
@@ -39,6 +57,8 @@
 export default {
   name: "NowPlaying",
   data: () => ({
+    server: _setting(`server`),
+    loadingRandom: false,
     audio_currentTimePercent: 100,
     audio_currentTime: "0:00",
     audio_totalTime: "0:00",
@@ -129,6 +149,42 @@ export default {
       _player.seek(
         (this.audio_currentTimePercent / 100) * _player.audio.duration
       );
+    },
+    randomPlay() {
+      this.axios(`/pokaapi/randomSongs`).then(res => {
+        console.log(res.data);
+        this.addSongs({ songlist: res.data.songs });
+      });
+    },
+    addSongs({ songlist, index, clear = true }) {
+      let playlist = [];
+      for (let nowsong of songlist) {
+        let src =
+            this.server +
+            nowsong.url +
+            "&songRes=" +
+            _setting(`audioQuality`).toLowerCase(),
+          name = nowsong.name,
+          artist = nowsong.artist,
+          album = nowsong.album,
+          cover = nowsong.cover
+            ? this.server + nowsong.cover
+            : this.defaultCover,
+          source = nowsong.source;
+        playlist.push({
+          url: src,
+          cover: cover,
+          name: name,
+          artist: artist,
+          album: album,
+          id: nowsong.id,
+          source: source
+        });
+      }
+      if (clear) _player.list.clear();
+      _player.list.add(playlist);
+      if (index) _player.list.switch(index);
+      _player.play();
     }
   }
 };

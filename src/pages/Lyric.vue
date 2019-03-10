@@ -1,11 +1,71 @@
 <template>
   <div>
-    <div v-if="lyric.length>0">
-      <p v-for="(item, index) of lyric" :key="index">{{item.text}}</p>
+    <div v-on:dblclick="showLyricDialog = true" class="lyric">
+      <div v-if="lyric.length > 1">
+        <p
+          v-for="(item, index) of lyric"
+          :key="index"
+          :class="{focus: index==lyricFocus }"
+        >{{item.text}}</p>
+      </div>
+      <div v-else>{{$t('lrc_noLyrics')}}</div>
     </div>
-    <div v-else></div>
+    <md-dialog :md-active.sync="showLyricDialog" style="overflow: scroll;">
+      <md-dialog-title>{{$t("lrc_search")}}</md-dialog-title>
+      <md-list class="md-double-line">
+        <md-list-item @click="loadLrc(`[00:00.000]`);showLyricDialog = false">
+          <md-icon>close</md-icon>
+          <div class="md-list-item-text">
+            <span>{{$t('lrc_notLoad')}}</span>
+            <span>{{$t('lrc_notLoad_description')}}</span>
+          </div>
+        </md-list-item>
+      </md-list>
+      <md-list class="md-triple-line">
+        <md-list-item
+          v-for="(item, index) of lyricSearchResult"
+          :key="index"
+          @click="loadLrc(item.lyric);showLyricDialog = false"
+        >
+          <md-icon>subtitles</md-icon>
+          <div class="md-list-item-text">
+            <span>{{item.name}}</span>
+            <span>{{item.artist}}</span>
+            <p>{{item.lyric.substring(0,50-1)+"..."}}</p>
+          </div>
+        </md-list-item>
+      </md-list>
+      <md-dialog-actions>
+        <md-button class="md-primary" @click="showLyricDialog = false">{{$t('cancel')}}</md-button>
+      </md-dialog-actions>
+    </md-dialog>
   </div>
 </template>
+<style lang="sass" scoped>
+.lyric 
+  text-align: center
+  height: calc(100vh - 64px - 69px - 16px)
+  overflow: hidden
+  overflow-y: scroll
+  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)
+  div
+    padding-top: 80px
+    padding-bottom: 80px
+  p
+    transition: all 0.5s cubic-bezier(0.77, 0, 0.18, 1), color 0.2s linear, opacity 0.2s linear
+    opacity: .5
+    min-height: 1em
+    transform: scale(0.95)
+    position: relative
+    font-size: calc(12px + 1.2vmin)
+    &.focus
+      opacity: 1
+      transform: scale(1)
+      font-weight: 700
+      &:not(:empty) + p
+        opacity: .85
+        transform: scale(0.98)
+</style>
 
 <script>
 export default {
@@ -13,7 +73,10 @@ export default {
   data: () => ({
     audio_title: null,
     audio_artist: null,
+    showLyricDialog: false,
     lyric: [],
+    lyricFocus: 0,
+    lyricSearchResult: [],
     Lyric_Update: null
   }),
   created() {
@@ -44,9 +107,28 @@ export default {
             nowPlaying.id,
             nowPlaying.source
           );
+          this.lyricSearchResult = [];
           this.audio_title = nowPlaying.name;
+          this.audio_artist = nowPlaying.artist;
         } else {
           this.lyric = window._lrc.getLyrics();
+          let lyricFocus_temp = this.lyricFocus;
+          this.lyricFocus = window._lrc.select(_player.audio.currentTime);
+          if (lyricFocus_temp != this.lyricFocus) {
+            let sh =
+              $(".lyric p.focus")[0].offsetTop -
+              $(".lyric p.focus").height() / 2 -
+              $(".lyric p.focus")[0].clientHeight -
+              $(window).height() * 0.2;
+            $(".lyric")
+              .clearQueue()
+              .animate(
+                {
+                  scrollTop: sh
+                },
+                250
+              );
+          }
           //更新時間就好
         }
       } else {
@@ -63,47 +145,37 @@ export default {
             source
           )}&id=${encodeURIComponent(id)}`;
 
-        axios(url).then(response => {
+        this.axios(url).then(response => {
           if (
             response.data.lyrics[0].lyric &&
             response.data.lyrics[0].lyric.match(lyricRegex)
           ) {
             //透過 id 找到歌詞ㄌ
-            loadLrc(response.data.lyrics[0].lyric);
+            window._lrc.load(response.data.lyrics[0].lyric);
           } else {
             //沒找到，拿 title 跟 artist 找找看
-            getLyricByKeyword(title, artist);
+            this.getLyricByKeyword(title, artist);
           }
         });
       } else {
-        getLyricByKeyword(title, artist);
+        this.getLyricByKeyword(title, artist);
       }
-      function getLyricByKeyword(title, artist) {
-        axios(
-          _setting(`server`) +
-            `/pokaapi/searchLyrics/?keyword=${encodeURIComponent(
-              title + " " + artist
-            )}`
-        )
-          .then(result => result.data)
-          .then(result => {
-            // console.log(result);
-            for (let { name, lyric } of result.lyrics) {
-              let lrcTitle = name
-                .toLowerCase()
-                .replace(/\.|\*|\~|\&|。|，|\ |\-|\!|！|\(|\)/g, "");
-              let songTitle = title
-                .toLowerCase()
-                .replace(/\.|\*|\~|\&|。|，|\ |\-|\!|！|\(|\)/g, "");
-              if (lrcTitle == songTitle && lyric.match(lyricRegex)) {
-                loadLrc(lyric);
-              }
-            }
-          });
-      }
-      function loadLrc(lrc) {
-        window._lrc.load(lrc);
-      }
+    },
+    getLyricByKeyword(title, artist) {
+      this.axios(
+        _setting(`server`) +
+          `/pokaapi/searchLyrics/?keyword=${encodeURIComponent(
+            title + " " + artist
+          )}`
+      )
+        .then(result => result.data)
+        .then(result => {
+          this.lyricSearchResult = result.lyrics;
+          window._lrc.load(result.lyrics[0].lyric);
+        });
+    },
+    loadLrc(lrc) {
+      window._lrc.load(lrc);
     }
   }
 };

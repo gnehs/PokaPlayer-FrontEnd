@@ -1,4 +1,6 @@
 import APlayer from 'APlayer';
+import $ from 'jquery'
+window.$ = $
 window._player = new APlayer({
     container: document.getElementById('player')
 });
