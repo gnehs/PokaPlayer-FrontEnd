@@ -16,8 +16,6 @@ window._setting = (setting, value) => {
         "version": "0.0.0",
         "filterEnabled": true,
         "darkMode": false,
-        "themeColor": "#009688",
-        "themeTextColor": "#FFF",
         "server": location.origin + "/",
         "password": "",
         "rememberPass": true,

@@ -195,78 +195,78 @@ export default {
 	transform: scaleY(0) scaleX(0.9)
 	transform-origin: center top
 .songlist-leave-active 
-  	position: absolute
+		position: absolute
 .songlist-move
 	transition: 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
 	transition-property: opacity, transform
 
 .audio-info
-  position: relative
-  >.top
-    display: flex
-    padding: 8px
-    position: relative
-    align-items: center
-    >.cover    
-      --cover-size: 200px
-      width: var(--cover-size)
-      height: 0
-      overflow: hidden
-      padding-bottom: var(--cover-size)
-      border-radius: calc(var(--cover-size) * .08)
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3)
-      background-size: cover
-      background-position: center
-      background-color: #0000
-    >.info
-      margin: 16px
-      margin-left: 24px
-      overflow: hidden
-      >.title,>.artist
-        white-space: nowrap
-        overflow: hidden
-        text-overflow: ellipsis
-      >.title
-        font-size: 48px
-        font-weight: bold
-        line-height: 1.1em
-      >.artist
-        font-size: 32px
-        line-height: 1.1em
-      >.control
-        margin-top: 16px
-        margin-bottom: 16px
-        >.md-icon-button
-          --icon-size: 30px
-          --button-size: 50px
-          width: var(--button-size)
-          min-width: var(--button-size)
-          height: var(--button-size)
-          .md-icon 
-            width: var(--icon-size)
-            min-width: var(--icon-size)
-            height: var(--icon-size)
-            font-size: var(--icon-size) !important
-  .bottom-bar
-    padding: 8px 0 
-    position: relative
+	position: relative
+	>.top
+		display: flex
+		padding: 8px
+		position: relative
+		align-items: center
+		>.cover    
+			--cover-size: 200px
+			width: var(--cover-size)
+			height: 0
+			overflow: hidden
+			padding-bottom: var(--cover-size)
+			border-radius: calc(var(--cover-size) * .08)
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3)
+			background-size: cover
+			background-position: center
+			background-color: #0000
+		>.info
+			margin: 16px
+			margin-left: 24px
+			overflow: hidden
+			>.title,>.artist
+				white-space: nowrap
+				overflow: hidden
+				text-overflow: ellipsis
+			>.title
+				font-size: 48px
+				font-weight: bold
+				line-height: 1.1em
+			>.artist
+				font-size: 32px
+				line-height: 1.1em
+			>.control
+				margin-top: 16px
+				margin-bottom: 16px
+				>.md-icon-button
+					--icon-size: 30px
+					--button-size: 50px
+					width: var(--button-size)
+					min-width: var(--button-size)
+					height: var(--button-size)
+					.md-icon 
+						width: var(--icon-size)
+						min-width: var(--icon-size)
+						height: var(--icon-size)
+						font-size: var(--icon-size) !important
+	.bottom-bar
+		padding: 8px 0 
+		position: relative
 @media screen and (max-width: 780px) 
-  .audio-info
-    .top
-      display: block
-      .cover    
-        --cover-size: 100%
-        --cover-size-max: 100%
-        >img
-          width: 100vw
-          height: 100vw
-      .info
-        .title,.artist,.control
-          text-align: center
-        .title
-          font-size: 32px
-        .artist
-          font-size: 24px
+	.audio-info
+		.top
+			display: block
+			.cover    
+				--cover-size: 100%
+				--cover-size-max: 100%
+				>img
+					width: 100vw
+					height: 100vw
+			.info
+				.title,.artist,.control
+					text-align: center
+				.title
+					font-size: 32px
+				.artist
+					font-size: 24px
 .md-list
 	width: 100%
 	background-color: transparent
@@ -279,12 +279,16 @@ export default {
 		overflow: hidden
 		transition: all 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
 		*
-	  		cursor: pointer
+				cursor: pointer
 		&:hover
 			background-color: rgba(0, 0, 0,.12)
 		&.active
 			background-color: rgb(255, 255, 255)
 			box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2)
+.md-theme-default-dark.md-list
+	.md-list-item
+		&.active
+			background-color: rgba(0, 0, 0, .3)
 @media screen and (max-width: 600px) 
 	.md-list
 		.md-list-item

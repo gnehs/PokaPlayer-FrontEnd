@@ -268,7 +268,6 @@ export default {
 </style>
 <style lang="scss">
 @import "~vue-material/dist/theme/engine"; // Import the theme engine
-
 @include md-register-theme(
   "default",
   (
@@ -276,7 +275,14 @@ export default {
     accent: #767676
   )
 );
-
+@include md-register-theme(
+  "default-dark",
+  (
+    primary: #27a09e,
+    accent: #767676,
+    theme: dark
+  )
+);
 @import "~vue-material/dist/theme/all"; // Apply the theme
 </style>
 <style lang="sass" scoped>
@@ -474,7 +480,8 @@ export default {
   background-size: contain !important;
 }
 
-.icon-white {
+.icon-white,
+.md-theme-default-dark .md-icon[class*="outline-"] {
   -moz-filter: contrast(4) invert(1);
   -o-filter: contrast(4) invert(1);
   -ms-filter: contrast(4) invert(1);
