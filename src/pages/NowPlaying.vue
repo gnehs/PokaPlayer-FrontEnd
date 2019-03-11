@@ -151,7 +151,11 @@ export default {
       );
     },
     randomPlay() {
-      this.axios(`/pokaapi/randomSongs`).then(res => {
+      this.axios(
+        `/pokaapi/randomSongs?${Math.random()
+          .toString(36)
+          .substring(7)}`
+      ).then(res => {
         console.log(res.data);
         this.addSongs({ songlist: res.data.songs });
       });
