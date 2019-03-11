@@ -38,7 +38,7 @@
           <div class="md-list-item-text">
             <span>{{item.name}}</span>
             <span>{{item.artist}}</span>
-            <p>{{item.lyric.substring(0,50-1)+"..."}}</p>
+            <p>({{item.rate}}% match) {{item.lyric.substring(0,50-1)+"..."}}</p>
           </div>
         </md-list-item>
       </md-list>
@@ -177,9 +177,26 @@ export default {
       )
         .then(result => result.data)
         .then(result => {
+          //計算傳回歌詞匹配率
+          result.lyrics.forEach(element => {
+            let rate =
+              this.matchRate(title, element.name) * 0.7 +
+              this.matchRate(artist, element.artist) * 0.3;
+            rate = Math.round(rate * 100) / 100;
+            element.rate = rate > 0 ? rate : 0;
+          });
+          //以匹配率排序
+          result.lyrics.sort((a, b) => b.rate - a.rate);
+          //最高者若超過 .7 則載入歌詞
+          if (result.lyrics[0].rate > 35)
+            window._lrc.load(result.lyrics[0].lyric);
           this.lyricSearchResult = result.lyrics;
-          window._lrc.load(result.lyrics[0].lyric);
         });
+    },
+    matchRate(a, b, rate = 0) {
+      for (let c of a.split("")) b.includes(c) ? rate++ : rate--;
+      for (let c of b.split("")) a.includes(c) ? rate++ : rate--;
+      return Math.round((rate / (a.length * 2)) * 10000) / 100;
     },
     loadLrc(lrc) {
       window._lrc.load(lrc);
