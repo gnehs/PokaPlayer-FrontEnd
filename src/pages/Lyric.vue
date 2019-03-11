@@ -8,7 +8,14 @@
           :class="{focus: index==lyricFocus }"
         >{{item.text}}</p>
       </div>
-      <div v-else>{{$t('lrc_noLyrics')}}</div>
+      <md-empty-state
+        v-else
+        md-icon="subtitles"
+        :md-label="$t('lrc_noLyrics')"
+        md-description="你可以搜尋看看啦，搞不好有之類的。"
+      >
+        <md-button class="md-primary md-raised" @click="showLyricDialog = true">{{$t('lrc_search')}}</md-button>
+      </md-empty-state>
     </div>
     <md-dialog :md-active.sync="showLyricDialog" style="overflow: scroll;">
       <md-dialog-title>{{$t("lrc_search")}}</md-dialog-title>
