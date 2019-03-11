@@ -467,6 +467,9 @@ export default {
 .md-tab {
   padding: 16px 0;
 }
+.md-speed-dial {
+  z-index: 2;
+}
 @media screen and (min-width: 600px) {
   .md-button.menu {
     display: none;

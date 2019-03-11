@@ -3,6 +3,7 @@ import headerWrapper from '@/components/header-wrapper.vue'
 import pokaCard from '@/components/card.vue'
 import pokaCards from '@/components/cards.vue'
 import pokaLoader from '@/components/loader.vue'
+import pinButton from '@/components/pinButton.vue'
 // parseData
 import parsePlaylists from '@/components/parse-playlists.vue'
 import parseSongs from '@/components/parse-songs.vue'
@@ -16,6 +17,7 @@ export {
     pokaCard,
     pokaCards,
     pokaLoader,
+    pinButton,
     parsePlaylists,
     parseSongs,
     parseArtists,

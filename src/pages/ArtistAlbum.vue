@@ -3,6 +3,13 @@
     <poka-header :title="name" :subtitle="$t('artist')" :blurbg="true" :bg="server+cover||null"/>
     <poka-parse-albums v-if="data" :data="data.albums"/>
     <poka-loader v-else/>
+    <pin-button
+      v-if="name"
+      :source="$route.params.source"
+      :id="$route.params.id"
+      type="artist"
+      :name="name"
+    />
   </div>
 </template>
 

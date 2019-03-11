@@ -16,6 +16,14 @@
     <md-divider/>
     <poka-parse-songs :data="songs" v-if="songs"/>
     <poka-loader v-else/>
+
+    <pin-button
+      v-if="name"
+      :source="$route.params.source"
+      :id="$route.params.id"
+      type="album"
+      :name="name"
+    />
   </div>
 </template>
 

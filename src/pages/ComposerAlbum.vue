@@ -1,13 +1,15 @@
 <template>
   <div>
-    <poka-header
-      :title="$route.params.id"
-      :subtitle="$t('composer')"
-      :blurbg="true"
-      :bg="server+cover||null"
-    />
+    <poka-header :title="name" :subtitle="$t('composer')" :blurbg="true" :bg="server+cover||null"/>
     <poka-parse-albums v-if="data" :data="data.albums"/>
     <poka-loader v-else/>
+    <pin-button
+      v-if="name"
+      :source="$route.params.source"
+      :id="$route.params.id"
+      type="composer"
+      :name="$route.params.id"
+    />
   </div>
 </template>
 
@@ -42,6 +44,8 @@ export default {
   data: () => ({
     data: null,
     cover: false,
+    name: null,
+    cover: null,
     server: _setting(`server`)
   })
 };

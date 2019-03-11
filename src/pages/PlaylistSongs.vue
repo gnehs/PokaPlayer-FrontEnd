@@ -4,10 +4,17 @@
       :title="title||$t('loading')"
       :subtitle="$t('playlist')"
       :blurbg="true"
-      :bg="server+cover||null"
+      :bg="cover"
     />
     <poka-parse-songs v-if="data" :data="data.songs"/>
     <poka-loader v-else/>
+    <pin-button
+      v-if="title"
+      :source="$route.params.source"
+      :id="$route.params.id"
+      type="playlist"
+      :name="title"
+    />
   </div>
 </template>
 
@@ -25,7 +32,9 @@ export default {
       .then(response => {
         this.data = response.data;
         this.title = this.data.playlists[0].name;
-        this.cover = this.data.playlists[0].image;
+        this.cover = this.data.playlists[0].image
+          ? this.server + this.data.playlists[0].image
+          : this.cover;
       });
   },
   data: () => ({
