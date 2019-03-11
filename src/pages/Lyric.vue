@@ -108,35 +108,38 @@ export default {
         if (this.audio_title != nowPlaying.name) {
           //找歌詞囉
           window._lrc.load(`[00:00.000]`);
+          this.lyricFocus = 0;
+          this.lyricSearchResult = [];
           this.getLyric(
             nowPlaying.name,
             nowPlaying.artist,
             nowPlaying.id,
             nowPlaying.source
           );
-          this.lyricSearchResult = [];
           this.audio_title = nowPlaying.name;
           this.audio_artist = nowPlaying.artist;
         } else {
-          this.lyric = window._lrc.getLyrics();
-          let lyricFocus_temp = this.lyricFocus;
-          this.lyricFocus = window._lrc.select(_player.audio.currentTime);
-          if (lyricFocus_temp != this.lyricFocus) {
-            let sh =
-              $(".lyric p.focus")[0].offsetTop -
-              $(".lyric p.focus").height() / 2 -
-              $(".lyric p.focus")[0].clientHeight -
-              $(window).height() * 0.2;
-            $(".lyric")
-              .clearQueue()
-              .animate(
-                {
-                  scrollTop: sh
-                },
-                250
-              );
-          }
           //更新時間就好
+          this.lyric = window._lrc.getLyrics();
+          if (this.lyric.length > 1) {
+            let lyricFocus_temp = this.lyricFocus;
+            this.lyricFocus = window._lrc.select(_player.audio.currentTime);
+            if (lyricFocus_temp != this.lyricFocus) {
+              let sh =
+                $(".lyric p.focus")[0].offsetTop -
+                $(".lyric p.focus").height() / 2 -
+                $(".lyric p.focus")[0].clientHeight -
+                $(window).height() * 0.2;
+              $(".lyric")
+                .clearQueue()
+                .animate(
+                  {
+                    scrollTop: sh
+                  },
+                  250
+                );
+            }
+          }
         }
       } else {
         this.noloadedLyric = true;
@@ -194,6 +197,8 @@ export default {
         });
     },
     matchRate(a, b, rate = 0) {
+      a = a.toLowerCase();
+      b = b.toLowerCase();
       for (let c of a.split("")) b.includes(c) ? rate++ : rate--;
       for (let c of b.split("")) a.includes(c) ? rate++ : rate--;
       return Math.round((rate / (a.length * 2)) * 10000) / 100;
