@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
     <md-app>
-      <md-app-toolbar class="md-primary">
+      <md-app-toolbar class="md-primary" id="toolbar">
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
             <md-button class="md-icon-button menu" @click="toggleMenu">
@@ -278,6 +278,7 @@ export default {
     accent: #767676
   )
 );
+@import "~vue-material/dist/theme/all"; // Apply the theme
 @include md-register-theme(
   "default-dark",
   (
@@ -287,17 +288,11 @@ export default {
   )
 );
 @import "~vue-material/dist/theme/all"; // Apply the theme
-@include md-register-theme(
-  "default-dark",
-  (
-    primary: #212121,
-    accent: md-get-palette-color(blue, A200),
-    theme: dark
-  )
-);
-@import "~vue-material/dist/components/MdToolbar/theme";
 </style>
 <style lang="sass" scoped>
+#toolbar.md-theme-default-dark
+  --md-theme-default-dark-text-primary-on-primary: rgba(255, 255, 255, 0.87)
+  --md-theme-default-dark-primary: #212121
 .md-toolbar .md-title
 	font-family: var(--product-font)
 	font-weight: bold
@@ -482,6 +477,10 @@ export default {
 .md-speed-dial {
   z-index: 2;
 }
+.md-app-content .md-list {
+  background-color: transparent !important;
+}
+
 @media screen and (min-width: 600px) {
   .md-button.menu {
     display: none;

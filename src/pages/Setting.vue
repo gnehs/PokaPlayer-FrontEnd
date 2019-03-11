@@ -12,7 +12,6 @@
 </template>
 <style lang="sass" scoped>
 .md-list
-	background-color: transparent
 	.md-list-item
 		border-radius: 8px !important
 		overflow: hidden
