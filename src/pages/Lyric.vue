@@ -8,12 +8,7 @@
           :class="{focus: index==lyricFocus }"
         >{{item.text}}</p>
       </div>
-      <md-empty-state
-        v-else
-        md-icon="subtitles"
-        :md-label="$t('lrc_noLyrics')"
-        md-description="你可以搜尋看看啦，搞不好有之類的。"
-      >
+      <md-empty-state v-else md-icon="subtitles" :md-label="$t('lrc_noLyrics')">
         <md-button class="md-primary md-raised" @click="showLyricDialog = true">{{$t('lrc_search')}}</md-button>
       </md-empty-state>
     </div>
@@ -95,7 +90,7 @@ export default {
   },
   methods: {
     startUpdateLyric() {
-      this.Lyric_Update = setInterval(() => this.updateLyric(), 400);
+      this.Lyric_Update = setInterval(() => this.updateLyric(), 150);
     },
     stopUpdateLyric() {
       if (this.Lyric_Update) {

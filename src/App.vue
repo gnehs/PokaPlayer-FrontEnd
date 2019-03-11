@@ -115,7 +115,7 @@
           <md-button class="md-icon-button" @click="audio_previous">
             <md-icon>skip_previous</md-icon>
           </md-button>
-          <md-button class="md-icon-button md-raised md-primary" @click="audio_toggle">
+          <md-button class="md-icon-button md-raised md-accent" @click="audio_toggle">
             <md-icon v-if="audio_paused">play_arrow</md-icon>
             <md-icon v-else>pause</md-icon>
           </md-button>
@@ -125,8 +125,11 @@
           <span class="time">{{audio_totalTime}}</span>
         </div>
         <div class="right">
-          <md-button class="md-icon-button" @click="audio_next">
-            <md-icon>skip_next</md-icon>
+          <md-button class="md-icon-button" to="/now" v-if="$route.path!='/now'">
+            <md-icon class="outline-playlist_play"></md-icon>
+          </md-button>
+          <md-button class="md-icon-button" to="/lyric" v-else>
+            <md-icon class="outline-subtitles"></md-icon>
           </md-button>
         </div>
         <div class="right-s">
@@ -278,12 +281,21 @@ export default {
 @include md-register-theme(
   "default-dark",
   (
-    primary: #27a09e,
-    accent: #767676,
+    primary: #65dbff,
+    accent: md-get-palette-color(blue, A200),
     theme: dark
   )
 );
 @import "~vue-material/dist/theme/all"; // Apply the theme
+@include md-register-theme(
+  "default-dark",
+  (
+    primary: #212121,
+    accent: md-get-palette-color(blue, A200),
+    theme: dark
+  )
+);
+@import "~vue-material/dist/components/MdToolbar/theme";
 </style>
 <style lang="sass" scoped>
 .md-toolbar .md-title
