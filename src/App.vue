@@ -133,6 +133,13 @@
           </md-button>
         </div>
         <div class="right-s">
+          <md-button class="md-icon-button" @click="audio_previous">
+            <md-icon>skip_previous</md-icon>
+          </md-button>
+          <md-button class="md-icon-button md-raised md-accent" @click="audio_toggle">
+            <md-icon v-if="audio_paused">play_arrow</md-icon>
+            <md-icon v-else>pause</md-icon>
+          </md-button>
           <md-button class="md-icon-button" @click="audio_next">
             <md-icon>skip_next</md-icon>
           </md-button>
@@ -414,6 +421,8 @@ export default {
 	max-width: calc(100vw - 125px)
 .router-link-active
 	background: rgba(0, 0, 0, 0.05)
+.md-theme-default-dark .router-link-active
+	background: rgba(255, 255, 255, 0.1)
 </style>
 <style>
 .fade-enter-active,
