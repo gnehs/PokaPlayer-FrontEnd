@@ -120,7 +120,7 @@ export default {
             let lyricFocus_temp = window._lrc.select(_player.audio.currentTime);
             if (this.lyricFocus != lyricFocus_temp) {
               this.lyricFocus = lyricFocus_temp;
-              setTimeout(() => {
+              this.$nextTick(() => {
                 //等 Vue 好了再去更新捲動條
                 let sh =
                   $(".lyric p.focus")[0].offsetTop -
@@ -135,7 +135,7 @@ export default {
                     },
                     250
                   );
-              }, 0);
+              });
             }
           }
         }
