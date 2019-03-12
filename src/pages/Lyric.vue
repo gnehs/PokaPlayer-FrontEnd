@@ -90,7 +90,7 @@ export default {
   },
   methods: {
     startUpdateLyric() {
-      this.Lyric_Update = setInterval(() => this.updateLyric(), 150);
+      this.Lyric_Update = setInterval(() => this.updateLyric(), 300);
     },
     stopUpdateLyric() {
       if (this.Lyric_Update) {
@@ -117,22 +117,25 @@ export default {
           //更新時間就好
           this.lyric = window._lrc.getLyrics();
           if (this.lyric.length > 1) {
-            let lyricFocus_temp = this.lyricFocus;
-            this.lyricFocus = window._lrc.select(_player.audio.currentTime);
-            if (lyricFocus_temp != this.lyricFocus) {
-              let sh =
-                $(".lyric p.focus")[0].offsetTop -
-                $(".lyric p.focus").height() / 2 -
-                $(".lyric p.focus")[0].clientHeight -
-                $(window).height() * 0.2;
-              $(".lyric")
-                .clearQueue()
-                .animate(
-                  {
-                    scrollTop: sh
-                  },
-                  250
-                );
+            let lyricFocus_temp = window._lrc.select(_player.audio.currentTime);
+            if (this.lyricFocus != lyricFocus_temp) {
+              this.lyricFocus = lyricFocus_temp;
+              setTimeout(() => {
+                //等 Vue 好了再去更新捲動條
+                let sh =
+                  $(".lyric p.focus")[0].offsetTop -
+                  $(".lyric p.focus").height() / 2 -
+                  $(".lyric p.focus")[0].clientHeight -
+                  $(window).height() * 0.2;
+                $(".lyric")
+                  .clearQueue()
+                  .animate(
+                    {
+                      scrollTop: sh
+                    },
+                    250
+                  );
+              }, 0);
             }
           }
         }
@@ -156,7 +159,7 @@ export default {
             response.data.lyrics[0].lyric.match(lyricRegex)
           ) {
             //透過 id 找到歌詞ㄌ
-            window._lrc.load(response.data.lyrics[0].lyric);
+            this.loadLrc(response.data.lyrics[0].lyric);
           } else {
             //沒找到，拿 title 跟 artist 找找看
             this.getLyricByKeyword(title, artist);
@@ -186,8 +189,7 @@ export default {
           //以匹配率排序
           result.lyrics.sort((a, b) => b.rate - a.rate);
           //最高者若超過 .7 則載入歌詞
-          if (result.lyrics[0].rate > 35)
-            window._lrc.load(result.lyrics[0].lyric);
+          if (result.lyrics[0].rate > 35) this.loadLrc(result.lyrics[0].lyric);
           this.lyricSearchResult = result.lyrics;
         });
     },
@@ -200,6 +202,7 @@ export default {
     },
     loadLrc(lrc) {
       window._lrc.load(lrc);
+      this.updateLyric();
     }
   }
 };
