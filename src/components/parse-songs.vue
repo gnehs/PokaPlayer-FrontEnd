@@ -72,13 +72,30 @@ export default {
           artist: artist,
           album: album,
           id: nowsong.id,
-          source: source
+          source: source,
+          uuid: this._uuid()
         });
       }
       if (clear) _player.list.clear();
       _player.list.add(playlist);
       if (index) _player.list.switch(index);
       _player.play();
+    },
+    _uuid() {
+      var d = Date.now();
+      if (
+        typeof performance !== "undefined" &&
+        typeof performance.now === "function"
+      ) {
+        d += performance.now(); //use high-precision timer if available
+      }
+      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
+        c
+      ) {
+        var r = (d + Math.random() * 16) % 16 | 0;
+        d = Math.floor(d / 16);
+        return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
+      });
     }
   }
 };

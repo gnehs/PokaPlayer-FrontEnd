@@ -10,7 +10,7 @@
       >
         <md-list-item
           v-for="(song,index) of audio_queue"
-          :key="song.name+song.artist"
+          :key="song.uuid"
           :class="{active:index==audio_index}"
         >
           <md-avatar>
