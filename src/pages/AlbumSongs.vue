@@ -8,22 +8,23 @@
         <div class="artist-name" :title="artist">{{artist}}</div>
         <div class="grow"></div>
         <div class="footer">
-          <div class="time">{{songs?$t("album_total", { songs: songs.length }):""}}</div>
-          <div class="actions"></div>
+          <div class="time" v-if="songs">{{$t("album_total", { songs: songs.length })}}</div>
+          <div class="actions">
+            <pin-button
+              v-if="name"
+              :source="$route.params.source"
+              :id="$route.params.id"
+              type="album"
+              :name="name"
+              btn-type="icon-button"
+            />
+          </div>
         </div>
       </div>
     </div>
     <md-divider/>
     <poka-parse-songs :data="songs" v-if="songs"/>
     <poka-loader v-else/>
-
-    <pin-button
-      v-if="name"
-      :source="$route.params.source"
-      :id="$route.params.id"
-      type="album"
-      :name="name"
-    />
   </div>
 </template>
 
@@ -77,8 +78,9 @@
 			font-size: 20px
 			line-height: 42px
 		.actions
-			.mdui-btn
+			.md-button
 				height: 42px
+				min-width: 42px
 				width: 42px
 
 @media screen and (max-width: 768px)
@@ -116,6 +118,7 @@ export default {
         this.name = response.data.name;
         this.artist = response.data.artist;
         this.cover = this.server + response.data.cover.replace(/'/, "\\'");
+        this.name = response.data.name;
       });
   },
   data: () => ({

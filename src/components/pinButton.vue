@@ -1,11 +1,30 @@
 <template>
-  <md-speed-dial class="md-bottom-right" v-if="isPinned != null&& isPinned != 'disabled'">
-    <md-speed-dial-target @click="pin">
+  <div>
+    <md-speed-dial
+      class="md-bottom-right"
+      v-if="isPinned != null && isPinned != 'disabled' && btnType == 'speed-dial'"
+    >
+      <md-speed-dial-target @click="pin">
+        <md-icon v-if="isPinned">turned_in</md-icon>
+        <md-icon v-else>turned_in_not</md-icon>
+      </md-speed-dial-target>
+    </md-speed-dial>
+    <md-button
+      class="md-icon-button"
+      @click="pin"
+      v-if="isPinned != null && isPinned != 'disabled' && btnType == 'icon-button'"
+    >
       <md-icon v-if="isPinned">turned_in</md-icon>
       <md-icon v-else>turned_in_not</md-icon>
-    </md-speed-dial-target>
-  </md-speed-dial>
+    </md-button>
+  </div>
 </template>
+<style lang="sass" scoped>
+.md-button
+  height: 42px
+  min-width: 42px
+  width: 42px
+</style>
 
 <script>
 export default {
@@ -13,23 +32,31 @@ export default {
   created() {
     this.getPinStatus();
   },
-  props: ["source", "type", "id", "name"],
+  props: {
+    source: String,
+    type: String,
+    id: String,
+    name: String,
+    btnType: { type: String, default: "speed-dial" }
+  },
   data: () => ({
     server: _setting(`server`),
     isPinned: null
   }),
   methods: {
     getPinStatus() {
-      console.log(this.source, this.type, this.id, this.name);
-      this.axios
-        .post(
-          `/pokaapi/isPinned/?moduleName=${this.source}&type=${this.type}&id=${
-            this.id
-          }&name=${this.name}`
-        )
-        .then(r => {
-          this.isPinned = r.data;
-        });
+      if (this.name) {
+        console.log(this.source, this.type, this.id, this.name);
+        this.axios
+          .post(
+            `/pokaapi/isPinned/?moduleName=${this.source}&type=${
+              this.type
+            }&id=${this.id}&name=${this.name}`
+          )
+          .then(r => {
+            this.isPinned = r.data;
+          });
+      }
     },
     pin() {
       this.axios
