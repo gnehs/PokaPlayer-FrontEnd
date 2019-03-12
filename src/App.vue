@@ -112,19 +112,29 @@
         </div>
         <div class="center">
           <span class="time">{{audio_currentTime}}</span>
-          <md-button class="md-icon-button" @click="audio_previous">
-            <md-icon>skip_previous</md-icon>
-          </md-button>
+          <div>
+            <md-button class="md-icon-button" @click="audio_previous">
+              <md-icon>skip_previous</md-icon>
+            </md-button>
+            <md-tooltip md-direction="left">{{audio_previous_name}}</md-tooltip>
+          </div>
           <md-button class="md-icon-button md-raised md-accent" @click="audio_toggle">
             <md-icon v-if="audio_paused">play_arrow</md-icon>
             <md-icon v-else>pause</md-icon>
           </md-button>
-          <md-button class="md-icon-button" @click="audio_next">
-            <md-icon>skip_next</md-icon>
-          </md-button>
+          <div>
+            <md-button class="md-icon-button" @click="audio_next">
+              <md-icon>skip_next</md-icon>
+            </md-button>
+            <md-tooltip md-direction="right">{{audio_next_name}}</md-tooltip>
+          </div>
           <span class="time">{{audio_totalTime}}</span>
         </div>
         <div class="right">
+          <md-button class="md-icon-button" @click="switch_audio_order">
+            <md-icon class="outline-repeat" v-if="audio_order==='list'"></md-icon>
+            <md-icon class="outline-shuffle" v-else></md-icon>
+          </md-button>
           <md-button class="md-icon-button" to="/now" v-if="$route.path!='/now'">
             <md-icon class="outline-playlist_play"></md-icon>
           </md-button>
@@ -162,6 +172,9 @@ export default {
     audio_cover: _setting(`randomImgSource`),
     audio_title: "等待播放中",
     audio_artist: "：Ｄ",
+    audio_next_name: "",
+    audio_previous_name: "",
+    audio_order: _player.options.order,
     transitionName: "fade"
   }),
   created() {
@@ -199,6 +212,9 @@ export default {
         this.audio_cover = nowPlaying.cover;
         this.audio_currentTime = this.secondToTime(_player.audio.currentTime);
         this.audio_totalTime = this.secondToTime(_player.audio.duration);
+        this.audio_next_name = _player.list.audios[_player.nextIndex()].name;
+        this.audio_previous_name =
+          _player.list.audios[_player.prevIndex()].name;
         if ("mediaSession" in navigator) {
           navigator.mediaSession.metadata = new MediaMetadata({
             title: nowPlaying.name,
@@ -259,6 +275,11 @@ export default {
     },
     toggleMenu() {
       this.menuVisible = !this.menuVisible;
+    },
+    switch_audio_order() {
+      _player.options.order =
+        _player.options.order === "random" ? "list" : "random";
+      this.audio_order = _player.options.order;
     },
     testConnection() {
       this.axios
