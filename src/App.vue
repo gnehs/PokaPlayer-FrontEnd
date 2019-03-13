@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
     <md-app>
-      <md-app-toolbar class="md-primary" id="toolbar">
+      <md-app-toolbar class="md-primary" md-elevation="2" id="toolbar">
         <div class="md-toolbar-row">
           <div class="md-toolbar-section-start">
             <md-button class="md-icon-button menu" @click="toggleMenu">
@@ -116,7 +116,7 @@
             <md-button class="md-icon-button" @click="audio_previous">
               <md-icon>skip_previous</md-icon>
             </md-button>
-            <md-tooltip md-direction="left">{{audio_previous_name}}</md-tooltip>
+            <md-tooltip md-direction="left" v-show="audio_previous_name!=''">{{audio_previous_name}}</md-tooltip>
           </div>
           <md-button class="md-icon-button md-raised md-accent" @click="audio_toggle">
             <md-icon v-if="audio_paused">play_arrow</md-icon>
@@ -126,7 +126,7 @@
             <md-button class="md-icon-button" @click="audio_next">
               <md-icon>skip_next</md-icon>
             </md-button>
-            <md-tooltip md-direction="right">{{audio_next_name}}</md-tooltip>
+            <md-tooltip md-direction="right" v-show="audio_next_name!=''">{{audio_next_name}}</md-tooltip>
           </div>
           <span class="time">{{audio_totalTime}}</span>
         </div>
@@ -302,15 +302,15 @@ export default {
 @include md-register-theme(
   "default",
   (
-    primary: #27a09e,
-    accent: #767676
+    primary: md-get-palette-color(blue, A200),
+    accent: md-get-palette-color(red, A200)
   )
 );
 @import "~vue-material/dist/theme/all"; // Apply the theme
 @include md-register-theme(
   "default-dark",
   (
-    primary: #65dbff,
+    primary: md-get-palette-color(yellow, A200),
     accent: md-get-palette-color(blue, A200),
     theme: dark
   )
@@ -321,6 +321,9 @@ export default {
 #toolbar.md-theme-default-dark
   --md-theme-default-dark-text-primary-on-primary: rgba(255, 255, 255, 0.87)
   --md-theme-default-dark-primary: #212121
+#toolbar.md-theme-default
+  --md-theme-default-text-primary-on-primary: rgba(0, 0, 0, 0.87)
+  --md-theme-default-primary: rgb(245, 245, 245)
 .md-toolbar .md-title
 	font-family: var(--product-font)
 	font-weight: bold
