@@ -1,12 +1,18 @@
 <template>
-  <div class="poka cards">
+  <div class="poka cards" :class="{ellipsis: hideOverflow}">
     <slot/>
   </div>
 </template>
 
 <script>
 export default {
-  name: "poka-cards"
+  name: "poka-cards",
+  props: {
+    hideOverflow: {
+      type: Boolean,
+      default: true
+    }
+  }
 };
 </script>
 <style lang="sass">
@@ -57,6 +63,12 @@ export default {
 	will-change: transform
 
 .poka
+	&.cards.ellipsis .card
+		.title,.subtitle
+			overflow: hidden
+			text-overflow: ellipsis
+			white-space: nowrap
+.poka
 	&.cards .card
 		&[data-source]:hover:before
 			transform: translateY(-5px)
@@ -81,10 +93,6 @@ export default {
 			left: 0
 			position: absolute
 			transform: scale(2)
-		.title,.subtitle
-			overflow: hidden
-			text-overflow: ellipsis
-			white-space: nowrap
 		.title
 			font-size: 1.8em
 			padding-top: 5px

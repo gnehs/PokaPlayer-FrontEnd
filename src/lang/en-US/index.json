@@ -89,7 +89,7 @@
 	"unpin_playlist": "Unpin playlist",
 
 	"settings_network": "Network",
-	"settings_network_description": "Data saver, Music quality",
+	"settings_network_description": "Music quality",
 	"settings_network_soundQuality": "Music quality",
 	"settings_network_soundQuality_Low": "Low",
 	"settings_network_soundQuality_Med": "Medium",
@@ -99,7 +99,6 @@
 	"settings_network_soundQuality_Med_description": "Able to stream smoothly under 3G network",
 	"settings_network_soundQuality_High_description": "Able to stream smoothly under 4G/LTE network",
 	"settings_network_soundQuality_Ori_description": "Uncompressed audio, only use when the internet is fast",
-	"settings_network_imageDataSaver": "Data saver",
 	"settings_customize": "Customizations",
 	"settings_customize_description": "Random background, theme color, details",
 	"settings_customize_randomImage": "Random background",

@@ -19,6 +19,7 @@ import PlaylistSongs from '@/pages/PlaylistSongs'
 import Lyric from '@/pages/Lyric'
 import Search from '@/pages/Search'
 import Setting from '@/pages/Setting'
+import SettingNetwork from '@/pages/SettingNetwork'
 
 Vue.use(Router)
 
@@ -111,6 +112,10 @@ export default new Router({
     path: '/setting',
     name: 'Setting',
     component: Setting
+  }, {
+    path: '/setting/network',
+    name: 'SettingNetwork',
+    component: SettingNetwork
   }, {
     path: '/home',
     name: 'Home',
