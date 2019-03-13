@@ -59,6 +59,7 @@ export default {
   data: () => ({
     server: _setting(`server`),
     loadingRandom: false,
+    defaultCover: _setting(`randomImgSource`),
     audio_currentTimePercent: 100,
     audio_currentTime: "0:00",
     audio_totalTime: "0:00",
@@ -163,26 +164,21 @@ export default {
     addSongs({ songlist, index, clear = true }) {
       let playlist = [];
       for (let nowsong of songlist) {
-        let src =
+        playlist.push({
+          url:
             this.server +
             nowsong.url +
             "&songRes=" +
             _setting(`audioQuality`).toLowerCase(),
-          name = nowsong.name,
-          artist = nowsong.artist,
-          album = nowsong.album,
-          cover = nowsong.cover
+          cover: nowsong.cover
             ? this.server + nowsong.cover
             : this.defaultCover,
-          source = nowsong.source;
-        playlist.push({
-          url: src,
-          cover: cover,
-          name: name,
-          artist: artist,
-          album: album,
+          name: nowsong.name,
+          artist: nowsong.artist,
+          album: nowsong.album,
           id: nowsong.id,
-          source: source
+          source: nowsong.source,
+          uuid: _uuid()
         });
       }
       if (clear) _player.list.clear();

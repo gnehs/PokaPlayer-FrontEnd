@@ -53,49 +53,27 @@ export default {
     addSongs({ songlist, index, clear = true }) {
       let playlist = [];
       for (let nowsong of songlist) {
-        let src =
+        playlist.push({
+          url:
             this.server +
             nowsong.url +
             "&songRes=" +
             _setting(`audioQuality`).toLowerCase(),
-          name = nowsong.name,
-          artist = nowsong.artist,
-          album = nowsong.album,
-          cover = nowsong.cover
+          cover: nowsong.cover
             ? this.server + nowsong.cover
             : this.defaultCover,
-          source = nowsong.source;
-        playlist.push({
-          url: src,
-          cover: cover,
-          name: name,
-          artist: artist,
-          album: album,
+          name: nowsong.name,
+          artist: nowsong.artist,
+          album: nowsong.album,
           id: nowsong.id,
-          source: source,
-          uuid: this._uuid()
+          source: nowsong.source,
+          uuid: _uuid()
         });
       }
       if (clear) _player.list.clear();
       _player.list.add(playlist);
       if (index) _player.list.switch(index);
       _player.play();
-    },
-    _uuid() {
-      var d = Date.now();
-      if (
-        typeof performance !== "undefined" &&
-        typeof performance.now === "function"
-      ) {
-        d += performance.now(); //use high-precision timer if available
-      }
-      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
-        c
-      ) {
-        var r = (d + Math.random() * 16) % 16 | 0;
-        d = Math.floor(d / 16);
-        return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
-      });
     }
   }
 };
