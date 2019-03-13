@@ -8,6 +8,7 @@
           :class="{focus: index==lyricFocus }"
         >{{item.text}}</p>
       </div>
+      <md-empty-state v-else-if="lyricSearching" md-icon="subtitles" :md-label="$t('loading')"/>
       <md-empty-state v-else md-icon="subtitles" :md-label="$t('lrc_noLyrics')">
         <md-button class="md-primary md-raised" @click="showLyricDialog = true">{{$t('lrc_search')}}</md-button>
       </md-empty-state>
@@ -78,6 +79,7 @@ export default {
     showLyricDialog: false,
     lyric: [],
     lyricFocus: 0,
+    lyricSearching: true,
     lyricSearchResult: [],
     Lyric_Update: null
   }),
@@ -104,6 +106,7 @@ export default {
           //找歌詞囉
           window._lrc.load(`[00:00.000]`);
           this.lyricFocus = 0;
+          this.lyricSearching = true;
           this.lyricSearchResult = [];
           this.getLyric(
             nowPlaying.name,
@@ -178,19 +181,23 @@ export default {
       )
         .then(result => result.data)
         .then(result => {
-          //計算傳回歌詞匹配率
-          result.lyrics.forEach(element => {
-            let rate =
-              this.matchRate(title, element.name) * 0.7 +
-              this.matchRate(artist, element.artist) * 0.3;
-            rate = Math.round(rate * 100) / 100;
-            element.rate = rate > 0 ? rate : 0;
-          });
-          //以匹配率排序
-          result.lyrics.sort((a, b) => b.rate - a.rate);
-          //最高者若超過 .7 則載入歌詞
-          if (result.lyrics[0].rate > 35) this.loadLrc(result.lyrics[0].lyric);
-          this.lyricSearchResult = result.lyrics;
+          if (result.lyrics.length > 0) {
+            //計算傳回歌詞匹配率
+            result.lyrics.forEach(element => {
+              let rate =
+                this.matchRate(title, element.name) * 0.7 +
+                this.matchRate(artist, element.artist) * 0.3;
+              rate = Math.round(rate * 100) / 100;
+              element.rate = rate > 0 ? rate : 0;
+            });
+            //以匹配率排序
+            result.lyrics.sort((a, b) => b.rate - a.rate);
+            //最高者若超過 .7 則載入歌詞
+            if (result.lyrics[0].rate > 35)
+              this.loadLrc(result.lyrics[0].lyric);
+            this.lyricSearchResult = result.lyrics;
+          }
+          this.lyricSearching = false;
         });
     },
     matchRate(a, b, rate = 0) {
@@ -202,6 +209,7 @@ export default {
     },
     loadLrc(lrc) {
       window._lrc.load(lrc);
+      this.lyricSearching = false;
       this.updateLyric();
     }
   }
