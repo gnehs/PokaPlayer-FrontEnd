@@ -39,7 +39,7 @@
           <span>{{$t('settings_systemAndUpdate_description')}}</span>
         </div>
       </md-list-item>
-      <md-list-item>
+      <md-list-item to="/about">
         <md-icon>info</md-icon>
         <div class="md-list-item-text">
           <span>{{$t('settings_aboutAndHelp')}}</span>
