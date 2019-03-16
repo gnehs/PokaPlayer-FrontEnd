@@ -93,6 +93,7 @@ export default {
 			left: 0
 			position: absolute
 			transform: scale(2)
+			color: #FFF
 		.title
 			font-size: 1.8em
 			padding-top: 5px
@@ -152,19 +153,6 @@ export default {
 		--size: calc(100% / 9 - 1em)
 	&.ten.cards .card
 		--size: calc(100% / 10 - 1em)
-	&.color.picker.cards
-		margin: 0 -24px
-		> .card
-			--size: 14.285714%
-			margin: 0
-			padding: 0
-			> .image
-				border-radius: 0
-				box-shadow: none
-				box-shadow: inset 0 0 0 100em transparent
-				&:hover
-					transform: none
-					box-shadow: inset 0 0 0 100em #00000015
 
 @media (max-width: 380px)
 	.poka
