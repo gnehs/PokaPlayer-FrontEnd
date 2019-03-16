@@ -21,7 +21,7 @@ export default {
     },
     bg: {
       type: String,
-      default: _setting(`randomImgSource`)
+      default: _setting(`headerBgSource`)
     },
     blurbg: { type: Boolean, default: false }
   }
@@ -32,6 +32,7 @@ export default {
 	width: 100%
 	position: relative
 	min-height: 1px
+	pointer-events: none
 	.bg
 		transform: scale(1.12)
 		background-size: cover
@@ -52,6 +53,7 @@ export default {
 		overflow: hidden
 		text-overflow: ellipsis
 		white-space: nowrap
+		line-height: 1.1em
 	>.title
 		font-size: 3.5em
 	>.subtitle

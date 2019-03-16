@@ -6,7 +6,7 @@ import zh_TW from './zh-TW/index.json'
 import en_US from './en-US/index.json'
 
 Vue.use(VueI18n)
-const locale = 'zh_TW'
+const locale = window._setting('lang')
 const messages = {
     zh_CN: zh_CN,
     zh_TW: zh_TW,
@@ -23,6 +23,6 @@ const i18n = new VueI18n({
         return key
     },
 })
-
+window.i18n = i18n
 
 export default i18n

@@ -59,9 +59,9 @@ export default {
   data: () => ({
     server: _setting(`server`),
     loadingRandom: false,
-    defaultCover: _setting(`randomImgSource`),
+    defaultCover: _setting(`headerBgSource`),
     audio_paused: true,
-    audio_cover: _setting(`randomImgSource`),
+    audio_cover: _setting(`headerBgSource`),
     audio_queue: null,
     audio_index: -1,
     audio_uuid: ":D",
@@ -115,7 +115,7 @@ export default {
           });
         }
       } else {
-        this.audio_cover = _setting(`randomImgSource`);
+        this.audio_cover = _setting(`headerBgSource`);
       }
     },
     secondToTime(second) {

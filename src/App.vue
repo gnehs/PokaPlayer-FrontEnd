@@ -113,7 +113,7 @@
           </div>
           <div class="info" @click="$router.push('/now')">
             <div class="title">{{audio_title}}</div>
-            <div class="artist">{{audio_artist}}</div>
+            <div class="artist">{{audio_artist||$t('app_waitForPlay')}}</div>
           </div>
         </div>
         <div class="center">
@@ -175,9 +175,9 @@ export default {
     audio_currentTime: "0:00",
     audio_totalTime: "0:00",
     audio_paused: true,
-    audio_cover: _setting(`randomImgSource`),
-    audio_title: "等待播放中",
-    audio_artist: "：Ｄ",
+    audio_cover: _setting(`headerBgSource`),
+    audio_title: "PokaPlayer",
+    audio_artist: null,
     audio_next_name: "",
     audio_previous_name: "",
     audio_order: _player.options.order,
@@ -245,9 +245,9 @@ export default {
         this.audio_currentTimePercent = 100;
         this.audio_bufferPercent = 100;
         this.audio_paused = _player.paused;
-        this.audio_title = "等待播放中~";
-        this.audio_artist = "：Ｄ";
-        this.audio_cover = _setting(`randomImgSource`);
+        this.audio_title = "PokaPlayer";
+        this.audio_artist = null;
+        this.audio_cover = _setting(`headerBgSource`);
         if ("mediaSession" in navigator) {
           navigator.mediaSession.metadata = null;
         }

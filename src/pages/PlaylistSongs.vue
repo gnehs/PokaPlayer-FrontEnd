@@ -40,7 +40,7 @@ export default {
   data: () => ({
     data: null,
     title: null,
-    cover: _setting(`randomImgSource`),
+    cover: _setting(`headerBgSource`),
     server: _setting(`server`)
   })
 };

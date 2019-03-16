@@ -46,7 +46,7 @@ export default {
   props: ["data"],
   data: () => ({
     server: _setting(`server`),
-    defaultCover: _setting(`randomImgSource`),
+    defaultCover: _setting(`headerBgSource`),
     isInSongList: []
   }),
   methods: {
