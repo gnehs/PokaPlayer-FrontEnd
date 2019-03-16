@@ -27,8 +27,8 @@
                 <md-menu-item @click="switchTheme">
                   <md-icon v-if="!settings.darkMode">brightness_3</md-icon>
                   <md-icon v-if="settings.darkMode">brightness_7</md-icon>
-                  <span v-if="!settings.darkMode" class="md-list-item-text">Dark Mode</span>
-                  <span v-if="settings.darkMode" class="md-list-item-text">Light Mode</span>
+                  <span v-if="!settings.darkMode" class="md-list-item-text">{{$t('settings_dark')}}</span>
+                  <span v-if="settings.darkMode" class="md-list-item-text">{{$t('settings_light')}}</span>
                 </md-menu-item>
               </md-menu-content>
             </md-menu>
@@ -299,7 +299,7 @@ export default {
       this.axios
         .get(_setting(`server`) + "/info/")
         .then(response => {
-          console.log(response.data.version);
+          if (!response.data.version) this.$router.push("/login");
         })
         .catch(e => this.$router.push("/login"));
     }
@@ -421,12 +421,12 @@ export default {
 			display: flex
 			align-items: center
 			height: 64px
-			justify-content: right
+			justify-content: flex-end
 		.right-s
 			display: none
 			align-items: center
 			height: 64px
-			justify-content: right
+			justify-content: flex-end
 		.md-button.next
 			width: 30px
 			min-width: 30px

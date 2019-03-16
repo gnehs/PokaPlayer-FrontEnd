@@ -88,6 +88,8 @@
 	"pin_playlist": "Pin playlist",
 	"unpin_playlist": "Unpin playlist",
 
+	"settings_dark": "Dark Mode",
+	"settings_light": "Light Mode",
 	"settings_network": "Network",
 	"settings_network_description": "Music quality",
 	"settings_network_soundQuality": "Music quality",

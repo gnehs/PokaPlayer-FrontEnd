@@ -88,6 +88,8 @@
 	"pin_playlist": "釘選此播放清單",
 	"unpin_playlist": "取消釘選此播放清單",
 
+	"settings_dark": "夜間模式",
+	"settings_light": "日間模式",
 	"settings_network": "網路",
 	"settings_network_description": "音質",
 	"settings_network_soundQuality": "音質",
