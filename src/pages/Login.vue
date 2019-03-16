@@ -70,7 +70,7 @@ export default {
       let formData = new URLSearchParams();
       formData.append("userPASS", this.password);
 
-      axios({
+      this.axios({
         method: "post",
         url: this.server + "/login/",
         data: formData,
