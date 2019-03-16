@@ -20,6 +20,9 @@ import Lyric from '@/pages/Lyric'
 import Search from '@/pages/Search'
 import Setting from '@/pages/Setting'
 import SettingNetwork from '@/pages/SettingNetwork'
+import SettingCustomize from '@/pages/SettingCustomize'
+import SettingLang from '@/pages/SettingLang'
+import SettingSystem from '@/pages/SettingSystem'
 
 Vue.use(Router)
 
@@ -116,6 +119,18 @@ export default new Router({
     path: '/setting/network',
     name: 'SettingNetwork',
     component: SettingNetwork
+  }, {
+    path: '/setting/customize',
+    name: 'SettingCustomize',
+    component: SettingCustomize
+  }, {
+    path: '/setting/lang',
+    name: 'SettingLang',
+    component: SettingLang
+  }, {
+    path: '/setting/system',
+    name: 'SettingSystem',
+    component: SettingSystem
   }, {
     path: '/home',
     name: 'Home',

@@ -9,21 +9,21 @@
           <span>{{$t('settings_network_description')}}</span>
         </div>
       </md-list-item>
-      <md-list-item>
+      <md-list-item to="/setting/customize">
         <md-icon>format_paint</md-icon>
         <div class="md-list-item-text">
           <span>{{$t('settings_customize')}}</span>
           <span>{{$t('settings_customize_description')}}</span>
         </div>
       </md-list-item>
-      <md-list-item>
+      <md-list-item to="/setting/lang">
         <md-icon>translate</md-icon>
         <div class="md-list-item-text">
           <span>{{$t('settings_lang')}}</span>
           <span>{{$t('settings_lang_description')}}</span>
         </div>
       </md-list-item>
-      <md-list-item>
+      <md-list-item to="/setting/system">
         <md-icon>system_update</md-icon>
         <div class="md-list-item-text">
           <span>{{$t('settings_systemAndUpdate')}}</span>
