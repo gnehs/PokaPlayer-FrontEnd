@@ -47,10 +47,6 @@
 <style lang="sass" scoped>
 .lyric 
   text-align: center
-  height: calc(100vh - 64px - 69px - 16px)
-  overflow: hidden
-  overflow-y: scroll
-  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)
   div
     padding-top: 80px
     padding-bottom: 80px
@@ -125,19 +121,21 @@ export default {
               this.lyricFocus = lyricFocus_temp;
               this.$nextTick(() => {
                 //等 Vue 好了再去更新捲動條
-                let sh =
-                  $(".lyric p.focus")[0].offsetTop -
-                  $(".lyric p.focus").height() / 2 -
-                  $(".lyric p.focus")[0].clientHeight -
-                  $(window).height() * 0.2;
-                $(".lyric")
-                  .clearQueue()
-                  .animate(
-                    {
-                      scrollTop: sh
-                    },
-                    250
-                  );
+                if ($(".lyric p.focus").length > 0) {
+                  let sh =
+                    $(".lyric p.focus")[0].offsetTop -
+                    $(".lyric p.focus").height() / 2 -
+                    $(".lyric p.focus")[0].clientHeight -
+                    $(window).height() * 0.32;
+                  $(".md-app-content")
+                    .clearQueue()
+                    .animate(
+                      {
+                        scrollTop: sh
+                      },
+                      250
+                    );
+                }
               });
             }
           }
