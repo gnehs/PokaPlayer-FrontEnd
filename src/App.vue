@@ -324,7 +324,7 @@ export default {
 @include md-register-theme(
   "default-dark",
   (
-    primary: md-get-palette-color(yellow, A200),
+    primary: md-get-palette-color(blue, 100),
     accent: md-get-palette-color(blue, A200),
     theme: dark
   )
