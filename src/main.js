@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import '@/assets/poka.js'
 import '@/assets/MaterialSlider.css'
+import '@/assets/icon_outline.css'
 
 import Vue from 'vue'
 import App from './App'

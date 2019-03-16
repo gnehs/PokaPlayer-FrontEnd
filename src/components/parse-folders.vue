@@ -5,7 +5,7 @@
       :key="id"
       :to="`/folder/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
     >
-      <md-icon class="md-primary">folder</md-icon>
+      <md-icon>folder</md-icon>
       <div class="md-list-item-text">
         <span>{{name}}</span>
         <span>{{source}}</span>

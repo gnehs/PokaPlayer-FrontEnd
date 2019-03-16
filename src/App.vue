@@ -24,6 +24,12 @@
                   <md-icon class="outline-info"></md-icon>
                   <span class="md-list-item-text">{{$t("settings_aboutAndHelp")}}</span>
                 </md-menu-item>
+                <md-menu-item @click="switchTheme">
+                  <md-icon v-if="!settings.darkMode">brightness_3</md-icon>
+                  <md-icon v-if="settings.darkMode">brightness_7</md-icon>
+                  <span v-if="!settings.darkMode" class="md-list-item-text">Dark Mode</span>
+                  <span v-if="settings.darkMode" class="md-list-item-text">Light Mode</span>
+                </md-menu-item>
               </md-menu-content>
             </md-menu>
           </div>
@@ -33,40 +39,40 @@
       <md-app-drawer :md-active.sync="menuVisible" md-permanent="clipped">
         <md-list>
           <md-list-item to="/home" @click="closeMenu">
-            <md-icon class="outline-home"></md-icon>
+            <md-icon class="outline-home"/>
             <span class="md-list-item-text">{{$t("home")}}</span>
           </md-list-item>
           <md-list-item to="/now" @click="closeMenu">
-            <md-icon class="outline-playlist_play"></md-icon>
+            <md-icon class="outline-playlist_play"/>
             <span class="md-list-item-text">{{$t("nowplaying")}}</span>
           </md-list-item>
           <md-list-item to="/lyric" @click="closeMenu">
-            <md-icon class="outline-subtitles"></md-icon>
+            <md-icon class="outline-subtitles"/>
             <span class="md-list-item-text">{{$t("lrc")}}</span>
           </md-list-item>
           <md-divider/>
           <md-list-item to="/search" @click="closeMenu">
-            <md-icon class="outline-search"></md-icon>
+            <md-icon class="outline-search"/>
             <span class="md-list-item-text">{{$t("search")}}</span>
           </md-list-item>
           <md-list-item to="/album" @click="closeMenu">
-            <md-icon class="outline-album"></md-icon>
+            <md-icon class="outline-album"/>
             <span class="md-list-item-text">{{$t("album")}}</span>
           </md-list-item>
           <md-list-item to="/folder" @click="closeMenu">
-            <md-icon class="outline-folder"></md-icon>
+            <md-icon class="outline-folder"/>
             <span class="md-list-item-text">{{$t("folder")}}</span>
           </md-list-item>
           <md-list-item to="/artist" @click="closeMenu">
-            <md-icon class="outline-mic_none"></md-icon>
+            <md-icon class="outline-mic_none"/>
             <span class="md-list-item-text">{{$t("artist")}}</span>
           </md-list-item>
           <md-list-item to="/composer" @click="closeMenu">
-            <md-icon class="outline-music_note"></md-icon>
+            <md-icon class="outline-music_note"/>
             <span class="md-list-item-text">{{$t("composer")}}</span>
           </md-list-item>
           <md-list-item to="/playlist" @click="closeMenu">
-            <md-icon class="outline-format_list_bulleted"></md-icon>
+            <md-icon class="outline-format_list_bulleted"/>
             <span class="md-list-item-text">{{$t("playlist")}}</span>
           </md-list-item>
         </md-list>
@@ -175,7 +181,8 @@ export default {
     audio_next_name: "",
     audio_previous_name: "",
     audio_order: _player.options.order,
-    transitionName: "fade"
+    transitionName: "fade",
+    settings: { darkMode: window._setting("darkMode") }
   }),
   created() {
     this.$router.beforeEach((to, from, next) => {
@@ -185,7 +192,7 @@ export default {
         const toDepth = to.path.split("/").length;
         const fromDepth = from.path.split("/").length;
         transitionName = toDepth < fromDepth ? "slide-right" : "slide-left";
-        // transitionName = toDepth == fromDepth ? "fade" : transitionName; //同一層
+        transitionName = toDepth == fromDepth ? "fade" : transitionName; //同一層
       }
       this.transitionName = transitionName;
       next();
@@ -280,6 +287,13 @@ export default {
       _player.options.order =
         _player.options.order === "random" ? "list" : "random";
       this.audio_order = _player.options.order;
+    },
+    switchTheme() {
+      this.settings.darkMode = !this.settings.darkMode;
+      window._setting("darkMode", this.settings.darkMode);
+      this.settings.darkMode
+        ? window._theme.switchToDark()
+        : window._theme.switchToLight();
     },
     testConnection() {
       this.axios
@@ -529,9 +543,6 @@ export default {
 
 .icon-white,
 .md-theme-default-dark .md-icon[class*="outline-"] {
-  -moz-filter: contrast(4) invert(1);
-  -o-filter: contrast(4) invert(1);
-  -ms-filter: contrast(4) invert(1);
-  filter: contrast(4) invert(1);
+  color: #fff;
 }
 </style>
