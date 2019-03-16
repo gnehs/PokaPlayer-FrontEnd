@@ -142,6 +142,7 @@ export default {
         }
       } else {
         this.noloadedLyric = true;
+        this.lyricSearching = false;
       }
     },
     getLyric(title, artist, id = false, source) {
