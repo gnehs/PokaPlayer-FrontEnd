@@ -60,16 +60,11 @@ export default {
     server: _setting(`server`),
     loadingRandom: false,
     defaultCover: _setting(`randomImgSource`),
-    audio_currentTimePercent: 100,
-    audio_currentTime: "0:00",
-    audio_totalTime: "0:00",
-    audio_buffer: 100,
     audio_paused: true,
     audio_cover: _setting(`randomImgSource`),
-    audio_title: "等待播放中",
-    audio_artist: "：Ｄ",
     audio_queue: null,
     audio_index: -1,
+    audio_uuid: ":D",
     NowPlaying_updatePlayer: null
   }),
   created() {
@@ -92,32 +87,32 @@ export default {
       }
     },
     updatePlayer() {
-      let nowPlaying = _player.list.audios[_player.list.index];
       this.audio_queue = _player.list.audios;
       this.audio_paused = _player.paused;
       if (_player.list.audios.length > 0) {
-        let buffered = _player.audio.buffered;
-        let audioBuffered =
-            _player.audio.currentTime > 1
-              ? (buffered.end(buffered.length - 1) / _player.audio.duration) *
-                100
-              : 0,
-          cent = (_player.audio.currentTime / _player.audio.duration) * 100;
+        let uuid_temp = this.audio_uuid;
         this.audio_index = _player.list.index;
-        this.audio_currentTimePercent = cent;
-        this.audio_buffer = audioBuffered;
-        this.audio_title = nowPlaying.name;
-        this.audio_artist = nowPlaying.artist;
-        this.audio_cover = nowPlaying.cover;
-        this.audio_currentTime = this.secondToTime(_player.audio.currentTime);
-        this.audio_totalTime = this.secondToTime(_player.audio.duration);
+        this.audio_uuid = _player.list.audios[this.audio_index].uuid;
+        this.audio_cover = _player.list.audios[this.audio_index].cover;
+        if (uuid_temp != this.audio_uuid) {
+          //換歌ㄌ
+          this.$nextTick(() => {
+            let sh =
+              $(".md-list > .active")[0].offsetTop -
+              $(".md-list > .active").height() / 2 -
+              $(".md-list > .active")[0].clientHeight -
+              $(window).height() * 0.15;
+            $(".md-app-content")
+              .clearQueue()
+              .animate(
+                {
+                  scrollTop: sh
+                },
+                250
+              );
+          });
+        }
       } else {
-        this.audio_currentTimePercent = 100;
-        this.audio_totalTime = "0:00";
-        this.audio_currentTime = "0:00";
-        this.audio_buffer = 100;
-        this.audio_title = "等待播放中";
-        this.audio_artist = "：Ｄ";
         this.audio_cover = _setting(`randomImgSource`);
       }
     },
@@ -136,28 +131,15 @@ export default {
       _player.list.remove(i);
       this.updatePlayer();
     },
-    audio_next() {
-      _player.skipForward();
-    },
-    audio_previous() {
-      _player.skipBack();
-    },
     audio_toggle() {
       _player.toggle();
       this.audio_paused = _player.paused;
     },
-    audio_seek() {
-      _player.seek(
-        (this.audio_currentTimePercent / 100) * _player.audio.duration
-      );
-    },
     randomPlay() {
-      this.axios(
-        `/pokaapi/randomSongs?${Math.random()
-          .toString(36)
-          .substring(7)}`
-      ).then(res => {
-        console.log(res.data);
+      let randomStr = Math.random()
+        .toString(36)
+        .substring(7);
+      this.axios(`/pokaapi/randomSongs?${randomStr}`).then(res => {
         this.addSongs({ songlist: res.data.songs });
       });
     },
