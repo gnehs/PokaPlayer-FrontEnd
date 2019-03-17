@@ -48,7 +48,10 @@
       <p style="padding:0 24px;">{{$t('settings_updateDialog_note')}}</p>
       <md-dialog-actions>
         <md-button @click="showUpdateDialog = false">{{$t('cancel')}}</md-button>
-        <md-button class="md-primary" @click="showUpdateDialog = false">{{$t('settings_update')}}</md-button>
+        <md-button
+          class="md-primary"
+          @click="showUpdateDialog = false;update"
+        >{{$t('settings_update')}}</md-button>
       </md-dialog-actions>
     </md-dialog>
   </div>
@@ -104,6 +107,9 @@ export default {
     },
     logout() {
       this.axios("/logout").then(e => this.$router.push("/login"));
+    },
+    update() {
+      this.axios.get("/upgrade");
     },
     restart() {
       this.axios.post("/restart");
