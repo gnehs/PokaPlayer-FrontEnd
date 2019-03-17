@@ -233,11 +233,18 @@ export default {
               }
             ]
           });
-          navigator.mediaSession
-            .setActionHandler("play", () => _player.toggle())
-            .setActionHandler("pause", () => _player.pause())
-            .setActionHandler("previoustrack", () => _player.skipBack())
-            .setActionHandler("nexttrack", () => _player.skipForward());
+          navigator.mediaSession.setActionHandler("play", () =>
+            _player.toggle()
+          );
+          navigator.mediaSession.setActionHandler("pause", () =>
+            _player.pause()
+          );
+          navigator.mediaSession.setActionHandler("previoustrack", () =>
+            _player.skipBack()
+          );
+          navigator.mediaSession.setActionHandler("nexttrack", () =>
+            _player.skipForward()
+          );
         }
       } else {
         this.audio_currentTime = "0:00";

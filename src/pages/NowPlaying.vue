@@ -36,6 +36,7 @@
           </md-button>
         </md-list-item>
       </transition-group>
+      <!-- TODO: i18n -->
       <md-empty-state
         v-else
         md-icon="queue_music"
