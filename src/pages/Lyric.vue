@@ -103,7 +103,7 @@ export default {
           window._lrc.load(`[00:00.000]`);
           this.lyricFocus = 0;
           this.lyricSearching = true;
-          this.lyricSearchResult = [];
+          this.lyricSearchResult = null;
           this.getLyric(
             nowPlaying.name,
             nowPlaying.artist,
@@ -188,6 +188,7 @@ export default {
                 this.matchRate(artist, element.artist) * 0.3;
               rate = Math.round(rate * 100) / 100;
               element.rate = rate > 0 ? rate : 0;
+              element.rate = rate > 100 ? 90.25 : rate;
             });
             //以匹配率排序
             result.lyrics.sort((a, b) => b.rate - a.rate);
