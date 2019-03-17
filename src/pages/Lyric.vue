@@ -160,8 +160,10 @@ export default {
             response.data.lyrics[0].lyric &&
             response.data.lyrics[0].lyric.match(lyricRegex)
           ) {
-            //透過 id 找到歌詞ㄌ
-            this.loadLrc(response.data.lyrics[0].lyric);
+            if (title == this.audio_title) {
+              //透過 id 找到歌詞ㄌ
+              this.loadLrc(response.data.lyrics[0].lyric);
+            }
           } else {
             //沒找到，拿 title 跟 artist 找找看
             this.getLyricByKeyword(title, artist);
@@ -187,15 +189,16 @@ export default {
                 this.matchRate(title, element.name) * 0.7 +
                 this.matchRate(artist, element.artist) * 0.3;
               rate = Math.round(rate * 100) / 100;
-              element.rate = rate > 0 ? rate : 0;
-              element.rate = rate > 100 ? 90.25 : rate;
+              element.rate = rate > 0 ? (rate > 100 ? 90.25 : rate) : 0;
             });
             //以匹配率排序
             result.lyrics.sort((a, b) => b.rate - a.rate);
-            //最高者若超過 .7 則載入歌詞
-            if (result.lyrics[0].rate > 35)
-              this.loadLrc(result.lyrics[0].lyric);
-            this.lyricSearchResult = result.lyrics;
+            if (title == this.audio_title) {
+              //最高者若超過 .7 則載入歌詞
+              if (result.lyrics[0].rate > 35)
+                this.loadLrc(result.lyrics[0].lyric);
+              this.lyricSearchResult = result.lyrics;
+            }
           }
           this.lyricSearching = false;
         });
