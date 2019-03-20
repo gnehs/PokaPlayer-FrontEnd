@@ -50,7 +50,31 @@
         >{{$t('playlist_random')}}</md-button>
         <poka-loader v-else/>
       </md-empty-state>
+      <md-dialog-confirm
+        :md-active.sync="cleanActive"
+        md-title="確定清除所有歌曲？"
+        md-content="這將會清除列表中所有歌曲！"
+        :md-cancel-text="$t('cancel')"
+        :md-confirm-text="$t('ok')"
+        @md-confirm="audio_clean"
+      />
     </div>
+
+    <md-speed-dial class="md-bottom-right">
+      <md-speed-dial-target>
+        <md-icon>add</md-icon>
+      </md-speed-dial-target>
+
+      <md-speed-dial-content>
+        <md-button class="md-icon-button" @click="switch_audio_order">
+          <md-icon class="outline-repeat" v-if="audio_order==='list'"></md-icon>
+          <md-icon class="outline-shuffle" v-else></md-icon>
+        </md-button>
+        <md-button class="md-icon-button" @click="cleanActive=true">
+          <md-icon>clear_all</md-icon>
+        </md-button>
+      </md-speed-dial-content>
+    </md-speed-dial>
   </div>
 </template>
 
@@ -65,8 +89,12 @@ export default {
     audio_cover: _setting(`headerBgSource`),
     audio_queue: null,
     audio_index: -1,
+    audio_title: "PokaPlayer",
+    audio_artist: null,
+    audio_order: _player.options.order,
     audio_uuid: ":D",
-    NowPlaying_updatePlayer: null
+    NowPlaying_updatePlayer: null,
+    cleanActive: false
   }),
   created() {
     this.updatePlayer();
@@ -90,11 +118,14 @@ export default {
     updatePlayer() {
       this.audio_queue = _player.list.audios;
       this.audio_paused = _player.paused;
+      this.audio_order = _player.options.order;
       if (_player.list.audios.length > 0) {
         let uuid_temp = this.audio_uuid;
         this.audio_index = _player.list.index;
         this.audio_uuid = _player.list.audios[this.audio_index].uuid;
         this.audio_cover = _player.list.audios[this.audio_index].cover;
+        this.audio_title = _player.list.audios[this.audio_index].name;
+        this.audio_artist = _player.list.audios[this.audio_index].artist;
         if (uuid_temp != this.audio_uuid) {
           //換歌ㄌ
           this.$nextTick(() => {
@@ -137,6 +168,14 @@ export default {
     audio_toggle() {
       _player.toggle();
       this.audio_paused = _player.paused;
+    },
+    audio_clean() {
+      _player.list.clear();
+    },
+    switch_audio_order() {
+      _player.options.order =
+        _player.options.order === "random" ? "list" : "random";
+      this.audio_order = _player.options.order;
     },
     randomPlay() {
       let randomStr = Math.random()
@@ -185,78 +224,12 @@ export default {
 	transition: 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
 	transition-property: opacity, transform
 
-.audio-info
-	position: relative
-	>.top
-		display: flex
-		padding: 8px
-		position: relative
-		align-items: center
-		>.cover    
-			--cover-size: 200px
-			width: var(--cover-size)
-			height: 0
-			overflow: hidden
-			padding-bottom: var(--cover-size)
-			border-radius: calc(var(--cover-size) * .08)
-			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3)
-			background-size: cover
-			background-position: center
-			background-color: #0000
-		>.info
-			margin: 16px
-			margin-left: 24px
-			overflow: hidden
-			>.title,>.artist
-				white-space: nowrap
-				overflow: hidden
-				text-overflow: ellipsis
-			>.title
-				font-size: 48px
-				font-weight: bold
-				line-height: 1.1em
-			>.artist
-				font-size: 32px
-				line-height: 1.1em
-			>.control
-				margin-top: 16px
-				margin-bottom: 16px
-				>.md-icon-button
-					--icon-size: 30px
-					--button-size: 50px
-					width: var(--button-size)
-					min-width: var(--button-size)
-					height: var(--button-size)
-					.md-icon 
-						width: var(--icon-size)
-						min-width: var(--icon-size)
-						height: var(--icon-size)
-						font-size: var(--icon-size) !important
-	.bottom-bar
-		padding: 8px 0 
-		position: relative
-@media screen and (max-width: 780px) 
-	.audio-info
-		.top
-			display: block
-			.cover    
-				--cover-size: 100%
-				--cover-size-max: 100%
-				>img
-					width: 100vw
-					height: 100vw
-			.info
-				.title,.artist,.control
-					text-align: center
-				.title
-					font-size: 32px
-				.artist
-					font-size: 24px
 .md-list
 	width: 100%
 	background-color: transparent
 	position: relative
 	display: block
+	padding-bottom: 96px
 	.md-list-item
 		display: block
 		border-radius: 8px
