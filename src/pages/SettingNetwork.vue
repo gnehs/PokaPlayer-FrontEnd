@@ -8,8 +8,8 @@
           <span>{{$t('back')}}</span>
         </div>
       </md-list-item>
-		</md-list> 
-		<md-list class="md-double-line" style="padding-top:0">
+    </md-list>
+    <md-list class="md-double-line" style="padding-top:0">
       <md-list-item @click="showSoundQualityDialog=true">
         <md-icon>music_note</md-icon>
         <div class="md-list-item-text">
@@ -18,7 +18,7 @@
         </div>
       </md-list-item>
     </md-list>
-    <md-dialog :md-active.sync="showSoundQualityDialog">
+    <md-dialog :md-active.sync="showSoundQualityDialog" :md-fullscreen="false">
       <md-dialog-title>{{$t('settings_network_soundQuality')}}</md-dialog-title>
       <poka-cards class="poka four doubling cards" :hide-overflow="false">
         <poka-card

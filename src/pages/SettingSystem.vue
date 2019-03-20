@@ -45,7 +45,11 @@
       @md-confirm="restart"
     />
 
-    <md-dialog :md-active.sync="showUpdateDialog" v-if="newVersion.tag||poka_debug">
+    <md-dialog
+      :md-active.sync="showUpdateDialog"
+      v-if="newVersion.tag||poka_debug"
+      :md-fullscreen="false"
+    >
       <md-dialog-title>{{$t("settings_update_update2", { version: this.newVersion.tag})}}</md-dialog-title>
       <p v-html="newVersion.body"/>
       <p style="padding:0 24px;">{{$t('settings_updateDialog_note')}}</p>
@@ -126,7 +130,6 @@ export default {
     update() {
       window._player.pause();
       this.axios.get("/upgrade").then(e => {
-        console.log(e.data);
         this.showUpdateingDialog = true;
         this.updateLog +=
           window.i18n.t("settings_update_update2", {

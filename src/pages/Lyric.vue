@@ -13,7 +13,7 @@
         <md-button class="md-primary md-raised" @click="showLyricDialog = true">{{$t('lrc_search')}}</md-button>
       </md-empty-state>
     </div>
-    <md-dialog :md-active.sync="showLyricDialog" style="overflow: scroll;">
+    <md-dialog :md-active.sync="showLyricDialog" style="overflow: scroll;" :md-fullscreen="false">
       <md-dialog-title>{{$t("lrc_search")}}</md-dialog-title>
       <md-list class="md-double-line">
         <md-list-item @click="loadLrc(`[00:00.000]`);showLyricDialog = false">
@@ -24,7 +24,7 @@
           </div>
         </md-list-item>
       </md-list>
-      <md-list class="md-triple-line">
+      <md-list class="md-triple-line" style="max-width: 100vw;">
         <md-list-item
           v-for="(item, index) of lyricSearchResult"
           :key="index"
@@ -34,7 +34,7 @@
           <div class="md-list-item-text">
             <span>{{item.name}}</span>
             <span>{{item.artist}}</span>
-            <p>({{item.rate}}% match) {{item.lyric.substring(0,50-1)+"..."}}</p>
+            <p class="t-ellipsis">({{item.rate}}% match) {{item.lyric.substring(0,50-1)+"..."}}</p>
           </div>
         </md-list-item>
       </md-list>

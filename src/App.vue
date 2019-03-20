@@ -567,4 +567,12 @@ body:not([pwa])
 .md-theme-default-dark .md-icon[class*="outline-"] {
   color: #fff;
 }
+.md-dialog {
+  max-width: 100vw;
+}
+.t-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 </style>
