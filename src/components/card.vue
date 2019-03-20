@@ -1,5 +1,5 @@
 <template lang="pug">
-  router-link.card(v-if="to",:to="to",:data-source="source||undefined")
+  router-link.card(v-if="to",:to="to",:data-source="_source||undefined")
       .image(v-if="pokaBg",:style="{backgroundImage:`url(\"${pokaBg}\")`}")
         md-tooltip {{pokaTitle}}
       .image(v-else)
@@ -7,7 +7,7 @@
         md-tooltip {{pokaTitle}}
       .title {{pokaTitle}}
       .subtitle {{pokaSubtitle}}
-  a.card(v-else,:data-source="source||undefined")
+  a.card(v-else,:data-source="_source||undefined")
       .image(v-if="pokaBg",:style="{backgroundImage:`url(\"${pokaBg}\")`}")
         md-tooltip {{pokaTitle}}
       .image(v-else)
@@ -28,12 +28,15 @@ export default {
     to: String,
     pokaIcon: { default: "outline-play_circle_filled", type: String }
   },
+  data: () => ({ _source: null }),
   created() {
     // source
     if (this.source == "Netease2") {
-      this.source = i18n.t("moduleShowName_Netease");
+      this._source = i18n.t("moduleShowName_Netease");
     } else if (this.source == "DSM") {
-      this.source = i18n.t("moduleShowName_DSM");
+      this._source = i18n.t("moduleShowName_DSM");
+    } else {
+      this._source = this.source;
     }
   }
 };
