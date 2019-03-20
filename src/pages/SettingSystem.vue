@@ -24,7 +24,7 @@
       </md-list-item>
     </md-list>
     <md-list class="md-double-line" style="padding-top:0">
-      <md-list-item @click="showUpdateDialog=true">
+      <md-list-item @click="openUpdateDialog">
         <md-icon>system_update</md-icon>
         <div class="md-list-item-text">
           <span>{{$t('settings_update')}}</span>
@@ -45,11 +45,7 @@
       @md-confirm="restart"
     />
 
-    <md-dialog
-      :md-active.sync="showUpdateDialog"
-      v-if="newVersion.tag||poka_debug"
-      :md-fullscreen="false"
-    >
+    <md-dialog :md-active.sync="showUpdateDialog" :md-fullscreen="false">
       <md-dialog-title>{{$t("settings_update_update2", { version: this.newVersion.tag})}}</md-dialog-title>
       <p v-html="newVersion.body"/>
       <p style="padding:0 24px;">{{$t('settings_updateDialog_note')}}</p>
@@ -100,11 +96,14 @@ export default {
   created() {
     this.axios.get(_setting(`server`) + "/info/").then(response => {
       this.poka_version = response.data.version;
-      this.poka_debug = response.data.debug;
+      this.poka_debug = response.data.debug ? response.data.debug : null;
       this.fetchNewVersion();
     });
   },
   methods: {
+    openUpdateDialog() {
+      if (this.poka_debug || this.newVersion.tag) this.showUpdateDialog = true;
+    },
     fetchNewVersion() {
       fetch("https://api.github.com/repos/gnehs/PokaPlayer/releases")
         .then(e => e.json())
