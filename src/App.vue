@@ -14,8 +14,13 @@
               <md-button class="md-icon-button" md-menu-trigger>
                 <md-icon>more_vert</md-icon>
               </md-button>
-
               <md-menu-content>
+                <md-menu-item @click="switchTheme">
+                  <md-icon v-if="!settings.darkMode">brightness_3</md-icon>
+                  <md-icon v-if="settings.darkMode">brightness_7</md-icon>
+                  <span v-if="!settings.darkMode" class="md-list-item-text">{{$t('settings_dark')}}</span>
+                  <span v-if="settings.darkMode" class="md-list-item-text">{{$t('settings_light')}}</span>
+                </md-menu-item>
                 <md-menu-item to="/setting">
                   <md-icon class="outline-settings"></md-icon>
                   <span class="md-list-item-text">{{$t("settings")}}</span>
@@ -23,12 +28,6 @@
                 <md-menu-item to="/about">
                   <md-icon class="outline-info"></md-icon>
                   <span class="md-list-item-text">{{$t("settings_aboutAndHelp")}}</span>
-                </md-menu-item>
-                <md-menu-item @click="switchTheme">
-                  <md-icon v-if="!settings.darkMode">brightness_3</md-icon>
-                  <md-icon v-if="settings.darkMode">brightness_7</md-icon>
-                  <span v-if="!settings.darkMode" class="md-list-item-text">{{$t('settings_dark')}}</span>
-                  <span v-if="settings.darkMode" class="md-list-item-text">{{$t('settings_light')}}</span>
                 </md-menu-item>
               </md-menu-content>
             </md-menu>
@@ -185,6 +184,17 @@ export default {
     settings: { darkMode: window._setting("darkMode") }
   }),
   created() {
+    function isMobile() {
+      try {
+        document.createEvent("TouchEvent");
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+    if (location.search == "?pwa" || !isMobile()) {
+      $("body").attr("pwa", true);
+    }
     this.$router.beforeEach((to, from, next) => {
       let transitionName =
         to.meta.transitionName || from.meta.transitionName || "fade";
@@ -202,6 +212,7 @@ export default {
     this.testConnection();
     setInterval(() => {
       this.audio_paused = _player.paused;
+      this.audio_order = _player.options.order;
       if (_player.list.audios.length > 0) {
         let nowPlaying = _player.list.audios[_player.list.index];
         let buffered = _player.audio.buffered;
@@ -452,6 +463,10 @@ export default {
 .md-app
 	min-height: calc(100vh - 69px)
 	max-height: calc(100vh - 69px)
+body:not([pwa])
+  .md-app
+    min-height: calc(100vh - 69px - 64px)
+    max-height: calc(100vh - 69px - 64px)
 #drawer
 	.drawer-player
 		display: none
