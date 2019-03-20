@@ -28,7 +28,10 @@
         <md-icon>system_update</md-icon>
         <div class="md-list-item-text">
           <span>{{$t('settings_update')}}</span>
-          <span>{{checkUpadteStatus}}</span>
+          <span>
+            {{checkUpadteStatus}}
+            <span v-if="poka_debug">(debug: {{poka_debug}})</span>
+          </span>
         </div>
       </md-list-item>
     </md-list>
@@ -42,7 +45,7 @@
       @md-confirm="restart"
     />
 
-    <md-dialog :md-active.sync="showUpdateDialog" v-if="newVersion.tag">
+    <md-dialog :md-active.sync="showUpdateDialog" v-if="newVersion.tag||poka_debug">
       <md-dialog-title>{{$t("settings_update_update2", { version: this.newVersion.tag})}}</md-dialog-title>
       <p v-html="newVersion.body"/>
       <p style="padding:0 24px;">{{$t('settings_updateDialog_note')}}</p>
@@ -50,9 +53,17 @@
         <md-button @click="showUpdateDialog = false">{{$t('cancel')}}</md-button>
         <md-button
           class="md-primary"
-          @click="showUpdateDialog = false;update"
+          @click="showUpdateDialog = false;update()"
         >{{$t('settings_update')}}</md-button>
       </md-dialog-actions>
+    </md-dialog>
+    <md-dialog
+      :md-active.sync="showUpdateingDialog"
+      :md-click-outside-to-close="false"
+      :md-close-on-esc="false"
+    >
+      <md-dialog-title>{{$t('settings_update_updating')}}</md-dialog-title>
+      <pre style="margin: 3px;">{{updateLog}}</pre>
     </md-dialog>
   </div>
 </template>
@@ -72,7 +83,10 @@ export default {
     checkUpadteStatus: i18n.t("settings_update_checking4updates"),
     restartConfirmActive: false,
     showUpdateDialog: false,
+    showUpdateingDialog: false,
+    updateLog: "",
     poka_version: null,
+    poka_debug: null,
     newVersion: {
       prerelease: null,
       tag: null,
@@ -82,6 +96,7 @@ export default {
   created() {
     this.axios.get(_setting(`server`) + "/info/").then(response => {
       this.poka_version = response.data.version;
+      this.poka_debug = response.data.debug;
       this.fetchNewVersion();
     });
   },
@@ -109,7 +124,50 @@ export default {
       this.axios("/logout").then(e => this.$router.push("/login"));
     },
     update() {
-      this.axios.get("/upgrade");
+      window._player.pause();
+      this.axios.get("/upgrade").then(e => {
+        console.log(e.data);
+        this.showUpdateingDialog = true;
+        this.updateLog +=
+          window.i18n.t("settings_update_update2", {
+            version: this.newVersion.tag
+          }) + "\n";
+        if (e.data == "upgrade") {
+          setTimeout(() => {
+            alert("更新完成！");
+            location.reload();
+          }, 30 * 1000);
+        } else if (e.data == "socket") {
+          window._socket.emit("update");
+          window._socket.on("Permission Denied Desu", () => {
+            this.showUpdateingDialog = false;
+            alert("Permission Denied");
+          });
+          window._socket.on("init", () => {
+            this.updateLog +=
+              window.i18n.t("settings_update_initializing") + "\n";
+          });
+          window._socket.on("git", data => {
+            this.updateLog +=
+              {
+                fetch: window.i18n.t("settings_update_git_fetch"),
+                reset: window.i18n.t("settings_update_git_reset"),
+                api: window.i18n.t("settings_update_git_api")
+              }[data] + "\n";
+          });
+          window._socket.on("restart", () => {
+            this.updateLog += window.i18n.t("settings_restarting") + "\n";
+            window._socket.on("hello", () => {
+              alert("更新完成！");
+              location.reload();
+            });
+          });
+          window._socket.on(
+            "err",
+            data => (this.updateLog += `[ERROR] ${data}`)
+          );
+        }
+      });
     },
     restart() {
       this.axios.post("/restart");

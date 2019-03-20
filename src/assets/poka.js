@@ -46,3 +46,4 @@ window._setting = (setting, value) => {
         }
     }
 }
+window._socket = io(window._setting(`server`));
