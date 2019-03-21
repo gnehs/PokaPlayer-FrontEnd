@@ -135,7 +135,8 @@
 	"settings_updateDialog_note": "注意：若您未开启 Docker 自动重启功能，您必须手动开启 PokaPlayer",
 	"settings_updateDialog_note_dev": "若在开发机器上进行更新，<mark>可能导致 Git 爆炸</mark>",
 	"settings_updateDialog_title": "{version} 更新日志",
-	"settings_restart": "重新启动",
-	"settings_restarting": "正在重新启动...",
+	"settings_restart": "重启",
+	"settings_restarting": "正在重启...",
+	"settings_restart_completed": "重启完成！",
 	"settings_restartDialog_title": "确定要重新启动吗？"
 }

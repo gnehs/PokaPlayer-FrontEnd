@@ -46,9 +46,11 @@
     />
 
     <md-dialog :md-active.sync="showUpdateDialog" :md-fullscreen="false">
-      <md-dialog-title>{{$t("settings_update_update2", { version: this.newVersion.tag})}}</md-dialog-title>
-      <p v-html="newVersion.body"/>
-      <p style="padding:0 24px;">{{$t('settings_updateDialog_note')}}</p>
+      <md-dialog-title>{{$t("settings_updateDialog_title", { version: this.newVersion.tag})}}</md-dialog-title>
+      <md-dialog-content>
+        <p v-html="newVersion.body"/>
+        <p>{{$t('settings_updateDialog_note')}}</p>
+      </md-dialog-content>
       <md-dialog-actions>
         <md-button @click="showUpdateDialog = false">{{$t('cancel')}}</md-button>
         <md-button
@@ -63,7 +65,32 @@
       :md-close-on-esc="false"
     >
       <md-dialog-title>{{$t('settings_update_updating')}}</md-dialog-title>
-      <pre style="margin: 3px;">{{updateLog}}</pre>
+      <md-dialog-content>
+        <pre class="log">{{updateLog}}</pre>
+      </md-dialog-content>
+    </md-dialog>
+    <md-dialog
+      :md-active.sync="showRestartingDialog"
+      :md-click-outside-to-close="false"
+      :md-close-on-esc="false"
+    >
+      <md-dialog-title>{{$t('settings_restart')}}</md-dialog-title>
+      <md-dialog-content>
+        <pre class="log">{{$t('settings_restarting')}}</pre>
+      </md-dialog-content>
+    </md-dialog>
+    <md-dialog
+      :md-active.sync="showRestartCompletedDialog"
+      :md-click-outside-to-close="false"
+      :md-close-on-esc="false"
+    >
+      <md-dialog-title>{{$t('settings_restart')}}</md-dialog-title>
+      <md-dialog-content>
+        <pre class="log">{{$t('settings_restart_completed')}}</pre>
+      </md-dialog-content>
+      <md-dialog-actions>
+        <md-button class="md-primary" @click="reload">{{$t('settings_update_reconnect')}}</md-button>
+      </md-dialog-actions>
     </md-dialog>
   </div>
 </template>
@@ -84,19 +111,23 @@ export default {
     restartConfirmActive: false,
     showUpdateDialog: false,
     showUpdateingDialog: false,
+    showRestartingDialog: false,
+    showRestartCompletedDialog: false,
     updateLog: "",
     poka_version: null,
     poka_debug: null,
     newVersion: {
       prerelease: null,
       tag: null,
-      body: null
+      body: "<h1>===PokaPlayer===</h1>"
     }
   }),
   created() {
     this.axios.get(_setting(`server`) + "/info/").then(response => {
       this.poka_version = response.data.version;
-      this.poka_debug = response.data.debug ? response.data.debug : null;
+      this.poka_debug = Boolean(response.data.debug)
+        ? response.data.debug
+        : null;
       this.fetchNewVersion();
     });
   },
@@ -160,8 +191,8 @@ export default {
           window._socket.on("restart", () => {
             this.updateLog += window.i18n.t("settings_restarting") + "\n";
             window._socket.on("hello", () => {
-              alert("更新完成！");
-              location.reload();
+              this.showRestartingDialog = false;
+              this.showRestartCompletedDialog = true;
             });
           });
           window._socket.on(
@@ -172,7 +203,18 @@ export default {
       });
     },
     restart() {
+      window._player.pause();
+      this.showRestartingDialog = true;
       this.axios.post("/restart");
+      setTimeout(() => {
+        window._socket.on("hello", () => {
+          this.showRestartingDialog = false;
+          this.showRestartCompletedDialog = true;
+        });
+      }, 2000);
+    },
+    reload() {
+      window.location.reload();
     },
     compareVersion(local, remote) {
       local = local.split(".").map(e => parseInt(e));
@@ -184,4 +226,13 @@ export default {
     }
   }
 };
-</script>
+</script><style lang="sass" scoped>
+pre.log
+	background: #000
+	border-radius: 3px
+	padding: 5px
+	width: 280px
+	height: 200px
+	overflow: scroll
+	font-family: 'Ubuntu Mono', monospace
+</style>
