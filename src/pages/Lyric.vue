@@ -13,31 +13,33 @@
         <md-button class="md-primary md-raised" @click="showLyricDialog = true">{{$t('lrc_search')}}</md-button>
       </md-empty-state>
     </div>
-    <md-dialog :md-active.sync="showLyricDialog" style="overflow: scroll;" :md-fullscreen="false">
+    <md-dialog :md-active.sync="showLyricDialog" :md-fullscreen="false">
       <md-dialog-title>{{$t("lrc_search")}}</md-dialog-title>
-      <md-list class="md-double-line">
-        <md-list-item @click="loadLrc(`[00:00.000]`);showLyricDialog = false">
-          <md-icon>close</md-icon>
-          <div class="md-list-item-text">
-            <span>{{$t('lrc_notLoad')}}</span>
-            <span>{{$t('lrc_notLoad_description')}}</span>
-          </div>
-        </md-list-item>
-      </md-list>
-      <md-list class="md-triple-line" style="max-width: 100vw;">
-        <md-list-item
-          v-for="(item, index) of lyricSearchResult"
-          :key="index"
-          @click="loadLrc(item.lyric);showLyricDialog = false"
-        >
-          <md-icon>subtitles</md-icon>
-          <div class="md-list-item-text">
-            <span>{{item.name}}</span>
-            <span>{{item.artist}}</span>
-            <p class="t-ellipsis">({{item.rate}}% match) {{item.lyric.substring(0,50-1)+"..."}}</p>
-          </div>
-        </md-list-item>
-      </md-list>
+      <md-dialog-content style="max-width: 100vw;">
+        <md-list class="md-double-line">
+          <md-list-item @click="loadLrc(`[00:00.000]`);showLyricDialog = false">
+            <md-icon>close</md-icon>
+            <div class="md-list-item-text">
+              <span>{{$t('lrc_notLoad')}}</span>
+              <span>{{$t('lrc_notLoad_description')}}</span>
+            </div>
+          </md-list-item>
+        </md-list>
+        <md-list class="md-triple-line" style="overflow:hidden;">
+          <md-list-item
+            v-for="(item, index) of lyricSearchResult"
+            :key="index"
+            @click="loadLrc(item.lyric);showLyricDialog = false"
+          >
+            <md-icon>subtitles</md-icon>
+            <div class="md-list-item-text">
+              <span>{{item.name}}</span>
+              <span>{{item.artist}}</span>
+              <p class="t-ellipsis">({{item.rate}}% match) {{item.lyric.substring(0,50-1)+"..."}}</p>
+            </div>
+          </md-list-item>
+        </md-list>
+      </md-dialog-content>
       <md-dialog-actions>
         <md-button class="md-primary" @click="showLyricDialog = false">{{$t('cancel')}}</md-button>
       </md-dialog-actions>
