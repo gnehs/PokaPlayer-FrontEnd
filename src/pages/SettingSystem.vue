@@ -122,9 +122,9 @@ export default {
   created() {
     this.axios.get(_setting(`server`) + "/info/").then(response => {
       this.poka_version = response.data.version;
-      this.poka_debug = Boolean(response.data.debug)
-        ? response.data.debug
-        : null;
+      this.poka_debug =
+        response.data.debug != "false" ? response.data.debug : null;
+      console.log(this.poka_debug);
       this.fetchNewVersion();
     });
   },
@@ -232,4 +232,5 @@ pre.log
 	height: 200px
 	overflow: scroll
 	font-family: 'Ubuntu Mono', monospace
+	color: #FFF
 </style>
