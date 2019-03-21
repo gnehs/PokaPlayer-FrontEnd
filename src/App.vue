@@ -351,11 +351,11 @@ export default {
 </style>
 <style lang="sass" scoped>
 #toolbar.md-theme-default-dark
-  --md-theme-default-dark-text-primary-on-primary: rgba(255, 255, 255, 0.87)
-  --md-theme-default-dark-primary: #212121
+	--md-theme-default-dark-text-primary-on-primary: rgba(255, 255, 255, 0.87)
+	--md-theme-default-dark-primary: #212121
 #toolbar.md-theme-default
-  --md-theme-default-text-primary-on-primary: rgba(0, 0, 0, 0.87)
-  --md-theme-default-primary: rgb(245, 245, 245)
+	--md-theme-default-text-primary-on-primary: rgba(0, 0, 0, 0.87)
+	--md-theme-default-primary: rgb(245, 245, 245)
 .md-toolbar .md-title
 	font-family: var(--product-font)
 	font-weight: bold
@@ -441,6 +441,7 @@ export default {
 			height: 64px
 			justify-content: flex-end
 		.right-s
+			width: 144px
 			display: none
 			align-items: center
 			height: 64px
@@ -456,6 +457,8 @@ export default {
 		.song-info
 			.left
 				flex: 1
+				overflow: hidden
+				max-width: calc(100vw - 144px)
 			.center,.right
 				display: none
 			.right-s
@@ -464,9 +467,9 @@ export default {
 	min-height: calc(100vh - 69px)
 	max-height: calc(100vh - 69px)
 body:not([pwa])
-  .md-app
-    min-height: calc(100vh - 69px - 64px)
-    max-height: calc(100vh - 69px - 64px)
+	.md-app
+		min-height: calc(100vh - 69px - 64px)
+		max-height: calc(100vh - 69px - 64px)
 #drawer
 	.drawer-player
 		display: none
