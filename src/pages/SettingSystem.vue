@@ -64,7 +64,6 @@
       :md-click-outside-to-close="false"
       :md-close-on-esc="false"
     >
-      <md-dialog-title>{{$t('settings_update_updating')}}</md-dialog-title>
       <md-dialog-content>
         <pre class="log">{{updateLog}}</pre>
       </md-dialog-content>
@@ -74,7 +73,6 @@
       :md-click-outside-to-close="false"
       :md-close-on-esc="false"
     >
-      <md-dialog-title>{{$t('settings_restart')}}</md-dialog-title>
       <md-dialog-content>
         <pre class="log">{{$t('settings_restarting')}}</pre>
       </md-dialog-content>
@@ -84,7 +82,6 @@
       :md-click-outside-to-close="false"
       :md-close-on-esc="false"
     >
-      <md-dialog-title>{{$t('settings_restart')}}</md-dialog-title>
       <md-dialog-content>
         <pre class="log">{{$t('settings_restart_completed')}}</pre>
       </md-dialog-content>
