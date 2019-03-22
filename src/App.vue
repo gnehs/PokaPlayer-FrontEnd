@@ -562,7 +562,7 @@ export default {
   color: #fff;
 }
 .md-dialog {
-  max-width: 100vw;
+  max-width: 100vw !important;
 }
 .t-ellipsis {
   white-space: nowrap;
