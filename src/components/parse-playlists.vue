@@ -1,9 +1,9 @@
 <template>
   <poka-cards>
     <poka-card
-      v-for="{name, image, id, source, type} in data"
+      v-for="({name, image, id, source, type},index) in data"
       v-if="!type||type!='folder'"
-      :key="id"
+      :key="index"
       :to="`/playlist/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
       :poka-bg="image?server+image:false"
       :poka-title="name"
