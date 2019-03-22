@@ -35,6 +35,10 @@
 	"home_netease": "Netease",
 
 	"app_waitForPlay": "There are no songs in the queue",
+	"app_waitForPlay_description": "Add some songs or click the bottom below",
+
+	"now_cleanSongs": "Are you sure to clear all the songs?",
+	"now_cleanSongs_description": "This will clear all the songs in the list.",
 
 	"playlist_random": "Random",
 

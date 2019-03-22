@@ -35,6 +35,10 @@
 	"home_netease": "网易云音乐",
 
 	"app_waitForPlay": "伫列中未有歌曲",
+	"app_waitForPlay_description": "加入一些歌曲，或是点选底下的随机播放",
+
+	"now_cleanSongs": "确定清除所有歌曲？",
+	"now_cleanSongs_description": "这将会清除列表中所有歌曲。",
 
 	"playlist_random": "随机播放",
 

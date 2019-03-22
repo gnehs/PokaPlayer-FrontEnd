@@ -35,6 +35,10 @@
 	"home_netease": "網易雲音樂",
 
 	"app_waitForPlay": "佇列中未有歌曲",
+	"app_waitForPlay_description": "加入一些歌曲，或是點選底下的隨機播放",
+
+	"now_cleanSongs": "確定清除所有歌曲？",
+	"now_cleanSongs_description": "這將會清除列表中所有歌曲。",
 
 	"playlist_random": "隨機播放",
 

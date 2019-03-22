@@ -36,19 +36,18 @@
           </md-button>
         </md-list-item>
       </transition-group>
-      <!-- TODO: i18n -->
       <md-empty-state
         v-else
         md-icon="queue_music"
-        md-label="佇列中尚未有歌曲"
-        md-description="加入一些歌曲，或是點選底下的隨機播放"
+        :md-label="$t('app_waitForPlay')"
+        :md-description="$t('app_waitForPlay_description')"
       >
         <play-random-button/>
       </md-empty-state>
       <md-dialog-confirm
         :md-active.sync="cleanActive"
-        md-title="確定清除所有歌曲？"
-        md-content="這將會清除列表中所有歌曲！"
+        :md-title="$t('now_cleanSongs')"
+        :md-content="$t('now_cleanSongs_description')"
         :md-cancel-text="$t('cancel')"
         :md-confirm-text="$t('ok')"
         @md-confirm="audio_clean"
