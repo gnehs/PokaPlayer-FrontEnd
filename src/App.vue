@@ -135,7 +135,7 @@
           </div>
           <span class="time">{{audio_totalTime}}</span>
         </div>
-        <div class="right">
+        <div class="right" v-if="audio_artist">
           <md-button class="md-icon-button" @click="switch_audio_order">
             <md-icon class="outline-repeat" v-if="audio_order==='list'"></md-icon>
             <md-icon class="outline-shuffle" v-else></md-icon>
@@ -147,7 +147,10 @@
             <md-icon class="outline-subtitles"></md-icon>
           </md-button>
         </div>
-        <div class="right-s">
+        <div class="right" v-else>
+          <play-random-button/>
+        </div>
+        <div class="right-s" v-if="audio_artist">
           <md-button class="md-icon-button" @click="audio_previous">
             <md-icon>skip_previous</md-icon>
           </md-button>
@@ -158,6 +161,9 @@
           <md-button class="md-icon-button" @click="audio_next">
             <md-icon>skip_next</md-icon>
           </md-button>
+        </div>
+        <div class="right-s" v-else>
+          <play-random-button/>
         </div>
       </div>
     </div>

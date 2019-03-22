@@ -43,12 +43,7 @@
         md-label="佇列中尚未有歌曲"
         md-description="加入一些歌曲，或是點選底下的隨機播放"
       >
-        <md-button
-          class="md-primary md-raised"
-          @click="randomPlay"
-          v-if="!loadingRandom"
-        >{{$t('playlist_random')}}</md-button>
-        <poka-loader v-else/>
+        <play-random-button/>
       </md-empty-state>
       <md-dialog-confirm
         :md-active.sync="cleanActive"
@@ -83,7 +78,6 @@ export default {
   name: "NowPlaying",
   data: () => ({
     server: _setting(`server`),
-    loadingRandom: false,
     defaultCover: _setting(`headerBgSource`),
     audio_paused: true,
     audio_cover: _setting(`headerBgSource`),
@@ -176,18 +170,6 @@ export default {
       _player.options.order =
         _player.options.order === "random" ? "list" : "random";
       this.audio_order = _player.options.order;
-    },
-    randomPlay() {
-      this.loadingRandom = true;
-      let randomStr = Math.random()
-        .toString(36)
-        .substring(7);
-      this.axios(`/pokaapi/randomSongs?${randomStr}`)
-        .then(res => {
-          this.addSongs({ songlist: res.data.songs });
-          setTimeout(() => (this.loadingRandom = false), 500);
-        })
-        .catch(e => alert(`PokaPlayer Error\n${e}`));
     },
     addSongs({ songlist, index, clear = true }) {
       let playlist = [];

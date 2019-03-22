@@ -4,6 +4,7 @@ import pokaCard from '@/components/card.vue'
 import pokaCards from '@/components/cards.vue'
 import pokaLoader from '@/components/loader.vue'
 import pinButton from '@/components/pinButton.vue'
+import playRandomButton from '@/components/playRandomButton.vue'
 // parseData
 import parsePlaylists from '@/components/parse-playlists.vue'
 import parseSongs from '@/components/parse-songs.vue'
@@ -18,6 +19,7 @@ export {
     pokaCards,
     pokaLoader,
     pinButton,
+    playRandomButton,
     parsePlaylists,
     parseSongs,
     parseArtists,
