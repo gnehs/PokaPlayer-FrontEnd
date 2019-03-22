@@ -1,24 +1,24 @@
 <template>
-  <div>
-    <div class="search-box" :class="{focus: searchBoxFocus}">
-      <input
-        class="search-input"
-        type="text"
-        v-on:keyup.enter="search"
-        v-model.trim="keyword"
-        :placeholder="$t('search')"
-        autocomplete="off"
-        @focus="searchBoxFocus = true"
-        @blur="searchBoxFocus = false"
-        required
-      >
-      <button class="search-button" @click="search">
-        <md-icon>search</md-icon>
-      </button>
-    </div>
-    <poka-loader v-if="isLoading"/>
-    <poka-parse-multiple v-if="!isLoading&&searchResult" :data="searchResult"/>
-  </div>
+	<div>
+		<div class="search-box" :class="{focus: searchBoxFocus}">
+			<input
+				class="search-input"
+				type="text"
+				v-on:keyup.enter="search"
+				v-model.trim="keyword"
+				:placeholder="$t('search')"
+				autocomplete="off"
+				@focus="searchBoxFocus = true"
+				@blur="searchBoxFocus = false"
+				required
+			>
+			<button class="search-button" @click="search">
+				<md-icon>search</md-icon>
+			</button>
+		</div>
+		<poka-loader v-if="isLoading"/>
+		<poka-parse-multiple v-if="!isLoading&&searchResult" :data="searchResult"/>
+	</div>
 </template>
 
 <style lang="sass" scoped>
@@ -32,7 +32,7 @@
 	overflow: hidden
 	transition-duration: 0.3s;
 	transition-property: border, box-shadow
-  	transition-timing-function: ease
+		transition-timing-function: ease
 	background-color: white
 	&:hover,&.focus
 		box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28)
@@ -53,29 +53,31 @@
 		padding: 0 10px
 		opacity: .7
 		background: #FFF
+		>i
+			color: rgba(0, 0, 0, 0.54)
 </style>
 <script>
 export default {
-  name: "Search",
-  data: () => ({
-    keyword: "",
-    searchResult: null,
-    isLoading: false,
-    searchBoxFocus: false
-  }),
-  methods: {
-    search() {
-      if (this.keyword == "") return;
-      this.isLoading = true;
+	name: "Search",
+	data: () => ({
+		keyword: "",
+		searchResult: null,
+		isLoading: false,
+		searchBoxFocus: false
+	}),
+	methods: {
+		search() {
+			if (this.keyword == "") return;
+			this.isLoading = true;
 
-      this.axios
-        .get(_setting(`server`) + "/pokaapi/search/?keyword=" + this.keyword)
-        .then(response => {
-          this.searchResult = [response.data];
-          this.isLoading = false;
-        })
-        .catch(e => (this.isLoading = false));
-    }
-  }
+			this.axios
+				.get(_setting(`server`) + "/pokaapi/search/?keyword=" + this.keyword)
+				.then(response => {
+					this.searchResult = [response.data];
+					this.isLoading = false;
+				})
+				.catch(e => (this.isLoading = false));
+		}
+	}
 };
 </script>
