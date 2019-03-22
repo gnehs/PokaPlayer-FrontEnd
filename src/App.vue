@@ -184,17 +184,12 @@ export default {
     settings: { darkMode: window._setting("darkMode") }
   }),
   created() {
-    function isMobile() {
-      try {
-        document.createEvent("TouchEvent");
-        return true;
-      } catch (e) {
-        return false;
-      }
-    }
-    if (location.search == "?pwa" || !isMobile()) {
-      $("body").attr("pwa", true);
-    }
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+    window.addEventListener("resize", () => {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    });
     this.$router.beforeEach((to, from, next) => {
       let transitionName =
         to.meta.transitionName || from.meta.transitionName || "fade";
@@ -464,17 +459,17 @@ export default {
 			.right-s
 				display: flex
 .md-app
-	min-height: calc(100vh - 69px)
-	max-height: calc(100vh - 69px)
+	min-height: calc(var(--vh, 1vh) * 100 - 69px)
+	max-height: calc(var(--vh, 1vh) * 100 - 69px)
 body:not([pwa])
 	.md-app
-		min-height: calc(100vh - 69px - 64px)
-		max-height: calc(100vh - 69px - 64px)
+		min-height: calc(var(--vh, 1vh) * 100 - 69px - 64px)
+		max-height: calc(var(--vh, 1vh) * 100 - 69px - 64px)
 #drawer
 	.drawer-player
 		display: none
 .md-app-content
-	max-height: calc(100vh - 64px - 69px)
+	max-height: calc(var(--vh, 1vh) * 100 - 64px - 69px)
 
 .md-toolbar, .md-toolbar-row 
 		min-height: 64px
