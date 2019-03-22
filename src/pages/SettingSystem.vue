@@ -66,6 +66,7 @@
     >
       <md-dialog-content>
         <pre class="log">{{updateLog}}</pre>
+        <md-progress-bar md-mode="indeterminate"></md-progress-bar>
       </md-dialog-content>
     </md-dialog>
     <md-dialog
@@ -73,18 +74,14 @@
       :md-click-outside-to-close="false"
       :md-close-on-esc="false"
     >
-      <md-dialog-content>
-        <pre class="log">{{$t('settings_restarting')}}</pre>
-      </md-dialog-content>
+      <md-dialog-title>{{$t("settings_restarting")}}</md-dialog-title>
     </md-dialog>
     <md-dialog
       :md-active.sync="showRestartCompletedDialog"
       :md-click-outside-to-close="false"
       :md-close-on-esc="false"
     >
-      <md-dialog-content>
-        <pre class="log">{{$t('settings_restart_completed')}}</pre>
-      </md-dialog-content>
+      <md-dialog-title>{{$t("settings_restart_completed")}}</md-dialog-title>
       <md-dialog-actions>
         <md-button class="md-primary" @click="reload">{{$t('settings_update_reconnect')}}</md-button>
       </md-dialog-actions>
@@ -188,7 +185,7 @@ export default {
           window._socket.on("restart", () => {
             this.updateLog += window.i18n.t("settings_restarting") + "\n";
             window._socket.on("hello", () => {
-              this.showRestartingDialog = false;
+              this.showUpdateingDialog = false;
               this.showRestartCompletedDialog = true;
             });
           });
