@@ -178,12 +178,16 @@ export default {
       this.audio_order = _player.options.order;
     },
     randomPlay() {
+      this.loadingRandom = true;
       let randomStr = Math.random()
         .toString(36)
         .substring(7);
-      this.axios(`/pokaapi/randomSongs?${randomStr}`).then(res => {
-        this.addSongs({ songlist: res.data.songs });
-      });
+      this.axios(`/pokaapi/randomSongs?${randomStr}`)
+        .then(res => {
+          this.addSongs({ songlist: res.data.songs });
+          setTimeout(() => (this.loadingRandom = false), 500);
+        })
+        .catch(e => alert(`PokaPlayer Error\n${e}`));
     },
     addSongs({ songlist, index, clear = true }) {
       let playlist = [];
