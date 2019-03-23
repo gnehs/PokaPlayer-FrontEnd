@@ -21,7 +21,7 @@
           </md-field>
           <div class="block">
             <div class="input">
-              <md-checkbox v-model="remember">Remember me</md-checkbox>
+              <md-checkbox v-model="remember" disabled>Remember me</md-checkbox>
             </div>
           </div>
         </md-card-content>
@@ -48,7 +48,7 @@ export default {
     passwordError: null
   }),
   created() {
-    this.remember = _setting(`rememberPass`);
+    this.remember = true;
     this.password = _setting(`password`);
     this.server = _setting(`server`);
   },

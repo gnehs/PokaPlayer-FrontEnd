@@ -165,7 +165,9 @@ export default {
             location.reload();
           }, 30 * 1000);
         } else if (e.data == "socket") {
-          window._socket.emit("update");
+          _socket.emit("login", { pass: window._setting(`password`) });
+          _socket.emit("update");
+
           window._socket.on("Permission Denied Desu", () => {
             this.showUpdateingDialog = false;
             alert("Permission Denied");
