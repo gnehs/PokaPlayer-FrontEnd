@@ -316,9 +316,11 @@ export default {
     },
     getStatus() {
       this.axios.get(_setting(`server`) + "/status/").then(response => {
-        if (!response.data.install) return (location.href = "/install");
-        //if (!response.data.install) return this.$router.push("/install");
-        if (!response.data.login) return this.$router.push("/login");
+        if (!response.data.install) {
+          return this.$router.push("/install");
+        } else if (!response.data.login) {
+          return this.$router.push("/login");
+        }
       });
     }
   }

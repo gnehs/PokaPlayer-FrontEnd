@@ -1,21 +1,12 @@
 <template>
   <div>
-    <md-empty-state
-      md-icon="devices_other"
-      md-label="初始化您的 PokaPlayer"
-      md-description="完成初始化後，您便能在此享受音樂！"
-      v-if="step.welcome"
-    >
-      <md-button class="md-primary md-raised" @click="step.welcome=false">初始化</md-button>
-      <!--<md-button class="md-raised" @click="step.welcome=false">上傳設定檔</md-button>-->
-    </md-empty-state>
-    <poka-header title="安裝嚮導" subtitle="PokaPlayer" v-if="step.welcome==false"/>
+    <poka-header title="安裝嚮導" subtitle="PokaPlayer"/>
     <md-steppers
       :md-active-step.sync="active"
       md-vertical
-      v-if="step.welcome==false"
       :md-linear="true"
       :md-dynamic-height="true"
+      v-show="!step.server_restarting&&!step.server_restarted"
     >
       <md-step id="step_description" md-label="說明" :md-done.sync="step.description">
         <h1>說明</h1>
@@ -87,10 +78,10 @@
               <div class="md-layout md-gutter">
                 <div class="md-layout-item">
                   <md-field>
-                    <label for="movie">通訊協定</label>
-                    <md-select v-model="setting.DSM.protocol" name="movie" id="movie">
-                      <md-option value="http://">http://</md-option>
-                      <md-option value="https://">https://</md-option>
+                    <label for="DSM-protocol">通訊協定</label>
+                    <md-select v-model="setting.DSM.protocol" name="DSM-protocol" id="DSM-protocol">
+                      <md-option value="http">http://</md-option>
+                      <md-option value="https">https://</md-option>
                     </md-select>
                   </md-field>
                 </div>
@@ -199,22 +190,29 @@
           </md-card-content>
         </md-card>
         <br>
-        <md-button class="md-raised md-primary" @click="setDone('module', 'confirm')">下一步</md-button>
+        <md-button class="md-raised md-primary" @click="setDone('module', 'done')">下一步</md-button>
       </md-step>
 
-      <md-step id="step_confirm" md-label="確認資料" :md-done.sync="step.confirm">
+      <md-step id="step_done" md-label="完成" :md-done.sync="step.done">
         <p>您可以在此備份目前的設定檔，以備不時之需</p>
-        <md-button class="md-raised md-primary" @click="setDone('confirm');checkRestart()">完成</md-button>
+        <p>點擊下方「完成」來提交設定檔</p>
+        <md-button class="md-raised md-primary" @click="setDone('done');checkRestart()">完成</md-button>
+        <md-button class="md-primary" @click="downloadSetting">下載設定檔</md-button>
       </md-step>
     </md-steppers>
-    <md-empty-state md-icon="done" md-label="完成！" md-description="正在等待伺服器重啟" v-if="false">
+    <md-empty-state
+      md-icon="done"
+      md-label="完成！"
+      :md-description="step.server_restarting_description"
+      v-if="step.server_restarting"
+    >
       <md-progress-spinner :md-diameter="30" :md-stroke="3" md-mode="indeterminate"></md-progress-spinner>
     </md-empty-state>
     <md-empty-state
       md-icon="done"
       md-label="完成！"
       md-description="伺服器重啟完成，請點擊下面按鈕重新載入頁面"
-      v-if="step==3"
+      v-if="step.server_restarted"
     >
       <md-button class="md-primary md-raised" to="/">完成</md-button>
     </md-empty-state>
@@ -227,13 +225,15 @@ export default {
   data: () => ({
     active: "step_description",
     step: {
-      welcome: true,
       description: false,
       pokaplayer: false,
       pokaplayer_err: null,
       module: false,
       module_err: null,
-      confirm: false
+      done: false,
+      server_restarting: false,
+      server_restarting_description: "正在提交設定檔",
+      server_restarted: false
     },
     netease: {
       protocol: "",
@@ -256,7 +256,7 @@ export default {
         enabled: true,
         protocol: null,
         host: "localhost",
-        port: 443,
+        port: 5000,
         account: null,
         password: null
       },
@@ -301,14 +301,21 @@ export default {
           !this.setting.PokaPlayer.password ||
           !this.setting.PokaPlayer.adminPassword
         ) {
-          return (this.step.pokaplayer_err = "請輸入密碼");
+          this.step.pokaplayer_err = "請輸入密碼";
+          return alert("請輸入密碼");
         } else {
           this.step.pokaplayer_err = null;
           this.step[id] = true;
         }
       } else if (id == "module") {
+        this.step.module_err = null;
         this.setting.Netease2.server =
-          this.netease.protocol + this.netease.host + ":" + this.netease.port;
+          this.netease.protocol +
+          this.netease.host +
+          ":" +
+          this.netease.port +
+          "/";
+        return this.checkConnection();
       } else {
         this.step[id] = true;
       }
@@ -316,10 +323,57 @@ export default {
         this.active = "step_" + index;
       }
     },
-    setError() {
-      this.secondStepError = "發生錯誤";
+    async checkConnection() {
+      let test_dsm, test_netease;
+      try {
+        test_dsm = this.setting.DSM.enabled
+          ? (await this.axios.post("/installapi/dsm", this.setting.DSM)).data
+          : true;
+        test_netease = this.setting.Netease2.enabled
+          ? (await this.axios.post(
+              "/installapi/netease2",
+              this.setting.Netease2
+            )).data
+          : true;
+        if (
+          test_dsm &&
+          test_dsm != "error" &&
+          test_netease &&
+          test_netease != "error"
+        ) {
+          this.step.module = true;
+          this.active = "step_done";
+        } else {
+          let _Error = [];
+          test_dsm == "error" || !test_dsm
+            ? _Error.push("無法連線至 DSM 或帳號密碼有誤")
+            : null;
+          test_netease == "error" || !test_netease
+            ? _Error.push("無法連線至網易雲或帳號密碼有誤")
+            : null;
+          this.step.module_err = _Error.join(", ");
+          alert(_Error.join(", "));
+        }
+      } catch (e) {
+        this.step.module_err = e;
+        console.error("e", e);
+      }
     },
-    async checkRestart() {}
+    async checkRestart() {
+      this.step.server_restarting = true;
+      let configPost = (await this.axios.post(
+        "/installapi/config",
+        this.setting
+      )).data;
+      if (configPost == "done")
+        this.step.server_restarting_description =
+          "正在等待伺服器重啟，請勿離開本頁面";
+      window._socket.on("hello", () => {
+        this.step.server_restarting = false;
+        this.step.server_restarted = true;
+      });
+    },
+    downloadSetting() {}
   }
 };
 </script>
