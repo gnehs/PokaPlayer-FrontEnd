@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!installed">
     <poka-header title="安裝嚮導" subtitle="PokaPlayer"/>
     <md-steppers
       :md-active-step.sync="active"
@@ -217,6 +217,14 @@
       <md-button class="md-primary md-raised" to="/">完成</md-button>
     </md-empty-state>
   </div>
+  <md-empty-state
+    md-icon="done"
+    md-label="PokaPlayer 已安裝完成"
+    md-description="若要修改設定，請手動刪除目錄下的 config.json"
+    v-else
+  >
+    <md-button class="md-primary md-raised" to="/">首頁</md-button>
+  </md-empty-state>
 </template>
 
 <script>
@@ -224,6 +232,7 @@ export default {
   name: "Install",
   data: () => ({
     active: "step_description",
+    installed: false,
     step: {
       description: false,
       pokaplayer: false,
@@ -293,6 +302,11 @@ export default {
       }
     }
   }),
+  created() {
+    this.axios.get(_setting(`server`) + "/status/").then(response => {
+      this.installed = response.data.install;
+    });
+  },
   methods: {
     setDone(id, index) {
       this.step.pokaplayer_err = null;
@@ -373,7 +387,17 @@ export default {
         this.step.server_restarted = true;
       });
     },
-    downloadSetting() {}
+    downloadSetting() {
+      let data = new Blob([JSON.stringify(this.setting, null, "\t")], {
+        type: "application/json"
+      });
+      let url = URL.createObjectURL(data);
+      let link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "config.json");
+      document.body.appendChild(link);
+      link.click();
+    }
   }
 };
 </script>
