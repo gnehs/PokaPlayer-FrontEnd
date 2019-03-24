@@ -206,6 +206,7 @@ export default {
         transitionName = toDepth == fromDepth ? "fade" : transitionName; //同一層
       }
       this.transitionName = transitionName;
+      this.getStatus();
       next();
     });
     this.axios.defaults.withCredentials = true;
