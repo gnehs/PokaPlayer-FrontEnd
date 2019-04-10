@@ -27,7 +27,7 @@ window._setting = (setting, value) => {
         "audioQuality": "High",
         "headerBgSource": "https://i.imgur.com/EcmOwlT.jpg",
         "darkMode": false,
-        "server": location.origin + "/",
+        "server": location.origin,
         "password": "",
         "rememberPass": true,
         "lang": "en_US",

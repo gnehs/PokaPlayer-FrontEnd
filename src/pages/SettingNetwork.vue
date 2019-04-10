@@ -70,7 +70,6 @@ export default {
   methods: {
     setSoundQuality(quality) {
       try {
-        console.log(quality);
         this.soundQuality = quality;
         this.showSoundQualityDialog = false;
         window._setting("audioQuality", quality);

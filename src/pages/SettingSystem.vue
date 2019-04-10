@@ -121,7 +121,6 @@ export default {
       this.poka_version = response.data.version;
       this.poka_debug =
         response.data.debug != "false" ? response.data.debug : null;
-      console.log(this.poka_debug);
       this.fetchNewVersion();
     });
   },

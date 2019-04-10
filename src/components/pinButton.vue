@@ -46,7 +46,6 @@ export default {
   methods: {
     getPinStatus() {
       if (this.name) {
-        console.log(this.source, this.type, this.id, this.name);
         this.axios
           .post(
             `/pokaapi/isPinned/?moduleName=${this.source}&type=${
