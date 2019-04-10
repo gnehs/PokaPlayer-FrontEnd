@@ -316,7 +316,7 @@ export default {
         : window._theme.switchToLight();
     },
     getStatus() {
-      this.axios.get(_setting(`server`) + "status/").then(response => {
+      this.axios.get(_setting(`server`) + "/status/").then(response => {
         if (!response.data.install) {
           return this.$router.push("/install");
         } else if (!response.data.login) {
