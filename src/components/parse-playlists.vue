@@ -5,7 +5,7 @@
       v-if="!type||type!='folder'"
       :key="index"
       :to="`/playlist/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
-      :poka-bg="image?server+image:false"
+      :poka-bg="image||false"
       :poka-title="name"
       :poka-subtitle="source"
       :source="source"

@@ -2,7 +2,7 @@
   <md-list class="md-double-line">
     <md-list-item v-for="(song,index) of data" :key="index">
       <md-avatar>
-        <img :src="song.cover?server+song.cover:defaultCover" alt="cover">
+        <img :src="song.cover||defaultCover" alt="cover">
       </md-avatar>
       <div class="md-list-item-text" @click="addSongs({songlist:data,index:index})">
         <span>{{song.name}}</span>
@@ -59,7 +59,8 @@ export default {
             nowsong.url +
             "&songRes=" +
             _setting(`audioQuality`).toLowerCase(),
-          cover: nowsong.cover
+          cover: nowsong.cover.startsWith("http")?nowsong.cover:
+          nowsong.cover
             ? this.server + nowsong.cover
             : this.defaultCover,
           name: nowsong.name,

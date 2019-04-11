@@ -4,7 +4,7 @@
       v-for="{name, cover, id, source} in data"
       :key="id"
       :to="`/artist/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
-      :poka-bg="cover?server+cover:false"
+      :poka-bg="cover||false"
       :poka-title="name||'未知'"
       :poka-subtitle="source"
     />
