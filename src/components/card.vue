@@ -1,14 +1,14 @@
 <template lang="pug">
-  router-link.card(v-if="to",:to="to",:data-source="_source||undefined")
-      .image(v-if="_pokaBg",:style="{backgroundImage:`url(\"${_pokaBg}\")`}")
+  router-link.card(v-if="to",:to="to",:data-source="parsed_source||undefined")
+      .image(v-if="parsed_pokaBg",:style="{backgroundImage:`url(\"${parsed_pokaBg}\")`}")
         md-tooltip {{pokaTitle}}
       .image(v-else)
         md-icon(class="icon-white", :class="pokaIcon")
         md-tooltip {{pokaTitle}}
       .title {{pokaTitle}}
       .subtitle {{pokaSubtitle}}
-  a.card(v-else,:data-source="_source||undefined")
-      .image(v-if="_pokaBg",:style="{backgroundImage:`url(\"${_pokaBg}\")`}")
+  a.card(v-else,:data-source="parsed_source||undefined")
+      .image(v-if="parsed_pokaBg",:style="{backgroundImage:`url(\"${parsed_pokaBg}\")`}")
         md-tooltip {{pokaTitle}}
       .image(v-else)
         md-icon(class="icon-white", :class="pokaIcon")
@@ -28,20 +28,20 @@ export default {
     to: String,
     pokaIcon: { default: "outline-play_circle_filled", type: String }
   },
-  data: () => ({ _source: null ,_pokaBg:null}),
+  data: () => ({ parsed_source: null ,parsed_pokaBg:null}),
   created() {
     // source
     if (this.source == "Netease2") {
-      this._source = i18n.t("moduleShowName_Netease");
+      this.parsed_source = i18n.t("moduleShowName_Netease");
     } else if (this.source == "DSM") {
-      this._source = i18n.t("moduleShowName_DSM");
+      this.parsed_source = i18n.t("moduleShowName_DSM");
     } else {
-      this._source = this.source;
+      this.parsed_source = this.source;
     }
-    if(this.pokaBg.startsWith("http")){
-      this._pokaBg=this.pokaBg
+    if(typeof this.pokaBg==="string"&&this.pokaBg.startsWith("http")){
+      this.parsed_pokaBg=this.pokaBg
     }else{
-      this._pokaBg=_setting('server')+this.pokaBg
+      this.parsed_pokaBg=_setting('server')+this.pokaBg
     }
   }
 };
