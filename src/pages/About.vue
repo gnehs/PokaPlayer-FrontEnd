@@ -1,65 +1,44 @@
 <template>
-  <div>
-    <poka-header
-      :title="$t('settings_aboutAndHelp')"
-      :subtitle="$t('settings_aboutAndHelp_description')"
-    />
-    <md-list class="md-double-line">
-      <md-subheader>{{$t("settings_about")}}</md-subheader>
-
-      <md-list-item>
-        <md-icon class="outline-info"/>
-        <div class="md-list-item-text">
-          <span>{{$t("settings_about_version")}}</span>
-          <span>{{poka_version}}</span>
-        </div>
-      </md-list-item>
-      <md-list-item class="md-inset">
-        <div class="md-list-item-text">
-          <span>{{$t("settings_about_developer")}}</span>
-          <span>{{poka_author}}</span>
-        </div>
-      </md-list-item>
-    </md-list>
-    <md-divider></md-divider>
-    <md-list>
-      <md-subheader>{{$t("settings_about_externalLink")}}</md-subheader>
-      <md-list-item href="https://github.com/gnehs/PokaPlayer/" target="_blank">
-        <md-icon class="outline-link"/>
-        <div class="md-list-item-text">
-          <span>GitHub</span>
-        </div>
-      </md-list-item>
-      <md-list-item href="https://github.com/gnehs/PokaPlayer/issues" target="_blank">
-        <md-icon class="outline-feedback"/>
-        <div class="md-list-item-text">
-          <span>{{$t("settings_about_errorEeport")}}</span>
-        </div>
-      </md-list-item>
-    </md-list>
-  </div>
+	<div class="box">
+		<div class="content">
+			<img src="/static/img/icons/512x512.png" style="height: 180px">
+			<h1>PokaPlayer</h1>
+			<p class="md-subheading">{{poka_version}}</p>
+			<a href="https://github.com/gnehs/PokaPlayer/" target="_blank">GitHub</a>
+			<span>．</span>
+			<a
+				href="https://github.com/gnehs/PokaPlayer/issues"
+				target="_blank"
+			>{{$t("settings_about_errorEeport")}}</a>
+			<span>．</span>
+			<a
+				href="https://github.com/gnehs/PokaPlayer/graphs/contributors"
+				target="_blank"
+			>{{$t('settings_about_contributions')}}</a>
+		</div>
+	</div>
 </template>
 
 <style lang="sass" scoped>
-  .md-list-item >*
-      border-radius: 8px
-  .md-list.md-theme-default 
-    background-color: transparent
-
+	.box   
+		display: grid
+		justify-content: center
+		align-items: center
+		height: calc(100% - 69px)
+	.content
+		text-align: center
 </style>
 <script>
 export default {
-  name: "About",
-  data: () => ({
-    poka_version: "",
-    poka_author: ""
-  }),
-  created() {
-    this.axios.get(_setting(`server`) + "/info/").then(response => {
-      if (!response.data.version) this.$router.push("/login");
-      this.poka_version = response.data.version;
-      this.poka_author = response.data.author;
-    });
-  }
+	name: "About",
+	data: () => ({
+		poka_version: "Loading..."
+	}),
+	created() {
+		this.axios.get(_setting(`server`) + "/info/").then(response => {
+			if (!response.data.version) this.$router.push("/login");
+			this.poka_version = response.data.version;
+		});
+	}
 };
 </script>
