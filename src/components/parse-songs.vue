@@ -2,7 +2,10 @@
 	<md-list class="md-double-line">
 		<md-list-item v-for="(song,index) of data" :key="index">
 			<md-avatar>
-				<img :src="song.cover||defaultCover" alt="cover">
+				<img
+					:src="song.cover?(song.cover.startsWith('http')?song.cover:server+song.cover):defaultCover"
+					alt="cover"
+				>
 			</md-avatar>
 			<div class="md-list-item-text" @click="addSongs({songlist:data,index:index})">
 				<span>{{song.name}}</span>
