@@ -9,22 +9,22 @@ div
 
 <script>
 export default {
-  name: "poka-header",
-  props: {
-    title: {
-      type: String,
-      default: ""
-    },
-    subtitle: {
-      type: String,
-      default: ""
-    },
-    bg: {
-      type: String,
-      default: _setting(`headerBgSource`)
-    },
-    blurbg: { type: Boolean, default: false }
-  }
+	name: "poka-header",
+	props: {
+		title: {
+			type: String,
+			default: ""
+		},
+		subtitle: {
+			type: String,
+			default: ""
+		},
+		bg: {
+			type: String,
+			default: _setting(`headerBgSource`)
+		},
+		blurbg: { type: Boolean, default: false }
+	}
 };
 </script>
 <style lang="sass" scoped>
