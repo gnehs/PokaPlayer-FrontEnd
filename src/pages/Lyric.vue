@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div v-on:dblclick="showLyricDialog = true" class="lyric">
+		<div v-on:dblclick="openLyricDialog" class="lyric">
 			<div v-if="lyric.length > 1">
 				<p
 					v-for="(item, index) of lyric"
@@ -97,6 +97,17 @@ export default {
 				clearInterval(this.Lyric_Update);
 			}
 		},
+		openLyricDialog() {
+			this.showLyricDialog = true;
+			let nowPlaying = _player.list.audios[_player.list.index];
+			if (!this.lyricSearchResult) {
+				this.getLyricByKeyword(
+					nowPlaying.name,
+					nowPlaying.artist,
+					false
+				); //搜尋一下
+			}
+		},
 		updateLyric() {
 			let nowPlaying = _player.list.audios[_player.list.index];
 			if (_player.list.audios.length > 0) {
@@ -167,8 +178,6 @@ export default {
 						if (title == this.audio_title) {
 							//透過 id 找到歌詞ㄌ
 							this.loadLrc(response.data.lyrics[0].lyric);
-							//但是還是搜尋一下
-							this.getLyricByKeyword(title, artist, false);
 						}
 					} else {
 						//沒找到，拿 title 跟 artist 找找看
