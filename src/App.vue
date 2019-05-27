@@ -36,6 +36,15 @@
 			</md-app-toolbar>
 
 			<md-app-drawer :md-active.sync="menuVisible" md-permanent="clipped">
+				<div id="pokaTitle">
+					<!--<img src="/static/img/icons/512x512.png">-->
+					<span>PokaPlayer</span>
+					<md-button class="md-icon-button" to="/setting/system" v-if="checkUpadteStatus">
+						<md-icon>system_update</md-icon>
+						<md-tooltip md-direction="right">{{checkUpadteStatus}}</md-tooltip>
+					</md-button>
+				</div>
+				<md-divider/>
 				<md-list>
 					<md-list-item to="/home" @click="closeMenu">
 						<md-icon class="outline-home"/>
@@ -73,6 +82,11 @@
 					<md-list-item to="/playlist" @click="closeMenu">
 						<md-icon class="outline-format_list_bulleted"/>
 						<span class="md-list-item-text">{{$t("playlist")}}</span>
+					</md-list-item>
+					<md-divider/>
+					<md-list-item to="/setting" @click="closeMenu">
+						<md-icon class="outline-settings"></md-icon>
+						<span class="md-list-item-text">{{$t("settings")}}</span>
 					</md-list-item>
 				</md-list>
 			</md-app-drawer>
@@ -187,6 +201,7 @@ export default {
 		audio_previous_name: "",
 		audio_order: _player.options.order,
 		transitionName: "fade",
+		checkUpadteStatus: null,
 		settings: { darkMode: window._setting("darkMode") }
 	}),
 	created() {
@@ -334,7 +349,31 @@ export default {
 				} else if (!response.data.login) {
 					return this.$router.push("/login");
 				}
+				this.fetchNewVersion(response.data.version);
 			});
+		},
+		compareVersion(local, remote) {
+			local = local.split(".").map(e => parseInt(e));
+			remote = remote.split(".").map(e => parseInt(e));
+			//版本號加權對比
+			local = local[0] * 1000 * 1000 + local[1] * 1000 + local[2];
+			remote = remote[0] * 1000 * 1000 + remote[1] * 1000 + remote[2];
+			return remote > local;
+		},
+		fetchNewVersion(currentVersion) {
+			fetch("https://api.github.com/repos/gnehs/PokaPlayer/releases")
+				.then(e => e.json())
+				.then(e => {
+					if (this.compareVersion(currentVersion, e[0].tag_name)) {
+						this.checkUpadteStatus = i18n.t(
+							"settings_update_update2",
+							{
+								version: e[0].tag_name
+							}
+						);
+					}
+				})
+				.catch(e => console.error(e));
 		}
 	}
 };
@@ -415,11 +454,11 @@ export default {
 				min-width: var(--cover-size)
 				position: relative
 				background-size: cover
-				background-position: center 
-				background-position: center 
+				background-position: center
+				background-position: center
 				border-radius: 4px
 				overflow: hidden
-				img    
+				img
 					transition: all .6s cubic-bezier(0.55, 0, 0.1, 1)
 					width: var(--cover-size)
 					height: var(--cover-size)
@@ -427,13 +466,13 @@ export default {
 					max-height: var(--cover-size)
 					object-fit: cover
 				.md-button
-					position: absolute 
+					position: absolute
 					top: 50%
 					left: 50%
 					transform: translate(-70%, -50%) scale(.9)
 					background-color: rgba(255, 255, 255, 0.7)
 					opacity: 0
-				&:hover 
+				&:hover
 					img
 						filter: brightness(50%) blur(1px)
 					.md-button
@@ -467,7 +506,28 @@ export default {
 			height: 30px
 			margin: 0
 
-@media screen and (max-width: 600px) 
+@media screen and (min-width: 600.99px)
+	#toolbar
+		display: none
+	.md-app-content
+		max-height: calc(var(--vh, 1vh) * 100 - 69px)
+	#pokaTitle
+		font-family: var(--product-font)
+		font-size: 24px
+		line-height: 48px
+		padding: 4px 16px
+		padding-right: 4px
+		display: flex
+		/*>img
+			height: 30px
+			margin: 9px 0
+			margin-right: 16px*/
+		>span
+			flex: 1
+			font-weight: bold
+		>.md-button
+			margin: 4px 0px
+@media screen and (max-width: 600px)
 	.bottom-player
 		.song-info
 			.left
@@ -478,19 +538,21 @@ export default {
 				display: none
 			.right-s
 				display: flex
+	#pokaTitle
+		display: none
+	.md-app-content
+		max-height: calc(var(--vh, 1vh) * 100 - 64px - 69px)
 .md-app
 	min-height: calc(var(--vh, 1vh) * 100 - 69px)
 	max-height: calc(var(--vh, 1vh) * 100 - 69px)
 #drawer
 	.drawer-player
 		display: none
-.md-app-content
-	max-height: calc(var(--vh, 1vh) * 100 - 64px - 69px)
 
-.md-toolbar, .md-toolbar-row 
+.md-toolbar, .md-toolbar-row
 		min-height: 64px
 
-.md-drawer 
+.md-drawer
 	width: 230px
 	max-width: calc(100vw - 125px)
 .router-link-active
