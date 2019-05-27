@@ -118,19 +118,31 @@ export default new Router({
   }, {
     path: '/setting/network',
     name: 'SettingNetwork',
-    component: SettingNetwork
+    component: SettingNetwork,
+    meta: {
+      transitionName: 'slide'
+    }
   }, {
     path: '/setting/customize',
     name: 'SettingCustomize',
-    component: SettingCustomize
+    component: SettingCustomize,
+    meta: {
+      transitionName: 'slide'
+    }
   }, {
     path: '/setting/lang',
     name: 'SettingLang',
-    component: SettingLang
+    component: SettingLang,
+    meta: {
+      transitionName: 'slide'
+    }
   }, {
     path: '/setting/system',
     name: 'SettingSystem',
-    component: SettingSystem
+    component: SettingSystem,
+    meta: {
+      transitionName: 'slide'
+    }
   }, {
     path: '/home',
     name: 'Home',
