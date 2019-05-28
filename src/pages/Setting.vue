@@ -47,12 +47,11 @@
 				</div>
 			</md-list-item>
 		</md-list>
-		<md-dialog :md-active.sync="aboutDialog">
+		<md-dialog :md-active.sync="aboutDialog" :md-fullscreen="false">
 			<md-dialog-title>{{$t('settings_about')}}</md-dialog-title>
 			<poka-about/>
-
 			<md-dialog-actions>
-				<md-button class="md-primary" @click="aboutDialog = false">{{$t('back')}}</md-button>
+				<md-button class="md-primary" @click="aboutDialog=false">{{$t('back')}}</md-button>
 			</md-dialog-actions>
 		</md-dialog>
 	</div>
