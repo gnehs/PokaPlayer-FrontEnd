@@ -37,7 +37,6 @@
 
 			<md-app-drawer :md-active.sync="menuVisible" md-permanent="clipped" id="drawer">
 				<div id="pokaTitle">
-					<!--<img src="/static/img/icons/512x512.png">-->
 					<span>PokaPlayer</span>
 					<md-button class="md-icon-button" to="/setting/system" v-if="checkUpadteStatus">
 						<md-icon>system_update</md-icon>
@@ -520,13 +519,10 @@ export default {
 		padding: 4px 16px
 		padding-right: 4px
 		display: flex
-		/*>img
-			height: 30px
-			margin: 9px 0
-			margin-right: 16px*/
 		>span
 			flex: 1
 			font-weight: bold
+			user-select: none
 		>.md-button
 			margin: 4px 0px
 	
@@ -538,6 +534,8 @@ export default {
 			.md-list-item
 				a.md-list-item-router
 					border-radius: 8px
+					.md-icon
+						opacity: 1
 @media screen and (max-width: 600px)
 	.bottom-player
 		.song-info
