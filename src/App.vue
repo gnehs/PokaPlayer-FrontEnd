@@ -35,7 +35,7 @@
 				</div>
 			</md-app-toolbar>
 
-			<md-app-drawer :md-active.sync="menuVisible" md-permanent="clipped">
+			<md-app-drawer :md-active.sync="menuVisible" md-permanent="clipped" id="drawer">
 				<div id="pokaTitle">
 					<!--<img src="/static/img/icons/512x512.png">-->
 					<span>PokaPlayer</span>
@@ -404,6 +404,8 @@ export default {
 	@import "~vue-material/dist/theme/all"; // Apply the theme
 </style>
 <style lang="sass" scoped>
+*.md-theme-default-dark
+	--md-theme-default-dark-background: #000
 #toolbar.md-theme-default-dark
 	--md-theme-default-dark-text-primary-on-primary: rgba(255, 255, 255, 0.87)
 	--md-theme-default-dark-primary: #212121
@@ -527,6 +529,15 @@ export default {
 			font-weight: bold
 		>.md-button
 			margin: 4px 0px
+	
+	#drawer
+		padding: 8px
+		.md-list
+			.md-divider
+				margin: 4px 0
+			.md-list-item
+				a.md-list-item-router
+					border-radius: 8px
 @media screen and (max-width: 600px)
 	.bottom-player
 		.song-info
@@ -556,9 +567,10 @@ export default {
 	width: 230px
 	max-width: calc(100vw - 125px)
 .router-link-active
-	background: rgba(0, 0, 0, 0.05)
-.md-theme-default-dark .router-link-active
-	background: rgba(255, 255, 255, 0.1)
+	background: #448aff !important
+	--md-theme-default-dark-primary-on-background: #FFF
+	--md-theme-default-primary-on-background: #FFF
+	--md-theme-default-icon-on-background: #FFF
 </style>
 <style>
 	.fade-enter-active,
