@@ -37,7 +37,7 @@
 		*
 			cursor: pointer
 		&:hover
-			background-color: rgba(0, 0, 0,.12)
+			background-color: var(--md-theme-default-dark-divider-on-background,rgba(0,0,0,.12))
 @media screen and (max-width: 600px) 
 		.md-list
 				.md-list-item

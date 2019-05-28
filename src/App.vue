@@ -405,6 +405,7 @@ export default {
 <style lang="sass" scoped>
 *.md-theme-default-dark
 	--md-theme-default-dark-background: #000
+	--md-theme-default-dark-divider-on-background: rgba(255, 255, 255, 0.12)
 #toolbar.md-theme-default-dark
 	--md-theme-default-dark-text-primary-on-primary: rgba(255, 255, 255, 0.87)
 	--md-theme-default-dark-primary: #212121
