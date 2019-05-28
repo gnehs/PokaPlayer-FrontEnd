@@ -25,10 +25,6 @@
 									<md-icon class="outline-settings"></md-icon>
 									<span class="md-list-item-text">{{$t("settings")}}</span>
 								</md-menu-item>
-								<md-menu-item to="/about">
-									<md-icon class="outline-info"></md-icon>
-									<span class="md-list-item-text">{{$t("settings_aboutAndHelp")}}</span>
-								</md-menu-item>
 							</md-menu-content>
 						</md-menu>
 					</div>

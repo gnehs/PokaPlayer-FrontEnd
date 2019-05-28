@@ -1,7 +1,7 @@
 <template>
 	<div class="box">
 		<div class="content">
-			<img src="/static/img/icons/512x512.png" style="height: 180px">
+			<img src="/static/img/icons/512x512.png" style="height: 128px">
 			<h1>PokaPlayer</h1>
 			<p class="md-subheading">{{poka_version}}</p>
 			<a href="https://github.com/gnehs/PokaPlayer/" target="_blank">GitHub</a>
@@ -20,17 +20,17 @@
 </template>
 
 <style lang="sass" scoped>
-	.box   
-		display: grid
-		justify-content: center
-		align-items: center
-		height: calc(100% - 69px)
-	.content
-		text-align: center
+.box   
+	display: grid
+	justify-content: center
+	align-items: center
+	height: calc(100% - 69px)
+.content
+	text-align: center
 </style>
 <script>
 export default {
-	name: "About",
+	name: "poka-about",
 	data: () => ({
 		poka_version: "Loading..."
 	}),

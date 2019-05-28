@@ -39,14 +39,22 @@
 					<span>{{$t('settings_systemAndUpdate_description')}}</span>
 				</div>
 			</md-list-item>
-			<md-list-item to="/about">
+			<md-list-item @click="aboutDialog=true">
 				<md-icon>info</md-icon>
 				<div class="md-list-item-text">
-					<span>{{$t('settings_aboutAndHelp')}}</span>
-					<span>{{$t('settings_aboutAndHelp_description')}}</span>
+					<span>{{$t('settings_about')}}</span>
+					<span>{{$t('settings_about_description')}}</span>
 				</div>
 			</md-list-item>
 		</md-list>
+		<md-dialog :md-active.sync="aboutDialog">
+			<md-dialog-title>{{$t('settings_about')}}</md-dialog-title>
+			<poka-about/>
+
+			<md-dialog-actions>
+				<md-button class="md-primary" @click="aboutDialog = false">{{$t('back')}}</md-button>
+			</md-dialog-actions>
+		</md-dialog>
 	</div>
 </template>
 <style lang="sass" scoped>
@@ -63,7 +71,8 @@
 export default {
 	name: "Setting",
 	data: () => ({
-		settings: { darkMode: window._setting("darkMode") }
+		settings: { darkMode: window._setting("darkMode") },
+		aboutDialog: false
 	}),
 	methods: {
 		switchTheme() {
