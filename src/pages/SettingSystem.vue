@@ -95,8 +95,6 @@
 		border-radius: 8px !important
 		overflow: hidden
 		transition: all 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
-		&.mark
-			border: 1px solid rgba(129, 129, 129, 0.3)
 </style>
 
 <script>

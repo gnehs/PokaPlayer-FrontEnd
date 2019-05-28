@@ -11,7 +11,7 @@
 				<md-list-item
 					v-for="(song,index) of audio_queue"
 					:key="song.uuid"
-					:class="{active:index==audio_index}"
+					:class="{mark:index==audio_index,active:index==audio_index}"
 				>
 					<md-avatar>
 						<img :src="song.cover" alt="cover">
@@ -201,14 +201,13 @@ export default {
 		*
 				cursor: pointer
 		&:hover
-			background-color: rgba(0, 0, 0,.12)
+			background-color: var(--md-theme-default-dark-divider-on-background,rgba(0,0,0,.12))
 		&.active
 			background-color: rgb(255, 255, 255)
-			box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2)
 .md-theme-default-dark.md-list
 	.md-list-item
 		&.active
-			background-color: rgba(0, 0, 0, .3)
+			background-color: rgba(255, 255, 255, .1)
 @media screen and (max-width: 600px) 
 	.md-list
 		.md-list-item

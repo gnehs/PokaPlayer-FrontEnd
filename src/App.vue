@@ -627,6 +627,12 @@ export default {
 	.md-list .md-icon {
 		opacity: 0.54;
 	}
+	.md-list-item {
+		border: 1px solid transparent;
+	}
+	.md-list-item.mark {
+		border: 1px solid rgba(129, 129, 129, 0.3);
+	}
 	.md-tab {
 		padding: 16px 0;
 	}
