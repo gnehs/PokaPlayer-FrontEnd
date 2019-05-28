@@ -49,6 +49,7 @@ export default {
 	margin-left: 16px
 	margin-top: 32px
 	position: relative
+	font-family: var(--product-font)
 	>.title,>.subtitle
 		overflow: hidden
 		text-overflow: ellipsis
