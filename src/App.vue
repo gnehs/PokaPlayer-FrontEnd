@@ -664,4 +664,7 @@ export default {
 	.card-banner::before {
 		padding-top: 25% !important;
 	}
+	.md-overlay {
+		background: rgba(56, 55, 55, 0.83);
+	}
 </style>
