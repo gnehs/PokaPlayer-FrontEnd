@@ -565,6 +565,7 @@ export default {
 	background: #448aff !important
 	--md-theme-default-dark-primary-on-background: #FFF
 	--md-theme-default-primary-on-background: #FFF
+	--md-theme-default-text-primary-on-background: rgba(255, 255, 255, .8)
 	--md-theme-default-icon-on-background: #FFF
 </style>
 <style>
