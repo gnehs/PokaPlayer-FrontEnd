@@ -25,20 +25,21 @@
 						</div>
 					</md-list-item>
 				</md-list>
-				<md-list class="md-triple-line" style="overflow:hidden;">
+				<md-list class="md-triple-line" style="overflow:hidden;" v-if="lyricSearchResult">
 					<md-list-item
 						v-for="(item, index) of lyricSearchResult"
 						:key="index"
 						@click="loadLrc(item.lyric,true);showLyricDialog = false"
 					>
 						<md-icon>subtitles</md-icon>
-						<div class="md-list-item-text">
-							<span>{{item.name}}</span>
-							<span>{{item.artist}}</span>
+						<div class="md-list-item-text t-ellipsis">
+							<span class="t-ellipsis">{{item.name}}</span>
+							<span class="t-ellipsis">{{item.artist}}</span>
 							<p class="t-ellipsis">({{item.rate}}% match) {{item.lyric.substring(0,50-1)+"..."}}</p>
 						</div>
 					</md-list-item>
 				</md-list>
+				<poka-loader v-else/>
 			</md-dialog-content>
 			<md-dialog-actions>
 				<md-button class="md-primary" @click="showLyricDialog = false">{{$t('cancel')}}</md-button>
