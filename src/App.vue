@@ -548,6 +548,8 @@ export default {
 		display: none
 	.md-app-content
 		max-height: calc(var(--vh, 1vh) * 100 - 64px - 69px)
+	#drawer .md-list-item
+		border-radius: 0 !important
 .md-app
 	min-height: calc(var(--vh, 1vh) * 100 - 69px)
 	max-height: calc(var(--vh, 1vh) * 100 - 69px)
@@ -563,6 +565,8 @@ export default {
 	max-width: calc(100vw - 125px)
 </style>
 <style lang="sass">
+html.md-theme-default-dark
+	background-color: #100027
 .md-list
 	.md-list-item
 		border-radius: 8px !important
