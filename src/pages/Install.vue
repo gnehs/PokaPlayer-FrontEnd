@@ -1,6 +1,6 @@
 <template>
 	<div v-if="!installed">
-		<poka-header title="安裝嚮導" subtitle="PokaPlayer"/>
+		<poka-header :title="$t('install.title')" subtitle="PokaPlayer"/>
 		<md-steppers
 			:md-active-step.sync="active"
 			md-vertical
