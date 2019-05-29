@@ -320,7 +320,6 @@ export default {
 	created() {
 		this.axios.get(_setting(`server`) + "/status/").then(response => {
 			this.installed = response.data.install;
-			this.installed = false;
 		});
 		this.server_restarting_description = this.$t(
 			"install.state.done_commit"
