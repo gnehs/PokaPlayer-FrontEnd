@@ -24,5 +24,12 @@ const i18n = new VueI18n({
     },
 })
 window.i18n = i18n
-
+// Hot updates
+if (module.hot) {
+    module.hot.accept(['./zh-CN/index.json', './zh-TW/index.json', './en-US/index.json'], function () {
+        i18n.setLocaleMessage('zh_CN', require('./zh-CN/index.json'))
+        i18n.setLocaleMessage('en_US', require('./en-US/index.json'))
+        i18n.setLocaleMessage('zh_TW', require('./zh-TW/index.json'))
+    })
+}
 export default i18n

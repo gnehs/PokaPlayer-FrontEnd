@@ -27,17 +27,12 @@
 						<label for="password">Password</label>
 						<md-input type="password" name="password" v-model="password" :disabled="logining"/>
 					</md-field>
-					<div class="block">
-						<div class="input">
-							<md-checkbox v-model="remember" disabled>Remember me</md-checkbox>
-						</div>
-					</div>
 				</md-card-content>
 
 				<md-progress-bar md-mode="indeterminate" v-if="logining"/>
 
 				<md-card-actions>
-					<md-button type="submit" class="md-raised md-primary" :disabled="logining">Login</md-button>
+					<md-button type="submit" class="md-raised md-primary" :disabled="logining">{{$t('login')}}</md-button>
 				</md-card-actions>
 			</md-card>
 		</form>
