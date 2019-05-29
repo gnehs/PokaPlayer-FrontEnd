@@ -10,7 +10,7 @@
 			</div>
 			<md-empty-state v-else-if="lyricSearching" md-icon="subtitles" :md-label="$t('loading')"/>
 			<md-empty-state v-else md-icon="subtitles" :md-label="$t('lrc_noLyrics')">
-				<md-button class="md-primary md-raised" @click="showLyricDialog = true">{{$t('lrc_search')}}</md-button>
+				<md-button class="md-primary outlined" @click="showLyricDialog = true">{{$t('lrc_search')}}</md-button>
 			</md-empty-state>
 		</div>
 		<md-dialog :md-active.sync="showLyricDialog" :md-fullscreen="false">

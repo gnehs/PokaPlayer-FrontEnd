@@ -383,7 +383,7 @@ export default {
 	@include md-register-theme(
 		"default",
 		(
-			primary: md-get-palette-color(blue, A200),
+			primary: rgb(98, 0, 238),
 			accent: md-get-palette-color(red, A200)
 		)
 	);
@@ -569,12 +569,17 @@ export default {
 		overflow: hidden
 		transition: all 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
 #drawer .router-link-active,.md-list-item.active
-	background: #448aff !important
+	background: rgb(98, 0, 238) !important
 	--md-theme-default-dark-primary-on-background: #FFF
 	--md-theme-default-primary-on-background: #FFF
 	--md-theme-default-text-primary-on-background: rgba(255, 255, 255, 1)
 	--md-theme-default-text-accent-on-background: rgba(255, 255, 255, .8)
 	--md-theme-default-icon-on-background: #FFF
+.md-button
+	&:not(.md-icon-button):not(.md-fab)
+		border-radius: 8px !important
+	&.outlined
+		border: 2px solid currentColor
 </style>
 
 <style>
