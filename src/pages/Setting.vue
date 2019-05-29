@@ -57,13 +57,8 @@
 	</div>
 </template>
 <style lang="sass" scoped>
-.md-list
-	&+.md-list
+.md-list+.md-list
 		margin-top: -16px
-	.md-list-item
-		border-radius: 8px !important
-		overflow: hidden
-		transition: all 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
 </style>
 
 <script>

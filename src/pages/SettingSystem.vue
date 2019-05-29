@@ -23,7 +23,7 @@
 				</div>
 			</md-list-item>
 		</md-list>
-		<md-list class="md-double-line" :class="{mark:newVersion.tag}" style="padding-top:0">
+		<md-list class="md-double-line" :class="{active: this.newVersion.tag}" style="padding-top:0">
 			<md-list-item @click="openUpdateDialog">
 				<md-icon>system_update</md-icon>
 				<div class="md-list-item-text">
@@ -91,10 +91,6 @@
 <style lang="sass" scoped>
 .md-list
 	padding-bottom: 0
-	.md-list-item
-		border-radius: 8px !important
-		overflow: hidden
-		transition: all 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
 </style>
 
 <script>

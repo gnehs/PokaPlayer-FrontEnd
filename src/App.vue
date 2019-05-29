@@ -561,13 +561,22 @@ export default {
 .md-drawer
 	width: 230px
 	max-width: calc(100vw - 125px)
-.router-link-active
+</style>
+<style lang="sass">
+.md-list
+	.md-list-item
+		border-radius: 8px !important
+		overflow: hidden
+		transition: all 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
+#drawer .router-link-active,.md-list-item.active
 	background: #448aff !important
 	--md-theme-default-dark-primary-on-background: #FFF
 	--md-theme-default-primary-on-background: #FFF
-	--md-theme-default-text-primary-on-background: rgba(255, 255, 255, .8)
+	--md-theme-default-text-primary-on-background: rgba(255, 255, 255, 1)
+	--md-theme-default-text-accent-on-background: rgba(255, 255, 255, .8)
 	--md-theme-default-icon-on-background: #FFF
 </style>
+
 <style>
 	.fade-enter-active,
 	.fade-leave-active {
@@ -623,12 +632,6 @@ export default {
 	}
 	.md-list .md-icon {
 		opacity: 0.54;
-	}
-	.md-list-item {
-		border: 1px solid transparent;
-	}
-	.md-list-item.mark {
-		border: 1px solid rgba(129, 129, 129, 0.3);
 	}
 	.md-tab {
 		padding: 16px 0;

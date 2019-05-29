@@ -11,7 +11,7 @@
 				<md-list-item
 					v-for="(song,index) of audio_queue"
 					:key="song.uuid"
-					:class="{mark:index==audio_index,active:index==audio_index}"
+					:class="{active:index==audio_index}"
 				>
 					<md-avatar>
 						<img :src="song.cover" alt="cover">
@@ -20,17 +20,6 @@
 						<span>{{song.name}}</span>
 						<span>{{song.artist}}</span>
 					</div>
-					<md-button
-						class="md-icon-button md-list-action"
-						v-if="index==audio_index"
-						@click="audio_toggle"
-					>
-						<md-icon v-if="audio_paused">play_arrow</md-icon>
-						<md-icon v-else>pause</md-icon>
-					</md-button>
-					<md-button class="md-icon-button md-list-action" v-else @click="playSong(index)">
-						<md-icon>play_arrow</md-icon>
-					</md-button>
 					<md-button class="md-icon-button md-list-action" @click="removeSong(index)">
 						<md-icon>close</md-icon>
 					</md-button>
