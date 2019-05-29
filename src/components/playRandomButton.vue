@@ -1,11 +1,9 @@
 <template>
 	<div>
-		<md-button
-			class="md-primary outlined"
-			@click="randomPlay"
-			v-if="!loadingRandom"
-		>{{$t('playlist_random')}}</md-button>
-		<poka-loader style="margin: 0 5px;" v-else/>
+		<md-button class="md-primary outlined" @click="randomPlay" :disabled="loadingRandom">
+			<span v-if="!loadingRandom">{{$t('playlist_random')}}</span>
+			<span v-else>{{$t('loading')}}</span>
+		</md-button>
 	</div>
 </template>
 
