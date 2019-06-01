@@ -176,31 +176,4 @@ export default {
 .songlist-move
 	transition: 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
 	transition-property: opacity, transform
-
-.md-list
-	width: 100%
-	background-color: transparent
-	position: relative
-	display: block
-	padding-bottom: 96px
-	.md-list-item
-		display: block
-		border-radius: 8px
-		width: 100%
-		overflow: hidden
-		transition: all 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
-		*
-				cursor: pointer
-		&:hover
-			background-color: var(--md-theme-default-dark-divider-on-background,rgba(0,0,0,.12))
-		&.active
-			background-color: rgb(255, 255, 255)
-.md-theme-default-dark.md-list
-	.md-list-item
-		&.active
-			background-color: rgba(255, 255, 255, .1)
-@media screen and (max-width: 600px) 
-	.md-list
-		.md-list-item
-			width: 100%
 </style>
