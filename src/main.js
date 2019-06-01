@@ -24,10 +24,12 @@ Vue.material.theming.theme = window._setting('darkMode') ? "default-dark" : "def
 window._theme = {
   switchToDark() {
     Vue.material.theming.theme = "default-dark";
+    document.getElementsByTagName('meta')["theme-color"].content = "rgb(33, 33, 33)";
     window._setting('darkMode', true)
   },
   switchToLight() {
     Vue.material.theming.theme = "default";
+    document.getElementsByTagName('meta')["theme-color"].content = "rgb(245, 245, 245)";
     window._setting('darkMode', false)
   }
 }
