@@ -2,28 +2,30 @@
 	<div>
 		<poka-header :blurbg="true" :bg="audio_cover"/>
 		<div style="position: relative">
-			<transition-group
-				name="songlist"
-				tag="md-list"
-				class="md-double-line"
-				v-if="audio_queue.length>0"
-			>
-				<md-list-item
+			<transition-group name="songlist" tag="div" class="poka list" v-if="audio_queue.length>0">
+				<div
+					class="item"
 					v-for="(song,index) of audio_queue"
 					:key="song.uuid"
 					:class="{active:index==audio_index}"
 				>
-					<md-avatar>
-						<img :src="song.cover" alt="cover">
-					</md-avatar>
-					<div class="md-list-item-text" @click="playSong(index)">
-						<span>{{song.name}}</span>
-						<span>{{song.artist}}</span>
-					</div>
-					<md-button class="md-icon-button md-list-action" @click="removeSong(index)">
-						<md-icon>close</md-icon>
-					</md-button>
-				</md-list-item>
+					<md-ripple>
+						<div class="content" @click="playSong(index)">
+							<md-avatar>
+								<img :src="song.cover" alt="cover">
+							</md-avatar>
+							<div class="header">
+								<div class="title t-ellipsis">{{song.name}}</div>
+								<div class="t-ellipsis">{{song.artist}}</div>
+							</div>
+						</div>
+						<div class="action">
+							<md-button class="md-icon-button md-list-action" @click="removeSong(index)">
+								<md-icon>close</md-icon>
+							</md-button>
+						</div>
+					</md-ripple>
+				</div>
 			</transition-group>
 			<md-empty-state
 				v-else
