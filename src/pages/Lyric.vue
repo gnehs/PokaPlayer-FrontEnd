@@ -171,7 +171,9 @@ export default {
 					_setting(`server`) +
 					`/pokaapi/lyric/?moduleName=${encodeURIComponent(
 						source
-					)}&id=${encodeURIComponent(id)}`;
+					)}&id=${encodeURIComponent(
+						id
+					)}&time=${new Date().getTime()}`;
 
 				this.axios(url).then(response => {
 					if (
