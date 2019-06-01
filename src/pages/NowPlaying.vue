@@ -114,11 +114,11 @@ export default {
 				if (uuid_temp != this.audio_uuid) {
 					//換歌ㄌ
 					this.$nextTick(() => {
-						if ($(".md-list > .active").length > 0) {
+						if ($(".poka.list > .active").length > 0) {
 							let sh =
-								$(".md-list > .active")[0].offsetTop -
-								$(".md-list > .active").height() / 2 -
-								$(".md-list > .active")[0].clientHeight -
+								$(".poka.list > .active")[0].offsetTop -
+								$(".poka.list > .active").height() / 2 -
+								$(".poka.list > .active")[0].clientHeight -
 								$(window).height() * 0.15;
 							$(".md-app-content")
 								.clearQueue()
