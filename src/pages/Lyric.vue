@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div v-on:dblclick="openLyricDialog" class="lyric">
+		<div v-on:dblclick="openLyricDialog" class="lyric" :class="{lyricTranslated:lyricTranslated}">
 			<div v-if="lyric.length > 1">
 				<p
 					v-for="(item, index) of lyric"
@@ -48,25 +48,26 @@
 	</div>
 </template>
 <style lang="sass" scoped>
-.lyric 
-  text-align: center
-  div
-    padding-top: 80px
-    padding-bottom: 80px
-  p
-    transition: all 0.5s cubic-bezier(0.77, 0, 0.18, 1), color 0.2s linear, opacity 0.2s linear
-    opacity: .5
-    min-height: 1em
-    transform: scale(0.95)
-    position: relative
-    font-size: calc(12px + 1.2vmin)
-    &.focus
-      opacity: 1
-      transform: scale(1)
-      font-weight: 700
-      &:not(:empty) + p
-        opacity: .85
-        transform: scale(0.98)
+.lyric
+	text-align: center
+	>div
+		padding-top: 80px
+		padding-bottom: 80px
+	p
+		transition: all 0.5s cubic-bezier(0.77, 0, 0.18, 1), color 0.2s linear, opacity 0.2s linear
+		opacity: .5
+		min-height: 1em
+		transform: scale(0.95)
+		position: relative
+		font-size: calc(12px + 1.2vmin)
+		&.focus
+			opacity: 1
+			transform: scale(1)
+			font-weight: 700
+	&.lyricTranslated
+		p.focus:not(:empty) + p
+			opacity: .95
+			transform: scale(0.98)
 </style>
 
 <script>
@@ -80,6 +81,7 @@ export default {
 		lyricFocus: 0,
 		lyricSearching: true,
 		lyricSearchResult: [],
+		lyricTranslated: false,
 		Lyric_Update: null
 	}),
 	created() {
@@ -239,6 +241,9 @@ export default {
 				window._lrc.lyrics_all[
 					window._lrc.lyrics_all.length - 1
 				].timestamp = 99999;
+				this.lyricTranslated = true;
+			} else {
+				this.lyricTranslated = false;
 			}
 			this.lyricSearching = false;
 			this.updateLyric();
