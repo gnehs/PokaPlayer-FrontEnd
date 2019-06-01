@@ -21,6 +21,7 @@ import * as PokaComponents from './poka-component.js'
 Object.values(PokaComponents).forEach(PokaComponents => Vue.component(PokaComponents.name, PokaComponents))
 
 Vue.material.theming.theme = window._setting('darkMode') ? "default-dark" : "default"
+document.getElementsByTagName('meta')["theme-color"].content = window._setting('darkMode') ? "rgb(33, 33, 33)" : "rgb(245, 245, 245)"
 window._theme = {
   switchToDark() {
     Vue.material.theming.theme = "default-dark";
