@@ -84,14 +84,9 @@ export default {
 				src: "https://images2.imgbox.com/99/e2/knJdNcns_o.jpg"
 			},
 			{
-				name: "阿珏隨機 ACG 圖片",
-				src: `https://random.52ecy.cn/randbg.php?type=302&style=3&https=true&rand=${new Date().getTime()}`
-			},
-			{
 				name: "iClart 隨機 ACG 圖片",
 				src: `https://acg.iclart.com/api.php?return=webp&rand=${new Date().getTime()}`
 			}
-			
 		]
 	}),
 	watch: {
