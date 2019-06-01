@@ -503,7 +503,16 @@ export default {
 			min-width: 30px
 			height: 30px
 			margin: 0
-
+#drawer
+	padding: 8px
+	.md-list
+		.md-divider
+			margin: 4px 0
+		.md-list-item
+			a.md-list-item-router
+				border-radius: 8px
+				.md-icon
+					opacity: 1
 @media screen and (min-width: 600.99px)
 	#toolbar
 		display: none
@@ -522,17 +531,6 @@ export default {
 			user-select: none
 		>.md-button
 			margin: 4px 0px
-	
-	#drawer
-		padding: 8px
-		.md-list
-			.md-divider
-				margin: 4px 0
-			.md-list-item
-				a.md-list-item-router
-					border-radius: 8px
-					.md-icon
-						opacity: 1
 @media screen and (max-width: 600px)
 	.bottom-player
 		.song-info
@@ -548,8 +546,6 @@ export default {
 		display: none
 	.md-app-content
 		max-height: calc(var(--vh, 1vh) * 100 - 64px - 69px)
-	#drawer .md-list-item
-		border-radius: 0 !important
 .md-app
 	min-height: calc(var(--vh, 1vh) * 100 - 69px)
 	max-height: calc(var(--vh, 1vh) * 100 - 69px)
