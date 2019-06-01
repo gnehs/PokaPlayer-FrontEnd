@@ -222,7 +222,7 @@ export default {
 		});
 		this.axios.defaults.withCredentials = true;
 		this.axios.defaults.baseURL = _setting(`server`);
-		this.getStatus();
+		this.getStatus(true);
 		setInterval(() => {
 			this.audio_paused = _player.paused;
 			this.audio_order = _player.options.order;
@@ -337,14 +337,14 @@ export default {
 				? window._theme.switchToDark()
 				: window._theme.switchToLight();
 		},
-		getStatus() {
+		getStatus(checkUpdate = false) {
 			this.axios.get(_setting(`server`) + "/status/").then(response => {
 				if (!response.data.install) {
 					return this.$router.push("/install");
 				} else if (!response.data.login) {
 					return this.$router.push("/login");
 				}
-				this.fetchNewVersion(response.data.version);
+				if (checkUpdate) this.fetchNewVersion(response.data.version);
 			});
 		},
 		compareVersion(local, remote) {
