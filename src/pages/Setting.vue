@@ -58,7 +58,7 @@
 </template>
 <style lang="sass" scoped>
 .md-list+.md-list
-		margin-top: -16px
+	margin-top: -16px
 </style>
 
 <script>

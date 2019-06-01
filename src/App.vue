@@ -575,6 +575,10 @@ html.md-theme-default-dark
 	--md-theme-default-text-primary-on-background: rgba(255, 255, 255, 1)
 	--md-theme-default-text-accent-on-background: rgba(255, 255, 255, .8)
 	--md-theme-default-icon-on-background: #FFF
+.md-list-item.mark:not(:hover)
+	box-shadow: 0px 1px 8px #00000029
+	html.md-theme-default-dark &
+		box-shadow: 0 0 0px 2px #FFFFFF50
 .md-button
 	&:not(.md-icon-button):not(.md-fab)
 		border-radius: 8px !important

@@ -23,8 +23,8 @@
 				</div>
 			</md-list-item>
 		</md-list>
-		<md-list class="md-double-line" :class="{active: this.newVersion.tag}" style="padding-top:0">
-			<md-list-item @click="openUpdateDialog">
+		<md-list class="md-double-line" style="padding-top:0">
+			<md-list-item @click="openUpdateDialog" :class="{mark: this.newVersion.tag}">
 				<md-icon>system_update</md-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('settings_update')}}</span>

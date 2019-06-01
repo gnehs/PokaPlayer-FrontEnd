@@ -97,7 +97,6 @@ export default {
 	methods: {
 		setBg(bg) {
 			this.setting.bg = bg;
-			window._setting("headerBgSource", bg);
 		}
 	}
 };
