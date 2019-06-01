@@ -229,6 +229,17 @@ export default {
 		},
 		loadLrc(lrc, save = false) {
 			window._lrc.load(lrc);
+			//如果最後兩個時間相同把後面那個的時間調到一個世紀後
+			if (
+				window._lrc.lyrics_all[window._lrc.lyrics_all.length - 2]
+					.timestamp ==
+				window._lrc.lyrics_all[window._lrc.lyrics_all.length - 1]
+					.timestamp
+			) {
+				window._lrc.lyrics_all[
+					window._lrc.lyrics_all.length - 1
+				].timestamp = 99999;
+			}
 			this.lyricSearching = false;
 			this.updateLyric();
 			if (save) {
@@ -245,5 +256,3 @@ export default {
 	}
 };
 </script>
-<style lang="sass" scoped>
-</style>
