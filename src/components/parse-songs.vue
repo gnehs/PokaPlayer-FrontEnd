@@ -1,5 +1,5 @@
 <template>
-	<div class="poka list">
+	<div class="poka two list">
 		<div class="item" v-for="(song,index) of data" :key="index">
 			<md-ripple>
 				<div class="content" @click="addSongs({songlist:data,index:index})">
@@ -27,28 +27,6 @@
 		</div>
 	</div>
 </template>
-
-<style lang="sass" scoped>
-.md-list
-	display: flex
-	flex-wrap: wrap
-	width: 100%
-	flex-direction: row
-	background-color: transparent
-	.md-list-item
-		width: 50%
-		border-radius: 8px
-		overflow: hidden
-		transition: all 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
-		*
-			cursor: pointer
-		&:hover
-			background-color: var(--md-theme-default-dark-divider-on-background,rgba(0,0,0,.12))
-@media screen and (max-width: 600px) 
-		.md-list
-				.md-list-item
-						width: 100%
-</style>
 <script>
 export default {
 	name: "poka-parse-songs",
