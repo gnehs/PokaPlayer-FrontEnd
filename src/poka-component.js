@@ -1,6 +1,7 @@
 // pokaComponent
 import about from '@/components/about.vue'
 import headerWrapper from '@/components/header-wrapper.vue'
+import infoHeader from '@/components/info-header.vue'
 import pokaCard from '@/components/card.vue'
 import pokaCards from '@/components/cards.vue'
 import pokaLoader from '@/components/loader.vue'
@@ -28,5 +29,6 @@ export {
     parseAlbums,
     parseComposers,
     parseFolders,
-    parseMultiple
+    parseMultiple,
+    infoHeader
 }
