@@ -10,23 +10,10 @@
 						<span class="md-title">PokaPlayer</span>
 					</div>
 					<div class="md-toolbar-section-end">
-						<md-menu>
-							<md-button class="md-icon-button" md-menu-trigger>
-								<md-icon>more_vert</md-icon>
-							</md-button>
-							<md-menu-content>
-								<md-menu-item @click="switchTheme">
-									<md-icon v-if="!settings.darkMode">brightness_3</md-icon>
-									<md-icon v-if="settings.darkMode">brightness_7</md-icon>
-									<span v-if="!settings.darkMode" class="md-list-item-text">{{$t('settings_dark')}}</span>
-									<span v-if="settings.darkMode" class="md-list-item-text">{{$t('settings_light')}}</span>
-								</md-menu-item>
-								<md-menu-item to="/setting">
-									<md-icon class="outline-settings"></md-icon>
-									<span class="md-list-item-text">{{$t("settings")}}</span>
-								</md-menu-item>
-							</md-menu-content>
-						</md-menu>
+						<md-button class="md-icon-button" @click="switch_audio_order">
+							<md-icon class="outline-repeat" v-if="audio_order==='list'"></md-icon>
+							<md-icon class="outline-shuffle" v-else></md-icon>
+						</md-button>
 					</div>
 				</div>
 			</md-app-toolbar>
@@ -680,7 +667,7 @@ html.md-theme-default-dark
 	.card-banner::before {
 		padding-top: 25% !important;
 	}
-	.md-overlay {
-		background: rgba(56, 55, 55, 0.83);
+	.md-theme-default-dark .md-overlay {
+		background: rgba(255, 255, 255, 0.45) !important;
 	}
 </style>

@@ -45,20 +45,20 @@
 			/>
 		</div>
 
-		<md-speed-dial class="md-bottom-right">
-			<md-speed-dial-target>
-				<md-icon>add</md-icon>
+		<md-speed-dial class="md-bottom-right" v-if="audio_queue.length>0">
+			<md-speed-dial-target @click="cleanActive=true">
+				<md-icon>clear_all</md-icon>
 			</md-speed-dial-target>
 
-			<md-speed-dial-content>
+			<!--<md-speed-dial-content>
 				<md-button class="md-icon-button" @click="switch_audio_order">
 					<md-icon class="outline-repeat" v-if="audio_order==='list'"></md-icon>
 					<md-icon class="outline-shuffle" v-else></md-icon>
 				</md-button>
-				<md-button class="md-icon-button" @click="cleanActive=true">
+				<md-button class="md-icon-button">
 					<md-icon>clear_all</md-icon>
 				</md-button>
-			</md-speed-dial-content>
+			</md-speed-dial-content>-->
 		</md-speed-dial>
 	</div>
 </template>
