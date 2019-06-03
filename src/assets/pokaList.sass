@@ -15,6 +15,7 @@
 		width: 100%
 		&:not(.active):hover
 			background-color: var(--hoverbg)
+			cursor: pointer
 		.md-ripple
 			border-radius: .66em
 			display: flex
@@ -50,3 +51,10 @@
 		&:not(:empty)
 			padding-top: .4rem
 			padding-left: .5rem
+
+@media screen and (min-width: 600.99px)
+	.poka.list
+		display: flex
+		flex-wrap: wrap
+		.item
+			width: 50%

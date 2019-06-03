@@ -1,25 +1,31 @@
 <template>
-	<md-list class="md-double-line">
-		<md-list-item v-for="(song,index) of data" :key="index">
-			<md-avatar>
-				<img
-					:src="song.cover?(song.cover.startsWith('http')?song.cover:server+song.cover):defaultCover"
-					alt="cover"
-				>
-			</md-avatar>
-			<div class="md-list-item-text" @click="addSongs({songlist:data,index:index})">
-				<span>{{song.name}}</span>
-				<span>{{song.artist}}</span>
-			</div>
-			<md-button
-				class="md-icon-button md-list-action"
-				@click="addSongs({songlist:[song],clear:false});isInSongList.push(index);"
-			>
-				<md-icon v-if="isInSongList.includes(index)">done</md-icon>
-				<md-icon v-else>add</md-icon>
-			</md-button>
-		</md-list-item>
-	</md-list>
+	<div class="poka list">
+		<div class="item" v-for="(song,index) of data" :key="index">
+			<md-ripple>
+				<div class="content" @click="addSongs({songlist:data,index:index})">
+					<md-avatar>
+						<img
+							:src="song.cover?(song.cover.startsWith('http')?song.cover:server+song.cover):defaultCover"
+							alt="cover"
+						>
+					</md-avatar>
+					<div class="header">
+						<div class="title t-ellipsis">{{song.name}}</div>
+						<div class="t-ellipsis">{{song.artist}}</div>
+					</div>
+				</div>
+				<div class="action">
+					<md-button
+						class="md-icon-button md-list-action"
+						@click="addSongs({songlist:[song],clear:false});isInSongList.push(index);"
+					>
+						<md-icon v-if="isInSongList.includes(index)">done</md-icon>
+						<md-icon v-else>add</md-icon>
+					</md-button>
+				</div>
+			</md-ripple>
+		</div>
+	</div>
 </template>
 
 <style lang="sass" scoped>
