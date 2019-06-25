@@ -38,18 +38,5 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
 			'  Tip: built files are meant to be served over an HTTP server.\n' +
 			'  Opening index.html over file:// won\'t work.\n'
 		))
-		if (fs.existsSync('copy.sh')) {
-			console.log(chalk.cyan('  複製檔案到 PokaPlayer public...\n'))
-			const exec = require('child_process').exec;
-			var copyToPoka = exec('sh copy.sh', (error, stdout, stderr) => {
-				console.log(stdout);
-				console.log(stderr);
-				if (error !== null) {
-					console.log(`exec error: ${error}`);
-				}
-				console.log(chalk.cyan('  複製完成\n'))
-			});
-		}
-
 	})
 })
