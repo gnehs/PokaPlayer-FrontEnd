@@ -74,7 +74,9 @@
 			</md-app-drawer>
 			<md-app-content>
 				<transition :name="transitionName" mode="out-in">
-					<router-view :key="$route.path"/>
+					<keep-alive>
+						<router-view :key="$route.path"/>
+					</keep-alive>
 				</transition>
 			</md-app-content>
 		</md-app>
@@ -184,6 +186,7 @@ export default {
 		audio_order: _player.options.order,
 		transitionName: "fade",
 		checkUpadteStatus: null,
+		scrollPositions: {},
 		settings: { darkMode: window._setting("darkMode") }
 	}),
 	created() {
@@ -205,7 +208,19 @@ export default {
 			}
 			this.transitionName = transitionName;
 			this.getStatus();
+
+			let el = document.querySelector(".md-app-content");
+			if (el) this.scrollPositions[from.name] = el.scrollTop;
+
 			next();
+		});
+		window.addEventListener("popstate", () => {
+			let currentRouteName = this.$router.history.current.name;
+			let el = document.querySelector(".md-app-content");
+			if (el && currentRouteName in this.scrollPositions) {
+				let positions = this.scrollPositions[currentRouteName];
+				setTimeout(() => (el.scrollTop = positions), 500);
+			}
 		});
 		this.axios.defaults.withCredentials = true;
 		this.axios.defaults.baseURL = _setting(`server`);
@@ -576,7 +591,7 @@ html.md-theme-default-dark
 <style>
 	.fade-enter-active,
 	.fade-leave-active {
-		transition: opacity 0.25s ease;
+		transition: opacity 0.2s ease;
 	}
 	.fade-enter,
 	.fade-leave-to {
