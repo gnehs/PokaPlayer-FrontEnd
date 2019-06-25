@@ -20,7 +20,7 @@ window._uuid = () => {
         return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
     });
 }
-window._lrc = new(require('@/assets/lyrics.min.js'))(`[00:00.000]`);
+window._lrc = new (require('@/assets/lyrics.min.js'))(`[00:00.000]`);
 window._setting = (setting, value) => {
     let pokaSetting = JSON.parse(localStorage.pokaSetting || `{}`)
     let defaultPokaSetting = {
@@ -29,9 +29,22 @@ window._setting = (setting, value) => {
         "darkMode": false,
         "server": location.origin,
         "password": "",
-        "rememberPass": true,
-        "lang": "en_US",
+        "rememberPass": true
     }
+    // default language
+    let userLang = navigator.language || navigator.userLanguage
+    switch (userLang) {
+        case "zh-TW":
+            defaultPokaSetting.lang = "zh_TW"
+            break;
+        case "zh-CN":
+            defaultPokaSetting.lang = "zh_CN"
+            break;
+        default:
+            defaultPokaSetting.lang = "en_US"
+            break;
+    }
+
     if (value != undefined) { //設定值
         pokaSetting[setting] = value
         localStorage.pokaSetting = JSON.stringify(pokaSetting)
