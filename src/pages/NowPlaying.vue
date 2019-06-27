@@ -271,7 +271,11 @@ export default {
 			if (t && t.albumId) {
 				this.moreDialogShow = false;
 				this.$nextTick(() => {
-					this.$router.push(`/album/songs/${t.source}/${t.albumId}`);
+					this.$router.push(
+						`/album/songs/${encodeURIComponent(
+							t.source
+						)}/${encodeURIComponent(t.albumId)}`
+					);
 				});
 			}
 		},
@@ -280,7 +284,11 @@ export default {
 			if (t && t.artistId) {
 				this.moreDialogShow = false;
 				this.$nextTick(() => {
-					this.$router.push(`/artist/${t.source}/${t.artistId}`);
+					this.$router.push(
+						`/artist/${encodeURIComponent(
+							t.source
+						)}/${encodeURIComponent(t.artistId)}`
+					);
 				});
 			}
 		}
