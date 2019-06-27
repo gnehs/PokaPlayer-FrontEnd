@@ -25,7 +25,7 @@
 						</div>
 					</md-list-item>
 				</md-list>
-				<md-list class="md-triple-line" style="overflow:hidden;" v-if="lyricSearchResult">
+				<md-list class="md-triple-line" style="overflow:hidden;" v-if="!lyricSearching">
 					<md-list-item
 						v-for="(item, index) of lyricSearchResult"
 						:key="index"
@@ -80,7 +80,7 @@ export default {
 		lyric: [],
 		lyricFocus: 0,
 		lyricSearching: true,
-		lyricSearchResult: [],
+		lyricSearchResult: null,
 		lyricTranslated: false,
 		Lyric_Update: null
 	}),
