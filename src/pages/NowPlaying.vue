@@ -20,6 +20,9 @@
 							</div>
 						</div>
 						<div class="action">
+							<md-button class="md-icon-button md-list-action" @click="moreDialog(song)">
+								<md-icon>more_horiz</md-icon>
+							</md-button>
 							<md-button class="md-icon-button md-list-action" @click="removeSong(index)">
 								<md-icon>close</md-icon>
 							</md-button>
@@ -60,6 +63,100 @@
 				</md-button>
 			</md-speed-dial-content>-->
 		</md-speed-dial>
+		<md-dialog :md-active.sync="moreDialogShow" :md-fullscreen="false">
+			<md-dialog-title>{{$t("songAction_title")}}</md-dialog-title>
+			<md-dialog-content style="min-width: 400px;">
+				<div class="poka list">
+					<div class="item disabled">
+						<md-ripple>
+							<div class="content">
+								<md-avatar>
+									<md-icon class="outline-turned_in_not"/>
+								</md-avatar>
+								<div class="header">
+									<div class="title">{{$t('songAction_like')}}</div>
+								</div>
+							</div>
+						</md-ripple>
+					</div>
+					<div class="item disabled">
+						<md-ripple>
+							<div class="content">
+								<md-avatar>
+									<md-icon class="outline-star"/>
+								</md-avatar>
+								<div class="header">
+									<div class="title">{{$t('songAction_rating')}}</div>
+								</div>
+							</div>
+						</md-ripple>
+					</div>
+					<div class="item disabled">
+						<md-ripple>
+							<div class="content">
+								<md-avatar>
+									<md-icon class="outline-playlist_add"/>
+								</md-avatar>
+								<div class="header">
+									<div class="title">{{$t('songAction_add2playlist')}}</div>
+								</div>
+							</div>
+						</md-ripple>
+					</div>
+					<div class="item" v-if="moreDialogTemp">
+						<div class="content">
+							<md-avatar>
+								<md-icon class="outline-music_note"/>
+							</md-avatar>
+							<div class="header">
+								<div class="title t-ellipsis">{{moreDialogTemp.name}}</div>
+								<div class="t-ellipsis">歌曲名稱</div>
+							</div>
+						</div>
+					</div>
+					<div class="item" v-if="moreDialogTemp" @click="moreDialog_goto_artist">
+						<md-ripple>
+							<div class="content">
+								<md-avatar>
+									<md-icon class="outline-mic_none"/>
+								</md-avatar>
+								<div class="header">
+									<div class="title t-ellipsis">{{moreDialogTemp.artist}}</div>
+									<div class="t-ellipsis">演出者</div>
+								</div>
+							</div>
+						</md-ripple>
+					</div>
+					<div class="item" v-if="moreDialogTemp" @click="moreDialog_goto_album">
+						<md-ripple>
+							<div class="content">
+								<md-avatar>
+									<md-icon class="outline-album"/>
+								</md-avatar>
+								<div class="header">
+									<div class="title t-ellipsis">{{moreDialogTemp.album}}</div>
+									<div class="t-ellipsis">專輯</div>
+								</div>
+							</div>
+						</md-ripple>
+					</div>
+					<div class="item" v-if="moreDialogTemp">
+						<div class="content">
+							<md-avatar>
+								<md-icon class="outline-cloud"/>
+							</md-avatar>
+							<div class="header">
+								<div class="title t-ellipsis">{{moreDialogTemp.source}}</div>
+								<div class="t-ellipsis">來源</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</md-dialog-content>
+			<md-dialog-actions>
+				<md-button class="md-primary" @click="moreDialogShow = false">{{$t('back')}}</md-button>
+			</md-dialog-actions>
+		</md-dialog>
 	</div>
 </template>
 
@@ -78,7 +175,9 @@ export default {
 		audio_order: _player.options.order,
 		audio_uuid: ":D",
 		NowPlaying_updatePlayer: null,
-		cleanActive: false
+		cleanActive: false,
+		moreDialogShow: false,
+		moreDialogTemp: null
 	}),
 	created() {
 		this.updatePlayer();
@@ -162,6 +261,28 @@ export default {
 			_player.options.order =
 				_player.options.order === "random" ? "list" : "random";
 			this.audio_order = _player.options.order;
+		},
+		moreDialog(song) {
+			this.moreDialogTemp = song;
+			this.moreDialogShow = true;
+		},
+		moreDialog_goto_album() {
+			let t = this.moreDialogTemp;
+			if (t && t.albumId) {
+				this.moreDialogShow = false;
+				this.$nextTick(() => {
+					this.$router.push(`/album/songs/${t.source}/${t.albumId}`);
+				});
+			}
+		},
+		moreDialog_goto_artist() {
+			let t = this.moreDialogTemp;
+			if (t && t.artistId) {
+				this.moreDialogShow = false;
+				this.$nextTick(() => {
+					this.$router.push(`/artist/${t.source}/${t.artistId}`);
+				});
+			}
 		}
 	}
 };

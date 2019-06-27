@@ -53,7 +53,9 @@ export default {
 						: this.defaultCover,
 					name: nowsong.name,
 					artist: nowsong.artist,
+					artistId: nowsong.artistId,
 					album: nowsong.album,
+					albumId: nowsong.albumId,
 					id: nowsong.id,
 					source: nowsong.source,
 					uuid: _uuid()
