@@ -30,6 +30,7 @@
 			align-items: center
 			.header
 				flex: 1
+				overflow: hidden
 				.title
 					font-weight: bold
 				>:not(.title)
@@ -37,11 +38,15 @@
 		.md-avatar
 			margin-right: 16px
 		&.active
-			box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2)
+			box-shadow: 0 3px 8px rgba(#4251fb, 0.3)
 			background: linear-gradient(120deg, #4251fb 0%, #0401a3 100%)
 			color: #FFF
 			.md-button .md-icon
 				--md-theme-default-icon-on-background: #FFF
+		&.disabled
+			pointer-events: none
+			opacity: .4
+			filter: grayscale(1)
 	.divider
 		font-size: .85em
 		border-top: 1px solid rgba(0, 0, 0, 0.2)

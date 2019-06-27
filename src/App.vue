@@ -511,8 +511,10 @@ export default {
 		.md-divider
 			margin: 4px 0
 		.md-list-item
+			margin-left: -8px
 			a.md-list-item-router
-				border-radius: 8px
+				border-radius: 0 8px 8px 0 !important
+				padding-left: 8px
 				.md-icon
 					opacity: 1
 @media screen and (min-width: 600.99px)
@@ -574,7 +576,7 @@ html.md-theme-default-dark
 		button,a
 			border-radius: 8px !important
 #drawer .router-link-active,.md-list-item.active
-	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2)  !important
+	box-shadow: 0 3px 8px rgba(#6572f6, 0.3)  !important
 	background: linear-gradient(120deg, #6572f6 0%, #8c197a 100%) !important
 	--md-theme-default-dark-primary-on-background: #FFF
 	--md-theme-default-primary-on-background: #FFF
@@ -677,6 +679,7 @@ html.md-theme-default-dark
 	}
 	.md-dialog {
 		max-width: 100vw !important;
+		border-radius: 8px;
 	}
 	.t-ellipsis {
 		white-space: nowrap;

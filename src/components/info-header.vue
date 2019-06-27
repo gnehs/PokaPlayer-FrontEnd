@@ -32,6 +32,7 @@ export default {
 /* 專輯歌曲頁面 - 專輯簡介 */
 .info-header
 	position: relative
+	margin-top: 48px
 	padding: 16px
 	display: flex
 	flex-direction: row

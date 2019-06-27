@@ -2,7 +2,7 @@
 div
 	.header-wrapper
 		.bg(:style=`{backgroundImage: 'url("'+bg+'")'}`,:class="{blur: blurbg}")
-	.header
+	.header(v-if='title')
 		.title(style="line-height: normal;") {{title}}
 		.subtitle {{subtitle}}
 </template>
@@ -11,14 +11,8 @@ div
 export default {
 	name: "poka-header",
 	props: {
-		title: {
-			type: String,
-			default: ""
-		},
-		subtitle: {
-			type: String,
-			default: ""
-		},
+		title: String,
+		subtitle: String,
 		bg: {
 			type: String,
 			default: _setting(`headerBgSource`)
@@ -48,6 +42,7 @@ export default {
 	font-weight: bold
 	margin-left: 16px
 	margin-top: 32px
+	margin-bottom: 32px
 	position: relative
 	font-family: var(--product-font)
 	>.title,>.subtitle
