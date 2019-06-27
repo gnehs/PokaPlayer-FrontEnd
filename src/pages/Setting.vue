@@ -3,10 +3,8 @@
 		<poka-header :title="$t('settings')" :subtitle="'PokaPlayer'"/>
 		<md-list>
 			<md-list-item @click="switchTheme">
-				<md-icon v-if="settings.darkMode">brightness_3</md-icon>
-				<md-icon v-if="!settings.darkMode">brightness_7</md-icon>
-				<span v-if="settings.darkMode" class="md-list-item-text">{{$t('settings_dark')}}</span>
-				<span v-if="!settings.darkMode" class="md-list-item-text">{{$t('settings_light')}}</span>
+				<md-icon>brightness_3</md-icon>
+				<span class="md-list-item-text">{{$t('settings_dark')}}</span>
 				<md-switch v-model="settings.darkMode"/>
 			</md-list-item>
 		</md-list>
