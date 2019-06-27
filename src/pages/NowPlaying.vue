@@ -172,7 +172,7 @@ export default {
 	transform: scaleY(0) scaleX(0.9)
 	transform-origin: center top
 .songlist-leave-active 
-		position: absolute
+	position: absolute
 .songlist-move
 	transition: 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
 	transition-property: opacity, transform

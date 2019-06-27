@@ -570,8 +570,12 @@ html.md-theme-default-dark
 		border-radius: 8px !important
 		overflow: hidden
 		transition: all 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
+		overflow: initial
+		button,a
+			border-radius: 8px !important
 #drawer .router-link-active,.md-list-item.active
-	background: rgb(98, 0, 238) !important
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2)  !important
+	background: linear-gradient(120deg, #6572f6 0%, #8c197a 100%) !important
 	--md-theme-default-dark-primary-on-background: #FFF
 	--md-theme-default-primary-on-background: #FFF
 	--md-theme-default-text-primary-on-background: rgba(255, 255, 255, 1)
@@ -684,5 +688,22 @@ html.md-theme-default-dark
 	}
 	.md-theme-default-dark .md-overlay {
 		background: rgba(255, 255, 255, 0.45) !important;
+	}
+	@media (min-width: 1024px) {
+		::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+		}
+	}
+	::-webkit-scrollbar {
+		width: 5px;
+		height: 5px;
+		background: 0 0;
+	}
+	::-webkit-scrollbar-thumb {
+		background: rgba(0, 0, 0, 0.2);
+	}
+	.md-theme-default-dark ::-webkit-scrollbar-thumb {
+		background: rgba(255, 255, 255, 0.4);
 	}
 </style>
