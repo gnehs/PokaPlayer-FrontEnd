@@ -1,32 +1,37 @@
 <template>
-  <md-list class="md-double-line">
-    <md-list-item
-      v-for="{name, image, id, source} in data"
-      :key="id"
-      :to="`/folder/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
-    >
-      <md-icon>folder</md-icon>
-      <div class="md-list-item-text">
-        <span>{{name}}</span>
-        <span>{{source}}</span>
-      </div>
-    </md-list-item>
-  </md-list>
+	<div class="poka two list">
+		<router-link
+			class="item"
+			v-for="{name, image, id, source} in data"
+			:key="id"
+			:to="`/folder/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
+		>
+			<md-ripple>
+				<div class="content">
+					<md-avatar>
+						<md-icon>folder</md-icon>
+					</md-avatar>
+					<div class="header">
+						<div class="title t-ellipsis">{{name}}</div>
+						<div class="t-ellipsis">{{source}}</div>
+					</div>
+				</div>
+			</md-ripple>
+		</router-link>
+	</div>
 </template>
 
 <style lang="sass" scoped>
-.md-list
-    background-color: transparent
-    .md-list-item
-        border-radius: 8px
-        overflow: hidden
+.poka.list
+	.item
+		overflow: hidden
 </style>
 <script>
 export default {
-  name: "poka-parse-folders",
-  props: ["data"],
-  data: () => ({
-    server: _setting(`server`)
-  })
+	name: "poka-parse-folders",
+	props: ["data"],
+	data: () => ({
+		server: _setting(`server`)
+	})
 };
 </script>
