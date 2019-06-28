@@ -1,0 +1,18 @@
+.md-progress-bar
+	overflow: inherit !important
+	position: fixed
+	--shadow-color: 255, 82, 82
+	--shadow-opacity: 0.2
+	&.md-theme-default-dark
+		--shadow-color: 68, 138, 255
+		--shadow-opacity: 0.35
+	.md-progress-bar-track,
+	.md-progress-bar-fill
+		box-shadow: 0 0 8px rgba(var(--shadow-color), var(--shadow-opacity))
+		.app-progress-bar:hover & 
+			box-shadow: 0 0 8px rgba(var(--shadow-color), calc(var(--shadow-opacity) * 2))
+		&:not([style="width: 100%;"])
+			border-radius: 0 5px 5px 0
+
+	.md-progress-bar-buffer 
+		opacity: .3
