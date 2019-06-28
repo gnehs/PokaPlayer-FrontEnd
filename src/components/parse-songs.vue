@@ -46,11 +46,12 @@ export default {
 						nowsong.url +
 						"&songRes=" +
 						_setting(`audioQuality`).toLowerCase(),
-					cover: nowsong.cover.startsWith("http")
-						? nowsong.cover
-						: nowsong.cover
-						? this.server + nowsong.cover
-						: this.defaultCover,
+					cover:
+						nowsong.cover && nowsong.cover.startsWith("http")
+							? nowsong.cover
+							: nowsong.cover
+							? this.server + nowsong.cover
+							: this.defaultCover,
 					name: nowsong.name,
 					artist: nowsong.artist,
 					artistId: nowsong.artistId,
