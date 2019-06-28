@@ -3,14 +3,11 @@
 	"loading": "Loading...",
 	"header_welcome": "Welcome",
 	"header_version": "PokaPlayer {version}",
-
 	"checkUpdate_poka": "Update Available: {version}",
 	"checkUpdate_button": "Update",
-
 	"pingServer_title": "Hint",
 	"pingServer_content": "Server restarting success!",
 	"pingServer_reconnect": "Reconnect",
-
 	"home": "Home",
 	"nowplaying": "Now Playing",
 	"lrc": "Lyrics",
@@ -22,34 +19,31 @@
 	"composer": "Composers",
 	"playlist": "Playlists",
 	"settings": "Settings",
-
 	"ok": "OK",
 	"cancel": "Cancel",
 	"back": "Back",
 	"login": "Login",
 	"nothingFound": "Nothing found",
 	"requestError": "An error occurred while requesting, please try again",
-
 	"home_recentAlbums": "Recent added albums",
 	"home_pins": "Pins",
 	"home_netease": "NetEase",
-
 	"app_waitForPlay": "No queued songs. ",
 	"app_waitForPlay_description": "You can add more songs, or press below to shuffle.",
-
 	"now_cleanSongs": "Clear all songs?",
 	"now_cleanSongs_description": "This will remove every song in the playlist.",
-
 	"playlist_random": "Shuffle",
-
 	"lrc_search": "Search lyrics",
 	"lrc_noKeyword": "Enter keyword to search",
 	"lrc_enter2search": "Press Enter key to start searching",
 	"lrc_notLoad": "Don't load lyrics",
 	"lrc_notLoad_description": "This will remove lyrics of the song now playing.",
 	"lrc_noLyrics": "No lyrics",
-
 	"songAction_title": "Actions",
+	"songAction_name": "Name",
+	"songAction_artist": "Artists",
+	"songAction_album": "Album",
+	"songAction_source": "Source",
 	"songAction_like": "Like",
 	"songAction_like_success": "Liked \"{name}\"",
 	"songAction_like_failed": "An error occurred while liking \"{name}\".",
@@ -69,17 +63,12 @@
 	"songAction_add2playlist_failed": "An error occured while processing {name}",
 	"songAction_add2playlist_add_success": "Added {name} to {playlist}",
 	"songAction_add2playlist_remove_success": "Removed {name} from {playlist}",
-
 	"album_total": "{songs} songs",
-
 	"addSong_total": "{total} songs added",
 	"addSong_name": "Added {name}",
-
 	"moduleShowName_Netease": "Netease",
 	"moduleShowName_DSM": "DSM",
-
 	"sessionExpired": "Session expired, please log in again",
-
 	"add2nowPlaying": "Add this list to queue",
 	"pin_failed": "Failed to pin",
 	"unpin_failed": "Failed to unpin",
@@ -91,9 +80,7 @@
 	"unpin_composer": "Unpin composer",
 	"pin_playlist": "Pin playlist",
 	"unpin_playlist": "Unpin playlist",
-
-	"settings_dark": "Dark Mode",
-	"settings_light": "Light Mode",
+	"settings_dark": "Night Mode",
 	"settings_network": "Network",
 	"settings_network_description": "Music quality",
 	"settings_network_soundQuality": "Music quality",

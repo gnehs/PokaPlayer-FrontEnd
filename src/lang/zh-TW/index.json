@@ -3,14 +3,11 @@
 	"loading": "載入中...",
 	"header_welcome": "歡迎使用",
 	"header_version": "PokaPlayer {version}",
-
 	"checkUpdate_poka": "有新版本可供更新：{version}",
 	"checkUpdate_button": "更新",
-
 	"pingServer_title": "提示",
 	"pingServer_content": "伺服器重新啟動完畢！",
 	"pingServer_reconnect": "重新連接",
-
 	"home": "首頁",
 	"nowplaying": "現正播放",
 	"lrc": "歌詞",
@@ -22,34 +19,31 @@
 	"composer": "作曲者",
 	"playlist": "播放清單",
 	"settings": "設定",
-
 	"ok": "好",
 	"cancel": "取消",
 	"back": "返回",
 	"login": "登入",
 	"nothingFound": "找不到",
 	"requestError": "請求失敗，請再試一次",
-
 	"home_recentAlbums": "最近加入的專輯",
 	"home_pins": "釘選",
 	"home_netease": "網易雲音樂",
-
 	"app_waitForPlay": "佇列中未有歌曲",
 	"app_waitForPlay_description": "加入一些歌曲，或是點選底下的隨機播放",
-
 	"now_cleanSongs": "確定清除所有歌曲？",
 	"now_cleanSongs_description": "這將會清除列表中所有歌曲。",
-
 	"playlist_random": "隨機播放",
-
 	"lrc_search": "搜尋歌詞",
 	"lrc_noKeyword": "尚未輸入關鍵字",
 	"lrc_enter2search": "輸入完後按下 Enter 開始搜尋歌詞",
 	"lrc_notLoad": "不載入歌詞",
 	"lrc_notLoad_description": "點選清除目前的歌詞",
 	"lrc_noLyrics": "無歌詞",
-
 	"songAction_title": "歌曲操作",
+	"songAction_name": "歌曲名稱",
+	"songAction_artist": "演出者",
+	"songAction_album": "專輯",
+	"songAction_source": "來源",
 	"songAction_like": "收藏",
 	"songAction_like_success": "已收藏「{name}」",
 	"songAction_like_failed": "收藏或取消收藏「{name}」時發生了錯誤",
@@ -69,17 +63,12 @@
 	"songAction_add2playlist_failed": "處理 {name} 時發生了錯誤",
 	"songAction_add2playlist_add_success": "已將 {name} 加入到 {playlist}",
 	"songAction_add2playlist_remove_success": "已將 {name} 從 {playlist} 刪除",
-
 	"album_total": "{songs} 首歌曲",
-
 	"addSong_total": "已添加 {total} 首歌",
 	"addSong_name": "已添加 {name}",
-
 	"moduleShowName_Netease": "網易雲音樂",
 	"moduleShowName_DSM": "DSM",
-
 	"sessionExpired": "Session 過期，請重新登入",
-
 	"add2nowPlaying": "將此頁歌曲加入到現正播放",
 	"pin_failed": "釘選失敗",
 	"unpin_failed": "取消釘選失敗",
@@ -91,9 +80,7 @@
 	"unpin_composer": "取消釘選該作曲者",
 	"pin_playlist": "釘選此播放清單",
 	"unpin_playlist": "取消釘選此播放清單",
-
 	"settings_dark": "夜間模式",
-	"settings_light": "日間模式",
 	"settings_network": "網路",
 	"settings_network_description": "音質",
 	"settings_network_soundQuality": "音質",

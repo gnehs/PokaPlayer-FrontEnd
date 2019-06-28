@@ -576,7 +576,7 @@ html.md-theme-default-dark
 #drawer .router-link-active,.md-list-item.active
 	box-shadow: 0 3px 8px rgba(#6572f6, 0.3)  !important
 	.md-theme-default-dark &
-		box-shadow: 0 3px 8px rgba(#6572f6, 0.5)   !important
+		box-shadow: 0 3px 8px rgba(#6572f6, 0.5) !important
 	background: linear-gradient(120deg, #6572f6 0%, #8c197a 100%) !important
 	--md-theme-default-dark-primary-on-background: #FFF
 	--md-theme-default-primary-on-background: #FFF

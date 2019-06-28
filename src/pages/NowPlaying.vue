@@ -110,7 +110,7 @@
 							</md-avatar>
 							<div class="header">
 								<div class="title t-ellipsis">{{moreDialogTemp.name}}</div>
-								<div class="t-ellipsis">歌曲名稱</div>
+								<div class="t-ellipsis">{{$t('songAction_name')}}</div>
 							</div>
 						</div>
 					</div>
@@ -122,7 +122,7 @@
 								</md-avatar>
 								<div class="header">
 									<div class="title t-ellipsis">{{moreDialogTemp.artist}}</div>
-									<div class="t-ellipsis">演出者</div>
+									<div class="t-ellipsis">{{$t('songAction_artist')}}</div>
 								</div>
 							</div>
 						</md-ripple>
@@ -135,7 +135,7 @@
 								</md-avatar>
 								<div class="header">
 									<div class="title t-ellipsis">{{moreDialogTemp.album}}</div>
-									<div class="t-ellipsis">專輯</div>
+									<div class="t-ellipsis">{{$t('songAction_album')}}</div>
 								</div>
 							</div>
 						</md-ripple>
@@ -147,7 +147,7 @@
 							</md-avatar>
 							<div class="header">
 								<div class="title t-ellipsis">{{moreDialogTemp.source}}</div>
-								<div class="t-ellipsis">來源</div>
+								<div class="t-ellipsis">{{$t('songAction_source')}}</div>
 							</div>
 						</div>
 					</div>
