@@ -74,9 +74,7 @@
 			</md-app-drawer>
 			<md-app-content>
 				<transition :name="transitionName" mode="out-in">
-					<keep-alive>
-						<router-view :key="$route.path"/>
-					</keep-alive>
+					<router-view :key="$route.path"/>
 				</transition>
 			</md-app-content>
 		</md-app>
