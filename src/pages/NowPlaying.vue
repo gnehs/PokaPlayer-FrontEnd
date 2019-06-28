@@ -216,9 +216,8 @@ export default {
 						if ($(".poka.list > .active").length > 0) {
 							let sh =
 								$(".poka.list > .active")[0].offsetTop -
-								$(".poka.list > .active").height() / 2 -
-								$(".poka.list > .active")[0].clientHeight -
-								$(window).height() * 0.15;
+								$("main").height() * 0.5 +
+								$(".poka.list > .active").height() * 0.75;
 							$(".md-app-content")
 								.clearQueue()
 								.animate(

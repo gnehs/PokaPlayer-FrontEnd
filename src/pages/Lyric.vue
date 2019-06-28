@@ -142,9 +142,11 @@ export default {
 								if ($(".lyric p.focus").length > 0) {
 									let sh =
 										$(".lyric p.focus")[0].offsetTop -
-										$(".lyric p.focus").height() / 2 -
-										$(".lyric p.focus")[0].clientHeight -
-										$(window).height() * 0.32;
+										$("main").height() * 0.5 +
+										$(".lyric p.focus").height() *
+											(this.lyricTranslated
+												? 1.75
+												: 0.75);
 									$(".md-app-content")
 										.clearQueue()
 										.animate(
