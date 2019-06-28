@@ -677,7 +677,7 @@ html.md-theme-default-dark
 	}
 	.md-dialog {
 		max-width: 100vw !important;
-		border-radius: 8px;
+		border-radius: 8px !important;
 	}
 	.t-ellipsis {
 		white-space: nowrap;

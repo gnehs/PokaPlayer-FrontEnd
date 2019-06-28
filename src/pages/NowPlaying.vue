@@ -297,7 +297,7 @@ export default {
 <style lang="sass" scoped>
 .songlist-enter, .songlist-leave-to
 	opacity: 0
-	transform: scaleY(0) scaleX(0.9)
+	transform: scaleY(0) scaleX(0.7)
 	transform-origin: center top
 .songlist-leave-active 
 	position: absolute
