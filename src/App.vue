@@ -14,6 +14,14 @@
 							<md-icon class="outline-repeat" v-if="audio_order==='list'"></md-icon>
 							<md-icon class="outline-shuffle" v-else></md-icon>
 						</md-button>
+						<md-button
+							class="md-button md-primary md-outlined"
+							to="/setting/system"
+							v-if="checkUpadteStatus"
+						>
+							<md-icon class="outline-system_update"></md-icon>
+							{{checkUpadteStatus}}
+						</md-button>
 					</div>
 				</div>
 			</md-app-toolbar>
