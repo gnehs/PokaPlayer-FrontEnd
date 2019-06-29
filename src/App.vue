@@ -22,7 +22,7 @@
 				<div id="pokaTitle">
 					<span>PokaPlayer</span>
 					<md-button class="md-icon-button" to="/setting/system" v-if="checkUpadteStatus">
-						<md-icon>system_update</md-icon>
+						<md-icon class="outline-system_update"></md-icon>
 						<md-tooltip md-direction="right">{{checkUpadteStatus}}</md-tooltip>
 					</md-button>
 				</div>
@@ -115,17 +115,17 @@
 					<span class="time">{{audio_currentTime}}</span>
 					<div>
 						<md-button class="md-icon-button" @click="audio_previous">
-							<md-icon>skip_previous</md-icon>
+							<md-icon class="outline-skip_previous"></md-icon>
 						</md-button>
 						<md-tooltip md-direction="left" v-show="audio_previous_name!=''">{{audio_previous_name}}</md-tooltip>
 					</div>
 					<md-button class="md-icon-button md-raised md-accent" @click="audio_toggle">
-						<md-icon v-if="audio_paused">play_arrow</md-icon>
-						<md-icon v-else>pause</md-icon>
+						<md-icon class="outline-play_arrow" v-if="audio_paused"></md-icon>
+						<md-icon class="outline-pause" v-else></md-icon>
 					</md-button>
 					<div>
 						<md-button class="md-icon-button" @click="audio_next">
-							<md-icon>skip_next</md-icon>
+							<md-icon class="outline-skip_next"></md-icon>
 						</md-button>
 						<md-tooltip md-direction="right" v-show="audio_next_name!=''">{{audio_next_name}}</md-tooltip>
 					</div>
@@ -148,14 +148,14 @@
 				</div>
 				<div class="right-s" v-if="audio_artist">
 					<md-button class="md-icon-button" @click="audio_previous">
-						<md-icon>skip_previous</md-icon>
+						<md-icon class="outline-skip_previous"></md-icon>
 					</md-button>
 					<md-button class="md-icon-button md-raised md-accent" @click="audio_toggle">
-						<md-icon v-if="audio_paused">play_arrow</md-icon>
-						<md-icon v-else>pause</md-icon>
+						<md-icon class="outline-play_arrow" v-if="audio_paused"></md-icon>
+						<md-icon class="outline-pause" v-else></md-icon>
 					</md-button>
 					<md-button class="md-icon-button" @click="audio_next">
-						<md-icon>skip_next</md-icon>
+						<md-icon class="outline-skip_next"></md-icon>
 					</md-button>
 				</div>
 				<div class="right-s" v-else>
@@ -546,6 +546,8 @@ export default {
 				display: flex
 	#pokaTitle
 		display: none
+		&+.md-divider
+			display: none
 	.md-app-content
 		max-height: calc(var(--vh, 1vh) * 100 - 64px - 69px)
 .md-app

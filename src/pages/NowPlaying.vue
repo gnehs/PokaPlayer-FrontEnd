@@ -21,10 +21,10 @@
 						</div>
 						<div class="action">
 							<md-button class="md-icon-button md-list-action" @click="moreDialog(song)">
-								<md-icon>more_horiz</md-icon>
+								<md-icon class="outline-more_horiz"/>
 							</md-button>
 							<md-button class="md-icon-button md-list-action" @click="removeSong(index)">
-								<md-icon>close</md-icon>
+								<md-icon class="outline-close"/>
 							</md-button>
 						</div>
 					</md-ripple>
@@ -42,7 +42,7 @@
 
 		<md-speed-dial class="md-bottom-right" v-if="audio_queue.length>0">
 			<md-speed-dial-target @click="audio_clean">
-				<md-icon>clear_all</md-icon>
+				<md-icon class="outline-clear_all"/>
 			</md-speed-dial-target>
 		</md-speed-dial>
 		<md-dialog :md-active.sync="moreDialogShow" :md-fullscreen="false">
