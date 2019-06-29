@@ -384,7 +384,7 @@ export default {
 		"default",
 		(
 			primary: rgb(98, 0, 238),
-			accent: md-get-palette-color(red, A200)
+			accent: #cc005f
 		)
 	);
 	@import "~vue-material/dist/theme/all"; // Apply the theme
