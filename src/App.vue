@@ -590,7 +590,7 @@ html.md-theme-default-dark
 .md-button
 	&:not(.md-icon-button):not(.md-fab)
 		border-radius: 8px !important
-	&.outlined
+	&.md-outlined
 		border: 2px solid currentColor
 </style>
 
