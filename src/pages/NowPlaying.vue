@@ -38,30 +38,12 @@
 			>
 				<play-random-button/>
 			</md-empty-state>
-			<md-dialog-confirm
-				:md-active.sync="cleanActive"
-				:md-title="$t('now_cleanSongs')"
-				:md-content="$t('now_cleanSongs_description')"
-				:md-cancel-text="$t('cancel')"
-				:md-confirm-text="$t('ok')"
-				@md-confirm="audio_clean"
-			/>
 		</div>
 
 		<md-speed-dial class="md-bottom-right" v-if="audio_queue.length>0">
-			<md-speed-dial-target @click="cleanActive=true">
+			<md-speed-dial-target @click="audio_clean">
 				<md-icon>clear_all</md-icon>
 			</md-speed-dial-target>
-
-			<!--<md-speed-dial-content>
-				<md-button class="md-icon-button" @click="switch_audio_order">
-					<md-icon class="outline-repeat" v-if="audio_order==='list'"></md-icon>
-					<md-icon class="outline-shuffle" v-else></md-icon>
-				</md-button>
-				<md-button class="md-icon-button">
-					<md-icon>clear_all</md-icon>
-				</md-button>
-			</md-speed-dial-content>-->
 		</md-speed-dial>
 		<md-dialog :md-active.sync="moreDialogShow" :md-fullscreen="false">
 			<md-dialog-title>{{$t("songAction_title")}}</md-dialog-title>
@@ -175,7 +157,6 @@ export default {
 		audio_order: _player.options.order,
 		audio_uuid: ":D",
 		NowPlaying_updatePlayer: null,
-		cleanActive: false,
 		moreDialogShow: false,
 		moreDialogTemp: null
 	}),
