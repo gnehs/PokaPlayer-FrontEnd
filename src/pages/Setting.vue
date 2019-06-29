@@ -2,10 +2,10 @@
 	<div>
 		<poka-header :title="$t('settings')" :subtitle="'PokaPlayer'"/>
 		<md-list>
-			<md-list-item @click="switchTheme">
+			<md-list-item>
 				<md-icon>brightness_3</md-icon>
 				<span class="md-list-item-text">{{$t('settings_dark')}}</span>
-				<md-switch v-model="settings.darkMode"/>
+				<md-switch v-model="settings.darkMode" @change="switchTheme"/>
 			</md-list-item>
 		</md-list>
 		<md-list class="md-double-line">
@@ -68,7 +68,6 @@ export default {
 	}),
 	methods: {
 		switchTheme() {
-			this.settings.darkMode = !this.settings.darkMode;
 			window._setting("darkMode", this.settings.darkMode);
 			this.settings.darkMode
 				? window._theme.switchToDark()
