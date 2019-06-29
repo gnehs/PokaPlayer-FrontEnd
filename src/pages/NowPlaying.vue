@@ -194,19 +194,20 @@ export default {
 				if (uuid_temp != this.audio_uuid) {
 					//換歌ㄌ
 					this.$nextTick(() => {
-						if ($(".poka.list > .active").length > 0) {
+						let activeItem = document.querySelector(
+							".poka.list > .active"
+						);
+						if (activeItem) {
 							let sh =
-								$(".poka.list > .active")[0].offsetTop -
-								$("main").height() * 0.5 +
-								$(".poka.list > .active").height() * 0.75;
-							$(".md-app-content")
-								.clearQueue()
-								.animate(
-									{
-										scrollTop: sh
-									},
-									250
-								);
+								activeItem.offsetTop -
+								document.querySelector("main").clientHeight *
+									0.5 +
+								activeItem.clientHeight * 0.75;
+							window.scrollTo(
+								document.querySelector(".md-app-content"),
+								sh,
+								200
+							);
 						}
 					});
 				}

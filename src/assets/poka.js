@@ -1,6 +1,4 @@
 import APlayer from 'APlayer';
-import $ from 'jquery'
-window.$ = $
 window._player = new APlayer({
     container: document.getElementById('player')
 });
@@ -60,3 +58,27 @@ window._setting = (setting, value) => {
     }
 }
 window._socket = io(window._setting(`server`));
+// scroll 
+
+window.scrollTo = (element, to, duration) => {
+    let start = element.scrollTop,
+        change = to - start,
+        currentTime = 0,
+        increment = 20;
+
+    let animateScroll = function () {
+        currentTime += increment;
+        var val = Math.easeInOutQuad(currentTime, start, change, duration);
+        element.scrollTop = val;
+        if (currentTime < duration) {
+            setTimeout(animateScroll, increment);
+        }
+    };
+    animateScroll();
+}
+Math.easeInOutQuad = function (t, b, c, d) {
+    t /= d / 2;
+    if (t < 1) return c / 2 * t * t + b;
+    t--;
+    return -c / 2 * (t * (t - 2) - 1) + b;
+};

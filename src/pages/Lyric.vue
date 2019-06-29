@@ -139,22 +139,27 @@ export default {
 							this.lyricFocus = lyricFocus_temp;
 							this.$nextTick(() => {
 								//等 Vue 好了再去更新捲動條
-								if ($(".lyric p.focus").length > 0) {
+								let focusLyric = document.querySelector(
+									".lyric p.focus"
+								);
+								if (focusLyric) {
 									let sh =
-										$(".lyric p.focus")[0].offsetTop -
-										$("main").height() * 0.5 +
-										$(".lyric p.focus").height() *
+										focusLyric.offsetTop -
+										document.querySelector("main")
+											.clientHeight *
+											0.5 +
+										focusLyric.clientHeight *
 											(this.lyricTranslated
 												? 1.75
 												: 0.75);
-									$(".md-app-content")
-										.clearQueue()
-										.animate(
-											{
-												scrollTop: sh
-											},
-											250
-										);
+
+									window.scrollTo(
+										document.querySelector(
+											".md-app-content"
+										),
+										sh,
+										200
+									);
 								}
 							});
 						}
