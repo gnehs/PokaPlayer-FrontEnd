@@ -3,14 +3,15 @@
 	position: fixed
 	--shadow-color: 255, 82, 82
 	--shadow-opacity: 0.2
+	transition: all .2s linear !important
 	&.md-theme-default-dark
 		--shadow-color: 68, 138, 255
 		--shadow-opacity: 0.35
+	.app-progress-bar:hover & 
+		transform: scaleY(1.65)
 	.md-progress-bar-track,
 	.md-progress-bar-fill
 		box-shadow: 0 0 8px rgba(var(--shadow-color), var(--shadow-opacity))
-		.app-progress-bar:hover & 
-			box-shadow: 0 0 8px rgba(var(--shadow-color), calc(var(--shadow-opacity) * 2))
 		&:not([style="width: 100%;"])
 			border-radius: 0 5px 5px 0
 
