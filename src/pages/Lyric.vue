@@ -8,7 +8,7 @@
 					:class="{focus: index==lyricFocus }"
 				>{{item.text}}</p>
 			</div>
-			<md-empty-state v-else-if="lyricSearching" md-icon="subtitles" :md-label="$t('loading')"/>
+			<md-empty-state v-else-if="lyricSearching" md-icon="subtitles" :md-label="$t('loading')" />
 			<md-empty-state v-else md-icon="subtitles" :md-label="$t('lrc_noLyrics')">
 				<md-button class="md-primary md-outlined" @click="showLyricDialog = true">{{$t('lrc_search')}}</md-button>
 			</md-empty-state>
@@ -39,7 +39,7 @@
 						</div>
 					</md-list-item>
 				</md-list>
-				<poka-loader v-else/>
+				<poka-loader v-else />
 			</md-dialog-content>
 			<md-dialog-actions>
 				<md-button class="md-primary" @click="showLyricDialog = false">{{$t('cancel')}}</md-button>
@@ -139,16 +139,16 @@ export default {
 							this.lyricFocus = lyricFocus_temp;
 							this.$nextTick(() => {
 								//等 Vue 好了再去更新捲動條
-								let focusLyric = document.querySelector(
+								let focusedLyric = document.querySelector(
 									".lyric p.focus"
 								);
-								if (focusLyric) {
+								if (focusedLyric) {
 									let sh =
-										focusLyric.offsetTop -
+										focusedLyric.offsetTop -
 										document.querySelector("main")
 											.clientHeight *
 											0.5 +
-										focusLyric.clientHeight *
+										focusedLyric.clientHeight *
 											(this.lyricTranslated
 												? 1.75
 												: 0.75);
