@@ -34,46 +34,46 @@
 						<md-tooltip md-direction="right">{{checkUpadteStatus}}</md-tooltip>
 					</md-button>
 				</div>
-				<md-divider/>
+				<md-divider />
 				<md-list>
 					<md-list-item to="/home" @click="closeMenu">
-						<md-icon class="outline-home"/>
+						<md-icon class="outline-home" />
 						<span class="md-list-item-text">{{$t("home")}}</span>
 					</md-list-item>
 					<md-list-item to="/now" @click="closeMenu">
-						<md-icon class="outline-playlist_play"/>
+						<md-icon class="outline-playlist_play" />
 						<span class="md-list-item-text">{{$t("nowplaying")}}</span>
 					</md-list-item>
 					<md-list-item to="/lyric" @click="closeMenu">
-						<md-icon class="outline-subtitles"/>
+						<md-icon class="outline-subtitles" />
 						<span class="md-list-item-text">{{$t("lrc")}}</span>
 					</md-list-item>
-					<md-divider/>
+					<md-divider />
 					<md-list-item to="/search" @click="closeMenu">
-						<md-icon class="outline-search"/>
+						<md-icon class="outline-search" />
 						<span class="md-list-item-text">{{$t("search")}}</span>
 					</md-list-item>
 					<md-list-item to="/album" @click="closeMenu">
-						<md-icon class="outline-album"/>
+						<md-icon class="outline-album" />
 						<span class="md-list-item-text">{{$t("album")}}</span>
 					</md-list-item>
 					<md-list-item to="/folder" @click="closeMenu">
-						<md-icon class="outline-folder"/>
+						<md-icon class="outline-folder" />
 						<span class="md-list-item-text">{{$t("folder")}}</span>
 					</md-list-item>
 					<md-list-item to="/artist" @click="closeMenu">
-						<md-icon class="outline-mic_none"/>
+						<md-icon class="outline-mic_none" />
 						<span class="md-list-item-text">{{$t("artist")}}</span>
 					</md-list-item>
 					<md-list-item to="/composer" @click="closeMenu">
-						<md-icon class="outline-music_note"/>
+						<md-icon class="outline-music_note" />
 						<span class="md-list-item-text">{{$t("composer")}}</span>
 					</md-list-item>
 					<md-list-item to="/playlist" @click="closeMenu">
-						<md-icon class="outline-format_list_bulleted"/>
+						<md-icon class="outline-format_list_bulleted" />
 						<span class="md-list-item-text">{{$t("playlist")}}</span>
 					</md-list-item>
-					<md-divider/>
+					<md-divider />
 					<md-list-item to="/setting" @click="closeMenu">
 						<md-icon class="outline-settings"></md-icon>
 						<span class="md-list-item-text">{{$t("settings")}}</span>
@@ -82,7 +82,7 @@
 			</md-app-drawer>
 			<md-app-content>
 				<transition :name="transitionName" mode="out-in">
-					<router-view :key="$route.path"/>
+					<router-view :key="$route.path" />
 				</transition>
 			</md-app-content>
 		</md-app>
@@ -102,13 +102,13 @@
 						step="0.000001"
 						v-model="audio_currentTimePercent"
 						v-on:input="audio_seek"
-					>
+					/>
 				</label>
 			</div>
 			<div class="song-info">
 				<div class="left">
 					<div class="cover">
-						<img :src="audio_cover">
+						<img :src="audio_cover" />
 						<md-button class="md-icon-button md-mini" @click="audio_toggle">
 							<md-icon v-if="audio_paused">play_arrow</md-icon>
 							<md-icon v-else>pause</md-icon>
@@ -152,7 +152,7 @@
 					</md-button>
 				</div>
 				<div class="right" v-else>
-					<play-random-button/>
+					<play-random-button />
 				</div>
 				<div class="right-s" v-if="audio_artist">
 					<md-button class="md-icon-button" @click="audio_previous">
@@ -167,7 +167,7 @@
 					</md-button>
 				</div>
 				<div class="right-s" v-else>
-					<play-random-button/>
+					<play-random-button />
 				</div>
 			</div>
 		</div>
@@ -605,6 +605,10 @@ html.md-theme-default-dark
 </style>
 
 <style>
+	html,
+	body {
+		font-family: var(--default-font);
+	}
 	.fade-enter-active,
 	.fade-leave-active {
 		transition: opacity 0.2s ease;
@@ -699,8 +703,8 @@ html.md-theme-default-dark
 	.card-banner::before {
 		padding-top: 25% !important;
 	}
-	.md-theme-default-dark .md-overlay {
-		background: rgba(255, 255, 255, 0.45) !important;
+	.md-overlay {
+		backdrop-filter: blur(5px);
 	}
 	@media (min-width: 1024px) {
 		::-webkit-scrollbar {
