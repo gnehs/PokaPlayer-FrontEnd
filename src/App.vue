@@ -602,51 +602,35 @@ html.md-theme-default-dark
 		border-radius: 8px !important
 	&.md-outlined
 		border: 2px solid currentColor
-</style>
-
-<style>
-	html,
-	body {
-		font-family: var(--default-font);
-	}
-	.fade-enter-active,
-	.fade-leave-active {
-		transition: opacity 0.2s ease;
-	}
-	.fade-enter,
-	.fade-leave-to {
-		opacity: 0;
-	}
-	.slide-left-enter-active,
-	.slide-left-leave-active,
-	.slide-right-enter-active,
-	.slide-right-leave-active {
-		transition-duration: 0.35s;
-		transition-property: height, opacity, transform;
-		transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
-	}
-
-	.slide-left-enter,
-	.slide-right-leave-active {
-		opacity: 0;
-		transform: translate(3em, 0);
-	}
-
-	.slide-left-leave-active,
-	.slide-right-enter {
-		opacity: 0;
-		transform: translate(-3em, 0);
-	}
-	:root {
-		--default-font: Roboto, "SF Pro TC", "SF Pro Text", "SF Pro Icons",
+html,body
+	font-family: var(--default-font)
+.fade-enter-active,.fade-leave-active
+	transition: opacity 0.2s ease
+.fade-enter,.fade-leave-to
+	opacity: 0
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active
+	transition-duration: 0.35s
+	transition-property: height, opacity, transform
+	transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1)
+.slide-left-enter,.slide-right-leave-active 
+	transform: translate(3em, 0)
+	opacity: 0
+.slide-left-leave-active,.slide-right-enter 
+	transform: translate(-3em, 0)
+	opacity: 0
+\:root
+	--default-font: Roboto, "SF Pro TC", "SF Pro Text", "SF Pro Icons",
 			"PingFang TC", "Helvetica Neue", "Helvetica", "Arial", "Source Hans",
 			"思源黑體", "Noto Sans CJK TC", "Noto Sans TC", "Microsoft JhengHei",
 			"Microsoft Yahei", wf_SegoeUI, "Segoe UI", Segoe, "Segoe WP", Tahoma,
 			Verdana, Ubuntu, "Bitstream Vera Sans", "DejaVu Sans", Tahoma,
 			微軟正黑體, "LiHei Pro", "WenQuanYi Micro Hei", "Droid Sans Fallback",
 			"AR PL UMing TW", "Helvetica Neue", "Hiragino Maru Gothic ProN",
-			メイリオ, "ヒラギノ丸ゴ ProN W4", Meiryo, "Droid Sans", sans-serif;
-		--product-font: "Product Sans", Roboto, "SF Pro TC", "SF Pro Text",
+			メイリオ, "ヒラギノ丸ゴ ProN W4", Meiryo, "Droid Sans", sans-serif
+	--product-font: "Product Sans", Roboto, "SF Pro TC", "SF Pro Text",
 			"SF Pro Icons", "PingFang TC", "Helvetica Neue", "Helvetica", "Arial",
 			"Source Hans", "思源黑體", "Noto Sans CJK TC", "Noto Sans TC",
 			"Microsoft JhengHei", "Microsoft Yahei", wf_SegoeUI, "Segoe UI", Segoe,
@@ -654,73 +638,52 @@ html.md-theme-default-dark
 			"DejaVu Sans", Tahoma, 微軟正黑體, "LiHei Pro", "WenQuanYi Micro Hei",
 			"Droid Sans Fallback", "AR PL UMing TW", "Helvetica Neue",
 			"Hiragino Maru Gothic ProN", メイリオ, "ヒラギノ丸ゴ ProN W4", Meiryo,
-			"Droid Sans", sans-serif;
-	}
-	.md-content.md-tabs-content {
-		transition-duration: 0.3s;
-		transition-property: height;
-		transition-timing-function: ease;
-	}
-	.md-list .md-icon {
-		opacity: 0.54;
-	}
-	.md-tab {
-		padding: 16px 0;
-	}
-	.md-speed-dial {
-		z-index: 2;
-	}
-	.md-app-content .md-list {
-		background-color: transparent !important;
-	}
-
-	@media screen and (min-width: 600px) {
-		.md-button.menu {
-			display: none;
-		}
-	}
-	.md-icon[class*="outline-"] {
-		display: inline-block;
-		width: 24px;
-		height: 24px;
-		background-repeat: no-repeat !important;
-		background-size: contain !important;
-	}
-
-	.icon-white,
-	.md-theme-default-dark .md-icon[class*="outline-"] {
-		color: #fff;
-	}
-	.md-dialog {
-		max-width: 100vw !important;
-		border-radius: 8px !important;
-	}
-	.t-ellipsis {
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-	.card-banner::before {
-		padding-top: 25% !important;
-	}
-	.md-overlay {
-		backdrop-filter: blur(5px);
-	}
-	@media (min-width: 1024px) {
-		::-webkit-scrollbar {
-			width: 8px;
-			height: 8px;
-		}
-	}
-	::-webkit-scrollbar {
-		width: 5px;
-		height: 5px;
-		background: 0 0;
-	}
-	::-webkit-scrollbar-thumb {
-		background: rgba(0, 0, 0, 0.2);
-	}
-	.md-theme-default-dark ::-webkit-scrollbar-thumb {
-		background: rgba(255, 255, 255, 0.4);
-	}
+			"Droid Sans", sans-serif
+.md-tab
+	padding: 16px 0
+	.md-content.md-tabs-content
+		transition-duration: 0.3s
+		transition-property: height
+		transition-timing-function: ease
+.md-list 
+	.md-app-content &
+		background-color: transparent !important
+	.md-icon
+		opacity: 0.54
+.md-speed-dial
+	z-index: 2
+.md-icon[class*="outline-"]
+	display: inline-block
+	width: 24px
+	height: 24px
+	background-repeat: no-repeat !important
+	background-size: contain !important
+	&.icon-white,.md-theme-default-dark &
+		color: #fff
+@media screen and (min-width: 600px)
+	.md-button.menu
+		display: none
+.md-dialog
+	max-width: 100vw !important
+	border-radius: 8px !important
+.t-ellipsis
+	white-space: nowrap
+	overflow: hidden
+	text-overflow: ellipsis
+.card-banner:before 
+	padding-top: 25% !important
+.md-overlay
+	backdrop-filter: blur(5px)
+@media (min-width: 1024px)
+	::-webkit-scrollbar
+		width: 8px
+		height: 8px
+::-webkit-scrollbar
+	width: 5px
+	height: 5px
+	background: 0 0
+	.md-theme-default-dark &
+		background: rgba(255, 255, 255, 0.4)
+::-webkit-scrollbar-thumb
+	background: rgba(0, 0, 0, 0.2)
 </style>
