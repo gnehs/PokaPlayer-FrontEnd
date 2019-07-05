@@ -231,6 +231,14 @@ export default {
 		this.axios.defaults.withCredentials = true;
 		this.axios.defaults.baseURL = _setting(`server`);
 		this.getStatus(true);
+		navigator.mediaSession.setActionHandler("play", () => _player.toggle());
+		navigator.mediaSession.setActionHandler("pause", () => _player.pause());
+		navigator.mediaSession.setActionHandler("previoustrack", () =>
+			_player.skipBack()
+		);
+		navigator.mediaSession.setActionHandler("nexttrack", () =>
+			_player.skipForward()
+		);
 		setInterval(() => {
 			this.audio_paused = _player.paused;
 			this.audio_order = _player.options.order;
@@ -263,29 +271,33 @@ export default {
 				this.audio_previous_name =
 					_player.list.audios[_player.prevIndex()].name;
 				if ("mediaSession" in navigator) {
+					let artworkData;
+					//讀圖片
+					let image = document.querySelector(".cover img");
+					if (image.complete) {
+						// 圖片已經被載入
+						artworkData = [
+							{
+								src: nowPlaying.cover,
+								sizes: `${image.naturalWidth}x${image.naturalHeight}`,
+								type: "image/png"
+							}
+						];
+					} else {
+						artworkData = [
+							{
+								src: "/static/img/icons/512x512.png",
+								sizes: "512x512",
+								type: "image/png"
+							}
+						];
+					}
+					//寫入 mediaSession.metadata
 					navigator.mediaSession.metadata = new MediaMetadata({
 						title: nowPlaying.name,
 						artist: nowPlaying.artist,
-						artwork: [
-							{
-								src: nowPlaying.cover,
-								type: "image/png"
-							}
-						]
+						artwork: artworkData
 					});
-					navigator.mediaSession.setActionHandler("play", () =>
-						_player.toggle()
-					);
-					navigator.mediaSession.setActionHandler("pause", () =>
-						_player.pause()
-					);
-					navigator.mediaSession.setActionHandler(
-						"previoustrack",
-						() => _player.skipBack()
-					);
-					navigator.mediaSession.setActionHandler("nexttrack", () =>
-						_player.skipForward()
-					);
 				}
 			} else {
 				this.audio_currentTime = "0:00";
