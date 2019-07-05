@@ -261,10 +261,10 @@ export default {
 				this.audio_artist = nowPlaying.artist;
 				this.audio_cover = nowPlaying.cover;
 				this.audio_currentTime = this.secondToTime(
-					_player.audio.currentTime
+					_player.audio.currentTime || 0
 				);
 				this.audio_totalTime = this.secondToTime(
-					_player.audio.duration
+					_player.audio.duration || 0
 				);
 				this.audio_next_name =
 					_player.list.audios[_player.nextIndex()].name;
