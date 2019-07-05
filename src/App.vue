@@ -683,7 +683,14 @@ html,body
 	height: 5px
 	background: 0 0
 	.md-theme-default-dark &
-		background: rgba(255, 255, 255, 0.4)
+		background: rgba(255, 255, 255, 0.05)
 ::-webkit-scrollbar-thumb
-	background: rgba(0, 0, 0, 0.2)
+	--color: 0,0,0
+	background: rgba(var(--color), .3)
+	.md-theme-default-dark &
+		--color: 255, 255, 255
+	&:hover
+		background: rgba(var(--color), .4)
+	&:active
+		background: rgba(var(--color), .6)
 </style>
