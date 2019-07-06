@@ -231,14 +231,20 @@ export default {
 		this.axios.defaults.withCredentials = true;
 		this.axios.defaults.baseURL = _setting(`server`);
 		this.getStatus(true);
-		navigator.mediaSession.setActionHandler("play", () => _player.toggle());
-		navigator.mediaSession.setActionHandler("pause", () => _player.pause());
-		navigator.mediaSession.setActionHandler("previoustrack", () =>
-			_player.skipBack()
-		);
-		navigator.mediaSession.setActionHandler("nexttrack", () =>
-			_player.skipForward()
-		);
+		if ("mediaSession" in navigator) {
+			navigator.mediaSession.setActionHandler("play", () =>
+				_player.toggle()
+			);
+			navigator.mediaSession.setActionHandler("pause", () =>
+				_player.pause()
+			);
+			navigator.mediaSession.setActionHandler("previoustrack", () =>
+				_player.skipBack()
+			);
+			navigator.mediaSession.setActionHandler("nexttrack", () =>
+				_player.skipForward()
+			);
+		}
 		setInterval(() => {
 			this.audio_paused = _player.paused;
 			this.audio_order = _player.options.order;
