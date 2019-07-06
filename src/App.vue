@@ -633,24 +633,6 @@ html,body
 .slide-left-leave-active,.slide-right-enter 
 	transform: translate(-3em, 0)
 	opacity: 0
-\:root
-	--default-font: Roboto, "SF Pro TC", "SF Pro Text", "SF Pro Icons",
-			"PingFang TC", "Helvetica Neue", "Helvetica", "Arial", "Source Hans",
-			"思源黑體", "Noto Sans CJK TC", "Noto Sans TC", "Microsoft JhengHei",
-			"Microsoft Yahei", wf_SegoeUI, "Segoe UI", Segoe, "Segoe WP", Tahoma,
-			Verdana, Ubuntu, "Bitstream Vera Sans", "DejaVu Sans", Tahoma,
-			微軟正黑體, "LiHei Pro", "WenQuanYi Micro Hei", "Droid Sans Fallback",
-			"AR PL UMing TW", "Helvetica Neue", "Hiragino Maru Gothic ProN",
-			メイリオ, "ヒラギノ丸ゴ ProN W4", Meiryo, "Droid Sans", sans-serif
-	--product-font: "Product Sans", Roboto, "SF Pro TC", "SF Pro Text",
-			"SF Pro Icons", "PingFang TC", "Helvetica Neue", "Helvetica", "Arial",
-			"Source Hans", "思源黑體", "Noto Sans CJK TC", "Noto Sans TC",
-			"Microsoft JhengHei", "Microsoft Yahei", wf_SegoeUI, "Segoe UI", Segoe,
-			"Segoe WP", Tahoma, Verdana, Ubuntu, "Bitstream Vera Sans",
-			"DejaVu Sans", Tahoma, 微軟正黑體, "LiHei Pro", "WenQuanYi Micro Hei",
-			"Droid Sans Fallback", "AR PL UMing TW", "Helvetica Neue",
-			"Hiragino Maru Gothic ProN", メイリオ, "ヒラギノ丸ゴ ProN W4", Meiryo,
-			"Droid Sans", sans-serif
 .md-tab
 	padding: 16px 0
 	.md-content.md-tabs-content
@@ -686,23 +668,52 @@ html,body
 	padding-top: 25% !important
 .md-overlay
 	backdrop-filter: blur(5px)
-@media (min-width: 1024px)
-	::-webkit-scrollbar
-		width: 8px
-		height: 8px
-::-webkit-scrollbar
-	width: 5px
-	height: 5px
-	background: 0 0
-	.md-theme-default-dark &
-		background: rgba(255, 255, 255, 0.05)
-::-webkit-scrollbar-thumb
-	--color: 0,0,0
-	background: rgba(var(--color), .3)
-	.md-theme-default-dark &
-		--color: 255, 255, 255
-	&:hover
-		background: rgba(var(--color), .4)
-	&:active
-		background: rgba(var(--color), .6)
+</style>
+<style lang="scss">
+	:root {
+		--default-font: Roboto, "SF Pro TC", "SF Pro Text", "SF Pro Icons",
+			"PingFang TC", "Helvetica Neue", "Helvetica", "Arial", "Source Hans",
+			"思源黑體", "Noto Sans CJK TC", "Noto Sans TC", "Microsoft JhengHei",
+			"Microsoft Yahei", wf_SegoeUI, "Segoe UI", Segoe, "Segoe WP", Tahoma,
+			Verdana, Ubuntu, "Bitstream Vera Sans", "DejaVu Sans", Tahoma,
+			微軟正黑體, "LiHei Pro", "WenQuanYi Micro Hei", "Droid Sans Fallback",
+			"AR PL UMing TW", "Helvetica Neue", "Hiragino Maru Gothic ProN",
+			メイリオ, "ヒラギノ丸ゴ ProN W4", Meiryo, "Droid Sans", sans-serif;
+		--product-font: "Product Sans", Roboto, "SF Pro TC", "SF Pro Text",
+			"SF Pro Icons", "PingFang TC", "Helvetica Neue", "Helvetica", "Arial",
+			"Source Hans", "思源黑體", "Noto Sans CJK TC", "Noto Sans TC",
+			"Microsoft JhengHei", "Microsoft Yahei", wf_SegoeUI, "Segoe UI", Segoe,
+			"Segoe WP", Tahoma, Verdana, Ubuntu, "Bitstream Vera Sans",
+			"DejaVu Sans", Tahoma, 微軟正黑體, "LiHei Pro", "WenQuanYi Micro Hei",
+			"Droid Sans Fallback", "AR PL UMing TW", "Helvetica Neue",
+			"Hiragino Maru Gothic ProN", メイリオ, "ヒラギノ丸ゴ ProN W4", Meiryo,
+			"Droid Sans", sans-serif;
+	}
+	@media (min-width: 1024px) {
+		::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+		}
+	}
+	::-webkit-scrollbar {
+		width: 5px;
+		height: 5px;
+		background: 0 0;
+		.md-theme-default-dark & {
+			background: rgba(255, 255, 255, 0.05);
+		}
+	}
+	::-webkit-scrollbar-thumb {
+		--color: 0, 0, 0;
+		background: rgba(var(--color), 0.3);
+		.md-theme-default-dark & {
+			--color: 255, 255, 255;
+		}
+		&:hover {
+			background: rgba(var(--color), 0.4);
+		}
+		&:active {
+			background: rgba(var(--color), 0.6);
+		}
+	}
 </style>
