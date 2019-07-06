@@ -129,6 +129,10 @@
 	"settings_restarting": "Restarting...",
 	"settings_restart_completed": "Restart completed.",
 	"settings_restartDialog_title": "Are you sure to restart?",
+	"source": {
+		"DSM": "DSM",
+		"Netease2": "Netease"
+	},
 	"install": {
 		"title": "安裝嚮導",
 		"next": "下一步",

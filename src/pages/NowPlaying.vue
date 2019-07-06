@@ -128,7 +128,7 @@
 								<md-icon class="outline-cloud"/>
 							</md-avatar>
 							<div class="header">
-								<div class="title t-ellipsis">{{moreDialogTemp.source}}</div>
+								<div class="title t-ellipsis">{{$t(`source.${moreDialogTemp.source}`)}}</div>
 								<div class="t-ellipsis">{{$t('songAction_source')}}</div>
 							</div>
 						</div>

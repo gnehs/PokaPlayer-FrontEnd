@@ -129,6 +129,10 @@
 	"settings_restarting": "正在重新啟動...",
 	"settings_restart_completed": "重新啟動完成！",
 	"settings_restartDialog_title": "確定要重新啟動嗎？",
+	"source": {
+		"DSM": "DSM",
+		"Netease2": "網易雲音樂"
+	},
 	"install": {
 		"title": "安裝嚮導",
 		"next": "下一步",

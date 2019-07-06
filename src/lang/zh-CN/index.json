@@ -129,6 +129,10 @@
 	"settings_restarting": "正在重启...",
 	"settings_restart_completed": "重启完成！",
 	"settings_restartDialog_title": "确定要重新启动吗？",
+	"source": {
+		"DSM": "DSM",
+		"Netease2": "网易云音乐"
+	},
 	"install": {
 		"title": "安装向导",
 		"next": "下一步",

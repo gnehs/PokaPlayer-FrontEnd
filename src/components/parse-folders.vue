@@ -13,7 +13,7 @@
 					</md-avatar>
 					<div class="header">
 						<div class="title t-ellipsis">{{name}}</div>
-						<div class="t-ellipsis">{{source}}</div>
+						<div class="t-ellipsis">{{$t(`source.${source}`)}}</div>
 					</div>
 				</div>
 			</md-ripple>

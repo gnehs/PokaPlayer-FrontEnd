@@ -7,8 +7,8 @@
       :to="`/playlist/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
       :poka-bg="image||false"
       :poka-title="name"
-      :poka-subtitle="source"
-      :source="source"
+      :poka-subtitle="$t(`source.${source}`)"
+      :source="$t(`source.${source}`)"
     />
   </poka-cards>
 </template>
