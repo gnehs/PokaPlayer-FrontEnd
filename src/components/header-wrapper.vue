@@ -32,6 +32,7 @@ export default {
 		background-size: cover
 		background-position: center
 		mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 10%, transparent 90%)
+		-webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 10%, transparent 90%)
 		width: 100%
 		position: absolute
 		min-height: 300px
