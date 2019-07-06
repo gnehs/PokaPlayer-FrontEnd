@@ -11,7 +11,7 @@
 				btn-type="icon-button"
 			/>
 		</info-header>
-		<md-divider/>
+		<md-divider v-if="songs"/>
 		<poka-parse-songs :data="songs" v-if="songs"/>
 		<poka-loader v-else/>
 	</div>
