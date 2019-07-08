@@ -22,6 +22,7 @@ import SettingNetwork from '@/pages/SettingNetwork'
 import SettingCustomize from '@/pages/SettingCustomize'
 import SettingLang from '@/pages/SettingLang'
 import SettingSystem from '@/pages/SettingSystem'
+import SettingUser from '@/pages/SettingUser'
 
 Vue.use(Router)
 
@@ -135,6 +136,13 @@ export default new Router({
     path: '/setting/system',
     name: 'SettingSystem',
     component: SettingSystem,
+    meta: {
+      transitionName: 'slide'
+    }
+  }, {
+    path: '/setting/user',
+    name: 'SettingUser',
+    component: SettingUser,
     meta: {
       transitionName: 'slide'
     }

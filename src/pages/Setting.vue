@@ -1,11 +1,11 @@
 <template>
 	<div>
-		<poka-header :title="$t('settings')" :subtitle="'PokaPlayer'"/>
+		<poka-header :title="$t('settings')" :subtitle="'PokaPlayer'" />
 		<md-list>
 			<md-list-item>
 				<md-icon>brightness_3</md-icon>
 				<span class="md-list-item-text">{{$t('settings_dark')}}</span>
-				<md-switch v-model="settings.darkMode" @change="switchTheme"/>
+				<md-switch v-model="settings.darkMode" @change="switchTheme" />
 			</md-list-item>
 		</md-list>
 		<md-list class="md-double-line">
@@ -30,6 +30,13 @@
 					<span>{{$t('settings_lang_description')}}</span>
 				</div>
 			</md-list-item>
+			<md-list-item to="/setting/user">
+				<md-icon>person</md-icon>
+				<div class="md-list-item-text">
+					<span>{{$t('settingUser.title')}}</span>
+					<span>{{$t('settingUser.description')}}</span>
+				</div>
+			</md-list-item>
 			<md-list-item to="/setting/system">
 				<md-icon>system_update</md-icon>
 				<div class="md-list-item-text">
@@ -47,7 +54,7 @@
 		</md-list>
 		<md-dialog :md-active.sync="aboutDialog" :md-fullscreen="false">
 			<md-dialog-title>{{$t('settings_about')}}</md-dialog-title>
-			<poka-about/>
+			<poka-about />
 			<md-dialog-actions>
 				<md-button class="md-primary" @click="aboutDialog=false">{{$t('back')}}</md-button>
 			</md-dialog-actions>

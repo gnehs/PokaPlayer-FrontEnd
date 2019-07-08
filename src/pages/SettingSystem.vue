@@ -1,18 +1,11 @@
 <template>
 	<div>
-		<poka-header :title="$t('settings')" :subtitle="$t('settings_systemAndUpdate')"/>
+		<poka-header :title="$t('settings')" :subtitle="$t('settings_systemAndUpdate')" />
 		<md-list>
 			<md-list-item to="/setting">
 				<md-icon>arrow_back</md-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('back')}}</span>
-				</div>
-			</md-list-item>
-			<md-subheader>{{$t('settings_account')}}</md-subheader>
-			<md-list-item @click="logout">
-				<md-icon>exit_to_app</md-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('settings_logout')}}</span>
 				</div>
 			</md-list-item>
 			<md-subheader>{{$t('settings_system')}}</md-subheader>
@@ -48,7 +41,7 @@
 		<md-dialog :md-active.sync="showUpdateDialog" :md-fullscreen="false">
 			<md-dialog-title>{{$t("settings_updateDialog_title", { version: this.newVersion.tag})}}</md-dialog-title>
 			<md-dialog-content>
-				<p v-html="newVersion.body"/>
+				<p v-html="newVersion.body" />
 				<p>{{$t('settings_updateDialog_note')}}</p>
 			</md-dialog-content>
 			<md-dialog-actions>
@@ -149,9 +142,6 @@ export default {
 					}
 				})
 				.catch(e => console.error(e));
-		},
-		logout() {
-			this.axios("/logout").then(e => this.$router.push("/login"));
 		},
 		update() {
 			window._player.pause();

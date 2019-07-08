@@ -3,7 +3,7 @@
 		<md-card class="md-layout-item">
 			<md-card-media-cover>
 				<md-card-media md-ratio="16:9" class="card-banner">
-					<img class="header-img" src="https://source.unsplash.com/daily">
+					<img class="header-img" src="https://source.unsplash.com/daily" />
 				</md-card-media>
 
 				<md-card-area>
@@ -18,17 +18,22 @@
 					<md-icon class="md-accent" v-if="serverError">warning</md-icon>
 					<md-icon class="md-accent" v-else>link</md-icon>
 					<label for="server">Server</label>
-					<md-input type="text" name="server" v-model.trim="server" :disabled="logining"/>
+					<md-input type="text" name="server" v-model.trim="server" :disabled="logining" />
+				</md-field>
+				<md-field>
+					<md-icon class="md-accent">vpn_key</md-icon>
+					<label for="username">Username</label>
+					<md-input type="text" name="username" v-model="username" :disabled="logining" />
 				</md-field>
 				<md-field>
 					<md-icon class="md-accent" v-if="passwordError">warning</md-icon>
 					<md-icon class="md-accent" v-else>vpn_key</md-icon>
 					<label for="password">Password</label>
-					<md-input type="password" name="password" v-model="password" :disabled="logining"/>
+					<md-input type="password" name="password" v-model="password" :disabled="logining" />
 				</md-field>
 			</md-card-content>
 
-			<md-progress-bar md-mode="indeterminate" v-if="logining"/>
+			<md-progress-bar md-mode="indeterminate" v-if="logining" />
 
 			<md-card-actions>
 				<md-button type="submit" class="md-raised md-primary" :disabled="logining">{{$t('login')}}</md-button>
@@ -83,11 +88,13 @@ export default {
 		server: null,
 		serverError: null,
 		password: null,
+		username: null,
 		passwordError: null
 	}),
 	created() {
 		this.remember = true;
 		this.password = _setting(`password`);
+		this.username = _setting(`username`);
 		this.server = _setting(`server`);
 	},
 	methods: {
@@ -105,13 +112,10 @@ export default {
 				return;
 			}
 			this.logining = true;
-			let formData = new URLSearchParams();
-			formData.append("userPASS", this.password);
-
 			this.axios({
 				method: "post",
 				url: this.server + "/login/",
-				data: formData,
+				data: { password: this.password, username: this.username },
 				config: { headers: { "Content-Type": "multipart/form-data" } }
 			})
 				.catch(
@@ -120,16 +124,12 @@ export default {
 				.then(res => res.data)
 				.then(response => {
 					this.logining = false;
-					if (response == "success") {
-						_setting(`rememberPass`, this.remember);
-						_setting(
-							`password`,
-							this.remember ? this.password : null
-						);
+					if (response.success) {
+						_setting(`password`, this.password);
+						_setting(`username`, this.username);
 						_setting(`server`, this.server);
 						this.$router.push("/");
-					}
-					if (response == "fail") {
+					} else {
 						this.passwordError = "Wrong password";
 						this.password = "";
 						return false;
