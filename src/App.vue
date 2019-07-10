@@ -196,6 +196,7 @@ export default {
 		settings: { darkMode: window._setting("darkMode") }
 	}),
 	created() {
+		sessionStorage.removeItem("login");
 		function vhResize() {
 			let vh = window.innerHeight * 0.01;
 			document.documentElement.style.setProperty("--vh", `${vh}px`);
@@ -277,27 +278,19 @@ export default {
 				this.audio_previous_name =
 					_player.list.audios[_player.prevIndex()].name;
 				if ("mediaSession" in navigator) {
-					let artworkData;
 					//讀圖片
 					let image = document.querySelector(".cover img");
-					if (image.complete) {
-						// 圖片已經被載入
-						artworkData = [
-							{
-								src: nowPlaying.cover,
-								sizes: `${image.naturalWidth}x${image.naturalHeight}`,
-								type: "image/png"
-							}
-						];
-					} else {
-						artworkData = [
-							{
-								src: "/static/img/icons/512x512.png",
-								sizes: "512x512",
-								type: "image/png"
-							}
-						];
-					}
+					let artworkData = [
+						{
+							src: image.complete
+								? nowPlaying.cover
+								: "/static/img/icons/512x512.png",
+							sizes: image.complete
+								? `${image.naturalWidth}x${image.naturalHeight}`
+								: "512x512",
+							type: "image/png"
+						}
+					];
 					//寫入 mediaSession.metadata
 					navigator.mediaSession.metadata = new MediaMetadata({
 						title: nowPlaying.name,
@@ -364,12 +357,14 @@ export default {
 				: window._theme.switchToLight();
 		},
 		getStatus(checkUpdate = false) {
+			if (sessionStorage.getItem("login")) return;
 			this.axios.get(_setting(`server`) + "/status/").then(response => {
 				if (!response.data.install) {
 					return this.$router.push("/install");
 				} else if (!response.data.login) {
 					return this.$router.push("/login");
 				}
+				sessionStorage.setItem("login", true);
 				if (checkUpdate) this.fetchNewVersion(response.data.version);
 			});
 		},

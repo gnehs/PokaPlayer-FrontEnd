@@ -240,6 +240,7 @@ export default {
 			this.snackbar.show = true;
 		},
 		logout() {
+			sessionStorage.removeItem("login");
 			this.axios("/logout").then(e => this.$router.push("/login"));
 		}
 	}
