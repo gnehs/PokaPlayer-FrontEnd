@@ -123,9 +123,13 @@ export default {
 		}
 	}),
 	created() {
-		this.axios.get(_setting(`server`) + "/profile/").then(response => {
-			this.userdata = response.data;
-		});
+		if (sessionStorage.getItem("login")) {
+			this.userdata = JSON.parse(sessionStorage.getItem("login"));
+		} else {
+			this.axios.get(_setting(`server`) + "/profile/").then(response => {
+				this.userdata = response.data;
+			});
+		}
 	},
 	methods: {
 		changeName() {

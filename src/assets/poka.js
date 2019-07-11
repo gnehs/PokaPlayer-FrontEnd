@@ -26,8 +26,7 @@ window._setting = (setting, value) => {
         "headerBgSource": "https://i.imgur.com/EcmOwlT.jpg",
         "darkMode": false,
         "server": location.origin,
-        "password": "",
-        "rememberPass": true
+        "password": ""
     }
     // default language
     let userLang = navigator.language || navigator.userLanguage
@@ -43,17 +42,19 @@ window._setting = (setting, value) => {
             break;
     }
 
-    if (value != undefined) { //設定值
+    if (value) { //設定值
         pokaSetting[setting] = value
         localStorage.pokaSetting = JSON.stringify(pokaSetting)
         return pokaSetting[setting]
     } else { //取值
-        if (pokaSetting[setting] != undefined) { //已有值
+        if (pokaSetting[setting]) { //已有值
             return pokaSetting[setting]
-        } else { //未有，先存下再回傳
+        } else if (defaultPokaSetting[setting]) { //未有，先存下再回傳
             pokaSetting[setting] = defaultPokaSetting[setting] || ""
             localStorage.pokaSetting = JSON.stringify(pokaSetting)
             return pokaSetting[setting]
+        } else {
+            return ""
         }
     }
 }

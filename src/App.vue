@@ -358,15 +358,27 @@ export default {
 		},
 		getStatus(checkUpdate = false) {
 			if (sessionStorage.getItem("login")) return;
-			this.axios.get(_setting(`server`) + "/status/").then(response => {
-				if (!response.data.install) {
-					return this.$router.push("/install");
-				} else if (!response.data.login) {
-					return this.$router.push("/login");
-				}
-				sessionStorage.setItem("login", true);
-				if (checkUpdate) this.fetchNewVersion(response.data.version);
-			});
+			this.axios
+				.get(_setting(`server`) + "/status/")
+				.then(async response => {
+					if (!response.data.install) {
+						return this.$router.push("/install");
+					} else if (!response.data.login) {
+						return this.$router.push("/login");
+					}
+					// 標記為已登入
+					sessionStorage.setItem("login", true);
+					let userProfile = await this.axios.get(
+						_setting(`server`) + "/profile/"
+					);
+					sessionStorage.setItem(
+						"login",
+						JSON.stringify(userProfile.data)
+					);
+
+					if (checkUpdate)
+						this.fetchNewVersion(response.data.version);
+				});
 		},
 		compareVersion(local, remote) {
 			local = local.split(".").map(e => parseInt(e));
