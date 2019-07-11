@@ -211,7 +211,7 @@ export default {
 						"settingUser.changePassword.result.inconsistent"
 					)
 				);
-			if (this.temp.changePassword !== this.temp.changePasswordold)
+			if (this.temp.changePassword === this.temp.changePasswordold)
 				return this.showMessage(
 					window.i18n.t("settingUser.changePassword.result.same")
 				);
