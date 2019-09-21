@@ -122,9 +122,15 @@ export default {
 			fetch("https://api.github.com/repos/gnehs/PokaPlayer/releases")
 				.then(e => e.json())
 				.then(e => {
-					this.newVersion.body = new showdown.Converter().makeHtml(
-						e[0].body
-					);
+					this.newVersion.body =
+						`<h1 align="center">Version ${e[0].tag_name}</h1>` +
+						new showdown.Converter().makeHtml(e[0].body) +
+						"<hr>" +
+						`<h1 align="center">Version ${e[1].tag_name}</h1>` +
+						new showdown.Converter().makeHtml(e[1].body) +
+						"<hr>" +
+						`<h1 align="center">Version ${e[2].tag_name}</h1>` +
+						new showdown.Converter().makeHtml(e[2].body);
 					if (this.compareVersion(this.poka_version, e[0].tag_name)) {
 						this.newVersion.prerelease = e[0].prerelease;
 						this.newVersion.tag = e[0].tag_name;
