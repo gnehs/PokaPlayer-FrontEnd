@@ -1,13 +1,6 @@
 <template>
 	<div>
 		<poka-header :title="$t('settings')" :subtitle="'PokaPlayer'" />
-		<md-list>
-			<md-list-item>
-				<md-icon>brightness_3</md-icon>
-				<span class="md-list-item-text">{{$t('settings_dark')}}</span>
-				<md-switch v-model="settings.darkMode" @change="switchTheme" />
-			</md-list-item>
-		</md-list>
 		<md-list class="md-double-line">
 			<md-list-item to="/setting/network">
 				<md-icon>cloud</md-icon>
@@ -61,25 +54,12 @@
 		</md-dialog>
 	</div>
 </template>
-<style lang="sass" scoped>
-.md-list+.md-list
-	margin-top: -16px
-</style>
-
 <script>
 export default {
 	name: "Setting",
 	data: () => ({
 		settings: { darkMode: window._setting("darkMode") },
 		aboutDialog: false
-	}),
-	methods: {
-		switchTheme() {
-			window._setting("darkMode", this.settings.darkMode);
-			this.settings.darkMode
-				? window._theme.switchToDark()
-				: window._theme.switchToLight();
-		}
-	}
+	})
 };
 </script>

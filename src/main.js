@@ -25,20 +25,19 @@ Vue.use(VueMaterial)
 import * as PokaComponents from './poka-component'
 Object.values(PokaComponents).forEach(PokaComponents => Vue.component(PokaComponents.name, PokaComponents))
 
-Vue.material.theming.theme = window._setting('darkMode') ? "default-dark" : "default"
-document.getElementsByTagName('meta')["theme-color"].content = window._setting('darkMode') ? "rgb(33, 33, 33)" : "rgb(245, 245, 245)"
-window._theme = {
-  switchToDark() {
-    Vue.material.theming.theme = "default-dark";
-    document.getElementsByTagName('meta')["theme-color"].content = "rgb(33, 33, 33)";
-    window._setting('darkMode', true)
-  },
-  switchToLight() {
-    Vue.material.theming.theme = "default";
-    document.getElementsByTagName('meta')["theme-color"].content = "rgb(245, 245, 245)";
-    window._setting('darkMode', false)
-  }
+// 偵測暗黑模式
+const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+themeSwitch(darkModeMediaQuery.matches)
+darkModeMediaQuery.addListener(e => {
+  const darkModeOn = e.matches;
+  themeSwitch(darkModeOn)
+});
+
+function themeSwitch(dark = false) {
+  Vue.material.theming.theme = dark ? "default-dark" : "default"
+  document.getElementsByTagName('meta')["theme-color"].content = dark ? "rgb(33, 33, 33)" : "rgb(245, 245, 245)"
 }
+
 
 Vue.config.productionTip = false
 /* eslint-disable no-new */
