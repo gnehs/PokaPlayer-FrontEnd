@@ -35,7 +35,7 @@
 						<div class="md-list-item-text t-ellipsis">
 							<span class="t-ellipsis">{{item.name}} ／ {{item.artist}}</span>
 							<span class="t-ellipsis">{{item.nowLyric}}</span>
-							<p class="t-ellipsis">({{item.rate}}% match){{item.nowLyricT}}</p>
+							<span class="t-ellipsis">{{item.nowLyricT}}</span>
 						</div>
 					</md-list-item>
 				</md-list>
