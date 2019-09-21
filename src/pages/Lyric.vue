@@ -33,9 +33,9 @@
 					>
 						<md-icon>subtitles</md-icon>
 						<div class="md-list-item-text t-ellipsis">
-							<span class="t-ellipsis">{{item.name}}</span>
-							<span class="t-ellipsis">{{item.artist}}</span>
-							<p class="t-ellipsis">({{item.rate}}% match) {{item.lyric.substring(0,50-1)+"..."}}</p>
+							<span class="t-ellipsis">{{item.name}} ／ {{item.artist}}</span>
+							<span class="t-ellipsis">{{item.nowLyric}}</span>
+							<p class="t-ellipsis">({{item.rate}}% match){{item.nowLyricT}}</p>
 						</div>
 					</md-list-item>
 				</md-list>
@@ -97,6 +97,11 @@ export default {
 	destroyed() {
 		this.stopUpdateLyric();
 	},
+	watch: {
+		showLyricDialog() {
+			this.updateSearchLyric();
+		}
+	},
 	methods: {
 		startUpdateLyric() {
 			this.Lyric_Update = setInterval(() => this.updateLyric(), 300);
@@ -118,6 +123,7 @@ export default {
 			}
 		},
 		updateLyric() {
+			this.updateSearchLyric(); //更新搜尋結果中的歌詞
 			let nowPlaying = _player.list.audios[_player.list.index];
 			if (_player.list.audios.length > 0) {
 				if (this.audio_title != nowPlaying.name) {
@@ -176,6 +182,23 @@ export default {
 				this.lyricSearching = false;
 			}
 		},
+		updateSearchLyric() {
+			//_lyricReader
+			if (this.lyricSearchResult && this.showLyricDialog) {
+				this.lyricSearchResult.map(x => {
+					let lr = new window._lyricReader(x.lyric);
+					let lrg = lr.getLyrics();
+					let lrs = lr.select(_player.audio.currentTime);
+					x.nowLyric = lrg[lrs].text;
+					if (x.nowLyric.trim() == "") x.nowLyric = "．．．";
+					x.nowLyricT = "";
+					if (this.lyricTranslated) {
+						x.nowLyricT = lrg[lrs + 1].text;
+					}
+					return x;
+				});
+			}
+		},
 		getLyric(title, artist, id = false, source) {
 			let lyricRegex = /\[([0-9.:]*)\]/i;
 			let response, url;
@@ -232,6 +255,7 @@ export default {
 							if (result.lyrics[0].rate > 35 && set)
 								this.loadLrc(result.lyrics[0].lyric);
 							this.lyricSearchResult = result.lyrics;
+							this.updateSearchLyric();
 						}
 					}
 					this.lyricSearching = false;
@@ -266,7 +290,6 @@ export default {
 				this.lyricTranslated = false;
 			}
 			this.lyricSearching = false;
-			this.updateLyric();
 			if (save) {
 				let nowPlaying = _player.list.audios[_player.list.index];
 				this.axios.post(_setting(`server`) + `/pokaapi/lyric`, {
