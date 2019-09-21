@@ -91,6 +91,7 @@
 				<md-progress-bar
 					class="md-accent"
 					md-mode="buffer"
+					style="width: 100%;"
 					:md-value="audio_currentTimePercent"
 					:md-buffer="audio_bufferPercent"
 				></md-progress-bar>

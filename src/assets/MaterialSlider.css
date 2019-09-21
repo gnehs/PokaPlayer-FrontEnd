@@ -23,6 +23,7 @@
 .app-progress-bar,
 .now-playing-progress-bar>.bar {
     position: relative;
+    z-index: 3;
 }
 
 .now-playing-progress-bar>.bar>.pure-material-slider,
