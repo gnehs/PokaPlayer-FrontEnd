@@ -9,8 +9,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import i18n from './lang'
+import store from './store'
+import './registerServiceWorker'
 
 import axios from 'axios'
+axios.defaults.withCredentials = true
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
 
@@ -18,7 +22,7 @@ import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 Vue.use(VueMaterial)
 
-import * as PokaComponents from './poka-component.js'
+import * as PokaComponents from './poka-component'
 Object.values(PokaComponents).forEach(PokaComponents => Vue.component(PokaComponents.name, PokaComponents))
 
 Vue.material.theming.theme = window._setting('darkMode') ? "default-dark" : "default"
@@ -42,8 +46,10 @@ new Vue({
   el: '#app',
   router,
   i18n,
+  store,
   components: {
     App
   },
-  template: '<App/>'
+  template: '<App/>',
+  render: h => h(App)
 })

@@ -106,7 +106,7 @@ export default {
 		}
 	}),
 	created() {
-		this.axios.get(_setting(`server`) + "/info/").then(response => {
+		this.axios.get(_setting(`server`) + "/status/").then(response => {
 			this.poka_version = response.data.version;
 			this.poka_debug =
 				response.data.debug != "false" ? response.data.debug : null;

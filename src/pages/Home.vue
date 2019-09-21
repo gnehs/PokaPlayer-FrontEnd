@@ -4,8 +4,8 @@
 			:title="$t('header_welcome')"
 			:subtitle="$t('header_version',{version:poka_version})"
 		/>
-		<poka-loader v-if="!data"/>
-		<poka-parse-multiple v-else :data="data"/>
+		<poka-loader v-if="!data" />
+		<poka-parse-multiple v-else :data="data" />
 	</div>
 </template>
 
@@ -16,7 +16,7 @@ export default {
 		this.axios.get(_setting(`server`) + "/pokaapi/home/").then(response => {
 			this.data = response.data;
 		});
-		this.axios.get(_setting(`server`) + "/info/").then(response => {
+		this.axios.get(_setting(`server`) + "/status/").then(response => {
 			this.poka_version = response.data.version;
 		});
 	},

@@ -357,7 +357,8 @@ export default {
 				: window._theme.switchToLight();
 		},
 		getStatus(checkUpdate = false) {
-			if (sessionStorage.getItem("login")) return;
+			if (sessionStorage.getItem("login"))
+				sessionStorage.setItem("login", false);
 			this.axios
 				.get(_setting(`server`) + "/status/")
 				.then(async response => {

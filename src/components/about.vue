@@ -1,7 +1,7 @@
 <template>
 	<div class="box">
 		<div class="content">
-			<img src="/static/img/icons/512x512.png" style="height: 128px">
+			<img src="/img/icons/apple-touch-icon.png" style="height: 128px" />
 			<h1>PokaPlayer</h1>
 			<p class="md-subheading">{{poka_version}}</p>
 			<a href="https://github.com/gnehs/PokaPlayer/" target="_blank">GitHub</a>
@@ -35,7 +35,7 @@ export default {
 		poka_version: "Loading..."
 	}),
 	created() {
-		this.axios.get(_setting(`server`) + "/info/").then(response => {
+		this.axios.get(_setting(`server`) + "/status/").then(response => {
 			if (!response.data.version) this.$router.push("/login");
 			this.poka_version = response.data.version;
 		});
