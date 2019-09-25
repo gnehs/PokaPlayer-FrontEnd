@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<poka-header :title="$t('settings')" :subtitle="$t('settings_lang')"/>
+		<poka-header :title="$t('settings')" :subtitle="$t('settings_lang')" />
 		<md-list>
 			<md-list-item to="/setting">
 				<md-icon>arrow_back</md-icon>
@@ -35,6 +35,12 @@ export default {
 			window.i18n.locale = lang;
 			this.currentLang = lang;
 			window._setting("lang", lang);
+			//同步設定
+			this.axios({
+				method: "post",
+				url: _setting(`server`) + "/setting/",
+				data: { n: { lang } }
+			});
 		}
 	}
 };

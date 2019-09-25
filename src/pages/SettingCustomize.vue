@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<poka-header :title="$t('settings')" :subtitle="$t('settings_customize')" :bg="setting.bg"/>
+		<poka-header :title="$t('settings')" :subtitle="$t('settings_customize')" :bg="setting.bg" />
 		<md-list>
 			<md-list-item to="/setting">
 				<md-icon>arrow_back</md-icon>
@@ -11,7 +11,7 @@
 		</md-list>
 		<div style="margin-left:16px">
 			<span class="md-title">{{$t('settings_customize_bg')}}</span>
-			<md-divider style="margin:4px"/>
+			<md-divider style="margin:4px" />
 			<poka-cards>
 				<poka-card
 					@click.native="bg_prompt_active=true"
@@ -97,6 +97,12 @@ export default {
 	methods: {
 		setBg(bg) {
 			this.setting.bg = bg;
+			//同步設定
+			this.axios({
+				method: "post",
+				url: _setting(`server`) + "/setting/",
+				data: { n: { headerBgSource: bg } }
+			});
 		}
 	}
 };

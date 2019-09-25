@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<poka-header :title="$t('settings')" :subtitle="$t('settings_network')"/>
+		<poka-header :title="$t('settings')" :subtitle="$t('settings_network')" />
 		<md-list style="padding-bottom:0">
 			<md-list-item to="/setting">
 				<md-icon>arrow_back</md-icon>
@@ -66,6 +66,13 @@ export default {
 				this.soundQuality = quality;
 				this.showSoundQualityDialog = false;
 				window._setting("audioQuality", quality);
+
+				//同步設定
+				this.axios({
+					method: "post",
+					url: _setting(`server`) + "/setting/",
+					data: { n: { audioQuality: quality } }
+				});
 			} catch (e) {
 				console.error(e);
 			}

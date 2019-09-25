@@ -80,6 +80,7 @@
 	}
 </style>
 <script>
+import { log } from "util";
 export default {
 	name: "Login",
 	data: () => ({
@@ -122,13 +123,24 @@ export default {
 					error => (this.serverError = "Unable to connect to server")
 				)
 				.then(res => res.data)
-				.then(response => {
+				.then(async response => {
 					this.logining = false;
 					if (response.success) {
 						_setting(`password`, this.password);
 						_setting(`username`, this.username);
 						_setting(`server`, this.server);
+						// 同步設定
+						let settingReq = (await this.axios(
+							this.server + "/setting/"
+						)).data;
+						for (let i of Object.keys(settingReq.settings)) {
+							console.log(i);
+							_setting(i, settingReq.settings[i]);
+						}
+						// 轉到首頁
 						this.$router.push("/");
+						//重新整理來啟用新設定值
+						window.location.reload();
 					} else {
 						this.passwordError = "Wrong password";
 						this.password = "";
