@@ -458,16 +458,17 @@ export default {
 	height: 69px
 	max-height: 69px
 	.song-info
-		display: flex
-		align-items: center
+		display: grid
+		grid-gap: 10px
+		grid-template-columns: .5fr 250px .5fr
 		width: 100vw
 		max-width: 100vw
 		box-sizing: border-box
 		.left
 			display: flex
 			align-items: center
+			overflow: hidden
 			height: 64px
-			width: 25vw
 			.info
 				flex: 1
 				overflow: hidden
@@ -515,14 +516,12 @@ export default {
 			display: flex
 			align-items: center
 			height: 64px
-			flex: 1
 			justify-content: center
 			span.time
 				font-family: var(--product-font)
 				width: 2.8em
 				text-align: center
 		.right
-			width: 25vw
 			display: flex
 			align-items: center
 			height: 64px
@@ -571,10 +570,7 @@ export default {
 @media screen and (max-width: 600px)
 	.bottom-player
 		.song-info
-			.left
-				flex: 1
-				overflow: hidden
-				max-width: calc(100vw - 144px)
+			grid-template-columns: 1fr 144px
 			.center,.right
 				display: none
 			.right-s
