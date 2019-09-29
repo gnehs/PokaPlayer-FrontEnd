@@ -435,7 +435,7 @@ export default {
 </style>
 <style lang="sass" scoped>
 *.md-theme-default-dark
-	--md-theme-default-dark-background: #000
+	--md-theme-default-dark-background: rgb(31,31,31)
 	--md-theme-default-dark-divider-on-background: rgba(255, 255, 255, 0.12)
 #toolbar.md-theme-default-dark
 	--md-theme-default-dark-text-primary-on-primary: rgba(255, 255, 255, 0.87)
@@ -601,7 +601,7 @@ export default {
 </style>
 <style lang="sass">
 html.md-theme-default-dark
-	background-color: #100027
+	background-color: rgb(40,40,40)
 .md-list
 	.md-list-item
 		border-radius: 8px !important
