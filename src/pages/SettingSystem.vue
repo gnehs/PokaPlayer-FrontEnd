@@ -164,7 +164,8 @@ export default {
 					}, 30 * 1000);
 				} else if (e.data == "socket") {
 					_socket.emit("login", {
-						pass: window._setting(`password`)
+						username: window._setting(`username`),
+						password: window._setting(`password`)
 					});
 					_socket.emit("update");
 
