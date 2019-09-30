@@ -271,6 +271,7 @@ export default {
 		loadLrc(lrc, save = false) {
 			window._lrc.load(lrc);
 			window.scrollTo(document.querySelector(".md-app-content"), 0, 200);
+			this.lyricFocus = 0; // 歌詞進度歸零
 			try {
 				//如果最後兩個時間相同把後面那個的時間調到一個世紀後
 				if (
