@@ -187,6 +187,7 @@ import Vue from "vue";
 export default {
 	name: "App",
 	data: () => ({
+		server: _setting(`server`),
 		menuVisible: false,
 		audio_currentTimePercent: 100,
 		audio_bufferPercent: 100,
@@ -219,6 +220,16 @@ export default {
 				() => (this.snackbar.show = false),
 				duration
 			);
+		};
+		Vue.prototype.$randomPlay = function() {
+			let randomStr = Math.random()
+				.toString(36)
+				.substring(7);
+			this.axios(`/pokaapi/randomSongs?${randomStr}`)
+				.then(res => {
+					this.$addSongs({ songs: res.data.songs });
+				})
+				.catch(e => alert(`PokaPlayer Error\n${e}`));
 		};
 		Vue.prototype.$addSongs = function({ songs, index, clear = true }) {
 			let playlist = [];
@@ -382,8 +393,12 @@ export default {
 			return MM + ":" + SS;
 		},
 		audio_toggle() {
-			_player.toggle();
-			this.audio_paused = _player.paused;
+			if (_player.list.audios.length > 0) {
+				_player.toggle();
+				this.audio_paused = _player.paused;
+			} else {
+				this.$randomPlay();
+			}
 		},
 		audio_next() {
 			_player.skipForward();
