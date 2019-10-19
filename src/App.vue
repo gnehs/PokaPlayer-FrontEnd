@@ -172,10 +172,18 @@
 				</div>
 			</div>
 		</div>
+		<md-snackbar
+			md-position="center"
+			:md-duration="1500"
+			:md-active.sync="snackbar.show"
+			md-persistent
+		>
+			<span>{{snackbar.message}}</span>
+		</md-snackbar>
 	</div>
 </template>
-
 <script>
+import Vue from "vue";
 export default {
 	name: "App",
 	data: () => ({
@@ -194,9 +202,60 @@ export default {
 		transitionName: "fade",
 		checkUpadteStatus: null,
 		scrollPositions: {},
-		settings: { darkMode: window._setting("darkMode") }
+		settings: { darkMode: window._setting("darkMode") },
+		snackbar: {
+			show: false,
+			message: ``,
+			timeout: null
+		}
 	}),
 	created() {
+		//註冊點心條組件
+		Vue.prototype.$snackbar = function(message = ``, duration = 1500) {
+			this.snackbar.message = message;
+			this.snackbar.show = true;
+			clearTimeout(this.snackbar.timeout);
+			this.snackbar.timeout = setTimeout(
+				() => (this.snackbar.show = false),
+				duration
+			);
+		};
+		Vue.prototype.$addSongs = function({ songs, index, clear = true }) {
+			let playlist = [];
+			for (let song of songs) {
+				playlist.push({
+					url:
+						this.server +
+						song.url +
+						"&songRes=" +
+						_setting(`audioQuality`).toLowerCase(),
+					cover:
+						song.cover && song.cover.startsWith("http")
+							? song.cover
+							: song.cover
+							? this.server + song.cover
+							: this.defaultCover,
+					name: song.name,
+					artist: song.artist,
+					artistId: song.artistId,
+					album: song.album,
+					albumId: song.albumId,
+					id: song.id,
+					source: song.source,
+					uuid: _uuid()
+				});
+			}
+			if (clear) _player.list.clear();
+			_player.list.add(playlist);
+			if (index && _player.options.order === "random") {
+				_player.options.order = "list";
+				_player.list.switch(index);
+				_player.options.order = "random";
+			} else if (index) {
+				_player.list.switch(index);
+			}
+			_player.play();
+		};
 		sessionStorage.removeItem("login");
 		function vhResize() {
 			let vh = window.innerHeight * 0.01;
@@ -596,6 +655,8 @@ export default {
 	max-width: calc(100vw - 125px)
 </style>
 <style lang="sass">
+.md-snackbar.md-position-center
+    bottom: 69px !important
 html.md-theme-default-dark
 	background-color: rgb(40,40,40)
 .md-list
@@ -609,13 +670,15 @@ html.md-theme-default-dark
 #drawer .router-link-active,.md-list-item.active
 	box-shadow: 0 3px 8px rgba(#6572f6, 0.3)  !important
 	.md-theme-default-dark &
-		box-shadow: 0 3px 8px rgba(#6572f6, 0.5) !important
+		background: #448affcf !important
+		box-shadow: 0 3px 8px rgba(#448aff, 0.1) !important
 	background: linear-gradient(120deg, #6572f6 0%, #8c197a 100%) !important
 	--md-theme-default-dark-primary-on-background: #FFF
 	--md-theme-default-primary-on-background: #FFF
 	--md-theme-default-text-primary-on-background: rgba(255, 255, 255, 1)
 	--md-theme-default-text-accent-on-background: rgba(255, 255, 255, .8)
 	--md-theme-default-icon-on-background: #FFF
+
 .md-list-item.mark:not(:hover)
 	box-shadow: 0px 1px 8px #00000029
 	html.md-theme-default-dark &
