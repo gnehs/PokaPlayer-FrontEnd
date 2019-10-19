@@ -21,10 +21,23 @@
         continue.</strong>
     </noscript>
     <div id="app">
-      <div style="text-align:center;margin-top:25vh">
+      <div class="start_container">
         <img src="<%= BASE_URL %>img/icons/apple-touch-icon.png" style="height: 180px" />
         <h1>PokaPlayer</h1>
       </div>
+      <style>
+        .start_container {
+          text-align: center;
+          margin-top: 25vh
+        }
+
+        @media (prefers-color-scheme: dark) {
+          body {
+            background: rgb(31, 31, 31);
+            color: #FFF;
+          }
+        }
+      </style>
     </div>
     <!-- built files will be auto injected -->
     <div id="player" style="display: none;"></div>
