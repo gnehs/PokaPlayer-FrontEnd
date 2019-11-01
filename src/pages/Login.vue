@@ -3,7 +3,7 @@
 		<md-card class="md-layout-item">
 			<md-card-media-cover>
 				<md-card-media md-ratio="16:9" class="card-banner">
-					<img class="header-img" src="https://source.unsplash.com/daily" />
+					<img class="header-img" :src="headerImg" />
 				</md-card-media>
 
 				<md-card-area>
@@ -55,9 +55,12 @@
 		right: 0;
 		left: 0;
 	}
-	.header-img {
-		transform: translateY(-50%) scale(1.2);
-		filter: blur(3px) brightness(70%);
+	.card-banner + .md-card-area {
+		background: linear-gradient(
+			to top,
+			rgba(0, 0, 0, 0.6) 0%,
+			transparent 100%
+		);
 	}
 	form {
 		height: 90%;
@@ -69,13 +72,6 @@
 			border-radius: 8px;
 			overflow: hidden;
 			box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-			.md-button {
-				background: linear-gradient(
-					120deg,
-					#4251fb 0%,
-					#0401a3 100%
-				) !important;
-			}
 		}
 	}
 </style>
@@ -90,13 +86,15 @@ export default {
 		serverError: null,
 		password: null,
 		username: null,
-		passwordError: null
+		passwordError: null,
+		headerImg: null
 	}),
 	created() {
 		this.remember = true;
 		this.password = _setting(`password`);
 		this.username = _setting(`username`);
 		this.server = _setting(`server`);
+		this.headerImg = _setting(`headerBgSource`);
 	},
 	methods: {
 		login() {
