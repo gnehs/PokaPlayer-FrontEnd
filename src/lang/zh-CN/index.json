@@ -67,6 +67,7 @@
 	"songAction_add2playlist_add_success": "已将 {name} 加入到 {playlist}",
 	"songAction_add2playlist_remove_success": "已将 {name} 从 {playlist} 删除",
 	"album_total": "{songs} 首歌曲",
+	"albumsOfSameArtist": "來自相同演出者的其他專輯",
 	"addSong_total": "已添加 {total} 首歌",
 	"addSong_name": "已添加 {name}",
 	"moduleShowName_Netease": "网易云音乐",

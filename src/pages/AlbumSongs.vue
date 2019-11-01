@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<poka-header :blurbg="true" :bg="cover||null"/>
+		<poka-header :blurbg="true" :bg="cover||null" />
 		<info-header v-if="name" :title="name" :subtitle="artist" :cover="cover" :songs="songs.length">
 			<pin-button
 				v-if="name"
@@ -11,19 +11,23 @@
 				btn-type="icon-button"
 			/>
 		</info-header>
-		<md-divider v-if="songs"/>
-		<poka-parse-songs :data="songs" v-if="songs"/>
-		<poka-loader v-else/>
+		<md-divider v-if="songs" />
+		<poka-parse-songs style="margin: 16px 0;" :data="songs" v-if="songs" />
+		<poka-loader v-if="!songs" />
+		<md-divider v-if="artistAlbums" />
+		<h1 v-if="artistAlbums" class="md-title" style="padding-left: 0.5em;">{{$t('albumsOfSameArtist')}}</h1>
+		<poka-parse-albums v-if="artistAlbums" :data="artistAlbums" />
 	</div>
 </template>
 
 <script>
 export default {
 	name: "AlbumSongs",
-	created() {
+	async created() {
+		//取得專輯資料
 		let albumSource = this.$route.params.source;
 		let albumID = this.$route.params.id;
-		this.axios
+		await this.axios
 			.get(
 				`${this.server}/pokaapi/album?moduleName=${encodeURIComponent(
 					albumSource
@@ -37,6 +41,21 @@ export default {
 					this.server + response.data.cover.replace(/'/, "\\'");
 				this.name = response.data.name;
 			});
+		// 取得相同演出者的專輯
+		let ArtistId = this.artist;
+		let ArtistSource = albumSource;
+		//取得專輯資料
+		let url = `${
+			this.server
+		}/pokaapi/artistAlbums/?moduleName=${encodeURIComponent(
+			ArtistSource
+		)}&id=${encodeURIComponent(ArtistId)}`;
+		this.axios.get(url).then(response => {
+			this.artistAlbums = response.data.albums.filter(
+				x => x.id != albumID
+			);
+			if (this.artistAlbums.length < 1) this.artistAlbums = null;
+		});
 	},
 	data: () => ({
 		data: null,
@@ -44,6 +63,7 @@ export default {
 		name: null,
 		artist: null,
 		songs: null,
+		artistAlbums: null,
 		server: _setting(`server`)
 	})
 };

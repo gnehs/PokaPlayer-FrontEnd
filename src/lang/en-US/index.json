@@ -67,6 +67,7 @@
 	"songAction_add2playlist_add_success": "Added {name} to {playlist}",
 	"songAction_add2playlist_remove_success": "Removed {name} from {playlist}",
 	"album_total": "{songs} songs",
+	"albumsOfSameArtist": "Albums of the same artist",
 	"addSong_total": "{total} songs added",
 	"addSong_name": "Added {name}",
 	"moduleShowName_Netease": "Netease",
@@ -130,41 +131,41 @@
 	"settings_restart_completed": "Restart completed.",
 	"settings_restartDialog_title": "Are you sure to restart?",
 	"settingUser": {
-		"title": "使用者",
-		"description": "檢視您的資料、修改密碼",
-		"name": "名稱",
-		"username": "使用者名稱",
-		"role": "權限",
-		"password": "密碼",
-		"passwordDescription": "輕觸此處來更改密碼",
+		"title": "User",
+		"description": "View your profile, change your password",
+		"name": "Name",
+		"username": "Username",
+		"role": "Role",
+		"password": "Password",
+		"passwordDescription": "Tap here to change your password",
 		"changeName": {
-			"title": "更改名稱",
-			"placeholder": "輸入新的名稱",
+			"title": "Change name",
+			"placeholder": "Enter a new name",
 			"result": {
-				"success": "名稱成功更改為 {name}",
-				"error": "名稱更改失敗"
+				"success": "Name successfully changed to {name}",
+				"error": "Name change failed"
 			}
 		},
 		"changeUsername": {
-			"title": "更改使用者名稱",
-			"placeholder": "輸入新的使用者名稱",
+			"title": "Change username",
+			"placeholder": "Enter a new username",
 			"result": {
-				"success": "使用者名稱成功更改為 {name}，下次請用新的使用者名稱來登入",
-				"error": "使用者名稱更改失敗"
+				"success": "Username successfully changed to {name}, please login with a new username next time",
+				"error": "Username change failed"
 			}
 		},
 		"changePassword": {
-			"title": "更改密碼",
-			"oldPassword": "舊密碼",
-			"newPassword": "新密碼",
-			"confirmPassword": "確認密碼",
-			"confirmPasswordHelperText": "再輸入一次您的新密碼",
-			"done": "更改密碼",
+			"title": "Change the password",
+			"oldPassword": "old password",
+			"newPassword": "new password",
+			"confirmPassword": "confirm password",
+			"confirmPasswordHelperText": "Enter your new password again",
+			"done": "change",
 			"result": {
-				"inconsistent": "兩次密碼不一致",
-				"same": "密碼不可與舊密碼相同",
-				"success": "密碼更改成功",
-				"error": "密碼更改失敗"
+				"inconsistent": "Two passwords are inconsistent",
+				"same": "Password cannot be the same as the old password",
+				"success": "Password changed successfully",
+				"error": "Password change failed"
 			}
 		}
 	},
