@@ -24,7 +24,7 @@ window._setting = (setting, value) => {
     let pokaSetting = JSON.parse(localStorage.pokaSetting || `{}`)
     let defaultPokaSetting = {
         "audioQuality": "High",
-        "headerBgSource": "https://i.imgur.com/EcmOwlT.jpg",
+        "headerBgSource": "https://i.imgur.com/IdbJiao.jpg",
         "darkMode": false,
         "server": location.origin,
         "password": ""
