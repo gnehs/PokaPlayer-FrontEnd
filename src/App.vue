@@ -198,8 +198,8 @@ export default {
 	}),
 	created() {
 		//註冊點心條組件
-		Vue.prototype.$snackbar = function(message = ``, duration = 1500) {
-			this.snackbar.message = message;
+		Vue.prototype.$snackbar = (msg = ``, duration = 1500) => {
+			this.snackbar.message = msg;
 			this.snackbar.show = true;
 			clearTimeout(this.snackbar.timeout);
 			this.snackbar.timeout = setTimeout(

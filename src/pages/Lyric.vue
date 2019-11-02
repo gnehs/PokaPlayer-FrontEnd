@@ -300,6 +300,7 @@ export default {
 					source: nowPlaying.source,
 					lyric: lrc
 				});
+				this.$snackbar("lyric saved.");
 			}
 		}
 	}

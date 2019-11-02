@@ -26,6 +26,7 @@ export default {
 	width: 100%
 	position: relative
 	min-height: 1px
+	margin-top: -1px
 	pointer-events: none
 	.bg
 		transform: scale(1.12)
