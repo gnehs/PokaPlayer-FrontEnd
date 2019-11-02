@@ -193,15 +193,21 @@ export default {
 					window._socket.on("restart", () => {
 						this.updateLog +=
 							window.i18n.t("settings_restarting") + "\n";
-						window._socket.on("hello", () => {
-							this.showUpdateingDialog = false;
-							this.showRestartCompletedDialog = true;
-						});
 					});
-					window._socket.on(
-						"err",
-						data => (this.updateLog += `[ERROR] ${data}`)
-					);
+					window._socket.on("hello", () => {
+						this.showUpdateingDialog = false;
+						this.showRestartCompletedDialog = true;
+					});
+					window._socket.on("err", async data => {
+						const delay = interval => {
+							return new Promise(resolve => {
+								setTimeout(resolve, interval);
+							});
+						};
+						this.updateLog += `[ERROR] ${data}`;
+						await delay(1000);
+						this.showUpdateingDialog = false;
+					});
 				}
 			});
 		},

@@ -172,10 +172,6 @@
 </template>
 <script>
 import Vue from "vue";
-
-import "@/assets/pokaList.sass";
-import "@/assets/main.sass";
-import "@/assets/scrollbar.scss";
 export default {
 	name: "App",
 	data: () => ({
@@ -449,6 +445,11 @@ export default {
 	}
 };
 </script>
+<style lang="sass">
+@import "@/assets/pokaList.sass"
+@import "@/assets/main.sass"
+@import "@/assets/scrollbar.scss"
+</style>
 <style lang="scss">
 	@import "~vue-material/dist/theme/engine"; // Import the theme engine
 	@include md-register-theme(
