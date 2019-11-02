@@ -187,7 +187,6 @@ import Vue from "vue";
 export default {
 	name: "App",
 	data: () => ({
-		server: _setting(`server`),
 		menuVisible: false,
 		audio_currentTimePercent: 100,
 		audio_bufferPercent: 100,
@@ -226,17 +225,20 @@ export default {
 				.toString(36)
 				.substring(7);
 			this.axios(`/pokaapi/randomSongs?${randomStr}`)
-				.then(res => {
-					this.$addSongs({ songs: res.data.songs });
+				.then(res => res.data.songs)
+				.then(songs => {
+					this.$addSongs({ songs: songs });
 				})
 				.catch(e => alert(`PokaPlayer Error\n${e}`));
 		};
 		Vue.prototype.$addSongs = function({ songs, index, clear = true }) {
+			const server = window._setting(`server`);
+			const defaultCover = window._setting(`headerBgSource`);
 			let playlist = [];
 			for (let song of songs) {
 				playlist.push({
 					url:
-						this.server +
+						server +
 						song.url +
 						"&songRes=" +
 						_setting(`audioQuality`).toLowerCase(),
@@ -244,8 +246,8 @@ export default {
 						song.cover && song.cover.startsWith("http")
 							? song.cover
 							: song.cover
-							? this.server + song.cover
-							: this.defaultCover,
+							? server + song.cover
+							: defaultCover,
 					name: song.name,
 					artist: song.artist,
 					artistId: song.artistId,
