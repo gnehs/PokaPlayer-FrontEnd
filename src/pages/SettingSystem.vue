@@ -215,12 +215,10 @@ export default {
 			window._player.pause();
 			this.showRestartingDialog = true;
 			this.axios.post("/restart");
-			setTimeout(() => {
-				window._socket.on("hello", () => {
-					this.showRestartingDialog = false;
-					this.showRestartCompletedDialog = true;
-				});
-			}, 2000);
+			window._socket.on("hello", () => {
+				this.showRestartingDialog = false;
+				this.showRestartCompletedDialog = true;
+			});
 		},
 		reload() {
 			window.location.reload();
