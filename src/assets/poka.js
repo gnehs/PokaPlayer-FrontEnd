@@ -59,7 +59,9 @@ window._setting = (setting, value) => {
         }
     }
 }
-window._socket = io(window._setting(`server`));
+window._socket = io(window._setting(`server`), {
+    transports: ['websocket']
+});
 // scroll 
 
 window.scrollTo = (element, to, duration) => {
