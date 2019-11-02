@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<poka-header :title="$t('settings')" :subtitle="'PokaPlayer'" />
+		<poka-header :title="$t('settings')" />
 		<poka-update />
 		<md-list class="md-double-line">
 			<md-list-item to="/setting/network">

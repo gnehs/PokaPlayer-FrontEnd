@@ -1,5 +1,5 @@
 <template>
-	<div class="update-notify" v-if="checkUpadteStatus">
+	<div class="update-notify" v-if="checkUpadteStatus||1">
 		<h1>{{$t('settings_update')}}</h1>
 		<p>{{checkUpadteStatus}}</p>
 		<md-button
@@ -13,9 +13,9 @@
 	background: #260d73
 	position: relative
 	margin: 16px
-	padding: 16px    
-	border-radius: 16px
-	background-size: 256px
+	padding: 24px 32px
+	border-radius: 8px
+	background-size: 240px
 	background-position: right
 	background-repeat: no-repeat
 	background-image: url('/img/update.svg')
