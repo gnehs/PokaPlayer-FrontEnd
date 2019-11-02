@@ -1,48 +1,66 @@
 <template>
 	<div>
-		<poka-header :blurbg="true" :bg="audio_cover"/>
-		<div style="position: relative">
-			<transition-group name="songlist" tag="div" class="poka list" v-if="audio_queue.length>0">
-				<div
-					class="item"
-					v-for="(song,index) of audio_queue"
-					:key="song.uuid"
-					:class="{active:index==audio_index}"
-				>
-					<md-ripple>
-						<div class="content" @click="playSong(index)">
-							<md-avatar>
-								<img :src="song.cover" alt="cover">
-							</md-avatar>
-							<div class="header">
-								<div class="title t-ellipsis">{{song.name}}</div>
-								<div class="t-ellipsis">{{song.artist}}</div>
-							</div>
-						</div>
-						<div class="action">
-							<md-button class="md-icon-button md-list-action" @click="moreDialog(song)">
-								<md-icon class="outline-more_horiz"/>
-							</md-button>
-							<md-button class="md-icon-button md-list-action" @click="removeSong(index)">
-								<md-icon class="outline-close"/>
-							</md-button>
-						</div>
-					</md-ripple>
-				</div>
-			</transition-group>
-			<md-empty-state
-				v-else
-				md-icon="queue_music"
-				:md-label="$t('app_waitForPlay')"
-				:md-description="$t('app_waitForPlay_description')"
+		<transition name="fade" mode="in-out">
+			<poka-header
+				:blurbg="true"
+				:bg="audio_cover"
+				v-if="audio_queue.length>0"
+				key="1"
+				style="margin-top: -1px"
+			/>
+			<poka-header
+				:bg="defaultCover"
+				v-if="audio_queue.length<=0||!audio_queue"
+				key="2"
+				style="margin-top: -1px"
+			/>
+		</transition>
+		<transition-group
+			name="songlist"
+			tag="div"
+			class="poka list"
+			style="position: relative"
+			v-if="audio_queue.length>0"
+		>
+			<div
+				class="item"
+				v-for="(song,index) of audio_queue"
+				:key="song.uuid"
+				:class="{active:index==audio_index}"
 			>
-				<play-random-button/>
-			</md-empty-state>
-		</div>
+				<md-ripple>
+					<div class="content" @click="playSong(index)">
+						<md-avatar>
+							<img :src="song.cover" alt="cover" />
+						</md-avatar>
+						<div class="header">
+							<div class="title t-ellipsis">{{song.name}}</div>
+							<div class="t-ellipsis">{{song.artist}}</div>
+						</div>
+					</div>
+					<div class="action">
+						<md-button class="md-icon-button md-list-action" @click="moreDialog(song)">
+							<md-icon class="outline-more_horiz" />
+						</md-button>
+						<md-button class="md-icon-button md-list-action" @click="removeSong(index)">
+							<md-icon class="outline-close" />
+						</md-button>
+					</div>
+				</md-ripple>
+			</div>
+		</transition-group>
+		<md-empty-state
+			v-else
+			md-icon="queue_music"
+			:md-label="$t('app_waitForPlay')"
+			:md-description="$t('app_waitForPlay_description')"
+		>
+			<play-random-button />
+		</md-empty-state>
 
 		<md-speed-dial class="md-bottom-right" v-if="audio_queue.length>0">
 			<md-speed-dial-target @click="audio_clean">
-				<md-icon class="outline-clear_all"/>
+				<md-icon class="outline-clear_all" />
 			</md-speed-dial-target>
 		</md-speed-dial>
 		<md-dialog :md-active.sync="moreDialogShow" :md-fullscreen="false">
@@ -53,7 +71,7 @@
 						<md-ripple>
 							<div class="content">
 								<md-avatar>
-									<md-icon class="outline-turned_in_not"/>
+									<md-icon class="outline-turned_in_not" />
 								</md-avatar>
 								<div class="header">
 									<div class="title">{{$t('songAction_like')}}</div>
@@ -65,7 +83,7 @@
 						<md-ripple>
 							<div class="content">
 								<md-avatar>
-									<md-icon class="outline-star"/>
+									<md-icon class="outline-star" />
 								</md-avatar>
 								<div class="header">
 									<div class="title">{{$t('songAction_rating')}}</div>
@@ -77,7 +95,7 @@
 						<md-ripple>
 							<div class="content">
 								<md-avatar>
-									<md-icon class="outline-playlist_add"/>
+									<md-icon class="outline-playlist_add" />
 								</md-avatar>
 								<div class="header">
 									<div class="title">{{$t('songAction_add2playlist')}}</div>
@@ -88,7 +106,7 @@
 					<div class="item" v-if="moreDialogTemp">
 						<div class="content">
 							<md-avatar>
-								<md-icon class="outline-music_note"/>
+								<md-icon class="outline-music_note" />
 							</md-avatar>
 							<div class="header">
 								<div class="title t-ellipsis">{{moreDialogTemp.name}}</div>
@@ -100,7 +118,7 @@
 						<md-ripple>
 							<div class="content">
 								<md-avatar>
-									<md-icon class="outline-mic_none"/>
+									<md-icon class="outline-mic_none" />
 								</md-avatar>
 								<div class="header">
 									<div class="title t-ellipsis">{{moreDialogTemp.artist}}</div>
@@ -113,7 +131,7 @@
 						<md-ripple>
 							<div class="content">
 								<md-avatar>
-									<md-icon class="outline-album"/>
+									<md-icon class="outline-album" />
 								</md-avatar>
 								<div class="header">
 									<div class="title t-ellipsis">{{moreDialogTemp.album}}</div>
@@ -125,7 +143,7 @@
 					<div class="item" v-if="moreDialogTemp">
 						<div class="content">
 							<md-avatar>
-								<md-icon class="outline-cloud"/>
+								<md-icon class="outline-cloud" />
 							</md-avatar>
 							<div class="header">
 								<div class="title t-ellipsis">{{$t(`source.${moreDialogTemp.source}`)}}</div>
@@ -141,7 +159,19 @@
 		</md-dialog>
 	</div>
 </template>
-
+<style scoped>
+	.fade-slide-up-enter-active {
+		transition: all 0.5s ease;
+	}
+	.fade-slide-up-leave-active {
+		transition: all 0.5s ease;
+	}
+	.fade-slide-up-enter,
+	.fade-slide-up-leave-to {
+		transform: translateY(40px);
+		opacity: 0;
+	}
+</style>
 <script>
 export default {
 	name: "NowPlaying",
