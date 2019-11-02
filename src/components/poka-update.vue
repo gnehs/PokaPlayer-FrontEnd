@@ -1,12 +1,14 @@
 <template>
-	<div class="update-notify" v-if="checkUpadteStatus">
-		<h1>{{$t('settings_update')}}</h1>
-		<p>{{checkUpadteStatus}}</p>
-		<md-button
-			to="/setting/system"
-			class="md-primary md-outlined md-theme-default-dark"
-		>{{$t('settings_update_go2UpdatePage')}}</md-button>
-	</div>
+	<transition name="fade-slide-up">
+		<div class="update-notify" v-if="checkUpadteStatus" key="0">
+			<h1>{{$t('settings_update')}}</h1>
+			<p>{{checkUpadteStatus}}</p>
+			<md-button
+				to="/setting/system"
+				class="md-primary md-outlined md-theme-default-dark"
+			>{{$t('settings_update_go2UpdatePage')}}</md-button>
+		</div>
+	</transition>
 </template>
 <style lang="sass" scoped>
 .update-notify
@@ -28,11 +30,15 @@
 export default {
 	name: "poka-update",
 	created() {
-		this.axios.get(_setting(`server`) + "/status/").then(response => {
-			this.fetchNewVersion(response.data.version);
-		});
+		this.axios
+			.get(_setting(`server`) + "/status/")
+			.then(res => res.data)
+			.then(data => {
+				this.fetchNewVersion(data.version);
+				if (data.debug) this.debug = data.debug;
+			});
 	},
-	data: () => ({ checkUpadteStatus: null }),
+	data: () => ({ checkUpadteStatus: null, debug: null }),
 	methods: {
 		compareVersion(local, remote) {
 			local = local.split(".").map(e => parseInt(e));
@@ -46,13 +52,18 @@ export default {
 			fetch("https://api.github.com/repos/gnehs/PokaPlayer/releases")
 				.then(e => e.json())
 				.then(e => {
-					if (this.compareVersion(currentVersion, e[0].tag_name)) {
+					if (
+						this.compareVersion(currentVersion, e[0].tag_name) ||
+						this.debug
+					) {
 						this.checkUpadteStatus = i18n.t(
 							"settings_update_canUpdate2",
 							{
 								version: e[0].tag_name
 							}
 						);
+						if (this.debug)
+							this.checkUpadteStatus += ` (debug: ${this.debug})`;
 					}
 				})
 				.catch(e => console.error(e));

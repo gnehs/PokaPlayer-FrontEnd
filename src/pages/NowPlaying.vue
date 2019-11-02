@@ -150,19 +150,6 @@
 		</md-dialog>
 	</div>
 </template>
-<style scoped>
-	.fade-slide-up-enter-active {
-		transition: all 0.5s ease;
-	}
-	.fade-slide-up-leave-active {
-		transition: all 0.5s ease;
-	}
-	.fade-slide-up-enter,
-	.fade-slide-up-leave-to {
-		transform: translateY(40px);
-		opacity: 0;
-	}
-</style>
 <script>
 export default {
 	name: "NowPlaying",
@@ -297,14 +284,3 @@ export default {
 	}
 };
 </script>
-<style lang="sass" scoped>
-.songlist-enter, .songlist-leave-to
-	opacity: 0
-	transform: scaleY(0) scaleX(0.7)
-	transform-origin: center top
-.songlist-leave-active 
-	position: absolute
-.songlist-move
-	transition: 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
-	transition-property: opacity, transform
-</style>
