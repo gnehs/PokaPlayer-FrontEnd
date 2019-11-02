@@ -1,6 +1,6 @@
 <template>
 	<div v-if="!installed">
-		<poka-header :title="$t('install.title')" subtitle="PokaPlayer"/>
+		<poka-header :title="$t('install.title')" subtitle="PokaPlayer" />
 		<md-steppers
 			:md-active-step.sync="active"
 			md-vertical
@@ -14,15 +14,16 @@
 				:md-done.sync="step.description"
 			>
 				<h1>{{$t('install.description.title')}}</h1>
-				<p v-html="$t('install.description.text')"/>
-				<h1 v-html="$t('install.note.title')"/>
+				<p v-html="$t('install.description.text')" />
+				<h1 v-html="$t('install.note.title')" />
 				<p v-html="$t('install.note.text')"></p>
 				<ul>
-					<li v-html="$t('install.note.docker')"/>
-					<li v-html="$t('install.note.netease.title')"/>
-					<ul v-html="$t('install.note.netease.text')"/>
-					<li v-html="$t('install.note.dsm.title')"/>
-					<ul v-html="$t('install.note.dsm.text')"/>
+					<li v-html="$t('install.note.docker')" />
+					<li v-html="$t('install.note.mongo')" />
+					<li v-html="$t('install.note.netease.title')" />
+					<ul v-html="$t('install.note.netease.text')" />
+					<li v-html="$t('install.note.dsm.title')" />
+					<ul v-html="$t('install.note.dsm.text')" />
 				</ul>
 				<md-button
 					class="md-raised md-primary"
@@ -38,18 +39,22 @@
 				:md-done.sync="step.pokaplayer"
 			>
 				<md-field>
-					<label for="login-password" v-html="$t('install.poka.login_password')"/>
-					<md-input name="login-password" id="login-password" v-model="setting.PokaPlayer.password"/>
+					<label for="mongodb-url" v-html="'MongoDB'" />
+					<md-input name="mongodb-url" id="mongodb-url" v-model="setting.mongodb" />
 				</md-field>
 				<md-field>
-					<label for="admin-password" v-html="$t('install.poka.admin_password')"/>
+					<label for="login-password" v-html="$t('install.poka.login_password')" />
+					<md-input name="login-password" id="login-password" v-model="setting.PokaPlayer.password" />
+				</md-field>
+				<md-field>
+					<label for="admin-password" v-html="$t('install.poka.admin_password')" />
 					<md-input
 						name="admin-password"
 						id="admin-password"
 						v-model="setting.PokaPlayer.adminPassword"
 					/>
 				</md-field>
-				<p v-html="$t('install.poka.note')"/>
+				<p v-html="$t('install.poka.note')" />
 				<md-button
 					class="md-raised md-primary"
 					@click="setDone('pokaplayer', 'module')"
@@ -65,17 +70,17 @@
 			>
 				<md-card>
 					<md-card-content>
-						<h2 v-html="$t('install.enabled')"/>
-						<md-divider/>
-						<md-switch v-model="setting.DSM.enabled">{{$t('install.dsm.dsm')}}</md-switch>
+						<h2 v-html="$t('install.dsm.dsm')" />
+						<md-divider />
+						<md-switch v-model="setting.DSM.enabled">{{$t('install.enabled')}}</md-switch>
 
 						<div v-if="setting.DSM.enabled">
-							<h2 v-html="$t('install.dsm.connect_to_dsm')"/>
-							<md-divider/>
+							<h2 v-html="$t('install.dsm.connect_to_dsm')" />
+							<md-divider />
 							<div class="md-layout md-gutter">
 								<div class="md-layout-item">
 									<md-field>
-										<label for="DSM-protocol" v-html="$t('install.protocol')"/>
+										<label for="DSM-protocol" v-html="$t('install.protocol')" />
 										<md-select v-model="setting.DSM.protocol" name="DSM-protocol" id="DSM-protocol">
 											<md-option value="http">http://</md-option>
 											<md-option value="https">https://</md-option>
@@ -84,50 +89,58 @@
 								</div>
 								<div class="md-layout-item">
 									<md-field>
-										<label v-html="$t('install.host')"/>
-										<md-input v-model="setting.DSM.host"/>
+										<label v-html="$t('install.host')" />
+										<md-input v-model="setting.DSM.host" />
 									</md-field>
 								</div>
 								<div class="md-layout-item">
 									<md-field>
-										<label v-html="$t('install.port')"/>
-										<md-input v-model="setting.DSM.port" type="number"/>
+										<label v-html="$t('install.port')" />
+										<md-input v-model="setting.DSM.port" type="number" />
 									</md-field>
 								</div>
 							</div>
 
-							<h2 v-html="$t('login')"/>
-							<md-divider/>
+							<h2 v-html="$t('login')" />
+							<md-divider />
 							<div class="md-layout md-gutter">
 								<div class="md-layout-item">
 									<md-field>
-										<label v-html="$t('install.account')"/>
-										<md-input v-model="setting.DSM.account"/>
+										<label v-html="$t('install.account')" />
+										<md-input v-model="setting.DSM.account" />
 									</md-field>
 								</div>
 								<div class="md-layout-item">
 									<md-field>
-										<label v-html="$t('install.password')"/>
-										<md-input v-model="setting.DSM.password"/>
+										<label v-html="$t('install.password')" />
+										<md-input v-model="setting.DSM.password" />
 									</md-field>
 								</div>
 							</div>
 						</div>
 					</md-card-content>
 				</md-card>
-				<br>
+				<br />
 				<md-card>
 					<md-card-content>
-						<h2 v-html="$t('install.enabled')"/>
-						<md-divider/>
-						<md-switch v-model="setting.Netease2.enabled">{{$t('install.netease.netease')}}</md-switch>
+						<h2 v-html="$t('install.neteaseLyric')" />
+						<md-divider />
+						<md-switch v-model="setting.neteaseLyric.enabled">{{$t('install.enabled')}}</md-switch>
+					</md-card-content>
+				</md-card>
+				<br />
+				<md-card>
+					<md-card-content>
+						<h2 v-html="$t('install.netease.netease')" />
+						<md-divider />
+						<md-switch v-model="setting.Netease2.enabled">{{$t('install.enabled')}}</md-switch>
 						<div v-if="setting.Netease2.enabled">
-							<h2 v-html="$t('install.netease.connect_to_netease')"/>
-							<md-divider/>
+							<h2 v-html="$t('install.netease.connect_to_netease')" />
+							<md-divider />
 							<div class="md-layout md-gutter">
 								<div class="md-layout-item">
 									<md-field>
-										<label for="netease-protocol" v-html="$t('install.protocol')"/>
+										<label for="netease-protocol" v-html="$t('install.protocol')" />
 										<md-select v-model="netease.protocol" name="netease-protocol">
 											<md-option value="http://">http://</md-option>
 											<md-option value="https://">https://</md-option>
@@ -136,22 +149,22 @@
 								</div>
 								<div class="md-layout-item">
 									<md-field>
-										<label v-html="$t('install.host')"/>
-										<md-input v-model="netease.host"/>
+										<label v-html="$t('install.host')" />
+										<md-input v-model="netease.host" />
 									</md-field>
 								</div>
 								<div class="md-layout-item">
 									<md-field>
-										<label v-html="$t('install.port')"/>
-										<md-input v-model="netease.port" type="number"/>
+										<label v-html="$t('install.port')" />
+										<md-input v-model="netease.port" type="number" />
 									</md-field>
 								</div>
 							</div>
-							<h2 v-html="$t('install.account')"/>
+							<h2 v-html="$t('install.account')" />
 							<div class="md-layout md-gutter">
 								<div class="md-layout-item">
 									<md-field>
-										<label for="neteaseloginby" v-html="$t('install.netease.loginby.title')"/>
+										<label for="neteaseloginby" v-html="$t('install.netease.loginby.title')" />
 										<md-select v-model="netease.loginby" name="neteaseloginby">
 											<md-option value="email">{{$t('install.netease.loginby.email')}}</md-option>
 											<md-option value="phone">{{$t('install.netease.loginby.phone')}}</md-option>
@@ -160,24 +173,24 @@
 								</div>
 								<div class="md-layout-item">
 									<md-field v-if="netease.loginby=='email'">
-										<label v-html="$t('install.netease.loginby.email')"/>
-										<md-input v-model="setting.Netease2.login.email"/>
+										<label v-html="$t('install.netease.loginby.email')" />
+										<md-input v-model="setting.Netease2.login.email" />
 									</md-field>
 									<md-field v-else>
-										<label v-html="$t('install.netease.loginby.phone')"/>
-										<md-input v-model="setting.Netease2.login.phone"/>
+										<label v-html="$t('install.netease.loginby.phone')" />
+										<md-input v-model="setting.Netease2.login.phone" />
 									</md-field>
 								</div>
 								<div class="md-layout-item">
 									<md-field>
-										<label v-html="$t('install.password')"/>
-										<md-input v-model="setting.Netease2.login.password"/>
+										<label v-html="$t('install.password')" />
+										<md-input v-model="setting.Netease2.login.password" />
 									</md-field>
 								</div>
 							</div>
-							<md-divider/>
-							<h2 v-html="$t('install.netease.subscription.title')"/>
-							<md-divider/>
+							<md-divider />
+							<h2 v-html="$t('install.netease.subscription.title')" />
+							<md-divider />
 							<md-switch
 								v-model="setting.Netease2.topPlaylist.enabled"
 							>{{$t('install.netease.subscription.topPlaylist')}}</md-switch>
@@ -193,7 +206,7 @@
 						</div>
 					</md-card-content>
 				</md-card>
-				<br>
+				<br />
 				<md-button
 					class="md-raised md-primary"
 					@click="setDone('module', 'done')"
@@ -202,7 +215,7 @@
 			</md-step>
 
 			<md-step id="step_done" :md-label="$t('install.finish.title')" :md-done.sync="step.done">
-				<p v-html="$t('install.finish.text')"/>
+				<p v-html="$t('install.finish.text')" />
 				<md-button
 					class="md-raised md-primary"
 					@click="setDone('done');checkRestart()"
@@ -229,7 +242,7 @@
 			:md-description="$t('install.state.done_server_restarted')"
 			v-if="step.server_restarted"
 		>
-			<md-button class="md-primary md-raised" to="/" v-html="$t('install.done')"/>
+			<md-button class="md-primary md-raised" to="/" v-html="$t('install.done')" />
 		</md-empty-state>
 	</div>
 	<md-empty-state
@@ -238,10 +251,17 @@
 		:md-description="$t('install.state.poka_description')"
 		v-else
 	>
-		<md-button class="md-primary md-raised" to="/" v-html="$t('home')"/>
+		<md-button class="md-primary md-raised" to="/" v-html="$t('home')" />
 	</md-empty-state>
 </template>
-
+<style scoped>
+	.md-theme-default-dark .md-app-content .md-card {
+		margin-right: 16px;
+		margin-left: 16px;
+		overflow: visible;
+		border: 1px solid #ffffff4a;
+	}
+</style>
 <script>
 export default {
 	name: "Install",
@@ -276,6 +296,7 @@ export default {
 				instantUpgradeProcess: true,
 				debug: false
 			},
+			mongodb: "mongodb://mongodb/poka",
 			DSM: {
 				enabled: true,
 				protocol: null,
@@ -283,6 +304,9 @@ export default {
 				port: 5000,
 				account: null,
 				password: null
+			},
+			neteaseLyric: {
+				enabled: true
 			},
 			Netease2: {
 				enabled: true,
@@ -320,6 +344,7 @@ export default {
 	created() {
 		this.axios.get(_setting(`server`) + "/status/").then(response => {
 			this.installed = response.data.install;
+			if (response.data.debug) this.installed = false;
 		});
 		this.server_restarting_description = this.$t(
 			"install.state.done_commit"

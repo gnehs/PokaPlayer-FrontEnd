@@ -188,6 +188,7 @@
 			"title": "注意",
 			"text": "請確認這些項目已開啟",
 			"docker": "已開啟 Docker 自動重啟功能",
+			"mongo": "已架設 MongoDB",
 			"netease": {
 				"title": "若您要使用網易雲服務",
 				"text": "<li>請先架設好 gnehs/neteasecloudmusicapi-docker</li><li>建議可設定好容器別名以方便連接</li>"
@@ -214,6 +215,7 @@
 		"port": "端口",
 		"account": "帳號",
 		"password": "密碼",
+		"neteaseLyric": "網易雲歌詞模組",
 		"netease": {
 			"netease": "網易雲音樂",
 			"connect_to_netease": "連接到 NeteaseCloudMusicApi",
