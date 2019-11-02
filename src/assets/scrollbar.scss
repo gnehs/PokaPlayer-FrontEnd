@@ -1,0 +1,36 @@
+//-------------//
+//  Scrollbar  //
+//-------------//
+@media (min-width: 1024px) {
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background: 0 0;
+
+    .md-theme-default-dark & {
+        background: rgba(255, 255, 255, 0.05)
+    }
+}
+
+::-webkit-scrollbar-thumb {
+    --color: 0, 0, 0;
+    background: rgba(var(--color), 0.3);
+
+    .md-theme-default-dark & {
+        --color: 255, 255, 255
+    }
+
+    &:hover {
+        background: rgba(var(--color), 0.4)
+    }
+
+    &:active {
+        background: rgba(var(--color), 0.6)
+    }
+}
