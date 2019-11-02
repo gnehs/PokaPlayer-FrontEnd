@@ -14,14 +14,6 @@
 							<md-icon class="outline-repeat" v-if="audio_order==='list'"></md-icon>
 							<md-icon class="outline-shuffle" v-else></md-icon>
 						</md-button>
-						<md-button
-							class="md-button md-primary md-outlined"
-							to="/setting/system"
-							v-if="checkUpadteStatus"
-						>
-							<md-icon class="outline-system_update"></md-icon>
-							{{checkUpadteStatus}}
-						</md-button>
 					</div>
 				</div>
 			</md-app-toolbar>
@@ -29,10 +21,6 @@
 			<md-app-drawer :md-active.sync="menuVisible" md-permanent="clipped" id="drawer">
 				<div id="pokaTitle">
 					<span>PokaPlayer</span>
-					<md-button class="md-icon-button" to="/setting/system" v-if="checkUpadteStatus">
-						<md-icon class="outline-system_update"></md-icon>
-						<md-tooltip md-direction="right">{{checkUpadteStatus}}</md-tooltip>
-					</md-button>
 				</div>
 				<md-divider />
 				<md-list>
@@ -200,7 +188,6 @@ export default {
 		audio_previous_name: "",
 		audio_order: _player.options.order,
 		transitionName: "fade",
-		checkUpadteStatus: null,
 		scrollPositions: {},
 		settings: { darkMode: window._setting("darkMode") },
 		snackbar: {
@@ -453,33 +440,7 @@ export default {
 						"login",
 						JSON.stringify(userProfile.data)
 					);
-
-					if (checkUpdate)
-						this.fetchNewVersion(response.data.version);
 				});
-		},
-		compareVersion(local, remote) {
-			local = local.split(".").map(e => parseInt(e));
-			remote = remote.split(".").map(e => parseInt(e));
-			//版本號加權對比
-			local = local[0] * 1000 * 1000 + local[1] * 1000 + local[2];
-			remote = remote[0] * 1000 * 1000 + remote[1] * 1000 + remote[2];
-			return remote > local;
-		},
-		fetchNewVersion(currentVersion) {
-			fetch("https://api.github.com/repos/gnehs/PokaPlayer/releases")
-				.then(e => e.json())
-				.then(e => {
-					if (this.compareVersion(currentVersion, e[0].tag_name)) {
-						this.checkUpadteStatus = i18n.t(
-							"settings_update_update2",
-							{
-								version: e[0].tag_name
-							}
-						);
-					}
-				})
-				.catch(e => console.error(e));
 		}
 	}
 };
@@ -488,6 +449,7 @@ export default {
 
 <style lang="sass">
 @import "@/assets/pokaList.sass"
+@import "@/assets/main.sass"
 </style>
 <style lang="scss">
 	@import "~vue-material/dist/theme/engine"; // Import the theme engine
@@ -670,141 +632,4 @@ export default {
 .md-drawer
 	width: 230px
 	max-width: calc(100vw - 125px)
-</style>
-<style lang="sass">
-.md-snackbar.md-position-center
-    bottom: 69px !important
-html.md-theme-default-dark
-	background-color: rgb(40,40,40)
-.md-list
-	.md-list-item
-		border-radius: 8px !important
-		overflow: hidden
-		transition: all 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95)
-		overflow: initial
-		button,a
-			border-radius: 8px !important
-#drawer .router-link-active,.md-list-item.active
-	box-shadow: 0 3px 8px rgba(#6572f6, 0.3)  !important
-	.md-theme-default-dark &
-		background: #448affcf !important
-		box-shadow: 0 3px 8px rgba(#448aff, 0.1) !important
-	background: linear-gradient(120deg, #6572f6 0%, #8c197a 100%) !important
-	--md-theme-default-dark-primary-on-background: #FFF
-	--md-theme-default-primary-on-background: #FFF
-	--md-theme-default-text-primary-on-background: rgba(255, 255, 255, 1)
-	--md-theme-default-text-accent-on-background: rgba(255, 255, 255, .8)
-	--md-theme-default-icon-on-background: #FFF
-
-.md-list-item.mark:not(:hover)
-	box-shadow: 0px 1px 8px #00000029
-	html.md-theme-default-dark &
-		box-shadow: 0 0 0px 2px #FFFFFF50
-.md-button
-	&:not(.md-icon-button):not(.md-fab)
-		border-radius: 8px !important
-	&.md-outlined
-		border: 2px solid currentColor
-html,body
-	font-family: var(--default-font)
-.fade-enter-active,.fade-leave-active
-	transition: opacity 0.2s ease
-.fade-enter,.fade-leave-to
-	opacity: 0
-.slide-left-enter-active,
-.slide-left-leave-active,
-.slide-right-enter-active,
-.slide-right-leave-active
-	transition-duration: 0.35s
-	transition-property: height, opacity, transform
-	transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1)
-.slide-left-enter,.slide-right-leave-active 
-	transform: translate(3em, 0)
-	opacity: 0
-.slide-left-leave-active,.slide-right-enter 
-	transform: translate(-3em, 0)
-	opacity: 0
-.md-tab
-	padding: 16px 0
-	.md-content.md-tabs-content
-		transition-duration: 0.3s
-		transition-property: height
-		transition-timing-function: ease
-.md-list 
-	.md-app-content &
-		background-color: transparent !important
-	.md-icon
-		opacity: 0.54
-.md-speed-dial
-	z-index: 2
-.md-icon[class*="outline-"]
-	display: inline-block
-	width: 24px
-	height: 24px
-	background-repeat: no-repeat !important
-	background-size: contain !important
-	&.icon-white,.md-theme-default-dark &
-		color: #fff
-@media screen and (min-width: 600px)
-	.md-button.menu
-		display: none
-.md-dialog
-	max-width: 100vw !important
-	border-radius: 8px !important
-.t-ellipsis
-	white-space: nowrap
-	overflow: hidden
-	text-overflow: ellipsis
-.card-banner:before 
-	padding-top: 25% !important
-.md-overlay
-	backdrop-filter: blur(5px)
-</style>
-<style lang="scss">
-	:root {
-		--default-font: Roboto, "SF Pro TC", "SF Pro Text", "SF Pro Icons",
-			"PingFang TC", "Helvetica Neue", "Helvetica", "Arial", "Source Hans",
-			"思源黑體", "Noto Sans CJK TC", "Noto Sans TC", "Microsoft JhengHei",
-			"Microsoft Yahei", wf_SegoeUI, "Segoe UI", Segoe, "Segoe WP", Tahoma,
-			Verdana, Ubuntu, "Bitstream Vera Sans", "DejaVu Sans", Tahoma,
-			微軟正黑體, "LiHei Pro", "WenQuanYi Micro Hei", "Droid Sans Fallback",
-			"AR PL UMing TW", "Helvetica Neue", "Hiragino Maru Gothic ProN",
-			メイリオ, "ヒラギノ丸ゴ ProN W4", Meiryo, "Droid Sans", sans-serif;
-		--product-font: "Product Sans", Roboto, "SF Pro TC", "SF Pro Text",
-			"SF Pro Icons", "PingFang TC", "Helvetica Neue", "Helvetica", "Arial",
-			"Source Hans", "思源黑體", "Noto Sans CJK TC", "Noto Sans TC",
-			"Microsoft JhengHei", "Microsoft Yahei", wf_SegoeUI, "Segoe UI", Segoe,
-			"Segoe WP", Tahoma, Verdana, Ubuntu, "Bitstream Vera Sans",
-			"DejaVu Sans", Tahoma, 微軟正黑體, "LiHei Pro", "WenQuanYi Micro Hei",
-			"Droid Sans Fallback", "AR PL UMing TW", "Helvetica Neue",
-			"Hiragino Maru Gothic ProN", メイリオ, "ヒラギノ丸ゴ ProN W4", Meiryo,
-			"Droid Sans", sans-serif;
-	}
-	@media (min-width: 1024px) {
-		::-webkit-scrollbar {
-			width: 8px;
-			height: 8px;
-		}
-	}
-	::-webkit-scrollbar {
-		width: 5px;
-		height: 5px;
-		background: 0 0;
-		.md-theme-default-dark & {
-			background: rgba(255, 255, 255, 0.05);
-		}
-	}
-	::-webkit-scrollbar-thumb {
-		--color: 0, 0, 0;
-		background: rgba(var(--color), 0.3);
-		.md-theme-default-dark & {
-			--color: 255, 255, 255;
-		}
-		&:hover {
-			background: rgba(var(--color), 0.4);
-		}
-		&:active {
-			background: rgba(var(--color), 0.6);
-		}
-	}
 </style>

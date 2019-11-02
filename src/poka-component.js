@@ -7,6 +7,7 @@ import pokaCards from '@/components/cards.vue'
 import pokaLoader from '@/components/loader.vue'
 import pinButton from '@/components/pinButton.vue'
 import playRandomButton from '@/components/playRandomButton.vue'
+import pokaUpdate from '@/components/poka-update.vue'
 // parseData
 import parsePlaylists from '@/components/parse-playlists.vue'
 import parseSongs from '@/components/parse-songs.vue'
@@ -16,6 +17,7 @@ import parseComposers from '@/components/parse-composers.vue'
 import parseFolders from '@/components/parse-folders.vue'
 import parseMultiple from '@/components/parse-multiple.vue'
 export {
+    // pokaComponent
     about,
     headerWrapper,
     pokaCard,
@@ -23,6 +25,8 @@ export {
     pokaLoader,
     pinButton,
     playRandomButton,
+    pokaUpdate,
+    // parseData
     parsePlaylists,
     parseSongs,
     parseArtists,

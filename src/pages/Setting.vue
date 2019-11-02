@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<poka-header :title="$t('settings')" :subtitle="'PokaPlayer'" />
+		<poka-update />
 		<md-list class="md-double-line">
 			<md-list-item to="/setting/network">
 				<md-icon>cloud</md-icon>

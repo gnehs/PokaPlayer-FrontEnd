@@ -4,11 +4,11 @@
 			:title="$t('header_welcome')"
 			:subtitle="$t('header_version',{version:poka_version})"
 		/>
+		<poka-update />
 		<poka-loader v-if="!data" />
 		<poka-parse-multiple v-else :data="data" />
 	</div>
 </template>
-
 <script>
 export default {
 	name: "Home",
