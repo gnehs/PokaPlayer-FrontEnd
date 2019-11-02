@@ -1,5 +1,5 @@
 <template>
-	<div class="update-notify" v-if="checkUpadteStatus||1">
+	<div class="update-notify" v-if="checkUpadteStatus">
 		<h1>{{$t('settings_update')}}</h1>
 		<p>{{checkUpadteStatus}}</p>
 		<md-button
