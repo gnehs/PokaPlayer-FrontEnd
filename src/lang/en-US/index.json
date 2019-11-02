@@ -116,7 +116,7 @@
 	"settings_update_latestVersion": "Your PokaPlayer is up to date",
 	"settings_update_update2": "Update to {version}",
 	"settings_update_canUpdate2": "{version} is available",
-	"settings_update_Go2UpdatePage": "Go to update page",
+	"settings_update_go2UpdatePage": "Go to update page",
 	"settings_update_srvRestart": "Restart server.",
 	"settings_update_reconnect": "Reconnect",
 	"settings_update_initializing": "Initializing...",
