@@ -17,9 +17,10 @@
 					v-for="(song,index) of audio_queue"
 					:key="song.uuid"
 					:class="{active:index==audio_index}"
+					@click="playSong(index)"
 				>
 					<md-ripple>
-						<div class="content" @click="playSong(index)">
+						<div class="content">
 							<md-avatar>
 								<img :src="song.cover" alt="cover" />
 							</md-avatar>
@@ -29,10 +30,10 @@
 							</div>
 						</div>
 						<div class="action">
-							<md-button class="md-icon-button md-list-action" @click="moreDialog(song)">
+							<md-button class="md-icon-button md-list-action" @click.stop="moreDialog(song)">
 								<md-icon class="outline-more_horiz" />
 							</md-button>
-							<md-button class="md-icon-button md-list-action" @click="removeSong(index)">
+							<md-button class="md-icon-button md-list-action" @click.stop="removeSong(index)">
 								<md-icon class="outline-close" />
 							</md-button>
 						</div>
