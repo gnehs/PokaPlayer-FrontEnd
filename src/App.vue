@@ -207,55 +207,8 @@ export default {
 				duration
 			);
 		};
-		Vue.prototype.$randomPlay = function() {
-			let randomStr = Math.random()
-				.toString(36)
-				.substring(7);
-			this.axios(`/pokaapi/randomSongs?${randomStr}`)
-				.then(res => res.data.songs)
-				.then(songs => {
-					this.$addSongs({ songs: songs });
-				})
-				.catch(e => alert(`PokaPlayer Error\n${e}`));
-		};
-		Vue.prototype.$addSongs = function({ songs, index, clear = true }) {
-			const server = window._setting(`server`);
-			const defaultCover = window._setting(`headerBgSource`);
-			let playlist = [];
-			for (let song of songs) {
-				playlist.push({
-					url:
-						server +
-						song.url +
-						"&songRes=" +
-						_setting(`audioQuality`).toLowerCase(),
-					cover:
-						song.cover && song.cover.startsWith("http")
-							? song.cover
-							: song.cover
-							? server + song.cover
-							: defaultCover,
-					name: song.name,
-					artist: song.artist,
-					artistId: song.artistId,
-					album: song.album,
-					albumId: song.albumId,
-					id: song.id,
-					source: song.source,
-					uuid: _uuid()
-				});
-			}
-			if (clear) _player.list.clear();
-			_player.list.add(playlist);
-			if (index && _player.options.order === "random") {
-				_player.options.order = "list";
-				_player.list.switch(index);
-				_player.options.order = "random";
-			} else if (index) {
-				_player.list.switch(index);
-			}
-			_player.play();
-		};
+		Vue.prototype.$randomPlay = window._randomPlay;
+		Vue.prototype.$addSongs = window._addSongs;
 		sessionStorage.removeItem("login");
 		function vhResize() {
 			let vh = window.innerHeight * 0.01;
