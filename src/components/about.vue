@@ -1,7 +1,7 @@
 <template>
 	<div class="box">
 		<div class="content">
-			<img src="/img/icons/apple-touch-icon.png" style="height: 128px" />
+			<img src="/img/icons/android-chrome-512x512.png" style="height: 128px" />
 			<h1>PokaPlayer</h1>
 			<p class="md-subheading">{{poka_version}}</p>
 			<a href="https://github.com/gnehs/PokaPlayer/" target="_blank">GitHub</a>
