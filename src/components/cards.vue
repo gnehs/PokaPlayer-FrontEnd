@@ -1,6 +1,6 @@
 <template>
 	<div class="poka cards">
-		<slot/>
+		<slot />
 	</div>
 </template>
 
@@ -82,14 +82,14 @@ export default {
 			transform: scale(2)
 			color: #FFF
 		.title
-			font-size: 1.8em
+			font-size: 2em
 			padding-top: 5px
 			line-height: 1.5em
 			font-weight: bold
 			color: var(--text-color)
 			opacity: .9
 		.subtitle
-			font-size: 1.2em
+			font-size: 1.4em
 			padding-top: 0px
 			line-height: 1.5em
 			color: var(--text-color)
