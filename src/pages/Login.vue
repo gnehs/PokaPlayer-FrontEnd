@@ -62,7 +62,7 @@
 			overflow: hidden;
 			box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 			backdrop-filter: blur(3px);
-			background-color: rgba(255, 255, 255, 0.9);
+			background-color: rgba(255, 255, 255, 0.95);
 			&.md-theme-default-dark {
 				background-color: rgba(40, 37, 53, 0.975);
 			}
@@ -83,11 +83,11 @@
 	}
 	// header-img
 	.header-img {
-		background: linear-gradient(45deg, #d5ffb9, #de7fff);
+		background: linear-gradient(-45deg, #d5ffb9, #de7fff);
 	}
 	@media (prefers-color-scheme: dark) {
 		.header-img {
-			background: linear-gradient(45deg, #514f5d, #262334);
+			background: linear-gradient(-45deg, #514f5d, #262334);
 		}
 	}
 
