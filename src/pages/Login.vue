@@ -1,45 +1,41 @@
 <template>
-	<form class="md-layout" v-on:submit.prevent="login">
-		<md-card class="md-layout-item">
-			<md-card-media-cover>
-				<md-card-media md-ratio="16:9" class="card-banner">
-					<img class="header-img" :src="headerImg" />
-				</md-card-media>
+	<div class="login-container" :style="{backgroundImage:`url('${headerImg}')`}">
+		<form class="md-layout" v-on:submit.prevent="login">
+			<md-card class="md-layout-item">
+				<md-card-media-cover>
+					<md-card-media md-ratio="16:9" class="card-banner">
+						<img class="header-img" src="/img/loginHeader.svg" />
+					</md-card-media>
+				</md-card-media-cover>
 
-				<md-card-area>
-					<md-card-header>
-						<span class="md-title">PokaPlayer</span>
-					</md-card-header>
-				</md-card-area>
-			</md-card-media-cover>
+				<md-card-content>
+					<md-field>
+						<md-icon class="md-accent" v-if="serverError">warning</md-icon>
+						<md-icon class="md-accent" v-else>link</md-icon>
+						<label for="server">Server</label>
+						<md-input type="text" name="server" v-model.trim="server" :disabled="logining" />
+					</md-field>
+					<md-field>
+						<md-icon class="md-accent">vpn_key</md-icon>
+						<label for="username">Username</label>
+						<md-input type="text" name="username" v-model="username" :disabled="logining" />
+					</md-field>
+					<md-field>
+						<md-icon class="md-accent" v-if="passwordError">warning</md-icon>
+						<md-icon class="md-accent" v-else>vpn_key</md-icon>
+						<label for="password">Password</label>
+						<md-input type="password" name="password" v-model="password" :disabled="logining" />
+					</md-field>
+				</md-card-content>
 
-			<md-card-content>
-				<md-field>
-					<md-icon class="md-accent" v-if="serverError">warning</md-icon>
-					<md-icon class="md-accent" v-else>link</md-icon>
-					<label for="server">Server</label>
-					<md-input type="text" name="server" v-model.trim="server" :disabled="logining" />
-				</md-field>
-				<md-field>
-					<md-icon class="md-accent">vpn_key</md-icon>
-					<label for="username">Username</label>
-					<md-input type="text" name="username" v-model="username" :disabled="logining" />
-				</md-field>
-				<md-field>
-					<md-icon class="md-accent" v-if="passwordError">warning</md-icon>
-					<md-icon class="md-accent" v-else>vpn_key</md-icon>
-					<label for="password">Password</label>
-					<md-input type="password" name="password" v-model="password" :disabled="logining" />
-				</md-field>
-			</md-card-content>
+				<md-progress-bar md-mode="indeterminate" v-if="logining" />
 
-			<md-progress-bar md-mode="indeterminate" v-if="logining" />
-
-			<md-card-actions>
-				<md-button type="submit" class="md-raised md-primary" :disabled="logining">{{$t('login')}}</md-button>
-			</md-card-actions>
-		</md-card>
-	</form>
+				<md-card-actions>
+					<md-button type="submit" class="md-raised md-primary" :disabled="logining">{{$t('login')}}</md-button>
+				</md-card-actions>
+			</md-card>
+		</form>
+	</div>
 </template>
 
 <style lang="scss" scoped>
@@ -72,7 +68,22 @@
 			border-radius: 8px;
 			overflow: hidden;
 			box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+			backdrop-filter: blur(3px);
+			background-color: rgba(255, 255, 255, 0.9);
+			&.md-theme-default-dark {
+				background-color: rgba(66, 66, 66, 0.975);
+			}
 		}
+	}
+	.md-field > .md-icon:after {
+		background-color: transparent;
+	}
+	.login-container {
+		height: 100vh;
+		width: 100vw;
+		margin: -16px;
+		background-size: cover;
+		background-position: center;
 	}
 </style>
 <script>

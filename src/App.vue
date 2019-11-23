@@ -1,6 +1,8 @@
 <template>
 	<div class="page-container">
-		<router-view />
+		<transition name="fade" mode="out-in">
+			<router-view />
+		</transition>
 	</div>
 </template>
 <style lang="sass">
