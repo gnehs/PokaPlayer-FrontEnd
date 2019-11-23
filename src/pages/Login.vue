@@ -8,6 +8,7 @@
 							<img class="header-img" src="/img/loginHeader.svg" />
 						</md-card-media>
 					</md-card-media-cover>
+					<md-progress-bar md-mode="indeterminate" v-if="logining" />
 				</md-card>
 				<md-card>
 					<md-card-content>
@@ -25,8 +26,6 @@
 						</md-field>
 					</md-card-content>
 
-					<md-progress-bar md-mode="indeterminate" v-if="logining" />
-
 					<md-card-actions>
 						<md-button
 							type="submit"
@@ -43,9 +42,9 @@
 <style lang="scss" scoped>
 	.md-progress-bar {
 		position: absolute;
-		top: 0;
 		right: 0;
 		left: 0;
+		bottom: 0;
 	}
 	.card-banner + .md-card-area {
 		background: linear-gradient(
