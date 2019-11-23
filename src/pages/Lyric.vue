@@ -24,6 +24,7 @@
 						v-model.trim="lyricSearchkeyword"
 						:disabled="lyricSearching"
 						@keyup.enter="getLyricByKeyword()"
+						v-on:blur="getLyricByKeyword()"
 					/>
 					<span class="md-helper-text">{{$t('lrc_enter2search')}}</span>
 				</md-field>
