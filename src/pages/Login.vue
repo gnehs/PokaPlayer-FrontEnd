@@ -1,38 +1,41 @@
 <template>
 	<div class="login-container" :style="{backgroundImage:`url('${headerImg}')`}">
 		<form class="md-layout" v-on:submit.prevent="login">
-			<md-card class="md-layout-item">
-				<md-card-media-cover>
-					<md-card-media md-ratio="16:9" class="card-banner">
-						<img class="header-img" src="/img/loginHeader.svg" />
-					</md-card-media>
-				</md-card-media-cover>
+			<div class="md-layout-item">
+				<md-card>
+					<md-card-media-cover>
+						<md-card-media md-ratio="16:9" class="card-banner">
+							<img class="header-img" src="/img/loginHeader.svg" />
+						</md-card-media>
+					</md-card-media-cover>
+				</md-card>
+				<md-card>
+					<md-card-content>
+						<md-field>
+							<label for="server">{{$t('login_page.server')}}</label>
+							<md-input type="text" name="server" v-model.trim="server" :disabled="logining" />
+						</md-field>
+						<md-field>
+							<label for="username">{{$t('login_page.username')}}</label>
+							<md-input type="text" name="username" v-model="username" :disabled="logining" />
+						</md-field>
+						<md-field>
+							<label for="password">{{$t('login_page.password')}}</label>
+							<md-input type="password" name="password" v-model="password" :disabled="logining" />
+						</md-field>
+					</md-card-content>
 
-				<md-card-content>
-					<md-field>
-						<label for="server">{{$t('login_page.server')}}</label>
-						<md-input type="text" name="server" v-model.trim="server" :disabled="logining" />
-					</md-field>
-					<md-field>
-						<label for="username">{{$t('login_page.username')}}</label>
-						<md-input type="text" name="username" v-model="username" :disabled="logining" />
-					</md-field>
-					<md-field>
-						<label for="password">{{$t('login_page.password')}}</label>
-						<md-input type="password" name="password" v-model="password" :disabled="logining" />
-					</md-field>
-				</md-card-content>
+					<md-progress-bar md-mode="indeterminate" v-if="logining" />
 
-				<md-progress-bar md-mode="indeterminate" v-if="logining" />
-
-				<md-card-actions>
-					<md-button
-						type="submit"
-						class="md-primary md-block md-outlined"
-						:disabled="logining"
-					>{{$t('login')}}</md-button>
-				</md-card-actions>
-			</md-card>
+					<md-card-actions>
+						<md-button
+							type="submit"
+							class="md-primary md-block md-outlined"
+							:disabled="logining"
+						>{{$t('login')}}</md-button>
+					</md-card-actions>
+				</md-card>
+			</div>
 		</form>
 	</div>
 </template>
@@ -78,6 +81,9 @@
 			}
 			.md-card-actions {
 				padding: 16px 32px;
+			}
+			& + .md-card {
+				margin-top: 8px;
 			}
 		}
 	}
