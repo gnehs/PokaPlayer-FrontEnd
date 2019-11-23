@@ -16,29 +16,45 @@
 		<md-dialog :md-active.sync="showLyricDialog" :md-fullscreen="false">
 			<md-dialog-title>{{$t("lrc_search")}}</md-dialog-title>
 			<md-dialog-content style="max-width: 100vw;">
-				<md-list class="md-double-line">
-					<md-list-item @click="loadLrc(`[00:00.000]`,true);showLyricDialog = false">
-						<md-icon>close</md-icon>
-						<div class="md-list-item-text">
-							<span>{{$t('lrc_notLoad')}}</span>
-							<span>{{$t('lrc_notLoad_description')}}</span>
-						</div>
-					</md-list-item>
-				</md-list>
-				<md-list class="md-triple-line" style="overflow:hidden;" v-if="!lyricSearching">
-					<md-list-item
+				<md-field>
+					<label for="searchLyric">{{$t('lrc_search')}}</label>
+					<md-input
+						type="text"
+						name="searchLyric"
+						v-model.trim="lyricSearchkeyword"
+						:disabled="lyricSearching"
+						@keyup.enter="getLyricByKeyword()"
+					/>
+				</md-field>
+				<div class="poka list" style="width: 400px;">
+					<div class="item" @click="loadLrc(`[00:00.000]`,true);showLyricDialog = false">
+						<md-ripple>
+							<div class="content">
+								<div class="header">
+									<div class="title t-ellipsis">{{$t('lrc_notLoad')}}</div>
+									<div class="t-ellipsis">{{$t('lrc_notLoad_description')}}</div>
+								</div>
+							</div>
+						</md-ripple>
+					</div>
+				</div>
+				<div class="poka list" v-if="!lyricSearching" style="width: 400px;">
+					<div
+						class="item"
 						v-for="(item, index) of lyricSearchResult"
 						:key="index"
 						@click="loadLrc(item.lyric,true);showLyricDialog = false"
 					>
-						<md-icon>subtitles</md-icon>
-						<div class="md-list-item-text t-ellipsis">
-							<span class="t-ellipsis">{{item.name}} ／ {{item.artist}}</span>
-							<span class="t-ellipsis">{{item.nowLyric}}</span>
-							<span class="t-ellipsis">{{item.nowLyricT}}</span>
-						</div>
-					</md-list-item>
-				</md-list>
+						<md-ripple>
+							<div class="content">
+								<div class="header">
+									<div class="title t-ellipsis">{{item.name}}</div>
+									<div class="t-ellipsis">{{item.artist}}</div>
+								</div>
+							</div>
+						</md-ripple>
+					</div>
+				</div>
 				<poka-loader v-else />
 			</md-dialog-content>
 			<md-dialog-actions>
@@ -88,6 +104,7 @@ export default {
 		lyricSearching: true,
 		lyricSearchResult: null,
 		lyricTranslated: false,
+		lyricSearchkeyword: null,
 		Lyric_Update: null
 	}),
 	created() {
@@ -96,11 +113,6 @@ export default {
 	},
 	destroyed() {
 		this.stopUpdateLyric();
-	},
-	watch: {
-		showLyricDialog() {
-			this.updateSearchLyric();
-		}
 	},
 	methods: {
 		startUpdateLyric() {
@@ -114,16 +126,12 @@ export default {
 		openLyricDialog() {
 			this.showLyricDialog = true;
 			let nowPlaying = _player.list.audios[_player.list.index];
+			this.lyricSearchkeyword = this.audio_title + " " + this.audio_artist
 			if (!this.lyricSearchResult) {
-				this.getLyricByKeyword(
-					nowPlaying.name,
-					nowPlaying.artist,
-					false
-				); //搜尋一下
+				this.getLyricByKeyword(this.lyricSearchkeyword, false); //搜尋一下
 			}
 		},
 		updateLyric() {
-			this.updateSearchLyric(); //更新搜尋結果中的歌詞
 			let nowPlaying = _player.list.audios[_player.list.index];
 			if (_player.list.audios.length > 0) {
 				if (this.audio_title != nowPlaying.name) {
@@ -132,6 +140,7 @@ export default {
 					this.lyricFocus = 0;
 					this.lyricSearching = true;
 					this.lyricSearchResult = null;
+					this.lyricSearchkeyword = nowPlaying.name + " " + nowPlaying.artist
 					this.getLyric(
 						nowPlaying.name,
 						nowPlaying.artist,
@@ -151,27 +160,11 @@ export default {
 							this.lyricFocus = lyricFocus_temp;
 							this.$nextTick(() => {
 								//等 Vue 好了再去更新捲動條
-								let focusedLyric = document.querySelector(
-									".lyric p.focus"
-								);
+								let focusedLyric = document.querySelector(".lyric p.focus");
 								if (focusedLyric) {
-									let sh =
-										focusedLyric.offsetTop -
-										document.querySelector("main")
-											.clientHeight *
-											0.5 +
-										focusedLyric.clientHeight *
-											(this.lyricTranslated
-												? 1.75
-												: 0.75);
-
-									window.scrollTo(
-										document.querySelector(
-											".md-app-content"
-										),
-										sh,
-										200
-									);
+									let sh = focusedLyric.offsetTop - document.querySelector("main").clientHeight * 0.5 +
+										focusedLyric.clientHeight * (this.lyricTranslated ? 1.75 : 0.75);
+									window.scrollTo(document.querySelector(".md-app-content"), sh, 200);
 								}
 							});
 						}
@@ -180,23 +173,6 @@ export default {
 			} else {
 				this.noloadedLyric = true;
 				this.lyricSearching = false;
-			}
-		},
-		updateSearchLyric() {
-			//_lyricReader
-			if (this.lyricSearchResult && this.showLyricDialog) {
-				this.lyricSearchResult.map(x => {
-					let lr = new window._lyricReader(x.lyric);
-					let lrg = lr.getLyrics();
-					let lrs = lr.select(_player.audio.currentTime);
-					x.nowLyric = lrg[lrs].text;
-					if (x.nowLyric.trim() == "") x.nowLyric = "．．．";
-					x.nowLyricT = "";
-					if (this.lyricTranslated) {
-						x.nowLyricT = lrg[lrs + 1].text;
-					}
-					return x;
-				});
 			}
 		},
 		getLyric(title, artist, id = false, source) {
@@ -222,40 +198,35 @@ export default {
 						}
 					} else {
 						//沒找到，拿 title 跟 artist 找找看
-						this.getLyricByKeyword(title, artist);
+						this.getLyricByKeyword(this.lyricSearchkeyword);
 					}
 				});
 			} else {
-				this.getLyricByKeyword(title, artist);
+				this.getLyricByKeyword(this.lyricSearchkeyword);
 			}
 		},
-		getLyricByKeyword(title, artist, set = true) {
-			this.axios(
-				_setting(`server`) +
-					`/pokaapi/searchLyrics/?keyword=${encodeURIComponent(
-						title + " " + artist
-					)}`
-			)
+		getLyricByKeyword(keyword, set = true) {
+			if (!keyword) keyword = this.lyricSearchkeyword
+			this.lyricSearching = true;
+			this.axios(_setting(`server`) + `/pokaapi/searchLyrics/?keyword=${encodeURIComponent(keyword)}`)
 				.then(result => result.data)
 				.then(result => {
 					if (result.lyrics.length > 0) {
 						//計算傳回歌詞匹配率
 						result.lyrics.forEach(element => {
 							let rate =
-								this.matchRate(title, element.name) * 0.7 +
-								this.matchRate(artist, element.artist) * 0.3;
+								this.matchRate(this.audio_title, element.name) * 0.7 +
+								this.matchRate(this.audio_artist, element.artist) * 0.3;
 							rate = Math.round(rate * 100) / 100;
-							element.rate =
-								rate > 0 ? (rate > 100 ? 90.25 : rate) : 0;
+							element.rate = rate > 0 ? (rate > 100 ? 90.25 : rate) : 0;
 						});
 						//以匹配率排序
 						result.lyrics.sort((a, b) => b.rate - a.rate);
-						if (title == this.audio_title) {
+						if (keyword == this.lyricSearchkeyword) {
 							//最高者若超過 .7 則載入歌詞
 							if (result.lyrics[0].rate > 35 && set)
 								this.loadLrc(result.lyrics[0].lyric);
 							this.lyricSearchResult = result.lyrics;
-							this.updateSearchLyric();
 						}
 					}
 					this.lyricSearching = false;
@@ -274,15 +245,9 @@ export default {
 			this.lyricFocus = 0; // 歌詞進度歸零
 			try {
 				//如果最後兩個時間相同把後面那個的時間調到一個世紀後
-				if (
-					window._lrc.lyrics_all[window._lrc.lyrics_all.length - 2]
-						.timestamp ==
-					window._lrc.lyrics_all[window._lrc.lyrics_all.length - 1]
-						.timestamp
-				) {
-					window._lrc.lyrics_all[
-						window._lrc.lyrics_all.length - 1
-					].timestamp = 99999;
+				if (window._lrc.lyrics_all[window._lrc.lyrics_all.length - 2].timestamp ==
+					window._lrc.lyrics_all[window._lrc.lyrics_all.length - 1].timestamp) {
+					window._lrc.lyrics_all[window._lrc.lyrics_all.length - 1].timestamp = 99999;
 					this.lyricTranslated = true;
 				} else {
 					this.lyricTranslated = false;
