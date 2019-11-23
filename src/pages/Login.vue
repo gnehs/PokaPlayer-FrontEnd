@@ -31,7 +31,11 @@
 				<md-progress-bar md-mode="indeterminate" v-if="logining" />
 
 				<md-card-actions>
-					<md-button type="submit" class="md-raised md-primary" :disabled="logining">{{$t('login')}}</md-button>
+					<md-button
+						type="submit"
+						class="md-primary md-block md-outlined"
+						:disabled="logining"
+					>{{$t('login')}}</md-button>
 				</md-card-actions>
 			</md-card>
 		</form>
@@ -39,12 +43,6 @@
 </template>
 
 <style lang="scss" scoped>
-	.md-card-media-cover {
-		background: #505050;
-	}
-	.card-banner::before {
-		padding-top: 170px !important;
-	}
 	.md-progress-bar {
 		position: absolute;
 		top: 0;
@@ -71,10 +69,33 @@
 			backdrop-filter: blur(3px);
 			background-color: rgba(255, 255, 255, 0.9);
 			&.md-theme-default-dark {
-				background-color: rgba(66, 66, 66, 0.975);
+				background-color: rgba(40, 37, 53, 0.975);
+			}
+			.md-card-media-cover {
+				background: #505050;
+			}
+			.card-banner::before {
+				padding-top: 170px !important;
+			}
+			.md-card-content {
+				padding: 16px 32px;
+				padding-bottom: 0;
+			}
+			.md-card-actions {
+				padding: 16px 32px;
 			}
 		}
 	}
+	// header-img
+	.header-img {
+		background: linear-gradient(bottom right, #d5ffb9, #de7fff);
+	}
+	@media (prefers-color-scheme: dark) {
+		.header-img {
+			background: linear-gradient(bottom right, #514f5d, #262334);
+		}
+	}
+
 	.md-field > .md-icon:after {
 		background-color: transparent;
 	}
@@ -98,7 +119,8 @@ export default {
 		password: null,
 		username: null,
 		passwordError: null,
-		headerImg: null
+		headerImg: null,
+		isDarkMode: window.matchMedia("(prefers-color-scheme: dark)").matches
 	}),
 	created() {
 		this.remember = true;
