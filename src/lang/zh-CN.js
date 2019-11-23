@@ -1,4 +1,4 @@
-{
+export default {
 	"title": "中文（中国）",
 	"loading": "加载中...",
 	"header_welcome": "欢迎使用",
@@ -23,6 +23,11 @@
 	"cancel": "取消",
 	"back": "返回",
 	"login": "登入",
+	"login_page": {
+		"server": "服务器",
+		"username": "用户名称",
+		"password": "密码"
+	},
 	"nothingFound": "找不到",
 	"requestError": "请求失败，请再试一次",
 	"home_recentAlbums": "最近加入的专辑",

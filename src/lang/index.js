@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 
-import zh_CN from './zh-CN/index.json'
-import zh_TW from './zh-TW/index.json'
-import en_US from './en-US/index.json'
+const zh_CN = require('./zh-CN.js').default
+const zh_TW = require('./zh-TW.js').default
+const en_US = require('./en-US.js').default
 
 Vue.use(VueI18n)
 const locale = window._setting('lang')
@@ -26,10 +26,10 @@ const i18n = new VueI18n({
 window.i18n = i18n
 // Hot updates
 if (module.hot) {
-    module.hot.accept(['./zh-CN/index.json', './zh-TW/index.json', './en-US/index.json'], function () {
-        i18n.setLocaleMessage('zh_CN', require('./zh-CN/index.json'))
-        i18n.setLocaleMessage('en_US', require('./en-US/index.json'))
-        i18n.setLocaleMessage('zh_TW', require('./zh-TW/index.json'))
+    module.hot.accept(['./zh-CN.js', './zh-TW.js', './en-US.js'], function () {
+        i18n.setLocaleMessage('zh_CN', require('./zh-CN.js'))
+        i18n.setLocaleMessage('en_US', require('./en-US.js'))
+        i18n.setLocaleMessage('zh_TW', require('./zh-TW.js'))
     })
 }
 export default i18n

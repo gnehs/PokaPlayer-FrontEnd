@@ -1,4 +1,4 @@
-{
+export default {
 	"title": "English (US)",
 	"loading": "Loading...",
 	"header_welcome": "Welcome",
@@ -23,6 +23,11 @@
 	"cancel": "Cancel",
 	"back": "Back",
 	"login": "Login",
+	"login_page": {
+		"server": "Server",
+		"username": "Username",
+		"password": "Password"
+	},
 	"nothingFound": "Nothing found",
 	"requestError": "An error occurred while requesting, please try again",
 	"home_recentAlbums": "Recent added albums",

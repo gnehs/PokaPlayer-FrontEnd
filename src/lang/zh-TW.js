@@ -1,4 +1,4 @@
-{
+export default {
 	"title": "中文（台灣）",
 	"loading": "載入中...",
 	"header_welcome": "歡迎使用",
@@ -24,6 +24,11 @@
 	"done": "完成",
 	"back": "返回",
 	"login": "登入",
+	"login_page": {
+		"server": "伺服器",
+		"username": "使用者名稱",
+		"password": "密碼"
+	},
 	"nothingFound": "找不到",
 	"requestError": "請求失敗，請再試一次",
 	"home_recentAlbums": "最近加入的專輯",

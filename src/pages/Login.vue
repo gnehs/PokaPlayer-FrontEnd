@@ -10,20 +10,15 @@
 
 				<md-card-content>
 					<md-field>
-						<md-icon class="md-accent" v-if="serverError">warning</md-icon>
-						<md-icon class="md-accent" v-else>link</md-icon>
-						<label for="server">Server</label>
+						<label for="server">{{$t('login_page.server')}}</label>
 						<md-input type="text" name="server" v-model.trim="server" :disabled="logining" />
 					</md-field>
 					<md-field>
-						<md-icon class="md-accent">vpn_key</md-icon>
-						<label for="username">Username</label>
+						<label for="username">{{$t('login_page.username')}}</label>
 						<md-input type="text" name="username" v-model="username" :disabled="logining" />
 					</md-field>
 					<md-field>
-						<md-icon class="md-accent" v-if="passwordError">warning</md-icon>
-						<md-icon class="md-accent" v-else>vpn_key</md-icon>
-						<label for="password">Password</label>
+						<label for="password">{{$t('login_page.password')}}</label>
 						<md-input type="password" name="password" v-model="password" :disabled="logining" />
 					</md-field>
 				</md-card-content>
@@ -88,17 +83,14 @@
 	}
 	// header-img
 	.header-img {
-		background: linear-gradient(bottom right, #d5ffb9, #de7fff);
+		background: linear-gradient(45deg, #d5ffb9, #de7fff);
 	}
 	@media (prefers-color-scheme: dark) {
 		.header-img {
-			background: linear-gradient(bottom right, #514f5d, #262334);
+			background: linear-gradient(45deg, #514f5d, #262334);
 		}
 	}
 
-	.md-field > .md-icon:after {
-		background-color: transparent;
-	}
 	.login-container {
 		height: 100vh;
 		width: 100vw;
