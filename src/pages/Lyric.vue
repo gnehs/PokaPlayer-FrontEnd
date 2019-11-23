@@ -25,6 +25,7 @@
 						:disabled="lyricSearching"
 						@keyup.enter="getLyricByKeyword()"
 					/>
+					<span class="md-helper-text">{{$t('lrc_enter2search')}}</span>
 				</md-field>
 				<div class="poka list" style="width: 400px;">
 					<div class="item" @click="loadLrc(`[00:00.000]`,true);showLyricDialog = false">
