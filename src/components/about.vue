@@ -1,9 +1,13 @@
 <template>
-	<div class="box">
-		<div class="content">
-			<img src="/img/icons/android-chrome-512x512.png" style="height: 128px" />
-			<h1>PokaPlayer</h1>
-			<p class="md-subheading">{{poka_version}}</p>
+	<v-card class="mx-auto" width="350">
+		<v-img class="banner-img" src="/img/loginHeader.svg" height="170px"></v-img>
+		<v-card-text class="text-center">
+			<br />
+			<span class="display-1">PokaPlayer</span>
+			<br />
+			<span class="subtitle-1">{{' '+poka_version}}</span>
+			<br />
+			<br />
 			<a href="https://github.com/gnehs/PokaPlayer/" target="_blank">GitHub</a>
 			<span>．</span>
 			<a
@@ -15,18 +19,18 @@
 				href="https://github.com/gnehs/PokaPlayer/graphs/contributors"
 				target="_blank"
 			>{{$t('settings_about_contributions')}}</a>
-		</div>
-	</div>
+		</v-card-text>
+	</v-card>
 </template>
 
 <style lang="sass" scoped>
-.box   
-	display: grid
-	justify-content: center
-	align-items: center
-	height: calc(100% - 69px)
-.content
-	text-align: center
+// banner-img
+.banner-img 
+	background: linear-gradient(-45deg, #d5ffb9f0, #de7ffff0)
+
+@media (prefers-color-scheme: dark) 
+	.banner-img 
+		background: linear-gradient(-45deg, #514f5df0, #262334f0)
 </style>
 <script>
 export default {

@@ -46,13 +46,9 @@
 				</div>
 			</md-list-item>
 		</md-list>
-		<md-dialog :md-active.sync="aboutDialog" :md-fullscreen="false">
-			<md-dialog-title>{{$t('settings_about')}}</md-dialog-title>
+		<v-dialog v-model="aboutDialog" max-width="350">
 			<poka-about />
-			<md-dialog-actions>
-				<md-button class="md-primary" @click="aboutDialog=false">{{$t('back')}}</md-button>
-			</md-dialog-actions>
-		</md-dialog>
+		</v-dialog>
 	</div>
 </template>
 <script>
