@@ -214,16 +214,9 @@ export default {
 							".poka.list > .active"
 						);
 						if (activeItem) {
-							let sh =
-								activeItem.offsetTop -
-								document.querySelector("main.v-content").clientHeight *
-								0.5 +
-								activeItem.clientHeight * 0.75;
-							window.scrollTo(
-								document.querySelector("main.v-content"),
-								sh,
-								200
-							);
+							let sh = activeItem.offsetTop - document.querySelector("main.v-content").clientHeight * 0.5 + activeItem.clientHeight * 0.75;
+							sh += 69 //底部播放器
+							window.scrollTo(document.querySelector("main.v-content"), sh, 200);
 						}
 					});
 				}

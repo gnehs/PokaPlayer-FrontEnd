@@ -1,68 +1,88 @@
 <template>
 	<div>
 		<div v-on:dblclick="openLyricDialog" class="lyric" :class="{lyricTranslated:lyricTranslated}">
-			<div v-if="lyric.length > 1">
-				<p
-					v-for="(item, index) of lyric"
-					:key="index"
-					:class="{focus: index==lyricFocus }"
-				>{{item.text}}</p>
-			</div>
-			<md-empty-state v-else-if="lyricSearching" v-icon="subtitles" :md-label="$t('loading')" />
-			<md-empty-state v-else v-icon="subtitles" :md-label="$t('lrc_noLyrics')">
-				<md-button class="md-primary md-outlined" @click="showLyricDialog = true">{{$t('lrc_search')}}</md-button>
-			</md-empty-state>
+			<transition name="fade" mode="out-in">
+				<div v-if="lyric.length > 1" key="lyric">
+					<p
+						v-for="(item, index) of lyric"
+						:key="index"
+						:class="{focus: index==lyricFocus }"
+					>{{item.text}}</p>
+				</div>
+
+				<v-card
+					v-else-if="lyricSearching"
+					class="mx-auto"
+					max-width="344"
+					style="margin-top:32px;"
+					key="lyricSearchingcard"
+				>
+					<v-card-text class="text-center">
+						<v-icon class="display-4 outline-subtitles" />
+						<p class="headline text--primary">{{$t('loading')}}</p>
+					</v-card-text>
+				</v-card>
+
+				<v-card v-else class="mx-auto" max-width="344" style="margin-top:32px;" key="lrc_noLyrics">
+					<v-card-text class="text-center">
+						<v-icon class="display-4 outline-subtitles" />
+						<p class="headline text--primary">{{$t('lrc_noLyrics')}}</p>
+						<v-btn outlined color="primary" @click="showLyricDialog = true">{{$t('lrc_search')}}</v-btn>
+					</v-card-text>
+				</v-card>
+			</transition>
 		</div>
-		<md-dialog :md-active.sync="showLyricDialog" :md-fullscreen="false">
-			<md-dialog-title>{{$t("lrc_search")}}</md-dialog-title>
-			<md-dialog-content style="max-width: 100vw;">
-				<md-field>
-					<label for="searchLyric">{{$t('lrc_search')}}</label>
-					<md-input
-						type="text"
+		<v-dialog v-model="showLyricDialog" max-width="420">
+			<v-card>
+				<v-card-title class="headline">{{$t("lrc_search")}}</v-card-title>
+				<v-card-text>
+					<v-text-field
+						:label="$t('lrc_search')"
+						solo
 						name="searchLyric"
 						v-model.trim="lyricSearchkeyword"
 						:disabled="lyricSearching"
 						@keyup.enter="getLyricByKeyword()"
-						v-on:blur="getLyricByKeyword()"
-					/>
-					<span class="md-helper-text">{{$t('lrc_enter2search')}}</span>
-				</md-field>
-				<div class="poka list" style="width: 400px;">
-					<div class="item" @click="loadLrc(`[00:00.000]`,true);showLyricDialog = false">
-						<md-ripple>
-							<div class="content">
-								<div class="header">
-									<div class="title t-ellipsis">{{$t('lrc_notLoad')}}</div>
-									<div class="t-ellipsis">{{$t('lrc_notLoad_description')}}</div>
+						@change="getLyricByKeyword()"
+						:hint="$t('lrc_enter2search')"
+					></v-text-field>
+
+					<div class="poka list" style="width: 372px;">
+						<div class="item" @click="loadLrc(`[00:00.000]`,true);showLyricDialog = false">
+							<md-ripple>
+								<div class="content">
+									<div class="header">
+										<div class="title t-ellipsis">{{$t('lrc_notLoad')}}</div>
+										<div class="t-ellipsis">{{$t('lrc_notLoad_description')}}</div>
+									</div>
 								</div>
-							</div>
-						</md-ripple>
+							</md-ripple>
+						</div>
 					</div>
-				</div>
-				<div class="poka list" v-if="!lyricSearching" style="width: 400px;">
-					<div
-						class="item"
-						v-for="(item, index) of lyricSearchResult"
-						:key="index"
-						@click="loadLrc(item.lyric,true);showLyricDialog = false"
-					>
-						<md-ripple>
+					<div class="poka list" v-if="!lyricSearching" style="width: 372px;">
+						<div
+							class="item"
+							v-for="(item, index) of lyricSearchResult"
+							:key="index"
+							@click="loadLrc(item.lyric,true);showLyricDialog = false"
+							v-ripple
+						>
 							<div class="content">
 								<div class="header">
 									<div class="title t-ellipsis">{{item.name}}</div>
 									<div class="t-ellipsis">{{item.artist}}</div>
 								</div>
 							</div>
-						</md-ripple>
+						</div>
 					</div>
-				</div>
-				<poka-loader v-else />
-			</md-dialog-content>
-			<md-dialog-actions>
-				<md-button class="md-primary" @click="showLyricDialog = false">{{$t('cancel')}}</md-button>
-			</md-dialog-actions>
-		</md-dialog>
+					<poka-loader v-else />
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn text @click="showLyricDialog = false">{{$t('cancel')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 	</div>
 </template>
 <style lang="sass" scoped>
