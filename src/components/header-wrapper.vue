@@ -2,9 +2,9 @@
 div
 	.header-wrapper
 		.bg(:style=`{backgroundImage: 'url("'+bg+'")'}`,:class="{blur: blurbg}")
-	.header(v-if='title')
-		.title(style="line-height: normal;") {{title}}
-		.subtitle {{subtitle}}
+	.hw-header(v-if='title')
+		.hw-title(style="line-height: normal;") {{title}}
+		.hw-subtitle {{subtitle}}
 </template>
 
 <script>
@@ -39,20 +39,20 @@ export default {
 		min-height: 300px
 	.bg.blur
 		filter: blur(5px)
-.header
+.hw-header
 	font-weight: bold
 	margin-left: 16px
 	margin-top: 32px
 	margin-bottom: 32px
 	position: relative
 	font-family: var(--product-font)
-	>.title,>.subtitle
+	>.hw-title,>.hw-subtitle
 		overflow: hidden
 		text-overflow: ellipsis
 		white-space: nowrap
 		line-height: 1.1em
-	>.title
+	>.hw-title
 		font-size: 3.5em
-	>.subtitle
+	>.hw-subtitle
 		font-size: 1.5em
 </style>
