@@ -166,7 +166,8 @@ export default {
 								if (focusedLyric) {
 									let sh = focusedLyric.offsetTop - document.querySelector("main").clientHeight * 0.5 +
 										focusedLyric.clientHeight * (this.lyricTranslated ? 1.75 : 0.75);
-									window.scrollTo(document.querySelector(".md-app-content"), sh, 200);
+									sh += 69 //底部播放器高度
+									window.scrollTo(document.querySelector("main.v-content"), sh, 200);
 								}
 							});
 						}
@@ -243,7 +244,7 @@ export default {
 		},
 		loadLrc(lrc, save = false) {
 			window._lrc.load(lrc);
-			window.scrollTo(document.querySelector(".md-app-content"), 0, 200);
+			window.scrollTo(document.querySelector("main.v-content"), 0, 200);
 			this.lyricFocus = 0; // 歌詞進度歸零
 			try {
 				//如果最後兩個時間相同把後面那個的時間調到一個世紀後

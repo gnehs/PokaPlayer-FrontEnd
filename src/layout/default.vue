@@ -1,88 +1,47 @@
 <template>
 	<div>
-		<md-app>
-			<md-app-toolbar class="md-primary" md-elevation="2" id="toolbar">
-				<div class="md-toolbar-row">
-					<div class="md-toolbar-section-start">
-						<md-button class="md-icon-button menu" @click="toggleMenu">
-							<md-icon>menu</md-icon>
-						</md-button>
-						<span class="md-title">PokaPlayer</span>
-					</div>
-					<div class="md-toolbar-section-end">
-						<md-button class="md-icon-button" @click="switch_audio_order">
-							<md-icon class="outline-repeat" v-if="audio_order==='list'"></md-icon>
-							<md-icon class="outline-shuffle" v-else></md-icon>
-						</md-button>
-					</div>
-				</div>
-			</md-app-toolbar>
-
-			<md-app-drawer :md-active.sync="menuVisible" md-permanent="clipped" id="drawer">
-				<div id="pokaTitle">
-					<span>PokaPlayer</span>
-				</div>
-				<md-divider />
-				<md-list>
-					<md-list-item to="/home" @click="closeMenu">
-						<md-icon class="outline-home" />
-						<span class="md-list-item-text">{{$t("home")}}</span>
-					</md-list-item>
-					<md-list-item to="/now" @click="closeMenu">
-						<md-icon class="outline-playlist_play" />
-						<span class="md-list-item-text">{{$t("nowplaying")}}</span>
-					</md-list-item>
-					<md-list-item to="/lyric" @click="closeMenu">
-						<md-icon class="outline-subtitles" />
-						<span class="md-list-item-text">{{$t("lrc")}}</span>
-					</md-list-item>
-					<md-divider />
-					<md-list-item to="/search" @click="closeMenu">
-						<md-icon class="outline-search" />
-						<span class="md-list-item-text">{{$t("search")}}</span>
-					</md-list-item>
-					<md-list-item to="/album" @click="closeMenu">
-						<md-icon class="outline-album" />
-						<span class="md-list-item-text">{{$t("album")}}</span>
-					</md-list-item>
-					<md-list-item to="/folder" @click="closeMenu">
-						<md-icon class="outline-folder" />
-						<span class="md-list-item-text">{{$t("folder")}}</span>
-					</md-list-item>
-					<md-list-item to="/artist" @click="closeMenu">
-						<md-icon class="outline-mic_none" />
-						<span class="md-list-item-text">{{$t("artist")}}</span>
-					</md-list-item>
-					<md-list-item to="/composer" @click="closeMenu">
-						<md-icon class="outline-music_note" />
-						<span class="md-list-item-text">{{$t("composer")}}</span>
-					</md-list-item>
-					<md-list-item to="/playlist" @click="closeMenu">
-						<md-icon class="outline-format_list_bulleted" />
-						<span class="md-list-item-text">{{$t("playlist")}}</span>
-					</md-list-item>
-					<md-divider />
-					<md-list-item to="/setting" @click="closeMenu">
-						<md-icon class="outline-settings"></md-icon>
-						<span class="md-list-item-text">{{$t("settings")}}</span>
-					</md-list-item>
-				</md-list>
-			</md-app-drawer>
-			<md-app-content>
-				<transition :name="transitionName" mode="out-in">
-					<router-view :key="$route.path" />
-				</transition>
-			</md-app-content>
-		</md-app>
+		<!--https://github.com/vuetifyjs/vuetify/blob/master/packages/docs/src/layouts/layouts/demos/google-contacts.vue-->
+		<v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" app>
+			<v-app-bar-nav-icon @click.stop="toggleMenu()" />
+			<v-toolbar-title style="width: 300px">
+				<span>PokaPlayer</span>
+			</v-toolbar-title>
+			<v-spacer />
+			<v-btn icon @click="switch_audio_order">
+				<v-icon class="outline-repeat" v-if="audio_order==='list'"></v-icon>
+				<v-icon class="outline-shuffle" v-else></v-icon>
+			</v-btn>
+		</v-app-bar>
+		<v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
+			<v-list shaped>
+				<v-list-item-group color="primary">
+					<template v-for="item in items">
+						<v-divider v-if="item.divider" :key="item.text" />
+						<v-list-item v-else :key="item.text" :to="item.to" link>
+							<v-list-item-action>
+								<v-icon :class="item.icon"></v-icon>
+							</v-list-item-action>
+							<v-list-item-content>
+								<v-list-item-title>{{ item.text }}</v-list-item-title>
+							</v-list-item-content>
+						</v-list-item>
+					</template>
+				</v-list-item-group>
+			</v-list>
+		</v-navigation-drawer>
+		<v-content>
+			<transition :name="transitionName" mode="out-in">
+				<router-view :key="$route.path" />
+			</transition>
+			<div style="height:69px"></div>
+		</v-content>
 		<div class="bottom-player">
 			<div class="app-progress-bar">
-				<md-progress-bar
-					class="md-accent"
-					md-mode="buffer"
-					style="width: 100%;"
-					:md-value="audio_currentTimePercent"
-					:md-buffer="audio_bufferPercent"
-				></md-progress-bar>
+				<v-progress-linear
+					v-model="audio_currentTimePercent"
+					:buffer-value="audio_bufferPercent"
+					color="primary"
+				></v-progress-linear>
 				<label class="pure-material-slider">
 					<input
 						type="range"
@@ -98,34 +57,28 @@
 				<div class="left">
 					<div class="cover">
 						<img :src="audio_cover" />
-						<md-button class="md-icon-button md-mini" @click="audio_toggle">
-							<md-icon v-if="audio_paused">play_arrow</md-icon>
-							<md-icon v-else>pause</md-icon>
-						</md-button>
 					</div>
-					<div class="info" @click="$router.push($route.path!='/now'?'/now':'/lyric')">
+					<div class="song-title" @click="$router.push($route.path!='/now'?'/now':'/lyric')">
 						<div class="title">{{audio_title}}</div>
 						<div class="artist">{{audio_artist||$t('app_waitForPlay')}}</div>
 					</div>
 				</div>
 				<div class="center">
 					<span class="time">{{audio_currentTime}}</span>
-					<div>
-						<md-button class="md-icon-button" @click="audio_previous">
-							<md-icon class="outline-skip_previous"></md-icon>
-						</md-button>
-						<md-tooltip md-direction="left" v-show="audio_previous_name!=''">{{audio_previous_name}}</md-tooltip>
-					</div>
-					<md-button class="md-icon-button md-raised md-accent" @click="audio_toggle">
-						<md-icon class="outline-play_arrow" v-if="audio_paused"></md-icon>
-						<md-icon class="outline-pause" v-else></md-icon>
-					</md-button>
-					<div>
-						<md-button class="md-icon-button" @click="audio_next">
-							<md-icon class="outline-skip_next"></md-icon>
-						</md-button>
-						<md-tooltip md-direction="right" v-show="audio_next_name!=''">{{audio_next_name}}</md-tooltip>
-					</div>
+
+					<v-btn icon @click="audio_previous" v-on="on">
+						<v-icon class="outline-skip_previous" />
+					</v-btn>
+
+					<v-btn fab small outlined @click="audio_toggle" color="primary">
+						<v-icon class="outline-play_arrow" v-if="audio_paused" />
+						<v-icon class="outline-pause" v-else />
+					</v-btn>
+
+					<v-btn icon @click="audio_next">
+						<v-icon class="outline-skip_next" />
+					</v-btn>
+
 					<span class="time">{{audio_totalTime}}</span>
 				</div>
 				<div class="right" v-if="audio_artist">
@@ -176,6 +129,7 @@ export default {
 	name: "App",
 	data: () => ({
 		menuVisible: false,
+		drawer: null,
 		audio_interval: null,
 		audio_currentTimePercent: 100,
 		audio_bufferPercent: 100,
@@ -195,7 +149,21 @@ export default {
 			show: false,
 			message: ``,
 			timeout: null
-		}
+		},
+		items: [
+			{ icon: 'outline-home', text: i18n.t("home"), to: "/home" },
+			{ icon: 'outline-playlist_play', text: i18n.t("nowplaying"), to: "/now" },
+			{ icon: 'outline-subtitles', text: i18n.t("lrc"), to: "/lyric" },
+			{ divider: true },
+			{ icon: 'outline-search', text: i18n.t("search"), to: "/search" },
+			{ icon: 'outline-album', text: i18n.t("album"), to: "/album" },
+			{ icon: 'outline-folder', text: i18n.t("folder"), to: "/folder" },
+			{ icon: 'outline-mic_none', text: i18n.t("artist"), to: "/artist" },
+			{ icon: 'outline-music_note', text: i18n.t("composer"), to: "/composer" },
+			{ icon: 'outline-format_list_bulleted', text: i18n.t("playlist"), to: "/playlist" },
+			{ divider: true },
+			{ icon: 'outline-settings', text: i18n.t("settings"), to: "/setting" },
+		],
 	}),
 	destroyed() {
 		if (this.audio_interval) clearInterval(this.audio_interval);
@@ -220,6 +188,7 @@ export default {
 		}
 		window.addEventListener("resize", vhResize);
 		vhResize();
+		this.drawer = this.$vuetify.breakpoint.lgAndUp
 		this.$router.beforeEach((to, from, next) => {
 			let transitionName =
 				to.meta.transitionName || from.meta.transitionName || "fade";
@@ -270,11 +239,11 @@ export default {
 				let nowPlaying = _player.list.audios[_player.list.index];
 				let buffered = _player.audio.buffered;
 				let audioBuffered =
-						_player.audio.currentTime > 1
-							? (buffered.end(buffered.length - 1) /
-									_player.audio.duration) *
-							  100
-							: 0,
+					_player.audio.currentTime > 1
+						? (buffered.end(buffered.length - 1) /
+							_player.audio.duration) *
+						100
+						: 0,
 					cent =
 						(_player.audio.currentTime / _player.audio.duration) *
 						100;
@@ -360,10 +329,10 @@ export default {
 			);
 		},
 		closeMenu() {
-			this.menuVisible = false;
+			this.drawer = false;
 		},
 		toggleMenu() {
-			this.menuVisible = !this.menuVisible;
+			this.drawer = !this.drawer;
 		},
 		switch_audio_order() {
 			_player.options.order =
@@ -403,6 +372,15 @@ export default {
 };
 </script>
 <style lang="sass" scoped>
+.v-content 
+	height: 100vh 
+	overflow: hidden
+	overflow-y: scroll
+	margin-bottom: -69px
+.v-navigation-drawer:not(.v-navigation-drawer--is-mobile)
+	height: calc(100vh - 69px - 64px) !important
+</style>
+<style lang="sass" scoped>
 #toolbar.md-theme-default-dark
 	--md-theme-default-dark-text-primary-on-primary: rgba(255, 255, 255, 0.87)
 	--md-theme-default-dark-primary: #212121
@@ -421,6 +399,13 @@ export default {
 	box-sizing: border-box
 	height: 69px
 	max-height: 69px
+	backdrop-filter: blur(3px)
+	z-index: 99
+	position: fixed
+	background-color: rgba(255, 255, 255, 0.8)
+	@media (prefers-color-scheme: dark) 
+		&
+			background-color: rgba(40, 37, 53, 0.95)
 	.song-info
 		display: grid
 		grid-gap: 10px
@@ -433,7 +418,7 @@ export default {
 			align-items: center
 			overflow: hidden
 			height: 64px
-			.info
+			.song-title
 				flex: 1
 				overflow: hidden
 				cursor: pointer

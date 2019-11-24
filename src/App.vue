@@ -33,6 +33,14 @@
 		overflow: hidden;
 		height: 100vh;
 		width: 100vw;
+		&.theme--dark {
+			background: #282535 !important;
+		}
+	}
+	.theme--dark.v-sheet,
+	.theme--dark.v-navigation-drawer {
+		border-color: #282535;
+		background: #282535 !important;
 	}
 	*.md-theme-default-dark {
 		--md-theme-default-dark-background: rgb(31, 31, 31);
