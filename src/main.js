@@ -23,6 +23,7 @@ import 'vue-material/dist/vue-material.min.css'
 Vue.use(VueMaterial)
 
 import * as PokaComponents from './poka-component'
+import vuetify from './plugins/vuetify';
 Object.values(PokaComponents).forEach(PokaComponents => Vue.component(PokaComponents.name, PokaComponents))
 
 // 偵測暗黑模式
@@ -46,9 +47,12 @@ new Vue({
   router,
   i18n,
   store,
+
   components: {
     App
   },
+
   template: '<App/>',
+  vuetify,
   render: h => h(App)
 })

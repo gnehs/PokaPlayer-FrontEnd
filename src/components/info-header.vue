@@ -1,6 +1,6 @@
 <template>
 	<div class="info-header">
-		<div class="cover" :style="`background-image: url('${cover}')`"/>
+		<div class="cover" :style="`background-image: url('${cover}')`" />
 		<div class="info">
 			<div class="album-name" :title="title">{{title}}</div>
 			<div class="artist-name" :title="subtitle">{{subtitle}}</div>
@@ -8,7 +8,7 @@
 			<div class="footer">
 				<div class="time" v-if="songs">{{$t("album_total", { songs: songs })}}</div>
 				<div class="actions">
-					<slot/>
+					<slot />
 				</div>
 			</div>
 		</div>
@@ -24,7 +24,7 @@ export default {
 		songs: { default: 0 }
 	},
 	data: () => ({}),
-	created() {}
+	created() { }
 };
 </script>
 
@@ -57,9 +57,9 @@ export default {
 		padding-top: 8px
 		overflow: hidden
 		>.album-name,>.artist-name
-      white-space: nowrap
-      overflow: hidden
-      text-overflow: ellipsis
+			white-space: nowrap
+			overflow: hidden
+			text-overflow: ellipsis
 		>.album-name
 			font-size: 40px
 			line-height: 48px

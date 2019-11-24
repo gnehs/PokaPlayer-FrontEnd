@@ -177,7 +177,7 @@ export default {
 @media (max-width: 575.98px)
 	.poka
 		&.doubling.ten.cards .card
-	 		--size: calc(20% - 1em)
+			--size: calc(20% - 1em)
 		&.color.picker.cards > .card
-		  	--size: calc(20%)
+			--size: calc(20%)
 </style>

@@ -11,13 +11,13 @@
 				@focus="searchBoxFocus = true"
 				@blur="searchBoxFocus = false"
 				required
-			>
+			/>
 			<button class="search-button" @click="search">
 				<md-icon>search</md-icon>
 			</button>
 		</div>
-		<poka-loader v-if="isLoading"/>
-		<poka-parse-multiple v-if="!isLoading&&searchResult" :data="searchResult"/>
+		<poka-loader v-if="isLoading" />
+		<poka-parse-multiple v-if="!isLoading&&searchResult" :data="searchResult" />
 	</div>
 </template>
 
@@ -30,7 +30,7 @@
 	border: 1px solid #90909061
 	border-radius: 24px
 	overflow: hidden
-	transition-duration: 0.3s;
+	transition-duration: 0.3s
 	transition-property: border, box-shadow
 		transition-timing-function: ease
 	background-color: white
