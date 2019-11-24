@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<md-progress-spinner md-mode="indeterminate" :md-stroke="3" :md-diameter="30"></md-progress-spinner>
+		<v-progress-circular indeterminate color="primary" />
 	</div>
 </template>
 
