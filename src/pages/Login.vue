@@ -26,7 +26,7 @@
 							v-model="password"
 							:disabled="logining"
 						></v-text-field>
-						<v-btn block outlined type="submit">{{$t('login')}}</v-btn>
+						<v-btn block outlined type="submit" color="primary">{{$t('login')}}</v-btn>
 					</v-card-text>
 				</v-card>
 			</div>
