@@ -48,15 +48,13 @@
 					></v-text-field>
 
 					<div class="poka list" style="width: 372px;">
-						<div class="item" @click="loadLrc(`[00:00.000]`,true);showLyricDialog = false">
-							<md-ripple>
-								<div class="content">
-									<div class="header">
-										<div class="title t-ellipsis">{{$t('lrc_notLoad')}}</div>
-										<div class="t-ellipsis">{{$t('lrc_notLoad_description')}}</div>
-									</div>
+						<div class="item" @click="loadLrc(`[00:00.000]`,true);showLyricDialog = false" v-ripple>
+							<div class="content">
+								<div class="header">
+									<div class="title t-ellipsis">{{$t('lrc_notLoad')}}</div>
+									<div class="t-ellipsis">{{$t('lrc_notLoad_description')}}</div>
 								</div>
-							</md-ripple>
+							</div>
 						</div>
 					</div>
 					<div class="poka list" v-if="!lyricSearching" style="width: 372px;">
@@ -103,14 +101,14 @@
 			transform: scale(1)
 			font-weight: 700
 			text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
-			.md-theme-default-dark &
+			.theme--dark &
 				text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
 	&.lyricTranslated
 		p.focus:not(:empty) + p
 			opacity: .95
 			transform: scale(0.98)
 			text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
-			.md-theme-default-dark &
+			.theme--dark &
 				text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
 </style>
 
