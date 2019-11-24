@@ -3,7 +3,7 @@
 		<poka-header :title="$t('settingUser.title')" :subtitle="$t('settings')" />
 		<md-list>
 			<md-list-item to="/setting">
-				<md-icon>arrow_back</md-icon>
+				<v-icon>arrow_back</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('back')}}</span>
 				</div>
@@ -11,28 +11,28 @@
 		</md-list>
 		<md-list class="md-double-line" style="padding-top:0" v-if="userdata">
 			<md-list-item @click="temp.changeNamePrompt=true">
-				<md-icon>person</md-icon>
+				<v-icon>person</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('settingUser.name')}}</span>
 					<span>{{userdata.name}}</span>
 				</div>
 			</md-list-item>
 			<md-list-item @click="temp.changeUsernamePrompt=true">
-				<md-icon>alternate_email</md-icon>
+				<v-icon>alternate_email</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('settingUser.username')}}</span>
 					<span>{{userdata.username}}</span>
 				</div>
 			</md-list-item>
 			<md-list-item>
-				<md-icon>settings</md-icon>
+				<v-icon>settings</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('settingUser.role')}}</span>
 					<span>{{userdata.role}}</span>
 				</div>
 			</md-list-item>
 			<md-list-item @click="temp.changePasswordDialog=true">
-				<md-icon>lock</md-icon>
+				<v-icon>lock</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('settingUser.password')}}</span>
 					<span>{{$t('settingUser.passwordDescription')}}</span>
@@ -42,7 +42,7 @@
 		<poka-loader v-else />
 		<md-list>
 			<md-list-item @click="logout">
-				<md-icon>exit_to_app</md-icon>
+				<v-icon>exit_to_app</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('settings_logout')}}</span>
 				</div>

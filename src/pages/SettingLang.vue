@@ -3,7 +3,7 @@
 		<poka-header :title="$t('settings')" :subtitle="$t('settings_lang')" />
 		<md-list>
 			<md-list-item to="/setting">
-				<md-icon>arrow_back</md-icon>
+				<v-icon>arrow_back</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('back')}}</span>
 				</div>
@@ -13,11 +13,11 @@
 				:key="`lang${lang}-${index}`"
 				@click="setLang(lang)"
 			>
-				<md-icon>translate</md-icon>
+				<v-icon>translate</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('title',lang)}}</span>
 				</div>
-				<md-icon v-show="currentLang==lang">check</md-icon>
+				<v-icon v-show="currentLang==lang">check</v-icon>
 			</md-list-item>
 		</md-list>
 	</div>

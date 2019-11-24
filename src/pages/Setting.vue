@@ -4,42 +4,42 @@
 		<poka-update />
 		<md-list class="md-double-line">
 			<md-list-item to="/setting/network">
-				<md-icon>cloud</md-icon>
+				<v-icon>cloud</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('settings_network')}}</span>
 					<span>{{$t('settings_network_description')}}</span>
 				</div>
 			</md-list-item>
 			<md-list-item to="/setting/customize">
-				<md-icon>format_paint</md-icon>
+				<v-icon>format_paint</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('settings_customize')}}</span>
 					<span>{{$t('settings_customize_description')}}</span>
 				</div>
 			</md-list-item>
 			<md-list-item to="/setting/lang">
-				<md-icon>translate</md-icon>
+				<v-icon>translate</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('settings_lang')}}</span>
 					<span>{{$t('settings_lang_description')}}</span>
 				</div>
 			</md-list-item>
 			<md-list-item to="/setting/user">
-				<md-icon>person</md-icon>
+				<v-icon>person</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('settingUser.title')}}</span>
 					<span>{{$t('settingUser.description')}}</span>
 				</div>
 			</md-list-item>
 			<md-list-item to="/setting/system">
-				<md-icon>system_update</md-icon>
+				<v-icon>system_update</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('settings_systemAndUpdate')}}</span>
 					<span>{{$t('settings_systemAndUpdate_description')}}</span>
 				</div>
 			</md-list-item>
 			<md-list-item @click="aboutDialog=true">
-				<md-icon>info</md-icon>
+				<v-icon>info</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('settings_about')}}</span>
 					<span>{{$t('settings_about_description')}}</span>

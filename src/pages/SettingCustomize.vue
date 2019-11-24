@@ -3,7 +3,7 @@
 		<poka-header :title="$t('settings')" :subtitle="$t('settings_customize')" :bg="setting.bg" />
 		<md-list>
 			<md-list-item to="/setting">
-				<md-icon>arrow_back</md-icon>
+				<v-icon>arrow_back</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('back')}}</span>
 				</div>

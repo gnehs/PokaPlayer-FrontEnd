@@ -8,8 +8,8 @@
 					:class="{focus: index==lyricFocus }"
 				>{{item.text}}</p>
 			</div>
-			<md-empty-state v-else-if="lyricSearching" md-icon="subtitles" :md-label="$t('loading')" />
-			<md-empty-state v-else md-icon="subtitles" :md-label="$t('lrc_noLyrics')">
+			<md-empty-state v-else-if="lyricSearching" v-icon="subtitles" :md-label="$t('loading')" />
+			<md-empty-state v-else v-icon="subtitles" :md-label="$t('lrc_noLyrics')">
 				<md-button class="md-primary md-outlined" @click="showLyricDialog = true">{{$t('lrc_search')}}</md-button>
 			</md-empty-state>
 		</div>

@@ -9,7 +9,7 @@
 			<md-ripple>
 				<div class="content">
 					<md-avatar>
-						<md-icon>folder</md-icon>
+						<v-icon>folder</v-icon>
 					</md-avatar>
 					<div class="header">
 						<div class="title t-ellipsis">{{name}}</div>

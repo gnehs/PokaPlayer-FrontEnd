@@ -3,7 +3,7 @@
 		<poka-header :title="$t('settings')" :subtitle="$t('settings_network')" />
 		<md-list style="padding-bottom:0">
 			<md-list-item to="/setting">
-				<md-icon>arrow_back</md-icon>
+				<v-icon>arrow_back</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('back')}}</span>
 				</div>
@@ -11,7 +11,7 @@
 		</md-list>
 		<md-list class="md-double-line" style="padding-top:0">
 			<md-list-item @click="showSoundQualityDialog=true">
-				<md-icon>music_note</md-icon>
+				<v-icon>music_note</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('settings_network_soundQuality')}}</span>
 					<span>{{$t(`settings_network_soundQuality_${soundQuality}`)}}</span>

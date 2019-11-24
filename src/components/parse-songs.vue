@@ -16,11 +16,11 @@
 				</div>
 				<div class="action">
 					<md-button
-						class="md-icon-button md-list-action"
+						class="v-icon-button md-list-action"
 						@click="$addSongs({songs:[song],clear:false});isInSongList.push(index);"
 					>
-						<md-icon v-if="isInSongList.includes(index)">done</md-icon>
-						<md-icon v-else>add</md-icon>
+						<v-icon v-if="isInSongList.includes(index)">done</v-icon>
+						<v-icon v-else>add</v-icon>
 					</md-button>
 				</div>
 			</md-ripple>

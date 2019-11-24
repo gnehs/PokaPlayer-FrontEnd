@@ -13,7 +13,7 @@
 				required
 			/>
 			<button class="search-button" @click="search">
-				<md-icon>search</md-icon>
+				<v-icon>search</v-icon>
 			</button>
 		</div>
 		<poka-loader v-if="isLoading" />

@@ -1,13 +1,13 @@
 <template>
 	<div>
-		<poka-header :title="$t('folder')"/>
+		<poka-header :title="$t('folder')" />
 		<md-button class="md-raised md-primary" @click="goBack" v-show="!$route.meta.root">
-			<md-icon>arrow_back</md-icon>
+			<v-icon>arrow_back</v-icon>
 			{{$t('back')}}
 		</md-button>
-		<poka-parse-folders v-if="data" :data="data.folders"/>
-		<poka-parse-songs v-if="data" :data="data.songs"/>
-		<poka-loader v-else/>
+		<poka-parse-folders v-if="data" :data="data.folders" />
+		<poka-parse-songs v-if="data" :data="data.songs" />
+		<poka-loader v-else />
 	</div>
 </template>
 

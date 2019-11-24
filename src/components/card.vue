@@ -2,13 +2,13 @@
 	router-link.card(v-if="to",:to="to",:data-source="parsed_source||undefined")
 		.image(v-if="parsed_pokaBg",:style="{backgroundImage:`url(\"${parsed_pokaBg}\")`}")
 		.image(v-else)
-			md-icon(class="icon-white", :class="pokaIcon")
+			v-icon(class="icon-white", :class="pokaIcon")
 		.title {{pokaTitle}}
 		.subtitle {{pokaSubtitle}}
 	a.card(v-else,:data-source="parsed_source||undefined")
 		.image(v-if="parsed_pokaBg",:style="{backgroundImage:`url(\"${parsed_pokaBg}\")`}")
 		.image(v-else)
-			md-icon(class="icon-white", :class="pokaIcon")
+			v-icon(class="icon-white", :class="pokaIcon")
 		.title {{pokaTitle}}
 		.subtitle {{pokaSubtitle}}
 </template>

@@ -5,7 +5,7 @@
 				<v-card class="mx-auto banner">
 					<v-img class="banner-img" src="/img/loginHeader.svg" height="170px"></v-img>
 				</v-card>
-				<v-card class="mx-auto">
+				<v-card class="mx-auto" :loading="logining">
 					<v-card-text>
 						<v-text-field
 							:label="$t('login_page.server')"

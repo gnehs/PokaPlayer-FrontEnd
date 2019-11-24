@@ -3,14 +3,14 @@
 		<poka-header :title="$t('settings')" :subtitle="$t('settings_systemAndUpdate')" />
 		<md-list>
 			<md-list-item to="/setting">
-				<md-icon>arrow_back</md-icon>
+				<v-icon>arrow_back</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('back')}}</span>
 				</div>
 			</md-list-item>
 			<md-subheader>{{$t('settings_system')}}</md-subheader>
 			<md-list-item @click="restartConfirmActive=true">
-				<md-icon>autorenew</md-icon>
+				<v-icon>autorenew</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('settings_restart')}}</span>
 				</div>
@@ -18,7 +18,7 @@
 		</md-list>
 		<md-list class="md-double-line" style="padding-top:0">
 			<md-list-item @click="openUpdateDialog" :class="{mark: this.newVersion.tag}">
-				<md-icon>system_update</md-icon>
+				<v-icon>system_update</v-icon>
 				<div class="md-list-item-text">
 					<span>{{$t('settings_update')}}</span>
 					<span>

@@ -229,7 +229,7 @@
 			</md-step>
 		</md-steppers>
 		<md-empty-state
-			md-icon="done"
+			v-icon="done"
 			:md-label="$t('install.state.done_title')"
 			:md-description="step.server_restarting_description"
 			v-if="step.server_restarting"
@@ -237,7 +237,7 @@
 			<md-progress-spinner :md-diameter="30" :md-stroke="3" md-mode="indeterminate"></md-progress-spinner>
 		</md-empty-state>
 		<md-empty-state
-			md-icon="done"
+			v-icon="done"
 			:md-label="$t('install.state.done_title')"
 			:md-description="$t('install.state.done_server_restarted')"
 			v-if="step.server_restarted"
@@ -246,7 +246,7 @@
 		</md-empty-state>
 	</div>
 	<md-empty-state
-		md-icon="done"
+		v-icon="done"
 		:md-label="$t('install.state.poka_title')"
 		:md-description="$t('install.state.poka_description')"
 		v-else
@@ -387,15 +387,15 @@ export default {
 			try {
 				test_dsm = this.setting.DSM.enabled
 					? (await this.axios.post(
-							"/installapi/dsm",
-							this.setting.DSM
-					  )).data
+						"/installapi/dsm",
+						this.setting.DSM
+					)).data
 					: true;
 				test_netease = this.setting.Netease2.enabled
 					? (await this.axios.post(
-							"/installapi/netease2",
-							this.setting.Netease2
-					  )).data
+						"/installapi/netease2",
+						this.setting.Netease2
+					)).data
 					: true;
 				if (
 					test_dsm &&
