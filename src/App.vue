@@ -1,19 +1,10 @@
 <template>
-	<v-app class="page-container" :dark="isDark" :light="!isDark">
+	<v-app class="page-container">
 		<transition name="fade" mode="out-in">
 			<router-view />
 		</transition>
 	</v-app>
 </template>
-<script>
-export default {
-	data: () => ({
-		isDark: window.matchMedia("(prefers-color-scheme: dark)").matches
-	}), created() {
-		this.$vuetify.dark = this.isDark
-	}
-}
-</script>
 <style lang="sass">
 @import "@/assets/pokaList.sass"
 @import "@/assets/main.sass"
