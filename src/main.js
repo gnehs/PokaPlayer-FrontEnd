@@ -36,6 +36,7 @@ darkModeMediaQuery.addListener(e => {
 
 function themeSwitch(dark = false) {
   Vue.material.theming.theme = dark ? "default-dark" : "default"
+  vuetify.framework.theme.isDark = dark
   document.getElementsByTagName('meta')["theme-color"].content = dark ? "rgb(33, 33, 33)" : "rgb(245, 245, 245)"
 }
 

@@ -1,105 +1,79 @@
 <template>
 	<div class="login-container" :style="{backgroundImage:`url('${headerImg}')`}">
-		<form class="md-layout" v-on:submit.prevent="login">
-			<div class="md-layout-item">
-				<md-card>
-					<md-card-media-cover>
-						<md-card-media md-ratio="16:9" class="card-banner">
-							<img class="header-img" src="/img/loginHeader.svg" />
-						</md-card-media>
-					</md-card-media-cover>
-					<md-progress-bar md-mode="indeterminate" v-if="logining" />
-				</md-card>
-				<md-card>
-					<md-card-content>
-						<md-field>
-							<label for="server">{{$t('login_page.server')}}</label>
-							<md-input type="text" name="server" v-model.trim="server" :disabled="logining" />
-						</md-field>
-						<md-field>
-							<label for="username">{{$t('login_page.username')}}</label>
-							<md-input type="text" name="username" v-model="username" :disabled="logining" />
-						</md-field>
-						<md-field>
-							<label for="password">{{$t('login_page.password')}}</label>
-							<md-input type="password" name="password" v-model="password" :disabled="logining" />
-						</md-field>
-					</md-card-content>
-
-					<md-card-actions>
-						<md-button
-							type="submit"
-							class="md-primary md-block md-outlined"
+		<v-form ref="form" v-on:submit.prevent="login">
+			<div class="form-container">
+				<v-card class="mx-auto banner">
+					<v-img class="banner-img" src="/img/loginHeader.svg" height="170px"></v-img>
+				</v-card>
+				<v-card class="mx-auto">
+					<v-card-text>
+						<v-text-field
+							:label="$t('login_page.server')"
+							outlined
+							v-model.trim="server"
 							:disabled="logining"
-						>{{$t('login')}}</md-button>
-					</md-card-actions>
-				</md-card>
+						></v-text-field>
+						<v-text-field
+							:label="$t('login_page.username')"
+							outlined
+							v-model="username"
+							:disabled="logining"
+						></v-text-field>
+						<v-text-field
+							:label="$t('login_page.password')"
+							type="password"
+							outlined
+							v-model="password"
+							:disabled="logining"
+						></v-text-field>
+						<v-btn block outlined type="submit">{{$t('login')}}</v-btn>
+					</v-card-text>
+				</v-card>
 			</div>
-		</form>
+		</v-form>
 	</div>
 </template>
 
 <style lang="scss" scoped>
-	.md-progress-bar {
-		position: absolute;
-		right: 0;
-		left: 0;
-		bottom: 0;
-	}
-	.card-banner + .md-card-area {
-		background: linear-gradient(
-			to top,
-			rgba(0, 0, 0, 0.6) 0%,
-			transparent 100%
-		);
-	}
 	form {
 		height: 90%;
 		justify-content: center;
 		align-items: center;
-		.md-card {
-			margin: 0 auto;
+		display: flex;
+		.form-container {
+			flex: 1 1;
 			max-width: 400px;
-			border-radius: 8px;
-			overflow: hidden;
-			box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-			backdrop-filter: blur(3px);
-			background-color: rgba(255, 255, 255, 0.95);
-			&.md-theme-default-dark {
-				background-color: rgba(40, 37, 53, 0.975);
-			}
-			.md-card-media-cover {
-				background: #505050;
-			}
-			.card-banner::before {
-				padding-top: 170px !important;
-			}
-			.md-card-content {
-				padding: 16px 32px;
-				padding-bottom: 0;
-			}
-			.md-card-actions {
-				padding: 16px 32px;
-			}
-			& + .md-card {
-				margin-top: 8px;
+			.v-card {
+				border-radius: 8px;
+				background-color: rgba(255, 255, 255, 0.95);
+				backdrop-filter: blur(3px);
+				&.theme--dark {
+					background-color: rgba(40, 37, 53, 0.975);
+				}
+				max-width: 400px;
+				& + .v-card {
+					margin-top: 8px;
+					padding: 16px 32px;
+				}
+				&.banner {
+					background-color: rgba(0, 0, 0, 0);
+				}
 			}
 		}
 	}
 	// header-img
-	.header-img {
-		background: linear-gradient(-45deg, #d5ffb9, #de7fff);
+	.banner-img {
+		background: linear-gradient(-45deg, #d5ffb9f0, #de7ffff0);
 	}
 	@media (prefers-color-scheme: dark) {
-		.header-img {
-			background: linear-gradient(-45deg, #514f5d, #262334);
+		.banner-img {
+			background: linear-gradient(-45deg, #514f5df0, #262334f0);
 		}
 	}
 
 	.login-container {
 		height: 100vh;
 		width: 100vw;
-		margin: -16px;
 		background-size: cover;
 		background-position: center;
 	}

@@ -1,10 +1,19 @@
 <template>
-	<div class="page-container">
+	<v-app class="page-container" :dark="isDark" :light="!isDark">
 		<transition name="fade" mode="out-in">
 			<router-view />
 		</transition>
-	</div>
+	</v-app>
 </template>
+<script>
+export default {
+	data: () => ({
+		isDark: window.matchMedia("(prefers-color-scheme: dark)").matches
+	}), created() {
+		this.$vuetify.dark = this.isDark
+	}
+}
+</script>
 <style lang="sass">
 @import "@/assets/pokaList.sass"
 @import "@/assets/main.sass"
@@ -31,6 +40,8 @@
 	@import "~vue-material/dist/theme/all"; // Apply the theme
 	.page-container {
 		overflow: hidden;
+		height: 100vh;
+		width: 100vw;
 	}
 	*.md-theme-default-dark {
 		--md-theme-default-dark-background: rgb(31, 31, 31);

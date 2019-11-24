@@ -1,11 +1,5 @@
 <template>
-	<div>
-		<md-app>
-			<md-app-content>
-				<router-view />
-			</md-app-content>
-		</md-app>
-	</div>
+	<router-view />
 </template>
 <script>
 export default {
