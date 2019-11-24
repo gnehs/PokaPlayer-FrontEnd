@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<!--https://github.com/vuetifyjs/vuetify/blob/master/packages/docs/src/layouts/layouts/demos/google-contacts.vue-->
+		<!-- https://github.com/vuetifyjs/vuetify/blob/master/packages/docs/src/layouts/layouts/demos/google-contacts.vue -->
 		<v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" app>
 			<v-app-bar-nav-icon @click.stop="toggleMenu()" />
 			<v-toolbar-title style="width: 300px">

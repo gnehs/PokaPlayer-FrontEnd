@@ -1,7 +1,7 @@
 .poka.list
-	html.md-theme-default &
+	.theme--light &
 		--hoverbg: rgba(101, 99, 99, 0.08)
-	html.md-theme-default-dark &
+	.theme--dark &
 		--hoverbg: rgba(255, 255, 255, 0.2)
 	.item
 		line-height: 1.25em
@@ -16,11 +16,6 @@
 		&:not(.active):hover
 			background-color: var(--hoverbg)
 			cursor: pointer
-		.md-ripple
-			border-radius: .66em
-			display: flex
-			align-items: center
-			z-index: 2
 		.content
 			padding: 0.88em 0 0.88em 1em
 			display: block
@@ -37,17 +32,17 @@
 					line-height: 1.5em
 				>:not(.title)
 					opacity: .8
-		.md-avatar
+		.v-avatar
 			margin-right: 16px
 		&.active
 			background: linear-gradient(120deg, #4251fb 0%, #0401a3 100%)
 			box-shadow: 0 3px 8px rgba(#4251fb, 0.3)
 			color: #FFF
-			.md-theme-default-dark &
+			.theme--dark &
 				background: #448affcf !important
 				box-shadow: 0 3px 8px rgba(#448aff, 0.1) !important
-			.md-button .md-icon
-				--md-theme-default-icon-on-background: #FFF
+			.v-btn
+				color: #FFF
 		&.disabled
 			pointer-events: none
 			opacity: .4
@@ -57,7 +52,7 @@
 		border-top: 1px solid rgba(0, 0, 0, 0.2)
 		margin: .533rem .66rem
 		opacity: .7
-		body.theme-dark &
+		body.theme--dark &
 			border-top: 1px solid rgba(255, 255, 255, 0.2)
 		&:not(:empty)
 			padding-top: .4rem
