@@ -52,7 +52,6 @@
 				}
 				max-width: 400px;
 				& + .v-card {
-					margin-top: 8px;
 					padding: 16px 32px;
 				}
 				&.banner {

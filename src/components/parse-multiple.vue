@@ -1,42 +1,32 @@
 <template>
 	<div class="poka-parse-multiple">
-		<div v-for="(item,index) of data" :key="index">
-			<md-divider v-if="index!=0"></md-divider>
-			<h1 v-if="item.title">
-				{{$t(item.title)}}
-				<span class="md-headline">{{$t(`source.${item.source}`)}}</span>
-			</h1>
-			<md-tabs>
-				<md-tab :md-label="$t('song')" v-if="item.songs&&item.songs.length>0">
-					<poka-parse-songs :data="item.songs" />
-				</md-tab>
-				<md-tab :md-label="$t('album')" v-if="item.albums&&item.albums.length>0">
-					<poka-parse-albums :data="item.albums" />
-				</md-tab>
-				<md-tab :md-label="$t('playlist')" v-if="item.playlists&&item.playlists.length>0">
-					<poka-parse-playlists :data="item.playlists" />
-				</md-tab>
-				<md-tab :md-label="$t('folder')" v-if="item.folders&&item.folders.length>0">
-					<poka-parse-folders :data="item.folders" />
-				</md-tab>
-				<md-tab :md-label="$t('composer')" v-if="item.composers&&item.composers.length>0">
-					<poka-parse-composers :data="item.composers" />
-				</md-tab>
-				<md-tab :md-label="$t('artist')" v-if="item.artists&&item.artists.length>0">
-					<poka-parse-artists :data="item.artists" />
-				</md-tab>
-			</md-tabs>
-		</div>
+		<v-card class="mx-auto" v-for="(item,index) of data" :key="index">
+			<v-card-text>
+				<div>{{$t(`source.${item.source}`)}}</div>
+				<p class="display-1 text--primary">{{$t(item.title)}}</p>
+				<v-tabs background-color="transparent" color="primary">
+					<template v-for="itemName of Object.keys(item).filter(x=>x!='title'&&x!='source')">
+						<v-tab
+							v-if="item[itemName]&&item[itemName].length>0"
+							:key="itemName"
+						>{{$t(itemName.substring(0, itemName.length-1))}}</v-tab>
+						<v-tab-item :key="itemName">
+							<poka-parse-songs v-if="itemName=='songs'" :data="item[itemName]" />
+							<poka-parse-albums v-if="itemName=='albums'" :data="item[itemName]" />
+							<poka-parse-playlists v-if="itemName=='playlists'" :data="item[itemName]" />
+							<poka-parse-folders v-if="itemName=='folders'" :data="item[itemName]" />
+							<poka-parse-composers v-if="itemName=='composers'" :data="item[itemName]" />
+							<poka-parse-artists v-if="itemName=='artists'" :data="item[itemName]" />
+						</v-tab-item>
+					</template>
+				</v-tabs>
+			</v-card-text>
+		</v-card>
 	</div>
 </template>
 <style lang="sass" scoped>
 .poka-parse-multiple
-    --md-theme-default-background-on-background: transparent
-    --md-theme-default-dark-background-on-background: transparent
-.poka-parse-multiple>div
-    margin-left: 16px
-.poka-parse-multiple>div>h1
-    font-size: 2em
+	padding: 16px
 </style>
 <script>
 export default {

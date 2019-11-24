@@ -66,7 +66,7 @@
 				<div class="center">
 					<span class="time">{{audio_currentTime}}</span>
 
-					<v-btn icon @click="audio_previous" v-on="on">
+					<v-btn icon @click="audio_previous">
 						<v-icon class="outline-skip_previous" />
 					</v-btn>
 
@@ -82,31 +82,33 @@
 					<span class="time">{{audio_totalTime}}</span>
 				</div>
 				<div class="right" v-if="audio_artist">
-					<md-button class="md-icon-button" @click="switch_audio_order">
-						<md-icon class="outline-repeat" v-if="audio_order==='list'"></md-icon>
-						<md-icon class="outline-shuffle" v-else></md-icon>
-					</md-button>
-					<md-button class="md-icon-button" to="/now" v-if="$route.path!='/now'">
-						<md-icon class="outline-playlist_play"></md-icon>
-					</md-button>
-					<md-button class="md-icon-button" to="/lyric" v-else>
-						<md-icon class="outline-subtitles"></md-icon>
-					</md-button>
+					<v-btn icon @click="switch_audio_order">
+						<v-icon class="outline-repeat" v-if="audio_order==='list'"></v-icon>
+						<v-icon class="outline-shuffle" v-else></v-icon>
+					</v-btn>
+					<v-btn icon to="/now" v-if="$route.path!='/now'">
+						<v-icon class="outline-playlist_play" />
+					</v-btn>
+					<v-btn icon to="/lyric" v-else>
+						<v-icon class="outline-subtitles" />
+					</v-btn>
 				</div>
 				<div class="right" v-else>
 					<play-random-button />
 				</div>
 				<div class="right-s" v-if="audio_artist">
-					<md-button class="md-icon-button" @click="audio_previous">
-						<md-icon class="outline-skip_previous"></md-icon>
-					</md-button>
-					<md-button class="md-icon-button md-raised md-accent" @click="audio_toggle">
-						<md-icon class="outline-play_arrow" v-if="audio_paused"></md-icon>
-						<md-icon class="outline-pause" v-else></md-icon>
-					</md-button>
-					<md-button class="md-icon-button" @click="audio_next">
-						<md-icon class="outline-skip_next"></md-icon>
-					</md-button>
+					<v-btn icon @click="audio_previous">
+						<v-icon class="outline-skip_previous" />
+					</v-btn>
+
+					<v-btn fab small outlined @click="audio_toggle" color="primary">
+						<v-icon class="outline-play_arrow" v-if="audio_paused" />
+						<v-icon class="outline-pause" v-else />
+					</v-btn>
+
+					<v-btn icon @click="audio_next">
+						<v-icon class="outline-skip_next" />
+					</v-btn>
 				</div>
 				<div class="right-s" v-else>
 					<play-random-button />
@@ -202,14 +204,14 @@ export default {
 			this.transitionName = transitionName;
 			this.getStatus();
 
-			let el = document.querySelector(".md-app-content");
+			let el = document.querySelector("main.v-content");
 			if (el) this.scrollPositions[from.name] = el.scrollTop;
 
 			next();
 		});
 		window.addEventListener("popstate", () => {
 			let currentRouteName = this.$router.history.current.name;
-			let el = document.querySelector(".md-app-content");
+			let el = document.querySelector("main.v-content");
 			if (el && currentRouteName in this.scrollPositions) {
 				let positions = this.scrollPositions[currentRouteName];
 				setTimeout(() => (el.scrollTop = positions), 500);
@@ -381,19 +383,6 @@ export default {
 	height: calc(100vh - 69px - 64px) !important
 </style>
 <style lang="sass" scoped>
-#toolbar.md-theme-default-dark
-	--md-theme-default-dark-text-primary-on-primary: rgba(255, 255, 255, 0.87)
-	--md-theme-default-dark-primary: #212121
-#toolbar.md-theme-default
-	--md-theme-default-text-primary-on-primary: rgba(0, 0, 0, 0.87)
-	--md-theme-default-primary: rgb(245, 245, 245)
-.md-toolbar .md-title
-	font-family: var(--product-font)
-	font-weight: bold
-
-.md-app-content
-	overflow-y: auto
-	overflow-x: hidden
 
 .bottom-player
 	box-sizing: border-box
@@ -448,19 +437,6 @@ export default {
 					max-width: var(--cover-size)
 					max-height: var(--cover-size)
 					object-fit: cover
-				.md-button
-					position: absolute
-					top: 50%
-					left: 50%
-					transform: translate(-70%, -50%) scale(.9)
-					background-color: rgba(255, 255, 255, 0.7)
-					opacity: 0
-				&:hover
-					img
-						filter: brightness(50%) blur(1px)
-					.md-button
-						transform: translate(-70%, -50%) scale(1)
-						opacity: 1
 		.center
 			display: flex
 			align-items: center
@@ -475,47 +451,14 @@ export default {
 			align-items: center
 			height: 64px
 			justify-content: flex-end
+			padding-right: 8px
 		.right-s
 			width: 144px
 			display: none
 			align-items: center
 			height: 64px
 			justify-content: flex-end
-		.md-button.next
-			width: 30px
-			min-width: 30px
-			height: 30px
-			margin: 0
-#drawer
-	padding: 8px
-	.md-list
-		.md-divider
-			margin: 4px 0
-		.md-list-item
-			margin-left: -8px
-			a.md-list-item-router
-				border-radius: 0 8px 8px 0 !important
-				padding-left: 8px
-				.md-icon
-					opacity: 1
-@media screen and (min-width: 600.99px)
-	#toolbar
-		display: none
-	.md-app-content
-		max-height: calc(var(--vh, 1vh) * 100 - 69px)
-	#pokaTitle
-		font-family: var(--product-font)
-		font-size: 24px
-		line-height: 48px
-		padding: 4px 16px
-		padding-right: 4px
-		display: flex
-		>span
-			flex: 1
-			font-weight: bold
-			user-select: none
-		>.md-button
-			margin: 4px 0px
+			padding-right: 8px
 @media screen and (max-width: 600px)
 	.bottom-player
 		.song-info
@@ -524,23 +467,4 @@ export default {
 				display: none
 			.right-s
 				display: flex
-	#pokaTitle
-		display: none
-		&+.md-divider
-			display: none
-	.md-app-content
-		max-height: calc(var(--vh, 1vh) * 100 - 64px - 69px)
-.md-app
-	min-height: calc(var(--vh, 1vh) * 100 - 69px)
-	max-height: calc(var(--vh, 1vh) * 100 - 69px)
-#drawer
-	.drawer-player
-		display: none
-
-.md-toolbar, .md-toolbar-row
-		min-height: 64px
-
-.md-drawer
-	width: 230px
-	max-width: calc(100vw - 125px)
 </style>

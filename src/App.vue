@@ -46,4 +46,10 @@
 		--md-theme-default-dark-background: rgb(31, 31, 31);
 		--md-theme-default-dark-divider-on-background: rgba(255, 255, 255, 0.12);
 	}
+	.v-card:not(.v-sheet--tile):not(.v-card--shaped) {
+		border-radius: 8px !important;
+	}
+	.v-card + .v-card {
+		margin-top: 16px;
+	}
 </style>

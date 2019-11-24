@@ -3,10 +3,8 @@
 		<div class="update-notify" v-if="checkUpadteStatus" key="0">
 			<h1>{{$t('settings_update')}}</h1>
 			<p>{{checkUpadteStatus}}</p>
-			<md-button
-				to="/setting/system"
-				class="md-primary md-outlined md-theme-default-dark"
-			>{{$t('settings_update_go2UpdatePage')}}</md-button>
+
+			<v-btn outlined to="/setting/system" color="white" dark>{{$t('settings_update_go2UpdatePage')}}</v-btn>
 		</div>
 	</transition>
 </template>
