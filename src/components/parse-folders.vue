@@ -5,18 +5,17 @@
 			v-for="{name, image, id, source} in data"
 			:key="id"
 			:to="`/folder/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
+			v-ripple
 		>
-			<md-ripple>
-				<div class="content">
-					<md-avatar>
-						<v-icon>folder</v-icon>
-					</md-avatar>
-					<div class="header">
-						<div class="title t-ellipsis">{{name}}</div>
-						<div class="t-ellipsis">{{$t(`source.${source}`)}}</div>
-					</div>
+			<div class="content">
+				<v-avatar size="42px" item>
+					<v-icon>folder</v-icon>
+				</v-avatar>
+				<div class="header">
+					<div class="title t-ellipsis">{{name}}</div>
+					<div class="t-ellipsis">{{$t(`source.${source}`)}}</div>
 				</div>
-			</md-ripple>
+			</div>
 		</router-link>
 	</div>
 </template>

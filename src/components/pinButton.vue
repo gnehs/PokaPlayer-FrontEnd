@@ -1,26 +1,34 @@
 <template>
 	<div>
-		<md-speed-dial
-			class="md-bottom-right"
-			v-if="isPinned != null && isPinned != 'disabled' && btnType == 'speed-dial'"
-		>
-			<md-speed-dial-target @click="pin">
+		<v-fab-transition v-if="isPinned != null && isPinned != 'disabled' && btnType == 'speed-dial'">
+			<v-btn
+				color="primary"
+				fab
+				large
+				dark
+				bottom
+				right
+				fixed
+				style="bottom: calc(16px + 69px);"
+				@click="pin"
+			>
 				<v-icon v-if="isPinned">turned_in</v-icon>
 				<v-icon v-else>turned_in_not</v-icon>
-			</md-speed-dial-target>
-		</md-speed-dial>
-		<md-button
-			class="v-icon-button"
+			</v-btn>
+		</v-fab-transition>
+		<v-btn
+			icon
 			@click="pin"
+			class="v-pin-btn"
 			v-if="isPinned != null && isPinned != 'disabled' && btnType == 'icon-button'"
 		>
 			<v-icon v-if="isPinned">turned_in</v-icon>
 			<v-icon v-else>turned_in_not</v-icon>
-		</md-button>
+		</v-btn>
 	</div>
 </template>
 <style lang="sass" scoped>
-.md-button
+.v-btn.v-pin-btn
   height: 42px
   min-width: 42px
   width: 42px

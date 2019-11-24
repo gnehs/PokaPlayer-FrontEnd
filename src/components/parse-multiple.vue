@@ -2,15 +2,17 @@
 	<div class="poka-parse-multiple">
 		<v-card class="mx-auto" v-for="(item,index) of data" :key="index">
 			<v-card-text>
-				<div>{{$t(`source.${item.source}`)}}</div>
-				<p class="display-1 text--primary">{{$t(item.title)}}</p>
+				<div v-if="item.source">{{$t(`source.${item.source}`)}}</div>
+				<p v-if="item.title" class="display-1 text--primary">{{$t(item.title)}}</p>
 				<v-tabs background-color="transparent" color="primary">
 					<template v-for="itemName of Object.keys(item).filter(x=>x!='title'&&x!='source')">
 						<v-tab
 							v-if="item[itemName]&&item[itemName].length>0"
 							:key="itemName"
 						>{{$t(itemName.substring(0, itemName.length-1))}}</v-tab>
-						<v-tab-item :key="itemName">
+					</template>
+					<template v-for="itemName of Object.keys(item).filter(x=>x!='title'&&x!='source')">
+						<v-tab-item v-if="item[itemName]&&item[itemName].length>0" :key="itemName">
 							<poka-parse-songs v-if="itemName=='songs'" :data="item[itemName]" />
 							<poka-parse-albums v-if="itemName=='albums'" :data="item[itemName]" />
 							<poka-parse-playlists v-if="itemName=='playlists'" :data="item[itemName]" />

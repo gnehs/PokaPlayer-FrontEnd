@@ -1,7 +1,7 @@
 <template>
 	<div class="info-header">
 		<div class="cover" :style="`background-image: url('${cover}')`" />
-		<div class="info">
+		<div class="info-data">
 			<div class="album-name" :title="title">{{title}}</div>
 			<div class="artist-name" :title="subtitle">{{subtitle}}</div>
 			<div class="grow"></div>
@@ -48,7 +48,7 @@ export default {
 		background-position: center
 		border-radius: .8em
 		box-shadow: 0 10px 15px #0000002e
-	&>.info
+	&>.info-data
 		flex: 1
 		flex-direction: column
 		display: flex
@@ -79,20 +79,19 @@ export default {
 			font-size: 20px
 			line-height: 42px
 		.actions
-			.md-button
+			.v-btn
 				height: 42px
 				min-width: 42px
 				width: 42px
 
 @media screen and (max-width: 768px)
 	.info-header
-		>.info
-			padding-left: 12px
-			padding-right: 0
 		>.cover
 			height: 150px
 			width: 150px
-		>.info
+		>.info-data
+			padding-left: 12px
+			padding-right: 0
 			>.album-name
 				font-size: 24px
 				line-height: 30px
