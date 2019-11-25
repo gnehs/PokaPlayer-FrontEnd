@@ -37,11 +37,12 @@
 		}
 	}
 	.theme--dark.v-sheet,
-	.theme--dark.v-navigation-drawer {
+	.theme--dark.v-navigation-drawer,
+	.theme--dark.v-tabs-items {
 		border-color: #282535;
 		background: #282535 !important;
 	}
-	*.md-theme-default-dark {
+	*.theme--dark {
 		--md-theme-default-dark-background: rgb(31, 31, 31);
 		--md-theme-default-dark-divider-on-background: rgba(255, 255, 255, 0.12);
 	}

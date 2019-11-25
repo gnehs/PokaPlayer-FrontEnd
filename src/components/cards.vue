@@ -10,7 +10,7 @@ export default {
 };
 </script>
 <style lang="sass">
-.md-theme-default-dark 
+.theme--dark
 	.poka.cards
 		--text-color: #FFF
 .poka.cards

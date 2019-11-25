@@ -1,15 +1,15 @@
 <template>
 	<div>
-		<poka-header :blurbg="true" :bg="cover"/>
+		<poka-header :blurbg="true" :bg="cover" />
 		<info-header
 			:title="title||$t('loading')"
 			:subtitle="$t('playlist')"
 			:cover="cover"
 			:songs="data.songs.length||0"
 		/>
-		<md-divider/>
-		<poka-parse-songs v-if="data" :data="data.songs"/>
-		<poka-loader v-else/>
+		<v-divider />
+		<poka-parse-songs v-if="data" :data="data.songs" />
+		<poka-loader v-else />
 		<pin-button
 			v-if="title"
 			:source="$route.params.source"

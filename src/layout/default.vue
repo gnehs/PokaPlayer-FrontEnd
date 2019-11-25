@@ -115,14 +115,7 @@
 				</div>
 			</div>
 		</div>
-		<md-snackbar
-			md-position="center"
-			:md-duration="1500"
-			:md-active.sync="snackbar.show"
-			md-persistent
-		>
-			<span>{{snackbar.message}}</span>
-		</md-snackbar>
+		<v-snackbar v-model="snackbar.show">{{snackbar.message}}</v-snackbar>
 	</div>
 </template>
 <script>

@@ -11,11 +11,11 @@
 				btn-type="icon-button"
 			/>
 		</info-header>
-		<md-divider v-if="songs" />
+		<v-divider v-if="songs" />
 		<poka-parse-songs style="margin: 16px 0;" :data="songs" v-if="songs" />
 		<poka-loader v-if="!songs" />
-		<md-divider v-if="artistAlbums" />
-		<h1 v-if="artistAlbums" class="md-title" style="padding-left: 0.5em;">{{$t('albumsOfSameArtist')}}</h1>
+		<v-divider v-if="artistAlbums" />
+		<h1 v-if="artistAlbums" class="title" style="padding-left: 0.5em;">{{$t('albumsOfSameArtist')}}</h1>
 		<poka-parse-albums v-if="artistAlbums" :data="artistAlbums" />
 	</div>
 </template>
@@ -47,9 +47,9 @@ export default {
 		//取得專輯資料
 		let url = `${
 			this.server
-		}/pokaapi/artistAlbums/?moduleName=${encodeURIComponent(
-			ArtistSource
-		)}&id=${encodeURIComponent(ArtistId)}`;
+			}/pokaapi/artistAlbums/?moduleName=${encodeURIComponent(
+				ArtistSource
+			)}&id=${encodeURIComponent(ArtistId)}`;
 		this.axios.get(url).then(response => {
 			this.artistAlbums = response.data.albums.filter(
 				x => x.id != albumID

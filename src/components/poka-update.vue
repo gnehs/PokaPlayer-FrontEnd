@@ -21,8 +21,6 @@
 	background-image: url('/img/update.svg')
 	color: #FFF
 	box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.3)
-	.md-button
-		margin-left: 0
 </style>
 <script>
 export default {

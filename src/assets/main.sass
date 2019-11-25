@@ -31,13 +31,13 @@ html.md-theme-default-dark
 	--md-theme-default-text-primary-on-background: rgba(255, 255, 255, 1)
 	--md-theme-default-text-accent-on-background: rgba(255, 255, 255, .8)
 	--md-theme-default-icon-on-background: #FFF
-	.md-theme-default-dark &
+	.theme--dark &
 		background: #448affcf !important
 		box-shadow: 0 3px 8px rgba(#448aff, 0.1) !important
 
 .md-list-item.mark:not(:hover)
 	box-shadow: 0px 1px 8px #00000029
-	html.md-theme-default-dark &
+	html.theme--dark &
 		box-shadow: 0 0 0px 2px #FFFFFF50
 .md-button
 	&:not(.md-icon-button):not(.md-fab)
@@ -66,7 +66,7 @@ html.md-theme-default-dark
 	height: 24px
 	background-repeat: no-repeat !important
 	background-size: contain !important
-	&.icon-white,.md-theme-default-dark &
+	&.icon-white,.theme--dark &
 		color: #fff
 @media screen and (min-width: 600px)
 	.md-button.menu

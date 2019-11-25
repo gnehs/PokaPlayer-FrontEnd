@@ -255,7 +255,7 @@
 	</md-empty-state>
 </template>
 <style scoped>
-	.md-theme-default-dark .md-app-content .md-card {
+	.theme--dark.md-app-content .md-card {
 		margin-right: 16px;
 		margin-left: 16px;
 		overflow: visible;
