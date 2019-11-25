@@ -8,7 +8,6 @@
 <style lang="sass">
 @import "@/assets/pokaList.sass"
 @import "@/assets/main.sass"
-@import "@/assets/scrollbar.scss"
 </style>
 <style lang="scss">
 	@import "~vue-material/dist/theme/engine"; // Import the theme engine
