@@ -2,50 +2,36 @@
 	<div>
 		<poka-header :title="$t('settings')" />
 		<poka-update />
-		<md-list class="md-double-line">
-			<md-list-item to="/setting/network">
-				<v-icon>cloud</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('settings_network')}}</span>
-					<span>{{$t('settings_network_description')}}</span>
+		<div class="poka list">
+			<div
+				class="item"
+				v-for="item in settingItems"
+				:key="item.title"
+				@click="$router.push(item.to)"
+				v-ripple
+			>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>{{item.icon}}</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="title t-ellipsis">{{item.title}}</div>
+						<div class="t-ellipsis">{{item.desp}}</div>
+					</div>
 				</div>
-			</md-list-item>
-			<md-list-item to="/setting/customize">
-				<v-icon>format_paint</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('settings_customize')}}</span>
-					<span>{{$t('settings_customize_description')}}</span>
+			</div>
+			<div class="item" @click="aboutDialog=true" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>info</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="title t-ellipsis">{{$t('settings_about')}}</div>
+						<div class="t-ellipsis">{{$t('settings_about_description')}}</div>
+					</div>
 				</div>
-			</md-list-item>
-			<md-list-item to="/setting/lang">
-				<v-icon>translate</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('settings_lang')}}</span>
-					<span>{{$t('settings_lang_description')}}</span>
-				</div>
-			</md-list-item>
-			<md-list-item to="/setting/user">
-				<v-icon>person</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('settingUser.title')}}</span>
-					<span>{{$t('settingUser.description')}}</span>
-				</div>
-			</md-list-item>
-			<md-list-item to="/setting/system">
-				<v-icon>system_update</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('settings_systemAndUpdate')}}</span>
-					<span>{{$t('settings_systemAndUpdate_description')}}</span>
-				</div>
-			</md-list-item>
-			<md-list-item @click="aboutDialog=true">
-				<v-icon>info</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('settings_about')}}</span>
-					<span>{{$t('settings_about_description')}}</span>
-				</div>
-			</md-list-item>
-		</md-list>
+			</div>
+		</div>
 		<v-dialog v-model="aboutDialog" max-width="350">
 			<poka-about />
 		</v-dialog>
@@ -56,7 +42,28 @@ export default {
 	name: "Setting",
 	data: () => ({
 		settings: { darkMode: window._setting("darkMode") },
-		aboutDialog: false
+		aboutDialog: false,
+		settingItems: [{
+			title: i18n.t('settings_network'),
+			desp: i18n.t('settings_network_description'),
+			icon: 'cloud', to: "/setting/network"
+		}, {
+			title: i18n.t('settings_customize'),
+			desp: i18n.t('settings_customize_description'),
+			icon: 'format_paint', to: "/setting/customize"
+		}, {
+			title: i18n.t('settings_lang'),
+			desp: i18n.t('settings_lang_description'),
+			icon: 'translate', to: "/setting/lang"
+		}, {
+			title: i18n.t('settingUser.title'),
+			desp: i18n.t('settingUser.description'),
+			icon: 'person', to: "/setting/user"
+		}, {
+			title: i18n.t('settings_systemAndUpdate'),
+			desp: i18n.t('settings_systemAndUpdate_description'),
+			icon: 'system_update', to: "/setting/system"
+		}]
 	})
 };
 </script>

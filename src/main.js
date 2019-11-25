@@ -3,7 +3,6 @@
 import '@/assets/poka.js'
 import '@/assets/MaterialSlider.css'
 import '@/assets/icon_outline.css'
-import '@/assets/progress-bar.sass'
 
 import Vue from 'vue'
 import App from './App'

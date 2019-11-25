@@ -1,25 +1,37 @@
 <template>
 	<div>
 		<poka-header :title="$t('settings')" :subtitle="$t('settings_lang')" />
-		<md-list>
-			<md-list-item to="/setting">
-				<v-icon>arrow_back</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('back')}}</span>
+		<div class="poka list">
+			<div class="item" @click="$router.push('/setting')" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>arrow_back</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="title t-ellipsis">{{$t('back')}}</div>
+					</div>
 				</div>
-			</md-list-item>
-			<md-list-item
+			</div>
+			<div
+				class="item"
 				v-for="(lang,index) of languages"
 				:key="`lang${lang}-${index}`"
 				@click="setLang(lang)"
+				v-ripple
 			>
-				<v-icon>translate</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('title',lang)}}</span>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>translate</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="title t-ellipsis">{{$t('title',lang)}}</div>
+					</div>
+					<div class="action">
+						<v-icon v-show="currentLang==lang">check</v-icon>
+					</div>
 				</div>
-				<v-icon v-show="currentLang==lang">check</v-icon>
-			</md-list-item>
-		</md-list>
+			</div>
+		</div>
 	</div>
 </template>
 

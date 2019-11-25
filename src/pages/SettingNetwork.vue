@@ -1,55 +1,69 @@
 <template>
 	<div>
 		<poka-header :title="$t('settings')" :subtitle="$t('settings_network')" />
-		<md-list style="padding-bottom:0">
-			<md-list-item to="/setting">
-				<v-icon>arrow_back</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('back')}}</span>
+
+		<div class="poka list">
+			<div class="item" @click="$router.push('/setting')" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>arrow_back</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="title t-ellipsis">{{$t('back')}}</div>
+					</div>
 				</div>
-			</md-list-item>
-		</md-list>
-		<md-list class="md-double-line" style="padding-top:0">
-			<md-list-item @click="showSoundQualityDialog=true">
-				<v-icon>music_note</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('settings_network_soundQuality')}}</span>
-					<span>{{$t(`settings_network_soundQuality_${soundQuality}`)}}</span>
+			</div>
+			<div class="item" @click="showSoundQualityDialog=true" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>music_note</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="title t-ellipsis">{{$t('settings_network_soundQuality')}}</div>
+						<div class="t-ellipsis">{{$t(`settings_network_soundQuality_${soundQuality}`)}}</div>
+					</div>
 				</div>
-			</md-list-item>
-		</md-list>
-		<md-dialog :md-active.sync="showSoundQualityDialog" :md-fullscreen="false">
-			<md-dialog-title>{{$t('settings_network_soundQuality')}}</md-dialog-title>
-			<poka-cards class="poka four doubling cards" :hide-overflow="false">
-				<poka-card
-					@click.native="setSoundQuality('Low')"
-					poka-icon="outline-music_note"
-					:poka-title="$t('settings_network_soundQuality_Low')"
-					:poka-subtitle="$t('settings_network_soundQuality_Low_description')"
-				/>
-				<poka-card
-					@click.native="setSoundQuality('Med')"
-					poka-icon="outline-music_note"
-					:poka-title="$t('settings_network_soundQuality_Med')"
-					:poka-subtitle="$t('settings_network_soundQuality_Med_description')"
-				/>
-				<poka-card
-					@click.native="setSoundQuality('High')"
-					poka-icon="outline-music_note"
-					:poka-title="$t('settings_network_soundQuality_High')"
-					:poka-subtitle="$t('settings_network_soundQuality_High_description')"
-				/>
-				<poka-card
-					@click.native="setSoundQuality('Ori')"
-					poka-icon="outline-music_note"
-					:poka-title="$t('settings_network_soundQuality_Ori')"
-					:poka-subtitle="$t('settings_network_soundQuality_Ori_description')"
-				/>
-			</poka-cards>
-			<md-dialog-actions>
-				<md-button class="md-primary" @click="showSoundQualityDialog = false">{{$t('cancel')}}</md-button>
-			</md-dialog-actions>
-		</md-dialog>
+			</div>
+		</div>
+
+		<v-dialog v-model="showSoundQualityDialog" max-width="800">
+			<v-card>
+				<v-card-title class="headline">{{$t("settings_network_soundQuality")}}</v-card-title>
+
+				<v-card-text>
+					<poka-cards class="poka four doubling cards" :hide-overflow="false">
+						<poka-card
+							@click.native="setSoundQuality('Low')"
+							poka-icon="outline-music_note"
+							:poka-title="$t('settings_network_soundQuality_Low')"
+							:poka-subtitle="$t('settings_network_soundQuality_Low_description')"
+						/>
+						<poka-card
+							@click.native="setSoundQuality('Med')"
+							poka-icon="outline-music_note"
+							:poka-title="$t('settings_network_soundQuality_Med')"
+							:poka-subtitle="$t('settings_network_soundQuality_Med_description')"
+						/>
+						<poka-card
+							@click.native="setSoundQuality('High')"
+							poka-icon="outline-music_note"
+							:poka-title="$t('settings_network_soundQuality_High')"
+							:poka-subtitle="$t('settings_network_soundQuality_High_description')"
+						/>
+						<poka-card
+							@click.native="setSoundQuality('Ori')"
+							poka-icon="outline-music_note"
+							:poka-title="$t('settings_network_soundQuality_Ori')"
+							:poka-subtitle="$t('settings_network_soundQuality_Ori_description')"
+						/>
+					</poka-cards>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer />
+					<v-btn text @click="showSoundQualityDialog = false">{{$t('cancel')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 	</div>
 </template>
 

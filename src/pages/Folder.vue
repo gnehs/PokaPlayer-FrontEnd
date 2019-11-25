@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<poka-header :title="$t('folder')" />
-		<md-button class="md-raised md-primary" @click="goBack" v-show="!$route.meta.root">
+		<v-btn @click="goBack" v-show="!$route.meta.root">
 			<v-icon>arrow_back</v-icon>
 			{{$t('back')}}
-		</md-button>
+		</v-btn>
 		<poka-parse-folders v-if="data" :data="data.folders" />
 		<poka-parse-songs v-if="data" :data="data.songs" />
 		<poka-loader v-else />

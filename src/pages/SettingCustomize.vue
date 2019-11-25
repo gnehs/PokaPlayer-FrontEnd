@@ -1,17 +1,20 @@
 <template>
 	<div>
 		<poka-header :title="$t('settings')" :subtitle="$t('settings_customize')" :bg="setting.bg" />
-		<md-list>
-			<md-list-item to="/setting">
-				<v-icon>arrow_back</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('back')}}</span>
+		<div class="poka list">
+			<div class="item" @click="$router.push('/setting')" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>arrow_back</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="title t-ellipsis">{{$t('back')}}</div>
+					</div>
 				</div>
-			</md-list-item>
-		</md-list>
+			</div>
+		</div>
 		<div style="margin-left:16px">
-			<span class="md-title">{{$t('settings_customize_bg')}}</span>
-			<md-divider style="margin:4px" />
+			<p class="title">{{$t('settings_customize_bg')}}</p>
 			<poka-cards>
 				<poka-card
 					@click.native="bg_prompt_active=true"
@@ -27,14 +30,19 @@
 				/>
 			</poka-cards>
 		</div>
-		<md-dialog-prompt
-			:md-active.sync="bg_prompt_active"
-			v-model="setting.bg"
-			:md-title="$t('settings_customize_bg')"
-			md-input-placeholder="https://..."
-			:md-cancel-text="$t('cancel')"
-			:md-confirm-text="$t('ok')"
-		/>
+		<v-dialog v-model="bg_prompt_active" max-width="420">
+			<v-card>
+				<v-card-title class="headline">{{$t("settings_customize_bg")}}</v-card-title>
+				<v-card-text style="padding-bottom: 0;">
+					<v-text-field label="URL" v-model.trim="bg_prompt_textbox" filled></v-text-field>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer />
+					<v-btn text @click="bg_prompt_cancel">{{$t('cancel')}}</v-btn>
+					<v-btn text @click="bg_prompt_ok">{{$t('ok')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 	</div>
 </template>
 
@@ -43,6 +51,7 @@ export default {
 	name: "SettingCustomize",
 	data: () => ({
 		bg_prompt_active: false,
+		bg_prompt_textbox: window._setting("headerBgSource"),
 		setting: { bg: window._setting("headerBgSource") },
 		imgSources: [
 			{
@@ -103,6 +112,14 @@ export default {
 				url: _setting(`server`) + "/setting/",
 				data: { n: { headerBgSource: bg } }
 			});
+		},
+		bg_prompt_cancel() {
+			this.bg_prompt_active = false
+			this.bg_prompt_textbox = window._setting("headerBgSource")
+		},
+		bg_prompt_ok() {
+			this.bg_prompt_active = false
+			this.setBg(this.bg_prompt_textbox)
 		}
 	}
 };

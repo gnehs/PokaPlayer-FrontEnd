@@ -1,90 +1,102 @@
 <template>
 	<div>
 		<poka-header :title="$t('settings')" :subtitle="$t('settings_systemAndUpdate')" />
-		<md-list>
-			<md-list-item to="/setting">
-				<v-icon>arrow_back</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('back')}}</span>
-				</div>
-			</md-list-item>
-			<md-subheader>{{$t('settings_system')}}</md-subheader>
-			<md-list-item @click="restartConfirmActive=true">
-				<v-icon>autorenew</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('settings_restart')}}</span>
-				</div>
-			</md-list-item>
-		</md-list>
-		<md-list class="md-double-line" style="padding-top:0">
-			<md-list-item @click="openUpdateDialog" :class="{mark: this.newVersion.tag}">
-				<v-icon>system_update</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('settings_update')}}</span>
-					<span>
+		<v-list subheader>
+			<v-list-item @click="$router.push('/setting')">
+				<v-list-item-avatar>
+					<v-icon>arrow_back</v-icon>
+				</v-list-item-avatar>
+
+				<v-list-item-content>
+					<v-list-item-title>{{$t('back')}}</v-list-item-title>
+				</v-list-item-content>
+			</v-list-item>
+			<v-subheader>{{$t('settings_system')}}</v-subheader>
+			<v-list-item @click="restartConfirmActive=true">
+				<v-list-item-avatar>
+					<v-icon>autorenew</v-icon>
+				</v-list-item-avatar>
+
+				<v-list-item-content>
+					<v-list-item-title>{{$t('settings_restart')}}</v-list-item-title>
+				</v-list-item-content>
+			</v-list-item>
+			<v-list-item @click="openUpdateDialog" :class="{mark: this.newVersion.tag}">
+				<v-list-item-avatar>
+					<v-icon>system_update</v-icon>
+				</v-list-item-avatar>
+
+				<v-list-item-content>
+					<v-list-item-title>{{$t('settings_update')}}</v-list-item-title>
+					<v-list-item-subtitle>
 						{{checkUpadteStatus}}
 						<span v-if="poka_debug">(debug: {{poka_debug}})</span>
-					</span>
-				</div>
-			</md-list-item>
-		</md-list>
+					</v-list-item-subtitle>
+				</v-list-item-content>
+			</v-list-item>
+		</v-list>
 
-		<md-dialog-confirm
-			:md-active.sync="restartConfirmActive"
-			:md-title="$t('settings_restartDialog_title')"
-			:md-content="$t('settings_updateDialog_note')"
-			:md-cancel-text="$t('cancel')"
-			:md-confirm-text="$t('ok')"
-			@md-confirm="restart"
-		/>
+		<v-dialog v-model="restartConfirmActive" max-width="420">
+			<v-card>
+				<v-card-title class="headline">{{$t("settings_restartDialog_title")}}</v-card-title>
+				<v-card-text style="padding-bottom: 0;">
+					<p>{{$t('settings_updateDialog_note')}}</p>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer />
+					<v-btn text @click="restartConfirmActive=false">{{$t('cancel')}}</v-btn>
+					<v-btn text @click="restartConfirmActive=false;restart()" color="primary">{{$t('ok')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 
-		<md-dialog :md-active.sync="showUpdateDialog" :md-fullscreen="false">
-			<md-dialog-title>{{$t("settings_updateDialog_title", { version: this.newVersion.tag})}}</md-dialog-title>
-			<md-dialog-content>
-				<p v-html="newVersion.body" />
-				<p>{{$t('settings_updateDialog_note')}}</p>
-			</md-dialog-content>
-			<md-dialog-actions>
-				<md-button @click="showUpdateDialog = false">{{$t('cancel')}}</md-button>
-				<md-button
-					class="md-primary"
-					@click="showUpdateDialog = false;update()"
-				>{{$t('settings_update')}}</md-button>
-			</md-dialog-actions>
-		</md-dialog>
-		<md-dialog
-			:md-active.sync="showUpdateingDialog"
-			:md-click-outside-to-close="false"
-			:md-close-on-esc="false"
-		>
-			<md-dialog-content>
-				<pre class="log">{{updateLog}}</pre>
-				<md-progress-bar md-mode="indeterminate"></md-progress-bar>
-			</md-dialog-content>
-		</md-dialog>
-		<md-dialog
-			:md-active.sync="showRestartingDialog"
-			:md-click-outside-to-close="false"
-			:md-close-on-esc="false"
-		>
-			<md-dialog-title>{{$t("settings_restarting")}}</md-dialog-title>
-		</md-dialog>
-		<md-dialog
-			:md-active.sync="showRestartCompletedDialog"
-			:md-click-outside-to-close="false"
-			:md-close-on-esc="false"
-		>
-			<md-dialog-title>{{$t("settings_restart_completed")}}</md-dialog-title>
-			<md-dialog-actions>
-				<md-button class="md-primary" @click="reload">{{$t('settings_update_reconnect')}}</md-button>
-			</md-dialog-actions>
-		</md-dialog>
+		<v-dialog v-model="showUpdateDialog" max-width="420">
+			<v-card>
+				<v-card-title
+					class="headline"
+				>{{$t("settings_updateDialog_title", { version: this.newVersion.tag})}}</v-card-title>
+				<v-card-text style="padding-bottom: 0;">
+					<p v-html="newVersion.body" />
+					<p>{{$t('settings_updateDialog_note')}}</p>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer />
+					<v-btn text @click="showUpdateDialog = false">{{$t('cancel')}}</v-btn>
+					<v-btn
+						text
+						@click="showUpdateDialog = false;update()"
+						color="primary"
+					>{{$t('settings_update')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
+
+		<v-dialog v-model="showUpdateingDialog" persistent max-width="280">
+			<v-card>
+				<v-card-text style="padding: 0;">
+					<pre class="log">{{updateLog}}</pre>
+					<v-progress-linear indeterminate color="primary"></v-progress-linear>
+				</v-card-text>
+			</v-card>
+		</v-dialog>
+
+		<v-dialog v-model="showRestartingDialog" persistent max-width="280">
+			<v-card>
+				<v-card-title class="headline">{{$t("settings_restarting")}}</v-card-title>
+			</v-card>
+		</v-dialog>
+
+		<v-dialog v-model="showRestartCompletedDialog" persistent max-width="280">
+			<v-card>
+				<v-card-title class="headline">{{$t("settings_restart_completed")}}</v-card-title>
+				<v-card-actions>
+					<v-spacer />
+					<v-btn text color="primary" @click="reload">{{$t('settings_update_reconnect')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 	</div>
 </template>
-<style lang="sass" scoped>
-.md-list
-	padding-bottom: 0
-</style>
 
 <script>
 export default {

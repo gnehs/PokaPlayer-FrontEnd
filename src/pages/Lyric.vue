@@ -35,18 +35,20 @@
 		<v-dialog v-model="showLyricDialog" max-width="420">
 			<v-card>
 				<v-card-title class="headline">{{$t("lrc_search")}}</v-card-title>
-				<v-card-text>
+				<v-card-text style="padding-bottom: 0;">
 					<v-text-field
 						:label="$t('lrc_search')"
-						solo
 						name="searchLyric"
 						v-model.trim="lyricSearchkeyword"
 						:disabled="lyricSearching"
 						@keyup.enter="getLyricByKeyword()"
 						@change="getLyricByKeyword()"
+						filled
 						:hint="$t('lrc_enter2search')"
 					></v-text-field>
-
+				</v-card-text>
+				<v-divider></v-divider>
+				<v-card-text style="max-height: 400px;overflow: scroll;">
 					<div class="poka list" style="width: 372px;">
 						<div class="item" @click="loadLrc(`[00:00.000]`,true);showLyricDialog = false" v-ripple>
 							<div class="content">
@@ -75,6 +77,7 @@
 					</div>
 					<poka-loader v-else />
 				</v-card-text>
+				<v-divider></v-divider>
 				<v-card-actions>
 					<v-spacer></v-spacer>
 					<v-btn text @click="showLyricDialog = false">{{$t('cancel')}}</v-btn>

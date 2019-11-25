@@ -1,107 +1,140 @@
 <template>
 	<div>
 		<poka-header :title="$t('settingUser.title')" :subtitle="$t('settings')" />
-		<md-list>
-			<md-list-item to="/setting">
-				<v-icon>arrow_back</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('back')}}</span>
-				</div>
-			</md-list-item>
-		</md-list>
-		<md-list class="md-double-line" style="padding-top:0" v-if="userdata">
-			<md-list-item @click="temp.changeNamePrompt=true">
-				<v-icon>person</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('settingUser.name')}}</span>
-					<span>{{userdata.name}}</span>
-				</div>
-			</md-list-item>
-			<md-list-item @click="temp.changeUsernamePrompt=true">
-				<v-icon>alternate_email</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('settingUser.username')}}</span>
-					<span>{{userdata.username}}</span>
-				</div>
-			</md-list-item>
-			<md-list-item>
-				<v-icon>settings</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('settingUser.role')}}</span>
-					<span>{{userdata.role}}</span>
-				</div>
-			</md-list-item>
-			<md-list-item @click="temp.changePasswordDialog=true">
-				<v-icon>lock</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('settingUser.password')}}</span>
-					<span>{{$t('settingUser.passwordDescription')}}</span>
-				</div>
-			</md-list-item>
-		</md-list>
-		<poka-loader v-else />
-		<md-list>
-			<md-list-item @click="logout">
-				<v-icon>exit_to_app</v-icon>
-				<div class="md-list-item-text">
-					<span>{{$t('settings_logout')}}</span>
-				</div>
-			</md-list-item>
-		</md-list>
-		<md-dialog-prompt
-			:md-active.sync="temp.changeNamePrompt"
-			v-model="temp.changeNameValue"
-			:md-title="$t('settingUser.changeName.title')"
-			md-input-maxlength="30"
-			:md-input-placeholder="$t('settingUser.changeName.placeholder')"
-			:md-cancel-text="$t('cancel')"
-			@md-confirm="changeName"
-			:md-confirm-text="$t('done')"
-		/>
-		<md-dialog-prompt
-			:md-active.sync="temp.changeUsernamePrompt"
-			v-model="temp.changeUsernameValue"
-			:md-title="$t('settingUser.changeUsername.title')"
-			md-input-maxlength="30"
-			:md-input-placeholder="$t('settingUser.changeUsername.placeholder')"
-			:md-cancel-text="$t('cancel')"
-			@md-confirm="changeUsername"
-			:md-confirm-text="$t('done')"
-		/>
-		<md-dialog
-			:md-active.sync="temp.changePasswordDialog"
-			:md-click-outside-to-close="false"
-			:md-fullscreen="false"
-		>
-			<md-dialog-title>{{$t('settingUser.changePassword.title')}}</md-dialog-title>
-			<md-dialog-content>
-				<md-field>
-					<label>{{$t('settingUser.changePassword.oldPassword')}}</label>
-					<md-input type="password" v-model="temp.changePasswordold"></md-input>
-				</md-field>
-				<md-field>
-					<label>{{$t('settingUser.changePassword.newPassword')}}</label>
-					<md-input type="password" v-model="temp.changePassword"></md-input>
-				</md-field>
-				<md-field>
-					<label>{{$t('settingUser.changePassword.confirmPassword')}}</label>
-					<md-input type="password" v-model="temp.changePassword2"></md-input>
-					<span class="md-helper-text">{{$t('settingUser.changePassword.confirmPasswordHelperText')}}</span>
-				</md-field>
-			</md-dialog-content>
-			<md-dialog-actions>
-				<md-button class="md-primary" @click="temp.changePasswordDialog = false">{{$t('cancel')}}</md-button>
-				<md-button class="md-primary" @click="changePassword">{{$t('settingUser.changePassword.done')}}</md-button>
-			</md-dialog-actions>
-		</md-dialog>
-		<md-snackbar
-			md-position="center"
-			:md-duration="3000"
-			:md-active.sync="snackbar.show"
-			md-persistent
-		>
-			<span>{{snackbar.text}}</span>
-		</md-snackbar>
+		<v-list subheader>
+			<v-list-item @click="$router.push('/setting')">
+				<v-list-item-avatar>
+					<v-icon>arrow_back</v-icon>
+				</v-list-item-avatar>
+
+				<v-list-item-content>
+					<v-list-item-title>{{$t('back')}}</v-list-item-title>
+				</v-list-item-content>
+			</v-list-item>
+
+			<v-list-item @click="temp.changeNamePrompt=true" v-if="userdata">
+				<v-list-item-avatar>
+					<v-icon>person</v-icon>
+				</v-list-item-avatar>
+
+				<v-list-item-content>
+					<v-list-item-title>{{$t('settingUser.name')}}</v-list-item-title>
+					<v-list-item-subtitle>{{userdata.name}}</v-list-item-subtitle>
+				</v-list-item-content>
+			</v-list-item>
+
+			<v-list-item @click="temp.changeUsernamePrompt=true" v-if="userdata">
+				<v-list-item-avatar>
+					<v-icon>alternate_email</v-icon>
+				</v-list-item-avatar>
+
+				<v-list-item-content>
+					<v-list-item-title>{{$t('settingUser.username')}}</v-list-item-title>
+					<v-list-item-subtitle>{{userdata.username}}</v-list-item-subtitle>
+				</v-list-item-content>
+			</v-list-item>
+
+			<v-list-item v-if="userdata">
+				<v-list-item-avatar>
+					<v-icon>settings</v-icon>
+				</v-list-item-avatar>
+
+				<v-list-item-content>
+					<v-list-item-title>{{$t('settingUser.role')}}</v-list-item-title>
+					<v-list-item-subtitle>{{userdata.role}}</v-list-item-subtitle>
+				</v-list-item-content>
+			</v-list-item>
+
+			<v-list-item @click="temp.changePasswordDialog=true" v-if="userdata">
+				<v-list-item-avatar>
+					<v-icon>lock</v-icon>
+				</v-list-item-avatar>
+
+				<v-list-item-content>
+					<v-list-item-title>{{$t('settingUser.password')}}</v-list-item-title>
+					<v-list-item-subtitle>{{$t('settingUser.passwordDescription')}}</v-list-item-subtitle>
+				</v-list-item-content>
+			</v-list-item>
+
+			<v-list-item @click="logout">
+				<v-list-item-avatar>
+					<v-icon>exit_to_app</v-icon>
+				</v-list-item-avatar>
+
+				<v-list-item-content>
+					<v-list-item-title>{{$t('settings_logout')}}</v-list-item-title>
+				</v-list-item-content>
+			</v-list-item>
+		</v-list>
+		<poka-loader v-if="!userdata" />
+
+		<v-dialog v-model="temp.changeNamePrompt" max-width="300">
+			<v-card>
+				<v-card-title class="headline">{{$t("settingUser.changeName.title")}}</v-card-title>
+				<v-card-text style="padding-bottom: 0;">
+					<v-text-field
+						:label="$t('settingUser.changeName.placeholder')"
+						v-model.trim="temp.changeNameValue"
+						filled
+					></v-text-field>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer />
+					<v-btn text @click="temp.changeNamePrompt=false">{{$t('cancel')}}</v-btn>
+					<v-btn text @click="temp.changeNamePrompt=false;changeName()" color="primary">{{$t('done')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
+		<v-dialog v-model="temp.changeUsernamePrompt" max-width="300">
+			<v-card>
+				<v-card-title class="headline">{{$t("settingUser.changeName.title")}}</v-card-title>
+				<v-card-text style="padding-bottom: 0;">
+					<v-text-field
+						:label="$t('settingUser.changeUsername.placeholder')"
+						v-model.trim="temp.changeUsernameValue"
+						filled
+					></v-text-field>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer />
+					<v-btn text @click="temp.changeUsernamePrompt=false">{{$t('cancel')}}</v-btn>
+					<v-btn
+						text
+						@click="temp.changeUsernamePrompt=false;changeUsername()"
+						color="primary"
+					>{{$t('done')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
+		<v-dialog v-model="temp.changePasswordDialog" max-width="300">
+			<v-card>
+				<v-card-title class="headline">{{$t("settingUser.changePassword.title")}}</v-card-title>
+				<v-card-text>
+					<v-text-field
+						:label="$t('settingUser.changePassword.oldPassword')"
+						v-model="temp.changePasswordold"
+						outlined
+					></v-text-field>
+					<v-text-field
+						:label="$t('settingUser.changePassword.newPassword')"
+						v-model="temp.changePassword"
+						outlined
+					></v-text-field>
+					<v-text-field
+						:label="$t('settingUser.changePassword.confirmPassword')"
+						v-model="temp.changePassword2"
+						:hint="$t('settingUser.changePassword.confirmPasswordHelperText')"
+						outlined
+					></v-text-field>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer />
+					<v-btn text @click="temp.changePasswordDialog=false">{{$t('cancel')}}</v-btn>
+					<v-btn text @click="changePassword()" color="primary">{{$t('settingUser.changePassword.done')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
+		<v-snackbar v-model="snackbar.show">{{snackbar.text}}</v-snackbar>
 	</div>
 </template>
         
@@ -250,11 +283,3 @@ export default {
 	}
 };
 </script>
-        
-
-<style lang="sass" scoped>
-.md-list
-	padding-bottom: 0
-</style>
-
-        
