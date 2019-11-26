@@ -31,7 +31,7 @@
 		</v-navigation-drawer>
 		<v-content>
 			<transition :name="transitionName" mode="out-in">
-				<router-view style="padding: 16px;height: 100%" :key="$route.path" />
+				<router-view style="padding: 16px" :key="$route.path" />
 			</transition>
 			<div style="height:69px"></div>
 		</v-content>
