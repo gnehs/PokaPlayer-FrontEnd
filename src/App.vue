@@ -31,4 +31,9 @@
 	.v-card + .v-card {
 		margin-top: 16px;
 	}
+	.t-ellipsis {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 </style>

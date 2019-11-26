@@ -43,12 +43,14 @@
 						:disabled="lyricSearching"
 						@keyup.enter="getLyricByKeyword()"
 						@change="getLyricByKeyword()"
-						filled
-						:hint="$t('lrc_enter2search')"
+						solo
 					></v-text-field>
+					<p style="margin-top: -22px">
+						<small>{{$t('lrc_enter2search')}}</small>
+					</p>
 				</v-card-text>
-				<v-divider></v-divider>
-				<v-card-text style="max-height: 400px;overflow: scroll;">
+				<v-divider />
+				<v-card-text style="max-height: 400px;overflow: scroll;overflow-x:hidden">
 					<div class="poka list" style="width: 372px;">
 						<div class="item" @click="loadLrc(`[00:00.000]`,true);showLyricDialog = false" v-ripple>
 							<div class="content">
@@ -59,7 +61,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="poka list" v-if="!lyricSearching" style="width: 372px;">
+					<div class="poka list" v-if="!lyricSearching" style="width: 100%;">
 						<div
 							class="item"
 							v-for="(item, index) of lyricSearchResult"

@@ -11,6 +11,7 @@
 <style lang="sass" scoped>
 .update-notify
 	background: #260d73
+	text-shadow: 0 0 6px #260d73
 	position: relative
 	margin: 16px
 	padding: 24px 32px

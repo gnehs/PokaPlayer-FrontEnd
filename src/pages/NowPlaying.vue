@@ -74,7 +74,7 @@
 					<div class="poka list">
 						<div class="item disabled" v-ripple>
 							<div class="content">
-								<v-avatar size="42px" item>
+								<v-avatar size="24px" item>
 									<v-icon class="outline-turned_in_not" />
 								</v-avatar>
 								<div class="header">
@@ -84,7 +84,7 @@
 						</div>
 						<div class="item disabled" v-ripple>
 							<div class="content">
-								<v-avatar size="42px" item>
+								<v-avatar size="24px" item>
 									<v-icon class="outline-star" />
 								</v-avatar>
 								<div class="header">
@@ -94,7 +94,7 @@
 						</div>
 						<div class="item disabled" v-ripple>
 							<div class="content">
-								<v-avatar size="42px" item>
+								<v-avatar size="24px" item>
 									<v-icon class="outline-playlist_add" />
 								</v-avatar>
 								<div class="header">
@@ -104,7 +104,7 @@
 						</div>
 						<div class="item" v-if="moreDialogTemp" v-ripple>
 							<div class="content">
-								<v-avatar size="42px" item>
+								<v-avatar size="24px" item>
 									<v-icon class="outline-music_note" />
 								</v-avatar>
 								<div class="header">
@@ -115,7 +115,7 @@
 						</div>
 						<div class="item" v-if="moreDialogTemp" @click="moreDialog_goto_artist" v-ripple>
 							<div class="content">
-								<v-avatar size="42px" item>
+								<v-avatar size="24px" item>
 									<v-icon class="outline-mic_none" />
 								</v-avatar>
 								<div class="header">
@@ -126,7 +126,7 @@
 						</div>
 						<div class="item" v-if="moreDialogTemp" @click="moreDialog_goto_album" v-ripple>
 							<div class="content">
-								<v-avatar size="42px" item>
+								<v-avatar size="24px" item>
 									<v-icon class="outline-album" />
 								</v-avatar>
 								<div class="header">
@@ -137,7 +137,7 @@
 						</div>
 						<div class="item" v-if="moreDialogTemp" v-ripple>
 							<div class="content">
-								<v-avatar size="42px" item>
+								<v-avatar size="24px" item>
 									<v-icon class="outline-cloud" />
 								</v-avatar>
 								<div class="header">

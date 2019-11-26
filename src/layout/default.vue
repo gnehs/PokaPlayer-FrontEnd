@@ -16,7 +16,7 @@
 			<v-list shaped>
 				<v-list-item-group color="primary">
 					<template v-for="item in items">
-						<v-divider v-if="item.divider" :key="item.text" />
+						<v-divider v-if="item.divider" :key="item.text" style="margin: 4px 0;" />
 						<v-list-item v-else :key="item.text" :to="item.to" link>
 							<v-list-item-action>
 								<v-icon :class="item.icon"></v-icon>
@@ -31,7 +31,7 @@
 		</v-navigation-drawer>
 		<v-content>
 			<transition :name="transitionName" mode="out-in">
-				<router-view style="padding: 16px;" :key="$route.path" />
+				<router-view style="padding: 16px;height: 100%" :key="$route.path" />
 			</transition>
 			<div style="height:69px"></div>
 		</v-content>
