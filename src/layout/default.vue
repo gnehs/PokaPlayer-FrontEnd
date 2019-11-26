@@ -368,12 +368,12 @@ export default {
 </script>
 <style lang="sass" scoped>
 .v-content 
-	height: 100vh 
+	height: calc(var(--vh,1vh) * 100) 
 	overflow: hidden
 	overflow-y: scroll
 	margin-bottom: -69px
 .v-navigation-drawer:not(.v-navigation-drawer--is-mobile)
-	height: calc(100vh - 69px - 64px) !important
+	height: calc(var(--vh,1vh) * 100 - 69px - 64px) !important
 </style>
 <style lang="sass" scoped>
 
