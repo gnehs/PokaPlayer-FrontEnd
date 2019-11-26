@@ -17,10 +17,6 @@ axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
 
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.min.css'
-Vue.use(VueMaterial)
-
 import * as PokaComponents from './poka-component'
 import vuetify from './plugins/vuetify';
 Object.values(PokaComponents).forEach(PokaComponents => Vue.component(PokaComponents.name, PokaComponents))
@@ -34,7 +30,6 @@ darkModeMediaQuery.addListener(e => {
 });
 
 function themeSwitch(dark = false) {
-  Vue.material.theming.theme = dark ? "default-dark" : "default"
   vuetify.framework.theme.isDark = dark
   document.getElementsByTagName('meta')["theme-color"].content = dark ? "rgb(33, 33, 33)" : "rgb(245, 245, 245)"
 }
