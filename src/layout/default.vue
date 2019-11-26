@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<!-- https://github.com/vuetifyjs/vuetify/blob/master/packages/docs/src/layouts/layouts/demos/google-contacts.vue -->
 		<v-app-bar :clipped-left="$vuetify.breakpoint.mdAndUp" app>
 			<v-app-bar-nav-icon @click.stop="toggleMenu()" />
 			<v-toolbar-title style="width: 300px">
@@ -12,7 +11,12 @@
 				<v-icon class="outline-shuffle" v-else></v-icon>
 			</v-btn>
 		</v-app-bar>
-		<v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
+		<v-navigation-drawer
+			v-model="drawer"
+			:clipped="$vuetify.breakpoint.mdAndUp"
+			mobile-break-point="1024"
+			app
+		>
 			<v-list shaped>
 				<v-list-item-group color="primary">
 					<template v-for="item in items">
