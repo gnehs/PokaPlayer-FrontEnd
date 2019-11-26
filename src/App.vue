@@ -38,9 +38,10 @@
 	}
 	.theme--dark.v-sheet,
 	.theme--dark.v-navigation-drawer,
-	.theme--dark.v-tabs-items {
-		border-color: #282535;
-		background: #282535 !important;
+	.theme--dark.v-tabs-items,
+	.theme--dark.v-stepper {
+		border-color: #2f2b3e;
+		background: #2f2b3e !important;
 	}
 	*.theme--dark {
 		--md-theme-default-dark-background: rgb(31, 31, 31);

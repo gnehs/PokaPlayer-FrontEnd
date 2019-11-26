@@ -21,7 +21,7 @@ export default {
 	}
 };
 </script>
-<style lang="sass" scoped>
+<style lang="sass">
 .header-wrapper
 	width: 100%
 	position: relative
