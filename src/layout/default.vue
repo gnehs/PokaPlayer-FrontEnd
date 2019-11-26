@@ -70,7 +70,7 @@
 						<v-icon class="outline-skip_previous" />
 					</v-btn>
 
-					<v-btn fab small outlined @click="audio_toggle" color="primary">
+					<v-btn small fab depressed @click="audio_toggle" color="primary">
 						<v-icon class="outline-play_arrow" v-if="audio_paused" />
 						<v-icon class="outline-pause" v-else />
 					</v-btn>
@@ -101,7 +101,7 @@
 						<v-icon class="outline-skip_previous" />
 					</v-btn>
 
-					<v-btn fab small outlined @click="audio_toggle" color="primary">
+					<v-btn small fab depressed @click="audio_toggle" color="primary">
 						<v-icon class="outline-play_arrow" v-if="audio_paused" />
 						<v-icon class="outline-pause" v-else />
 					</v-btn>

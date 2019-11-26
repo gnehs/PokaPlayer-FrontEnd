@@ -20,7 +20,7 @@ export default new Vuetify({
 				warning: '#FFC107'
 			},
 			dark: {
-				primary: '#bbdefb',
+				primary: '#5c95c4',
 			}
 		},
 	},
