@@ -384,7 +384,7 @@ export default {
 	backdrop-filter: blur(3px)
 	z-index: 99
 	position: fixed
-	background-color: rgba(255, 255, 255, 0.8)
+	background-color: rgba(255, 255, 255, 0.9)
 	@media (prefers-color-scheme: dark) 
 		&
 			background-color: rgba(40, 37, 53, 0.95)
