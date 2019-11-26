@@ -8,7 +8,7 @@
 						<v-icon>arrow_back</v-icon>
 					</v-avatar>
 					<div class="header">
-						<div class="title t-ellipsis">{{$t('back')}}</div>
+						<div class="head t-ellipsis">{{$t('back')}}</div>
 					</div>
 				</div>
 			</div>
@@ -24,7 +24,7 @@
 						<v-icon>translate</v-icon>
 					</v-avatar>
 					<div class="header">
-						<div class="title t-ellipsis">{{$t('title',lang)}}</div>
+						<div class="head t-ellipsis">{{$t('title',lang)}}</div>
 					</div>
 					<div class="action">
 						<v-icon v-show="currentLang==lang">check</v-icon>

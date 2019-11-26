@@ -8,7 +8,7 @@
 						<v-icon>arrow_back</v-icon>
 					</v-avatar>
 					<div class="header">
-						<div class="title t-ellipsis">{{$t('back')}}</div>
+						<div class="head t-ellipsis">{{$t('back')}}</div>
 					</div>
 				</div>
 			</div>

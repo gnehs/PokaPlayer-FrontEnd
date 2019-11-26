@@ -15,7 +15,7 @@
 						<v-icon>{{item.icon}}</v-icon>
 					</v-avatar>
 					<div class="header">
-						<div class="title t-ellipsis">{{item.title}}</div>
+						<div class="head t-ellipsis">{{item.title}}</div>
 						<div class="t-ellipsis">{{item.desp}}</div>
 					</div>
 				</div>
@@ -26,7 +26,7 @@
 						<v-icon>info</v-icon>
 					</v-avatar>
 					<div class="header">
-						<div class="title t-ellipsis">{{$t('settings_about')}}</div>
+						<div class="head t-ellipsis">{{$t('settings_about')}}</div>
 						<div class="t-ellipsis">{{$t('settings_about_description')}}</div>
 					</div>
 				</div>

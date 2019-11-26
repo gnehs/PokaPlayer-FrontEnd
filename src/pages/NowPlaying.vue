@@ -26,7 +26,7 @@
 							<v-img :src="song.cover" alt="cover" />
 						</v-avatar>
 						<div class="header">
-							<div class="title t-ellipsis">{{song.name}}</div>
+							<div class="head t-ellipsis">{{song.name}}</div>
 							<div class="t-ellipsis">{{song.artist}}</div>
 						</div>
 					</div>
@@ -78,7 +78,7 @@
 									<v-icon class="outline-turned_in_not" />
 								</v-avatar>
 								<div class="header">
-									<div class="title">{{$t('songAction_like')}}</div>
+									<div class="head">{{$t('songAction_like')}}</div>
 								</div>
 							</div>
 						</div>
@@ -88,7 +88,7 @@
 									<v-icon class="outline-star" />
 								</v-avatar>
 								<div class="header">
-									<div class="title">{{$t('songAction_rating')}}</div>
+									<div class="head">{{$t('songAction_rating')}}</div>
 								</div>
 							</div>
 						</div>
@@ -98,7 +98,7 @@
 									<v-icon class="outline-playlist_add" />
 								</v-avatar>
 								<div class="header">
-									<div class="title">{{$t('songAction_add2playlist')}}</div>
+									<div class="head">{{$t('songAction_add2playlist')}}</div>
 								</div>
 							</div>
 						</div>
@@ -108,7 +108,7 @@
 									<v-icon class="outline-music_note" />
 								</v-avatar>
 								<div class="header">
-									<div class="title t-ellipsis">{{moreDialogTemp.name}}</div>
+									<div class="head t-ellipsis">{{moreDialogTemp.name}}</div>
 									<div class="t-ellipsis">{{$t('songAction_name')}}</div>
 								</div>
 							</div>
@@ -119,7 +119,7 @@
 									<v-icon class="outline-mic_none" />
 								</v-avatar>
 								<div class="header">
-									<div class="title t-ellipsis">{{moreDialogTemp.artist}}</div>
+									<div class="head t-ellipsis">{{moreDialogTemp.artist}}</div>
 									<div class="t-ellipsis">{{$t('songAction_artist')}}</div>
 								</div>
 							</div>
@@ -130,7 +130,7 @@
 									<v-icon class="outline-album" />
 								</v-avatar>
 								<div class="header">
-									<div class="title t-ellipsis">{{moreDialogTemp.album}}</div>
+									<div class="head t-ellipsis">{{moreDialogTemp.album}}</div>
 									<div class="t-ellipsis">{{$t('songAction_album')}}</div>
 								</div>
 							</div>
@@ -141,7 +141,7 @@
 									<v-icon class="outline-cloud" />
 								</v-avatar>
 								<div class="header">
-									<div class="title t-ellipsis">{{$t(`source.${moreDialogTemp.source}`)}}</div>
+									<div class="head t-ellipsis">{{$t(`source.${moreDialogTemp.source}`)}}</div>
 									<div class="t-ellipsis">{{$t('songAction_source')}}</div>
 								</div>
 							</div>

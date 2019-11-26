@@ -59,8 +59,8 @@
 						<img :src="audio_cover" />
 					</div>
 					<div class="song-title" @click="$router.push($route.path!='/now'?'/now':'/lyric')">
-						<div class="title">{{audio_title}}</div>
-						<div class="artist">{{audio_artist||$t('app_waitForPlay')}}</div>
+						<div class="song-name">{{audio_title}}</div>
+						<div class="song-artist">{{audio_artist||$t('app_waitForPlay')}}</div>
 					</div>
 				</div>
 				<div class="center">
@@ -404,13 +404,13 @@ export default {
 				flex: 1
 				overflow: hidden
 				cursor: pointer
-				.title,.artist
+				.song-name,.song-artist
 					padding-left: 2px
 					overflow: hidden
 					text-overflow: ellipsis
 					white-space: nowrap
 					line-height: 24px
-				.title
+				.song-name
 					font-weight: bold
 			.cover
 				margin: 0 8px

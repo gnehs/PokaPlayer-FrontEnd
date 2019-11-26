@@ -53,7 +53,7 @@
 						<div class="item" @click="loadLrc(`[00:00.000]`,true);showLyricDialog = false" v-ripple>
 							<div class="content">
 								<div class="header">
-									<div class="title t-ellipsis">{{$t('lrc_notLoad')}}</div>
+									<div class="head t-ellipsis">{{$t('lrc_notLoad')}}</div>
 									<div class="t-ellipsis">{{$t('lrc_notLoad_description')}}</div>
 								</div>
 							</div>
@@ -69,7 +69,7 @@
 						>
 							<div class="content">
 								<div class="header">
-									<div class="title t-ellipsis">{{item.name}}</div>
+									<div class="head t-ellipsis">{{item.name}}</div>
 									<div class="t-ellipsis">{{item.artist}}</div>
 								</div>
 							</div>

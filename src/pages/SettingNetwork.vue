@@ -9,7 +9,7 @@
 						<v-icon>arrow_back</v-icon>
 					</v-avatar>
 					<div class="header">
-						<div class="title t-ellipsis">{{$t('back')}}</div>
+						<div class="head t-ellipsis">{{$t('back')}}</div>
 					</div>
 				</div>
 			</div>
@@ -19,7 +19,7 @@
 						<v-icon>music_note</v-icon>
 					</v-avatar>
 					<div class="header">
-						<div class="title t-ellipsis">{{$t('settings_network_soundQuality')}}</div>
+						<div class="head t-ellipsis">{{$t('settings_network_soundQuality')}}</div>
 						<div class="t-ellipsis">{{$t(`settings_network_soundQuality_${soundQuality}`)}}</div>
 					</div>
 				</div>
