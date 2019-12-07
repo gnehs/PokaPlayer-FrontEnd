@@ -75,8 +75,8 @@
 					</v-btn>
 
 					<v-btn small fab depressed @click="audio_toggle" color="primary">
-						<v-icon class="outline-play_arrow" v-if="audio_paused" />
-						<v-icon class="outline-pause" v-else />
+						<v-icon key="play" class="outline-play_arrow" v-if="audio_paused" />
+						<v-icon key="pause" class="outline-pause" v-else />
 					</v-btn>
 
 					<v-btn icon @click="audio_next">
@@ -106,8 +106,8 @@
 					</v-btn>
 
 					<v-btn small fab depressed @click="audio_toggle" color="primary">
-						<v-icon class="outline-play_arrow" v-if="audio_paused" />
-						<v-icon class="outline-pause" v-else />
+						<v-icon key="play" class="outline-play_arrow" v-if="audio_paused" />
+						<v-icon key="pause" class="outline-pause" v-else />
 					</v-btn>
 
 					<v-btn icon @click="audio_next">
