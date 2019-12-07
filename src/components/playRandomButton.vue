@@ -14,7 +14,11 @@ export default {
 	methods: {
 		randomPlay() {
 			this.loadingRandom = true;
-			this.$randomPlay();
+			try {
+				this.$randomPlay();
+			} catch {
+				this.loadingRandom = false;
+			}
 		}
 	}
 };
