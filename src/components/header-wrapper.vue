@@ -37,6 +37,7 @@ export default {
 		width: 100%
 		position: absolute
 		min-height: 300px
+		overflow: hidden
 	.bg.blur
 		filter: blur(5px)
 .hw-header
