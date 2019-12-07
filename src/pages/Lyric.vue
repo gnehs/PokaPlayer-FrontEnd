@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="lyric" :class="{lyricTranslated:lyricTranslated}">
+		<div v-on:dblclick="openLyricDialog" class="lyric" :class="{lyricTranslated:lyricTranslated}">
 			<transition name="fade" mode="out-in">
 				<div v-if="lyric.length > 1" key="lyric">
 					<p
