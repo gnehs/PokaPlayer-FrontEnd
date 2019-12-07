@@ -34,7 +34,7 @@
 						<v-btn icon @click.stop="moreDialog(song)">
 							<v-icon class="outline-more_horiz" />
 						</v-btn>
-						<v-btn icon @click.stop="removeSong(song)">
+						<v-btn icon @click.stop="removeSong(index)">
 							<v-icon class="outline-close" />
 						</v-btn>
 					</div>
@@ -236,8 +236,8 @@ export default {
 			_player.play();
 			this.updatePlayer();
 		},
-		removeSong(i) {
-			_player.list.remove(i);
+		removeSong(index) {
+			_player.list.remove(index);
 			this.updatePlayer();
 		},
 		audio_toggle() {
