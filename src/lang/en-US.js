@@ -47,6 +47,7 @@ export default {
 	"lrc_notLoad": "Don't load lyrics",
 	"lrc_notLoad_description": "This will remove lyrics of the song now playing.",
 	"lrc_noLyrics": "No lyrics",
+	"lrc_saved": "lyric saved.",
 	"songAction_title": "Actions",
 	"songAction_name": "Name",
 	"songAction_artist": "Artists",

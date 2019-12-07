@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div v-on:dblclick="openLyricDialog" class="lyric" :class="{lyricTranslated:lyricTranslated}">
+		<div class="lyric" :class="{lyricTranslated:lyricTranslated}">
 			<transition name="fade" mode="out-in">
 				<div v-if="lyric.length > 1" key="lyric">
 					<p
@@ -32,6 +32,21 @@
 				</v-card>
 			</transition>
 		</div>
+		<v-fab-transition>
+			<v-btn
+				color="primary"
+				fab
+				large
+				dark
+				bottom
+				right
+				fixed
+				style="bottom: calc(16px + 69px);"
+				@click="openLyricDialog"
+			>
+				<v-icon>search</v-icon>
+			</v-btn>
+		</v-fab-transition>
 		<v-dialog v-model="showLyricDialog" max-width="420">
 			<v-card>
 				<v-card-title class="headline">{{$t("lrc_search")}}</v-card-title>
@@ -291,7 +306,7 @@ export default {
 					source: nowPlaying.source,
 					lyric: lrc
 				});
-				this.$snackbar("lyric saved.");
+				this.$snackbar(i18n.t('lrc_saved'));
 			}
 		}
 	}

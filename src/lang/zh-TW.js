@@ -48,6 +48,7 @@ export default {
 	"lrc_notLoad": "不載入歌詞",
 	"lrc_notLoad_description": "點選清除目前的歌詞",
 	"lrc_noLyrics": "無歌詞",
+	"lrc_saved": "歌詞已儲存",
 	"songAction_title": "歌曲操作",
 	"songAction_name": "歌曲名稱",
 	"songAction_artist": "演出者",
