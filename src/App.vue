@@ -36,4 +36,11 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
+	.v-snack--bottom {
+		bottom: 77px !important;
+	}
+	.v-snack__wrapper {
+		background-color: rgba(57, 53, 77, 0.8) !important;
+		backdrop-filter: blur(3px) !important;
+	}
 </style>
