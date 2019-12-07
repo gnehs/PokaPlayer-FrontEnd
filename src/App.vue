@@ -43,4 +43,13 @@
 		background-color: rgba(57, 53, 77, 0.8) !important;
 		backdrop-filter: blur(3px) !important;
 	}
+	nav .theme--dark.v-list-item--active:hover::before,
+	nav .theme--dark.v-list-item--active::before {
+		opacity: 0.2;
+		background-color: #776ea0;
+	}
+	nav .theme--dark.v-list-item--active,
+	nav .theme--dark.v-list-item--active {
+		color: #fff !important;
+	}
 </style>
