@@ -1,5 +1,8 @@
 <template>
-	<div class="login-container" :style="{backgroundImage:`url('${headerImg}')`}">
+	<div class="login-container" :style="{'--login-bg':`url('${headerImg}')`}">
+		<div class="license-container">
+			<a href="https://loading.io/">banner background from loading.io</a>
+		</div>
 		<v-form ref="form" v-on:submit.prevent="login">
 			<div class="form-container">
 				<v-card class="mx-auto banner">
@@ -62,11 +65,12 @@
 	}
 	// header-img
 	.banner-img {
-		background: linear-gradient(-45deg, #d5ffb9f0, #de7ffff0);
+		background-image: url("/img/loginBannerBgLight.svg");
+		background-size: 100%;
 	}
 	@media (prefers-color-scheme: dark) {
 		.banner-img {
-			background: linear-gradient(-45deg, #514f5df0, #262334f0);
+			background-image: url("/img/loginBannerBgDark.svg");
 		}
 	}
 
@@ -75,6 +79,26 @@
 		width: 100vw;
 		background-size: cover;
 		background-position: center;
+		background-image: var(--login-bg);
+	}
+	@media (prefers-color-scheme: dark) {
+		.login-container {
+			background-image: linear-gradient(
+					rgba(0, 0, 0, 0.6),
+					rgba(0, 0, 0, 0.6)
+				),
+				var(--login-bg);
+		}
+	}
+
+	.license-container {
+		position: absolute;
+		bottom: 3px;
+		right: 3px;
+		opacity: 0.1;
+		a {
+			color: #fff;
+		}
 	}
 </style>
 <script>
