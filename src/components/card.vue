@@ -3,14 +3,14 @@
 		.image(v-if="parsed_pokaBg",:style="{backgroundImage:`url(\"${parsed_pokaBg}\")`}")
 		.image(v-else)
 			v-icon(class="icon-white", :class="pokaIcon")
-		.title {{pokaTitle}}
-		.subtitle {{pokaSubtitle}}
+		.title.t-ellipsis {{pokaTitle}}
+		.subtitle.t-ellipsis {{pokaSubtitle}}
 	a.card(v-else,:data-source="parsed_source||undefined")
 		.image(v-if="parsed_pokaBg",:style="{backgroundImage:`url(\"${parsed_pokaBg}\")`}")
 		.image(v-else)
 			v-icon(class="icon-white", :class="pokaIcon")
-		.title {{pokaTitle}}
-		.subtitle {{pokaSubtitle}}
+		.title.t-ellipsis {{pokaTitle}}
+		.subtitle.t-ellipsis {{pokaSubtitle}}
 </template>
 
 <script>

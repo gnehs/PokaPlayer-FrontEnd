@@ -23,8 +23,8 @@ export default {
 		--size: calc(16.6% - 1em)
 		height: 0
 		width: var(--size)
-		font-size: 10px
-		margin: .4em .5em
+		font-size: 11px
+		margin: .8em .5em
 		background-position: center
 		background-size: cover
 		padding-bottom: var(--size)
@@ -82,14 +82,14 @@ export default {
 			transform: scale(2)
 			color: #FFF
 		.title
-			font-size: 2em
+			font-size: 1.5em !important
 			padding-top: 5px
 			line-height: 1.5em
 			font-weight: bold
 			color: var(--text-color)
 			opacity: .9
 		.subtitle
-			font-size: 1.4em
+			font-size: 1em !important
 			padding-top: 0px
 			line-height: 1.5em
 			color: var(--text-color)
@@ -145,14 +145,12 @@ export default {
 	.poka
 		&.cards .card
 			--size: calc(100% - 1em)
-			font-size: 9px
 		&.doubling.four.cards .card
 			--size: calc(100% - 1em)
 @media (max-width: 575.98px)
 	.poka
 		&.cards .card
-			--size: calc(50% - 1em)
-			font-size: 9px
+			--size: calc(33.3% - 1em)
 		&.doubling.four.cards .card
 			--size: calc(50% - 1em)
 
