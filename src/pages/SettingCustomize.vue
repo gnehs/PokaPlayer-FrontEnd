@@ -13,7 +13,7 @@
 				</div>
 			</div>
 		</div>
-		<div style="margin-left:16px">
+		<div>
 			<p class="title">{{$t('settings_customize_bg')}}</p>
 			<poka-cards>
 				<poka-card
