@@ -25,6 +25,9 @@
 		border-color: #2f2b3e;
 		background: #2f2b3e !important;
 	}
+	.v-application.v-application {
+		font-family: var(--default-font);
+	}
 	.v-card:not(.v-sheet--tile):not(.v-card--shaped) {
 		border-radius: 8px !important;
 	}
