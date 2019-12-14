@@ -13,7 +13,7 @@
 	background: #2f2b3e
 	text-shadow: 0 0 6px #2f2b3e
 	position: relative
-	margin: 16px
+	margin: 16px 2px
 	padding: 24px 32px
 	border-radius: 8px
 	background-size: 240px

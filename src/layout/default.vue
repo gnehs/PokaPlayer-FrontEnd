@@ -35,7 +35,9 @@
 		</v-navigation-drawer>
 		<v-content>
 			<transition :name="transitionName" mode="out-in">
-				<router-view style="padding: 16px" :key="$route.path" />
+				<div class="router-view" :key="$route.path">
+					<router-view />
+				</div>
 			</transition>
 			<div style="height:69px"></div>
 		</v-content>
@@ -378,9 +380,9 @@ export default {
 	margin-bottom: -69px
 .v-navigation-drawer:not(.v-navigation-drawer--is-mobile)
 	height: calc(var(--vh,1vh) * 100 - 69px - 64px) !important
-</style>
-<style lang="sass" scoped>
-
+@media (min-width: 576px)
+	.router-view
+		padding: 16px
 .bottom-player
 	box-sizing: border-box
 	height: 69px

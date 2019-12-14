@@ -28,7 +28,7 @@
 </template>
 <style lang="sass" scoped>
 .poka-parse-multiple
-	padding: 16px
+	padding: 2px
 </style>
 <script>
 export default {
