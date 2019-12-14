@@ -15,6 +15,7 @@
 			>
 				<div
 					class="item"
+					style="user-select: none;"
 					v-for="(song,index) of audio_queue"
 					:key="song.uuid"
 					:class="{active:index==audio_index}"
