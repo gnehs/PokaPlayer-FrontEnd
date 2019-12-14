@@ -19,6 +19,7 @@
 					:key="song.uuid"
 					:class="{active:index==audio_index}"
 					@click="playSong(index)"
+					@contextmenu.prevent="moreDialog(song)"
 					v-ripple
 				>
 					<div class="content">
@@ -31,9 +32,6 @@
 						</div>
 					</div>
 					<div class="action">
-						<v-btn icon @click.stop="moreDialog(song)">
-							<v-icon class="outline-more_horiz" />
-						</v-btn>
 						<v-btn icon @click.stop="removeSong(index)">
 							<v-icon class="outline-close" />
 						</v-btn>
