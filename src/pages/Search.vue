@@ -46,6 +46,7 @@
 		border-radius: 24px
 		padding: 12px 14px
 		font-size: 14px
+		color: #000
 	>.search-button
 		outline: none
 		border: 0
