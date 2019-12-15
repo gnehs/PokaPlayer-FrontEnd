@@ -26,11 +26,12 @@
 <style lang="sass" scoped>
 // banner-img
 .banner-img 
-	background: linear-gradient(-45deg, #d5ffb9f0, #de7ffff0)
+	background-image: url("/img/loginBannerBgLight.svg")
+	background-size: 100%
 
 @media (prefers-color-scheme: dark) 
 	.banner-img 
-		background: linear-gradient(-45deg, #514f5df0, #262334f0)
+		background-image: url("/img/loginBannerBgDark.svg")
 </style>
 <script>
 export default {
