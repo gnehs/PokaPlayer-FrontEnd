@@ -31,6 +31,9 @@ export default {
 			this.headerStyle.opacity = scrollTop > targetHideHeight ? 0 : (scrollTop > 20 ? 1 - scrollTop / targetHideHeight : 1)
 		}
 	},
+	mounted() {
+		document.querySelector('main').addEventListener('scroll', this.handleScroll);
+	},
 	created() {
 		document.querySelector('main').addEventListener('scroll', this.handleScroll);
 	},
