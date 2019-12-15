@@ -95,33 +95,33 @@ export default {
 			color: var(--text-color)
 			opacity: .75
 		.image
-			background-color: #F44336
+			background-color: #B0BEC5
 		&:nth-child(14n+2) .image
-			background-color: #E91E63
+			background-color: #BCAAA4
 		&:nth-child(14n+3) .image
-			background-color: #9C27B0
+			background-color: #FFAB91
 		&:nth-child(14n+4) .image
-			background-color: #673AB7
+			background-color: #FFF59D
 		&:nth-child(14n+5) .image
-			background-color: #3F51B5
+			background-color: #FFE082
 		&:nth-child(14n+6) .image
-			background-color: #2196F3
+			background-color: #FFCC80
 		&:nth-child(14n+7) .image
-			background-color: #00BCD4
+			background-color: #A5D6A7
 		&:nth-child(14n+8) .image
-			background-color: #009688
+			background-color: #C5E1A5
 		&:nth-child(14n+9) .image
-			background-color: #4CAF50
+			background-color: #E6EE9C
 		&:nth-child(14n+10) .image
-			background-color: #8BC34A
+			background-color: #81D4FA
 		&:nth-child(14n+11) .image
-			background-color: #CDDC39
+			background-color: #80DEEA
 		&:nth-child(14n+12) .image
-			background-color: #FF5722
+			background-color: #80CBC4
 		&:nth-child(14n+13) .image
-			background-color: #795548
+			background-color: #B39DDB
 		&:nth-child(14n+14) .image
-			background-color: #9E9E9E
+			background-color: #90CAF9
 	&.two.cards .card
 		--size: calc(100% / 2 - .5em)
 	&.three.cards .card
