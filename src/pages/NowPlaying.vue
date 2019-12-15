@@ -1,5 +1,5 @@
 <template>
-	<div style="padding:16px;">
+	<div>
 		<transition name="fade" mode="in-out">
 			<poka-header :blurbg="true" :bg="audio_cover" v-if="audio_queue.length>0" key="1" />
 			<poka-header :bg="defaultCover" v-else key="2" />

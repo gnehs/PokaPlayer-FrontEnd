@@ -32,7 +32,7 @@ export default {
 /* 專輯歌曲頁面 - 專輯簡介 */
 .info-header
 	position: relative
-	margin-top: 48px
+	margin-top: 16px
 	padding: 16px
 	display: flex
 	flex-direction: row
@@ -54,19 +54,18 @@ export default {
 		display: flex
 		padding-left: 24px
 		padding-right: 24px
-		padding-top: 8px
 		overflow: hidden
 		>.album-name,>.artist-name
 			white-space: nowrap
 			overflow: hidden
 			text-overflow: ellipsis
 		>.album-name
-			font-size: 40px
-			line-height: 48px
+			font-size: 2em
+			line-height: 1.5em
 			font-weight: bold
 		>.artist-name
-			font-size: 32px
-			line-height: 40px
+			font-size: 1.5em
+			line-height:  1.5em
 		>.grow
 			flex: 1
 		>.footer
@@ -92,12 +91,7 @@ export default {
 		>.info-data
 			padding-left: 12px
 			padding-right: 0
-			>.album-name
-				font-size: 24px
-				line-height: 30px
-			>.artist-name
-				font-size: 20px
-				line-height: 25px
-		>.time
-			font-size: 16px
+			font-size: 12px
+		.time
+			font-size: 18px !important
 </style>

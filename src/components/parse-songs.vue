@@ -9,7 +9,7 @@
 					/>
 				</v-avatar>
 				<div class="header">
-					<div class="title t-ellipsis">{{song.name}}</div>
+					<div class="head t-ellipsis">{{song.name}}</div>
 					<div class="t-ellipsis">{{song.artist}}</div>
 				</div>
 			</div>

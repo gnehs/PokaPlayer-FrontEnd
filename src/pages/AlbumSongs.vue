@@ -15,7 +15,11 @@
 		<poka-parse-songs style="margin: 16px 0;" :data="songs" v-if="songs" />
 		<poka-loader v-if="!songs" />
 		<v-divider v-if="artistAlbums" />
-		<h1 v-if="artistAlbums" class="title" style="padding-left: 0.5em;">{{$t('albumsOfSameArtist')}}</h1>
+		<h1
+			v-if="artistAlbums"
+			class="title"
+			style="padding-left: 0.5em;margin-top: 8px;"
+		>{{$t('albumsOfSameArtist')}}</h1>
 		<poka-parse-albums v-if="artistAlbums" :data="artistAlbums" />
 	</div>
 </template>
