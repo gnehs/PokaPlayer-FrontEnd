@@ -1,6 +1,6 @@
 <template>
 	<v-card class="mx-auto" width="350">
-		<v-img class="banner-img" src="/img/loginHeader.svg" height="170px"></v-img>
+		<v-img class="poka-logo-banner" src="/img/loginHeader.svg" height="170px"></v-img>
 		<v-card-text class="text-center">
 			<br />
 			<span class="display-1">PokaPlayer</span>
@@ -23,16 +23,6 @@
 	</v-card>
 </template>
 
-<style lang="sass" scoped>
-// banner-img
-.banner-img 
-	background-image: url("/img/loginBannerBgLight.svg")
-	background-size: 100%
-
-@media (prefers-color-scheme: dark) 
-	.banner-img 
-		background-image: url("/img/loginBannerBgDark.svg")
-</style>
 <script>
 export default {
 	name: "poka-about",

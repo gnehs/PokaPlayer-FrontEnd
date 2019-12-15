@@ -135,7 +135,7 @@ export default {
 	"settings_updateDialog_note_dev": "若在開發機器上進行更新，<mark>可能導致 Git 爆炸</mark>",
 	"settings_updateDialog_title": "{version} 更新日誌",
 	"settings_restart": "重新啟動",
-	"settings_restarting": "正在重新啟動...",
+	"settings_restarting": "正在重新啟動",
 	"settings_restart_completed": "重新啟動完成！",
 	"settings_restartDialog_title": "確定要重新啟動嗎？",
 	"settingUser": {

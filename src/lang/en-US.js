@@ -134,7 +134,7 @@ export default {
 	"settings_updateDialog_note_dev": "If you update on developing machine, <mark>it may cause Git to crash</mark>",
 	"settings_updateDialog_title": "{version} Release note",
 	"settings_restart": "Restart",
-	"settings_restarting": "Restarting...",
+	"settings_restarting": "Restarting",
 	"settings_restart_completed": "Restart completed.",
 	"settings_restartDialog_title": "Are you sure to restart?",
 	"settingUser": {
