@@ -27,7 +27,6 @@ export default {
 	methods: {
 		handleScroll(event) {
 			let scrollTop = document.querySelector('main').scrollTop;
-			console.log(scrollTop);
 			let targetHideHeight = 130
 			this.headerStyle.opacity = scrollTop > targetHideHeight ? 0 : (scrollTop > 20 ? 1 - scrollTop / targetHideHeight : 1)
 		}
