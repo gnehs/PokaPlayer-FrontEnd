@@ -1,8 +1,8 @@
 <template lang="pug">
-div
+div(style="position: sticky;top: -50px;")
 	.header-wrapper
 		.bg(:style=`{backgroundImage: 'url("'+bg+'")'}`,:class="{blur: blurbg}")
-	.hw-header(v-if='title')
+	.hw-header(v-if='title',:style="headerStyle")
 		.hw-title(style="line-height: normal;") {{title}}
 		.hw-subtitle {{subtitle}}
 </template>
@@ -10,6 +10,11 @@ div
 <script>
 export default {
 	name: "poka-header",
+	data: () => ({
+		headerStyle: {
+			opacity: 1
+		}
+	}),
 	props: {
 		title: String,
 		subtitle: String,
@@ -18,6 +23,20 @@ export default {
 			default: _setting(`headerBgSource`)
 		},
 		blurbg: { type: Boolean, default: false }
+	},
+	methods: {
+		handleScroll(event) {
+			let scrollTop = document.querySelector('main').scrollTop;
+			console.log(scrollTop);
+			let targetHideHeight = 130
+			this.headerStyle.opacity = scrollTop > targetHideHeight ? 0 : (scrollTop > 20 ? 1 - scrollTop / targetHideHeight : 1)
+		}
+	},
+	created() {
+		document.querySelector('main').addEventListener('scroll', this.handleScroll);
+	},
+	destroyed() {
+		document.querySelector('main').removeEventListener('scroll', this.handleScroll);
 	}
 };
 </script>
