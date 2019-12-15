@@ -206,6 +206,8 @@ export default {
 										focusedLyric.clientHeight * (this.lyricTranslated ? 1.75 : 0.75);
 									sh += 69 //底部播放器高度
 									window.scrollTo(document.querySelector("main.v-content"), sh, 200);
+								} else {
+									this.lyricFocus = 0
 								}
 							});
 						}
