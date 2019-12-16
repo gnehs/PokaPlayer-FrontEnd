@@ -33,6 +33,9 @@
 						</div>
 					</div>
 					<div class="action">
+						<v-btn icon @click.stop="moreDialog(song)" v-show="isSafari">
+							<v-icon class="outline-more_horiz" />
+						</v-btn>
 						<v-btn icon @click.stop="removeSong(index)">
 							<v-icon class="outline-close" />
 						</v-btn>
@@ -173,7 +176,8 @@ export default {
 		audio_uuid: ":D",
 		NowPlaying_updatePlayer: null,
 		moreDialogShow: false,
-		moreDialogTemp: null
+		moreDialogTemp: null,
+		isSafari: /^((?!chrome|android).)*safari/i.test(window.navigator.userAgent)
 	}),
 	created() {
 		this.updatePlayer();
