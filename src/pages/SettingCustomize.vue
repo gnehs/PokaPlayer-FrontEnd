@@ -92,10 +92,6 @@ export default {
 				name: "Sword Art Online: Alicization",
 				src: "https://images2.imgbox.com/99/e2/knJdNcns_o.jpg"
 			},
-			{
-				name: "iClart 隨機 ACG 圖片",
-				src: `https://acg.iclart.com/api.php?return=webp&rand=${new Date().getTime()}`
-			}
 		]
 	}),
 	watch: {
