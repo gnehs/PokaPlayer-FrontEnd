@@ -76,7 +76,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="poka list" v-if="!lyricSearching" style="width: 100%;">
+					<div class="poka list" v-if="!lyricSearching&&lyricSearchResult" style="width: 100%;">
 						<div
 							class="item"
 							v-for="(item, index) of lyricSearchResult"
@@ -92,7 +92,10 @@
 							</div>
 						</div>
 					</div>
-					<poka-loader v-else />
+					<poka-loader v-else-if="lyricSearching" />
+					<div style="text-align:center;padding: 40px 0;" v-else>
+						<v-btn @click="dialogSearch" color="primary">{{$t('search')}}</v-btn>
+					</div>
 				</v-card-text>
 				<v-divider></v-divider>
 				<v-card-actions>
@@ -167,9 +170,10 @@ export default {
 			this.showLyricDialog = true;
 			let nowPlaying = _player.list.audios[_player.list.index];
 			this.lyricSearchkeyword = this.audio_title + " " + this.audio_artist
-			if (!this.lyricSearchResult) {
-				this.getLyricByKeyword(this.lyricSearchkeyword, false); //搜尋一下
-			}
+
+		},
+		dialogSearch() {
+			this.getLyricByKeyword(this.lyricSearchkeyword, false); //搜尋一下
 		},
 		updateLyric() {
 			let nowPlaying = _player.list.audios[_player.list.index];
