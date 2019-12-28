@@ -14,7 +14,8 @@
 		<v-navigation-drawer
 			v-model="drawer"
 			:clipped="$vuetify.breakpoint.mdAndUp"
-			mobile-break-point="1024"
+			:mini-variant="$vuetify.breakpoint.mdOnly"
+			:mobile-break-point="960"
 			app
 		>
 			<v-list shaped>
@@ -189,7 +190,7 @@ export default {
 		}
 		window.addEventListener("resize", vhResize);
 		vhResize();
-		this.drawer = this.$vuetify.breakpoint.lgAndUp
+		this.drawer = this.$vuetify.breakpoint.mdAndUp
 		this.$router.beforeEach((to, from, next) => {
 			let transitionName =
 				to.meta.transitionName || from.meta.transitionName || "fade";
