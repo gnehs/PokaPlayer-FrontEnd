@@ -18,14 +18,14 @@
 					key="lyricSearchingcard"
 				>
 					<v-card-text class="text-center">
-						<v-icon class="display-4 outline-subtitles" />
+						<v-icon class="material-icons-outlined display-4">subtitles</v-icon>
 						<p class="headline text--primary">{{$t('loading')}}</p>
 					</v-card-text>
 				</v-card>
 
 				<v-card v-else class="mx-auto" max-width="344" style="margin-top:32px;" key="lrc_noLyrics">
 					<v-card-text class="text-center">
-						<v-icon class="display-4 outline-subtitles" />
+						<v-icon class="material-icons-outlined display-4">subtitles</v-icon>
 						<p class="headline text--primary">{{$t('lrc_noLyrics')}}</p>
 						<v-btn outlined color="primary" @click="showLyricDialog = true">{{$t('lrc_search')}}</v-btn>
 					</v-card-text>

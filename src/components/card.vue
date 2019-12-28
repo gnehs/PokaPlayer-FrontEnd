@@ -8,7 +8,7 @@
 	a.card(v-else,:data-source="parsed_source||undefined")
 		.image(v-if="parsed_pokaBg",:style="{backgroundImage:`url(\"${parsed_pokaBg}\")`}")
 		.image(v-else)
-			v-icon(class="icon-white", :class="pokaIcon")
+			v-icon(class="icon-white material-icons-outlined") {{pokaIcon}}
 		.title.t-ellipsis {{pokaTitle}}
 		.subtitle.t-ellipsis {{pokaSubtitle}}
 </template>
@@ -22,7 +22,7 @@ export default {
 		pokaTitle: String,
 		pokaSubtitle: String,
 		to: String,
-		pokaIcon: { default: "outline-play_circle_filled", type: String }
+		pokaIcon: { default: "play_circle_filled", type: String }
 	},
 	data: () => ({ parsed_source: null, parsed_pokaBg: null }),
 	created() {

@@ -55,4 +55,7 @@
 	nav .theme--dark.v-list-item--active {
 		color: #fff !important;
 	}
+	.material-icons-outlined.material-icons-outlined.material-icons-outlined {
+		font-family: "Material Icons Outlined" !important;
+	}
 </style>

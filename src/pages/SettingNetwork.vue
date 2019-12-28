@@ -34,25 +34,25 @@
 					<poka-cards class="poka four doubling cards" :hide-overflow="false">
 						<poka-card
 							@click.native="setSoundQuality('Low')"
-							poka-icon="outline-music_note"
+							poka-icon="music_note"
 							:poka-title="$t('settings_network_soundQuality_Low')"
 							:poka-subtitle="$t('settings_network_soundQuality_Low_description')"
 						/>
 						<poka-card
 							@click.native="setSoundQuality('Med')"
-							poka-icon="outline-music_note"
+							poka-icon="music_note"
 							:poka-title="$t('settings_network_soundQuality_Med')"
 							:poka-subtitle="$t('settings_network_soundQuality_Med_description')"
 						/>
 						<poka-card
 							@click.native="setSoundQuality('High')"
-							poka-icon="outline-music_note"
+							poka-icon="music_note"
 							:poka-title="$t('settings_network_soundQuality_High')"
 							:poka-subtitle="$t('settings_network_soundQuality_High_description')"
 						/>
 						<poka-card
 							@click.native="setSoundQuality('Ori')"
-							poka-icon="outline-music_note"
+							poka-icon="music_note"
 							:poka-title="$t('settings_network_soundQuality_Ori')"
 							:poka-subtitle="$t('settings_network_soundQuality_Ori_description')"
 						/>

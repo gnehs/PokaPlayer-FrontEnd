@@ -73,13 +73,9 @@ export default {
 			box-shadow: 0 10px 15px #0000004d
 		.image i
 			margin: auto
-			display: block
-			top: 0
-			right: 0
-			bottom: 0
-			left: 0
 			position: absolute
-			transform: scale(2)
+			font-size: 5em
+			transform: translate(100%, 100%)
 			color: #FFF
 		.title
 			font-size: 1.5em !important

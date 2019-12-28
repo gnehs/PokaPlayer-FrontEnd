@@ -34,10 +34,10 @@
 					</div>
 					<div class="action">
 						<v-btn icon @click.stop="moreDialog(song)" v-show="isSafari">
-							<v-icon class="outline-more_horiz" />
+							<v-icon class="material-icons-outlined">more_horiz</v-icon>
 						</v-btn>
 						<v-btn icon @click.stop="removeSong(index)">
-							<v-icon class="outline-close" />
+							<v-icon class="material-icons-outlined">close</v-icon>
 						</v-btn>
 					</div>
 				</div>
@@ -45,7 +45,7 @@
 
 			<v-card v-else class="mx-auto" max-width="344" style="margin-top:32px;" key="card">
 				<v-card-text class="text-center">
-					<v-icon class="display-4 outline-queue_music" />
+					<v-icon class="display-4 material-icons-outlined">queue_music</v-icon>
 					<p class="headline text--primary">{{$t('app_waitForPlay')}}</p>
 					<p>{{$t('app_waitForPlay_description')}}</p>
 					<play-random-button />
@@ -65,7 +65,7 @@
 				v-if="audio_queue.length>0"
 				@click="audio_clean"
 			>
-				<v-icon class="outline-clear_all" />
+				<v-icon class="material-icons-outlined">clear_all</v-icon>
 			</v-btn>
 		</v-fab-transition>
 		<v-dialog v-model="moreDialogShow" max-width="400">
@@ -77,7 +77,7 @@
 						<div class="item disabled" v-ripple>
 							<div class="content">
 								<v-avatar size="24px" item>
-									<v-icon class="outline-turned_in_not" />
+									<v-icon class="material-icons-outlined">turned_in_not</v-icon>
 								</v-avatar>
 								<div class="header">
 									<div class="head">{{$t('songAction_like')}}</div>
@@ -87,7 +87,7 @@
 						<div class="item disabled" v-ripple>
 							<div class="content">
 								<v-avatar size="24px" item>
-									<v-icon class="outline-star" />
+									<v-icon class="material-icons-outlined">star</v-icon>
 								</v-avatar>
 								<div class="header">
 									<div class="head">{{$t('songAction_rating')}}</div>
@@ -97,7 +97,7 @@
 						<div class="item disabled" v-ripple>
 							<div class="content">
 								<v-avatar size="24px" item>
-									<v-icon class="outline-playlist_add" />
+									<v-icon class="material-icons-outlined">playlist_add</v-icon>
 								</v-avatar>
 								<div class="header">
 									<div class="head">{{$t('songAction_add2playlist')}}</div>
@@ -107,7 +107,7 @@
 						<div class="item" v-if="moreDialogTemp" v-ripple>
 							<div class="content">
 								<v-avatar size="24px" item>
-									<v-icon class="outline-music_note" />
+									<v-icon class="material-icons-outlined">music_note</v-icon>
 								</v-avatar>
 								<div class="header">
 									<div class="head t-ellipsis">{{moreDialogTemp.name}}</div>
@@ -118,7 +118,7 @@
 						<div class="item" v-if="moreDialogTemp" @click="moreDialog_goto_artist" v-ripple>
 							<div class="content">
 								<v-avatar size="24px" item>
-									<v-icon class="outline-mic_none" />
+									<v-icon class="material-icons-outlined">mic_none</v-icon>
 								</v-avatar>
 								<div class="header">
 									<div class="head t-ellipsis">{{moreDialogTemp.artist}}</div>
@@ -129,7 +129,7 @@
 						<div class="item" v-if="moreDialogTemp" @click="moreDialog_goto_album" v-ripple>
 							<div class="content">
 								<v-avatar size="24px" item>
-									<v-icon class="outline-album" />
+									<v-icon class="material-icons-outlined">album</v-icon>
 								</v-avatar>
 								<div class="header">
 									<div class="head t-ellipsis">{{moreDialogTemp.album}}</div>
@@ -140,7 +140,7 @@
 						<div class="item" v-if="moreDialogTemp" v-ripple>
 							<div class="content">
 								<v-avatar size="24px" item>
-									<v-icon class="outline-cloud" />
+									<v-icon class="material-icons-outlined">cloud</v-icon>
 								</v-avatar>
 								<div class="header">
 									<div class="head t-ellipsis">{{$t(`source.${moreDialogTemp.source}`)}}</div>

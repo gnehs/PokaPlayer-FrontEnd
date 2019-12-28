@@ -7,8 +7,8 @@
 			</v-toolbar-title>
 			<v-spacer />
 			<v-btn icon @click="switch_audio_order">
-				<v-icon class="outline-repeat" v-if="audio_order==='list'"></v-icon>
-				<v-icon class="outline-shuffle" v-else></v-icon>
+				<v-icon class="material-icons-outlined" v-if="audio_order==='list'">repeat</v-icon>
+				<v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
 			</v-btn>
 		</v-app-bar>
 		<v-navigation-drawer
@@ -23,7 +23,7 @@
 						<v-divider v-if="item.divider" :key="item.text" style="margin: 4px 0;" />
 						<v-list-item v-else :key="item.text" :to="item.to" link>
 							<v-list-item-action>
-								<v-icon :class="item.icon"></v-icon>
+								<v-icon class="material-icons-outlined" v-text="item.icon"></v-icon>
 							</v-list-item-action>
 							<v-list-item-content>
 								<v-list-item-title>{{ item.text }}</v-list-item-title>
@@ -73,30 +73,30 @@
 					<span class="time">{{audio_currentTime}}</span>
 
 					<v-btn icon @click="audio_previous">
-						<v-icon class="outline-skip_previous" />
+						<v-icon class="material-icons-outlined">skip_previous</v-icon>
 					</v-btn>
 
 					<v-btn small fab depressed @click="audio_toggle" color="primary">
-						<v-icon key="play" class="outline-play_arrow" v-if="audio_paused" />
-						<v-icon key="pause" class="outline-pause" v-else />
+						<v-icon class="material-icons-outlined" key="play" v-if="audio_paused">play_arrow</v-icon>
+						<v-icon class="material-icons-outlined" key="pause" v-else>pause</v-icon>
 					</v-btn>
 
 					<v-btn icon @click="audio_next">
-						<v-icon class="outline-skip_next" />
+						<v-icon class="material-icons-outlined">skip_next</v-icon>
 					</v-btn>
 
 					<span class="time">{{audio_totalTime}}</span>
 				</div>
 				<div class="right" v-if="audio_artist">
 					<v-btn icon @click="switch_audio_order">
-						<v-icon class="outline-repeat" v-if="audio_order==='list'"></v-icon>
-						<v-icon class="outline-shuffle" v-else></v-icon>
+						<v-icon class="material-icons-outlined" v-if="audio_order==='list'">repeat</v-icon>
+						<v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
 					</v-btn>
 					<v-btn icon to="/now" v-if="$route.path!='/now'">
-						<v-icon class="outline-playlist_play" />
+						<v-icon class="material-icons-outlined">playlist_play</v-icon>
 					</v-btn>
 					<v-btn icon to="/lyric" v-else>
-						<v-icon class="outline-subtitles" />
+						<v-icon class="material-icons-outlined">subtitles</v-icon>
 					</v-btn>
 				</div>
 				<div class="right" v-else>
@@ -104,16 +104,16 @@
 				</div>
 				<div class="right-s" v-if="audio_artist">
 					<v-btn icon @click="audio_previous">
-						<v-icon class="outline-skip_previous" />
+						<v-icon class="material-icons-outlined">skip_previous</v-icon>
 					</v-btn>
 
 					<v-btn small fab depressed @click="audio_toggle" color="primary">
-						<v-icon key="play" class="outline-play_arrow" v-if="audio_paused" />
-						<v-icon key="pause" class="outline-pause" v-else />
+						<v-icon class="material-icons-outlined" key="play" v-if="audio_paused">play_arrow</v-icon>
+						<v-icon class="material-icons-outlined" key="pause" v-else>pause</v-icon>
 					</v-btn>
 
 					<v-btn icon @click="audio_next">
-						<v-icon class="outline-skip_next" />
+						<v-icon class="material-icons-outlined">skip_next</v-icon>
 					</v-btn>
 				</div>
 				<div class="right-s" v-else>
@@ -152,18 +152,18 @@ export default {
 			timeout: null
 		},
 		items: [
-			{ icon: 'outline-home', text: i18n.t("home"), to: "/home" },
-			{ icon: 'outline-playlist_play', text: i18n.t("nowplaying"), to: "/now" },
-			{ icon: 'outline-subtitles', text: i18n.t("lrc"), to: "/lyric" },
+			{ icon: 'home', text: i18n.t("home"), to: "/home" },
+			{ icon: 'playlist_play', text: i18n.t("nowplaying"), to: "/now" },
+			{ icon: 'subtitles', text: i18n.t("lrc"), to: "/lyric" },
 			{ divider: true },
-			{ icon: 'outline-search', text: i18n.t("search"), to: "/search" },
-			{ icon: 'outline-album', text: i18n.t("album"), to: "/album" },
-			{ icon: 'outline-folder', text: i18n.t("folder"), to: "/folder" },
-			{ icon: 'outline-mic_none', text: i18n.t("artist"), to: "/artist" },
-			{ icon: 'outline-music_note', text: i18n.t("composer"), to: "/composer" },
-			{ icon: 'outline-format_list_bulleted', text: i18n.t("playlist"), to: "/playlist" },
+			{ icon: 'search', text: i18n.t("search"), to: "/search" },
+			{ icon: 'album', text: i18n.t("album"), to: "/album" },
+			{ icon: 'folder', text: i18n.t("folder"), to: "/folder" },
+			{ icon: 'mic_none', text: i18n.t("artist"), to: "/artist" },
+			{ icon: 'music_note', text: i18n.t("composer"), to: "/composer" },
+			{ icon: 'format_list_bulleted', text: i18n.t("playlist"), to: "/playlist" },
 			{ divider: true },
-			{ icon: 'outline-settings', text: i18n.t("settings"), to: "/setting" },
+			{ icon: 'settings', text: i18n.t("settings"), to: "/setting" },
 		],
 	}),
 	destroyed() {

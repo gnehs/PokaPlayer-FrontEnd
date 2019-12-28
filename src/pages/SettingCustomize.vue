@@ -18,7 +18,7 @@
 			<poka-cards>
 				<poka-card
 					@click.native="bg_prompt_active=true"
-					poka-icon="outline-link"
+					poka-icon="link"
 					:poka-title="$t('settings_customize_bg_link')"
 				/>
 				<poka-card

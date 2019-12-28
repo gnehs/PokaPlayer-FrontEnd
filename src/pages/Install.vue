@@ -193,7 +193,7 @@
 			key="card"
 		>
 			<v-card-text class="text-center">
-				<v-icon class="display-4 outline-done" />
+				<v-icon class="material-icons-outlined display-4 " >done</v-icon>
 				<p class="headline text--primary">{{$t('install.state.done_title')}}</p>
 				<poka-loader />
 			</v-card-text>
@@ -206,7 +206,7 @@
 			key="card"
 		>
 			<v-card-text class="text-center">
-				<v-icon class="display-4 outline-done" />
+				<v-icon class="material-icons-outlined display-4 " >done</v-icon>
 				<p class="headline text--primary">{{$t('install.state.done_title')}}</p>
 				<p>{{$t('install.state.done_server_restarted')}}</p>
 
@@ -217,7 +217,7 @@
 
 	<v-card v-else class="mx-auto" max-width="344" style="margin-top:32px;" key="card">
 		<v-card-text class="text-center">
-			<v-icon class="display-4 outline-done" />
+				<v-icon class="material-icons-outlined display-4 " >done</v-icon>
 			<p class="headline text--primary">{{$t('install.state.poka_title')}}</p>
 			<p>{{$t('install.state.poka_description')}}</p>
 
