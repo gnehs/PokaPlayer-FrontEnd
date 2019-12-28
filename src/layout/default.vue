@@ -381,6 +381,16 @@ export default {
 	margin-bottom: -69px
 .v-navigation-drawer:not(.v-navigation-drawer--is-mobile)
 	height: calc(var(--vh,1vh) * 100 - 69px - 64px) !important
+
+nav 
+	.v-list
+		.v-list-item.theme--dark
+			&.v-list-item--active::before 
+				opacity: 1
+				background-color: var(--v-primary-base) !important
+			.v-list-item__action,.v-list-item__content
+				z-index: 1
+
 @media (min-width: 576px)
 	.router-view
 		padding: 16px
