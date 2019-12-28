@@ -147,11 +147,7 @@ export default {
 		transitionName: "fade",
 		scrollPositions: {},
 		settings: { darkMode: window._setting("darkMode") },
-		snackbar: {
-			show: false,
-			message: ``,
-			timeout: null
-		},
+		snackbar: { show: false, message: ``, timeout: null },
 		items: [
 			{ icon: 'home', text: i18n.t("home"), to: "/home" },
 			{ icon: 'playlist_play', text: i18n.t("nowplaying"), to: "/now" },
@@ -176,10 +172,7 @@ export default {
 			this.snackbar.message = msg;
 			this.snackbar.show = true;
 			clearTimeout(this.snackbar.timeout);
-			this.snackbar.timeout = setTimeout(
-				() => (this.snackbar.show = false),
-				duration
-			);
+			this.snackbar.timeout = setTimeout(() => (this.snackbar.show = false), duration);
 		};
 		Vue.prototype.$randomPlay = window._randomPlay;
 		Vue.prototype.$addSongs = window._addSongs;
@@ -192,13 +185,11 @@ export default {
 		vhResize();
 		this.drawer = this.$vuetify.breakpoint.mdAndUp
 		this.$router.beforeEach((to, from, next) => {
-			let transitionName =
-				to.meta.transitionName || from.meta.transitionName || "fade";
+			let transitionName = to.meta.transitionName || from.meta.transitionName || "fade";
 			if (transitionName === "slide") {
 				const toDepth = to.path.split("/").length;
 				const fromDepth = from.path.split("/").length;
-				transitionName =
-					toDepth < fromDepth ? "slide-right" : "slide-left";
+				transitionName = toDepth < fromDepth ? "slide-right" : "slide-left";
 				transitionName = toDepth == fromDepth ? "fade" : transitionName; //同一層
 			}
 			this.transitionName = transitionName;
@@ -221,18 +212,10 @@ export default {
 		this.axios.defaults.baseURL = _setting(`server`);
 		this.getStatus(true);
 		if ("mediaSession" in navigator) {
-			navigator.mediaSession.setActionHandler("play", () =>
-				_player.toggle()
-			);
-			navigator.mediaSession.setActionHandler("pause", () =>
-				_player.pause()
-			);
-			navigator.mediaSession.setActionHandler("previoustrack", () =>
-				_player.skipBack()
-			);
-			navigator.mediaSession.setActionHandler("nexttrack", () =>
-				_player.skipForward()
-			);
+			navigator.mediaSession.setActionHandler("play", () => _player.toggle());
+			navigator.mediaSession.setActionHandler("pause", () => _player.pause());
+			navigator.mediaSession.setActionHandler("previoustrack", () => _payer.skipBack());
+			navigator.mediaSession.setActionHandler("nexttrack", () => _player.skipForward());
 		}
 		this.audio_interval = setInterval(() => {
 			this.audio_paused = _player.paused;
@@ -240,45 +223,26 @@ export default {
 			if (_player.list.audios.length > 0) {
 				let nowPlaying = _player.list.audios[_player.list.index];
 				let buffered = _player.audio.buffered;
-				let audioBuffered =
-					_player.audio.currentTime > 1
-						? (buffered.end(buffered.length - 1) /
-							_player.audio.duration) *
-						100
-						: 0,
-					cent =
-						(_player.audio.currentTime / _player.audio.duration) *
-						100;
+				let audioBuffered = _player.audio.currentTime > 1 ? (buffered.end(buffered.length - 1) / _player.audio.duration) * 100 : 0
+				let cent = (_player.audio.currentTime / _player.audio.duration) * 100;
 				this.audio_currentTimePercent = cent;
 				this.audio_bufferPercent = audioBuffered;
 				this.audio_paused = _player.paused;
 				this.audio_title = nowPlaying.name;
 				this.audio_artist = nowPlaying.artist;
 				this.audio_cover = nowPlaying.cover;
-				this.audio_currentTime = this.secondToTime(
-					_player.audio.currentTime || 0
-				);
-				this.audio_totalTime = this.secondToTime(
-					_player.audio.duration || 0
-				);
-				this.audio_next_name =
-					_player.list.audios[_player.nextIndex()].name;
-				this.audio_previous_name =
-					_player.list.audios[_player.prevIndex()].name;
+				this.audio_currentTime = this.secondToTime(_player.audio.currentTime || 0);
+				this.audio_totalTime = this.secondToTime(_player.audio.duration || 0);
+				this.audio_next_name = _player.list.audios[_player.nextIndex()].name;
+				this.audio_previous_name = _player.list.audios[_player.prevIndex()].name;
 				if ("mediaSession" in navigator) {
 					//讀圖片
 					let image = document.querySelector(".cover img");
-					let artworkData = [
-						{
-							src: image.complete
-								? nowPlaying.cover
-								: "/static/img/icons/512x512.png",
-							sizes: image.complete
-								? `${image.naturalWidth}x${image.naturalHeight}`
-								: "512x512",
-							type: "image/png"
-						}
-					];
+					let artworkData = [{
+						src: image.complete ? nowPlaying.cover : "/static/img/icons/512x512.png",
+						sizes: image.complete ? `${image.naturalWidth}x${image.naturalHeight}` : "512x512",
+						type: "image/png"
+					}];
 					//寫入 mediaSession.metadata
 					navigator.mediaSession.metadata = new MediaMetadata({
 						title: nowPlaying.name,
@@ -295,9 +259,7 @@ export default {
 				this.audio_title = "PokaPlayer";
 				this.audio_artist = null;
 				this.audio_cover = _setting(`headerBgSource`);
-				if ("mediaSession" in navigator) {
-					navigator.mediaSession.metadata = null;
-				}
+				if ("mediaSession" in navigator) { navigator.mediaSession.metadata = null; }
 			}
 		}, 400);
 	},
@@ -326,9 +288,7 @@ export default {
 			_player.play();
 		},
 		audio_seek() {
-			_player.seek(
-				(this.audio_currentTimePercent / 100) * _player.audio.duration
-			);
+			_player.seek((this.audio_currentTimePercent / 100) * _player.audio.duration);
 		},
 		closeMenu() {
 			this.drawer = false;
@@ -337,16 +297,13 @@ export default {
 			this.drawer = !this.drawer;
 		},
 		switch_audio_order() {
-			_player.options.order =
-				_player.options.order === "random" ? "list" : "random";
+			_player.options.order = _player.options.order === "random" ? "list" : "random";
 			this.audio_order = _player.options.order;
 		},
 		switchTheme() {
 			this.settings.darkMode = !this.settings.darkMode;
 			window._setting("darkMode", this.settings.darkMode);
-			this.settings.darkMode
-				? window._theme.switchToDark()
-				: window._theme.switchToLight();
+			this.settings.darkMode ? window._theme.switchToDark() : window._theme.switchToLight();
 		},
 		getStatus(checkUpdate = false) {
 			if (sessionStorage.getItem("login"))
@@ -361,13 +318,8 @@ export default {
 					}
 					// 標記為已登入
 					sessionStorage.setItem("login", true);
-					let userProfile = await this.axios.get(
-						_setting(`server`) + "/profile/"
-					);
-					sessionStorage.setItem(
-						"login",
-						JSON.stringify(userProfile.data)
-					);
+					let userProfile = await this.axios.get(_setting(`server`) + "/profile/");
+					sessionStorage.setItem("login", JSON.stringify(userProfile.data));
 				});
 		}
 	}
