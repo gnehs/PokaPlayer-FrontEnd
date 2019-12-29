@@ -28,10 +28,8 @@ window._addSongs = function ({
                 "&songRes=" +
                 _setting(`audioQuality`).toLowerCase(),
             cover: song.cover && song.cover.startsWith("http") ?
-                song.cover :
-                song.cover ?
-                server + song.cover :
-                defaultCover,
+                song.cover : song.cover ?
+                server + song.cover : defaultCover,
             name: song.name,
             artist: song.artist,
             artistId: song.artistId,
@@ -122,7 +120,7 @@ window.scrollTo = (element, to, duration) => {
     let start = element.scrollTop,
         change = to - start,
         currentTime = 0,
-        increment = 20;
+        increment = 5;
 
     let animateScroll = function () {
         currentTime += increment;
