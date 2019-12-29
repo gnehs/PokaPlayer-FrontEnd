@@ -72,11 +72,14 @@ export default {
 			transform: translateY(-5px)
 			box-shadow: 0 10px 15px #0000004d
 		.image i
-			margin: auto
 			position: absolute
-			font-size: 5em
-			transform: translate(100%, 100%)
+			font-size: 7em
 			color: #FFF
+			display: flex
+			top: 0
+			bottom: 0
+			left: 0
+			right: 0
 		.title
 			font-size: 1.5em !important
 			padding-top: 5px

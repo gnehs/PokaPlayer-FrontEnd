@@ -2,15 +2,15 @@
 	router-link.card(v-if="to",:to="to",:data-source="parsed_source||undefined")
 		.image(v-if="parsed_pokaBg",:style="{backgroundImage:`url(\"${parsed_pokaBg}\")`}")
 		.image(v-else)
-			v-icon(class="icon-white", :class="pokaIcon")
-		.title.t-ellipsis {{pokaTitle}}
-		.subtitle.t-ellipsis {{pokaSubtitle}}
+			v-icon(class="material-icons-outlined") {{pokaIcon}}
+		.title(:class="{'t-ellipsis':ellipsis}") {{pokaTitle}}
+		.subtitle(:class="{'t-ellipsis':ellipsis}") {{pokaSubtitle}}
 	a.card(v-else,:data-source="parsed_source||undefined")
 		.image(v-if="parsed_pokaBg",:style="{backgroundImage:`url(\"${parsed_pokaBg}\")`}")
 		.image(v-else)
-			v-icon(class="icon-white material-icons-outlined") {{pokaIcon}}
-		.title.t-ellipsis {{pokaTitle}}
-		.subtitle.t-ellipsis {{pokaSubtitle}}
+			v-icon(class="material-icons-outlined") {{pokaIcon}}
+		.title(:class="{'t-ellipsis':ellipsis}") {{pokaTitle}}
+		.subtitle(:class="{'t-ellipsis':ellipsis}") {{pokaSubtitle}}
 </template>
 
 <script>
@@ -18,11 +18,12 @@ export default {
 	name: "poka-card",
 	props: {
 		pokaBg: { default: null },
+		ellipsis: { default: true },
 		source: { default: "" },
 		pokaTitle: String,
 		pokaSubtitle: String,
 		to: String,
-		pokaIcon: { default: "play_circle_filled", type: String }
+		pokaIcon: { default: "playlist_play", type: String }
 	},
 	data: () => ({ parsed_source: null, parsed_pokaBg: null }),
 	created() {
