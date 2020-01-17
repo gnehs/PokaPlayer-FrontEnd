@@ -1,24 +1,31 @@
 <template>
-  <div>
-    <poka-header :title="$t('playlist')"/>
-    <poka-parse-playlists v-if="data" :data="data.playlists"/>
-    <poka-loader v-else/>
-  </div>
+	<div>
+		<poka-header :title="title" />
+		<poka-parse-playlists v-if="data" :data="data" />
+		<poka-loader v-else />
+	</div>
 </template>
 
 <script>
 export default {
-  name: "Playlist",
-  created() {
-    this.axios
-      .get(_setting(`server`) + "/pokaapi/playlists/")
-      .then(response => {
-        this.data = response.data;
-      });
-  },
-  data: () => ({
-    data: null,
-    server: _setting(`server`)
-  })
+	name: "Playlist",
+	created() {
+		let routerParams=this.$route.params.pathMatch, routerNames=this.$route.name
+		this.axios
+			.get(_setting(`server`) + "/pokaapi/playlists/")
+			.then(response => {
+				if(routerNames=='PlaylistFolder'){
+					this.title= response.data.playlists.filter(x=>x.id==routerParams)[0].name
+					this.data = response.data.playlists.filter(x=>x.id==routerParams)[0].playlists
+				}else{
+					this.data = response.data.playlists;
+				}
+			});
+	},
+	data: () => ({
+		data: null,
+		server: _setting(`server`),
+		title: i18n.t('playlist')
+	})
 };
 </script>

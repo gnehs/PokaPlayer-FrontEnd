@@ -93,7 +93,14 @@ export default new Router({
 				name: 'NowPlaying',
 				component: NowPlaying
 			}, {
-				path: '/playlist/:source/:id',
+				path: '/playlist/f/*',
+				name: 'PlaylistFolder',
+				component: Playlist,
+				meta: {
+					transitionName: 'slide'
+				}
+			}, {
+				path: '/playlist/p/:source/:id',
 				component: PlaylistSongs,
 				name: 'PlaylistSongs',
 				meta: {
