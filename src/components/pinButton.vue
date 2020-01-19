@@ -1,31 +1,29 @@
 <template>
-	<div>
-		<v-fab-transition v-if="isPinned != null && isPinned != 'disabled' && btnType == 'speed-dial'">
-			<v-btn
-				color="primary"
-				fab
-				large
-				dark
-				bottom
-				right
-				fixed
-				style="bottom: calc(16px + 69px);"
-				@click="pin"
-			>
-				<v-icon v-if="isPinned">turned_in</v-icon>
-				<v-icon v-else>turned_in_not</v-icon>
-			</v-btn>
-		</v-fab-transition>
+	<v-fab-transition v-if="isPinned != null && isPinned != 'disabled' && btnType == 'speed-dial'">
 		<v-btn
-			icon
+			color="primary"
+			fab
+			large
+			dark
+			bottom
+			right
+			fixed
+			style="bottom: calc(16px + 69px);"
 			@click="pin"
-			class="v-pin-btn"
-			v-if="isPinned != null && isPinned != 'disabled' && btnType == 'icon-button'"
 		>
 			<v-icon v-if="isPinned">turned_in</v-icon>
 			<v-icon v-else>turned_in_not</v-icon>
 		</v-btn>
-	</div>
+	</v-fab-transition>
+	<v-btn
+		icon
+		@click="pin"
+		class="v-pin-btn"
+		v-else-if="isPinned != null && isPinned != 'disabled' && btnType == 'icon-button'"
+	>
+		<v-icon v-if="isPinned">turned_in</v-icon>
+		<v-icon v-else>turned_in_not</v-icon>
+	</v-btn>
 </template>
 <style lang="sass" scoped>
 .v-btn.v-pin-btn

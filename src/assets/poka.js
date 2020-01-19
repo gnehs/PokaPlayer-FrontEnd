@@ -27,9 +27,11 @@ window._addSongs = function ({
                 song.url +
                 "&songRes=" +
                 _setting(`audioQuality`).toLowerCase(),
+            originalURL: song.url,
             cover: song.cover && song.cover.startsWith("http") ?
                 song.cover : song.cover ?
                 server + song.cover : defaultCover,
+            originalCover: song.cover,
             name: song.name,
             artist: song.artist,
             artistId: song.artistId,

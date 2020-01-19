@@ -41,6 +41,16 @@ export default {
 	"now_cleanSongs": "确定清除所有歌曲？",
 	"now_cleanSongs_description": "这将会清除列表中所有歌曲。",
 	"playlist_random": "随机播放",
+	"playlist_page": {
+		"del": "删除",
+		"del_title": "删除播放清单",
+		"delconfirm": "确定要删除「{title}」吗？",
+		"edit_title": "编辑播放清单",
+		"title_input": "播放清单标题",
+		"cover_input": "播放清单封面",
+		"edit_empty": "字段不得为空",
+		"playlist_empty": "您尚未建立任何播放清单，点选右上角的「＋」来新增",
+	},
 	"lrc_search": "搜索歌词",
 	"lrc_noKeyword": "尚未输入关键字",
 	"lrc_enter2search": "输入完后按下 Enter 开始搜索歌词",
@@ -178,6 +188,7 @@ export default {
 	},
 	"source": {
 		"DSM": "DSM",
+		"poka": "PokaPlayer",
 		"Netease2": "网易云音乐"
 	},
 	"install": {

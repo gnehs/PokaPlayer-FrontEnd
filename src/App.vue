@@ -58,4 +58,14 @@
 	.material-icons-outlined.material-icons-outlined.material-icons-outlined {
 		font-family: "Material Icons Outlined" !important;
 	}
+	#playlist-dialog {
+		.theme--dark.v-list-item--active:hover::before,
+		.theme--dark.v-list-item--active::before {
+			opacity: 0 !important;
+		}
+		.theme--dark.v-list-item,
+		.v-list-item--link:before {
+			border-radius: 8px !important;
+		}
+	}
 </style>

@@ -10,14 +10,14 @@
 export default {
 	name: "Playlist",
 	created() {
-		let routerParams=this.$route.params.pathMatch, routerNames=this.$route.name
+		let routerParams = this.$route.params.pathMatch, routerNames = this.$route.name
 		this.axios
-			.get(_setting(`server`) + "/pokaapi/playlists/")
+			.get(_setting(`server`) + `/pokaapi/playlists?rnd=${Math.floor(Math.random() * 9999999)}`)
 			.then(response => {
-				if(routerNames=='PlaylistFolder'){
-					this.title= response.data.playlists.filter(x=>x.id==routerParams)[0].name
-					this.data = response.data.playlists.filter(x=>x.id==routerParams)[0].playlists
-				}else{
+				if (routerNames == 'PlaylistFolder') {
+					this.title = response.data.playlists.filter(x => x.id == routerParams)[0].name
+					this.data = response.data.playlists.filter(x => x.id == routerParams)[0].playlists
+				} else {
 					this.data = response.data.playlists;
 				}
 			});

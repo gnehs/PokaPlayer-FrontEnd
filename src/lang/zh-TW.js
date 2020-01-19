@@ -42,6 +42,17 @@ export default {
 	"now_cleanSongs": "確定清除所有歌曲？",
 	"now_cleanSongs_description": "這將會清除列表中所有歌曲。",
 	"playlist_random": "隨機播放",
+	"playlist_page": {
+		"del": "刪除",
+		"del_title": "刪除播放清單",
+		"delconfirm": "確定要刪除「{title}」嗎？",
+		"add_title": "新增播放清單",
+		"edit_title": "編輯播放清單",
+		"title_input": "播放清單標題",
+		"cover_input": "播放清單封面",
+		"edit_empty": "欄位不得為空",
+		"playlist_empty": "您尚未建立任何播放清單，點選右上角的「＋」來新增"
+	},
 	"lrc_search": "搜尋歌詞",
 	"lrc_noKeyword": "尚未輸入關鍵字",
 	"lrc_enter2search": "輸入完後按下 Enter 開始搜尋歌詞",
@@ -179,6 +190,7 @@ export default {
 	},
 	"source": {
 		"DSM": "DSM",
+		"poka": "PokaPlayer",
 		"Netease2": "網易雲音樂"
 	},
 	"install": {

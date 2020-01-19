@@ -41,6 +41,16 @@ export default {
 	"now_cleanSongs": "Clear all songs?",
 	"now_cleanSongs_description": "This will remove every song in the playlist.",
 	"playlist_random": "Shuffle",
+	"playlist_page": {
+		"del": "DELETE",
+		"del_title": "Delete Playlist",
+		"delconfirm": "Are you sure what to delete \"{title}\"?",
+		"edit_title": "Edit Playlist",
+		"title_input": "Playlist name",
+		"cover_input": "Playlist cover",
+		"edit_empty": "Field cannot be empty",
+		"playlist_empty": "You haven't created any playlists, click \"+\" in the upper right corner to add",
+	},
 	"lrc_search": "Search lyrics",
 	"lrc_noKeyword": "Enter keyword to search",
 	"lrc_enter2search": "Press Enter key to start searching",
@@ -178,6 +188,7 @@ export default {
 	},
 	"source": {
 		"DSM": "DSM",
+		"poka": "PokaPlayer",
 		"Netease2": "Netease"
 	},
 	"install": {

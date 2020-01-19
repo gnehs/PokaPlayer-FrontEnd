@@ -174,6 +174,7 @@ export default {
 			clearTimeout(this.snackbar.timeout);
 			this.snackbar.timeout = setTimeout(() => (this.snackbar.show = false), duration);
 		};
+		Vue.prototype.$deepCopy = d => JSON.parse(JSON.stringify(d))
 		Vue.prototype.$randomPlay = window._randomPlay;
 		Vue.prototype.$addSongs = window._addSongs;
 		sessionStorage.removeItem("login");
@@ -342,7 +343,6 @@ nav
 				background-color: var(--v-primary-base) !important
 			.v-list-item__action,.v-list-item__content
 				z-index: 1
-
 @media (min-width: 576px)
 	.router-view
 		padding: 16px

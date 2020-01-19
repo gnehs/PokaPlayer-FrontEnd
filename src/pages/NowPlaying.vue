@@ -77,10 +77,9 @@
 		<v-dialog v-model="moreDialogShow" max-width="400">
 			<v-card>
 				<v-card-title class="headline">{{$t("songAction_title")}}</v-card-title>
-
 				<v-card-text>
 					<div class="poka list">
-						<div class="item disabled" v-ripple>
+						<!--<div class="item disabled" v-ripple>
 							<div class="content">
 								<v-avatar size="24px" item>
 									<v-icon class="material-icons-outlined">turned_in_not</v-icon>
@@ -99,8 +98,8 @@
 									<div class="head">{{$t('songAction_rating')}}</div>
 								</div>
 							</div>
-						</div>
-						<div class="item disabled" v-ripple>
+						</div>-->
+						<div class="item" v-ripple @click="openPlaylistDialog();moreDialogShow=false">
 							<div class="content">
 								<v-avatar size="24px" item>
 									<v-icon class="material-icons-outlined">playlist_add</v-icon>
@@ -110,6 +109,7 @@
 								</div>
 							</div>
 						</div>
+						<v-divider />
 						<div class="item" v-if="moreDialogTemp" v-ripple>
 							<div class="content">
 								<v-avatar size="24px" item>
@@ -156,11 +156,60 @@
 						</div>
 					</div>
 				</v-card-text>
-
 				<v-card-actions>
 					<v-spacer></v-spacer>
-
 					<v-btn text @click="moreDialogShow = false">{{$t('back')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
+		<v-dialog v-model="playlistDialog" max-width="400">
+			<v-card id="playlist-dialog">
+				<v-toolbar dark flat>
+					<v-card-title class="headline">{{$t("songAction_add2playlist")}}</v-card-title>
+					<v-spacer></v-spacer>
+					<v-btn dark icon @click="openCreatePlaylistDialog">
+						<v-icon class="material-icons-outlined">add</v-icon>
+					</v-btn>
+				</v-toolbar>
+				<v-card-text style="height: 300px;" v-if="playlistDialogLoading">
+					<poka-loader />
+				</v-card-text>
+				<v-card-text style="height: 300px;" v-else>
+					<v-list v-if="playlists.length>0">
+						<v-list-item-group v-model="existsPlaylists" multiple>
+							<template v-for="(item, i) in playlists">
+								<v-list-item :key="`item-${i}`" :value="item" @click="toggleSongOfPlaylist(item);">
+									<v-list-item-action>
+										<v-checkbox :input-value="existsPlaylists.includes(item._id)"></v-checkbox>
+									</v-list-item-action>
+									<v-list-item-content>
+										<v-list-item-title v-text="item.name"></v-list-item-title>
+									</v-list-item-content>
+								</v-list-item>
+							</template>
+						</v-list-item-group>
+					</v-list>
+					<p
+						style="user-select: none;margin:100px 0;text-align: center;"
+						v-else
+					>{{$t('playlist_page.playlist_empty')}}</p>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn text @click="playlistDialog = false">{{$t('done')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
+		<v-dialog v-model="createPlaylistDialog" max-width="400">
+			<v-card>
+				<v-card-title class="headline">{{$t('playlist_page.add_title')}}</v-card-title>
+				<v-card-text>
+					<v-text-field v-model="createPlaylistName" :label="$t('playlist_page.title_input')" outlined></v-text-field>
+				</v-card-text>
+				<v-card-actions>
+					<v-btn text @click="createPlaylistDialog = false">{{$t('back')}}</v-btn>
+					<v-spacer></v-spacer>
+					<v-btn text @click="createPlaylist">{{$t('done')}}</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
@@ -181,8 +230,14 @@ export default {
 		audio_order: _player.options.order,
 		audio_uuid: ":D",
 		NowPlaying_updatePlayer: null,
+		playlistDialog: false,
+		playlistDialogLoading: false,
+		createPlaylistDialog: false,
+		createPlaylistName: '',
 		moreDialogShow: false,
 		moreDialogTemp: null,
+		playlists: [],
+		existsPlaylists: [],
 		isSafari: /^((?!chrome|android).)*safari/i.test(window.navigator.userAgent)
 	}),
 	created() {
@@ -193,6 +248,39 @@ export default {
 		this.stopUpdatePlayer();
 	},
 	methods: {
+		async openPlaylistDialog() {
+			this.playlistDialog = true
+			this.playlistDialogLoading = true
+			await this.updatePlaylistData()
+			this.playlistDialogLoading = false
+		},
+		async toggleSongOfPlaylist(playlist) {
+			let song = this.$deepCopy(this.moreDialogTemp)
+			song.url = song.originalURL
+			song.cover = song.originalCover
+			delete song.originalURL
+			delete song.uuid
+			delete song.originalCover
+			await this.axios.post(`${this.server}/pokaapi/playlist/song`, {
+				playlistId: playlist._id,
+				song
+			})
+			await this.updatePlaylistData()
+		},
+		openCreatePlaylistDialog() {
+			this.createPlaylistDialog = true
+			this.createPlaylistName = ''
+		},
+		async createPlaylist() {
+			await this.axios.post(`${this.server}/pokaapi/playlist/create`, { name: this.createPlaylistName })
+			this.createPlaylistDialog = false
+			await this.updatePlaylistData()
+		},
+		async updatePlaylistData() {
+			let res = (await this.axios.post(`${this.server}/pokaapi/playlist/song/exist`, this.moreDialogTemp)).data
+			this.playlists = res.playlists
+			this.existsPlaylists = res.existsPlaylists.map(x => x._id)
+		},
 		startUpdatePlayer() {
 			this.NowPlaying_updatePlayer = setInterval(
 				() => this.updatePlayer(),
