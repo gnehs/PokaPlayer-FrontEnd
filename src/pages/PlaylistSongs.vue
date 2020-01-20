@@ -5,7 +5,7 @@
 			:title="title||$t('loading')"
 			:subtitle="$t('playlist')"
 			:cover="cover"
-			:songs="data.songs.length||0"
+			:songs="data?data.songs.length:0||0"
 		>
 			<pin-button
 				v-if="title"
