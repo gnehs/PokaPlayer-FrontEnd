@@ -1,5 +1,5 @@
 <template lang="pug">
-div(style="position: sticky;top: -50px;")
+div(style="position: sticky;top: 15px;")
 	.header-wrapper
 		.bg(:style=`{backgroundImage: 'url("'+bg+'")'}`,:class="{blur: blurbg}")
 	.hw-header(v-if='title',:style="headerStyle")
@@ -34,7 +34,7 @@ export default {
 	mounted() {
 		document.querySelector('main').addEventListener('scroll', this.handleScroll);
 	},
-	created() {
+	created() {		this.handleScroll()
 		document.querySelector('main').addEventListener('scroll', this.handleScroll);
 	},
 	destroyed() {
@@ -57,7 +57,7 @@ export default {
 		-webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 100%)
 		width: 100%
 		position: absolute
-		min-height: 300px
+		min-height: calc( 100vh - 69px - 64px )
 		overflow: hidden
 	.bg.blur
 		filter: blur(5px)

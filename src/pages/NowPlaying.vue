@@ -1,12 +1,12 @@
 <template>
 	<div>
-		<transition name="fade" mode="in-out">
+		<transition :name="bgSlideAnimation" mode="out-in">
 			<poka-header
 				:blurbg="true"
 				:title="$t('nowplaying')"
 				:bg="audio_cover"
 				v-if="audio_queue.length>0"
-				key="1"
+				:key="audio_index"
 			/>
 			<poka-header :bg="defaultCover" v-else key="2" />
 		</transition>
@@ -64,6 +64,7 @@ export default {
 		audio_index: -1,
 		audio_uuid: ":D",
 		updateInterval: null,
+		bgSlideAnimation: 'slide-left',
 		isSafari: /^((?!chrome|android).)*safari/i.test(window.navigator.userAgent)
 	}),
 	created() {
@@ -84,11 +85,16 @@ export default {
 			this.audio_queue = _player.list.audios;
 			if (_player.list.audios.length > 0) {
 				let uuid_temp = this.audio_uuid;
+				let audio_index_temp = this.audio_index;
 				this.audio_index = _player.list.index;
 				this.audio_uuid = _player.list.audios[this.audio_index].uuid;
 				this.audio_cover = _player.list.audios[this.audio_index].cover;
 				if (uuid_temp != this.audio_uuid) {
 					//換歌ㄌ
+					if (this.audio_index > audio_index_temp)
+						this.bgSlideAnimation = 'slide-left'
+					else
+						this.bgSlideAnimation = 'slide-right'
 					this.$nextTick(() => {
 						let activeItem = document.querySelector(
 							".poka.list > .active"
