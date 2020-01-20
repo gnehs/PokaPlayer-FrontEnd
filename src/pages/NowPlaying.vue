@@ -18,7 +18,7 @@
 				:active-index="audio_index"
 			>
 				<template scope="props">
-					<v-btn icon @click.stop="moreDialog(props.song)" v-show="isSafari">
+					<v-btn icon @click.stop="props.moreDialog(props.song)" v-show="isSafari">
 						<v-icon class="material-icons-outlined">more_horiz</v-icon>
 					</v-btn>
 					<v-btn icon @click.stop="removeSong(props.index)">
@@ -58,14 +58,12 @@
 export default {
 	name: "NowPlaying",
 	data: () => ({
-		server: _setting(`server`),
 		defaultCover: _setting(`headerBgSource`),
 		audio_cover: _setting(`headerBgSource`),
 		audio_queue: null,
 		audio_index: -1,
-		audio_order: _player.options.order,
 		audio_uuid: ":D",
-		NowPlaying_updatePlayer: null,
+		updateInterval: null,
 		isSafari: /^((?!chrome|android).)*safari/i.test(window.navigator.userAgent)
 	}),
 	created() {
@@ -76,21 +74,14 @@ export default {
 		this.stopUpdatePlayer();
 	},
 	methods: {
-
 		startUpdatePlayer() {
-			this.NowPlaying_updatePlayer = setInterval(
-				() => this.updatePlayer(),
-				400
-			);
+			this.updateInterval = setInterval(() => this.updatePlayer(), 400);
 		},
 		stopUpdatePlayer() {
-			if (this.NowPlaying_updatePlayer) {
-				clearInterval(this.NowPlaying_updatePlayer);
-			}
+			if (this.updateInterval) clearInterval(this.updateInterval);
 		},
 		updatePlayer() {
 			this.audio_queue = _player.list.audios;
-			this.audio_order = _player.options.order;
 			if (_player.list.audios.length > 0) {
 				let uuid_temp = this.audio_uuid;
 				this.audio_index = _player.list.index;
@@ -114,34 +105,11 @@ export default {
 				this.audio_cover = _setting(`headerBgSource`);
 			}
 		},
-		secondToTime(second) {
-			//秒數轉時間
-			let MM = Math.floor(second / 60);
-			let SS = Math.floor(second % 60);
-			SS = SS < 10 ? "0" + SS : SS;
-			return MM + ":" + SS;
-		},
-		playSong(i) {
-			_player.list.switch(i);
-			_player.play();
-			this.updatePlayer();
-		},
 		removeSong(index) {
 			_player.list.remove(index);
 			this.updatePlayer();
 		},
-		audio_toggle() {
-			_player.toggle();
-		},
-		audio_clean() {
-			_player.list.clear();
-		},
-		switch_audio_order() {
-			_player.options.order =
-				_player.options.order === "random" ? "list" : "random";
-			this.audio_order = _player.options.order;
-		},
-
+		audio_clean() { _player.list.clear(); },
 	}
 };
 </script>
