@@ -110,10 +110,10 @@
 		</v-dialog>
 		<v-dialog v-model="playlistDialog" max-width="400">
 			<v-card id="playlist-dialog">
-				<v-toolbar dark flat>
+				<v-toolbar flat>
 					<v-card-title class="headline">{{$t("songAction_add2playlist")}}</v-card-title>
 					<v-spacer></v-spacer>
-					<v-btn dark icon @click="openCreatePlaylistDialog">
+					<v-btn icon @click="openCreatePlaylistDialog">
 						<v-icon class="material-icons-outlined">add</v-icon>
 					</v-btn>
 				</v-toolbar>
@@ -124,12 +124,17 @@
 					<v-list v-if="playlists.length>0">
 						<v-list-item-group v-model="existsPlaylists" multiple>
 							<template v-for="(item, i) in playlists">
-								<v-list-item :key="`item-${i}`" :value="item" @click="toggleSongOfPlaylist(item);">
+								<v-list-item
+									:key="`item-${i}`"
+									:value="item"
+									@click="toggleSongOfPlaylist(item);"
+									:title="item.name"
+								>
 									<v-list-item-action>
-										<v-checkbox :input-value="existsPlaylists.includes(item._id)"></v-checkbox>
+										<v-checkbox color="primary" :input-value="existsPlaylists.includes(item._id)" />
 									</v-list-item-action>
 									<v-list-item-content>
-										<v-list-item-title v-text="item.name"></v-list-item-title>
+										<v-list-item-title v-text="item.name" class="t-ellipsis" />
 									</v-list-item-content>
 								</v-list-item>
 							</template>
