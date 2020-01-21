@@ -119,20 +119,20 @@
 	p
 		transition: all 0.5s cubic-bezier(0.77, 0, 0.18, 1), color 0.2s linear, opacity 0.2s linear
 		opacity: .4
-		min-height: 1em
+		min-height: 1.5em
 		transform: scale(0.95)
 		position: relative
 		font-size: calc(12px + 1.2vmin)
 		&.focus
 			opacity: 1
-			transform: scale(1.3)
+			transform: scale(1.2)
 			font-weight: 700
 			text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
 			.theme--dark &
 				text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
 	&.lyricTranslated
 		p.focus:not(:empty) + p
-			opacity: .95
+			opacity: .8
 			transform: scale(1)
 			text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
 			font-weight: 700
