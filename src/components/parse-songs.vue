@@ -195,15 +195,12 @@ export default {
 		},
 		async toggleSongOfPlaylist(playlist) {
 			let song = this.$deepCopy(this.moreDialogTemp)
-			song.url = song.originalURL
-			song.cover = song.originalCover
+			if (song.originalURL) song.url = song.originalURL
+			if (song.originalCover) song.cover = song.originalCover
 			delete song.originalURL
 			delete song.uuid
 			delete song.originalCover
-			await this.axios.post(`${this.server}/pokaapi/playlist/song`, {
-				playlistId: playlist._id,
-				song
-			})
+			await this.axios.post(`${this.server}/pokaapi/playlist/song`, { playlistId: playlist._id, song })
 			await this.updatePlaylistData()
 		},
 		openCreatePlaylistDialog() {
