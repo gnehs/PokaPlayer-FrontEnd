@@ -8,7 +8,7 @@
 				v-if="audio_queue.length>0"
 				:key="audio_index"
 			/>
-			<poka-header :bg="defaultCover" v-else key="2" />
+			<poka-header v-else key="2" />
 		</transition>
 		<transition name="slide-left" mode="out-in">
 			<poka-parse-songs

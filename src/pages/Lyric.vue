@@ -1,5 +1,9 @@
 <template>
 	<div>
+		<transition name="fade" mode="out-in">
+			<poka-header :blurbg="true" :bg="audio_cover" v-if="audio_cover" :key="audio_cover" />
+			<poka-header v-else key="2" />
+		</transition>
 		<div v-on:dblclick="openLyricDialog" class="lyric" :class="{lyricTranslated:lyricTranslated}">
 			<transition name="fade" mode="out-in">
 				<div v-if="lyric.length > 1" key="lyric">
@@ -114,14 +118,14 @@
 		padding-bottom: 80px
 	p
 		transition: all 0.5s cubic-bezier(0.77, 0, 0.18, 1), color 0.2s linear, opacity 0.2s linear
-		opacity: .5
+		opacity: .4
 		min-height: 1em
 		transform: scale(0.95)
 		position: relative
 		font-size: calc(12px + 1.2vmin)
 		&.focus
 			opacity: 1
-			transform: scale(1)
+			transform: scale(1.3)
 			font-weight: 700
 			text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
 			.theme--dark &
@@ -129,8 +133,9 @@
 	&.lyricTranslated
 		p.focus:not(:empty) + p
 			opacity: .95
-			transform: scale(0.98)
+			transform: scale(1.2)
 			text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
+			font-weight: 700
 			.theme--dark &
 				text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
 </style>
@@ -141,6 +146,7 @@ export default {
 	data: () => ({
 		audio_title: null,
 		audio_artist: null,
+		audio_cover: null,
 		showLyricDialog: false,
 		lyric: [],
 		lyricFocus: 0,
@@ -148,7 +154,7 @@ export default {
 		lyricSearchResult: null,
 		lyricTranslated: false,
 		lyricSearchkeyword: null,
-		Lyric_Update: null
+		Lyric_Update: null,
 	}),
 	created() {
 		this.updateLyric();
@@ -193,6 +199,7 @@ export default {
 					);
 					this.audio_title = nowPlaying.name;
 					this.audio_artist = nowPlaying.artist;
+					this.audio_cover = nowPlaying.cover;
 				} else {
 					//更新時間就好
 					this.lyric = window._lrc.getLyrics();
