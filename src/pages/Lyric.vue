@@ -133,7 +133,7 @@
 	&.lyricTranslated
 		p.focus:not(:empty) + p
 			opacity: .95
-			transform: scale(1.2)
+			transform: scale(1)
 			text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
 			font-weight: 700
 			.theme--dark &
