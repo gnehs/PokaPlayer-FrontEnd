@@ -4,7 +4,7 @@
 		<div class="poka list">
 			<div class="item" @click="$router.push('/setting')" v-ripple>
 				<div class="content">
-					<v-avatar size="42px" item>
+					<v-avatar size="24px" item>
 						<v-icon>arrow_back</v-icon>
 					</v-avatar>
 					<div class="header">
@@ -20,7 +20,7 @@
 				v-ripple
 			>
 				<div class="content">
-					<v-avatar size="42px" item>
+					<v-avatar size="24px" item>
 						<v-icon>translate</v-icon>
 					</v-avatar>
 					<div class="header">

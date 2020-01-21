@@ -158,7 +158,7 @@ export default {
 			{ icon: 'folder', text: i18n.t("folder"), to: "/folder" },
 			{ icon: 'mic_none', text: i18n.t("artist"), to: "/artist" },
 			{ icon: 'music_note', text: i18n.t("composer"), to: "/composer" },
-			{ icon: 'format_list_bulleted', text: i18n.t("playlist"), to: "/playlist" },
+			{ icon: 'queue_music', text: i18n.t("playlist"), to: "/playlist" },
 			{ divider: true },
 			{ icon: 'settings', text: i18n.t("settings"), to: "/setting" },
 		],

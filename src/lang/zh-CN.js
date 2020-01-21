@@ -114,7 +114,15 @@ export default {
 	"settings_network_soundQuality_Ori_description": "在网路状况许可下，可选择此选项聆听高音质音乐",
 	"settings_customize": "个人化",
 	"settings_customize_description": "自订背景、其他细节设定",
-	"settings_customize_bg": "自订背景",
+	"settings_customize_bg": "自定义背景",
+	"settings_customize_bg_description": "更改背景图样",
+	"settings_customize_bg_cover": "背景覆盖",
+	"settings_customize_bg_cover_description": "更改背景覆盖样式或将其隐藏",
+	"settings_customize_bg_cover_options": {
+		"full": "全覆盖",
+		"half": "半覆盖",
+		"none": "无背景"
+	},
 	"settings_customize_bg_link": "自订连结",
 	"settings_lang": "语言",
 	"settings_lang_description": "设定您的 PokaPlayer 语言",

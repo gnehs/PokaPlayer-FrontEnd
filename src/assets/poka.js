@@ -74,6 +74,12 @@ window._uuid = () => {
 }
 window._lyricReader = require('@/assets/lyrics.min.js')
 window._lrc = new(require('@/assets/lyrics.min.js'))(`[00:00.000]`);
+window._CSSsetting = (key, value) => {
+    let s = _setting('cssVariable')
+    s[key] = value
+    _setting('cssVariable', s)
+    document.documentElement.style.setProperty(key, value)
+}
 window._setting = (setting, value) => {
     let pokaSetting = JSON.parse(localStorage.pokaSetting || `{}`)
     let defaultPokaSetting = {
@@ -81,7 +87,10 @@ window._setting = (setting, value) => {
         "headerBgSource": "https://i.imgur.com/IdbJiao.jpg",
         "darkMode": false,
         "server": location.origin,
-        "password": ""
+        "password": "",
+        "cssVariable": {
+            "--pokabgheight": "calc( 100vh - 69px - 64px )"
+        }
     }
     // default language
     let userLang = navigator.language || navigator.userLanguage
@@ -139,4 +148,11 @@ Math.easeInOutQuad = function (t, b, c, d) {
     if (t < 1) return c / 2 * t * t + b;
     t--;
     return -c / 2 * (t * (t - 2) - 1) + b;
+};
+
+// 注入 CSS 變數
+window.onload = () => {
+    let root = document.documentElement;
+    for (let [key, value] of Object.entries(_setting('cssVariable')))
+        root.style.setProperty(key, value);
 };

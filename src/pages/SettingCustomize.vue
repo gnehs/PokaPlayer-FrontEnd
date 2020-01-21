@@ -12,24 +12,98 @@
 					</div>
 				</div>
 			</div>
+			<div class="item" @click="customize_bg_dialog=true" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>landscape</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">{{$t('settings_customize_bg')}}</div>
+						<div class="t-ellipsis">{{$t('settings_customize_bg_description')}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="item" @click="bg_height_dialog=true" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>style</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">{{$t('settings_customize_bg_cover')}}</div>
+						<div class="t-ellipsis">{{$t('settings_customize_bg_cover_description')}}</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div>
-			<p class="title">{{$t('settings_customize_bg')}}</p>
-			<poka-cards>
-				<poka-card
-					@click.native="bg_prompt_active=true"
-					poka-icon="link"
-					:poka-title="$t('settings_customize_bg_link')"
-				/>
-				<poka-card
-					v-for="{name, src} in imgSources"
-					@click.native="setBg(src)"
-					:key="src"
-					:poka-bg="src"
-					:poka-title="name"
-				/>
-			</poka-cards>
-		</div>
+
+		<v-dialog v-model="bg_height_dialog" max-width="300">
+			<v-card>
+				<v-card-title class="headline">{{$t('settings_customize_bg_cover')}}</v-card-title>
+				<v-card-text>
+					<div class="poka list">
+						<div class="item" @click="setBgHeight('full')" v-ripple>
+							<div class="content">
+								<v-avatar size="24px" item>
+									<v-icon>star</v-icon>
+								</v-avatar>
+								<div class="header">
+									<div class="head">{{$t('settings_customize_bg_cover_options.full')}}</div>
+								</div>
+							</div>
+						</div>
+						<div class="item" @click="setBgHeight('half')" v-ripple>
+							<div class="content">
+								<v-avatar size="24px" item>
+									<v-icon>star_half</v-icon>
+								</v-avatar>
+								<div class="header">
+									<div class="head">{{$t('settings_customize_bg_cover_options.half')}}</div>
+								</div>
+							</div>
+						</div>
+						<div class="item" @click="setBgHeight('none')" v-ripple>
+							<div class="content">
+								<v-avatar size="24px" item>
+									<v-icon>star_border</v-icon>
+								</v-avatar>
+								<div class="header">
+									<div class="head">{{$t('settings_customize_bg_cover_options.none')}}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn text @click="bg_height_dialog = false">{{$t('back')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
+		<v-dialog v-model="customize_bg_dialog" max-width="1200">
+			<v-card>
+				<v-card-title class="headline">{{$t('settings_customize_bg')}}</v-card-title>
+				<v-card-text>
+					<poka-cards>
+						<poka-card
+							@click.native="bg_prompt_active=true"
+							poka-icon="link"
+							:poka-title="$t('settings_customize_bg_link')"
+						/>
+						<poka-card
+							v-for="{name, src} in imgSources"
+							@click.native="setBg(src)"
+							:key="src"
+							:poka-bg="src"
+							:poka-title="name"
+						/>
+					</poka-cards>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn text @click="customize_bg_dialog = false">{{$t('done')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 		<v-dialog v-model="bg_prompt_active" max-width="420">
 			<v-card>
 				<v-card-title class="headline">{{$t("settings_customize_bg")}}</v-card-title>
@@ -50,6 +124,8 @@
 export default {
 	name: "SettingCustomize",
 	data: () => ({
+		bg_height_dialog: false,
+		customize_bg_dialog: false,
 		bg_prompt_active: false,
 		bg_prompt_textbox: window._setting("headerBgSource"),
 		setting: { bg: window._setting("headerBgSource") },
@@ -108,6 +184,27 @@ export default {
 				url: _setting(`server`) + "/setting/",
 				data: { n: { headerBgSource: bg } }
 			});
+		},
+		setBgHeight(h) {
+			switch (h) {
+				case 'full':
+					window._CSSsetting("--pokabgheight", "calc( 100vh - 69px - 64px )")
+					break;
+				case 'none':
+					window._CSSsetting("--pokabgheight", "0px")
+					break;
+				default:
+					window._CSSsetting("--pokabgheight", "400px")
+					break;
+			}
+			//this.bg_height_dialog = false
+			let cssVariable = window._setting('cssVariable')
+			this.axios({
+				method: "post",
+				url: _setting(`server`) + "/setting/",
+				data: { n: { cssVariable } }
+			});
+
 		},
 		bg_prompt_cancel() {
 			this.bg_prompt_active = false

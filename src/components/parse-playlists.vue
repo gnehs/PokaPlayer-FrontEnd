@@ -19,7 +19,7 @@
 		<poka-card
 			v-for="({name, image, id, source, type},index) in data"
 			v-if="!type||type!='folder'"
-			poka-icon="playlist_play"
+			poka-icon="queue_music"
 			:key="index"
 			:to="`/playlist/p/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
 			:poka-bg="image||false"

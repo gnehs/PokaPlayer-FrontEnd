@@ -115,6 +115,14 @@ export default {
 	"settings_customize": "Customizations",
 	"settings_customize_description": "Custom background, details",
 	"settings_customize_bg": "Custom background",
+	"settings_customize_bg_description": "Change background image",
+	"settings_customize_bg_cover": "Background cover",
+	"settings_customize_bg_cover_description": "Change background cover size or hide it",
+	"settings_customize_bg_cover_options": {
+		"full": "Full cover",
+		"half": "Half cover",
+		"none": "Hide background"
+	},
 	"settings_customize_bg_link": "Custom link",
 	"settings_lang": "Language",
 	"settings_lang_description": "Set your PokaPlayer language",

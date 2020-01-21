@@ -117,6 +117,14 @@ export default {
 	"settings_customize": "個人化",
 	"settings_customize_description": "自訂背景、其他細節設定",
 	"settings_customize_bg": "自訂背景",
+	"settings_customize_bg_description": "更改背景圖樣",
+	"settings_customize_bg_cover": "背景覆蓋",
+	"settings_customize_bg_cover_description": "更改背景覆蓋樣式或將其隱藏",
+	"settings_customize_bg_cover_options": {
+		"full": "全覆蓋",
+		"half": "半覆蓋",
+		"none": "無背景"
+	},
 	"settings_customize_bg_link": "自訂連結",
 	"settings_lang": "語言",
 	"settings_lang_description": "設定您的 PokaPlayer 語言",

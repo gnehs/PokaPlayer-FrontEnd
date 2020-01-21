@@ -57,7 +57,8 @@ export default {
 		-webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 100%)
 		width: 100%
 		position: absolute
-		min-height: calc( 100vh - 69px - 64px )
+		transition: min-height .4s
+		min-height: var(--pokabgheight)
 		overflow: hidden
 	.bg.blur
 		filter: blur(5px)
