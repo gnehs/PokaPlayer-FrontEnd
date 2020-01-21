@@ -249,7 +249,6 @@ export default {
 </script><style lang="sass" scoped>
 pre.log
 	background: #000
-	border-radius: 3px
 	padding: 5px
 	width: 280px
 	height: 200px
