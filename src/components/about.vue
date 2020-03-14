@@ -1,24 +1,43 @@
 <template>
 	<v-card class="mx-auto" width="350">
 		<v-img class="poka-logo-banner" src="/img/loginHeader.svg" height="170px"></v-img>
-		<v-card-text class="text-center">
-			<br />
-			<span class="display-1">PokaPlayer</span>
-			<br />
-			<span class="subtitle-1">{{' '+poka_version}}</span>
-			<br />
-			<br />
-			<a href="https://github.com/gnehs/PokaPlayer/" target="_blank">GitHub</a>
-			<span>．</span>
-			<a
-				href="https://github.com/gnehs/PokaPlayer/issues"
-				target="_blank"
-			>{{$t("settings_about_errorEeport")}}</a>
-			<span>．</span>
-			<a
-				href="https://github.com/gnehs/PokaPlayer/graphs/contributors"
-				target="_blank"
-			>{{$t('settings_about_contributions')}}</a>
+		<v-card-text>
+			<v-list subheader>
+				<v-list-item>
+					<v-list-item-avatar>
+						<v-icon>info</v-icon>
+					</v-list-item-avatar>
+					<v-list-item-content>
+						<v-list-item-title>PokaPlayer</v-list-item-title>
+						<v-list-item-subtitle>{{poka_version}}</v-list-item-subtitle>
+					</v-list-item-content>
+				</v-list-item>
+				<v-divider />
+				<v-list-item href="https://github.com/gnehs/PokaPlayer/" target="_blank">
+					<v-list-item-avatar>
+						<v-icon>explore</v-icon>
+					</v-list-item-avatar>
+					<v-list-item-content>
+						<v-list-item-title>GitHub</v-list-item-title>
+					</v-list-item-content>
+				</v-list-item>
+				<v-list-item href="https://github.com/gnehs/PokaPlayer/graphs/contributors" target="_blank">
+					<v-list-item-avatar>
+						<v-icon>error</v-icon>
+					</v-list-item-avatar>
+					<v-list-item-content>
+						<v-list-item-title>{{$t("settings_about_contributions")}}</v-list-item-title>
+					</v-list-item-content>
+				</v-list-item>
+				<v-list-item href="https://github.com/gnehs/PokaPlayer/issues" target="_blank">
+					<v-list-item-avatar>
+						<v-icon>error</v-icon>
+					</v-list-item-avatar>
+					<v-list-item-content>
+						<v-list-item-title>{{$t("settings_about_errorEeport")}}</v-list-item-title>
+					</v-list-item-content>
+				</v-list-item>
+			</v-list>
 		</v-card-text>
 	</v-card>
 </template>
