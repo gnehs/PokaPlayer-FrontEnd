@@ -32,7 +32,7 @@
 				</div>
 				<div class="action">
 					<slot :index="index" :song="song" :moreDialog="moreDialog">
-						<v-btn icon @click="$addSongs({songs:[song],clear:false});isInSongList.push(index);">
+						<v-btn icon @click.stop="$addSongs({songs:[song],clear:false});isInSongList.push(index);">
 							<v-icon v-if="isInSongList.includes(index)">done</v-icon>
 							<v-icon v-else>add</v-icon>
 						</v-btn>
