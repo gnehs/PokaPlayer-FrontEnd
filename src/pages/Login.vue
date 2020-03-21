@@ -5,33 +5,36 @@
 		</div>
 		<v-form ref="form" v-on:submit.prevent="login">
 			<div class="form-container">
-				<v-card class="mx-auto banner">
-					<v-img class="banner-img" src="/img/loginHeader.svg" height="170px"></v-img>
-				</v-card>
-				<v-card class="mx-auto" :loading="logining">
-					<v-card-text>
+				<p style="margin-bottom:4px;font-family:var(--product-font);font-size:3.75rem;">PokaPlayer</p>
+				<v-expand-transition>
+					<div class="text-center" style="margin: 50px 0;" v-show="logining">
+						<v-progress-circular indeterminate color="primary"></v-progress-circular>
+					</div>
+				</v-expand-transition>
+				<v-expand-transition>
+					<div v-show="!logining">
 						<v-text-field
-							:label="$t('login_page.server')"
 							outlined
+							:label="$t('login_page.server')"
 							v-model.trim="server"
 							:disabled="logining"
 						></v-text-field>
 						<v-text-field
-							:label="$t('login_page.username')"
 							outlined
+							:label="$t('login_page.username')"
 							v-model="username"
 							:disabled="logining"
 						></v-text-field>
 						<v-text-field
+							outlined
 							:label="$t('login_page.password')"
 							type="password"
-							outlined
 							v-model="password"
 							:disabled="logining"
 						></v-text-field>
-						<v-btn block outlined type="submit" color="primary">{{$t('login')}}</v-btn>
-					</v-card-text>
-				</v-card>
+					</div>
+				</v-expand-transition>
+				<v-btn block type="submit" :disabled="logining" color="primary">{{$t('login')}}</v-btn>
 			</div>
 		</v-form>
 	</div>
@@ -39,38 +42,42 @@
 
 <style lang="scss" scoped>
 	form {
-		height: 90%;
+		height: 100%;
 		justify-content: center;
 		align-items: center;
 		display: flex;
+		max-width: calc(350px + 30px + 30px);
+		padding: 0 30px;
+		background-color: rgba(255, 255, 255, 0.9);
+		backdrop-filter: blur(10px);
+		box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
 		.form-container {
 			flex: 1 1;
-			max-width: 400px;
-			.v-card {
-				border-radius: 8px;
-				background-color: rgba(255, 255, 255, 0.95);
-				backdrop-filter: blur(3px);
-				&.theme--dark {
-					background-color: rgba(40, 37, 53, 0.975);
-				}
-				max-width: 400px;
-				& + .v-card {
-					padding: 16px 32px;
-				}
-				&.banner {
-					background-color: rgba(0, 0, 0, 0);
-				}
-			}
+			max-width: 350px;
+		}
+		animation: slideout 0.6s ease 0.3s;
+		animation-fill-mode: forwards;
+		transform: translate(-100%);
+	}
+	@media (max-width: 575.98px) {
+		form {
+			width: 100%;
+			max-width: 100%;
+			padding: 0;
+			background-color: rgba(255, 255, 255, 0.95);
 		}
 	}
-	// header-img
-	.banner-img {
-		background-image: url("/img/loginBannerBgLight.svg");
-		background-size: 100%;
+	@keyframes slideout {
+		from {
+			transform: translate(-100%);
+		}
+		to {
+			transform: translate(0);
+		}
 	}
 	@media (prefers-color-scheme: dark) {
-		.banner-img {
-			background-image: url("/img/loginBannerBgDark.svg");
+		form {
+			background-color: rgba(0, 0, 0, 0.7);
 		}
 	}
 
@@ -102,7 +109,6 @@
 	}
 </style>
 <script>
-import { log } from "util";
 export default {
 	name: "Login",
 	data: () => ({
@@ -149,7 +155,6 @@ export default {
 				)
 				.then(res => res.data)
 				.then(async response => {
-					this.logining = false;
 					if (response.success) {
 						_setting(`password`, this.password);
 						_setting(`username`, this.username);
@@ -167,6 +172,7 @@ export default {
 						//重新整理來啟用新設定值
 						window.location.reload();
 					} else {
+						this.logining = false;
 						this.passwordError = "Wrong password";
 						this.password = "";
 						return false;
