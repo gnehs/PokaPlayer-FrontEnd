@@ -23,7 +23,7 @@
 				</v-list-item>
 				<v-list-item href="https://github.com/gnehs/PokaPlayer/graphs/contributors" target="_blank">
 					<v-list-item-avatar>
-						<v-icon>error</v-icon>
+						<v-icon>group</v-icon>
 					</v-list-item-avatar>
 					<v-list-item-content>
 						<v-list-item-title>{{$t("settings_about_contributions")}}</v-list-item-title>
