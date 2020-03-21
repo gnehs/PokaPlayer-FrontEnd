@@ -1,7 +1,7 @@
 <template>
-	<v-card class="mx-auto" width="350">
+	<v-card class="mx-auto" width="350" style="border-radius: 8px;overflow: hidden;">
 		<v-img class="poka-logo-banner" src="/img/loginHeader.svg" height="170px"></v-img>
-		<v-card-text>
+		<v-card-text style="padding: 0;">
 			<v-list subheader>
 				<v-list-item>
 					<v-list-item-avatar>
