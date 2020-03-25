@@ -6,7 +6,7 @@
 		/>
 		<poka-update />
 		<poka-loader v-if="!data" />
-		<poka-parse-multiple v-else :data="data" />
+		<poka-parse-home v-else :data="data" />
 	</div>
 </template>
 <script>

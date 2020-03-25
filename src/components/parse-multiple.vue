@@ -5,13 +5,13 @@
 				<div v-if="item.source">{{$t(`source.${item.source}`)}}</div>
 				<p v-if="item.title" class="display-1 text--primary">{{$t(item.title)}}</p>
 				<v-tabs background-color="transparent" color="primary">
-					<template v-for="itemName of Object.keys(item).filter(x=>x!='title'&&x!='source')">
+					<template v-for="itemName of Object.keys(item).filter(x=>x!='title'&&x!='source'&&x!='icon')">
 						<v-tab
 							v-if="item[itemName]&&item[itemName].length>0"
 							:key="itemName"
 						>{{$t(itemName.substring(0, itemName.length-1))}}</v-tab>
 					</template>
-					<template v-for="itemName of Object.keys(item).filter(x=>x!='title'&&x!='source')">
+					<template v-for="itemName of Object.keys(item).filter(x=>x!='title'&&x!='source'&&x!='icon')">
 						<v-tab-item v-if="item[itemName]&&item[itemName].length>0" :key="itemName">
 							<poka-parse-songs v-if="itemName=='songs'" :data="item[itemName]" />
 							<poka-parse-albums v-if="itemName=='albums'" :data="item[itemName]" />

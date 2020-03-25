@@ -17,8 +17,9 @@ import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
 
 import * as PokaComponents from './poka-component'
-import vuetify from './plugins/vuetify';
 Object.values(PokaComponents).forEach(PokaComponents => Vue.component(PokaComponents.name, PokaComponents))
+
+import vuetify from './plugins/vuetify';
 
 // 偵測暗黑模式
 const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
