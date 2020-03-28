@@ -58,9 +58,10 @@
 					class="headline"
 				>{{$t("settings_updateDialog_title", { version: this.newVersion.tag})}}</v-card-title>
 				<v-card-text style="padding-bottom: 0;">
-					<p v-html="newVersion.body" />
+					<p class="changelog" v-html="newVersion.body" />
 					<p>{{$t('settings_updateDialog_note')}}</p>
 				</v-card-text>
+				<v-divider />
 				<v-card-actions>
 					<v-spacer />
 					<v-btn text @click="showUpdateDialog = false">{{$t('cancel')}}</v-btn>
@@ -246,7 +247,8 @@ export default {
 		}
 	}
 };
-</script><style lang="sass" scoped>
+</script>
+<style lang="sass" scoped>
 pre.log
 	background: #000
 	padding: 5px
@@ -255,4 +257,25 @@ pre.log
 	overflow: scroll
 	font-family: 'Ubuntu Mono', monospace
 	color: #FFF
+</style>
+<style lang="sass" >
+.changelog
+	font-family: 'Ubuntu Mono', monospace
+	color: currentColor
+	padding: 8px
+	border-radius: 8px
+	background-color: rgba(0, 0, 0, .03)
+	color: #000
+	h1,h2,h3,h4,h5,h6
+		font-size: 16px
+		line-height: 1.3em
+	h1
+		font-size: 20px
+	h2
+		font-size: 18px
+
+@media (prefers-color-scheme: dark)
+	.changelog
+		background-color: rgba(255, 255, 255, 0.04)
+		color: #FFF
 </style>
