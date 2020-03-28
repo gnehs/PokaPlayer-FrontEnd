@@ -32,9 +32,11 @@ export default {
 		}
 	},
 	mounted() {
+		this.handleScroll()
 		document.querySelector('main').addEventListener('scroll', this.handleScroll);
 	},
-	created() {		this.handleScroll()
+	created() {
+		this.handleScroll()
 		document.querySelector('main').addEventListener('scroll', this.handleScroll);
 	},
 	destroyed() {

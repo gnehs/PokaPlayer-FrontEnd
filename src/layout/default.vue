@@ -327,18 +327,17 @@ export default {
 };
 </script>
 <style lang="sass" scoped>
-.v-content 
-	height: calc(var(--vh,1vh) * 100) 
+.v-content
+	height: calc(var(--vh,1vh) * 100)
 	overflow: hidden
 	overflow-y: scroll
 	margin-bottom: -69px
 .v-navigation-drawer:not(.v-navigation-drawer--is-mobile)
 	height: calc(var(--vh,1vh) * 100 - 69px - 64px) !important
-
-nav 
+nav
 	.v-list
 		.v-list-item.theme--dark
-			&.v-list-item--active::before 
+			&.v-list-item--active::before
 				opacity: 1
 				background-color: var(--v-primary-base) !important
 			.v-list-item__action,.v-list-item__content
@@ -354,7 +353,7 @@ nav
 	z-index: 99
 	position: fixed
 	background-color: rgba(255, 255, 255, 0.9)
-	@media (prefers-color-scheme: dark) 
+	@media (prefers-color-scheme: dark)
 		&
 			background-color: rgba(40, 37, 53, 0.95)
 	.song-info

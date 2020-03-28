@@ -4,9 +4,14 @@
 			<poka-header :blurbg="true" :bg="audio_cover" v-if="audio_cover" :key="audio_cover" />
 			<poka-header v-else key="2" />
 		</transition>
-		<div v-on:dblclick="openLyricDialog" class="lyric" :class="{lyricTranslated:lyricTranslated}">
+		<div v-on:dblclick="openLyricDialog">
 			<transition name="fade" mode="out-in">
-				<div v-if="lyric.length > 1" key="lyric">
+				<div
+					v-if="lyric.length > 1"
+					class="lyric"
+					key="lyric"
+					:class="{lyricTranslated:lyricTranslated}"
+				>
 					<p
 						v-for="(item, index) of lyric"
 						:key="index"
@@ -113,19 +118,18 @@
 <style lang="sass" scoped>
 .lyric
 	text-align: center
-	>div
-		padding-top: 80px
-		padding-bottom: 80px
+	padding-top: 80px
+	padding-bottom: 80px
 	p
 		transition: all 0.5s cubic-bezier(0.77, 0, 0.18, 1), color 0.2s linear, opacity 0.2s linear
 		opacity: .4
-		min-height: 1.5em
-		transform: scale(0.95)
+		line-height: 1.2em
+		transform: scale(.7)
 		position: relative
-		font-size: calc(12px + 1.2vmin)
+		font-size: calc(16px + 1.2vmin)
 		&.focus
 			opacity: 1
-			transform: scale(1.2)
+			transform: scale(1)
 			font-weight: 700
 			text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
 			.theme--dark &
@@ -133,7 +137,7 @@
 	&.lyricTranslated
 		p.focus:not(:empty) + p
 			opacity: .8
-			transform: scale(1)
+			transform: scale(.8)
 			text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
 			font-weight: 700
 			.theme--dark &
@@ -233,13 +237,7 @@ export default {
 			let lyricRegex = /\[([0-9.:]*)\]/i;
 			let response, url;
 			if (id) {
-				url =
-					_setting(`server`) +
-					`/pokaapi/lyric/?moduleName=${encodeURIComponent(
-						source
-					)}&id=${encodeURIComponent(
-						id
-					)}&time=${new Date().getTime()}`;
+				url = _setting(`server`) + `/pokaapi/lyric/?moduleName=${encodeURIComponent(source)}&id=${encodeURIComponent(id)}&time=${new Date().getTime()}`;
 
 				this.axios(url).then(response => {
 					if (
