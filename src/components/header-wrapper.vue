@@ -58,7 +58,7 @@ export default {
 		width: 100%
 		position: absolute
 		transition: min-height .4s
-		min-height: var(--pokabgheight)
+		min-height: var(--pokabgheight,400px)
 		overflow: hidden
 	.bg.blur
 		filter: blur(5px)

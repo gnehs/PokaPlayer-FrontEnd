@@ -151,8 +151,7 @@ Math.easeInOutQuad = function (t, b, c, d) {
 };
 
 // 注入 CSS 變數
-window.onload = () => {
-    let root = document.documentElement;
-    for (let [key, value] of Object.entries(_setting('cssVariable')))
-        root.style.setProperty(key, value);
-};
+let root = document.documentElement;
+for (let [key, value] of Object.entries(_setting('cssVariable'))) {
+    root.style.setProperty(key, value);
+}
