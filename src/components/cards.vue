@@ -94,33 +94,34 @@ export default {
 			color: var(--text-color)
 			opacity: .75
 		.image
-			background-color: #B0BEC5
+			background-color: #B0BEC5B3
+			backdrop-filter: blur(5px)
 		&:nth-child(14n+2) .image
-			background-color: #BCAAA4
+			background-color: #BCAAA4B3
 		&:nth-child(14n+3) .image
-			background-color: #FFAB91
+			background-color: #FFAB91B3
 		&:nth-child(14n+4) .image
-			background-color: #FFF59D
+			background-color: #FFF59DB3
 		&:nth-child(14n+5) .image
-			background-color: #FFE082
+			background-color: #FFE082B3
 		&:nth-child(14n+6) .image
-			background-color: #FFCC80
+			background-color: #FFCC80B3
 		&:nth-child(14n+7) .image
-			background-color: #A5D6A7
+			background-color: #A5D6A7B3
 		&:nth-child(14n+8) .image
-			background-color: #C5E1A5
+			background-color: #C5E1A5B3
 		&:nth-child(14n+9) .image
-			background-color: #E6EE9C
+			background-color: #E6EE9CB3
 		&:nth-child(14n+10) .image
-			background-color: #81D4FA
+			background-color: #81D4FAB3
 		&:nth-child(14n+11) .image
-			background-color: #80DEEA
+			background-color: #80DEEAB3
 		&:nth-child(14n+12) .image
-			background-color: #80CBC4
+			background-color: #80CBC4B3
 		&:nth-child(14n+13) .image
-			background-color: #B39DDB
+			background-color: #B39DDBB3
 		&:nth-child(14n+14) .image
-			background-color: #90CAF9
+			background-color: #90CAF9B3
 	&.two.cards .card
 		--size: calc(100% / 2 - .5em)
 	&.three.cards .card
