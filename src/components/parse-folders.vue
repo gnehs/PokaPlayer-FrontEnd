@@ -12,7 +12,7 @@
 					<v-icon>folder</v-icon>
 				</v-avatar>
 				<div class="header">
-					<div class="title t-ellipsis">{{name}}</div>
+					<div class="head t-ellipsis">{{name}}</div>
 					<div class="t-ellipsis">{{$t(`source.${source}`)}}</div>
 				</div>
 			</div>
