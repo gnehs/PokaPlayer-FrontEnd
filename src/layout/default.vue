@@ -34,14 +34,14 @@
 				</v-list-item-group>
 			</v-list>
 		</v-navigation-drawer>
-		<v-content>
-			<transition :name="transitionName" mode="out-in">
-				<div class="router-view" :key="$route.path">
+		<transition :name="transitionName" mode="out-in" v-on:enter="pageEnter">
+			<v-content :key="$route.path">
+				<div class="router-view">
 					<router-view />
 				</div>
-			</transition>
-			<div style="height:69px"></div>
-		</v-content>
+				<div style="height:69px"></div>
+			</v-content>
+		</transition>
 		<div class="bottom-player">
 			<div class="app-progress-bar">
 				<v-progress-linear
@@ -190,24 +190,14 @@ export default {
 			if (transitionName === "slide") {
 				const toDepth = to.path.split("/").length;
 				const fromDepth = from.path.split("/").length;
-				transitionName = toDepth < fromDepth ? "slide-right" : "slide-left";
+				transitionName = toDepth < fromDepth ? "zoom-out" : "zoom-in";
 				transitionName = toDepth == fromDepth ? "fade" : transitionName; //同一層
 			}
 			this.transitionName = transitionName;
 			this.getStatus();
-
 			let el = document.querySelector("main.v-content");
 			if (el) this.scrollPositions[from.name] = el.scrollTop;
-
 			next();
-		});
-		window.addEventListener("popstate", () => {
-			let currentRouteName = this.$router.history.current.name;
-			let el = document.querySelector("main.v-content");
-			if (el && currentRouteName in this.scrollPositions) {
-				let positions = this.scrollPositions[currentRouteName];
-				setTimeout(() => (el.scrollTop = positions), 500);
-			}
 		});
 		this.axios.defaults.withCredentials = true;
 		this.axios.defaults.baseURL = _setting(`server`);
@@ -322,6 +312,14 @@ export default {
 					let userProfile = await this.axios.get(_setting(`server`) + "/profile/");
 					sessionStorage.setItem("login", JSON.stringify(userProfile.data));
 				});
+		},
+		pageEnter() {
+			let currentRouteName = this.$router.history.current.name;
+			let el = document.querySelector("main.v-content");
+			if (el && currentRouteName in this.scrollPositions) {
+				let positions = this.scrollPositions[currentRouteName];
+				setTimeout(() => (el.scrollTop = positions), 100);
+			}
 		}
 	}
 };
