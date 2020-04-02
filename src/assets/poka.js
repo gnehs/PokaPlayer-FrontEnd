@@ -22,11 +22,18 @@ window._addSongs = function ({
     const defaultCover = window._setting(`headerBgSource`);
     let playlist = [];
     for (let song of songs) {
+        let songRes = _setting(`audioQuality`).toLowerCase()
+        if (song.source == "DSM" && songRes == 'high') {
+            if (song.codec == "mp3") {
+                songRes = "original"
+            } else if (song.codec == "aac") {
+                songRes = "original"
+            } else if (song.codec == "flac" && song.bitrate <= 1600 * 1000) {
+                songRes = "original"
+            }
+        }
         playlist.push({
-            url: server +
-                song.url +
-                "&songRes=" +
-                _setting(`audioQuality`).toLowerCase(),
+            url: server + song.url + "&songRes=" + songRes,
             originalURL: song.url,
             cover: song.cover && song.cover.startsWith("http") ?
                 song.cover : song.cover ?
