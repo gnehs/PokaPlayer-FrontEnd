@@ -259,6 +259,15 @@ export default {
 		setPrimaryColor(color) {
 			this.$vuetify.theme.themes.dark.primary = color
 			this.$vuetify.theme.themes.light.primary = color
+
+			window._setting("theme", color);
+
+			let theme = window._setting('theme')
+			this.axios({
+				method: "post",
+				url: _setting(`server`) + "/setting/",
+				data: { n: { theme } }
+			});
 		}
 	}
 };
