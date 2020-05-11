@@ -343,6 +343,12 @@ nav
 @media (min-width: 576px)
 	.router-view
 		padding: 16px
+
+.v-app-bar
+	box-shadow: inset 0 -1px 0 0 #dadce0
+@media (prefers-color-scheme: dark)
+	.v-app-bar
+		box-shadow: inset 0 -1px 0 0 hsla(0,0%,100%,.12)
 .bottom-player
 	box-sizing: border-box
 	height: 69px
