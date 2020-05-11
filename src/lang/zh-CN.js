@@ -113,7 +113,7 @@ export default {
 	"settings_network_soundQuality_High_description": "音质较原始音质略差，可在 4G 网路下流畅的串流",
 	"settings_network_soundQuality_Ori_description": "在网路状况许可下，可选择此选项聆听高音质音乐",
 	"settings_customize": "个人化",
-	"settings_customize_description": "自订背景、其他细节设定",
+	"settings_customize_description": "自订背景、主題與其他细节设定",
 	"settings_customize_bg": "自定义背景",
 	"settings_customize_bg_description": "更改背景图样",
 	"settings_customize_bg_cover": "背景覆盖",
@@ -124,6 +124,8 @@ export default {
 		"none": "无背景"
 	},
 	"settings_customize_bg_link": "自订连结",
+	"settings_customize_theme": "主题",
+	"settings_customize_theme_description": "设定 PokaPlayer 的主题色彩",
 	"settings_lang": "语言",
 	"settings_lang_description": "设定您的 PokaPlayer 语言",
 	"settings_systemAndUpdate": "系统和更新",

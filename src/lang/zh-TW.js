@@ -115,7 +115,7 @@ export default {
 	"settings_network_soundQuality_High_description": "音質較原始音質略差，可在 4G 網路下流暢的串流",
 	"settings_network_soundQuality_Ori_description": "在網路狀況許可下，可選擇此選項聆聽高音質音樂",
 	"settings_customize": "個人化",
-	"settings_customize_description": "自訂背景、其他細節設定",
+	"settings_customize_description": "自訂背景、主題與其他細節設定",
 	"settings_customize_bg": "自訂背景",
 	"settings_customize_bg_description": "更改背景圖樣",
 	"settings_customize_bg_cover": "背景覆蓋",
@@ -126,6 +126,8 @@ export default {
 		"none": "無背景"
 	},
 	"settings_customize_bg_link": "自訂連結",
+	"settings_customize_theme": "主題",
+	"settings_customize_theme_description": "設定 PokaPlayer 的主題色彩",
 	"settings_lang": "語言",
 	"settings_lang_description": "設定您的 PokaPlayer 語言",
 	"settings_systemAndUpdate": "系統和更新",

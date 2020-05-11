@@ -34,6 +34,17 @@
 					</div>
 				</div>
 			</div>
+			<div class="item" @click="theme_dialog=true" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>palette</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">{{$t('settings_customize_theme')}}</div>
+						<div class="t-ellipsis">{{$t('settings_customize_theme_description')}}</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<v-dialog v-model="bg_height_dialog" max-width="300">
@@ -104,6 +115,26 @@
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
+		<v-dialog v-model="theme_dialog" max-width="1200">
+			<v-card>
+				<v-card-title class="headline">{{$t('settings_customize_theme')}}</v-card-title>
+				<v-card-text>
+					<poka-cards>
+						<poka-card
+							poka-icon="palette"
+							:style="{'--card-background-color':color}"
+							v-for="color in themeColor"
+							@click.native="setPrimaryColor(color)"
+							:key="color"
+						/>
+					</poka-cards>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn text @click="theme_dialog = false">{{$t('done')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 		<v-dialog v-model="bg_prompt_active" max-width="420">
 			<v-card>
 				<v-card-title class="headline">{{$t("settings_customize_bg")}}</v-card-title>
@@ -124,6 +155,7 @@
 export default {
 	name: "SettingCustomize",
 	data: () => ({
+		theme_dialog: false,
 		bg_height_dialog: false,
 		customize_bg_dialog: false,
 		bg_prompt_active: false,
@@ -168,6 +200,16 @@ export default {
 				name: "Sword Art Online: Alicization",
 				src: "https://images2.imgbox.com/99/e2/knJdNcns_o.jpg"
 			},
+		],
+		themeColor: [
+			'#5c95c4',
+			'#fc5185',
+			'#f96d00',
+			'#824c96',
+			'#107a8b',
+			'#fd0054',
+			'#facf5a',
+			"#000"
 		]
 	}),
 	watch: {
@@ -213,6 +255,10 @@ export default {
 		bg_prompt_ok() {
 			this.bg_prompt_active = false
 			this.setBg(this.bg_prompt_textbox)
+		},
+		setPrimaryColor(color) {
+			this.$vuetify.theme.themes.dark.primary = color
+			this.$vuetify.theme.themes.light.primary = color
 		}
 	}
 };

@@ -113,7 +113,7 @@ export default {
 	"settings_network_soundQuality_High_description": "Able to stream smoothly under 4G/LTE network",
 	"settings_network_soundQuality_Ori_description": "Uncompressed audio, only use when the internet is fast",
 	"settings_customize": "Customizations",
-	"settings_customize_description": "Custom background, details",
+	"settings_customize_description": "Custom background, theme and other details",
 	"settings_customize_bg": "Custom background",
 	"settings_customize_bg_description": "Change background image",
 	"settings_customize_bg_cover": "Background cover",
@@ -124,6 +124,8 @@ export default {
 		"none": "Hide background"
 	},
 	"settings_customize_bg_link": "Custom link",
+	"settings_customize_theme": "Theme",
+	"settings_customize_theme_description": "Change theme color",
 	"settings_lang": "Language",
 	"settings_lang_description": "Set your PokaPlayer language",
 	"settings_systemAndUpdate": "System & update",
