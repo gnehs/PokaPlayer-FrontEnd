@@ -25,6 +25,7 @@
 						<v-list-item v-else :key="item.text" :to="item.to" link>
 							<v-list-item-action>
 								<v-icon class="material-icons-outlined" v-text="item.icon"></v-icon>
+								<v-icon class="material-icons" v-text="item.icon"></v-icon>
 							</v-list-item-action>
 							<v-list-item-content>
 								<v-list-item-title>{{ item.text }}</v-list-item-title>
@@ -328,6 +329,15 @@ export default {
 };
 </script>
 <style lang="sass" scoped>
+nav
+	.v-list-item
+		.material-icons:not(.material-icons-outlined)
+			display: none
+		&.v-item--active
+			.material-icons:not(.material-icons-outlined)
+				display: block
+			.material-icons-outlined
+				display: none
 .v-content
 	height: calc(var(--vh,1vh) * 100)
 	overflow: hidden
