@@ -115,19 +115,19 @@
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
-		<v-dialog v-model="theme_dialog" max-width="1200">
+		<v-dialog v-model="theme_dialog" max-width="340">
 			<v-card>
 				<v-card-title class="headline">{{$t('settings_customize_theme')}}</v-card-title>
 				<v-card-text>
-					<poka-cards>
-						<poka-card
-							poka-icon="palette"
-							:style="{'--card-background-color':color}"
-							v-for="color in themeColor"
-							@click.native="setPrimaryColor(color)"
-							:key="color"
-						/>
-					</poka-cards>
+					<v-color-picker
+						style="margin:8px auto !important"
+						flat
+						mode="hex"
+						v-model="color"
+						class="ma-2"
+						:swatches="swatches"
+						show-swatches
+					></v-color-picker>
 				</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
@@ -201,21 +201,39 @@ export default {
 				src: "https://images2.imgbox.com/99/e2/knJdNcns_o.jpg"
 			},
 		],
-		themeColor: [
-			'#5c95c4',
-			'#fc5185',
-			'#f96d00',
-			'#824c96',
-			'#107a8b',
-			'#fd0054',
-			'#facf5a',
-			"#000"
+		swatches: [
+			[
+				'#5c95c4',
+				'#fc5185',
+			],
+			[
+				'#824c96',
+				'#107a8b',
+			],
+			[
+				'#facf5a',
+				"#000"
+			],
+			[
+				'#fd0054',
+			],
+			[
+				'#f96d00',
+			]
 		]
 	}),
-	watch: {
-		"setting.bg": value => {
-			window._setting("headerBgSource", value);
+	computed: {
+		"color": {
+			get: function () {
+				return window._setting("theme")
+			},
+			set: function (value) {
+				this.setPrimaryColor(value)
+			}
 		}
+	},
+	watch: {
+		"setting.bg": value => window._setting("headerBgSource", value)
 	},
 	methods: {
 		setBg(bg) {
