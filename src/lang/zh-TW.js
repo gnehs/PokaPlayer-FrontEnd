@@ -198,6 +198,10 @@ export default {
 			}
 		}
 	},
+	"settingPravicy": {
+		"title": "隱私",
+		"description": "資料紀錄設定",
+	},
 	"source": {
 		"DSM": "DSM",
 		"poka": "PokaPlayer",
