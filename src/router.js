@@ -45,7 +45,10 @@ export default new Router({
 		}, {
 			path: '/lyric/edit',
 			name: 'LyricEdit',
-			component: LyricEdit
+			component: LyricEdit,
+			meta: {
+				transitionName: 'slide'
+			}
 		}, {
 			path: '/album/songs/:source/:id',
 			name: 'AlbumSongs',

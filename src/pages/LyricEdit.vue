@@ -19,12 +19,24 @@
 					</p>
 				</div>
 				<div id="lyric-edit">
-					<v-card class="mx-auto" id="lyric-edit-text-editor">
+					<v-card class="mx-auto" id="lyric-edit-about">
 						<v-card-text>
 							<div>PokaPlayer 歌詞編輯器 Beta</div>
 							<p class="display-1 text--primary">使用說明</p>
 							<div class="text--primary">
 								左側為歌詞預覽，右側則是編輯區塊
+								<br />編輯完成後請按左下角打勾儲存歌詞，若要取消編輯點擊返回鍵即可跳出
+								<br />點擊歌詞預覽的歌詞即可將歌曲轉跳至該時間，若是雙語歌詞，請點選原文部份
+								<br />若有任何問題或功能建議，歡迎透過「設定->關於->GitHub->Issues」提出
+							</div>
+						</v-card-text>
+					</v-card>
+					<v-card class="mx-auto" id="lyric-edit-about-phone">
+						<v-card-text>
+							<div>PokaPlayer 歌詞編輯器 Beta</div>
+							<p class="display-1 text--primary">使用說明</p>
+							<div class="text--primary">
+								上方為歌詞預覽，下方則是編輯區塊
 								<br />編輯完成後請按左下角打勾儲存歌詞，若要取消編輯點擊返回鍵即可跳出
 								<br />點擊歌詞預覽的歌詞即可將歌曲轉跳至該時間，若是雙語歌詞，請點選原文部份
 								<br />若有任何問題或功能建議，歡迎透過「設定->關於->GitHub->Issues」提出
@@ -137,6 +149,26 @@
             width: 100%
         #lyric-edit-text-editor
             width: 100%
+        #lyric-edit-about, #lyric-edit-about-phone
+            width: 100%
+        #lyric-edit-about-phone
+            display: none
+
+@media screen and (max-width: 768px)
+    #lrc-editor
+        display: block
+        height: calc(100vh - 64px - 69px)
+        .lyric-view
+            width: 100%
+            height: 30%
+        #lyric-edit
+            width: 100%
+            height: 70%
+            padding: 0 8px
+            #lyric-edit-about
+                display: none
+            #lyric-edit-about-phone
+                display: block
 </style>
 <style lang="sass">
 .v-textarea textarea
@@ -263,9 +295,8 @@ export default {
 						//等 Vue 好了再去更新捲動條
 						let focusedLyric = document.querySelector(".lyric-view p.focus");
 						if (focusedLyric) {
-							let sh = focusedLyric.offsetTop - document.querySelector("main").clientHeight * 0.5 +
+							let sh = focusedLyric.offsetTop - document.querySelector(".lyric-view").clientHeight * 0.5 +
 								focusedLyric.clientHeight * (this.lyricTranslated ? 1.75 : 0.75);
-							sh += 69 //底部播放器高度
 							window.scrollTo(document.querySelector(".lyric-view"), sh, 200);
 						} else {
 							this.lyricFocus = 0
