@@ -111,7 +111,7 @@
             .timestamp
                 width: 85px
                 display: inline-block
-                background: #000
+                background: var(--v-primary-base,#000)
                 color: #FFF
                 padding: 2px 5px
                 font-size: 18px
@@ -161,6 +161,7 @@
         .lyric-view
             width: 100%
             height: 30%
+            box-shadow: inset 0 -1px 0 0 #dadce0
         #lyric-edit
             width: 100%
             height: 70%
@@ -169,10 +170,13 @@
                 display: none
             #lyric-edit-about-phone
                 display: block
+@media (prefers-color-scheme: dark) and (max-width: 768px)
+    .lyric-view
+        box-shadow: inset 0 -1px 0 0 hsla(0,0%,100%,.12)
 </style>
 <style lang="sass">
 .v-textarea textarea
-    line-height: 1.25em!important
+    line-height: 1.5em!important
 </style>
 <script>
 
