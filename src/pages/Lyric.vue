@@ -108,6 +108,7 @@
 				</v-card-text>
 				<v-divider></v-divider>
 				<v-card-actions>
+					<v-btn text @click="editLyric">編輯目前的歌詞</v-btn>
 					<v-spacer></v-spacer>
 					<v-btn text @click="showLyricDialog = false">{{$t('cancel')}}</v-btn>
 				</v-card-actions>
@@ -146,13 +147,14 @@
 
 <script>
 export default {
-	name: "Lyrics",
+	name: "LyricEdit",
 	data: () => ({
 		audio_title: null,
 		audio_artist: null,
 		audio_cover: null,
 		showLyricDialog: false,
 		lyric: [],
+		lyric_raw: null,
 		lyricFocus: 0,
 		lyricSearching: true,
 		lyricSearchResult: null,
@@ -168,6 +170,10 @@ export default {
 		this.stopUpdateLyric();
 	},
 	methods: {
+		editLyric() {
+			window.localStorage['lrc_temp'] = this.lyric_raw
+			this.$router.push("/lyric/edit");
+		},
 		startUpdateLyric() {
 			this.Lyric_Update = setInterval(() => this.updateLyric(), 300);
 		},
@@ -293,14 +299,16 @@ export default {
 		},
 		loadLrc(lrc, save = false) {
 			window._lrc.load(lrc);
+			this.lyric_raw = lrc
 			window.scrollTo(document.querySelector("main.v-content"), 0, 200);
 			this.lyricFocus = 0; // 歌詞進度歸零
 			try {
 				//如果最後兩個時間相同把後面那個的時間調到一個世紀後
 				if (window._lrc.lyrics_all[window._lrc.lyrics_all.length - 2].timestamp ==
 					window._lrc.lyrics_all[window._lrc.lyrics_all.length - 1].timestamp) {
-					window._lrc.lyrics_all[window._lrc.lyrics_all.length - 1].timestamp = 99999;
+					window._lrc.lyrics_all[window._lrc.lyrics_all.length - 2].timestamp += 100;
 					this.lyricTranslated = true;
+					window._lrc.lyrics_all = window._lrc.lyrics_all.sort((a, b) => a.timestamp - b.timestamp)
 				} else {
 					this.lyricTranslated = false;
 				}

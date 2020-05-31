@@ -19,6 +19,7 @@ import Notfound from '@/pages/Notfound'
 import Playlist from '@/pages/Playlist'
 import PlaylistSongs from '@/pages/PlaylistSongs'
 import Lyric from '@/pages/Lyric'
+import LyricEdit from '@/pages/LyricEdit'
 import Search from '@/pages/Search'
 import Setting from '@/pages/Setting'
 import SettingNetwork from '@/pages/SettingNetwork'
@@ -41,6 +42,10 @@ export default new Router({
 			path: '/lyric',
 			name: 'Lyric',
 			component: Lyric
+		}, {
+			path: '/lyric/edit',
+			name: 'LyricEdit',
+			component: LyricEdit
 		}, {
 			path: '/album/songs/:source/:id',
 			name: 'AlbumSongs',
