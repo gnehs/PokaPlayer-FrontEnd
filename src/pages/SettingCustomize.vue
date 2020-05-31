@@ -224,10 +224,10 @@ export default {
 	}),
 	computed: {
 		"color": {
-			get: function () {
+			get() {
 				return window._setting("theme")
 			},
-			set: function (value) {
+			set(value) {
 				this.setPrimaryColor(value)
 			}
 		}

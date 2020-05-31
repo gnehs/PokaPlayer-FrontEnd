@@ -142,8 +142,6 @@ export default {
 		audio_cover: _setting(`headerBgSource`),
 		audio_title: "PokaPlayer",
 		audio_artist: null,
-		audio_next_name: "",
-		audio_previous_name: "",
 		audio_order: _player.options.order,
 		transitionName: "fade",
 		scrollPositions: {},
@@ -228,8 +226,6 @@ export default {
 				this.audio_cover = nowPlaying.cover;
 				this.audio_currentTime = this.secondToTime(_player.audio.currentTime || 0);
 				this.audio_totalTime = this.secondToTime(_player.audio.duration || 0);
-				this.audio_next_name = _player.list.audios[_player.nextIndex()].name;
-				this.audio_previous_name = _player.list.audios[_player.prevIndex()].name;
 				if ("mediaSession" in navigator) {
 					//讀圖片
 					let image = document.querySelector(".cover img");
