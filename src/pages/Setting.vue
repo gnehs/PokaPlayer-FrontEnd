@@ -59,11 +59,11 @@ export default {
 			title: i18n.t('settingUser.title'),
 			desp: i18n.t('settingUser.description'),
 			icon: 'person', to: "/setting/user"
-		}, {
+		}, /*{
 			title: i18n.t('settingPravicy.title'),
 			desp: i18n.t('settingPravicy.description'),
 			icon: 'lock', to: "/setting/privacy"
-		}, {
+		},*/ {
 			title: i18n.t('settings_systemAndUpdate'),
 			desp: i18n.t('settings_systemAndUpdate_description'),
 			icon: 'system_update', to: "/setting/system"
