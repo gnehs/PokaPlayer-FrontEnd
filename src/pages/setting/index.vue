@@ -5,46 +5,35 @@
 			<p style="margin-bottom:0">請使用選單來檢視設定項目。</p>
 		</div>
 		<poka-update />
-		<h1>{{$t('settings_about')}}</h1>
-		<v-list subheader>
-			<v-list-item>
-				<v-list-item-avatar>
-					<v-icon>info</v-icon>
-				</v-list-item-avatar>
-				<v-list-item-content>
-					<v-list-item-title>PokaPlayer</v-list-item-title>
-					<v-list-item-subtitle>{{poka_version}}</v-list-item-subtitle>
-				</v-list-item-content>
-			</v-list-item>
-			<v-divider />
-			<v-list-item href="https://github.com/gnehs/PokaPlayer/" target="_blank">
-				<v-list-item-avatar>
-					<v-icon>explore</v-icon>
-				</v-list-item-avatar>
-				<v-list-item-content>
-					<v-list-item-title>GitHub</v-list-item-title>
-				</v-list-item-content>
-			</v-list-item>
-			<v-list-item href="https://github.com/gnehs/PokaPlayer/graphs/contributors" target="_blank">
-				<v-list-item-avatar>
-					<v-icon>group</v-icon>
-				</v-list-item-avatar>
-				<v-list-item-content>
-					<v-list-item-title>{{$t("settings_about_contributions")}}</v-list-item-title>
-				</v-list-item-content>
-			</v-list-item>
-			<v-list-item href="https://github.com/gnehs/PokaPlayer/issues" target="_blank">
-				<v-list-item-avatar>
-					<v-icon>error</v-icon>
-				</v-list-item-avatar>
-				<v-list-item-content>
-					<v-list-item-title>{{$t("settings_about_errorEeport")}}</v-list-item-title>
-				</v-list-item-content>
-			</v-list-item>
-		</v-list>
-		<v-dialog v-model="aboutDialog" max-width="350">
-			<poka-about />
-		</v-dialog>
+		<poka-cards class="poka cards" :hide-overflow="false">
+			<poka-card
+				poka-icon="music_note"
+				:ellipsis="false"
+				poka-title="PokaPlayer"
+				:poka-subtitle="poka_version"
+			/>
+			<poka-card
+				href="https://github.com/gnehs/PokaPlayer/"
+				target="_blank"
+				poka-icon="explore"
+				:ellipsis="false"
+				poka-title="GitHub"
+			/>
+			<poka-card
+				href="https://github.com/gnehs/PokaPlayer/graphs/contributors"
+				target="_blank"
+				poka-icon="group"
+				:ellipsis="false"
+				:poka-title="$t('settings_about_contributions')"
+			/>
+			<poka-card
+				href="https://github.com/gnehs/PokaPlayer/issues"
+				target="_blank"
+				poka-icon="error"
+				:ellipsis="false"
+				:poka-title="$t('settings_about_errorEeport')"
+			/>
+		</poka-cards>
 	</div>
 </template>
 <script>
@@ -58,7 +47,6 @@ export default {
 	},
 	data: () => ({
 		settings: { darkMode: window._setting("darkMode") },
-		aboutDialog: false,
 		poka_version: "Loading..."
 	})
 };
