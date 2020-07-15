@@ -4,7 +4,6 @@
 			<h1>歡迎來到設定頁面</h1>
 			<p style="margin-bottom:0">請使用選單來檢視設定項目。</p>
 		</div>
-		<poka-update />
 		<poka-cards class="poka cards" :hide-overflow="false">
 			<poka-card
 				poka-icon="music_note"
@@ -33,6 +32,7 @@
 				:ellipsis="false"
 				:poka-title="$t('settings_about_errorEeport')"
 			/>
+			<poka-update :card="true" />
 		</poka-cards>
 	</div>
 </template>

@@ -1,6 +1,15 @@
 <template>
 	<transition name="fade-slide-up">
-		<div class="update-notify" v-if="checkUpadteStatus" key="0">
+		<poka-card
+			v-if="card&&checkUpadteStatus"
+			poka-bg="/img/update.svg"
+			:ellipsis="false"
+			to="/settings/system"
+			:poka-title="$t('settings_update')"
+			:poka-subtitle="checkUpadteStatus"
+			style="--card-background-color: #2f2b3eB3"
+		/>
+		<div class="update-notify" key="0" v-else-if="checkUpadteStatus">
 			<h1>{{$t('settings_update')}}</h1>
 			<p>{{checkUpadteStatus}}</p>
 
@@ -26,6 +35,9 @@
 <script>
 export default {
 	name: "poka-update",
+	props: {
+		card: { default: false },
+	},
 	created() {
 		this.axios
 			.get(_setting(`server`) + "/status/")
