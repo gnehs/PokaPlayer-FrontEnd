@@ -1,17 +1,7 @@
 <template>
 	<div>
-		<poka-header :title="$t('settingUser.title')" :subtitle="$t('settings')" />
+		<poka-header :title="$t('settingUser.title')" />
 		<v-list subheader>
-			<v-list-item @click="$router.push('/setting')">
-				<v-list-item-avatar>
-					<v-icon>arrow_back</v-icon>
-				</v-list-item-avatar>
-
-				<v-list-item-content>
-					<v-list-item-title>{{$t('back')}}</v-list-item-title>
-				</v-list-item-content>
-			</v-list-item>
-
 			<v-list-item @click="temp.changeNamePrompt=true" v-if="userdata">
 				<v-list-item-avatar>
 					<v-icon>person</v-icon>

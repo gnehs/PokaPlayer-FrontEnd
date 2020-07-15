@@ -1,17 +1,7 @@
 <template>
 	<div>
-		<poka-header :title="$t('settings')" :subtitle="$t('settings_lang')" />
+		<poka-header :title="$t('settings_lang')" />
 		<div class="poka list">
-			<div class="item" @click="$router.push('/setting')" v-ripple>
-				<div class="content">
-					<v-avatar size="24px" item>
-						<v-icon>arrow_back</v-icon>
-					</v-avatar>
-					<div class="header">
-						<div class="head t-ellipsis">{{$t('back')}}</div>
-					</div>
-				</div>
-			</div>
 			<div
 				class="item"
 				v-for="(lang,index) of languages"

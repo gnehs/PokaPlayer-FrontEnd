@@ -1,5 +1,4 @@
 // pokaComponent
-import about from '@/components/about.vue'
 import headerWrapper from '@/components/header-wrapper.vue'
 import infoHeader from '@/components/info-header.vue'
 import pokaCard from '@/components/card.vue'
@@ -20,7 +19,6 @@ import parseHome from '@/components/parse-home.vue'
 import parseHomeDialog from '@/components/parse-home-dialog.vue'
 export {
     // pokaComponent
-    about,
     headerWrapper,
     pokaCard,
     pokaCards,

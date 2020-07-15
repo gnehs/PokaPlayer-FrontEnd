@@ -55,6 +55,7 @@ export default {
 		items: [
 			{ icon: 'home', text: i18n.t("home"), to: "/home" },
 			{ divider: true },
+			{ icon: 'settings', text: i18n.t("settings"), to: "/setting" },
 			{
 				text: i18n.t('settings_network'),
 				icon: 'cloud', to: "/settings/network"

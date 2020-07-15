@@ -1,17 +1,7 @@
 <template>
 	<div>
-		<poka-header :title="$t('settings')" :subtitle="$t('settings_customize')" :bg="setting.bg" />
+		<poka-header :title="$t('settings_customize')" :bg="setting.bg" />
 		<div class="poka list">
-			<div class="item" @click="$router.push('/setting')" v-ripple>
-				<div class="content">
-					<v-avatar size="42px" item>
-						<v-icon>arrow_back</v-icon>
-					</v-avatar>
-					<div class="header">
-						<div class="head t-ellipsis">{{$t('back')}}</div>
-					</div>
-				</div>
-			</div>
 			<div class="item" @click="customize_bg_dialog=true" v-ripple>
 				<div class="content">
 					<v-avatar size="42px" item>

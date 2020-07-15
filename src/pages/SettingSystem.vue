@@ -1,16 +1,7 @@
 <template>
 	<div>
-		<poka-header :title="$t('settings')" :subtitle="$t('settings_systemAndUpdate')" />
+		<poka-header :title="$t('settings_systemAndUpdate')" />
 		<v-list subheader>
-			<v-list-item @click="$router.push('/setting')">
-				<v-list-item-avatar>
-					<v-icon>arrow_back</v-icon>
-				</v-list-item-avatar>
-
-				<v-list-item-content>
-					<v-list-item-title>{{$t('back')}}</v-list-item-title>
-				</v-list-item-content>
-			</v-list-item>
 			<v-subheader>{{$t('settings_system')}}</v-subheader>
 			<v-list-item @click="restartConfirmActive=true">
 				<v-list-item-avatar>

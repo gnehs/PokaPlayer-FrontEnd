@@ -1,37 +1,47 @@
 <template>
 	<div>
-		<poka-header :title="$t('settings')" />
 		<poka-update />
-		<div class="poka list">
-			<div
-				class="item"
-				v-for="item in settingItems"
-				:key="item.title"
-				@click="$router.push(item.to)"
-				v-ripple
-			>
-				<div class="content">
-					<v-avatar size="42px" item>
-						<v-icon>{{item.icon}}</v-icon>
-					</v-avatar>
-					<div class="header">
-						<div class="head t-ellipsis">{{item.title}}</div>
-						<div class="t-ellipsis">{{item.desp}}</div>
-					</div>
-				</div>
-			</div>
-			<div class="item" @click="aboutDialog=true" v-ripple>
-				<div class="content">
-					<v-avatar size="42px" item>
-						<v-icon>info</v-icon>
-					</v-avatar>
-					<div class="header">
-						<div class="head t-ellipsis">{{$t('settings_about')}}</div>
-						<div class="t-ellipsis">{{$t('settings_about_description')}}</div>
-					</div>
-				</div>
-			</div>
+		<div class="poka-notify">
+			<h1>歡迎來到設定頁面</h1>
+			<p style="margin-bottom:0">請使用選單來檢視設定項目。</p>
 		</div>
+		<h1>{{$t('settings_about')}}</h1>
+		<v-list subheader>
+			<v-list-item>
+				<v-list-item-avatar>
+					<v-icon>info</v-icon>
+				</v-list-item-avatar>
+				<v-list-item-content>
+					<v-list-item-title>PokaPlayer</v-list-item-title>
+					<v-list-item-subtitle>{{poka_version}}</v-list-item-subtitle>
+				</v-list-item-content>
+			</v-list-item>
+			<v-divider />
+			<v-list-item href="https://github.com/gnehs/PokaPlayer/" target="_blank">
+				<v-list-item-avatar>
+					<v-icon>explore</v-icon>
+				</v-list-item-avatar>
+				<v-list-item-content>
+					<v-list-item-title>GitHub</v-list-item-title>
+				</v-list-item-content>
+			</v-list-item>
+			<v-list-item href="https://github.com/gnehs/PokaPlayer/graphs/contributors" target="_blank">
+				<v-list-item-avatar>
+					<v-icon>group</v-icon>
+				</v-list-item-avatar>
+				<v-list-item-content>
+					<v-list-item-title>{{$t("settings_about_contributions")}}</v-list-item-title>
+				</v-list-item-content>
+			</v-list-item>
+			<v-list-item href="https://github.com/gnehs/PokaPlayer/issues" target="_blank">
+				<v-list-item-avatar>
+					<v-icon>error</v-icon>
+				</v-list-item-avatar>
+				<v-list-item-content>
+					<v-list-item-title>{{$t("settings_about_errorEeport")}}</v-list-item-title>
+				</v-list-item-content>
+			</v-list-item>
+		</v-list>
 		<v-dialog v-model="aboutDialog" max-width="350">
 			<poka-about />
 		</v-dialog>
@@ -40,34 +50,16 @@
 <script>
 export default {
 	name: "Setting",
+	created() {
+		this.axios.get(_setting(`server`) + "/status/").then(response => {
+			if (!response.data.version) this.$router.push("/login");
+			this.poka_version = response.data.version;
+		});
+	},
 	data: () => ({
 		settings: { darkMode: window._setting("darkMode") },
 		aboutDialog: false,
-		settingItems: [{
-			title: i18n.t('settings_network'),
-			desp: i18n.t('settings_network_description'),
-			icon: 'cloud', to: "/settings/network"
-		}, {
-			title: i18n.t('settings_customize'),
-			desp: i18n.t('settings_customize_description'),
-			icon: 'format_paint', to: "/settings/customize"
-		}, {
-			title: i18n.t('settings_lang'),
-			desp: i18n.t('settings_lang_description'),
-			icon: 'translate', to: "/settings/lang"
-		}, {
-			title: i18n.t('settingUser.title'),
-			desp: i18n.t('settingUser.description'),
-			icon: 'person', to: "/settings/user"
-		}, /*{
-			title: i18n.t('settingPravicy.title'),
-			desp: i18n.t('settingPravicy.description'),
-			icon: 'lock', to: "/settings/privacy"
-		},*/ {
-			title: i18n.t('settings_systemAndUpdate'),
-			desp: i18n.t('settings_systemAndUpdate_description'),
-			icon: 'system_update', to: "/settings/system"
-		}]
+		poka_version: "Loading..."
 	})
 };
 </script>

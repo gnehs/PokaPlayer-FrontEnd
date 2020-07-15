@@ -1,18 +1,8 @@
 <template>
 	<div>
-		<poka-header :title="$t('settings')" :subtitle="$t('settings_network')" />
+		<poka-header :title="$t('settings_network')" />
 
 		<div class="poka list">
-			<div class="item" @click="$router.push('/setting')" v-ripple>
-				<div class="content">
-					<v-avatar size="42px" item>
-						<v-icon>arrow_back</v-icon>
-					</v-avatar>
-					<div class="header">
-						<div class="head t-ellipsis">{{$t('back')}}</div>
-					</div>
-				</div>
-			</div>
 			<div class="item" @click="showSoundQualityDialog=true" v-ripple>
 				<div class="content">
 					<v-avatar size="42px" item>
