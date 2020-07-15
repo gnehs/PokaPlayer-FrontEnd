@@ -1,10 +1,10 @@
 <template>
 	<div>
-		<poka-update />
 		<div class="poka-notify">
 			<h1>歡迎來到設定頁面</h1>
 			<p style="margin-bottom:0">請使用選單來檢視設定項目。</p>
 		</div>
+		<poka-update />
 		<h1>{{$t('settings_about')}}</h1>
 		<v-list subheader>
 			<v-list-item>
