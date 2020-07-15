@@ -46,27 +46,27 @@ export default {
 		settingItems: [{
 			title: i18n.t('settings_network'),
 			desp: i18n.t('settings_network_description'),
-			icon: 'cloud', to: "/setting/network"
+			icon: 'cloud', to: "/settings/network"
 		}, {
 			title: i18n.t('settings_customize'),
 			desp: i18n.t('settings_customize_description'),
-			icon: 'format_paint', to: "/setting/customize"
+			icon: 'format_paint', to: "/settings/customize"
 		}, {
 			title: i18n.t('settings_lang'),
 			desp: i18n.t('settings_lang_description'),
-			icon: 'translate', to: "/setting/lang"
+			icon: 'translate', to: "/settings/lang"
 		}, {
 			title: i18n.t('settingUser.title'),
 			desp: i18n.t('settingUser.description'),
-			icon: 'person', to: "/setting/user"
+			icon: 'person', to: "/settings/user"
 		}, /*{
 			title: i18n.t('settingPravicy.title'),
 			desp: i18n.t('settingPravicy.description'),
-			icon: 'lock', to: "/setting/privacy"
+			icon: 'lock', to: "/settings/privacy"
 		},*/ {
 			title: i18n.t('settings_systemAndUpdate'),
 			desp: i18n.t('settings_systemAndUpdate_description'),
-			icon: 'system_update', to: "/setting/system"
+			icon: 'system_update', to: "/settings/system"
 		}]
 	})
 };

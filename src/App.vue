@@ -5,6 +5,19 @@
 		</transition>
 	</v-app>
 </template>
+<script>
+import Vue from "vue";
+export default {
+	created() {
+		Vue.prototype.$goBack = () => {
+			window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
+		}
+		Vue.prototype.$deepCopy = d => JSON.parse(JSON.stringify(d))
+		Vue.prototype.$randomPlay = window._randomPlay;
+		Vue.prototype.$addSongs = window._addSongs;
+	}
+}
+</script>
 <style lang="sass">
 @import "@/assets/pokaList.sass"
 @import "@/assets/main.sass"

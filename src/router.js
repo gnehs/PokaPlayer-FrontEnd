@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import defaultLayout from '@/layout/default'
 import emptyLayout from '@/layout/empty'
+import settingLayout from '@/layout/setting'
 
 import Album from '@/pages/Album'
 import AlbumSongs from '@/pages/AlbumSongs'
@@ -124,52 +125,6 @@ export default new Router({
 			name: 'Search',
 			component: Search
 		}, {
-			path: '/setting',
-			name: 'Setting',
-			component: Setting
-		}, {
-			path: '/setting/network',
-			name: 'SettingNetwork',
-			component: SettingNetwork,
-			meta: {
-				transitionName: 'slide'
-			}
-		}, {
-			path: '/setting/customize',
-			name: 'SettingCustomize',
-			component: SettingCustomize,
-			meta: {
-				transitionName: 'slide'
-			}
-		}, {
-			path: '/setting/lang',
-			name: 'SettingLang',
-			component: SettingLang,
-			meta: {
-				transitionName: 'slide'
-			}
-		}, {
-			path: '/setting/system',
-			name: 'SettingSystem',
-			component: SettingSystem,
-			meta: {
-				transitionName: 'slide'
-			}
-		}, {
-			path: '/setting/user',
-			name: 'SettingUser',
-			component: SettingUser,
-			meta: {
-				transitionName: 'slide'
-			}
-		}, {
-			path: '/setting/privacy',
-			name: 'SettingPrivacy',
-			component: SettingPrivacy,
-			meta: {
-				transitionName: 'slide'
-			}
-		}, {
 			path: '/home',
 			name: 'Home',
 			component: Home
@@ -180,12 +135,11 @@ export default new Router({
 		}, {
 			path: '',
 			redirect: '/home'
-		},]
+		}]
 	}, {
 		path: '/',
 		name: 'empty',
 		component: emptyLayout,
-		redirect: '/dashboard',
 		children: [{
 			path: '/install',
 			name: 'Install',
@@ -194,7 +148,58 @@ export default new Router({
 			path: '/login',
 			name: 'Login',
 			component: Login
-		},]
+		}]
+	}, {
+		path: '/',
+		name: 'setting',
+		component: settingLayout,
+		children: [{
+			path: '/setting',
+			name: 'Setting',
+			component: Setting
+		}, {
+			path: '/settings/network',
+			name: 'SettingNetwork',
+			component: SettingNetwork,
+			meta: {
+				transitionName: 'slide'
+			}
+		}, {
+			path: '/settings/customize',
+			name: 'SettingCustomize',
+			component: SettingCustomize,
+			meta: {
+				transitionName: 'slide'
+			}
+		}, {
+			path: '/settings/lang',
+			name: 'SettingLang',
+			component: SettingLang,
+			meta: {
+				transitionName: 'slide'
+			}
+		}, {
+			path: '/settings/system',
+			name: 'SettingSystem',
+			component: SettingSystem,
+			meta: {
+				transitionName: 'slide'
+			}
+		}, {
+			path: '/settings/user',
+			name: 'SettingUser',
+			component: SettingUser,
+			meta: {
+				transitionName: 'slide'
+			}
+		}, {
+			path: '/settings/privacy',
+			name: 'SettingPrivacy',
+			component: SettingPrivacy,
+			meta: {
+				transitionName: 'slide'
+			}
+		}]
 	}, {
 		path: '*',
 		redirect: '/notfound'

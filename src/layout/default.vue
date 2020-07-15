@@ -176,9 +176,6 @@ export default {
 			clearTimeout(this.snackbar.timeout);
 			this.snackbar.timeout = setTimeout(() => (this.snackbar.show = false), duration);
 		};
-		Vue.prototype.$deepCopy = d => JSON.parse(JSON.stringify(d))
-		Vue.prototype.$randomPlay = window._randomPlay;
-		Vue.prototype.$addSongs = window._addSongs;
 		sessionStorage.removeItem("login");
 		function vhResize() {
 			let vh = window.innerHeight * 0.01;

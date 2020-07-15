@@ -4,7 +4,7 @@
 			<h1>{{$t('settings_update')}}</h1>
 			<p>{{checkUpadteStatus}}</p>
 
-			<v-btn outlined to="/setting/system" color="white" dark>{{$t('settings_update_go2UpdatePage')}}</v-btn>
+			<v-btn outlined to="/settings/system" color="white" dark>{{$t('settings_update_go2UpdatePage')}}</v-btn>
 		</div>
 	</transition>
 </template>
