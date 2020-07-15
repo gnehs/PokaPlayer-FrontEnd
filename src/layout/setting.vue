@@ -56,26 +56,12 @@ export default {
 			{ icon: 'home', text: i18n.t("home"), to: "/home" },
 			{ divider: true },
 			{ icon: 'settings', text: i18n.t("settings"), to: "/setting" },
-			{
-				text: i18n.t('settings_network'),
-				icon: 'cloud', to: "/settings/network"
-			}, {
-				text: i18n.t('settings_customize'),
-				icon: 'format_paint', to: "/settings/customize"
-			}, {
-				text: i18n.t('settings_lang'),
-				icon: 'translate', to: "/settings/lang"
-			}, {
-				text: i18n.t('settingUser.title'),
-				icon: 'person', to: "/settings/user"
-			}, /*{
-			text: i18n.t('settingPravicy.title'),
-			desp: i18n.t('settingPravicy.description'),
-			icon: 'lock', to: "/settings/privacy"
-		},*/ {
-				text: i18n.t('settings_systemAndUpdate'),
-				icon: 'system_update', to: "/settings/system"
-			}
+			{ text: i18n.t('settings_network'), icon: 'cloud', to: "/settings/network" },
+			{ text: i18n.t('settings_customize'), icon: 'format_paint', to: "/settings/customize" },
+			{ text: i18n.t('settings_lang'), icon: 'translate', to: "/settings/lang" },
+			{ text: i18n.t('settingUser.title'), icon: 'person', to: "/settings/user" },
+			//{ text: i18n.t('settingPravicy.title'), icon: 'lock', to: "/settings/privacy" },
+			{ text: i18n.t('settings_systemAndUpdate'), icon: 'system_update', to: "/settings/system" }
 		],
 	}),
 	created() {
@@ -153,28 +139,28 @@ export default {
 </script>
 <style lang="sass" scoped>
 nav
-    .v-list-item
-        .material-icons:not(.material-icons-outlined)
-            display: none
-        &.v-item--active
-            .material-icons:not(.material-icons-outlined)
-                display: block
-            .material-icons-outlined
-                display: none
+	.v-list-item
+		.material-icons:not(.material-icons-outlined)
+			display: none
+		&.v-item--active
+			.material-icons:not(.material-icons-outlined)
+				display: block
+			.material-icons-outlined
+				display: none
 .v-content
-    height: calc(var(--vh,1vh) * 100)
-    overflow: hidden
-    overflow-y: scroll
-    margin-bottom: 0
+	height: calc(var(--vh,1vh) * 100)
+	overflow: hidden
+	overflow-y: scroll
+	margin-bottom: 0
 nav
-    .v-list
-        .v-list-item.theme--dark
-            &.v-list-item--active::before
-                opacity: 1
-                background-color: var(--v-primary-base) !important
-            .v-list-item__action,.v-list-item__content
-                z-index: 1
+	.v-list
+		.v-list-item.theme--dark
+			&.v-list-item--active::before
+				opacity: 1
+				background-color: var(--v-primary-base) !important
+			.v-list-item__action,.v-list-item__content
+				z-index: 1
 @media (min-width: 576px)
-    .router-view
-        padding: 16px
+	.router-view
+		padding: 16px
 </style>

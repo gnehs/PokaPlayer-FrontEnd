@@ -17,7 +17,7 @@
 				now-playing
 				:active-index="audio_index"
 			>
-				<template scope="props">
+				<template slot-scope="props">
 					<v-btn icon @click.stop="props.moreDialog(props.song)" v-show="isSafari">
 						<v-icon class="material-icons-outlined">more_horiz</v-icon>
 					</v-btn>

@@ -1,53 +1,34 @@
 <template>
 	<div>
-		<div class="poka-notify">
-			<h1>歡迎來到設定頁面</h1>
-			<p style="margin-bottom:0">請使用選單來檢視設定項目。</p>
-		</div>
 		<poka-cards class="poka cards" :hide-overflow="false">
-			<poka-card
-				poka-icon="music_note"
-				:ellipsis="false"
-				poka-title="PokaPlayer"
-				:poka-subtitle="poka_version"
-			/>
-			<poka-card
-				href="https://github.com/gnehs/PokaPlayer/"
-				target="_blank"
-				poka-icon="explore"
-				:ellipsis="false"
-				poka-title="GitHub"
-			/>
-			<poka-card
-				href="https://github.com/gnehs/PokaPlayer/graphs/contributors"
-				target="_blank"
-				poka-icon="group"
-				:ellipsis="false"
-				:poka-title="$t('settings_about_contributions')"
-			/>
-			<poka-card
-				href="https://github.com/gnehs/PokaPlayer/issues"
-				target="_blank"
-				poka-icon="error"
-				:ellipsis="false"
-				:poka-title="$t('settings_about_errorEeport')"
-			/>
 			<poka-update :card="true" />
+			<poka-card
+				v-for="item in settingItems"
+				:key="item.to"
+				:to="item.to"
+				:poka-icon="item.icon"
+				:poka-title="item.text"
+			/>
+			<poka-card @click.native="aboutDialog=true" poka-icon="info" :poka-title="$t('settings_about')" />
 		</poka-cards>
+		<v-dialog v-model="aboutDialog" max-width="350">
+			<poka-about />
+		</v-dialog>
 	</div>
 </template>
 <script>
 export default {
 	name: "Setting",
-	created() {
-		this.axios.get(_setting(`server`) + "/status/").then(response => {
-			if (!response.data.version) this.$router.push("/login");
-			this.poka_version = response.data.version;
-		});
-	},
 	data: () => ({
-		settings: { darkMode: window._setting("darkMode") },
-		poka_version: "Loading..."
+		aboutDialog: false,
+		settingItems: [
+			{ text: i18n.t('settings_network'), icon: 'cloud', to: "/settings/network" },
+			{ text: i18n.t('settings_customize'), icon: 'format_paint', to: "/settings/customize" },
+			{ text: i18n.t('settings_lang'), icon: 'translate', to: "/settings/lang" },
+			{ text: i18n.t('settingUser.title'), icon: 'person', to: "/settings/user" },
+			//{ text: i18n.t('settingPravicy.title'), icon: 'lock', to: "/settings/privacy" },
+			{ text: i18n.t('settings_systemAndUpdate'), icon: 'system_update', to: "/settings/system" }
+		],
 	})
 };
 </script>
