@@ -113,19 +113,15 @@ export default {
 		newVersion: {
 			prerelease: null,
 			tag: null,
-			body: "<h1>===PokaPlayer===</h1>"
+			body: "Loading..."
 		}
 	}),
 	created() {
 		this.axios.get(_setting(`server`) + "/status/").then(response => {
 			this.poka_version = response.data.version;
-			this.poka_debug =
-				response.data.debug != "false" ? response.data.debug : null;
+			this.poka_debug = response.data.debug != "false" ? response.data.debug : null;
 			this.fetchNewVersion();
 		});
-		if (this.$route.query.update) {
-			this.showUpdateDialog = true
-		}
 	},
 	methods: {
 		openUpdateDialog() {
@@ -142,17 +138,12 @@ export default {
 					if (this.compareVersion(this.poka_version, e[0].tag_name)) {
 						this.newVersion.prerelease = e[0].prerelease;
 						this.newVersion.tag = e[0].tag_name;
-
-						this.checkUpadteStatus = i18n.t(
-							"settings_update_update2",
-							{
-								version: this.newVersion.tag
-							}
-						);
+						this.checkUpadteStatus = i18n.t("settings_update_update2", { version: this.newVersion.tag });
+						if (this.$route.query.update) {
+							this.showUpdateDialog = true
+						}
 					} else {
-						this.checkUpadteStatus = i18n.t(
-							"settings_update_latestVersion"
-						);
+						this.checkUpadteStatus = i18n.t("settings_update_latestVersion");
 					}
 				})
 				.catch(e => console.error(e));
