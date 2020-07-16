@@ -24,9 +24,7 @@ export default {
 		aboutDialog: false,
 		settingItems: [
 			{ text: i18n.t('settings_network'), icon: 'cloud', to: "/settings/network" },
-			{ text: i18n.t('settingInterface._'), icon: 'desktop_windows', to: "/settings/interface" },
-			//{ text: i18n.t('settings_customize'), icon: 'format_paint', to: "/settings/customize" },
-			//{ text: i18n.t('settings_lang'), icon: 'translate', to: "/settings/lang" },
+			{ text: i18n.t('settingInterface._'), icon: 'layers', to: "/settings/interface" },
 			{ text: i18n.t('settingUser.title'), icon: 'person', to: "/settings/user" },
 			//{ text: i18n.t('settingPravicy.title'), icon: 'lock', to: "/settings/privacy" },
 			{ text: i18n.t('settings_systemAndUpdate'), icon: 'system_update', to: "/settings/system" }
