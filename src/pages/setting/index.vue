@@ -1,7 +1,7 @@
 <template>
 	<div>
+		<poka-update />
 		<poka-cards class="poka cards" :hide-overflow="false">
-			<poka-update :card="true" />
 			<poka-card
 				v-for="item in settingItems"
 				:key="item.to"

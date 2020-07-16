@@ -1,15 +1,6 @@
 <template>
 	<transition name="fade-slide-up">
-		<poka-card
-			v-if="card&&checkUpadteStatus"
-			poka-bg="/img/update.svg"
-			:ellipsis="false"
-			to="/settings/system?update=true"
-			:poka-title="$t('settings_update')"
-			:poka-subtitle="checkUpadteStatus"
-			style="--card-background-color: #2f2b3eB3"
-		/>
-		<div class="update-notify" key="0" v-else-if="checkUpadteStatus">
+		<div class="update-notify" key="0" v-if="checkUpadteStatus">
 			<h1>{{$t('settings_update')}}</h1>
 			<p>{{checkUpadteStatus}}</p>
 
@@ -40,9 +31,6 @@
 <script>
 export default {
 	name: "poka-update",
-	props: {
-		card: { default: false },
-	},
 	created() {
 		this.axios
 			.get(_setting(`server`) + "/status/")
@@ -66,16 +54,8 @@ export default {
 			fetch("https://api.github.com/repos/gnehs/PokaPlayer/releases")
 				.then(e => e.json())
 				.then(e => {
-					if (
-						this.compareVersion(currentVersion, e[0].tag_name) ||
-						this.debug
-					) {
-						this.checkUpadteStatus = i18n.t(
-							"settings_update_canUpdate2",
-							{
-								version: e[0].tag_name
-							}
-						);
+					if (this.compareVersion(currentVersion, e[0].tag_name) || this.debug) {
+						this.checkUpadteStatus = i18n.t("settings_update_canUpdate2", { version: e[0].tag_name });
 						if (this.debug)
 							this.checkUpadteStatus += ` (debug: ${this.debug})`;
 					}

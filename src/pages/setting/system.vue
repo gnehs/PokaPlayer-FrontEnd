@@ -125,16 +125,13 @@ export default {
 	},
 	methods: {
 		openUpdateDialog() {
-			if (this.poka_debug || this.newVersion.tag)
-				this.showUpdateDialog = true;
+			if (this.poka_debug || this.newVersion.tag) this.showUpdateDialog = true;
 		},
 		fetchNewVersion() {
 			fetch("https://api.github.com/repos/gnehs/PokaPlayer/releases")
 				.then(e => e.json())
 				.then(e => {
-					this.newVersion.body = new showdown.Converter().makeHtml(
-						e[0].body
-					);
+					this.newVersion.body = new showdown.Converter().makeHtml(e[0].body);
 					if (this.compareVersion(this.poka_version, e[0].tag_name)) {
 						this.newVersion.prerelease = e[0].prerelease;
 						this.newVersion.tag = e[0].tag_name;
@@ -152,10 +149,7 @@ export default {
 			window._player.pause();
 			this.axios.get("/upgrade").then(e => {
 				this.showUpdateingDialog = true;
-				this.updateLog +=
-					window.i18n.t("settings_update_update2", {
-						version: this.newVersion.tag
-					}) + "\n";
+				this.updateLog += window.i18n.t("settings_update_update2", { version: this.newVersion.tag }) + "\n";
 				if (e.data == "upgrade") {
 					setTimeout(() => {
 						alert("更新完成！");
@@ -173,19 +167,13 @@ export default {
 						alert("Permission Denied");
 					});
 					window._socket.on("init", () => {
-						this.updateLog +=
-							window.i18n.t("settings_update_initializing") +
-							"\n";
+						this.updateLog += window.i18n.t("settings_update_initializing") + "\n";
 					});
 					window._socket.on("git", data => {
 						this.updateLog +=
 							{
-								fetch: window.i18n.t(
-									"settings_update_git_fetch"
-								),
-								reset: window.i18n.t(
-									"settings_update_git_reset"
-								),
+								fetch: window.i18n.t("settings_update_git_fetch"),
+								reset: window.i18n.t("settings_update_git_reset"),
 								api: window.i18n.t("settings_update_git_api")
 							}[data] + "\n";
 					});
