@@ -14,7 +14,7 @@
 				</div>
 			</div>
 		</div>
-		<h4>{{$t('settingInterface.customize._')}}</h4>
+		<v-subheader>{{$t('settingInterface.customize._')}}</v-subheader>
 		<div class="poka list">
 			<div class="item" @click="customize_bg_dialog=true" v-ripple>
 				<div class="content">

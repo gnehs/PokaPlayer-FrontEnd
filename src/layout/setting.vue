@@ -53,7 +53,7 @@ export default {
 		settings: { darkMode: window._setting("darkMode") },
 		snackbar: { show: false, message: ``, timeout: null },
 		items: [
-			{ icon: 'home', text: i18n.t("home"), to: "/home" },
+			{ icon: 'arrow_back_ios', text: i18n.t("back"), to: "/home" },
 			{ divider: true },
 			{ icon: 'settings', text: i18n.t("settings"), to: "/setting" },
 			{ text: i18n.t('settings_network'), icon: 'cloud', to: "/settings/network" },
