@@ -112,22 +112,6 @@ export default {
 	"settings_network_soundQuality_Med_description": "音质只比 YouTube 好那么一点点，可在 3G 网路下流畅的串流",
 	"settings_network_soundQuality_High_description": "音质较原始音质略差，可在 4G 网路下流畅的串流",
 	"settings_network_soundQuality_Ori_description": "在网路状况许可下，可选择此选项聆听高音质音乐",
-	"settings_customize": "个人化",
-	"settings_customize_description": "自订背景、主題與其他细节设定",
-	"settings_customize_bg": "自定义背景",
-	"settings_customize_bg_description": "更改背景图样",
-	"settings_customize_bg_cover": "背景覆盖",
-	"settings_customize_bg_cover_description": "更改背景覆盖样式或将其隐藏",
-	"settings_customize_bg_cover_options": {
-		"full": "全覆盖",
-		"half": "半覆盖",
-		"none": "无背景"
-	},
-	"settings_customize_bg_link": "自订连结",
-	"settings_customize_theme": "主题",
-	"settings_customize_theme_description": "设定 PokaPlayer 的主题色彩",
-	"settings_lang": "语言",
-	"settings_lang_description": "设定您的 PokaPlayer 语言",
 	"settings_systemAndUpdate": "系统和更新",
 	"settings_systemAndUpdate_description": "更新 PokaPlayer、重新启动",
 	"settings_about": "关于",
@@ -157,6 +141,31 @@ export default {
 	"settings_restarting": "正在重启",
 	"settings_restart_completed": "重启完成！",
 	"settings_restartDialog_title": "确定要重新启动吗？",
+	"settingInterface": {
+		"_": "界面",
+		"customize": {
+			"_": "个人化",
+			"bg": {
+				"_": "自订背景",
+				"description": "更改背景图片",
+				"custom_link": "自订连结"
+			},
+			"bg_cover": {
+				"_": "背景覆盖",
+				"description": "更改背景覆盖样式或将其隐藏",
+				"options": {
+					"full": "全覆盖",
+					"half": "半覆盖",
+					"none": "无背景"
+				}
+			},
+			"theme": {
+				"_": "主题",
+				"description": "设定 PokaPlayer 的主题色彩",
+			}
+		},
+		"lang": "语言"
+	},
 	"settingUser": {
 		"title": "使用者",
 		"description": "检视您的资料、修改密码",

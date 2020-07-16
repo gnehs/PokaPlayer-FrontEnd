@@ -112,20 +112,6 @@ export default {
 	"settings_network_soundQuality_Med_description": "Able to stream smoothly under 3G network",
 	"settings_network_soundQuality_High_description": "Able to stream smoothly under 4G/LTE network",
 	"settings_network_soundQuality_Ori_description": "Uncompressed audio, only use when the internet is fast",
-	"settings_customize": "Customizations",
-	"settings_customize_description": "Custom background, theme and other details",
-	"settings_customize_bg": "Custom background",
-	"settings_customize_bg_description": "Change background image",
-	"settings_customize_bg_cover": "Background cover",
-	"settings_customize_bg_cover_description": "Change background cover size or hide it",
-	"settings_customize_bg_cover_options": {
-		"full": "Full cover",
-		"half": "Half cover",
-		"none": "Hide background"
-	},
-	"settings_customize_bg_link": "Custom link",
-	"settings_customize_theme": "Theme",
-	"settings_customize_theme_description": "Change theme color",
 	"settings_lang": "Language",
 	"settings_lang_description": "Set your PokaPlayer language",
 	"settings_systemAndUpdate": "System & update",
@@ -157,6 +143,31 @@ export default {
 	"settings_restarting": "Restarting",
 	"settings_restart_completed": "Restart completed.",
 	"settings_restartDialog_title": "Are you sure to restart?",
+	"settingInterface": {
+		"_": "介面",
+		"customize": {
+			"_": "Customizations",
+			"bg": {
+				"_": "Custom background",
+				"description": "Change background image",
+				"custom_link": "Custom link"
+			},
+			"bg_cover": {
+				"_": "Background cover",
+				"description": "Change background cover size or hide it",
+				"options": {
+					"full": "Full cover",
+					"half": "Half cover",
+					"none": "Hide background"
+				}
+			},
+			"theme": {
+				"_": "Theme",
+				"description": "Change theme color",
+			}
+		},
+		"lang": "Language"
+	},
 	"settingUser": {
 		"title": "User",
 		"description": "View your profile, change your password",

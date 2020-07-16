@@ -24,8 +24,7 @@ import LyricEdit from '@/pages/LyricEdit'
 import Search from '@/pages/Search'
 import Setting from '@/pages/setting/index'
 import SettingNetwork from '@/pages/setting/network'
-import SettingCustomize from '@/pages/setting/customize'
-import SettingLang from '@/pages/setting/lang'
+import SettingInterface from '@/pages/setting/interface'
 import SettingSystem from '@/pages/setting/system'
 import SettingUser from '@/pages/setting/user'
 import SettingPrivacy from '@/pages/setting/privacy'
@@ -158,23 +157,16 @@ export default new Router({
 			name: 'Setting',
 			component: Setting
 		}, {
+			path: '/settings/interface',
+			name: 'SettingInterface',
+			component: SettingInterface,
+			meta: {
+				transitionName: 'slide'
+			}
+		}, {
 			path: '/settings/network',
 			name: 'SettingNetwork',
 			component: SettingNetwork,
-			meta: {
-				transitionName: 'slide'
-			}
-		}, {
-			path: '/settings/customize',
-			name: 'SettingCustomize',
-			component: SettingCustomize,
-			meta: {
-				transitionName: 'slide'
-			}
-		}, {
-			path: '/settings/lang',
-			name: 'SettingLang',
-			component: SettingLang,
 			meta: {
 				transitionName: 'slide'
 			}

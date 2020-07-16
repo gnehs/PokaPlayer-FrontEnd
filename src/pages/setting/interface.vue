@@ -1,6 +1,20 @@
 <template>
 	<div>
-		<poka-header :title="$t('settings_customize')" :bg="setting.bg" />
+		<poka-header :title="$t('settingInterface._')" :bg="setting.bg" />
+		<div class="poka list">
+			<div class="item" @click="lang_dialog=true" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>translate</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">{{$t('settingInterface.lang')}}</div>
+						<div class="t-ellipsis">{{$t('title',currentLang)}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<h4>{{$t('settingInterface.customize._')}}</h4>
 		<div class="poka list">
 			<div class="item" @click="customize_bg_dialog=true" v-ripple>
 				<div class="content">
@@ -8,8 +22,8 @@
 						<v-icon>landscape</v-icon>
 					</v-avatar>
 					<div class="header">
-						<div class="head t-ellipsis">{{$t('settings_customize_bg')}}</div>
-						<div class="t-ellipsis">{{$t('settings_customize_bg_description')}}</div>
+						<div class="head t-ellipsis">{{$t('settingInterface.customize.bg._')}}</div>
+						<div class="t-ellipsis">{{$t('settingInterface.customize.bg.description')}}</div>
 					</div>
 				</div>
 			</div>
@@ -19,8 +33,8 @@
 						<v-icon>style</v-icon>
 					</v-avatar>
 					<div class="header">
-						<div class="head t-ellipsis">{{$t('settings_customize_bg_cover')}}</div>
-						<div class="t-ellipsis">{{$t('settings_customize_bg_cover_description')}}</div>
+						<div class="head t-ellipsis">{{$t('settingInterface.customize.bg_cover._')}}</div>
+						<div class="t-ellipsis">{{$t('settingInterface.customize.bg_cover.description')}}</div>
 					</div>
 				</div>
 			</div>
@@ -30,8 +44,8 @@
 						<v-icon>palette</v-icon>
 					</v-avatar>
 					<div class="header">
-						<div class="head t-ellipsis">{{$t('settings_customize_theme')}}</div>
-						<div class="t-ellipsis">{{$t('settings_customize_theme_description')}}</div>
+						<div class="head t-ellipsis">{{$t('settingInterface.customize.theme._')}}</div>
+						<div class="t-ellipsis">{{$t('settingInterface.customize.theme.description')}}</div>
 					</div>
 				</div>
 			</div>
@@ -39,7 +53,7 @@
 
 		<v-dialog v-model="bg_height_dialog" max-width="300">
 			<v-card>
-				<v-card-title class="headline">{{$t('settings_customize_bg_cover')}}</v-card-title>
+				<v-card-title class="headline">{{$t('settingInterface.customize.bg_cover._')}}</v-card-title>
 				<v-card-text>
 					<div class="poka list">
 						<div class="item" @click="setBgHeight('full')" v-ripple>
@@ -48,7 +62,7 @@
 									<v-icon>star</v-icon>
 								</v-avatar>
 								<div class="header">
-									<div class="head">{{$t('settings_customize_bg_cover_options.full')}}</div>
+									<div class="head">{{$t('settingInterface.customize.bg_cover.options.full')}}</div>
 								</div>
 							</div>
 						</div>
@@ -58,7 +72,7 @@
 									<v-icon>star_half</v-icon>
 								</v-avatar>
 								<div class="header">
-									<div class="head">{{$t('settings_customize_bg_cover_options.half')}}</div>
+									<div class="head">{{$t('settingInterface.customize.bg_cover.options.half')}}</div>
 								</div>
 							</div>
 						</div>
@@ -68,7 +82,7 @@
 									<v-icon>star_border</v-icon>
 								</v-avatar>
 								<div class="header">
-									<div class="head">{{$t('settings_customize_bg_cover_options.none')}}</div>
+									<div class="head">{{$t('settingInterface.customize.bg_cover.options.none')}}</div>
 								</div>
 							</div>
 						</div>
@@ -82,13 +96,13 @@
 		</v-dialog>
 		<v-dialog v-model="customize_bg_dialog" max-width="1200">
 			<v-card>
-				<v-card-title class="headline">{{$t('settings_customize_bg')}}</v-card-title>
+				<v-card-title class="headline">{{$t('settingInterface.customize.bg._')}}</v-card-title>
 				<v-card-text>
 					<poka-cards>
 						<poka-card
 							@click.native="bg_prompt_active=true"
 							poka-icon="link"
-							:poka-title="$t('settings_customize_bg_link')"
+							:poka-title="$t('settingInterface.customize.bg.custom_link')"
 						/>
 						<poka-card
 							v-for="{name, src} in imgSources"
@@ -107,7 +121,7 @@
 		</v-dialog>
 		<v-dialog v-model="theme_dialog" max-width="340">
 			<v-card>
-				<v-card-title class="headline">{{$t('settings_customize_theme')}}</v-card-title>
+				<v-card-title class="headline">{{$t('settingInterface.customize.theme._')}}</v-card-title>
 				<v-card-text>
 					<v-color-picker
 						style="margin:8px auto !important"
@@ -127,7 +141,7 @@
 		</v-dialog>
 		<v-dialog v-model="bg_prompt_active" max-width="420">
 			<v-card>
-				<v-card-title class="headline">{{$t("settings_customize_bg")}}</v-card-title>
+				<v-card-title class="headline">{{$t("settingInterface.customize.bg._")}}</v-card-title>
 				<v-card-text style="padding-bottom: 0;">
 					<v-text-field label="URL" v-model.trim="bg_prompt_textbox" filled></v-text-field>
 				</v-card-text>
@@ -138,6 +152,35 @@
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
+		<v-dialog v-model="lang_dialog" max-width="300">
+			<v-card>
+				<v-card-title class="headline">{{$t('settingInterface.lang')}}</v-card-title>
+				<v-card-text>
+					<div class="poka list">
+						<div
+							class="item"
+							v-for="(lang,index) of languages"
+							:key="`lang${lang}-${index}`"
+							@click="setLang(lang)"
+							v-ripple
+						>
+							<div class="content">
+								<v-avatar size="24px" item>
+									<v-icon>translate</v-icon>
+								</v-avatar>
+								<div class="header">
+									<div class="head t-ellipsis">{{$t('title',lang)}}</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn text @click="lang_dialog = false">{{$t('cancel')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 	</div>
 </template>
 
@@ -145,6 +188,10 @@
 export default {
 	name: "SettingCustomize",
 	data: () => ({
+		lang_dialog: false,
+		languages: Object.keys(window.i18n.messages),
+		currentLang: window.i18n.locale,
+
 		theme_dialog: false,
 		bg_height_dialog: false,
 		customize_bg_dialog: false,
@@ -166,13 +213,11 @@ export default {
 			},
 			{
 				name: "The Dog API (GIF)",
-				src:
-					"https://api.thedogapi.com/v1/images/search?format=src&mime_types=image/gif"
+				src: "https://api.thedogapi.com/v1/images/search?format=src&mime_types=image/gif"
 			},
 			{
 				name: "The Dog API (PNG)",
-				src:
-					"https://api.thedogapi.com/v1/images/search?format=src&mime_types=image/png"
+				src: "https://api.thedogapi.com/v1/images/search?format=src&mime_types=image/png"
 			},
 			{
 				name: "The Cat API (GIF)",
@@ -275,6 +320,18 @@ export default {
 				method: "post",
 				url: _setting(`server`) + "/setting/",
 				data: { n: { theme } }
+			});
+		},
+		setLang(lang) {
+			window.i18n.locale = lang;
+			this.currentLang = lang;
+			window._setting("lang", lang);
+			this.lang_dialog = false
+			//同步設定
+			this.axios({
+				method: "post",
+				url: _setting(`server`) + "/setting/",
+				data: { n: { lang } }
 			});
 		}
 	}
