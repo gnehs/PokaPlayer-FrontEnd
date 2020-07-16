@@ -4,7 +4,7 @@
 			v-if="card&&checkUpadteStatus"
 			poka-bg="/img/update.svg"
 			:ellipsis="false"
-			to="/settings/system"
+			to="/settings/system?update=true"
 			:poka-title="$t('settings_update')"
 			:poka-subtitle="checkUpadteStatus"
 			style="--card-background-color: #2f2b3eB3"
@@ -13,7 +13,12 @@
 			<h1>{{$t('settings_update')}}</h1>
 			<p>{{checkUpadteStatus}}</p>
 
-			<v-btn outlined to="/settings/system" color="white" dark>{{$t('settings_update_go2UpdatePage')}}</v-btn>
+			<v-btn
+				outlined
+				to="/settings/system?update=true"
+				color="white"
+				dark
+			>{{$t('settings_update_go2UpdatePage')}}</v-btn>
 		</div>
 	</transition>
 </template>

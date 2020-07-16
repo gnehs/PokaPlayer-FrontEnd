@@ -123,6 +123,9 @@ export default {
 				response.data.debug != "false" ? response.data.debug : null;
 			this.fetchNewVersion();
 		});
+		if (this.$route.query.update) {
+			this.showUpdateDialog = true
+		}
 	},
 	methods: {
 		openUpdateDialog() {
