@@ -1,6 +1,9 @@
 <template>
 	<div>
 		<v-app-bar :clipped-left="$vuetify.breakpoint.mdAndUp" app dark color="primary">
+			<v-btn icon to="/home">
+				<v-icon class="material-icons-outlined">arrow_back</v-icon>
+			</v-btn>
 			<v-app-bar-nav-icon @click.stop="toggleMenu()" />
 			<v-toolbar-title style="width: 300px">
 				<span>{{$t('settings')}}</span>
@@ -53,8 +56,6 @@ export default {
 		settings: { darkMode: window._setting("darkMode") },
 		snackbar: { show: false, message: ``, timeout: null },
 		items: [
-			{ icon: 'arrow_back_ios', text: i18n.t("back"), to: "/home" },
-			{ divider: true },
 			{ icon: 'settings', text: i18n.t("settings"), to: "/setting" },
 			{ text: i18n.t('settings_network'), icon: 'cloud', to: "/settings/network" },
 			{ text: i18n.t('settingInterface._'), icon: 'layers', to: "/settings/interface" },
