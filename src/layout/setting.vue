@@ -4,7 +4,7 @@
 			<v-btn icon to="/home">
 				<v-icon class="material-icons-outlined">arrow_back</v-icon>
 			</v-btn>
-			<v-app-bar-nav-icon @click.stop="toggleMenu()" />
+			<v-app-bar-nav-icon @click.stop="toggleMenu()" v-if="!$vuetify.breakpoint.mdAndUp" />
 			<v-toolbar-title style="width: 300px">
 				<span>{{$t('settings')}}</span>
 			</v-toolbar-title>
