@@ -13,7 +13,6 @@ import Composer from '@/pages/Composer'
 import ComposerAlbum from '@/pages/ComposerAlbum'
 import Folder from '@/pages/Folder'
 import Home from '@/pages/Home'
-import Install from '@/pages/Install'
 import Login from '@/pages/Login'
 import NowPlaying from '@/pages/NowPlaying'
 import Notfound from '@/pages/Notfound'
@@ -145,10 +144,6 @@ export default new Router({
 		name: 'empty',
 		component: emptyLayout,
 		children: [{
-			path: '/install',
-			name: 'Install',
-			component: Install
-		}, {
 			path: '/login',
 			name: 'Login',
 			component: Login
