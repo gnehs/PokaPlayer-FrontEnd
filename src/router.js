@@ -19,6 +19,7 @@ import NowPlaying from '@/pages/NowPlaying'
 import Notfound from '@/pages/Notfound'
 import Playlist from '@/pages/Playlist'
 import PlaylistSongs from '@/pages/PlaylistSongs'
+import Shuffle from '@/pages/shuffle'
 import Lyric from '@/pages/Lyric'
 import LyricEdit from '@/pages/LyricEdit'
 import Search from '@/pages/Search'
@@ -127,6 +128,10 @@ export default new Router({
 			path: '/home',
 			name: 'Home',
 			component: Home
+		}, {
+			path: '/shuffle',
+			name: 'Shuffle',
+			component: Shuffle
 		}, {
 			path: '/notfound',
 			name: 'Notfound',
