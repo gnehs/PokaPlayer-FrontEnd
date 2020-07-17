@@ -114,9 +114,7 @@ export default {
 			this.axios
 				.get(_setting(`server`) + "/status/")
 				.then(async response => {
-					if (!response.data.install) {
-						return this.$router.push("/install");
-					} else if (!response.data.login) {
+					if (!response.data.login) {
 						return this.$router.push("/login");
 					}
 					// 標記為已登入
