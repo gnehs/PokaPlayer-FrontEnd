@@ -4,7 +4,7 @@
 			<input
 				class="search-input"
 				type="text"
-				v-on:keyup.enter="search"
+				v-on:keyup.enter="searchClick"
 				v-model.trim="keyword"
 				:placeholder="$t('search')"
 				autocomplete="off"
@@ -32,7 +32,7 @@
 	overflow: hidden
 	transition-duration: 0.3s
 	transition-property: border, box-shadow
-		transition-timing-function: ease
+	transition-timing-function: ease
 	background-color: white
 	&:hover,&.focus
 		box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28)
@@ -66,9 +66,19 @@ export default {
 		isLoading: false,
 		searchBoxFocus: false
 	}),
+	created() {
+		if (this.$route.query.keyword) {
+			this.keyword = this.$route.query.keyword
+			this.search()
+		}
+	},
 	methods: {
+		searchClick() {
+			this.$router.replace({ query: { keyword: this.keyword } })
+			this.search()
+		},
 		search() {
-			if (this.keyword == "") return;
+			if (!this.keyword || this.keyword == "") return;
 			this.isLoading = true;
 
 			this.axios
