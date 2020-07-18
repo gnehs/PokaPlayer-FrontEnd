@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<poka-header :title="$t('settings')" />
 		<poka-update />
 		<poka-cards class="poka cards" :hide-overflow="false">
 			<poka-card
