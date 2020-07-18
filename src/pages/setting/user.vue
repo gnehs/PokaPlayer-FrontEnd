@@ -146,98 +146,50 @@ export default {
 		}
 	}),
 	created() {
-		if (sessionStorage.getItem("login")) {
-			this.userdata = JSON.parse(sessionStorage.getItem("login"));
-		} else {
-			this.axios.get(_setting(`server`) + "/profile/").then(response => {
-				this.userdata = response.data;
-			});
-		}
+		this.axios.get(_setting(`server`) + "/profile/").then(response => { this.userdata = response.data; });
 	},
 	methods: {
 		changeName() {
 			if (this.temp.changeNameValue == "" || !this.temp.changeNameValue)
-				return this.showMessage(
-					window.i18n.t("settingUser.changeName.result.error")
-				);
+				return this.showMessage(window.i18n.t("settingUser.changeName.result.error"));
 			this.axios
-				.post(_setting(`server`) + "/changeName/", {
-					n: this.temp.changeNameValue
-				})
+				.post(_setting(`server`) + "/changeName/", { n: this.temp.changeNameValue })
 				.then(response => {
 					if (response.data.success) {
 						this.userdata.name = this.temp.changeNameValue;
-						this.showMessage(
-							window.i18n.t(
-								"settingUser.changeName.result.success",
-								{
-									name: this.temp.changeNameValue
-								}
-							)
-						);
+						this.showMessage(window.i18n.t("settingUser.changeName.result.success", { name: this.temp.changeNameValue }));
 					} else {
-						this.showMessage(
-							window.i18n.t("settingUser.changeName.result.error")
-						);
+						this.showMessage(window.i18n.t("settingUser.changeName.result.error"));
 					}
 				});
 		},
 		changeUsername() {
-			if (
-				this.temp.changeUsernameValue == "" ||
-				!this.temp.changeUsernameValue
-			)
-				return this.showMessage(
-					window.i18n.t("settingUser.changeUsername.result.error")
-				);
+			if (this.temp.changeUsernameValue == "" || !this.temp.changeUsernameValue)
+				return this.showMessage(window.i18n.t("settingUser.changeUsername.result.error"));
 			this.axios
-				.post(_setting(`server`) + "/changeUsername/", {
-					n: this.temp.changeUsernameValue
-				})
+				.post(_setting(`server`) + "/changeUsername/", { n: this.temp.changeUsernameValue })
 				.then(response => {
 					if (response.data.success) {
 						this.userdata.username = this.temp.changeUsernameValue;
-						this.showMessage(
-							window.i18n.t(
-								"settingUser.changeUsername.result.success",
-								{
-									name: this.temp.changeUsernameValue
-								}
-							)
-						);
+						this.showMessage(window.i18n.t("settingUser.changeUsername.result.success", { name: this.temp.changeUsernameValue }));
 					} else if (response.data.error) {
 						this.showMessage(response.data.error);
 					} else {
-						this.showMessage(
-							window.i18n.t(
-								"settingUser.changeUsername.result.error"
-							)
-						);
+						this.showMessage(window.i18n.t("settingUser.changeUsername.result.error"));
 					}
 				});
 		},
 		changePassword() {
 			if (
-				this.temp.changePassword == "" ||
-				!this.temp.changePassword ||
-				this.temp.changePassword2 == "" ||
-				!this.temp.changePassword2 ||
-				this.temp.changePasswordold == "" ||
-				!this.temp.changePasswordold
+				this.temp.changePassword == "" || !this.temp.changePassword ||
+				this.temp.changePassword2 == "" || !this.temp.changePassword2 ||
+				this.temp.changePasswordold == "" || !this.temp.changePasswordold
 			)
-				return this.showMessage(
-					window.i18n.t("settingUser.changePassword.result.error")
-				);
+				return this.showMessage(window.i18n.t("settingUser.changePassword.result.error"));
 			if (this.temp.changePassword !== this.temp.changePassword2)
-				return this.showMessage(
-					window.i18n.t(
-						"settingUser.changePassword.result.inconsistent"
-					)
-				);
+				return this.showMessage(window.i18n.t("settingUser.changePassword.result.inconsistent"));
 			if (this.temp.changePassword === this.temp.changePasswordold)
-				return this.showMessage(
-					window.i18n.t("settingUser.changePassword.result.same")
-				);
+				return this.showMessage(window.i18n.t("settingUser.changePassword.result.same"));
 			this.axios
 				.post(_setting(`server`) + "/changePassword/", {
 					oldpassword: this.temp.changePasswordold,
@@ -245,20 +197,12 @@ export default {
 				})
 				.then(response => {
 					if (response.data.success) {
-						this.showMessage(
-							window.i18n.t(
-								"settingUser.changePassword.result.success"
-							)
-						);
+						this.showMessage(window.i18n.t("settingUser.changePassword.result.success"));
 						this.temp.changePasswordDialog = false;
 					} else if (response.data.error) {
 						this.showMessage(response.data.error);
 					} else {
-						this.showMessage(
-							window.i18n.t(
-								"settingUser.changePassword.result.error"
-							)
-						);
+						this.showMessage(window.i18n.t("settingUser.changePassword.result.error"));
 					}
 				});
 		},
