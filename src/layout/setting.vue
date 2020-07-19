@@ -56,7 +56,8 @@ export default {
 		settings: { darkMode: window._setting("darkMode") },
 		snackbar: { show: false, message: ``, timeout: null },
 		items: [
-			{ icon: 'settings', text: i18n.t("settings"), to: "/setting" },
+			{ text: i18n.t("settings"), icon: 'settings', to: "/setting" },
+			{ divider: true },
 			{ text: i18n.t('settings_network'), icon: 'cloud', to: "/settings/network" },
 			{ text: i18n.t('settingInterface._'), icon: 'layers', to: "/settings/interface" },
 			{ text: i18n.t('settingUser.title'), icon: 'person', to: "/settings/user" },
