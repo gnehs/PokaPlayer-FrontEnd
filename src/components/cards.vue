@@ -68,6 +68,7 @@ export default {
 			transition: all .2s
 			will-change: box-shadow, transform
 			position: relative
+			overflow: hidden
 		&:hover .image
 			transform: translateY(-5px)
 			box-shadow: 0 0.8px 1.9px rgba(0, 0, 0, 0.02),0 2.3px 4.5px rgba(0, 0, 0, 0.028),0 4.8px 8.5px rgba(0, 0, 0, 0.035),0 9.2px 15.2px rgba(0, 0, 0, 0.042),0 16.9px 28.4px rgba(0, 0, 0, 0.05),0 26px 68px rgba(0, 0, 0, 0.07)
@@ -77,7 +78,7 @@ export default {
 			z-index: 5
 		.image i
 			position: absolute
-			font-size: 7em
+			font-size: calc(3vmax + 18px)
 			color: #FFF
 			display: flex
 			top: 0
@@ -98,34 +99,34 @@ export default {
 			color: var(--text-color)
 			opacity: .75
 		.image
-			background-color: var(--card-background-color,#B0BEC5B3)
+			background-color: var(--card-background-color,#607D8Ba1)
 			backdrop-filter: blur(5px)
 		&:nth-child(14n+2)
-			--card-background-color: #BCAAA4B3
+			--card-background-color: #F44336a1
 		&:nth-child(14n+3)
-			--card-background-color: #FFAB91B3
+			--card-background-color: #E91E63a1
 		&:nth-child(14n+4)
-			--card-background-color: #FFF59DB3
+			--card-background-color: #9C27B0a1
 		&:nth-child(14n+5)
-			--card-background-color: #FFE082B3
+			--card-background-color: #FF9800a1
 		&:nth-child(14n+6)
-			--card-background-color: #FFCC80B3
+			--card-background-color: #2196F3a1
 		&:nth-child(14n+7)
-			--card-background-color: #A5D6A7B3
+			--card-background-color: #00BCD4a1
 		&:nth-child(14n+8)
-			--card-background-color: #C5E1A5B3
+			--card-background-color: #009688a1
 		&:nth-child(14n+9)
-			--card-background-color: #E6EE9CB3
+			--card-background-color: #4CAF50a1
 		&:nth-child(14n+10)
-			--card-background-color: #81D4FAB3
+			--card-background-color: #8BC34Aa1
 		&:nth-child(14n+11)
-			--card-background-color: #80DEEAB3
+			--card-background-color: #FFC107a1
 		&:nth-child(14n+12)
-			--card-background-color: #80CBC4B3
+			--card-background-color: #3F51B5a1
 		&:nth-child(14n+13)
-			--card-background-color: #B39DDBB3
+			--card-background-color: #FF5722a1
 		&:nth-child(14n+14)
-			--card-background-color: #90CAF9B3
+			--card-background-color: #795548a1
 	&.two.cards .card
 		--size: calc(100% / 2 - .5em)
 	&.three.cards .card
@@ -161,8 +162,6 @@ export default {
 @media (min-width: 576px) and (max-width: 767.98px)
 	.poka.cards .card
 		--size: calc(33.3% - .5em)
-		.image i
-			font-size: 5em
 
 @media (min-width: 768px) and (max-width: 991.98px)
 	.poka.cards .card

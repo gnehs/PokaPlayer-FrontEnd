@@ -1,12 +1,14 @@
 <template lang="pug">
 	router-link.card(v-if="to",:to="to",:data-source="parsed_source||undefined")
-		.image(v-if="parsed_pokaBg",:style="{backgroundImage:`url(\"${parsed_pokaBg}\")`}")
+		.image(v-if="parsed_pokaBg")
+			v-img(:src="parsed_pokaBg",aspect-ratio="1")
 		.image(v-else)
 			v-icon(class="material-icons-outlined") {{pokaIcon}}
 		.title(:class="{'t-ellipsis':ellipsis}") {{pokaTitle}}
 		.subtitle(:class="{'t-ellipsis':ellipsis}") {{pokaSubtitle}}
 	a.card(v-else,:data-source="parsed_source||undefined")
-		.image(v-if="parsed_pokaBg",:style="{backgroundImage:`url(\"${parsed_pokaBg}\")`}")
+		.image(v-if="parsed_pokaBg")
+			v-img(:src="parsed_pokaBg",aspect-ratio="1")
 		.image(v-else)
 			v-icon(class="material-icons-outlined") {{pokaIcon}}
 		.title(:class="{'t-ellipsis':ellipsis}") {{pokaTitle}}
