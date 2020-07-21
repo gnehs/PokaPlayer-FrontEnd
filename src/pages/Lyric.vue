@@ -141,6 +141,7 @@
 			transform: scale(.8)
 			text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
 			font-weight: 700
+			letter-spacing: .5px
 			.theme--dark &
 				text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
 </style>
