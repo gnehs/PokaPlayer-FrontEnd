@@ -208,6 +208,10 @@ export default {
 				src: "https://picsum.photos/1920/1080/?random"
 			},
 			{
+				name: "Random Image API",
+				src: "https://random.imagecdn.app/v1/image?width=1920&height=1080"
+			},
+			{
 				name: "Bing",
 				src: "https://area.sinaapp.com/bingImg/"
 			},
