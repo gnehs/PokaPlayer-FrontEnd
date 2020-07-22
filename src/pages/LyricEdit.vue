@@ -88,95 +88,95 @@
 </template>
 <style lang="sass" scoped>
 #lrc-editor
-    display: flex
-    flex-direction: row
-    height: calc(100vh - 64px - 69px - 32px)
-    .lyric-view
-        width: 50%
-        text-align: left
-        padding-top: 80px
-        padding-bottom: 80px
-        padding-left: 8px
-        height: 100%
-        overflow: scroll
-        //border: 1px solid rgba(0, 0, 0, 0.2)
-        p
-            transition: font-size 0.5s cubic-bezier(0.77, 0, 0.18, 1), color 0.2s linear, opacity 0.2s linear
-            opacity: .4
-            line-height: 1.2em
-            position: relative
-            font-size: 18px
-            transform: none
-            cursor: pointer
-            .timestamp
-                width: 85px
-                display: inline-block
-                background: var(--v-primary-base,#000)
-                color: #FFF
-                padding: 2px 5px
-                font-size: 18px
-                font-family: 'Ubuntu Mono', monospace
-            &:hover
-                background: rgba(0,0,0,.1)
-            &.focus
-                opacity: 1
-                font-weight: 700
-                text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
-                transform: none
-                font-size: 20px
-                .theme--dark &
-                    text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
-        &.lyricTranslated
-            p.focus:not(:empty) + p
-                opacity: .8
-                font-size: 18px
-                text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
-                font-weight: 700
-                .theme--dark &
-                    text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
-    #lyric-edit
-        height: 100%
-        padding: 10px 8px
-        width: 50%
-        //border: 1px solid rgba(0, 0, 0, 0.2)
-        border-left: 0
-        font-family: 'Ubuntu Mono', monospace
-        display: flex
-        flex-direction: column
-        height: 100%
-        overflow: scroll
-        #lyric-edit-time-shift
-            width: 100%
-        #lyric-edit-text-editor
-            width: 100%
-        #lyric-edit-about, #lyric-edit-about-phone
-            width: 100%
-        #lyric-edit-about-phone
-            display: none
+	display: flex
+	flex-direction: row
+	height: calc(100vh - 64px - 69px - 32px)
+	.lyric-view
+		width: 50%
+		text-align: left
+		padding-top: 80px
+		padding-bottom: 80px
+		padding-left: 8px
+		height: 100%
+		//border: 1px solid rgba(0, 0, 0, 0.2)
+		overflow: scroll
+		p
+			transition: font-size 0.5s cubic-bezier(0.77, 0, 0.18, 1), color 0.2s linear, opacity 0.2s linear
+			opacity: .4
+			line-height: 1.2em
+			position: relative
+			font-size: 18px
+			transform: none
+			cursor: pointer
+			.timestamp
+				width: 85px
+				display: inline-block
+				background: var(--v-primary-base,#000)
+				color: #FFF
+				padding: 2px 5px
+				font-size: 18px
+				font-family: 'Ubuntu Mono', monospace
+			&:hover
+				background: rgba(0,0,0,.1)
+			&.focus
+				opacity: 1
+				font-weight: 700
+				text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
+				transform: none
+				font-size: 20px
+				.theme--dark &
+					text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
+		&.lyricTranslated
+			p.focus:not(:empty) + p
+				opacity: .8
+				font-size: 18px
+				text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
+				font-weight: 700
+				.theme--dark &
+					text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
+	#lyric-edit
+		height: 100%
+		padding: 10px 8px
+		width: 50%
+		//border: 1px solid rgba(0, 0, 0, 0.2)
+		border-left: 0
+		font-family: 'Ubuntu Mono', monospace
+		display: flex
+		flex-direction: column
+		height: 100%
+		overflow: scroll
+		#lyric-edit-time-shift
+			width: 100%
+		#lyric-edit-text-editor
+			width: 100%
+		#lyric-edit-about, #lyric-edit-about-phone
+			width: 100%
+		#lyric-edit-about-phone
+			display: none
 
 @media screen and (max-width: 768px)
-    #lrc-editor
-        display: block
-        height: calc(100vh - 64px - 69px)
-        .lyric-view
-            width: 100%
-            height: 30%
-            box-shadow: inset 0 -1px 0 0 #dadce0
-        #lyric-edit
-            width: 100%
-            height: 70%
-            padding: 0 8px
-            #lyric-edit-about
-                display: none
-            #lyric-edit-about-phone
-                display: block
+	#lrc-editor
+		display: block
+		height: calc(100vh - 64px - 69px)
+		.lyric-view
+			width: 100%
+			height: 30%
+			box-shadow: inset 0 -1px 0 0 #dadce0
+		#lyric-edit
+			width: 100%
+			height: 70%
+			padding: 0 8px
+			#lyric-edit-about
+				display: none
+			#lyric-edit-about-phone
+				display: block
 @media (prefers-color-scheme: dark) and (max-width: 768px)
-    .lyric-view
-        box-shadow: inset 0 -1px 0 0 hsla(0,0%,100%,.12)
+	.lyric-view
+		box-shadow: inset 0 -1px 0 0 hsla(0,0%,100%,.12)
 </style>
 <style lang="sass">
 .v-textarea textarea
-    line-height: 1.5em!important
+	line-height: 1.5em!important
 </style>
 <script>
 
@@ -301,7 +301,12 @@ export default {
 						if (focusedLyric) {
 							let sh = focusedLyric.offsetTop - document.querySelector(".lyric-view").clientHeight * 0.5 +
 								focusedLyric.clientHeight * (this.lyricTranslated ? 1.75 : 0.75);
-							window.scrollTo(document.querySelector(".lyric-view"), sh, 200);
+							this.$vuetify.goTo(sh, {
+								duration: 250,
+								offset: 0,
+								container: "main.v-content",
+								easing: 'easeInOutCubic',
+							})
 						} else {
 							this.lyricFocus = 0
 						}

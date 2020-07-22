@@ -103,7 +103,12 @@ export default {
 							let sh = activeItem.offsetTop - document.querySelector("main.v-content").clientHeight * 0.5 + activeItem.clientHeight * 0.75;
 							sh += 69 //底部播放器
 							sh += 150 // Title
-							window.scrollTo(document.querySelector("main.v-content"), sh, 200);
+							this.$vuetify.goTo(sh, {
+								duration: 250,
+								offset: 0,
+								container: "main.v-content",
+								easing: 'easeInOutCubic',
+							})
 						}
 					});
 				}

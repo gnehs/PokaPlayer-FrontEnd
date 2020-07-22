@@ -227,7 +227,13 @@ export default {
 									let sh = focusedLyric.offsetTop - document.querySelector("main").clientHeight * 0.5 +
 										focusedLyric.clientHeight * (this.lyricTranslated ? 1.75 : 0.75);
 									sh += 69 //底部播放器高度
-									window.scrollTo(document.querySelector("main.v-content"), sh, 200);
+									sh += 50 // 偏移調整
+									this.$vuetify.goTo(sh, {
+										duration: 250,
+										offset: 0,
+										container: "main.v-content",
+										easing: 'easeInOutCubic',
+									})
 								} else {
 									this.lyricFocus = 0
 								}
@@ -301,7 +307,12 @@ export default {
 		loadLrc(lrc, save = false) {
 			window._lrc.load(lrc);
 			this.lyric_raw = lrc
-			window.scrollTo(document.querySelector("main.v-content"), 0, 200);
+			this.$vuetify.goTo(0, {
+				duration: 250,
+				offset: 0,
+				container: "main.v-content",
+				easing: 'easeInOutCubic',
+			})
 			this.lyricFocus = 0; // 歌詞進度歸零
 			try {
 				//如果最後兩個時間相同把後面那個的時間調到一個世紀後

@@ -37,7 +37,7 @@ window._addSongs = function ({
             originalURL: song.url,
             cover: song.cover && song.cover.startsWith("http") ?
                 song.cover : song.cover ?
-                server + song.cover : defaultCover,
+                    server + song.cover : defaultCover,
             originalCover: song.cover,
             name: song.name,
             artist: song.artist,
@@ -80,7 +80,7 @@ window._uuid = () => {
     });
 }
 window._lyricReader = require('@/assets/lyrics.min.js')
-window._lrc = new(require('@/assets/lyrics.min.js'))(`[00:00.000]`);
+window._lrc = new (require('@/assets/lyrics.min.js'))(`[00:00.000]`);
 window._CSSsetting = (key, value) => {
     let s = _setting('cssVariable')
     s[key] = value
@@ -133,30 +133,6 @@ window._setting = (setting, value) => {
 window._socket = io(window._setting(`server`), {
     transports: ['websocket']
 });
-// scroll 
-
-window.scrollTo = (element, to, duration) => {
-    let start = element.scrollTop,
-        change = to - start,
-        currentTime = 0,
-        increment = 5;
-
-    let animateScroll = function () {
-        currentTime += increment;
-        var val = Math.easeInOutQuad(currentTime, start, change, duration);
-        element.scrollTop = val;
-        if (currentTime < duration) {
-            setTimeout(animateScroll, increment);
-        }
-    };
-    animateScroll();
-}
-Math.easeInOutQuad = function (t, b, c, d) {
-    t /= d / 2;
-    if (t < 1) return c / 2 * t * t + b;
-    t--;
-    return -c / 2 * (t * (t - 2) - 1) + b;
-};
 
 // 注入 CSS 變數
 let root = document.documentElement;
