@@ -304,7 +304,7 @@ export default {
 							this.$vuetify.goTo(sh, {
 								duration: 250,
 								offset: 0,
-								container: "main.v-content",
+								container: ".lyric-view",
 								easing: 'easeInOutCubic',
 							})
 						} else {
