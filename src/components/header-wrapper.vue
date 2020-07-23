@@ -12,7 +12,8 @@ export default {
 	name: "poka-header",
 	data: () => ({
 		headerStyle: {
-			opacity: 1
+			opacity: 1,
+			transform: ''
 		}
 	}),
 	props: {
@@ -26,21 +27,27 @@ export default {
 	},
 	methods: {
 		handleScroll(event) {
-			let scrollTop = document.querySelector('main').scrollTop;
-			let targetHideHeight = 70
-			this.headerStyle.opacity = scrollTop > targetHideHeight ? 0 : (scrollTop > 20 ? 1 - scrollTop / targetHideHeight : 1)
+			if (document.querySelector('main')) {
+				let scrollTop = document.querySelector('main').scrollTop;
+				let targetHideHeight = 40
+				this.headerStyle.opacity = scrollTop > targetHideHeight ? 0 : 1
+				this.headerStyle.transform = `translate(0,-${scrollTop > targetHideHeight ? 20 : (scrollTop / targetHideHeight * 20)}px)`
+			}
 		}
 	},
 	mounted() {
 		this.handleScroll()
-		document.querySelector('main').addEventListener('scroll', this.handleScroll);
+		if (document.querySelector('main'))
+			document.querySelector('main').addEventListener('scroll', this.handleScroll);
 	},
 	created() {
 		this.handleScroll()
-		document.querySelector('main').addEventListener('scroll', this.handleScroll);
+		if (document.querySelector('main'))
+			document.querySelector('main').addEventListener('scroll', this.handleScroll);
 	},
 	destroyed() {
-		document.querySelector('main').removeEventListener('scroll', this.handleScroll);
+		if (document.querySelector('main'))
+			document.querySelector('main').removeEventListener('scroll', this.handleScroll);
 	}
 };
 </script>
@@ -71,6 +78,7 @@ export default {
 	margin-bottom: 32px
 	position: relative
 	font-family: var(--product-font)
+	transition: opacity .25s ease
 	>.hw-title,>.hw-subtitle
 		overflow: hidden
 		text-overflow: ellipsis
