@@ -1,8 +1,5 @@
 <template>
-	<div
-		:theme="lyric_theme"
-		:style="{'--lyric-color':lyric_color,'--lyric-shadow-color':lyric_shadow_color}"
-	>
+	<div :theme="lyric_theme">
 		<transition name="fade" mode="out-in">
 			<poka-header :blurbg="true" :bg="audio_cover" v-if="audio_cover" :key="audio_cover" />
 			<poka-header v-else key="2" />
@@ -150,22 +147,13 @@
 			font-weight: 700
 			.theme--dark &
 				text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
-[theme="apple"] ::v-deep .header-wrapper
-	.bg
-		--pokabgheight: calc( 100vh - 69px - 64px )
-		mask-image: none
-		-webkit-mask-image: none
-		opacity: .6
-		filter: blur(50px)
-[theme="apple"] .lyric
+[theme="bigtext"] .lyric
 	padding: 160px 25px
 	p
 		font-size: 2em
 		line-height: 1.5em
 		font-weight: 900
 		transform: translateY(.1px)
-		color: var(--lyric-color,#FFF)
-		text-shadow: 0 0 20px var(--lyric-shadow-color,#000)
 		transition: all .3s ease
 		opacity: .1
 		&.focus
@@ -189,7 +177,6 @@
 </style>
 
 <script>
-import ColorThief from 'colorthief'
 export default {
 	name: "LyricEdit",
 	data: () => ({
@@ -257,17 +244,6 @@ export default {
 					this.audio_title = nowPlaying.name;
 					this.audio_artist = nowPlaying.artist;
 					this.audio_cover = nowPlaying.cover;
-					//set lyricColor
-					let setColor = (color) => {
-						this.lyric_shadow_color = `rgba(${color.join(',')},.3)`
-						color = color.map(x => 255 - x).map(x => x > 100 ? 255 : x)
-						this.lyric_color = `rgb(${color.join(',')})`
-					}
-					const colorThief = new ColorThief();
-					const img = new Image();
-					img.addEventListener('load', () => setColor(colorThief.getColor(img, 100)));
-					img.src = this.audio_cover
-					img.crossOrigin = 'use-credentials'
 				} else {
 					//更新時間就好
 					this.lyric = window._lrc.getLyrics();

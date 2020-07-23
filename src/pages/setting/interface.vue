@@ -207,13 +207,13 @@
 								</div>
 							</div>
 						</div>
-						<div class="item" @click="setLyricTheme('apple')" v-ripple>
+						<div class="item" @click="setLyricTheme('bigtext')" v-ripple>
 							<div class="content">
 								<v-avatar size="24px" item>
 									<v-icon>palette</v-icon>
 								</v-avatar>
 								<div class="header">
-									<div class="head">Apple Music</div>
+									<div class="head">Big text</div>
 								</div>
 							</div>
 						</div>
