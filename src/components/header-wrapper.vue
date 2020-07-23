@@ -1,7 +1,7 @@
 <template lang="pug">
 div(style="position: sticky;top: 15px;")
 	.header-wrapper
-		.bg(:style=`{backgroundImage: 'url("'+bg+'")'}`,:class="{blur: blurbg}")
+		.bg(:style=`Object.assign({backgroundImage: 'url("'+bg+'")'},bgStyle)`,:class="{blur: blurbg}")
 	.hw-header(v-if='title',:style="headerStyle")
 		.hw-title(style="line-height: normal;") {{title}}
 		.hw-subtitle {{subtitle}}
@@ -14,6 +14,9 @@ export default {
 		headerStyle: {
 			opacity: 1,
 			transform: ''
+		},
+		bgStyle: {
+			transform: '',
 		}
 	}),
 	props: {
@@ -29,9 +32,11 @@ export default {
 		handleScroll(event) {
 			if (document.querySelector('main')) {
 				let scrollTop = document.querySelector('main').scrollTop;
+				let scrollHeight = document.querySelector('main').scrollHeight
 				let targetHideHeight = 40
 				this.headerStyle.opacity = scrollTop > targetHideHeight ? 0 : 1
 				this.headerStyle.transform = `translate(0,-${scrollTop > targetHideHeight ? 20 : (scrollTop / targetHideHeight * 20)}px)`
+				this.bgStyle.transform = `scale(1.12) translate(0,-${scrollTop / scrollHeight * 50}px)`
 			}
 		}
 	},
