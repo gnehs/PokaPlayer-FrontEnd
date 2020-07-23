@@ -15,7 +15,8 @@
 					<p
 						v-for="(item, index) of lyric"
 						:key="index"
-						:class="{focus: index==lyricFocus }"
+						:data-lyric-set="lyricTranslated?Math.floor((index-lyricFocus)/2):index-lyricFocus"
+						:class="[{focus: index==lyricFocus},{tl:lyricTranslated?Math.floor((index-lyricFocus)/2)!=Math.round((index-lyricFocus)/2):false}]"
 					>{{item.text}}</p>
 				</div>
 
@@ -124,7 +125,8 @@
 	p
 		transition: all 0.5s cubic-bezier(0.77, 0, 0.18, 1), color 0.2s linear, opacity 0.2s linear
 		opacity: .4
-		line-height: 1.2em
+		line-height: 1.1em
+		height: 1.1em
 		transform: scale(.7)
 		position: relative
 		font-size: calc(16px + 1.2vmin)
@@ -135,15 +137,62 @@
 			text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
 			.theme--dark &
 				text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
+		&.tl
+			opacity: .25
+			transform: scale(.65) translateY(-10px)
 	&.lyricTranslated
 		p.focus:not(:empty) + p
 			opacity: .8
-			transform: scale(.8)
+			transform: scale(.8) translateY(-8px)
 			text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
 			font-weight: 700
-			letter-spacing: .5px
 			.theme--dark &
 				text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
+.lyric.test1
+	&.lyricTranslated
+		p.focus
+			&+p
+				filter: blur(0px)
+				opacity: 1
+	p.focus
+		&~p
+			filter: blur(5px)
+			opacity: .4
+	@function repeat($character, $n)
+		$c:""
+		@for $i from 1 through $n
+			$c: $c + $character
+		@return $c
+	p.focus
+		@for $i from 1 through 2*5
+			#{repeat("+p", $i)}
+				filter: blur(#{.5*$i}px)
+		@for $i from 1 through 5
+			#{repeat("+p", $i)}
+				opacity: #{1-.1*$i}
+.lyric.test2
+	&.lyricTranslated
+		p.focus
+			&+p
+				filter: blur(0px)
+				opacity: 1
+	@function repeat($character, $n)
+		$c:""
+		@for $i from 1 through $n
+			$c: $c + $character
+		@return $c
+	@for $i from -100 through -1
+		.lyric-#{$i}
+			filter: blur(#{.5*-$i}px)
+			transform: skewX(#{5*-$i}deg) rotate(#{5*-$i}deg)
+			transition-delay: #{.05*-$i}s
+			opacity: #{1+.05*$i}
+	@for $i from 1 through 100
+		.lyric-#{$i}
+			filter: blur(#{.5*$i}px)
+			transform: skewX(#{5*$i}deg) rotate(#{5*$i}deg)
+			transition-delay: #{.05*$i}s
+			opacity: #{1-.05*$i}
 </style>
 
 <script>
