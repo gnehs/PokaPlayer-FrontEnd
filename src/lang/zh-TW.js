@@ -166,6 +166,10 @@ export default {
 			"theme": {
 				"_": "主題",
 				"description": "設定 PokaPlayer 的主題色彩",
+			},
+			"lyric": {
+				"_": "歌詞頁面樣式",
+				"description": "設定歌詞頁面的主題",
 			}
 		},
 		"lang": "語言"

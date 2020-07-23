@@ -164,6 +164,10 @@ export default {
 			"theme": {
 				"_": "Theme",
 				"description": "Change theme color",
+			},
+			"lyric": {
+				"_": "Lyric theme",
+				"description": "Change the theme of lyric page",
 			}
 		},
 		"lang": "Language"

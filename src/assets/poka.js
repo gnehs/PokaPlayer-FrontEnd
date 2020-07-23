@@ -91,6 +91,7 @@ window._setting = (setting, value) => {
     let pokaSetting = JSON.parse(localStorage.pokaSetting || `{}`)
     let defaultPokaSetting = {
         "theme": "#5c95c4",
+        "lyricTheme": "default",
         "audioQuality": "High",
         "headerBgSource": "https://i.imgur.com/IdbJiao.jpg",
         "darkMode": false,

@@ -1,5 +1,8 @@
 <template>
-	<div>
+	<div
+		:theme="lyric_theme"
+		:style="{'--lyric-color':lyric_color,'--lyric-shadow-color':lyric_shadow_color}"
+	>
 		<transition name="fade" mode="out-in">
 			<poka-header :blurbg="true" :bg="audio_cover" v-if="audio_cover" :key="audio_cover" />
 			<poka-header v-else key="2" />
@@ -118,10 +121,9 @@
 	</div>
 </template>
 <style lang="sass" scoped>
-.lyric
+[theme="default"] .lyric
 	text-align: center
-	padding-top: 80px
-	padding-bottom: 80px
+	padding: 80px 0
 	p
 		transition: all 0.5s cubic-bezier(0.77, 0, 0.18, 1), color 0.2s linear, opacity 0.2s linear
 		opacity: .4
@@ -148,54 +150,46 @@
 			font-weight: 700
 			.theme--dark &
 				text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
-.lyric.test1
-	&.lyricTranslated
-		p.focus
-			&+p
-				filter: blur(0px)
+[theme="apple"] ::v-deep .header-wrapper
+	.bg
+		--pokabgheight: calc( 100vh - 69px - 64px )
+		mask-image: none
+		-webkit-mask-image: none
+		opacity: .6
+		filter: blur(50px)
+[theme="apple"] .lyric
+	padding: 160px 25px
+	p
+		font-size: 2em
+		line-height: 1.5em
+		font-weight: 900
+		transform: translateY(.1px)
+		color: var(--lyric-color,#FFF)
+		text-shadow: 0 0 20px var(--lyric-shadow-color,#000)
+		transition: all .3s ease
+		opacity: .1
+		&.focus
+			opacity: 1
+			&+.tl
 				opacity: 1
-	p.focus
-		&~p
-			filter: blur(5px)
-			opacity: .4
-	@function repeat($character, $n)
-		$c:""
-		@for $i from 1 through $n
-			$c: $c + $character
-		@return $c
-	p.focus
-		@for $i from 1 through 2*5
-			#{repeat("+p", $i)}
-				filter: blur(#{.5*$i}px)
-		@for $i from 1 through 5
-			#{repeat("+p", $i)}
-				opacity: #{1-.1*$i}
-.lyric.test2
-	&.lyricTranslated
-		p.focus
-			&+p
-				filter: blur(0px)
-				opacity: 1
-	@function repeat($character, $n)
-		$c:""
-		@for $i from 1 through $n
-			$c: $c + $character
-		@return $c
-	@for $i from -100 through -1
-		.lyric-#{$i}
-			filter: blur(#{.5*-$i}px)
-			transform: skewX(#{5*-$i}deg) rotate(#{5*-$i}deg)
-			transition-delay: #{.05*-$i}s
-			opacity: #{1+.05*$i}
-	@for $i from 1 through 100
-		.lyric-#{$i}
-			filter: blur(#{.5*$i}px)
-			transform: skewX(#{5*$i}deg) rotate(#{5*$i}deg)
-			transition-delay: #{.05*$i}s
-			opacity: #{1-.05*$i}
+		&.tl
+			transform: translateY(-.4em)
+			font-size: 1.5em
+
+		@for $i from -4 through -1
+			&[data-lyric-set="#{$i}"]
+				transition-delay: #{.05*-$i}s
+				//filter: blur(#{1*-$i}px)
+				opacity: #{.5+.1*$i}
+		@for $i from 1 through 4
+			&[data-lyric-set="#{$i}"]
+				transition-delay: #{.05*-$i}s
+				//filter: blur(#{1*$i}px)
+				opacity: #{.5-.1*$i}
 </style>
 
 <script>
+import ColorThief from 'colorthief'
 export default {
 	name: "LyricEdit",
 	data: () => ({
@@ -211,6 +205,9 @@ export default {
 		lyricTranslated: false,
 		lyricSearchkeyword: null,
 		Lyric_Update: null,
+		lyric_color: null,
+		lyric_shadow_color: null,
+		lyric_theme: _setting('lyricTheme')
 	}),
 	created() {
 		this.updateLyric();
@@ -260,6 +257,17 @@ export default {
 					this.audio_title = nowPlaying.name;
 					this.audio_artist = nowPlaying.artist;
 					this.audio_cover = nowPlaying.cover;
+					//set lyricColor
+					let setColor = (color) => {
+						this.lyric_shadow_color = `rgba(${color.join(',')},.3)`
+						color = color.map(x => 255 - x)
+						this.lyric_color = `rgb(${color.join(',')})`
+					}
+					const colorThief = new ColorThief();
+					const img = new Image();
+					img.addEventListener('load', () => setColor(colorThief.getColor(img, 100)));
+					img.src = this.audio_cover
+					img.crossOrigin = 'use-credentials'
 				} else {
 					//更新時間就好
 					this.lyric = window._lrc.getLyrics();

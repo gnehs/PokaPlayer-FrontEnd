@@ -49,6 +49,17 @@
 					</div>
 				</div>
 			</div>
+			<div class="item" @click="lyric_theme_dialog=true" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>palette</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">{{$t('settingInterface.customize.lyric._')}}</div>
+						<div class="t-ellipsis">{{$t('settingInterface.customize.lyric.description')}}</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<v-dialog v-model="bg_height_dialog" max-width="300">
@@ -181,6 +192,39 @@
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
+		<v-dialog v-model="lyric_theme_dialog" max-width="300">
+			<v-card>
+				<v-card-title class="headline">{{$t('settingInterface.lang')}}</v-card-title>
+				<v-card-text>
+					<div class="poka list">
+						<div class="item" @click="setLyricTheme('default')" v-ripple>
+							<div class="content">
+								<v-avatar size="24px" item>
+									<v-icon>palette</v-icon>
+								</v-avatar>
+								<div class="header">
+									<div class="head">Default</div>
+								</div>
+							</div>
+						</div>
+						<div class="item" @click="setLyricTheme('apple')" v-ripple>
+							<div class="content">
+								<v-avatar size="24px" item>
+									<v-icon>palette</v-icon>
+								</v-avatar>
+								<div class="header">
+									<div class="head">Apple Music</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn text @click="lyric_theme_dialog = false">{{$t('cancel')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 	</div>
 </template>
 
@@ -188,12 +232,17 @@
 export default {
 	name: "SettingCustomize",
 	data: () => ({
+		// lang
 		lang_dialog: false,
 		languages: Object.keys(window.i18n.messages),
 		currentLang: window.i18n.locale,
-
+		//lyric theme
+		lyric_theme_dialog: false,
+		// theme
 		theme_dialog: false,
+		// bgheight
 		bg_height_dialog: false,
+		// custombg
 		customize_bg_dialog: false,
 		bg_prompt_active: false,
 		bg_prompt_textbox: window._setting("headerBgSource"),
@@ -336,6 +385,14 @@ export default {
 				method: "post",
 				url: _setting(`server`) + "/setting/",
 				data: { n: { lang } }
+			});
+		}, setLyricTheme(lyricTheme) {
+			window._setting("lyricTheme", lyricTheme);
+			this.lyric_theme_dialog = false
+			this.axios({
+				method: "post",
+				url: _setting(`server`) + "/setting/",
+				data: { n: { lyricTheme } }
 			});
 		}
 	}
