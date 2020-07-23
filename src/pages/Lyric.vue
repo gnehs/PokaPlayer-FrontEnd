@@ -260,7 +260,7 @@ export default {
 					//set lyricColor
 					let setColor = (color) => {
 						this.lyric_shadow_color = `rgba(${color.join(',')},.3)`
-						color = color.map(x => 255 - x)
+						color = color.map(x => 255 - x).map(x => x > 100 ? 255 : x)
 						this.lyric_color = `rgb(${color.join(',')})`
 					}
 					const colorThief = new ColorThief();
