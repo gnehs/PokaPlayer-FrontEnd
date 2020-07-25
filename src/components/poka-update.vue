@@ -36,8 +36,9 @@ export default {
 			.get(_setting(`server`) + "/status/")
 			.then(res => res.data)
 			.then(data => {
-				this.fetchNewVersion(data.version);
+				let isAdmin = JSON.parse(sessionStorage.getItem("login")).role == 'admin' || false
 				if (data.debug) this.debug = data.debug;
+				if (isAdmin) this.fetchNewVersion(data.version, isAdmin);
 			});
 	},
 	data: () => ({ checkUpadteStatus: null, debug: null }),
@@ -50,17 +51,21 @@ export default {
 			remote = remote[0] * 1000 * 1000 + remote[1] * 1000 + remote[2];
 			return remote > local;
 		},
-		fetchNewVersion(currentVersion) {
-			fetch("https://api.github.com/repos/gnehs/PokaPlayer/releases")
-				.then(e => e.json())
-				.then(e => {
-					if (this.compareVersion(currentVersion, e[0].tag_name) || this.debug) {
-						this.checkUpadteStatus = i18n.t("settings_update_canUpdate2", { version: e[0].tag_name });
-						if (this.debug)
-							this.checkUpadteStatus += ` (debug: ${this.debug})`;
-					}
-				})
-				.catch(e => console.error(e));
+		async fetchNewVersion(currentVersion, isAdmin) {
+			let storageId = `poka-github-check-${new Date().toJSON().slice(0, 10).replace(/-/g, '/')}`
+
+			let githubRes = JSON.parse(sessionStorage[storageId] || null)
+			if (!githubRes) {
+				githubRes = await fetch("https://api.github.com/repos/gnehs/PokaPlayer/releases")
+					.then(e => e.json())
+					.then(e => { sessionStorage[storageId] = JSON.stringify(e); return e })
+					.catch(e => console.error(e))
+			}
+			if (this.compareVersion(currentVersion, githubRes[0].tag_name) || this.debug) {
+				this.checkUpadteStatus = i18n.t("settings_update_canUpdate2", { version: githubRes[0].tag_name });
+				if (this.debug)
+					this.checkUpadteStatus += ` (debug: ${this.debug})`;
+			}
 		}
 	}
 };

@@ -176,7 +176,6 @@ export default {
 			clearTimeout(this.snackbar.timeout);
 			this.snackbar.timeout = setTimeout(() => (this.snackbar.show = false), duration);
 		};
-		sessionStorage.removeItem("login");
 		function vhResize() {
 			let vh = window.innerHeight * 0.01;
 			document.documentElement.style.setProperty("--vh", `${vh}px`);
@@ -200,7 +199,7 @@ export default {
 		});
 		this.axios.defaults.withCredentials = true;
 		this.axios.defaults.baseURL = _setting(`server`);
-		this.getStatus(true);
+		this.getStatus();
 		if ("mediaSession" in navigator) {
 			navigator.mediaSession.setActionHandler("play", () => _player.toggle());
 			navigator.mediaSession.setActionHandler("pause", () => _player.pause());
@@ -293,9 +292,7 @@ export default {
 			window._setting("darkMode", this.settings.darkMode);
 			this.settings.darkMode ? window._theme.switchToDark() : window._theme.switchToLight();
 		},
-		getStatus(checkUpdate = false) {
-			if (sessionStorage.getItem("login"))
-				sessionStorage.setItem("login", false);
+		getStatus() {
 			this.axios
 				.get(_setting(`server`) + "/status/")
 				.then(async response => {
@@ -303,7 +300,6 @@ export default {
 						return this.$router.push("/login");
 					}
 					// 標記為已登入
-					sessionStorage.setItem("login", true);
 					let userProfile = await this.axios.get(_setting(`server`) + "/profile/");
 					sessionStorage.setItem("login", JSON.stringify(userProfile.data));
 				});

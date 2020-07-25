@@ -73,7 +73,6 @@ export default {
 			clearTimeout(this.snackbar.timeout);
 			this.snackbar.timeout = setTimeout(() => (this.snackbar.show = false), duration);
 		};
-		sessionStorage.removeItem("login");
 		this.drawer = this.$vuetify.breakpoint.mdAndUp
 		this.$router.beforeEach((to, from, next) => {
 			let transitionName = to.meta.transitionName || from.meta.transitionName || "fade";
@@ -89,7 +88,15 @@ export default {
 			if (el) this.scrollPositions[from.name] = el.scrollTop;
 			next();
 		});
-		this.getStatus(true);
+		this.getStatus();
+
+		let isAdmin = JSON.parse(sessionStorage.getItem("login")).role == 'admin' || false
+		if (isAdmin) {
+			this.items.push(
+				{ divider: true },
+				{ text: '使用者管理', icon: 'person', to: "/settings/network" }
+			)
+		}
 	},
 	methods: {
 		closeMenu() {
@@ -107,9 +114,7 @@ export default {
 			window._setting("darkMode", this.settings.darkMode);
 			this.settings.darkMode ? window._theme.switchToDark() : window._theme.switchToLight();
 		},
-		getStatus(checkUpdate = false) {
-			if (sessionStorage.getItem("login"))
-				sessionStorage.setItem("login", false);
+		getStatus() {
 			this.axios
 				.get(_setting(`server`) + "/status/")
 				.then(async response => {
@@ -117,7 +122,6 @@ export default {
 						return this.$router.push("/login");
 					}
 					// 標記為已登入
-					sessionStorage.setItem("login", true);
 					let userProfile = await this.axios.get(_setting(`server`) + "/profile/");
 					sessionStorage.setItem("login", JSON.stringify(userProfile.data));
 				});
