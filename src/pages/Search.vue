@@ -17,7 +17,9 @@
 			</button>
 		</div>
 		<poka-loader v-if="isLoading" />
-		<poka-parse-multiple v-if="!isLoading&&searchResult" :data="searchResult" />
+		<v-slide-y-reverse-transition>
+			<poka-parse-multiple v-if="!isLoading&&searchResult" :data="searchResult" />
+		</v-slide-y-reverse-transition>
 	</div>
 </template>
 

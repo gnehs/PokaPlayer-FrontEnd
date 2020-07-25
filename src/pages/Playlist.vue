@@ -1,8 +1,10 @@
 <template>
 	<div>
 		<poka-header :title="title" />
-		<poka-parse-playlists v-if="data" :data="data" />
-		<poka-loader v-else />
+		<v-slide-y-reverse-transition>
+			<poka-parse-playlists v-if="data" :data="data" />
+		</v-slide-y-reverse-transition>
+		<poka-loader v-if="!data" />
 	</div>
 </template>
 

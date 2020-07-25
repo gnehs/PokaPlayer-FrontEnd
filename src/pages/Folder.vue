@@ -5,9 +5,13 @@
 			<v-icon>arrow_back</v-icon>
 			{{$t('back')}}
 		</v-btn>
-		<poka-parse-folders v-if="data" :data="data.folders" />
-		<poka-parse-songs v-if="data" :data="data.songs" />
-		<poka-loader v-else />
+		<v-slide-y-reverse-transition>
+			<poka-parse-folders v-if="data" :data="data.folders" />
+		</v-slide-y-reverse-transition>
+		<v-slide-y-reverse-transition>
+			<poka-parse-songs v-if="data" :data="data.songs" />
+		</v-slide-y-reverse-transition>
+		<poka-loader v-if="!data" />
 	</div>
 </template>
 

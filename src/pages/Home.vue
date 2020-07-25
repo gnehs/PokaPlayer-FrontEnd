@@ -6,7 +6,9 @@
 		/>
 		<poka-update />
 		<poka-loader v-if="!data" />
-		<poka-parse-home v-else :data="data" />
+		<v-slide-y-reverse-transition>
+			<poka-parse-home v-if="data" :data="data" />
+		</v-slide-y-reverse-transition>
 	</div>
 </template>
 <script>
