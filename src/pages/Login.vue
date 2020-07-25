@@ -167,6 +167,12 @@ export default {
 							console.log(i);
 							_setting(i, settingReq.settings[i]);
 						}
+						//login socket
+						_socket.emit("login", {
+							username: window._setting(`username`),
+							password: window._setting(`password`)
+						});
+						socket.emit('send-nickname', _setting('nickname'));
 						// 轉到首頁
 						this.$router.push("/");
 						//重新整理來啟用新設定值

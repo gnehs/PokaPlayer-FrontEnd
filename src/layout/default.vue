@@ -200,6 +200,11 @@ export default {
 		this.axios.defaults.withCredentials = true;
 		this.axios.defaults.baseURL = _setting(`server`);
 		this.getStatus();
+		//login socket
+		_socket.emit("login", {
+			username: window._setting(`username`),
+			password: window._setting(`password`)
+		});
 		if ("mediaSession" in navigator) {
 			navigator.mediaSession.setActionHandler("play", () => _player.toggle());
 			navigator.mediaSession.setActionHandler("pause", () => _player.pause());

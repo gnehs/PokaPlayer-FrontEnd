@@ -90,6 +90,7 @@ window._CSSsetting = (key, value) => {
 window._setting = (setting, value) => {
     let pokaSetting = JSON.parse(localStorage.pokaSetting || `{}`)
     let defaultPokaSetting = {
+        "nickname": `Poka-${Math.random().toString(36).substring(8).toUpperCase()}`,
         "theme": "#5c95c4",
         "lyricTheme": "default",
         "audioQuality": "High",
