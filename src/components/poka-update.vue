@@ -1,17 +1,15 @@
 <template>
-	<transition name="fade-slide-up">
-		<div class="update-notify" key="0" v-if="checkUpadteStatus">
-			<h1>{{$t('settings_update')}}</h1>
-			<p>{{checkUpadteStatus}}</p>
+	<div class="update-notify" key="0" v-if="checkUpadteStatus">
+		<h1>{{$t('settings_update')}}</h1>
+		<p>{{checkUpadteStatus}}</p>
 
-			<v-btn
-				outlined
-				to="/settings/system?update=true"
-				color="white"
-				dark
-			>{{$t('settings_update_go2UpdatePage')}}</v-btn>
-		</div>
-	</transition>
+		<v-btn
+			outlined
+			to="/settings/system?update=true"
+			color="white"
+			dark
+		>{{$t('settings_update_go2UpdatePage')}}</v-btn>
+	</div>
 </template>
 <style lang="sass" scoped>
 .update-notify
