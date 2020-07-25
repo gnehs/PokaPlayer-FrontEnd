@@ -197,6 +197,16 @@
 				<v-card-title class="headline">{{$t('settingInterface.lang')}}</v-card-title>
 				<v-card-text>
 					<div class="poka list">
+						<div class="item" @click="setLyricTheme('bigtext')" v-ripple>
+							<div class="content">
+								<v-avatar size="24px" item>
+									<v-icon>palette</v-icon>
+								</v-avatar>
+								<div class="header">
+									<div class="head">Big text</div>
+								</div>
+							</div>
+						</div>
 						<div class="item" @click="setLyricTheme('default')" v-ripple>
 							<div class="content">
 								<v-avatar size="24px" item>
@@ -207,13 +217,23 @@
 								</div>
 							</div>
 						</div>
-						<div class="item" @click="setLyricTheme('bigtext')" v-ripple>
+						<div class="item" @click="setLyricTheme('spacing')" v-ripple>
 							<div class="content">
 								<v-avatar size="24px" item>
 									<v-icon>palette</v-icon>
 								</v-avatar>
 								<div class="header">
-									<div class="head">Big text</div>
+									<div class="head">Spacing</div>
+								</div>
+							</div>
+						</div>
+						<div class="item" @click="setLyricTheme('underline')" v-ripple>
+							<div class="content">
+								<v-avatar size="24px" item>
+									<v-icon>palette</v-icon>
+								</v-avatar>
+								<div class="header">
+									<div class="head">Underline</div>
 								</div>
 							</div>
 						</div>

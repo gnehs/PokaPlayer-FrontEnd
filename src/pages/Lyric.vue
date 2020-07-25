@@ -17,7 +17,9 @@
 						:key="index"
 						:data-lyric-set="lyricTranslated?Math.floor((index-lyricFocus)/2):index-lyricFocus"
 						:class="[{focus: index==lyricFocus},{tl:lyricTranslated?Math.floor((index-lyricFocus)/2)!=Math.round((index-lyricFocus)/2):false}]"
-					>{{item.text}}</p>
+					>
+						<span>{{item.text}}</span>
+					</p>
 				</div>
 
 				<v-card
@@ -156,10 +158,13 @@
 		transform: translateY(.1px)
 		transition: all .3s ease
 		opacity: .1
+		filter: blur(4.25px)
 		&.focus
 			opacity: 1
+			filter: none
 			&+.tl
 				opacity: 1
+				filter: none
 		&.tl
 			transform: translateY(-.4em)
 			font-size: 1.5em
@@ -167,13 +172,93 @@
 		@for $i from -4 through -1
 			&[data-lyric-set="#{$i}"]
 				transition-delay: #{.05*-$i}s
-				//filter: blur(#{1*-$i}px)
+				filter: blur(#{1*-$i}px)
 				opacity: #{.5+.1*$i}
 		@for $i from 1 through 4
 			&[data-lyric-set="#{$i}"]
 				transition-delay: #{.05*-$i}s
-				//filter: blur(#{1*$i}px)
+				filter: blur(#{1*$i}px)
 				opacity: #{.5-.1*$i}
+[theme="spacing"] .lyric
+	padding: 160px 25px
+	text-align: center
+	p
+		font-size: 1.5em
+		transform: translateY(.1px)
+		transition: all .5s ease
+		opacity: .25
+		>span
+			padding: .25em .2em
+			transition: all .6s ease
+		&.focus.focus
+			opacity: 1
+			letter-spacing: 3px
+			>span:not(:empty)
+				color: #FFF
+				background: var(--v-primary-base)
+				z-index: 1
+			&+.tl
+				opacity: 1
+				transform: translateY(-.75em)
+		&.tl
+			transform-origin: top
+			font-size: 1.25em
+			transform: translateY(-.75em) scale(.9)
+
+		@for $i from -3 through -1
+			&[data-lyric-set="#{$i}"]
+				//filter: blur(#{1*-$i}px)
+				opacity: #{.25*(4+$i)}
+		@for $i from 1 through 3
+			&[data-lyric-set="#{$i}"]
+				//filter: blur(#{1*$i}px)
+				opacity: #{.25*(4-$i)}
+[theme="underline"] .lyric
+	padding: 160px 25px
+	text-align: center
+	p
+		font-size: 1.5em
+		font-weight: bold
+		transform: translateY(.1px)
+		transition: all .5s ease
+		opacity: .25
+		>span
+			padding: .25em .2em
+			transition: .5s ease
+			position: relative
+			&::after
+				content: ''
+				transition: all .4s ease
+				position: absolute
+				bottom: .3rem
+				left: -0.5rem
+				right: -0.5rem
+				height: 0.5rem
+				z-index: -1
+				background-color: var(--v-primary-base)
+				transform: scaleX(0)
+				border-radius: 500em
+				opacity: .4
+		&.focus
+			opacity: 1
+			>span:not(:empty):after
+				transform: none
+			&+.tl
+				opacity: 1
+		&.tl
+			transform-origin: top
+			font-size: 1.25em
+			font-weight: normal
+			transform: translateY(-.75em)
+
+		@for $i from -3 through -1
+			&[data-lyric-set="#{$i}"]
+				//filter: blur(#{1*-$i}px)
+				opacity: #{.25*(4+$i)}
+		@for $i from 1 through 3
+			&[data-lyric-set="#{$i}"]
+				//filter: blur(#{1*$i}px)
+				opacity: #{.25*(4-$i)}
 </style>
 
 <script>
