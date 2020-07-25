@@ -90,10 +90,8 @@ export default {
 			next();
 		});
 		this.getStatus(true);
-
 	},
 	methods: {
-
 		closeMenu() {
 			this.drawer = false;
 		},

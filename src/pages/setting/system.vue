@@ -2,6 +2,17 @@
 	<div>
 		<poka-header :title="$t('settings_systemAndUpdate')" />
 		<v-list subheader>
+			<v-subheader>移轉</v-subheader>
+			<v-list-item @click="migratePlaylist">
+				<v-list-item-avatar>
+					<v-icon>queue_music</v-icon>
+				</v-list-item-avatar>
+
+				<v-list-item-content>
+					<v-list-item-title>資料庫升級</v-list-item-title>
+					<v-list-item-subtitle>將所有播放清單之所有權移轉至您名下</v-list-item-subtitle>
+				</v-list-item-content>
+			</v-list-item>
 			<v-subheader>{{$t('settings_system')}}</v-subheader>
 			<v-list-item @click="restartConfirmActive=true">
 				<v-list-item-avatar>
@@ -217,6 +228,18 @@ export default {
 			local = local[0] * 1000 * 1000 + local[1] * 1000 + local[2];
 			remote = remote[0] * 1000 * 1000 + remote[1] * 1000 + remote[2];
 			return remote > local;
+		},
+		migratePlaylist() {
+			if (confirm("這項動作無法被復原，請確定您移轉到正確的帳號！"/* 記得移除這ㄍ */)) {
+				this.axios.post(_setting(`server`) + "/pokaapi/v2/playlist/migrate").then(response => {
+					if (response.data.success)
+						this.$snackbar(`轉移成功`)
+					else
+						this.$snackbar(`轉移失敗，可能是您的權限不足所致`)
+				});
+			} else {
+				this.$snackbar(`轉移已取消`)
+			}
 		}
 	}
 };
