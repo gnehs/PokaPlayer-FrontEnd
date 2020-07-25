@@ -92,9 +92,7 @@ export default {
 			let playlistId = encodeURIComponent(this.$route.params.id);
 			let server = this.server;
 			this.axios
-				.get(
-					`${server}/pokaapi/playlistSongs/?moduleName=${source}&id=${playlistId}&rnd=${Math.floor(Math.random() * 9999999)}`
-				)
+				.get(`${server}/pokaapi/playlistSongs/?moduleName=${source}&id=${playlistId}&rnd=${Math.floor(Math.random() * 9999999)}`)
 				.then(response => {
 					this.data = response.data;
 					this.title = this.data.playlists[0].name;

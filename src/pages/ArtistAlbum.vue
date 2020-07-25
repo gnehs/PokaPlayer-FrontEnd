@@ -19,25 +19,16 @@
 export default {
 	name: "ArtistAlbum",
 	created() {
-		let ArtistId =
-			this.$route.params.id == "unknown" ? "" : this.$route.params.id;
+		let ArtistId = this.$route.params.id == "unknown" ? "" : this.$route.params.id;
 		let ArtistSource = this.$route.params.source;
 		//取得專輯資料
-		let url = `${
-			this.server
-			}/pokaapi/artistAlbums/?moduleName=${encodeURIComponent(
-				ArtistSource
-			)}&id=${encodeURIComponent(ArtistId)}`;
+		let url = `${this.server}/pokaapi/artistAlbums/?moduleName=${encodeURIComponent(ArtistSource)}&id=${encodeURIComponent(ArtistId)}`;
 		this.axios.get(url).then(response => {
 			this.data = response.data;
 		});
 		//取得封面與名字
 		this.axios
-			.get(
-				`/pokaapi/artist/?moduleName=${encodeURIComponent(
-					ArtistSource
-				)}&id=${encodeURIComponent(ArtistId)}`
-			)
+			.get(`/pokaapi/artist/?moduleName=${encodeURIComponent(ArtistSource)}&id=${encodeURIComponent(ArtistId)}`)
 			.then(response => {
 				this.cover = response.data.cover;
 				this.name = response.data.name;
