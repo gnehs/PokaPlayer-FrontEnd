@@ -205,6 +205,7 @@ export default {
 			username: window._setting(`username`),
 			password: window._setting(`password`)
 		});
+		_socket.emit('send-nickname', _setting('nickname'));
 		if ("mediaSession" in navigator) {
 			navigator.mediaSession.setActionHandler("play", () => _player.toggle());
 			navigator.mediaSession.setActionHandler("pause", () => _player.pause());
