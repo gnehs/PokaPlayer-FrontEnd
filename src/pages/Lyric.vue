@@ -150,6 +150,9 @@
 			font-weight: 700
 			.theme--dark &
 				text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
+@media (min-width: 576px)
+	[theme="default"] .lyric
+		font-size: 18px
 [theme="bigtext"] .lyric
 	padding: 160px 25px
 	p
