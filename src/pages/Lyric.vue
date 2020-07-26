@@ -126,25 +126,26 @@
 	p
 		transition: all 0.5s cubic-bezier(0.77, 0, 0.18, 1), color 0.2s linear, opacity 0.2s linear
 		opacity: .4
-		line-height: 1.1em
-		height: 1.1em
-		transform: scale(.7)
-		position: relative
-		font-size: calc(16px + 1.2vmin)
+		line-height: 1.3em
+		font-size: 1em
+		>span
+			line-height: 1.3em
 		&.focus
 			opacity: 1
-			transform: scale(1)
 			font-weight: 700
 			text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
+			font-size: 1.4em
 			.theme--dark &
 				text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
+			&+.tl
+				font-size: 1.2em
 		&.tl
 			opacity: .25
-			transform: scale(.65) translateY(-10px)
+			transform: translateY(-10px)
 	&.lyricTranslated
 		p.focus:not(:empty) + p
 			opacity: .8
-			transform: scale(.8) translateY(-8px)
+			transform: translateY(-8px)
 			text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
 			font-weight: 700
 			.theme--dark &
@@ -190,9 +191,9 @@
 		>span
 			padding: .25em .2em
 			transition: all .6s ease
-		&.focus.focus
+		&.focus
 			opacity: 1
-			letter-spacing: 3px
+			letter-spacing: 1px
 			>span:not(:empty)
 				color: #FFF
 				background: var(--v-primary-base)
@@ -226,23 +227,14 @@
 			padding: .25em .2em
 			transition: .5s ease
 			position: relative
-			&::after
-				content: ''
-				transition: all .4s ease
-				position: absolute
-				bottom: .3rem
-				left: -0.5rem
-				right: -0.5rem
-				height: 0.5rem
-				z-index: -1
-				background-color: var(--v-primary-base)
-				transform: scaleX(0)
-				border-radius: 500em
-				opacity: .4
+			background-image: linear-gradient(transparent calc(65% - 5px),var(--v-primary-lighten3) 5px)
+			background-size: 0
+			background-repeat: no-repeat
+
 		&.focus
 			opacity: 1
-			>span:not(:empty):after
-				transform: none
+			>span:not(:empty)
+				background-size: 100%
 			&+.tl
 				opacity: 1
 		&.tl
@@ -259,6 +251,10 @@
 			&[data-lyric-set="#{$i}"]
 				//filter: blur(#{1*$i}px)
 				opacity: #{.25*(4-$i)}
+
+@media (prefers-color-scheme: dark)
+	[theme="underline"] .lyric p > span
+		background-image: linear-gradient(transparent calc(65% - 5px),var(--v-primary-darken3) 5px)
 </style>
 
 <script>
