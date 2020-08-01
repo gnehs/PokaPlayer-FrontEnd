@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<poka-header :title="$t('settingInterface._')" :bg="setting.bg" />
+		<v-subheader>{{$t('settingInterface.lang')}}</v-subheader>
 		<div class="poka list">
 			<div class="item" @click="lang_dialog=true" v-ripple>
 				<div class="content">
@@ -14,7 +15,7 @@
 				</div>
 			</div>
 		</div>
-		<v-subheader>{{$t('settingInterface.customize._')}}</v-subheader>
+		<v-subheader>Background</v-subheader>
 		<div class="poka list">
 			<div class="item" @click="customize_bg_dialog=true" v-ripple>
 				<div class="content">
@@ -38,6 +39,7 @@
 					</div>
 				</div>
 			</div>
+			<v-subheader>Color</v-subheader>
 			<div class="item" @click="theme_dialog=true" v-ripple>
 				<div class="content">
 					<v-avatar size="42px" item>
@@ -49,6 +51,7 @@
 					</div>
 				</div>
 			</div>
+			<v-subheader>Theme</v-subheader>
 			<div class="item" @click="lyric_theme_dialog=true" v-ripple>
 				<div class="content">
 					<v-avatar size="42px" item>
@@ -57,6 +60,29 @@
 					<div class="header">
 						<div class="head t-ellipsis">{{$t('settingInterface.customize.lyric._')}}</div>
 						<div class="t-ellipsis">{{$t('settingInterface.customize.lyric.description')}}</div>
+					</div>
+				</div>
+			</div>
+			<v-subheader>Display</v-subheader>
+			<div class="item" @click="changeStyle('artist')" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>{{view.artist=='card'?'view_module':'list'}}</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">演出者頁面佈局</div>
+						<div class="t-ellipsis">{{view.artist}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="item" @click="changeStyle('composer')" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>{{view.composer=='card'?'view_module':'list'}}</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">作曲者頁面佈局</div>
+						<div class="t-ellipsis">{{view.composer}}</div>
 					</div>
 				</div>
 			</div>
@@ -262,6 +288,11 @@ export default {
 		theme_dialog: false,
 		// bgheight
 		bg_height_dialog: false,
+		// style
+		view: {
+			artist: _setting(`artistView`),
+			composer: _setting(`composerView`)
+		},
 		// custombg
 		customize_bg_dialog: false,
 		bg_prompt_active: false,
@@ -406,7 +437,8 @@ export default {
 				url: _setting(`server`) + "/setting/",
 				data: { n: { lang } }
 			});
-		}, setLyricTheme(lyricTheme) {
+		},
+		setLyricTheme(lyricTheme) {
 			window._setting("lyricTheme", lyricTheme);
 			this.lyric_theme_dialog = false
 			this.axios({
@@ -414,6 +446,14 @@ export default {
 				url: _setting(`server`) + "/setting/",
 				data: { n: { lyricTheme } }
 			});
+		},
+		changeStyle(name) {
+			let value = this.view[name] == 'card' ? 'list' : 'card'
+			//artist
+			let settingkey = name + 'View'
+			_setting(settingkey, value)
+			this.view[name] = value
+
 		}
 	}
 };

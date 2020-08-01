@@ -93,6 +93,8 @@ window._setting = (setting, value) => {
         "nickname": `Poka-${Math.random().toString(36).substring(8).toUpperCase()}`,
         "theme": "#5c95c4",
         "lyricTheme": "default",
+        "artistView": "card",
+        "composerView": "card",
         "audioQuality": "High",
         "headerBgSource": "https://i.imgur.com/IdbJiao.jpg",
         "darkMode": false,
