@@ -26,7 +26,31 @@ export default {
 	"login_page": {
 		"server": "Server",
 		"username": "Username",
-		"password": "Password"
+		"password": "Password",
+		"features": {
+			"opensource": {
+				"title": "Open Source",
+				"description": "All source code is on GitHub"
+			},
+			"module": {
+				"title": "Modularization",
+				"description": "Port any of the services are not difficult"
+			},
+			"streaming": {
+				"title": "Stream anywhere",
+				"description": "Listen to music anywhere"
+			},
+			"fastinstall": {
+				"title": "Quick install",
+				"description": "Can be quickly deployed using Docker"
+			},
+		},
+		"tips": {
+			"firstLogin": {
+				"title": 'First time?',
+				"description": 'The default user name and password are both "poka", after logging in, you can go to the settings to change.'
+			}
+		}
 	},
 	"nothingFound": "Nothing found",
 	"requestError": "An error occurred while requesting, please try again",

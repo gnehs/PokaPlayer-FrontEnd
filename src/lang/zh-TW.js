@@ -27,7 +27,31 @@ export default {
 	"login_page": {
 		"server": "伺服器",
 		"username": "使用者名稱",
-		"password": "密碼"
+		"password": "密碼",
+		"features": {
+			"opensource": {
+				"title": "開放原始碼",
+				"description": "所有的程式碼都在 GitHub"
+			},
+			"module": {
+				"title": "模組化",
+				"description": "接入任何服務皆不是難事"
+			},
+			"streaming": {
+				"title": "隨時隨地串流",
+				"description": "連上網便能聽歌"
+			},
+			"fastinstall": {
+				"title": "快速安裝",
+				"description": "可使用 Docker 快速部署"
+			},
+		},
+		"tips": {
+			"firstLogin": {
+				"title": '首次登入？',
+				"description": '預設使用者名稱與密碼皆為「poka」，登入後可至設定更改。'
+			}
+		}
 	},
 	"nothingFound": "找不到",
 	"requestError": "請求失敗，請再試一次",

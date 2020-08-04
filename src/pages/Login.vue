@@ -1,110 +1,183 @@
 <template>
-	<div class="login-container" :style="{'--login-bg':`url('${headerImg}')`}">
-		<div class="license-container">
-			<a href="https://loading.io/">banner background from loading.io</a>
-		</div>
-		<v-form ref="form" v-on:submit.prevent="login">
-			<div class="form-container">
-				<p style="margin-bottom:4px;font-family:var(--product-font);font-size:3.75rem;">PokaPlayer</p>
-				<v-expand-transition>
-					<div class="text-center" style="margin: 50px 0;" v-show="logining">
-						<v-progress-circular indeterminate color="primary"></v-progress-circular>
+	<div class="login-container">
+		<div class="login-row">
+			<div class="login-intro">
+				<div class="intro-container">
+					<h1 class="welcome">PokaPlayer</h1>
+					<div class="features">
+						<div class="feature">
+							<v-icon large color="green darken-2">mdi-code-braces</v-icon>
+							<div class="title">{{$t('login_page.features.opensource.title')}}</div>
+							<div class="description">{{$t('login_page.features.opensource.description')}}</div>
+						</div>
+						<div class="feature">
+							<v-icon large color="blue darken-2">mdi-puzzle</v-icon>
+							<div class="title">{{$t('login_page.features.module.title')}}</div>
+							<div class="description">{{$t('login_page.features.module.description')}}</div>
+						</div>
+						<div class="feature">
+							<v-icon large color="purple darken-2">mdi-music-note</v-icon>
+							<div class="title">{{$t('login_page.features.streaming.title')}}</div>
+							<div class="description">{{$t('login_page.features.streaming.description')}}</div>
+						</div>
+						<div class="feature">
+							<v-icon large color="teal darken-2">mdi-clock-fast</v-icon>
+							<div class="title">{{$t('login_page.features.fastinstall.title')}}</div>
+							<div class="description">{{$t('login_page.features.fastinstall.description')}}</div>
+						</div>
 					</div>
-				</v-expand-transition>
-				<v-expand-transition>
-					<div v-show="!logining">
-						<v-text-field
-							outlined
-							:label="$t('login_page.server')"
-							v-model.trim="server"
-							:disabled="logining"
-						></v-text-field>
-						<v-text-field
-							outlined
-							:label="$t('login_page.username')"
-							v-model="username"
-							:disabled="logining"
-						></v-text-field>
-						<v-text-field
-							outlined
-							:label="$t('login_page.password')"
-							type="password"
-							v-model="password"
-							:disabled="logining"
-						></v-text-field>
+					<br />
+					<div class="title">{{$t('login_page.tips.firstLogin.title')}}</div>
+					<p>{{$t('login_page.tips.firstLogin.description')}}</p>
+					<br />
+					<p>
+						<v-btn icon href="https://github.com/gnehs/PokaPlayer" target="_blank">
+							<v-icon>mdi-github</v-icon>
+						</v-btn>
+						<v-btn icon href="https://github.com/gnehs/PokaPlayer/graphs/contributors" target="_blank">
+							<v-icon>mdi-account-group</v-icon>
+						</v-btn>
+						<v-btn icon href="https://github.com/gnehs/PokaPlayer/issues" target="_blank">
+							<v-icon>mdi-alert-circle-outline</v-icon>
+						</v-btn>
+					</p>
+					<div style="max-width: 200px;margin: 0 auto">
+						<v-select v-model="currentLang" @change="setLang" solo :items="langs" />
 					</div>
-				</v-expand-transition>
-				<v-btn block type="submit" :disabled="logining" color="primary">{{$t('login')}}</v-btn>
+				</div>
 			</div>
-		</v-form>
+			<div class="login-form">
+				<poka-header />
+				<v-card class="mx-auto" max-width="400">
+					<v-toolbar flat color="primary" dark>
+						<v-toolbar-title>{{$t('login')}}</v-toolbar-title>
+
+						<v-spacer></v-spacer>
+
+						<!--<v-btn icon>
+						<v-icon>mdi-magnify</v-icon>
+					</v-btn>
+
+					<v-btn icon>
+						<v-icon>mdi-apps</v-icon>
+					</v-btn>
+
+					<v-btn icon>
+						<v-icon>mdi-dots-vertical</v-icon>
+						</v-btn>-->
+					</v-toolbar>
+
+					<v-divider></v-divider>
+
+					<v-card-text>
+						<v-expand-transition>
+							<div class="text-center" style="margin: 50px 0;" v-show="logining">
+								<v-progress-circular indeterminate color="primary"></v-progress-circular>
+							</div>
+						</v-expand-transition>
+						<v-expand-transition>
+							<div v-show="!logining">
+								<v-text-field
+									outlined
+									:label="$t('login_page.server')"
+									v-model.trim="server"
+									:disabled="logining"
+								></v-text-field>
+								<v-text-field
+									outlined
+									:label="$t('login_page.username')"
+									v-model="username"
+									:disabled="logining"
+								></v-text-field>
+								<v-text-field
+									outlined
+									:label="$t('login_page.password')"
+									type="password"
+									v-model="password"
+									:disabled="logining"
+								></v-text-field>
+							</div>
+						</v-expand-transition>
+						<v-btn block :disabled="logining" color="primary" @click="login">{{$t('login')}}</v-btn>
+					</v-card-text>
+				</v-card>
+			</div>
+		</div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
-	form {
-		height: 100%;
-		justify-content: center;
-		align-items: center;
+	.login-container {
+		position: relative;
+		height: 100vh;
+		width: 100vw;
+	}
+	.login-row {
 		display: flex;
-		max-width: calc(350px + 30px + 30px);
-		padding: 0 30px;
-		background-color: rgba(255, 255, 255, 0.9);
-		backdrop-filter: blur(10px);
-		box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
-		.form-container {
-			flex: 1 1;
-			max-width: 350px;
+		height: 100vh;
+		.login-intro {
+			width: 500px;
+			height: 100vh;
+			padding: 10px;
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			overflow: scroll;
+			.intro-container {
+				max-width: 500px;
+				margin: 0 auto;
+				border-radius: 8px;
+				text-align: center;
+				h1.welcome {
+					font-weight: normal;
+					font-size: 48px;
+					margin: 20px 0;
+					font-family: var(--product-font);
+				}
+				.features {
+					display: flex;
+					flex-direction: row;
+					flex-wrap: wrap;
+					.feature {
+						width: 50%;
+						padding: 8px 4px;
+					}
+				}
+			}
 		}
-		animation: slideout 0.6s ease 0.3s;
-		animation-fill-mode: forwards;
-		transform: translate(-100%);
+		.login-form {
+			position: relative;
+			flex: 1;
+			height: 100vh;
+			overflow: hidden;
+			.v-card {
+				margin: auto;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				width: 400px;
+				height: fit-content;
+			}
+		}
 	}
-	@media (max-width: 575.98px) {
-		form {
-			width: 100%;
-			max-width: 100%;
-			padding: 0;
-			background-color: rgba(255, 255, 255, 0.95);
-		}
-	}
-	@keyframes slideout {
-		from {
-			transform: translate(-100%);
-		}
-		to {
-			transform: translate(0);
+	@media (max-width: 1200px) {
+		.login-row {
+			display: block;
+			.login-intro {
+				display: none;
+			}
+			.login-form {
+				position: relative;
+				width: 100vw;
+			}
 		}
 	}
 	@media (prefers-color-scheme: dark) {
 		form {
 			background-color: rgba(0, 0, 0, 0.7);
-		}
-	}
-
-	.login-container {
-		height: 100vh;
-		width: 100vw;
-		background-size: cover;
-		background-position: center;
-		background-image: var(--login-bg);
-	}
-	@media (prefers-color-scheme: dark) {
-		.login-container {
-			background-image: linear-gradient(
-					rgba(0, 0, 0, 0.6),
-					rgba(0, 0, 0, 0.6)
-				),
-				var(--login-bg);
-		}
-	}
-
-	.license-container {
-		position: absolute;
-		bottom: 3px;
-		right: 3px;
-		opacity: 0.1;
-		a {
-			color: #fff;
 		}
 	}
 </style>
@@ -120,7 +193,9 @@ export default {
 		username: null,
 		passwordError: null,
 		headerImg: null,
-		isDarkMode: window.matchMedia("(prefers-color-scheme: dark)").matches
+		isDarkMode: window.matchMedia("(prefers-color-scheme: dark)").matches,
+		currentLang: i18n.locale,
+		langs: Object.keys(i18n.messages).map(x => ({ text: i18n.t("title", x), value: x }))
 	}),
 	created() {
 		this.remember = true;
@@ -130,7 +205,11 @@ export default {
 		this.headerImg = _setting(`headerBgSource`);
 	},
 	methods: {
-		login() {
+		setLang() {
+			window.i18n.locale = this.currentLang;
+			window._setting("lang", this.currentLang);
+		},
+		async login() {
 			this.passwordError = null;
 			this.serverError = null;
 			this.server = this.server.replace(/\/$/, ""); // remove last "/"
@@ -144,6 +223,7 @@ export default {
 				return;
 			}
 			this.logining = true;
+			await this.axios.get(this.server + "/logout/")
 			this.axios({
 				method: "post",
 				url: this.server + "/login/",
@@ -172,7 +252,7 @@ export default {
 							username: window._setting(`username`),
 							password: window._setting(`password`)
 						});
-						socket.emit('send-nickname', _setting('nickname'));
+						_socket.emit('send-nickname', _setting('nickname'));
 						// 轉到首頁
 						this.$router.push("/");
 						//重新整理來啟用新設定值
