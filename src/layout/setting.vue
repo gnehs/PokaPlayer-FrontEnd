@@ -61,7 +61,7 @@ export default {
 			{ text: i18n.t('settings_network'), icon: 'cloud', to: "/settings/network" },
 			{ text: i18n.t('settingInterface._'), icon: 'layers', to: "/settings/interface" },
 			{ text: i18n.t('settingUser.title'), icon: 'person', to: "/settings/user" },
-			{ text: i18n.t('settingPravicy.title'), icon: 'lock', to: "/settings/privacy" },
+			//{ text: i18n.t('settingPravicy.title'), icon: 'lock', to: "/settings/privacy" },
 			{ text: i18n.t('settings_systemAndUpdate'), icon: 'system_update', to: "/settings/system" }
 		],
 	}),
@@ -90,14 +90,14 @@ export default {
 		});
 		this.getStatus();
 
-		let isAdmin = JSON.parse(sessionStorage.getItem("login")).role == 'admin' || false
+		/*let isAdmin = JSON.parse(sessionStorage.getItem("login")).role == 'admin' || false
 		if (isAdmin) {
 			this.items.push(
 				{ divider: true },
 				{ text: '使用者管理', icon: 'person', to: "/settings/admin/user" },
 				{ text: '播放清單管理', icon: 'queue_music', to: "/settings/admin/playlist" }
 			)
-		}
+		}*/
 	},
 	methods: {
 		closeMenu() {
