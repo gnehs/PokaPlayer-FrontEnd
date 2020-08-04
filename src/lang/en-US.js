@@ -168,7 +168,7 @@ export default {
 	"settings_restart_completed": "Restart completed.",
 	"settings_restartDialog_title": "Are you sure to restart?",
 	"settingInterface": {
-		"_": "介面",
+		"_": "Interface",
 		"customize": {
 			"_": "Customizations",
 			"bg": {
@@ -185,13 +185,21 @@ export default {
 					"none": "Hide background"
 				}
 			},
-			"theme": {
-				"_": "Theme",
-				"description": "Change theme color",
+			"theme": "Theme",
+			"theme_color": {
+				"_": "Theme color",
+				"description": "Change the theme color",
 			},
 			"lyric": {
 				"_": "Lyric theme",
 				"description": "Change the theme of lyric page",
+			},
+			"layout": {
+				"_": "Layout",
+				"list": "list",
+				"card": "card",
+				"artist": "Artist page layout",
+				"composer": "Composer page layout",
 			}
 		},
 		"lang": "Language"
@@ -234,6 +242,10 @@ export default {
 				"error": "Password change failed"
 			}
 		}
+	},
+	"settingPravicy": {
+		"title": "Pravicy",
+		"description": "Data record setting",
 	},
 	"source": {
 		"DSM": "DSM",

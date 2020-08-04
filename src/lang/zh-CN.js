@@ -1,6 +1,6 @@
 export default {
 	"title": "中文（中国）",
-	"loading": "加载中...",
+	"loading": "载入中...",
 	"header_welcome": "欢迎使用",
 	"header_version": "PokaPlayer {version}",
 	"checkUpdate_poka": "有新版本可供更新：{version}",
@@ -11,9 +11,9 @@ export default {
 	"home": "首页",
 	"nowplaying": "现正播放",
 	"lrc": "歌词",
-	"search": "搜索",
+	"search": "搜寻",
 	"album": "专辑",
-	"folder": "文件夹",
+	"folder": "资料夹",
 	"artist": "演出者",
 	"song": "歌曲",
 	"composer": "作曲者",
@@ -21,11 +21,12 @@ export default {
 	"settings": "设定",
 	"ok": "好",
 	"cancel": "取消",
+	"done": "完成",
 	"back": "返回",
 	"login": "登入",
 	"login_page": {
 		"server": "服务器",
-		"username": "用户名称",
+		"username": "使用者名称",
 		"password": "密码",
 		"features": {
 			"opensource": {
@@ -69,19 +70,20 @@ export default {
 		"del": "删除",
 		"del_title": "删除播放清单",
 		"delconfirm": "确定要删除「{title}」吗？",
+		"add_title": "新增播放清单",
 		"edit_title": "编辑播放清单",
 		"title_input": "播放清单标题",
 		"cover_input": "播放清单封面",
 		"edit_empty": "字段不得为空",
-		"playlist_empty": "您尚未建立任何播放清单，点选右上角的「＋」来新增",
+		"playlist_empty": "您尚未建立任何播放清单，点选右上角的「＋」来新增"
 	},
-	"lrc_search": "搜索歌词",
-	"lrc_noKeyword": "尚未输入关键字",
-	"lrc_enter2search": "输入完后按下 Enter 开始搜索歌词",
-	"lrc_notLoad": "不加载歌词",
+	"lrc_search": "搜寻歌词",
+	"lrc_noKeyword": "尚未输入关键词",
+	"lrc_enter2search": "输入完后按下 Enter 开始搜寻歌词",
+	"lrc_notLoad": "不载入歌词",
 	"lrc_notLoad_description": "点选清除目前的歌词",
 	"lrc_noLyrics": "无歌词",
-	"lrc_saved": "歌詞已儲存",
+	"lrc_saved": "歌词已储存",
 	"songAction_title": "歌曲操作",
 	"songAction_name": "歌曲名称",
 	"songAction_artist": "演出者",
@@ -107,7 +109,7 @@ export default {
 	"songAction_add2playlist_add_success": "已将 {name} 加入到 {playlist}",
 	"songAction_add2playlist_remove_success": "已将 {name} 从 {playlist} 删除",
 	"album_total": "{songs} 首歌曲",
-	"albumsOfSameArtist": "來自相同演出者的其他專輯",
+	"albumsOfSameArtist": "来自相同演出者的其他专辑",
 	"addSong_total": "已添加 {total} 首歌",
 	"addSong_name": "已添加 {name}",
 	"moduleShowName_Netease": "网易云音乐",
@@ -125,17 +127,19 @@ export default {
 	"pin_playlist": "钉选此播放清单",
 	"unpin_playlist": "取消钉选此播放清单",
 	"settings_dark": "夜间模式",
-	"settings_network": "网路",
+	"settings_network": "网络",
 	"settings_network_description": "音质",
 	"settings_network_soundQuality": "音质",
 	"settings_network_soundQuality_Low": "低音质",
 	"settings_network_soundQuality_Med": "中等音质",
 	"settings_network_soundQuality_High": "高音质(建议)",
 	"settings_network_soundQuality_Ori": "原始音质",
-	"settings_network_soundQuality_Low_description": "128K，跟 YouTube 差不多的烂音质，在网路夭寿慢的情况下请选择此选项",
-	"settings_network_soundQuality_Med_description": "音质只比 YouTube 好那么一点点，可在 3G 网路下流畅的串流",
-	"settings_network_soundQuality_High_description": "音质较原始音质略差，可在 4G 网路下流畅的串流",
-	"settings_network_soundQuality_Ori_description": "在网路状况许可下，可选择此选项聆听高音质音乐",
+	"settings_network_soundQuality_Low_description": "128K，跟 YouTube 差不多的烂音质，在网络夭寿慢的情况下请选择此选项",
+	"settings_network_soundQuality_Med_description": "音质只比 YouTube 好那么一点点，可在 3G 网络下流畅的串流",
+	"settings_network_soundQuality_High_description": "音质较原始音质略差，可在 4G 网络下流畅的串流",
+	"settings_network_soundQuality_Ori_description": "在网络状况许可下，可选择此选项聆听高音质音乐",
+	"settings_lang": "语言",
+	"settings_lang_description": "设定您的 PokaPlayer 语言",
 	"settings_systemAndUpdate": "系统和更新",
 	"settings_systemAndUpdate_description": "更新 PokaPlayer、重新启动",
 	"settings_about": "关于",
@@ -145,7 +149,7 @@ export default {
 	"settings_account": "账号",
 	"settings_logout": "登出",
 	"settings_system": "系统",
-	"settings_update": "軟體更新",
+	"settings_update": "软件更新",
 	"settings_update_checking4updates": "正在检查更新...",
 	"settings_update_latestVersion": "您的 PokaPlayer 已是最新版本",
 	"settings_update_update2": "更新至 {version}",
@@ -161,9 +165,9 @@ export default {
 	"settings_updateDialog_note": "注意：若您未开启 Docker 自动重启功能，您必须手动开启 PokaPlayer",
 	"settings_updateDialog_note_dev": "若在开发机器上进行更新，<mark>可能导致 Git 爆炸</mark>",
 	"settings_updateDialog_title": "{version} 更新日志",
-	"settings_restart": "重启",
-	"settings_restarting": "正在重启",
-	"settings_restart_completed": "重启完成！",
+	"settings_restart": "重新启动",
+	"settings_restarting": "正在重新启动",
+	"settings_restart_completed": "重新启动完成！",
 	"settings_restartDialog_title": "确定要重新启动吗？",
 	"settingInterface": {
 		"_": "界面",
@@ -183,13 +187,21 @@ export default {
 					"none": "无背景"
 				}
 			},
-			"theme": {
-				"_": "主题",
+			"theme": "主题",
+			"theme_color": {
+				"_": "主色",
 				"description": "设定 PokaPlayer 的主题色彩",
 			},
 			"lyric": {
-				"_": "歌词页面主題",
+				"_": "歌词页面主题",
 				"description": "设定歌词页面的主题",
+			},
+			"layout": {
+				"_": "布局",
+				"list": "清单",
+				"card": "卡片",
+				"artist": "演出者页面布局",
+				"composer": "作曲者页面布局",
 			}
 		},
 		"lang": "语言"
@@ -233,9 +245,13 @@ export default {
 			}
 		}
 	},
+	"settingPravicy": {
+		"title": "隐私",
+		"description": "资料纪录设定",
+	},
 	"source": {
 		"DSM": "DSM",
 		"poka": "PokaPlayer",
 		"Netease2": "网易云音乐"
-	}
+	},
 }

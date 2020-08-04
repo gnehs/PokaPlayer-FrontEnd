@@ -15,7 +15,7 @@
 				</div>
 			</div>
 		</div>
-		<v-subheader>Background</v-subheader>
+		<v-subheader>{{$t('settingInterface.customize.bg._')}}</v-subheader>
 		<div class="poka list">
 			<div class="item" @click="customize_bg_dialog=true" v-ripple>
 				<div class="content">
@@ -39,19 +39,18 @@
 					</div>
 				</div>
 			</div>
-			<v-subheader>Color</v-subheader>
+			<v-subheader>{{$t('settingInterface.customize.theme')}}</v-subheader>
 			<div class="item" @click="theme_dialog=true" v-ripple>
 				<div class="content">
 					<v-avatar size="42px" item>
 						<v-icon>palette</v-icon>
 					</v-avatar>
 					<div class="header">
-						<div class="head t-ellipsis">{{$t('settingInterface.customize.theme._')}}</div>
-						<div class="t-ellipsis">{{$t('settingInterface.customize.theme.description')}}</div>
+						<div class="head t-ellipsis">{{$t('settingInterface.customize.theme_color._')}}</div>
+						<div class="t-ellipsis">{{$t('settingInterface.customize.theme_color.description')}}</div>
 					</div>
 				</div>
 			</div>
-			<v-subheader>Theme</v-subheader>
 			<div class="item" @click="lyric_theme_dialog=true" v-ripple>
 				<div class="content">
 					<v-avatar size="42px" item>
@@ -63,15 +62,15 @@
 					</div>
 				</div>
 			</div>
-			<v-subheader>Display</v-subheader>
+			<v-subheader>{{$t('settingInterface.customize.layout._')}}</v-subheader>
 			<div class="item" @click="changeStyle('artist')" v-ripple>
 				<div class="content">
 					<v-avatar size="42px" item>
 						<v-icon>{{view.artist=='card'?'view_module':'list'}}</v-icon>
 					</v-avatar>
 					<div class="header">
-						<div class="head t-ellipsis">演出者頁面佈局</div>
-						<div class="t-ellipsis">{{view.artist}}</div>
+						<div class="head t-ellipsis">{{$t('settingInterface.customize.layout.artist')}}</div>
+						<div class="t-ellipsis">{{$t('settingInterface.customize.layout.'+view.artist)}}</div>
 					</div>
 				</div>
 			</div>
@@ -81,8 +80,8 @@
 						<v-icon>{{view.composer=='card'?'view_module':'list'}}</v-icon>
 					</v-avatar>
 					<div class="header">
-						<div class="head t-ellipsis">作曲者頁面佈局</div>
-						<div class="t-ellipsis">{{view.composer}}</div>
+						<div class="head t-ellipsis">{{$t('settingInterface.customize.layout.composer')}}</div>
+						<div class="t-ellipsis">{{$t('settingInterface.customize.layout.'+view.composer)}}</div>
 					</div>
 				</div>
 			</div>
@@ -158,7 +157,7 @@
 		</v-dialog>
 		<v-dialog v-model="theme_dialog" max-width="340">
 			<v-card>
-				<v-card-title class="headline">{{$t('settingInterface.customize.theme._')}}</v-card-title>
+				<v-card-title class="headline">{{$t('settingInterface.customize.theme_color._')}}</v-card-title>
 				<v-card-text>
 					<v-color-picker
 						style="margin:8px auto !important"
