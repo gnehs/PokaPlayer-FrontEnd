@@ -34,7 +34,7 @@ export default {
 			},
 			"module": {
 				"title": "Modularization",
-				"description": "Port any of the services are not difficult"
+				"description": "Easy to port any services"
 			},
 			"streaming": {
 				"title": "Stream anywhere",
@@ -42,13 +42,13 @@ export default {
 			},
 			"fastinstall": {
 				"title": "Quick install",
-				"description": "Can be quickly deployed using Docker"
+				"description": "Deploy using Docker in a snap"
 			},
 		},
 		"tips": {
 			"firstLogin": {
 				"title": 'First time?',
-				"description": 'The default user name and password are both "poka", after logging in, you can go to the settings to change.'
+				"description": 'The default user name and password are both "poka". You can change them in the settings'
 			}
 		}
 	},
