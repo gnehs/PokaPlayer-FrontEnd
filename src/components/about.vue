@@ -15,7 +15,7 @@
 				<v-divider />
 				<v-list-item href="https://github.com/gnehs/PokaPlayer/" target="_blank">
 					<v-list-item-avatar>
-						<v-icon>explore</v-icon>
+						<v-icon>mdi-github</v-icon>
 					</v-list-item-avatar>
 					<v-list-item-content>
 						<v-list-item-title>GitHub</v-list-item-title>

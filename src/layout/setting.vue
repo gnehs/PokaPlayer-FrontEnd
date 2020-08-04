@@ -2,7 +2,7 @@
 	<div>
 		<v-app-bar :clipped-left="$vuetify.breakpoint.mdAndUp" app dark color="primary">
 			<v-btn icon to="/home">
-				<v-icon class="material-icons-outlined">arrow_back</v-icon>
+				<v-icon class="material-icons-outlined">mdi-close</v-icon>
 			</v-btn>
 			<v-app-bar-nav-icon @click.stop="toggleMenu()" v-if="!$vuetify.breakpoint.mdAndUp" />
 			<v-toolbar-title style="width: 300px">
