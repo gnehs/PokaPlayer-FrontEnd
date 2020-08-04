@@ -1,5 +1,6 @@
 <template>
 	<div class="login-container">
+		<poka-header />
 		<div class="login-row">
 			<div class="login-intro">
 				<div class="intro-container">
@@ -47,14 +48,14 @@
 				</div>
 			</div>
 			<div class="login-form">
-				<poka-header />
-				<v-card class="mx-auto" max-width="400">
-					<v-toolbar flat color="primary" dark>
-						<v-toolbar-title>{{$t('login')}}</v-toolbar-title>
+				<div class="box">
+					<v-card class="mx-auto" max-width="400">
+						<v-toolbar dark color="primary">
+							<v-toolbar-title>{{$t('login')}}</v-toolbar-title>
 
-						<v-spacer></v-spacer>
+							<v-spacer></v-spacer>
 
-						<!--<v-btn icon>
+							<!--<v-btn icon>
 						<v-icon>mdi-magnify</v-icon>
 					</v-btn>
 
@@ -64,19 +65,15 @@
 
 					<v-btn icon>
 						<v-icon>mdi-dots-vertical</v-icon>
-						</v-btn>-->
-					</v-toolbar>
+							</v-btn>-->
+						</v-toolbar>
+						<v-divider></v-divider>
 
-					<v-divider></v-divider>
-
-					<v-card-text>
-						<v-expand-transition>
-							<div class="text-center" style="margin: 50px 0;" v-show="logining">
+						<v-card-text>
+							<v-overlay absolute :value="logining">
 								<v-progress-circular indeterminate color="primary"></v-progress-circular>
-							</div>
-						</v-expand-transition>
-						<v-expand-transition>
-							<div v-show="!logining">
+							</v-overlay>
+							<div>
 								<v-text-field
 									outlined
 									:label="$t('login_page.server')"
@@ -97,10 +94,10 @@
 									:disabled="logining"
 								></v-text-field>
 							</div>
-						</v-expand-transition>
-						<v-btn block :disabled="logining" color="primary" @click="login">{{$t('login')}}</v-btn>
-					</v-card-text>
-				</v-card>
+							<v-btn block :disabled="logining" color="primary" @click="login">{{$t('login')}}</v-btn>
+						</v-card-text>
+					</v-card>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -115,8 +112,10 @@
 	.login-row {
 		display: flex;
 		height: 100vh;
+		max-width: 1200px;
+		margin: 0 auto;
 		.login-intro {
-			width: 500px;
+			min-width: 500px;
 			height: 100vh;
 			padding: 10px;
 			position: relative;
@@ -151,7 +150,7 @@
 			flex: 1;
 			height: 100vh;
 			overflow: hidden;
-			.v-card {
+			.box {
 				margin: auto;
 				position: absolute;
 				top: 0;
