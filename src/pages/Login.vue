@@ -52,26 +52,12 @@
 					<v-card class="mx-auto" max-width="400">
 						<v-toolbar dark color="primary">
 							<v-toolbar-title>{{$t('login')}}</v-toolbar-title>
-
-							<v-spacer></v-spacer>
-
-							<!--<v-btn icon>
-						<v-icon>mdi-magnify</v-icon>
-					</v-btn>
-
-					<v-btn icon>
-						<v-icon>mdi-apps</v-icon>
-					</v-btn>
-
-					<v-btn icon>
-						<v-icon>mdi-dots-vertical</v-icon>
-							</v-btn>-->
 						</v-toolbar>
 						<v-divider></v-divider>
 
 						<v-card-text>
 							<v-overlay absolute :value="logining">
-								<v-progress-circular indeterminate color="primary"></v-progress-circular>
+								<poka-loader />
 							</v-overlay>
 							<div>
 								<v-text-field
