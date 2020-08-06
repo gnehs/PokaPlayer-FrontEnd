@@ -23,7 +23,7 @@
 		<v-slide-y-reverse-transition>
 			<div v-if="searchResult">
 				<v-card>
-					<v-toolbar color="cyan" dark flat>
+					<v-toolbar color="primary" dark flat>
 						<v-toolbar-title>{{keyword||$t('search')}}</v-toolbar-title>
 						<template v-slot:extension>
 							<v-tabs v-model="tabs" background-color="transparent" class="primary--text">

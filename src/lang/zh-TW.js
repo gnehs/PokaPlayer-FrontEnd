@@ -21,6 +21,7 @@ export default {
 	"settings": "設定",
 	"ok": "好",
 	"cancel": "取消",
+	"reset": "重置",
 	"done": "完成",
 	"back": "返回",
 	"login": "登入",
@@ -53,7 +54,7 @@ export default {
 			}
 		},
 		"session": {
-			"_": "清除 session",
+			"_": "重置 session",
 			"description": "若您持續無法登入，可能是 session 發生錯誤。",
 			"description2": "您可以於下方輸入管理員帳號進行重置，但請注意，此動作將重置所有使用者的登入狀態。",
 		}

@@ -132,7 +132,7 @@
 
 					<v-btn text @click="clearSessionDialog = false">{{$t('cancel')}}</v-btn>
 
-					<v-btn color="red" text @click="clearSession">{{$t('done')}}</v-btn>
+					<v-btn color="red" text @click="clearSession">{{$t('reset')}}</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>

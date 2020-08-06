@@ -21,6 +21,7 @@ export default {
 	"settings": "Settings",
 	"ok": "OK",
 	"cancel": "Cancel",
+	"reset": "Reset",
 	"back": "Back",
 	"login": "Login",
 	"login_page": {
@@ -52,7 +53,7 @@ export default {
 			}
 		},
 		"session": {
-			"_": "Clear session",
+			"_": "Reset session",
 			"description": "If you unable to log in, there may be an error in the session. ",
 			"description2": "You can enter the administrator account below to reset, but please note that this action will reset the login status of all users.",
 		}
