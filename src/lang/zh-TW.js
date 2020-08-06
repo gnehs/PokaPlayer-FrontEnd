@@ -51,6 +51,11 @@ export default {
 				"title": '首次登入？',
 				"description": '預設使用者名稱與密碼皆為「poka」，登入後可至設定更改。'
 			}
+		},
+		"session": {
+			"_": "清除 session",
+			"description": "若您持續無法登入，可能是 session 發生錯誤。",
+			"description2": "您可以於下方輸入管理員帳號進行重置，但請注意，此動作將重置所有使用者的登入狀態。",
 		}
 	},
 	"nothingFound": "找不到",

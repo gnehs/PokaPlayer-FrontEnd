@@ -50,6 +50,11 @@ export default {
 				"title": 'First time?',
 				"description": 'The default user name and password are both "poka". You can change them in the settings'
 			}
+		},
+		"session": {
+			"_": "Clear session",
+			"description": "If you unable to log in, there may be an error in the session. ",
+			"description2": "You can enter the administrator account below to reset, but please note that this action will reset the login status of all users.",
 		}
 	},
 	"nothingFound": "Nothing found",

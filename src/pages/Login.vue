@@ -52,6 +52,19 @@
 					<v-card class="mx-auto" max-width="400">
 						<v-toolbar dark color="primary">
 							<v-toolbar-title>{{$t('login')}}</v-toolbar-title>
+							<v-spacer></v-spacer>
+							<v-menu offset-y close-on-content-click>
+								<template v-slot:activator="{ on }">
+									<v-btn icon v-on="on">
+										<v-icon>mdi-dots-vertical</v-icon>
+									</v-btn>
+								</template>
+								<v-list>
+									<v-list-item @click="clearSessionDialog=true">
+										<v-list-item-title>{{$t('login_page.session._')}}</v-list-item-title>
+									</v-list-item>
+								</v-list>
+							</v-menu>
 						</v-toolbar>
 						<v-divider></v-divider>
 
@@ -86,6 +99,44 @@
 				</div>
 			</div>
 		</div>
+		<v-dialog v-model="clearSessionDialog" max-width="420">
+			<v-card>
+				<v-card-title class="headline">{{$t('login_page.session._')}}</v-card-title>
+
+				<v-card-text>
+					<p>{{$t('login_page.session.description')}}</p>
+					<p>{{$t('login_page.session.description2')}}</p>
+					<v-text-field
+						outlined
+						:label="$t('login_page.server')"
+						v-model.trim="server"
+						:disabled="logining"
+					></v-text-field>
+					<v-text-field
+						outlined
+						:label="$t('login_page.username')"
+						v-model="username"
+						:disabled="logining"
+					></v-text-field>
+					<v-text-field
+						outlined
+						:label="$t('login_page.password')"
+						type="password"
+						v-model="password"
+						:disabled="logining"
+					></v-text-field>
+				</v-card-text>
+
+				<v-card-actions>
+					<v-spacer></v-spacer>
+
+					<v-btn text @click="clearSessionDialog = false">{{$t('cancel')}}</v-btn>
+
+					<v-btn color="red" text @click="clearSession">{{$t('done')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
+		<v-snackbar v-model="snackbar.show">{{snackbar.message}}</v-snackbar>
 	</div>
 </template>
 
@@ -172,6 +223,7 @@ export default {
 	data: () => ({
 		remember: false,
 		logining: false,
+		clearSessionDialog: false,
 		server: null,
 		serverError: null,
 		password: null,
@@ -180,7 +232,8 @@ export default {
 		headerImg: null,
 		isDarkMode: window.matchMedia("(prefers-color-scheme: dark)").matches,
 		currentLang: i18n.locale,
-		langs: Object.keys(i18n.messages).map(x => ({ text: i18n.t("title", x), value: x }))
+		langs: Object.keys(i18n.messages).map(x => ({ text: i18n.t("title", x), value: x })),
+		snackbar: { show: false, message: ``, timeout: null },
 	}),
 	created() {
 		this.remember = true;
@@ -188,6 +241,13 @@ export default {
 		this.username = _setting(`username`);
 		this.server = _setting(`server`);
 		this.headerImg = _setting(`headerBgSource`);
+		//註冊點心條組件
+		Vue.prototype.$snackbar = (msg = ``, duration = 1500) => {
+			this.snackbar.message = msg;
+			this.snackbar.show = true;
+			clearTimeout(this.snackbar.timeout);
+			this.snackbar.timeout = setTimeout(() => (this.snackbar.show = false), duration);
+		};
 	},
 	methods: {
 		setLang() {
@@ -249,6 +309,18 @@ export default {
 						return false;
 					}
 				});
+		},
+		async clearSession() {
+			this.clearSessionDialog = false;
+			let clrres = await this.axios({
+				method: "post",
+				url: this.server + "/clear-session/",
+				data: { password: this.password, username: this.username },
+				config: { headers: { "Content-Type": "multipart/form-data" } }
+			})
+			if (!clrres.data.success) {
+				alert('Error:\n' + clrres.data.e)
+			}
 		}
 	}
 };
