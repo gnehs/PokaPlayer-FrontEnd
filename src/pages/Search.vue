@@ -16,16 +16,25 @@
 				<v-icon>search</v-icon>
 			</button>
 		</div>
-		<poka-loader v-if="isLoading" />
+
+		<v-overlay absolute :value="isLoading">
+			<poka-loader />
+		</v-overlay>
 		<v-slide-y-reverse-transition>
 			<div v-if="searchResult">
 				<v-card>
-					<v-tabs v-model="tabs" background-color="transparent" grow class="primary--text">
-						<v-tab
-							v-for="itemName of Object.keys(searchResult).filter(x=>searchResult[x].length)"
-							:key="itemName"
-						>{{$t(itemName.substring(0, itemName.length-1))}}</v-tab>
-					</v-tabs>
+					<v-toolbar color="cyan" dark flat>
+						<v-toolbar-title>{{keyword||$t('search')}}</v-toolbar-title>
+						<template v-slot:extension>
+							<v-tabs v-model="tabs" background-color="transparent" class="primary--text">
+								<v-tab
+									v-for="itemName of Object.keys(searchResult).filter(x=>searchResult[x].length)"
+									:key="itemName"
+								>{{$t(itemName.substring(0, itemName.length-1))}}</v-tab>
+							</v-tabs>
+						</template>
+					</v-toolbar>
+
 					<v-tabs-items v-model="tabs">
 						<v-tab-item
 							v-for="itemName of Object.keys(searchResult).filter(x=>searchResult[x].length)"
