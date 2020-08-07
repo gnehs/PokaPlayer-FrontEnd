@@ -345,12 +345,14 @@ export default {
 							this.lyricFocus = lyricFocus_temp;
 							this.$nextTick(() => {
 								//等 Vue 好了再去更新捲動條
-								let focusedLyric = document.querySelector(".lyric p.focus");
+								let focusedLyric = document.querySelector(".lyric [data-lyric-set=\"0\"].focus");
+								let tlfocusedLyric = document.querySelector(".lyric [data-lyric-set=\"0\"].tl") || null;
 								if (focusedLyric) {
-									let sh = focusedLyric.offsetTop - document.querySelector("main").clientHeight * 0.5 +
-										focusedLyric.clientHeight * (this.lyricTranslated ? 1.75 : 0.75);
+									let sh = focusedLyric.offsetTop - document.querySelector("main").clientHeight / 2 - focusedLyric.clientHeight;
+									if (tlfocusedLyric) {
+										sh = tlfocusedLyric.offsetTop - document.querySelector("main").clientHeight / 2 - focusedLyric.clientHeight - tlfocusedLyric.clientHeight
+									}
 									sh += 69 //底部播放器高度
-									sh += 50 // 偏移調整
 									this.$vuetify.goTo(sh, {
 										duration: 250,
 										offset: 0,
