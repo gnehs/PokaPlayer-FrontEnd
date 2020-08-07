@@ -46,7 +46,7 @@ export default {
 	z-index: 1
 	top: 11px
 	background-color: rgba(0, 0, 0, 0.4)
-	padding: 2px 3px
+	padding: 3px 5px
 	border-radius: 4px
 	font-size: 12px
 	max-width: 7em
@@ -66,16 +66,15 @@ export default {
 			border-radius: .8em
 			box-shadow: 0 0.4px 0.3px rgba(0, 0, 0, 0.008),0 1.1px 0.8px rgba(0, 0, 0, 0.012),0 2.2px 1.5px rgba(0, 0, 0, 0.015),0 4.2px 2.7px rgba(0, 0, 0, 0.018),0 7.8px 5px rgba(0, 0, 0, 0.022),0 12px 12px rgba(0, 0, 0, 0.03)
 			transition: all .2s
-			will-change: box-shadow, transform
+			will-change: box-shadow, transform, filter
 			position: relative
 			overflow: hidden
 		&:hover .image
 			transform: translateY(-5px)
 			box-shadow: 0 0.8px 1.9px rgba(0, 0, 0, 0.02),0 2.3px 4.5px rgba(0, 0, 0, 0.028),0 4.8px 8.5px rgba(0, 0, 0, 0.035),0 9.2px 15.2px rgba(0, 0, 0, 0.042),0 16.9px 28.4px rgba(0, 0, 0, 0.05),0 26px 68px rgba(0, 0, 0, 0.07)
 		&:active .image
-			transform: translateY(-5px) scale(.95)
-			transition: transform .1s
-			z-index: 5
+			transform: translateY(-5px)
+			filter: brightness(80%)
 		.image i
 			position: absolute
 			font-size: calc(3vmax + 18px)
