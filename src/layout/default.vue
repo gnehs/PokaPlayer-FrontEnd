@@ -19,7 +19,8 @@
 			app
 		>
 			<div class="poka-drawer-logo" v-show="$vuetify.breakpoint.mdAndUp">
-				<h1>PokaPlayer</h1>
+				<h1 v-if="$vuetify.breakpoint.mdOnly">Poka</h1>
+				<h1 v-else>PokaPlayer</h1>
 				<p>{{poka_version}}</p>
 			</div>
 			<v-divider v-show="$vuetify.breakpoint.mdAndUp" style="margin: 0px 0;" />
