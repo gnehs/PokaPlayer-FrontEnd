@@ -11,6 +11,7 @@ import Artist from '@/pages/Artist'
 import ArtistAlbum from '@/pages/ArtistAlbum'
 import Composer from '@/pages/Composer'
 import ComposerAlbum from '@/pages/ComposerAlbum'
+import Debug from '@/pages/Debug'
 import Folder from '@/pages/Folder'
 import Home from '@/pages/Home'
 import Login from '@/pages/Login'
@@ -137,6 +138,10 @@ export default new Router({
 			path: '/notfound',
 			name: 'Notfound',
 			component: Notfound
+		}, {
+			path: '/debug',
+			name: 'Debug',
+			component: Debug
 		}, {
 			path: '',
 			redirect: '/home'
