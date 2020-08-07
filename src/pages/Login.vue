@@ -136,7 +136,6 @@
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
-		<v-snackbar v-model="snackbar.show">{{snackbar.message}}</v-snackbar>
 	</div>
 </template>
 
@@ -233,7 +232,6 @@ export default {
 		isDarkMode: window.matchMedia("(prefers-color-scheme: dark)").matches,
 		currentLang: i18n.locale,
 		langs: Object.keys(i18n.messages).map(x => ({ text: i18n.t("title", x), value: x })),
-		snackbar: { show: false, message: ``, timeout: null },
 	}),
 	created() {
 		this.remember = true;
@@ -241,13 +239,6 @@ export default {
 		this.username = _setting(`username`);
 		this.server = _setting(`server`);
 		this.headerImg = _setting(`headerBgSource`);
-		//註冊點心條組件
-		Vue.prototype.$snackbar = (msg = ``, duration = 1500) => {
-			this.snackbar.message = msg;
-			this.snackbar.show = true;
-			clearTimeout(this.snackbar.timeout);
-			this.snackbar.timeout = setTimeout(() => (this.snackbar.show = false), duration);
-		};
 	},
 	methods: {
 		setLang() {
@@ -318,8 +309,10 @@ export default {
 				data: { password: this.password, username: this.username },
 				config: { headers: { "Content-Type": "multipart/form-data" } }
 			})
-			if (!clrres.data.success) {
-				alert('Error:\n' + clrres.data.e)
+			if (clrres.data.success) {
+				this.$snackbar(i18n.t("login_page.session.success"))
+			} else {
+				this.$snackbar(i18n.t("login_page.session.fail") + clrres.data.e)
 			}
 		}
 	}

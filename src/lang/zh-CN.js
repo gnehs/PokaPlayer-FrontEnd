@@ -57,6 +57,8 @@ export default {
 			"_": "重置 session",
 			"description": "若您持续无法登入，可能是 session 发生错误。",
 			"description2": "您可以于下方输入管理员账号进行重置，但请注意，此动作将重置所有使用者的登入状态。",
+			"success": "重置成功，請嘗試登入",
+			"fail": "重置失敗，錯誤原因："
 		}
 	},
 	"nothingFound": "找不到",

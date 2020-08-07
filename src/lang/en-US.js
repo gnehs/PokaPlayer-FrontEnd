@@ -56,6 +56,8 @@ export default {
 			"_": "Reset session",
 			"description": "If you unable to log in, there may be an error in the session. ",
 			"description2": "You can enter the administrator account below to reset, but please note that this action will reset the login status of all users.",
+			"success": "Reset successfully, please try to log in",
+			"fail": "Reset failed, error reason:"
 		}
 	},
 	"nothingFound": "Nothing found",
