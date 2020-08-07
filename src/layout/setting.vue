@@ -66,6 +66,8 @@ export default {
 		],
 	}),
 	created() {
+		// 調整狀態欄
+		document.getElementsByTagName('meta')["theme-color"].content = window._setting('theme')
 		//註冊點心條組件
 		Vue.prototype.$snackbar = (msg = ``, duration = 1500) => {
 			this.snackbar.message = msg;
