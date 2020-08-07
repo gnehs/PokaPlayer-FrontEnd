@@ -337,6 +337,8 @@ nav
 	overflow-y: scroll
 	margin-bottom: -69px
 
+.v-navigation-drawer:not(.v-navigation-drawer--is-mobile)
+	height: calc(var(--vh,1vh) * 100 - 69px) !important
 .poka-drawer-logo
 	padding: 8px 16px
 	font-family: var(--product-font)
