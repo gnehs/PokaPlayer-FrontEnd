@@ -124,7 +124,6 @@
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
-		<v-snackbar v-model="snackbar.show">{{snackbar.text}}</v-snackbar>
 	</div>
 </template>
         
@@ -133,7 +132,6 @@ export default {
 	name: "SettingUser",
 	data: () => ({
 		userdata: null,
-		snackbar: { show: false, text: "" },
 		temp: {
 			changeNamePrompt: false,
 			changeNameValue: "",
@@ -151,31 +149,31 @@ export default {
 	methods: {
 		changeName() {
 			if (this.temp.changeNameValue == "" || !this.temp.changeNameValue)
-				return this.showMessage(window.i18n.t("settingUser.changeName.result.error"));
+				return this.$snackbar(window.i18n.t("settingUser.changeName.result.error"));
 			this.axios
 				.post(_setting(`server`) + "/changeName/", { n: this.temp.changeNameValue })
 				.then(response => {
 					if (response.data.success) {
 						this.userdata.name = this.temp.changeNameValue;
-						this.showMessage(window.i18n.t("settingUser.changeName.result.success", { name: this.temp.changeNameValue }));
+						this.$snackbar(window.i18n.t("settingUser.changeName.result.success", { name: this.temp.changeNameValue }));
 					} else {
-						this.showMessage(window.i18n.t("settingUser.changeName.result.error"));
+						this.$snackbar(window.i18n.t("settingUser.changeName.result.error"));
 					}
 				});
 		},
 		changeUsername() {
 			if (this.temp.changeUsernameValue == "" || !this.temp.changeUsernameValue)
-				return this.showMessage(window.i18n.t("settingUser.changeUsername.result.error"));
+				return this.$snackbar(window.i18n.t("settingUser.changeUsername.result.error"));
 			this.axios
 				.post(_setting(`server`) + "/changeUsername/", { n: this.temp.changeUsernameValue })
 				.then(response => {
 					if (response.data.success) {
 						this.userdata.username = this.temp.changeUsernameValue;
-						this.showMessage(window.i18n.t("settingUser.changeUsername.result.success", { name: this.temp.changeUsernameValue }));
+						this.$snackbar(window.i18n.t("settingUser.changeUsername.result.success", { name: this.temp.changeUsernameValue }));
 					} else if (response.data.error) {
-						this.showMessage(response.data.error);
+						this.$snackbar(response.data.error);
 					} else {
-						this.showMessage(window.i18n.t("settingUser.changeUsername.result.error"));
+						this.$snackbar(window.i18n.t("settingUser.changeUsername.result.error"));
 					}
 				});
 		},
@@ -185,11 +183,11 @@ export default {
 				this.temp.changePassword2 == "" || !this.temp.changePassword2 ||
 				this.temp.changePasswordold == "" || !this.temp.changePasswordold
 			)
-				return this.showMessage(window.i18n.t("settingUser.changePassword.result.error"));
+				return this.$snackbar(window.i18n.t("settingUser.changePassword.result.error"));
 			if (this.temp.changePassword !== this.temp.changePassword2)
-				return this.showMessage(window.i18n.t("settingUser.changePassword.result.inconsistent"));
+				return this.$snackbar(window.i18n.t("settingUser.changePassword.result.inconsistent"));
 			if (this.temp.changePassword === this.temp.changePasswordold)
-				return this.showMessage(window.i18n.t("settingUser.changePassword.result.same"));
+				return this.$snackbar(window.i18n.t("settingUser.changePassword.result.same"));
 			this.axios
 				.post(_setting(`server`) + "/changePassword/", {
 					oldpassword: this.temp.changePasswordold,
@@ -197,18 +195,14 @@ export default {
 				})
 				.then(response => {
 					if (response.data.success) {
-						this.showMessage(window.i18n.t("settingUser.changePassword.result.success"));
+						this.$snackbar(window.i18n.t("settingUser.changePassword.result.success"));
 						this.temp.changePasswordDialog = false;
 					} else if (response.data.error) {
-						this.showMessage(response.data.error);
+						this.$snackbar(response.data.error);
 					} else {
-						this.showMessage(window.i18n.t("settingUser.changePassword.result.error"));
+						this.$snackbar(window.i18n.t("settingUser.changePassword.result.error"));
 					}
 				});
-		},
-		showMessage(text) {
-			this.snackbar.text = text;
-			this.snackbar.show = true;
 		},
 		logout() {
 			sessionStorage.removeItem("login");

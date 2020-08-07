@@ -123,7 +123,6 @@
 				</div>
 			</div>
 		</div>
-		<v-snackbar v-model="snackbar.show">{{snackbar.message}}</v-snackbar>
 	</div>
 </template>
 <script>
@@ -146,7 +145,6 @@ export default {
 		transitionName: "fade",
 		scrollPositions: {},
 		settings: { darkMode: window._setting("darkMode") },
-		snackbar: { show: false, message: ``, timeout: null },
 		items: [
 			{ icon: 'home', text: i18n.t("home"), to: "/home" },
 			{ icon: 'playlist_play', text: i18n.t("nowplaying"), to: "/now" },
@@ -171,13 +169,6 @@ export default {
 		this.$vuetify.theme.themes.light.primary = window._setting('theme')
 		// 狀態欄顏色
 		document.getElementsByTagName('meta')["theme-color"].content = this.$vuetify.theme.isDark ? "rgb(47, 43, 62)" : "rgb(245, 245, 245)"
-		//註冊點心條組件
-		Vue.prototype.$snackbar = (msg = ``, duration = 1500) => {
-			this.snackbar.message = msg;
-			this.snackbar.show = true;
-			clearTimeout(this.snackbar.timeout);
-			this.snackbar.timeout = setTimeout(() => (this.snackbar.show = false), duration);
-		};
 		function vhResize() {
 			let vh = window.innerHeight * 0.01;
 			document.documentElement.style.setProperty("--vh", `${vh}px`);

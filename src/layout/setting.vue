@@ -41,7 +41,6 @@
 				</div>
 			</v-content>
 		</transition>
-		<v-snackbar v-model="snackbar.show">{{snackbar.message}}</v-snackbar>
 	</div>
 </template>
 <script>
@@ -54,7 +53,6 @@ export default {
 		transitionName: "fade",
 		scrollPositions: {},
 		settings: { darkMode: window._setting("darkMode") },
-		snackbar: { show: false, message: ``, timeout: null },
 		items: [
 			{ text: i18n.t("settings"), icon: 'settings', to: "/setting" },
 			{ divider: true },
@@ -68,13 +66,7 @@ export default {
 	created() {
 		// 調整狀態欄
 		document.getElementsByTagName('meta')["theme-color"].content = window._setting('theme')
-		//註冊點心條組件
-		Vue.prototype.$snackbar = (msg = ``, duration = 1500) => {
-			this.snackbar.message = msg;
-			this.snackbar.show = true;
-			clearTimeout(this.snackbar.timeout);
-			this.snackbar.timeout = setTimeout(() => (this.snackbar.show = false), duration);
-		};
+
 		this.drawer = this.$vuetify.breakpoint.mdAndUp
 		this.$router.beforeEach((to, from, next) => {
 			let transitionName = to.meta.transitionName || from.meta.transitionName || "fade";
