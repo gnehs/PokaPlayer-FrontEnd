@@ -23,12 +23,13 @@ window._addSongs = function ({
     let playlist = [];
     for (let song of songs) {
         let songRes = _setting(`audioQuality`).toLowerCase()
+        let isSafari = /^((?!chrome|android).)*safari/i.test(window.navigator.userAgent)
         if (song.source == "DSM" && songRes == 'high') {
             if (song.codec == "mp3") {
                 songRes = "original"
             } else if (song.codec == "aac") {
                 songRes = "original"
-            } else if (song.codec == "flac" && song.bitrate <= 1600 * 1000) {
+            } else if (song.codec == "flac" && song.bitrate <= 1600 * 1000 && !isSafari) {
                 songRes = "original"
             }
         }
