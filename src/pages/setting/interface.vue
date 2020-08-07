@@ -448,11 +448,18 @@ export default {
 		},
 		changeStyle(name) {
 			let value = this.view[name] == 'card' ? 'list' : 'card'
-			//artist
+
 			let settingkey = name + 'View'
 			_setting(settingkey, value)
 			this.view[name] = value
 
+			let n = {}
+			n[settingkey] = value
+			this.axios({
+				method: "post",
+				url: _setting(`server`) + "/setting/",
+				data: { n }
+			});
 		}
 	}
 };
