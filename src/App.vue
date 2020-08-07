@@ -3,7 +3,10 @@
 		<transition name="fade" mode="out-in">
 			<router-view />
 		</transition>
-		<v-snackbar v-model="snackbar.show">{{snackbar.message}}</v-snackbar>
+		<v-snackbar
+			v-model="snackbar.show"
+			:class="{'withBottomPlayer':snackbar.withBottomPlayer}"
+		>{{snackbar.message}}</v-snackbar>
 	</v-app>
 </template>
 <script>
@@ -19,13 +22,14 @@ export default {
 		//註冊點心條組件
 		Vue.prototype.$snackbar = (msg = ``, duration = 1500) => {
 			this.snackbar.message = msg;
+			this.snackbar.withBottomPlayer = document.querySelectorAll('.bottom-player').length
 			this.snackbar.show = true;
 			clearTimeout(this.snackbar.timeout);
 			this.snackbar.timeout = setTimeout(() => (this.snackbar.show = false), duration);
 		};
 	},
 	data: () => ({
-		snackbar: { show: false, message: ``, timeout: null },
+		snackbar: { show: false, message: ``, timeout: null, withBottomPlayer: true },
 	})
 }
 </script>
@@ -63,7 +67,7 @@ export default {
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
-	.v-snack--bottom {
+	.v-snack--bottom.withBottomPlayer {
 		bottom: 77px !important;
 	}
 	.v-snack__wrapper {
