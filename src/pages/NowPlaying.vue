@@ -27,7 +27,7 @@
 				</template>
 			</poka-parse-songs>
 
-			<v-card v-else class="mx-auto" max-width="344" style="margin-top:32px;" key="card">
+			<v-card v-else class="mx-auto blur-card" max-width="344" style="margin-top:32px;" key="card">
 				<v-card-text class="text-center">
 					<v-icon class="display-4 material-icons-outlined">queue_music</v-icon>
 					<p class="headline text--primary">{{$t('app_waitForPlay')}}</p>

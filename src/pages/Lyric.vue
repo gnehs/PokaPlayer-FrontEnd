@@ -35,7 +35,13 @@
 					</v-card-text>
 				</v-card>
 
-				<v-card v-else class="mx-auto" max-width="344" style="margin-top:32px;" key="lrc_noLyrics">
+				<v-card
+					v-else
+					class="mx-auto blur-card"
+					max-width="344"
+					style="margin-top:32px;"
+					key="lrc_noLyrics"
+				>
 					<v-card-text class="text-center">
 						<v-icon class="material-icons-outlined display-4">subtitles</v-icon>
 						<p class="headline text--primary">{{$t('lrc_noLyrics')}}</p>
