@@ -212,7 +212,7 @@ export default {
 		},
 		logout() {
 			sessionStorage.removeItem("login");
-			this.axios("/logout").then(e => this.$router.push("/login"));
+			this.axios(_setting(`server`) + "/logout").then(e => this.$router.push("/login"));
 		}
 	}
 };
