@@ -1,9 +1,6 @@
 <template>
 	<div>
-		<poka-header
-			:title="$t('header_welcome')"
-			:subtitle="$t('header_version',{version:poka_version})"
-		/>
+		<poka-header :title="$t('header_welcome')" />
 		<poka-update />
 		<poka-loader v-if="!data" />
 		<v-slide-y-reverse-transition>

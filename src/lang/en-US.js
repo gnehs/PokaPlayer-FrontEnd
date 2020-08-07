@@ -2,7 +2,6 @@ export default {
 	"title": "English (US)",
 	"loading": "Loading...",
 	"header_welcome": "Welcome",
-	"header_version": "PokaPlayer {version}",
 	"checkUpdate_poka": "Update Available: {version}",
 	"checkUpdate_button": "Update",
 	"pingServer_title": "Hint",

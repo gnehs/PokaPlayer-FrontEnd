@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-app-bar :clipped-left="$vuetify.breakpoint.mdAndUp" app>
+		<v-app-bar v-if="!$vuetify.breakpoint.mdAndUp" app>
 			<v-app-bar-nav-icon @click.stop="toggleMenu()" />
 			<v-toolbar-title style="width: 300px">
 				<span>PokaPlayer</span>
@@ -18,6 +18,11 @@
 			:mobile-break-point="960"
 			app
 		>
+			<div class="poka-drawer-logo" v-show="$vuetify.breakpoint.mdAndUp">
+				<h1>PokaPlayer</h1>
+				<p>{{poka_version}}</p>
+			</div>
+			<v-divider v-show="$vuetify.breakpoint.mdAndUp" style="margin: 0px 0;" />
 			<v-list shaped>
 				<v-list-item-group color="primary">
 					<template v-for="item in items">
@@ -143,6 +148,7 @@ export default {
 		audio_artist: null,
 		audio_order: _player.options.order,
 		transitionName: "fade",
+		poka_version: "0.0.0",
 		scrollPositions: {},
 		settings: { darkMode: window._setting("darkMode") },
 		items: [
@@ -295,9 +301,10 @@ export default {
 			this.axios
 				.get(_setting(`server`) + "/status/")
 				.then(async response => {
-					if (!response.data.login) {
-						return this.$router.push("/login");
-					}
+					// 沒登入滾回登入頁面
+					if (!response.data.login) return this.$router.push("/login");
+					// version
+					this.poka_version = response.data.version;
 					// 標記為已登入
 					let userProfile = await this.axios.get(_setting(`server`) + "/profile/");
 					sessionStorage.setItem("login", JSON.stringify(userProfile.data));
@@ -329,8 +336,13 @@ nav
 	overflow: hidden
 	overflow-y: scroll
 	margin-bottom: -69px
-.v-navigation-drawer:not(.v-navigation-drawer--is-mobile)
-	height: calc(var(--vh,1vh) * 100 - 69px - 64px) !important
+
+.poka-drawer-logo
+	padding: 8px 16px
+	font-family: var(--product-font)
+	p
+		margin-bottom: 0
+
 nav
 	.v-list
 		.v-list-item.theme--dark
@@ -339,6 +351,7 @@ nav
 				background-color: var(--v-primary-base) !important
 			.v-list-item__action,.v-list-item__content
 				z-index: 1
+
 @media (min-width: 576px)
 	.router-view
 		padding: 16px
@@ -348,6 +361,7 @@ nav
 @media (prefers-color-scheme: dark)
 	.v-app-bar
 		box-shadow: inset 0 -1px 0 0 hsla(0,0%,100%,.12)
+
 .bottom-player
 	box-sizing: border-box
 	height: 69px
