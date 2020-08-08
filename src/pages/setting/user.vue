@@ -2,6 +2,17 @@
 	<div>
 		<poka-header :title="$t('settingUser.title')" />
 		<div class="poka list">
+			<div class="item" @click="copyID" v-if="userdata" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>mdi-account-key</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">ID</div>
+						<div class="t-ellipsis">{{userdata._id}}</div>
+					</div>
+				</div>
+			</div>
 			<div class="item" @click="temp.changeNamePrompt=true" v-if="userdata" v-ripple>
 				<div class="content">
 					<v-avatar size="42px" item>
@@ -46,7 +57,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="item" @click="temp.changePasswordDialog=true" v-if="userdata">
+			<div class="item" @click="logout" v-if="userdata">
 				<div class="content">
 					<v-avatar size="42px" item>
 						<v-icon>exit_to_app</v-icon>
@@ -148,6 +159,13 @@ export default {
 		this.axios.get(_setting(`server`) + "/profile/").then(response => { this.userdata = response.data; });
 	},
 	methods: {
+		copyID() {
+			navigator.clipboard.writeText(this.userdata._id).then(() => {
+				this.$snackbar(i18n.t("copy.success"));
+			}, () => {
+				this.$snackbar(i18n.t("copy.failed"))
+			});
+		},
 		changeName() {
 			if (this.temp.changeNameValue == "" || !this.temp.changeNameValue)
 				return this.$snackbar(window.i18n.t("settingUser.changeName.result.error"));
@@ -207,6 +225,7 @@ export default {
 		},
 		logout() {
 			sessionStorage.removeItem("login");
+			_player.pause()
 			this.axios(_setting(`server`) + "/logout").then(e => this.$router.push("/login"));
 		}
 	}

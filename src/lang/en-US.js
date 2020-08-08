@@ -7,6 +7,10 @@ export default {
 	"pingServer_title": "Hint",
 	"pingServer_content": "Server restarting success!",
 	"pingServer_reconnect": "Reconnect",
+	"copy": {
+		success: 'Copied to clipboard successfully!',
+		failed: 'Unable to write to clipboard.'
+	},
 	"home": "Home",
 	"nowplaying": "Now Playing",
 	"lrc": "Lyrics",

@@ -7,6 +7,10 @@ export default {
 	"pingServer_title": "提示",
 	"pingServer_content": "服务器重新启动完毕！",
 	"pingServer_reconnect": "重新连接",
+	"copy": {
+		success: '已复制至剪贴板',
+		failed: '无法复制至剪贴板'
+	},
 	"home": "首页",
 	"nowplaying": "现正播放",
 	"lrc": "歌词",
@@ -56,8 +60,8 @@ export default {
 			"_": "重置 session",
 			"description": "若您持续无法登入，可能是 session 发生错误。",
 			"description2": "您可以于下方输入管理员账号进行重置，但请注意，此动作将重置所有使用者的登入状态。",
-			"success": "重置成功，請嘗試登入",
-			"fail": "重置失敗，錯誤原因："
+			"success": "重置成功，请尝试登入",
+			"fail": "重置失败，错误原因："
 		}
 	},
 	"nothingFound": "找不到",

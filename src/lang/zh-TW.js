@@ -7,6 +7,10 @@ export default {
 	"pingServer_title": "提示",
 	"pingServer_content": "伺服器重新啟動完畢！",
 	"pingServer_reconnect": "重新連接",
+	"copy": {
+		success: '已複製至剪貼簿',
+		failed: '無法複製至剪貼簿'
+	},
 	"home": "首頁",
 	"nowplaying": "現正播放",
 	"lrc": "歌詞",
