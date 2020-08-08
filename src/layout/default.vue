@@ -171,9 +171,6 @@ export default {
 		if (this.audio_interval) clearInterval(this.audio_interval);
 	},
 	created() {
-		// set theme color
-		this.$vuetify.theme.themes.dark.primary = window._setting('theme')
-		this.$vuetify.theme.themes.light.primary = window._setting('theme')
 		// 狀態欄顏色
 		document.getElementsByTagName('meta')["theme-color"].content = this.$vuetify.theme.isDark ? "rgb(47, 43, 62)" : "rgb(245, 245, 245)"
 		function vhResize() {

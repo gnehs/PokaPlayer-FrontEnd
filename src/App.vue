@@ -27,6 +27,9 @@ export default {
 			clearTimeout(this.snackbar.timeout);
 			this.snackbar.timeout = setTimeout(() => (this.snackbar.show = false), duration);
 		};
+		// set theme color
+		this.$vuetify.theme.themes.dark.primary = window._setting('theme')
+		this.$vuetify.theme.themes.light.primary = window._setting('theme')
 	},
 	data: () => ({
 		snackbar: { show: false, message: ``, timeout: null, withBottomPlayer: true },
