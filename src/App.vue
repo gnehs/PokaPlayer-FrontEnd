@@ -123,6 +123,6 @@ export default {
 .v-dialog__content.v-dialog__content--active
 	background-color: rgb(0 0 0 / 40%)
 	backdrop-filter: blur(10px)
-.v-dialog > .v-card > .v-card__text
+.v-dialog.v-dialog--fullscreen > .v-card > .v-card__text
 	padding: 0 2px 20px !important
 </style>
