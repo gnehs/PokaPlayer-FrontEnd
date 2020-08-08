@@ -12,8 +12,8 @@
 			:loading="loading"
 			@click="pin"
 		>
-			<v-icon v-if="isPinned">turned_in</v-icon>
-			<v-icon v-else>turned_in_not</v-icon>
+			<v-icon v-if="isPinned">push_pin</v-icon>
+			<v-icon v-else class="material-icons-outlined">push_pin</v-icon>
 		</v-btn>
 	</v-fab-transition>
 	<v-btn
@@ -23,8 +23,8 @@
 		:loading="loading"
 		v-else-if="isPinned != null && isPinned != 'disabled' && btnType == 'icon-button'"
 	>
-		<v-icon v-if="isPinned">turned_in</v-icon>
-		<v-icon v-else>turned_in_not</v-icon>
+		<v-icon v-if="isPinned">push_pin</v-icon>
+		<v-icon v-else class="material-icons-outlined">push_pin</v-icon>
 	</v-btn>
 </template>
 <style lang="sass" scoped>
