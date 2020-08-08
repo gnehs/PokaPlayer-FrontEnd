@@ -15,7 +15,7 @@
 			v-model="drawer"
 			:clipped="$vuetify.breakpoint.mdAndUp"
 			:mini-variant="$vuetify.breakpoint.mdOnly"
-			:mobile-break-point="960"
+			:mobile-breakpoint="960"
 			app
 		>
 			<div class="poka-drawer-logo" v-show="$vuetify.breakpoint.mdAndUp">
@@ -42,12 +42,12 @@
 			</v-list>
 		</v-navigation-drawer>
 		<transition :name="transitionName" mode="out-in" v-on:enter="pageEnter">
-			<v-content :key="$route.path">
+			<v-main :key="$route.path">
 				<div class="router-view">
 					<router-view />
 				</div>
 				<div style="height:69px"></div>
-			</v-content>
+			</v-main>
 		</transition>
 		<div class="bottom-player">
 			<div class="app-progress-bar">
@@ -190,7 +190,7 @@ export default {
 			}
 			this.transitionName = transitionName;
 			this.getStatus();
-			let el = document.querySelector("main.v-content");
+			let el = document.querySelector("main");
 			if (el) this.scrollPositions[from.name] = el.scrollTop;
 			next();
 		});
@@ -310,7 +310,7 @@ export default {
 		},
 		pageEnter() {
 			let currentRouteName = this.$router.history.current.name;
-			let el = document.querySelector("main.v-content");
+			let el = document.querySelector("main");
 			if (el && currentRouteName in this.scrollPositions) {
 				let positions = this.scrollPositions[currentRouteName];
 				setTimeout(() => (el.scrollTop = positions), 100);
@@ -329,7 +329,7 @@ nav
 				display: block
 			.material-icons-outlined
 				display: none
-.v-content
+main
 	height: calc(var(--vh,1vh) * 100)
 	overflow: hidden
 	overflow-y: scroll

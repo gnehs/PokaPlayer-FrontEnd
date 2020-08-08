@@ -435,7 +435,7 @@ export default {
 			this.$vuetify.goTo(0, {
 				duration: 250,
 				offset: 0,
-				container: "main.v-content",
+				container: "main",
 				easing: 'easeInOutCubic',
 			})
 			this.lyricFocus = 0; // 歌詞進度歸零
