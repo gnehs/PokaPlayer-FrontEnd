@@ -28,6 +28,7 @@ import SettingNetwork from '@/pages/setting/network'
 import SettingInterface from '@/pages/setting/interface'
 import SettingSystem from '@/pages/setting/system'
 import SettingUser from '@/pages/setting/user'
+import SettingPins from '@/pages/setting/pins'
 import SettingPrivacy from '@/pages/setting/privacy'
 import SettingAdminUser from '@/pages/setting/admin/user'
 
@@ -165,45 +166,31 @@ export default new Router({
 		}, {
 			path: '/settings/interface',
 			name: 'SettingInterface',
-			component: SettingInterface,
-			meta: {
-				transitionName: 'slide'
-			}
+			component: SettingInterface
 		}, {
 			path: '/settings/network',
 			name: 'SettingNetwork',
-			component: SettingNetwork,
-			meta: {
-				transitionName: 'slide'
-			}
+			component: SettingNetwork
 		}, {
 			path: '/settings/system',
 			name: 'SettingSystem',
-			component: SettingSystem,
-			meta: {
-				transitionName: 'slide'
-			}
+			component: SettingSystem
 		}, {
 			path: '/settings/user',
 			name: 'SettingUser',
-			component: SettingUser,
-			meta: {
-				transitionName: 'slide'
-			}
+			component: SettingUser
+		}, {
+			path: '/settings/pins',
+			name: 'SettingPins',
+			component: SettingPins
 		}, {
 			path: '/settings/privacy',
 			name: 'SettingPrivacy',
-			component: SettingPrivacy,
-			meta: {
-				transitionName: 'slide'
-			}
+			component: SettingPrivacy
 		}, {
 			path: '/settings/admin/user',
 			name: 'SettingAdminUser',
-			component: SettingAdminUser,
-			meta: {
-				transitionName: 'slide'
-			}
+			component: SettingAdminUser
 		}]
 	}, {
 		path: '*',

@@ -129,14 +129,6 @@ export default {
 	"add2nowPlaying": "將此頁歌曲加入到現正播放",
 	"pin_failed": "釘選失敗",
 	"unpin_failed": "取消釘選失敗",
-	"pin_album": "釘選此專輯",
-	"unpin_album": "取消釘選此專輯",
-	"pin_artist": "釘選該演出者",
-	"unpin_artist": "取消釘選該演出者",
-	"pin_composer": "釘選該作曲者",
-	"unpin_composer": "取消釘選該作曲者",
-	"pin_playlist": "釘選此播放清單",
-	"unpin_playlist": "取消釘選此播放清單",
 	"settings_dark": "夜間模式",
 	"settings_network": "網路",
 	"settings_network_description": "音質",
@@ -259,6 +251,9 @@ export default {
 	"settingPravicy": {
 		"title": "隱私",
 		"description": "資料紀錄設定",
+	},
+	"settingPins": {
+		"title": "釘選管理",
 	},
 	"source": {
 		"DSM": "DSM",
