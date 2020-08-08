@@ -59,7 +59,6 @@ export default {
 			{ text: i18n.t('settingInterface._'), icon: 'layers', to: "/settings/interface" },
 			{ text: i18n.t('settingUser.title'), icon: 'person', to: "/settings/user" },
 			//{ text: i18n.t('settingPravicy.title'), icon: 'lock', to: "/settings/privacy" },
-			{ text: i18n.t('settings_systemAndUpdate'), icon: 'system_update', to: "/settings/system" }
 		],
 	}),
 	created() {
@@ -73,6 +72,7 @@ export default {
 		if (isAdmin) {
 			this.items.push(
 				{ divider: true },
+				{ text: i18n.t('settings_systemAndUpdate'), icon: 'system_update', to: "/settings/system" },
 				{ text: '使用者管理', icon: 'person', to: "/settings/admin/user" },
 			)
 		}
