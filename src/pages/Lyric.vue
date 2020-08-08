@@ -348,15 +348,18 @@ export default {
 								let focusedLyric = document.querySelector(".lyric [data-lyric-set=\"0\"].focus");
 								let tlfocusedLyric = document.querySelector(".lyric [data-lyric-set=\"0\"].tl") || null;
 								if (focusedLyric) {
-									let sh = focusedLyric.offsetTop - document.querySelector("main").clientHeight / 2 - focusedLyric.clientHeight;
+									let sh = focusedLyric.offsetTop - document.querySelector("main").clientHeight / 2 + focusedLyric.clientHeight / 2;
 									if (tlfocusedLyric) {
-										sh = tlfocusedLyric.offsetTop - document.querySelector("main").clientHeight / 2 - focusedLyric.clientHeight - tlfocusedLyric.clientHeight
+										sh = tlfocusedLyric.offsetTop - document.querySelector("main").clientHeight / 2 - focusedLyric.clientHeight
 									}
 									sh += 69 //底部播放器高度
+									if (!this.$vuetify.breakpoint.mdAndUp) {
+										sh += 56 // mobile app-bar
+									}
 									this.$vuetify.goTo(sh, {
 										duration: 250,
 										offset: 0,
-										container: "main.v-content",
+										container: "main",
 										easing: 'easeInOutCubic',
 									})
 								} else {
