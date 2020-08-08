@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<poka-header title="使用者管理" />
+		<poka-header title="User management" />
 		<poka-loader v-if="!users" />
 		<v-slide-y-reverse-transition>
 			<div class="poka list" v-if="users">
@@ -157,7 +157,7 @@ export default {
 				await this.axios.post(_setting(`server`) + "/pokaapi/v2/users/change-password", {
 					_id: this.userTemp._id, password
 				}).catch(e => {
-					this.$snackbar(e)
+					this.$snackbar('An error occurred when changing the password')
 				})
 				this.$snackbar('Password changed.')
 			}
@@ -167,7 +167,7 @@ export default {
 				await this.axios.post(_setting(`server`) + "/pokaapi/v2/users/delete", {
 					_id: this.userTemp._id
 				}).catch(e => {
-					this.$snackbar(e)
+					this.$snackbar('An error occurred when deleting the user')
 				})
 				this.userDialog = false
 				this.fetchUsers()

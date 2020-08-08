@@ -73,7 +73,7 @@ export default {
 			this.items.push(
 				{ divider: true },
 				{ text: i18n.t('settings_systemAndUpdate'), icon: 'system_update', to: "/settings/system" },
-				{ text: '使用者管理', icon: 'person', to: "/settings/admin/user" },
+				{ text: 'User management', icon: 'person', to: "/settings/admin/user" },
 			)
 		}
 	},
