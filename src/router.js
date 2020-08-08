@@ -30,7 +30,6 @@ import SettingSystem from '@/pages/setting/system'
 import SettingUser from '@/pages/setting/user'
 import SettingPrivacy from '@/pages/setting/privacy'
 import SettingAdminUser from '@/pages/setting/admin/user'
-import SettingAdminPlaylist from '@/pages/setting/admin/playlist'
 
 Vue.use(Router)
 
@@ -202,13 +201,6 @@ export default new Router({
 			path: '/settings/admin/user',
 			name: 'SettingAdminUser',
 			component: SettingAdminUser,
-			meta: {
-				transitionName: 'slide'
-			}
-		}, {
-			path: '/settings/admin/playlist',
-			name: 'SettingAdminPlaylist',
-			component: SettingAdminPlaylist,
 			meta: {
 				transitionName: 'slide'
 			}

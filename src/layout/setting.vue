@@ -34,7 +34,7 @@
 				</v-list-item-group>
 			</v-list>
 		</v-navigation-drawer>
-		<transition :name="transitionName" mode="out-in" v-on:enter="pageEnter">
+		<transition name="fade" mode="out-in" v-on:enter="pageEnter">
 			<v-content :key="$route.path">
 				<div class="router-view">
 					<router-view />
@@ -50,7 +50,6 @@ export default {
 	data: () => ({
 		menuVisible: false,
 		drawer: null,
-		transitionName: "fade",
 		scrollPositions: {},
 		settings: { darkMode: window._setting("darkMode") },
 		items: [
@@ -68,30 +67,15 @@ export default {
 		document.getElementsByTagName('meta')["theme-color"].content = window._setting('theme')
 
 		this.drawer = this.$vuetify.breakpoint.mdAndUp
-		this.$router.beforeEach((to, from, next) => {
-			let transitionName = to.meta.transitionName || from.meta.transitionName || "fade";
-			if (transitionName === "slide") {
-				const toDepth = to.path.split("/").length;
-				const fromDepth = from.path.split("/").length;
-				transitionName = toDepth < fromDepth ? "zoom-out" : "zoom-in";
-				transitionName = toDepth == fromDepth ? "fade" : transitionName; //同一層
-			}
-			this.transitionName = transitionName;
-			this.getStatus();
-			let el = document.querySelector("main.v-content");
-			if (el) this.scrollPositions[from.name] = el.scrollTop;
-			next();
-		});
 		this.getStatus();
 
-		/*let isAdmin = JSON.parse(sessionStorage.getItem("login")).role == 'admin' || false
+		let isAdmin = JSON.parse(sessionStorage.getItem("login")).role == 'admin' || false
 		if (isAdmin) {
 			this.items.push(
 				{ divider: true },
 				{ text: '使用者管理', icon: 'person', to: "/settings/admin/user" },
-				{ text: '播放清單管理', icon: 'queue_music', to: "/settings/admin/playlist" }
 			)
-		}*/
+		}
 	},
 	methods: {
 		closeMenu() {
