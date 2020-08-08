@@ -7,6 +7,8 @@
 				:source="$route.params.source"
 				:id="$route.params.id"
 				type="album"
+				:cover="cover"
+				:artist="artist"
 				:name="name"
 				btn-type="icon-button"
 			/>
@@ -35,7 +37,6 @@ export default {
 			.get(`${this.server}/pokaapi/album?moduleName=${encodeURIComponent(albumSource)}&id=${encodeURIComponent(albumID)}`)
 			.then(response => {
 				this.songs = response.data.songs;
-				this.name = response.data.name;
 				this.artist = response.data.artist;
 				this.cover = this.server + response.data.cover.replace(/'/, "\\'");
 				this.name = response.data.name;
@@ -43,7 +44,7 @@ export default {
 		// 取得相同演出者的專輯
 		let ArtistId = this.artist;
 		let ArtistSource = albumSource;
-		//取得專輯資料
+		// - 取得專輯資料
 		let url = `${this.server}/pokaapi/artistAlbums/?moduleName=${encodeURIComponent(ArtistSource)}&id=${encodeURIComponent(ArtistId)}`;
 		this.axios.get(url).then(response => {
 			this.artistAlbums = response.data.albums.filter(x => x.id != albumID); //篩選掉這張專輯

@@ -9,6 +9,7 @@
 			right
 			fixed
 			style="bottom: calc(16px + 69px);"
+			:loading="loading"
 			@click="pin"
 		>
 			<v-icon v-if="isPinned">turned_in</v-icon>
@@ -19,6 +20,7 @@
 		icon
 		@click="pin"
 		class="v-pin-btn"
+		:loading="loading"
 		v-else-if="isPinned != null && isPinned != 'disabled' && btnType == 'icon-button'"
 	>
 		<v-icon v-if="isPinned">turned_in</v-icon>
@@ -43,33 +45,34 @@ export default {
 		type: String,
 		id: String,
 		name: String,
+		cover: String,
+		artist: { type: String, default: "" },
 		btnType: { type: String, default: "speed-dial" }
 	},
 	data: () => ({
 		server: _setting(`server`),
-		isPinned: null
+		isPinned: null,
+		loading: false
 	}),
 	methods: {
 		getPinStatus() {
 			if (this.name) {
+				this.loading = true
+				let [source, id, type] = [this.source, this.id, this.type]
 				this.axios
-					.post(
-						`/pokaapi/isPinned/?moduleName=${this.source}&type=${
-						this.type
-						}&id=${this.id}&name=${this.name}`
-					)
+					.post(`/pokaapi/v2/pin/ispinned`, { source, id, name, type })
 					.then(r => {
 						this.isPinned = r.data;
+						this.loading = false
 					});
 			}
 		},
 		pin() {
+			this.loading = true
+			let [source, id, type, name, cover, artist] = [this.source, this.id, this.type, this.name, this.cover, this.artist]
+			cover = cover.replace(_setting('server'), '')
 			this.axios
-				.post(
-					`/pokaapi/${!this.isPinned ? "addPin" : "unPin"}/?moduleName=${
-					this.source
-					}&type=${this.type}&id=${this.id}&name=${this.name}`
-				)
+				.post(`/pokaapi/v2/pin/${this.isPinned ? "unpin" : "pin"}`, { source, id, type, name, cover, artist })
 				.then(r => {
 					this.getPinStatus();
 				});

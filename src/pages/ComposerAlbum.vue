@@ -9,6 +9,7 @@
 			v-if="name"
 			:source="$route.params.source"
 			:id="$route.params.id"
+			:cover="cover"
 			type="composer"
 			:name="$route.params.id"
 		/>
