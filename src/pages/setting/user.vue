@@ -1,61 +1,62 @@
 <template>
 	<div>
 		<poka-header :title="$t('settingUser.title')" />
-		<v-list subheader>
-			<v-list-item @click="temp.changeNamePrompt=true" v-if="userdata">
-				<v-list-item-avatar>
-					<v-icon>person</v-icon>
-				</v-list-item-avatar>
-
-				<v-list-item-content>
-					<v-list-item-title>{{$t('settingUser.name')}}</v-list-item-title>
-					<v-list-item-subtitle>{{userdata.name}}</v-list-item-subtitle>
-				</v-list-item-content>
-			</v-list-item>
-
-			<v-list-item @click="temp.changeUsernamePrompt=true" v-if="userdata">
-				<v-list-item-avatar>
-					<v-icon>alternate_email</v-icon>
-				</v-list-item-avatar>
-
-				<v-list-item-content>
-					<v-list-item-title>{{$t('settingUser.username')}}</v-list-item-title>
-					<v-list-item-subtitle>{{userdata.username}}</v-list-item-subtitle>
-				</v-list-item-content>
-			</v-list-item>
-
-			<v-list-item v-if="userdata">
-				<v-list-item-avatar>
-					<v-icon>settings</v-icon>
-				</v-list-item-avatar>
-
-				<v-list-item-content>
-					<v-list-item-title>{{$t('settingUser.role')}}</v-list-item-title>
-					<v-list-item-subtitle>{{userdata.role}}</v-list-item-subtitle>
-				</v-list-item-content>
-			</v-list-item>
-
-			<v-list-item @click="temp.changePasswordDialog=true" v-if="userdata">
-				<v-list-item-avatar>
-					<v-icon>lock</v-icon>
-				</v-list-item-avatar>
-
-				<v-list-item-content>
-					<v-list-item-title>{{$t('settingUser.password')}}</v-list-item-title>
-					<v-list-item-subtitle>{{$t('settingUser.passwordDescription')}}</v-list-item-subtitle>
-				</v-list-item-content>
-			</v-list-item>
-
-			<v-list-item @click="logout">
-				<v-list-item-avatar>
-					<v-icon>exit_to_app</v-icon>
-				</v-list-item-avatar>
-
-				<v-list-item-content>
-					<v-list-item-title>{{$t('settings_logout')}}</v-list-item-title>
-				</v-list-item-content>
-			</v-list-item>
-		</v-list>
+		<div class="poka list">
+			<div class="item" @click="temp.changeNamePrompt=true" v-if="userdata" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>person</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">{{$t('settingUser.name')}}</div>
+						<div class="t-ellipsis">{{userdata.name}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="item" @click="temp.changeUsernamePrompt=true" v-if="userdata" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>alternate_email</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">{{$t('settingUser.username')}}</div>
+						<div class="t-ellipsis">{{userdata.username}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="item" v-if="userdata">
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>settings</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">{{$t('settingUser.role')}}</div>
+						<div class="t-ellipsis">{{userdata.role}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="item" @click="temp.changePasswordDialog=true" v-if="userdata">
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>lock</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">{{$t('settingUser.password')}}</div>
+						<div class="t-ellipsis">{{$t('settingUser.passwordDescription')}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="item" @click="temp.changePasswordDialog=true" v-if="userdata">
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>exit_to_app</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">{{$t('settings_logout')}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<poka-loader v-if="!userdata" />
 
 		<v-dialog v-model="temp.changeNamePrompt" max-width="300">

@@ -1,42 +1,45 @@
 <template>
 	<div>
 		<poka-header :title="$t('settings_systemAndUpdate')" />
-		<v-list subheader>
+		<div class="poka list">
 			<v-subheader>移轉</v-subheader>
-			<v-list-item @click="migratePlaylist">
-				<v-list-item-avatar>
-					<v-icon>queue_music</v-icon>
-				</v-list-item-avatar>
-
-				<v-list-item-content>
-					<v-list-item-title>資料庫升級</v-list-item-title>
-					<v-list-item-subtitle>將所有播放清單之所有權移轉至您名下</v-list-item-subtitle>
-				</v-list-item-content>
-			</v-list-item>
+			<div class="item" @click="migratePlaylist" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>queue_music</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">資料庫升級</div>
+						<div class="t-ellipsis">將所有播放清單之所有權移轉至您名下</div>
+					</div>
+				</div>
+			</div>
 			<v-subheader>{{$t('settings_system')}}</v-subheader>
-			<v-list-item @click="restartConfirmActive=true">
-				<v-list-item-avatar>
-					<v-icon>autorenew</v-icon>
-				</v-list-item-avatar>
-
-				<v-list-item-content>
-					<v-list-item-title>{{$t('settings_restart')}}</v-list-item-title>
-				</v-list-item-content>
-			</v-list-item>
-			<v-list-item @click="openUpdateDialog" :class="{mark: this.newVersion.tag}">
-				<v-list-item-avatar>
-					<v-icon>system_update</v-icon>
-				</v-list-item-avatar>
-
-				<v-list-item-content>
-					<v-list-item-title>{{$t('settings_update')}}</v-list-item-title>
-					<v-list-item-subtitle>
-						{{checkUpadteStatus}}
-						<span v-if="poka_debug">(debug: {{poka_debug}})</span>
-					</v-list-item-subtitle>
-				</v-list-item-content>
-			</v-list-item>
-		</v-list>
+			<div class="item" @click="restartConfirmActive=true" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>autorenew</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">{{$t('settings_restart')}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="item" @click="openUpdateDialog" v-ripple>
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>system_update</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">{{$t('settings_update')}}</div>
+						<div class="t-ellipsis">
+							{{checkUpadteStatus}}
+							<span v-if="poka_debug">(debug: {{poka_debug}})</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<v-dialog v-model="restartConfirmActive" max-width="420">
 			<v-card>
