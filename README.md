@@ -2,7 +2,7 @@
 
 > Frontend of PokaPlayer
 ## Screenshot
-![](https://i.imgur.com/ittKoyd.jpg)
+![](https://i.imgur.com/E8FGWr3.png)
 ## Build Setup
 
 ``` bash
