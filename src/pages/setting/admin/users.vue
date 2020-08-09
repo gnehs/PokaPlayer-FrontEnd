@@ -163,10 +163,19 @@ export default {
 		},
 		async createUser() {
 			let { name, username, password, role } = this.userTemp
-			await this.axios.post(_setting(`server`) + "/pokaapi/v2/users/create", { name, username, password, role })
-			this.$snackbar(i18n.t('settingUserManagement.dialog.userCreated'))
-			this.createUserDialog = false
-			this.fetchUsers()
+			let createUserResult = await this.axios.post(_setting(`server`) + "/pokaapi/v2/users/create", { name, username, password, role })
+			if (createUserResult.data.success) {
+				this.$snackbar(i18n.t('settingUserManagement.dialog.userCreated'))
+				this.createUserDialog = false
+				this.fetchUsers()
+			} else {
+				if (createUserResult.data.error == 'username already taken') {
+					this.$snackbar(i18n.t('settingUserManagement.dialog.userCreateUsernameRepeat'))
+				}
+				else {
+					this.$snackbar(i18n.t('settingUserManagement.dialog.userCreateFailed'))
+				}
+			}
 		},
 		async changePassword() {
 			let password = prompt(i18n.t('settingUserManagement.dialog.enterPassword'));

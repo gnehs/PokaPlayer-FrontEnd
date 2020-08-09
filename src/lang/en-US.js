@@ -261,6 +261,8 @@ export default {
 			create: 'Create User',
 			createBtn: 'Create',
 			userCreated: 'User created.',
+			userCreateFailed: 'User create failed.',
+			userCreateUsernameRepeat: 'Username is already taken.',
 			//edit
 			edit: 'Edit User',
 			//changePassword

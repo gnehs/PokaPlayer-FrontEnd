@@ -263,6 +263,8 @@ export default {
 			create: '建立使用者',
 			createBtn: '建立',
 			userCreated: '使用者建立成功',
+			userCreateFailed: '使用者建立失敗',
+			userCreateUsernameRepeat: '使用者名稱已被使用',
 			//edit
 			edit: '编辑使用者',
 			//changePassword
