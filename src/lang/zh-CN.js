@@ -172,6 +172,10 @@ export default {
 	"settings_restarting": "正在重新启动",
 	"settings_restart_completed": "重新启动完成！",
 	"settings_restartDialog_title": "确定要重新启动吗？",
+	"settingIndex": {
+		'normalItems': '一般设定项目',
+		'adminItems': '服务器管理',
+	},
 	"settingInterface": {
 		"_": "界面",
 		"customize": {
@@ -248,9 +252,42 @@ export default {
 			}
 		}
 	},
+	"settingUserManagement": {
+		title: "使用者管理",
+		role: {
+			user: '普通使用者',
+			admin: '管理员'
+		},
+		dialog: {
+			//create
+			create: '建立使用者',
+			createBtn: '建立',
+			userCreated: '使用者建立成功',
+			//edit
+			edit: '编辑使用者',
+			//changePassword
+			changePassword: '更改密码',
+			changePasswordSuccess: '密码已变更',
+			changePasswordFailed: '更改密码时发生了错误',
+			enterNewPassword: '请输入新密码',
+			//deleteUser
+			deleteUser: '删除使用者',
+			deleteUserFailed: '删除使用者时发生了错误'
+		},
+
+		field: {
+			name: "名称",
+			username: "使用者名称",
+			role: "权限",
+			password: "密码",
+		}
+	},
 	"settingPravicy": {
 		"title": "隐私",
 		"description": "资料纪录设定",
+	},
+	"settingPins": {
+		"title": "钉选管理",
 	},
 	"source": {
 		"DSM": "DSM",

@@ -30,7 +30,7 @@ import SettingSystem from '@/pages/setting/system'
 import SettingUser from '@/pages/setting/user'
 import SettingPins from '@/pages/setting/pins'
 import SettingPrivacy from '@/pages/setting/privacy'
-import SettingAdminUser from '@/pages/setting/admin/user'
+import SettingAdminUsers from '@/pages/setting/admin/users'
 
 Vue.use(Router)
 
@@ -188,9 +188,9 @@ export default new Router({
 			name: 'SettingPrivacy',
 			component: SettingPrivacy
 		}, {
-			path: '/settings/admin/user',
-			name: 'SettingAdminUser',
-			component: SettingAdminUser
+			path: '/settings/admin/users',
+			name: 'SettingAdminUsers',
+			component: SettingAdminUsers
 		}]
 	}, {
 		path: '*',

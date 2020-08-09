@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<poka-header title="User management" />
+		<poka-header :title="$t('settingUserManagement.title')" />
 		<poka-loader v-if="!users" />
 		<v-slide-y-reverse-transition>
 			<div class="poka list" v-if="users">
@@ -11,7 +11,7 @@
 						</v-avatar>
 						<div class="header">
 							<div class="head t-ellipsis">{{user.username}}</div>
-							<div class="t-ellipsis">{{user.role}}</div>
+							<div class="t-ellipsis">{{$t('settingUserManagement.role.' + user.role)}}</div>
 						</div>
 					</div>
 				</div>
@@ -19,13 +19,13 @@
 		</v-slide-y-reverse-transition>
 		<v-dialog v-model="userDialog" max-width="300">
 			<v-card>
-				<v-card-title class="headline">{{userTemp.name}}</v-card-title>
+				<v-card-title class="headline">{{$t('settingUserManagement.dialog.edit')}}</v-card-title>
 				<v-card-text>
 					<div class="poka list">
 						<div class="item" v-ripple>
 							<div class="content">
 								<div class="header">
-									<div class="head t-ellipsis">Name</div>
+									<div class="head t-ellipsis">{{$t('settingUserManagement.field.name')}}</div>
 									<div class="t-ellipsis">{{userTemp.name}}</div>
 								</div>
 							</div>
@@ -33,7 +33,7 @@
 						<div class="item" v-ripple>
 							<div class="content">
 								<div class="header">
-									<div class="head t-ellipsis">Username</div>
+									<div class="head t-ellipsis">{{$t('settingUserManagement.field.username')}}</div>
 									<div class="t-ellipsis">{{userTemp.username}}</div>
 								</div>
 							</div>
@@ -41,7 +41,7 @@
 						<div class="item" v-ripple>
 							<div class="content">
 								<div class="header">
-									<div class="head t-ellipsis">Role</div>
+									<div class="head t-ellipsis">{{$t('settingUserManagement.field.role')}}</div>
 									<div class="t-ellipsis">{{userTemp.role}}</div>
 								</div>
 							</div>
@@ -53,7 +53,7 @@
 									<v-icon>mdi-lock</v-icon>
 								</v-avatar>
 								<div class="header">
-									<div class="head t-ellipsis">Change password</div>
+									<div class="head t-ellipsis">{{$t('settingUserManagement.dialog.changePassword')}}</div>
 								</div>
 							</div>
 						</div>
@@ -63,7 +63,7 @@
 									<v-icon>mdi-delete</v-icon>
 								</v-avatar>
 								<div class="header">
-									<div class="head t-ellipsis">Delete this user</div>
+									<div class="head t-ellipsis">{{$t('settingUserManagement.dialog.deleteUser')}}</div>
 								</div>
 							</div>
 						</div>
@@ -77,17 +77,34 @@
 		</v-dialog>
 		<v-dialog v-model="createUserDialog" max-width="300">
 			<v-card>
-				<v-card-title class="headline">Create User</v-card-title>
+				<v-card-title class="headline">{{$t('settingUserManagement.dialog.create')}}</v-card-title>
 				<v-card-text>
-					<v-text-field label="Name" v-model="userTemp.name" outlined></v-text-field>
-					<v-text-field label="Username" v-model="userTemp.username" outlined></v-text-field>
-					<v-text-field label="Password" v-model="userTemp.password" outlined></v-text-field>
-					<v-select :items="['admin','user']" v-model="userTemp.role" label="Role" outlined></v-select>
+					<v-text-field :label="$t('settingUserManagement.field.name')" v-model="userTemp.name" outlined></v-text-field>
+					<v-text-field
+						:label="$t('settingUserManagement.field.username')"
+						v-model="userTemp.username"
+						outlined
+					></v-text-field>
+					<v-text-field
+						:label="$t('settingUserManagement.field.password')"
+						v-model="userTemp.password"
+						outlined
+					></v-text-field>
+					<v-select
+						:label="$t('settingUserManagement.field.role')"
+						:items="['admin','user']"
+						v-model="userTemp.role"
+						outlined
+					></v-select>
 				</v-card-text>
 				<v-card-actions>
 					<v-spacer />
 					<v-btn text @click="createUserDialog = false" color="primary">{{$t('back')}}</v-btn>
-					<v-btn text @click="createUser" color="primary">create</v-btn>
+					<v-btn
+						text
+						@click="createUser"
+						color="primary"
+					>{{$t('settingUserManagement.dialog.createBtn')}}</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
@@ -147,19 +164,19 @@ export default {
 		async createUser() {
 			let { name, username, password, role } = this.userTemp
 			await this.axios.post(_setting(`server`) + "/pokaapi/v2/users/create", { name, username, password, role })
-			this.$snackbar('User created.')
+			this.$snackbar(i18n.t('settingUserManagement.dialog.userCreated'))
 			this.createUserDialog = false
 			this.fetchUsers()
 		},
 		async changePassword() {
-			let password = prompt("Please enter the password");
+			let password = prompt(i18n.t('settingUserManagement.dialog.enterPassword'));
 			if (password) {
 				await this.axios.post(_setting(`server`) + "/pokaapi/v2/users/change-password", {
 					_id: this.userTemp._id, password
 				}).catch(e => {
-					this.$snackbar('An error occurred when changing the password')
+					this.$snackbar(i18n.t('settingUserManagement.dialog.changePasswordFailed'))
 				})
-				this.$snackbar('Password changed.')
+				this.$snackbar(i18n.t('settingUserManagement.dialog.changePasswordSuccess'))
 			}
 		},
 		async deleteUser() {
@@ -167,7 +184,7 @@ export default {
 				await this.axios.post(_setting(`server`) + "/pokaapi/v2/users/delete", {
 					_id: this.userTemp._id
 				}).catch(e => {
-					this.$snackbar('An error occurred when deleting the user')
+					this.$snackbar(i18n.t('settingUserManagement.dialog.deleteUserFailed'))
 				})
 				this.userDialog = false
 				this.fetchUsers()

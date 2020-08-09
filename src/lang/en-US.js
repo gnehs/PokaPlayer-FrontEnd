@@ -170,6 +170,10 @@ export default {
 	"settings_restarting": "Restarting",
 	"settings_restart_completed": "Restart completed.",
 	"settings_restartDialog_title": "Are you sure to restart?",
+	"settingIndex": {
+		'normalItems': 'General',
+		'adminItems': 'Server management',
+	},
 	"settingInterface": {
 		"_": "Interface",
 		"customize": {
@@ -244,6 +248,35 @@ export default {
 				"success": "Password changed successfully",
 				"error": "Password change failed"
 			}
+		}
+	},
+	"settingUserManagement": {
+		title: "User management",
+		role: {
+			user: 'user',
+			admin: 'admin'
+		},
+		dialog: {
+			//create
+			create: 'Create User',
+			createBtn: 'Create',
+			userCreated: 'User created.',
+			//edit
+			edit: 'Edit User',
+			//changePassword
+			changePassword: 'Change Password',
+			changePasswordSuccess: 'Password changed.',
+			changePasswordFailed: 'An error occurred when changing the password.',
+			enterNewPassword: 'Please enter the new password',
+			//deleteUser
+			deleteUser: 'Delete this user',
+			deleteUserFailed: 'An error occurred when deleting the user'
+		},
+		field: {
+			name: "Name",
+			username: "Username",
+			role: "Role",
+			password: "Password",
 		}
 	},
 	"settingPravicy": {
