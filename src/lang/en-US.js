@@ -283,6 +283,10 @@ export default {
 		"title": "Pravicy",
 		"description": "Data record setting",
 	},
+	"settingPins": {
+		title: "Pins management",
+		deleteConfirm: 'Are you sure want to unpin?'
+	},
 	"source": {
 		"DSM": "DSM",
 		"poka": "PokaPlayer",

@@ -48,7 +48,7 @@ export default {
 				});
 		},
 		async unPin(pin) {
-			if (confirm('Are you sure want to unpin?')) {
+			if (confirm(i18n.t('settingPins.deleteConfirm'))) {
 				this.axios
 					.post(`/pokaapi/v2/pin/unpin`, pin)
 					.then(r => {

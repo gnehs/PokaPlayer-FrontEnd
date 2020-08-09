@@ -287,7 +287,8 @@ export default {
 		"description": "資料紀錄設定",
 	},
 	"settingPins": {
-		"title": "釘選管理",
+		title: "釘選管理",
+		deleteConfirm: '您確定要取消釘選此項目嗎？'
 	},
 	"source": {
 		"DSM": "DSM",

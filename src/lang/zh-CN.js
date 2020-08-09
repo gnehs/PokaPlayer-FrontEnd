@@ -287,7 +287,8 @@ export default {
 		"description": "资料纪录设定",
 	},
 	"settingPins": {
-		"title": "钉选管理",
+		title: "钉选管理",
+		deleteConfirm: '您确定要取消钉选此项目吗？'
 	},
 	"source": {
 		"DSM": "DSM",
