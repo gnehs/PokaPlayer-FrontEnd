@@ -107,7 +107,7 @@ export default {
 .v-card.blur-card
 	background-color: rgb(255 255 255 / 70%) !important
 	backdrop-filter: blur(20px)
-	box-shadow: none
+	box-shadow: none !important
 	&.theme--dark
 		background: rgb(47 43 62 / .7) !important
 //---------------------//
