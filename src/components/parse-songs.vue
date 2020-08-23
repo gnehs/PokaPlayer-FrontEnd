@@ -44,7 +44,7 @@
 			<v-card>
 				<v-card-title class="headline">{{$t("songAction_title")}}</v-card-title>
 				<v-card-text>
-					<div class="poka list">
+					<div class="poka list" v-if="moreDialogTemp">
 						<div class="item" v-ripple @click="openPlaylistDialog();moreDialogShow=false">
 							<div class="content">
 								<v-avatar size="24px" item>
@@ -56,47 +56,53 @@
 							</div>
 						</div>
 						<v-divider />
-						<div class="item" v-if="moreDialogTemp" v-ripple>
+						<div class="item" @click="moreDialog_goto_artist" v-ripple>
 							<div class="content">
 								<v-avatar size="24px" item>
 									<v-icon class="material-icons-outlined">music_note</v-icon>
 								</v-avatar>
 								<div class="header">
 									<div class="head t-ellipsis">{{moreDialogTemp.name}}</div>
-									<div class="t-ellipsis">{{$t('songAction_name')}}</div>
+									<div class="t-ellipsis">{{moreDialogTemp.artist}}</div>
 								</div>
 							</div>
 						</div>
-						<div class="item" v-if="moreDialogTemp" @click="moreDialog_goto_artist" v-ripple>
-							<div class="content">
-								<v-avatar size="24px" item>
-									<v-icon class="material-icons-outlined">mic_none</v-icon>
-								</v-avatar>
-								<div class="header">
-									<div class="head t-ellipsis">{{moreDialogTemp.artist}}</div>
-									<div class="t-ellipsis">{{$t('songAction_artist')}}</div>
-								</div>
-							</div>
-						</div>
-						<div class="item" v-if="moreDialogTemp" @click="moreDialog_goto_album" v-ripple>
+						<div class="item" @click="moreDialog_goto_album" v-ripple>
 							<div class="content">
 								<v-avatar size="24px" item>
 									<v-icon class="material-icons-outlined">album</v-icon>
 								</v-avatar>
 								<div class="header">
 									<div class="head t-ellipsis">{{moreDialogTemp.album}}</div>
-									<div class="t-ellipsis">{{$t('songAction_album')}}</div>
+									<div class="t-ellipsis">
+										<span v-if="moreDialogTemp.year">{{moreDialogTemp.year}}</span>
+										<span v-else>{{$t('songAction_album')}}</span>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="item" v-if="moreDialogTemp" v-ripple>
+						<div class="item" v-ripple>
 							<div class="content">
 								<v-avatar size="24px" item>
 									<v-icon class="material-icons-outlined">cloud</v-icon>
 								</v-avatar>
 								<div class="header">
 									<div class="head t-ellipsis">{{$t(`source.${moreDialogTemp.source}`)}}</div>
-									<div class="t-ellipsis">{{$t('songAction_source')}}</div>
+									<div class="t-ellipsis">{{moreDialogTemp.id}}</div>
+								</div>
+							</div>
+						</div>
+						<div class="item" v-if="moreDialogTemp.codec" v-ripple>
+							<div class="content">
+								<v-avatar size="24px" item>
+									<v-icon class="material-icons-outlined">insert_drive_file</v-icon>
+								</v-avatar>
+								<div class="header">
+									<div class="head t-ellipsis">{{moreDialogTemp.codec.toUpperCase()}}</div>
+									<div class="t-ellipsis">
+										<span v-if="moreDialogTemp.bitrate">{{moreDialogTemp.bitrate/1000}}k</span>
+										<span v-else>Codec</span>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -224,6 +230,7 @@ export default {
 		},
 		moreDialog(song) {
 			this.moreDialogTemp = song;
+			console.log(song);
 			this.moreDialogShow = true;
 		},
 		moreDialog_goto_album() {
@@ -231,11 +238,7 @@ export default {
 			if (t && t.albumId) {
 				this.moreDialogShow = false;
 				this.$nextTick(() => {
-					this.$router.push(
-						`/album/songs/${encodeURIComponent(
-							t.source
-						)}/${encodeURIComponent(t.albumId)}`
-					);
+					this.$router.push(`/album/songs/${encodeURIComponent(t.source)}/${encodeURIComponent(t.albumId)}`);
 				});
 			}
 		},
@@ -244,11 +247,7 @@ export default {
 			if (t && t.artistId) {
 				this.moreDialogShow = false;
 				this.$nextTick(() => {
-					this.$router.push(
-						`/artist/${encodeURIComponent(
-							t.source
-						)}/${encodeURIComponent(t.artistId)}`
-					);
+					this.$router.push(`/artist/${encodeURIComponent(t.source)}/${encodeURIComponent(t.artistId)}`);
 				});
 			}
 		}

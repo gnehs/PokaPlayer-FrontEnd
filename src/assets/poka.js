@@ -33,22 +33,13 @@ window._addSongs = function ({
                 songRes = "original"
             }
         }
-        playlist.push({
-            url: server + song.url + "&songRes=" + songRes,
-            originalURL: song.url,
-            cover: song.cover && song.cover.startsWith("http") ?
-                song.cover : song.cover ?
-                    server + song.cover : defaultCover,
-            originalCover: song.cover,
-            name: song.name,
-            artist: song.artist,
-            artistId: song.artistId,
-            album: song.album,
-            albumId: song.albumId,
-            id: song.id,
-            source: song.source,
-            uuid: _uuid()
-        });
+        song.originalURL = song.url
+        song.url = server + song.url + "&songRes=" + songRes
+        song.originalCover = song.cover
+        song.cover = song.cover && song.cover.startsWith("http") ? song.cover : (song.cover ? server + song.cover : defaultCover)
+        song.uuid = _uuid()
+
+        playlist.push(song);
     }
     if (clear) _player.list.clear();
     _player.list.add(playlist);
