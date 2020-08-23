@@ -32,6 +32,9 @@
 				</div>
 				<div class="action">
 					<slot :index="index" :song="song" :moreDialog="moreDialog">
+						<v-btn icon @click.stop="moreDialog(song)" v-show="isSafari">
+							<v-icon class="material-icons-outlined">more_horiz</v-icon>
+						</v-btn>
 						<v-btn icon @click.stop="$addSongs({songs:[song],clear:false});isInSongList.push(index);">
 							<v-icon v-if="isInSongList.includes(index)">done</v-icon>
 							<v-icon v-else>add</v-icon>
@@ -192,7 +195,9 @@ export default {
 		moreDialogTemp: null,
 		playlists: [],
 		existsPlaylists: [],
-	}), methods: {
+		isSafari: /^((?!chrome|android).)*safari/i.test(window.navigator.userAgent),
+	}),
+	methods: {
 		async openPlaylistDialog() {
 			this.playlistDialog = true
 			this.playlistDialogLoading = true
