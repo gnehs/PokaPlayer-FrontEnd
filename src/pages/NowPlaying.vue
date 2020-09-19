@@ -91,14 +91,9 @@ export default {
 				this.audio_cover = _player.list.audios[this.audio_index].cover;
 				if (uuid_temp != this.audio_uuid) {
 					//換歌ㄌ
-					if (this.audio_index > audio_index_temp)
-						this.bgSlideAnimation = 'slide-left'
-					else
-						this.bgSlideAnimation = 'slide-right'
+					this.bgSlideAnimation = this.audio_index > audio_index_temp ? 'slide-left' : 'slide-right'
 					this.$nextTick(() => {
-						let activeItem = document.querySelector(
-							".poka.list > .active"
-						);
+						let activeItem = document.querySelector(".poka.list > .active");
 						if (activeItem) {
 							let sh = activeItem.offsetTop - document.querySelector("main").clientHeight * 0.5 + activeItem.clientHeight * 0.75;
 							sh += 69 //底部播放器
