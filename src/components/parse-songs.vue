@@ -45,7 +45,18 @@
 		</transition-group>
 		<v-dialog v-model="moreDialogShow" max-width="400">
 			<v-card>
-				<v-card-title class="headline">{{$t("songAction_title")}}</v-card-title>
+				<v-img
+					v-if="moreDialogTemp"
+					height="200px"
+					class="white--text align-end moreDialog-cover"
+					:src="moreDialogTemp.cover"
+					@click="moreDialog_goto_artist"
+				>
+					<div class="header">
+						<div class="head t-ellipsis">{{moreDialogTemp.name}}</div>
+						<div class="t-ellipsis">{{moreDialogTemp.artist}}</div>
+					</div>
+				</v-img>
 				<v-card-text>
 					<div class="poka list" v-if="moreDialogTemp">
 						<div class="item" v-ripple @click="openPlaylistDialog();moreDialogShow=false">
@@ -59,17 +70,7 @@
 							</div>
 						</div>
 						<v-divider />
-						<div class="item" @click="moreDialog_goto_artist" v-ripple>
-							<div class="content">
-								<v-avatar size="24px" item>
-									<v-icon class="material-icons-outlined">music_note</v-icon>
-								</v-avatar>
-								<div class="header">
-									<div class="head t-ellipsis">{{moreDialogTemp.name}}</div>
-									<div class="t-ellipsis">{{moreDialogTemp.artist}}</div>
-								</div>
-							</div>
-						</div>
+
 						<div class="item" @click="moreDialog_goto_album" v-ripple>
 							<div class="content">
 								<v-avatar size="24px" item>
@@ -175,6 +176,29 @@
 		</v-dialog>
 	</div>
 </template>
+<style lang="sass">
+.moreDialog-cover
+	background: #000
+	margin-bottom: 8px
+	.v-image__image
+		transition: all .25s ease
+	&:hover
+		cursor: pointer
+		.v-image__image
+			opacity: .8
+	&:active
+		.v-image__image
+			opacity: 1
+	.header
+		padding: 8px 32px
+		background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.4))
+		.head
+			font-weight: bold
+			font-size: 1.2rem
+			line-height: 1.5rem
+		>:not(.head)
+			opacity: .7
+</style>
 <script>
 export default {
 	name: "poka-parse-songs",
