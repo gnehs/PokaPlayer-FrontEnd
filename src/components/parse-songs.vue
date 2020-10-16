@@ -49,7 +49,12 @@
 					v-if="moreDialogTemp"
 					height="200px"
 					class="white--text align-end moreDialog-cover"
-					:src="moreDialogTemp.cover"
+					:src=" moreDialogTemp.cover
+							? moreDialogTemp.cover.startsWith('http')
+								? moreDialogTemp.cover
+								: server + moreDialogTemp.cover
+							: defaultCover
+					"
 					@click="moreDialog_goto_artist"
 				>
 					<div class="header">
