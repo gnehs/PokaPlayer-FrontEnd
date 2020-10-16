@@ -219,7 +219,7 @@
 		</v-dialog>
 		<v-dialog v-model="lyric_theme_dialog" max-width="300">
 			<v-card>
-				<v-card-title class="headline">{{$t('settingInterface.lang')}}</v-card-title>
+				<v-card-title class="headline">{{$t('settingInterface.customize.lyric._')}}</v-card-title>
 				<v-card-text>
 					<div class="poka list">
 						<div class="item" @click="setLyricTheme('bigtext')" v-ripple>

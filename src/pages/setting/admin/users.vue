@@ -178,7 +178,7 @@ export default {
 			}
 		},
 		async changePassword() {
-			let password = prompt(i18n.t('settingUserManagement.dialog.enterPassword'));
+			let password = prompt(i18n.t('settingUserManagement.dialog.enterNewPassword'));
 			if (password) {
 				await this.axios.post(_setting(`server`) + "/pokaapi/v2/users/change-password", {
 					_id: this.userTemp._id, password
