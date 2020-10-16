@@ -43,7 +43,6 @@
 
 		<v-dialog v-model="restartConfirmActive" max-width="420">
 			<v-card>
-				<v-img class="poka-logo-banner" src="/img/loginHeader.svg" height="170px"></v-img>
 				<v-card-title class="headline">{{$t("settings_restartDialog_title")}}</v-card-title>
 				<v-card-text style="padding-bottom: 0;">
 					<p>{{$t('settings_updateDialog_note')}}</p>
@@ -58,7 +57,6 @@
 
 		<v-dialog v-model="showUpdateDialog" max-width="420">
 			<v-card>
-				<v-img class="poka-logo-banner" src="/img/loginHeader.svg" height="170px"></v-img>
 				<v-card-title
 					class="headline"
 				>{{$t("settings_updateDialog_title", { version: this.newVersion.tag})}}</v-card-title>
@@ -81,7 +79,6 @@
 
 		<v-dialog v-model="showUpdateingDialog" persistent max-width="280">
 			<v-card>
-				<v-img class="poka-logo-banner" src="/img/loginHeader.svg" height="170px"></v-img>
 				<v-card-text style="padding: 0;">
 					<pre class="log">{{updateLog}}</pre>
 					<v-progress-linear indeterminate color="primary"></v-progress-linear>
@@ -91,7 +88,6 @@
 
 		<v-dialog v-model="showRestartingDialog" persistent max-width="280">
 			<v-card>
-				<v-img class="poka-logo-banner" src="/img/loginHeader.svg" height="170px"></v-img>
 				<p class="headline text-center font-weight-bold">{{$t("settings_restarting")}}</p>
 				<poka-loader />
 				<br />
@@ -100,7 +96,6 @@
 
 		<v-dialog v-model="showRestartCompletedDialog" persistent max-width="280">
 			<v-card>
-				<v-img class="poka-logo-banner" src="/img/loginHeader.svg" height="170px"></v-img>
 				<v-card-title class="headline">{{$t("settings_restart_completed")}}</v-card-title>
 				<v-card-actions>
 					<v-spacer />
