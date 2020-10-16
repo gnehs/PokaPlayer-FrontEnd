@@ -81,23 +81,29 @@
 			<v-card>
 				<v-card-text style="padding: 0;">
 					<pre class="log">{{updateLog}}</pre>
-					<v-progress-linear indeterminate color="primary"></v-progress-linear>
+					<v-progress-linear indeterminate color="primary" v-show="!showRestartCompleted"></v-progress-linear>
 				</v-card-text>
+				<v-card-actions v-show="showRestartCompleted">
+					<v-spacer />
+					<v-btn text color="primary" @click="reload">{{$t('settings_update_reconnect')}}</v-btn>
+				</v-card-actions>
 			</v-card>
 		</v-dialog>
 
 		<v-dialog v-model="showRestartingDialog" persistent max-width="280">
 			<v-card>
-				<p class="headline text-center font-weight-bold">{{$t("settings_restarting")}}</p>
-				<poka-loader />
 				<br />
-			</v-card>
-		</v-dialog>
-
-		<v-dialog v-model="showRestartCompletedDialog" persistent max-width="280">
-			<v-card>
-				<v-card-title class="headline">{{$t("settings_restart_completed")}}</v-card-title>
-				<v-card-actions>
+				<p
+					v-show="!showRestartCompleted"
+					class="headline text-center font-weight-bold"
+				>{{$t("settings_restarting")}}</p>
+				<p
+					v-show="showRestartCompleted"
+					class="headline text-center font-weight-bold"
+				>{{$t("settings_restart_completed")}}</p>
+				<poka-loader v-show="!showRestartCompleted" />
+				<br />
+				<v-card-actions v-show="showRestartCompleted">
 					<v-spacer />
 					<v-btn text color="primary" @click="reload">{{$t('settings_update_reconnect')}}</v-btn>
 				</v-card-actions>
@@ -115,7 +121,7 @@ export default {
 		showUpdateDialog: false,
 		showUpdateingDialog: false,
 		showRestartingDialog: false,
-		showRestartCompletedDialog: false,
+		showRestartCompleted: false,
 		updateLog: "",
 		poka_version: null,
 		poka_debug: null,
@@ -191,8 +197,7 @@ export default {
 							window.i18n.t("settings_restarting") + "...\n";
 					});
 					window._socket.on("hello", () => {
-						this.showUpdateingDialog = false;
-						this.showRestartCompletedDialog = true;
+						this.showRestartCompleted = true;
 					});
 					window._socket.on("err", async data => {
 						const delay = interval => {
@@ -212,8 +217,7 @@ export default {
 			this.showRestartingDialog = true;
 			this.axios.post("/restart");
 			window._socket.on("hello", () => {
-				this.showRestartingDialog = false;
-				this.showRestartCompletedDialog = true;
+				this.showRestartCompleted = true;
 			});
 		},
 		reload() {
