@@ -16,7 +16,7 @@ export default {
 		Vue.prototype.$goBack = () => {
 			window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
 		}
-		Vue.prototype.$deepCopy =window._deepcopy
+		Vue.prototype.$deepCopy = window._deepcopy
 		Vue.prototype.$randomPlay = window._randomPlay;
 		Vue.prototype.$addSongs = window._addSongs;
 		//註冊點心條組件
@@ -71,7 +71,7 @@ export default {
 		text-overflow: ellipsis;
 	}
 	.v-snack--bottom.withBottomPlayer {
-		bottom: 77px !important;
+		padding-bottom: 77px !important;
 	}
 	.v-snack__wrapper {
 		background-color: rgba(57, 53, 77, 0.8) !important;
