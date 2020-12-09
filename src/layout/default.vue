@@ -305,6 +305,13 @@ export default {
 					// 標記為已登入
 					let userProfile = await this.axios.get(_setting(`server`) + "/profile/");
 					sessionStorage.setItem("login", JSON.stringify(userProfile.data));
+					// add debug page
+					if (response.data.debug) {
+						let debugItem = { icon: "bug_report", text: "Debug", to: "/debug" };
+						if (!this.items.includes(debugItem)) {
+							this.items.push(debugItem);
+						}
+					}
 				});
 		},
 		pageEnter() {
