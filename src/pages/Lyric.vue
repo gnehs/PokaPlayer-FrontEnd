@@ -168,7 +168,7 @@
 		transform: translateY(.1px)
 		transition: all .3s ease
 		opacity: .1
-		filter: blur(4.25px)
+		//filter: blur(4.25px)
 		&.focus
 			opacity: 1
 			filter: none
@@ -182,12 +182,12 @@
 		@for $i from -4 through -1
 			&[data-lyric-set="#{$i}"]
 				transition-delay: #{.05*-$i}s
-				filter: blur(#{1*-$i}px)
+				//filter: blur(#{1*-$i}px)
 				opacity: #{.5+.1*$i}
 		@for $i from 1 through 4
 			&[data-lyric-set="#{$i}"]
 				transition-delay: #{.05*-$i}s
-				filter: blur(#{1*$i}px)
+				//filter: blur(#{1*$i}px)
 				opacity: #{.5-.1*$i}
 [theme="spacing"] .lyric
 	padding: 160px 25px
