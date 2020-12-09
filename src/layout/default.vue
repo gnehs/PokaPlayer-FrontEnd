@@ -308,7 +308,8 @@ export default {
 					// add debug page
 					if (response.data.debug) {
 						let debugItem = { icon: "bug_report", text: "Debug", to: "/debug" };
-						if (!this.items.includes(debugItem)) {
+
+						if (!this.items.filter(x => x.text == 'Debug').length) {
 							this.items.push(debugItem);
 						}
 					}
