@@ -16,7 +16,7 @@ export default {
 		Vue.prototype.$goBack = () => {
 			window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
 		}
-		Vue.prototype.$deepCopy = d => JSON.parse(JSON.stringify(d))
+		Vue.prototype.$deepCopy =window._deepcopy
 		Vue.prototype.$randomPlay = window._randomPlay;
 		Vue.prototype.$addSongs = window._addSongs;
 		//註冊點心條組件

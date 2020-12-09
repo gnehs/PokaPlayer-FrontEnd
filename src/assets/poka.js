@@ -13,6 +13,7 @@ window._randomPlay = function () {
         })
         .catch(e => alert(`PokaPlayer Error\n${e}`));
 };
+window._deepcopy = d => JSON.parse(JSON.stringify(d))
 window._addSongs = function ({
     songs,
     index,
@@ -21,7 +22,8 @@ window._addSongs = function ({
     const server = window._setting(`server`);
     const defaultCover = window._setting(`headerBgSource`);
     let playlist = [];
-    for (let song of songs) {
+    for (let item of songs) {
+        let song = _deepcopy(item)
         let songRes = _setting(`audioQuality`).toLowerCase()
         let isSafari = /^((?!chrome|android).)*safari/i.test(window.navigator.userAgent)
         if (song.source == "DSM" && songRes == 'high') {
