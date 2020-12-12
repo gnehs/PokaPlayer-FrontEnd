@@ -13,9 +13,6 @@
 import Vue from "vue";
 export default {
 	created() {
-		Vue.prototype.$goBack = () => {
-			window.history.length > 1 ? this.$router.go(-1) : this.$router.push("/");
-		}
 		Vue.prototype.$deepCopy = window._deepcopy
 		Vue.prototype.$randomPlay = window._randomPlay;
 		Vue.prototype.$addSongs = window._addSongs;
