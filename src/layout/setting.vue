@@ -17,7 +17,7 @@
 			:mobile-breakpoint="960"
 			app
 		>
-			<v-list shaped>
+			<v-list nav dense>
 				<v-list-item-group color="primary">
 					<template v-for="item in items">
 						<v-divider v-if="item.divider" :key="item.text" style="margin: 4px 0;" />

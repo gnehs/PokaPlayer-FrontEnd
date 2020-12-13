@@ -20,10 +20,9 @@
 		>
 			<div class="poka-drawer-logo" v-show="$vuetify.breakpoint.lgAndUp">
 				<h1>PokaPlayer</h1>
-				<p>{{poka_version}}</p>
 			</div>
 			<v-divider v-show="$vuetify.breakpoint.lgAndUp" style="margin: 0px 0;" />
-			<v-list shaped>
+			<v-list nav dense>
 				<v-list-item-group color="primary">
 					<template v-for="item in items">
 						<v-divider v-if="item.divider" :key="item.text" style="margin: 4px 0;" />
@@ -347,8 +346,6 @@ main
 .poka-drawer-logo
 	padding: 8px 16px
 	font-family: var(--product-font)
-	p
-		margin-bottom: 0
 
 nav
 	.v-list
