@@ -280,7 +280,6 @@ export default {
 							this.server + "/setting/"
 						)).data;
 						for (let i of Object.keys(settingReq.settings)) {
-							console.log(i);
 							_setting(i, settingReq.settings[i]);
 						}
 						//login socket

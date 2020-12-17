@@ -264,7 +264,6 @@ export default {
 		},
 		moreDialog(song) {
 			this.moreDialogTemp = song;
-			console.log(song);
 			this.moreDialogShow = true;
 		},
 		moreDialog_goto_album() {
