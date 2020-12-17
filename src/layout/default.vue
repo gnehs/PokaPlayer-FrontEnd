@@ -142,6 +142,7 @@ export default {
 		audio_currentTime: "0:00",
 		audio_totalTime: "0:00",
 		audio_paused: true,
+		audio_recored: false,
 		audio_cover: _setting(`headerBgSource`),
 		audio_title: "PokaPlayer",
 		audio_artist: null,
@@ -208,21 +209,26 @@ export default {
 			navigator.mediaSession.setActionHandler("nexttrack", () => _player.skipForward());
 		}
 		this.audio_interval = setInterval(() => {
+			let currentTime = _player.audio.currentTime || 0,
+				totalTime = _player.audio.duration || 0
 			this.audio_paused = _player.paused;
 			this.audio_order = _player.options.order;
 			if (_player.list.audios.length > 0) {
 				let nowPlaying = _player.list.audios[_player.list.index];
+				if (this.audio_title != nowPlaying.name) {
+					this.audio_recored = false
+				}
 				let buffered = _player.audio.buffered;
-				let audioBuffered = _player.audio.currentTime > 1 ? (buffered.end(buffered.length - 1) / _player.audio.duration) * 100 : 0
-				let cent = (_player.audio.currentTime / _player.audio.duration) * 100;
+				let audioBuffered = currentTime > 1 ? (buffered.end(buffered.length - 1) / totalTime) * 100 : 0
+				let cent = (currentTime / totalTime) * 100;
 				this.audio_currentTimePercent = cent;
 				this.audio_bufferPercent = audioBuffered;
-				this.audio_paused = _player.paused;
 				this.audio_title = nowPlaying.name;
 				this.audio_artist = nowPlaying.artist;
 				this.audio_cover = nowPlaying.cover;
-				this.audio_currentTime = this.secondToTime(_player.audio.currentTime || 0);
-				this.audio_totalTime = this.secondToTime(_player.audio.duration || 0);
+				this.audio_currentTime = this.secondToTime(currentTime);
+				this.audio_totalTime = this.secondToTime(totalTime);
+				// mediaSession
 				if ("mediaSession" in navigator) {
 					//讀圖片
 					let image = document.querySelector(".cover img");
@@ -238,14 +244,19 @@ export default {
 						artwork: artworkData
 					});
 				}
+				// record
+				if (totalTime && currentTime + 10 > totalTime && !this.audio_recored && window._setting("dataRecord")) {
+					this.audio_recored = true
+					this.axios.post(`${_setting('server')}/pokaapi/v2/record/add`, nowPlaying)
+				}
 			} else {
 				this.audio_currentTime = "0:00";
 				this.audio_totalTime = "0:00";
 				this.audio_currentTimePercent = 100;
 				this.audio_bufferPercent = 100;
-				this.audio_paused = _player.paused;
 				this.audio_title = "PokaPlayer";
 				this.audio_artist = null;
+				this.audio_recored = false;
 				this.audio_cover = _setting(`headerBgSource`);
 				if ("mediaSession" in navigator) { navigator.mediaSession.metadata = null; }
 			}

@@ -92,6 +92,7 @@ window._setting = (setting, value) => {
         "audioQuality": "High",
         "headerBgSource": "https://i.imgur.com/IdbJiao.jpg",
         "darkMode": false,
+        "dataRecord": true,
         "server": location.origin,
         "password": "",
         "cssVariable": {

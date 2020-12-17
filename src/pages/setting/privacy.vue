@@ -1,44 +1,75 @@
 <template>
 	<div>
 		<poka-header :title="$t('settingPravicy.title')" />
-		<div class="poka-notify">
-			<h1>關於 PokaPlayer 資料記錄</h1>
-			<p style="margin-bottom:0">資料紀錄功能僅會將您的資料於本地伺服器運算，並提供您更優質的使用體驗，並不會被上傳至網路進行分析。</p>
+		<div class="poka-notify cloud">
+			<h1>關於 PokaPlayer 記錄</h1>
+			<p style="margin-bottom:0">
+				資料僅會於您的伺服器進行運算，不會被上傳至網路進行分析。
+				<br />該功能可提供您更優質的使用體驗（如：年度回顧、最近播放）。
+				<br />若您有疑慮可於下方關閉此功能，並將已記錄的資料清除。
+			</p>
 		</div>
 		<div class="poka list">
-			<div class="item" v-ripple>
+			<div class="item" v-ripple @click="setDataRecord">
 				<div class="content">
-					<v-avatar size="24px" item>
-						<v-icon>security</v-icon>
+					<v-avatar size="42px" item>
+						<v-icon :color="dataRecord?'purple':null">analytics</v-icon>
 					</v-avatar>
 					<div class="header">
 						<div class="head t-ellipsis">資料記錄</div>
-						<div class="t-ellipsis">啟用</div>
+						<div class="t-ellipsis">{{dataRecord?'啟用':'已停用'}}</div>
 					</div>
 				</div>
 			</div>
-			<div class="item" v-ripple>
+			<div class="item" v-ripple @click="clearRecord">
 				<div class="content">
-					<v-avatar size="24px" item>
+					<v-avatar size="42px" item>
 						<v-icon>clear</v-icon>
 					</v-avatar>
 					<div class="header">
-						<div class="head t-ellipsis">清除目前紀錄資料</div>
-						<div class="t-ellipsis">目前已紀錄約 1000 筆資料</div>
+						<div class="head t-ellipsis">清除目前已紀錄資料</div>
+						<div class="t-ellipsis">{{dataRecordCount>-1?`目前已記錄 ${dataRecordCount} 筆資料`:'正在統計資料...'}}</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</template>
-
+</template> 
 <script>
 export default {
 	name: "SettingPravicy",
 	data: () => ({
+		dataRecord: window._setting("dataRecord"),
+		dataRecordCount: -1
 	}),
-	created() {
+	mounted() {
+		this.getDataRecordCount()
 	},
-	methods: {}
+	methods: {
+		async setDataRecord() {
+			this.dataRecord = !this.dataRecord
+
+			let n = { dataRecord: this.dataRecord }
+			this.axios({
+				method: "post",
+				url: _setting(`server`) + "/setting/",
+				data: { n }
+			});
+		},
+		async getDataRecordCount() {
+			this.axios(_setting(`server`) + `/pokaapi/v2/record/count/user`)
+				.then(r => {
+					this.dataRecordCount = r.data
+				});
+		},
+		async clearRecord() {
+			if (confirm('您確定要清除資料嗎？'))
+				this.axios.post(_setting(`server`) + `/pokaapi/v2/record/clear`)
+					.then(r => {
+						this.$snackbar('資料已清除')
+						this.dataRecordCount = 0
+					});
+		}
+	}
 }
 </script>

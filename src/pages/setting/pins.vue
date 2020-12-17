@@ -50,7 +50,7 @@ export default {
 		async unPin(pin) {
 			if (confirm(i18n.t('settingPins.deleteConfirm'))) {
 				this.axios
-					.post(`/pokaapi/v2/pin/unpin`, pin)
+					.post(`${_setting('server')}/pokaapi/v2/pin/unpin`, pin)
 					.then(r => {
 						this.getPins();
 					});

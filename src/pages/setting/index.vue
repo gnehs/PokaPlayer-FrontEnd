@@ -48,7 +48,7 @@ export default {
 			{ text: i18n.t('settingInterface._'), icon: 'layers', to: "/settings/interface" },
 			{ text: i18n.t('settingUser.title'), icon: 'person', to: "/settings/user" },
 			{ text: i18n.t('settingPins.title'), icon: 'push_pin', to: "/settings/pins" },
-			//{ text: i18n.t('settingPravicy.title'), icon: 'lock', to: "/settings/privacy" },
+			{ text: i18n.t('settingPravicy.title'), icon: 'lock', to: "/settings/privacy" },
 		],
 		adminSettingItems: [
 			{ text: i18n.t('settings_systemAndUpdate'), icon: 'system_update', to: "/settings/system" },
