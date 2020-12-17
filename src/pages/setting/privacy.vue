@@ -57,7 +57,7 @@ export default {
 			});
 		},
 		async getDataRecordCount() {
-			this.axios(_setting(`server`) + `/pokaapi/v2/record/count/user`)
+			this.axios(_setting(`server`) + `/pokaapi/v2/record/count/user?${Date.now()}`)
 				.then(r => {
 					this.dataRecordCount = r.data
 				});
