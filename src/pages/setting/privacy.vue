@@ -2,12 +2,8 @@
 	<div>
 		<poka-header :title="$t('settingPravicy.title')" />
 		<div class="poka-notify cloud">
-			<h1>關於 PokaPlayer 記錄</h1>
-			<p style="margin-bottom:0">
-				資料僅會於您的伺服器進行運算，不會被上傳至網路進行分析。
-				<br />該功能可提供您更優質的使用體驗（如：年度回顧、最近播放）。
-				<br />若您有疑慮可於下方關閉此功能，並將已記錄的資料清除。
-			</p>
+			<h1>{{$t('settingPravicy.notify.title')}}</h1>
+			<p style="margin-bottom:0">{{$t('settingPravicy.notify.body')}}</p>
 		</div>
 		<div class="poka list">
 			<div class="item" v-ripple @click="setDataRecord">
@@ -16,8 +12,8 @@
 						<v-icon :color="dataRecord?'purple':null">analytics</v-icon>
 					</v-avatar>
 					<div class="header">
-						<div class="head t-ellipsis">資料記錄</div>
-						<div class="t-ellipsis">{{dataRecord?'啟用':'已停用'}}</div>
+						<div class="head t-ellipsis">{{$t('settingPravicy.dataRecord._')}}</div>
+						<div class="t-ellipsis">{{$t('settingPravicy.dataRecord.'+(dataRecord?'enabled':'disabled'))}}</div>
 					</div>
 				</div>
 			</div>
@@ -27,8 +23,10 @@
 						<v-icon>clear</v-icon>
 					</v-avatar>
 					<div class="header">
-						<div class="head t-ellipsis">清除目前已紀錄資料</div>
-						<div class="t-ellipsis">{{dataRecordCount>-1?`目前已記錄 ${dataRecordCount} 筆資料`:'正在統計資料...'}}</div>
+						<div class="head t-ellipsis">{{$t('settingPravicy.dataRecord.clear')}}</div>
+						<div
+							class="t-ellipsis"
+						>{{dataRecordCount>-1?$t('settingPravicy.dataRecord.logged',{count:dataRecordCount}):$t('settingPravicy.dataRecord.loading')}}</div>
 					</div>
 				</div>
 			</div>
