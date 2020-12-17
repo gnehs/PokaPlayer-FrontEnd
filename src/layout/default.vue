@@ -148,7 +148,6 @@ export default {
 		audio_artist: null,
 		audio_order: _player.options.order,
 		transitionName: "fade",
-		poka_version: "0.0.0",
 		scrollPositions: {},
 		settings: { darkMode: window._setting("darkMode") },
 		items: [
@@ -166,6 +165,7 @@ export default {
 			{ icon: 'settings', text: i18n.t("settings"), to: "/setting" },
 		],
 	}),
+
 	destroyed() {
 		if (this.audio_interval) clearInterval(this.audio_interval);
 	},
@@ -188,7 +188,6 @@ export default {
 				transitionName = toDepth == fromDepth ? "fade" : transitionName; //同一層
 			}
 			this.transitionName = transitionName;
-			this.getStatus();
 			let el = document.querySelector("main");
 			if (el) this.scrollPositions[from.name] = el.scrollTop;
 			next();
@@ -310,8 +309,6 @@ export default {
 				.then(async response => {
 					// 沒登入滾回登入頁面
 					if (!response.data.login) return this.$router.push("/login");
-					// version
-					this.poka_version = response.data.version;
 					// 標記為已登入
 					let userProfile = await this.axios.get(_setting(`server`) + "/profile/");
 					sessionStorage.setItem("login", JSON.stringify(userProfile.data));

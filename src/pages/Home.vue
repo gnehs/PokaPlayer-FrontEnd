@@ -14,10 +14,9 @@ export default {
 	created() {
 		this.axios.get(_setting(`server`) + "/pokaapi/home/").then(response => {
 			this.data = response.data;
-		});
-		this.axios.get(_setting(`server`) + "/status/").then(response => {
-			this.poka_version = response.data.version;
-		});
+		}).catch(e => {
+			this.$router.push('/login')
+		})
 	},
 	data: () => ({ data: null, poka_version: null })
 };
