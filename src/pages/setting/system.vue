@@ -51,6 +51,13 @@
 				<v-card-text style="padding-bottom: 0;">
 					<p class="changelog" v-html="newVersion.body" />
 					<p>{{$t('settings_updateDialog_note')}}</p>
+					<p v-if="poka_debug" v-html="$t('settings_updateDialog_note_dev')"></p>
+					<p>
+						<a
+							href="https://github.com/gnehs/PokaPlayer/releases"
+							target="_blank"
+						>{{$t('settings_updateDialog_view_previous')}}</a>
+					</p>
 				</v-card-text>
 				<v-divider />
 				<v-card-actions>

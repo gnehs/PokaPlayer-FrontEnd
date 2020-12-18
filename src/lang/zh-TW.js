@@ -168,6 +168,7 @@ export default {
 	"settings_update_git_api": "API 更新完成",
 	"settings_updateDialog_note": "注意：若您未開啟 Docker 自動重啟功能，您必須手動開啟 PokaPlayer",
 	"settings_updateDialog_note_dev": "若在開發機器上進行更新，<mark>可能導致 Git 爆炸</mark>",
+	"settings_updateDialog_view_previous": "查看先前的更新日誌",
 	"settings_updateDialog_title": "{version} 更新日誌",
 	"settings_restart": "重新啟動",
 	"settings_restarting": "正在重新啟動",

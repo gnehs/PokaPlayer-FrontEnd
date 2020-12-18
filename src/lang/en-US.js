@@ -166,6 +166,7 @@ export default {
 	"settings_update_git_api": "API update complete.",
 	"settings_updateDialog_note": "Notice: If Docker auto-restart is disabled, you must start PokaPlayer manually.",
 	"settings_updateDialog_note_dev": "If you update on developing machine, <mark>it may cause Git to crash</mark>",
+	"settings_updateDialog_view_previous": "View previous update log",
 	"settings_updateDialog_title": "{version} Release note",
 	"settings_restart": "Restart",
 	"settings_restarting": "Restarting",
