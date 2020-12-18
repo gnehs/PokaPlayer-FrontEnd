@@ -2,6 +2,7 @@ export default {
 	"title": "中文（中国）",
 	"loading": "载入中...",
 	"header_welcome": "欢迎使用",
+	"header_welcome_with_name": "哈囉，{name}",
 	"checkUpdate_poka": "有新版本可供更新：{version}",
 	"checkUpdate_button": "更新",
 	"pingServer_title": "提示",

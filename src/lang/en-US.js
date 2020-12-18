@@ -2,6 +2,7 @@ export default {
 	"title": "English (US)",
 	"loading": "Loading...",
 	"header_welcome": "Welcome",
+	"header_welcome_with_name": "Hi, {name}",
 	"checkUpdate_poka": "Update Available: {version}",
 	"checkUpdate_button": "Update",
 	"pingServer_title": "Hint",

@@ -303,24 +303,26 @@ export default {
 			window._setting("darkMode", this.settings.darkMode);
 			this.settings.darkMode ? window._theme.switchToDark() : window._theme.switchToLight();
 		},
-		getStatus() {
-			this.axios
-				.get(_setting(`server`) + "/status/")
-				.then(async response => {
-					// 沒登入滾回登入頁面
-					if (!response.data.login) return this.$router.push("/login");
-					// 標記為已登入
-					let userProfile = await this.axios.get(_setting(`server`) + "/profile/");
-					sessionStorage.setItem("login", JSON.stringify(userProfile.data));
-					// add debug page
-					if (response.data.debug) {
-						let debugItem = { icon: "bug_report", text: "Debug", to: "/debug" };
-
-						if (!this.items.filter(x => x.text == 'Debug').length) {
-							this.items.push(debugItem);
-						}
-					}
-				});
+		async getStatus() {
+			// getStatus
+			let response = await this.axios.get(_setting(`server`) + "/status/")
+			// 沒登入滾回登入頁面
+			if (!response.data.login) return this.$router.push("/login");
+			// 標記為已登入
+			let userProfile = await this.axios.get(_setting(`server`) + "/profile/");
+			sessionStorage.setItem("login", JSON.stringify(userProfile.data));
+			// sync settings
+			let settings = JSON.parse(userProfile.data.settings)
+			for (let i of Object.keys(settings)) {
+				_setting(i, settings[i]);
+			}
+			// add debug page
+			if (response.data.debug) {
+				let debugItem = { icon: "bug_report", text: "Debug", to: "/debug" };
+				if (!this.items.filter(x => x.text == 'Debug').length) {
+					this.items.push(debugItem);
+				}
+			}
 		},
 		pageEnter() {
 			let currentRouteName = this.$router.history.current.name;

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<poka-header :title="$t('header_welcome')" />
+		<poka-header :title="name?$t('header_welcome_with_name',{name}):$t('header_welcome')" />
 		<poka-update />
 		<poka-loader v-if="!data" />
 		<v-slide-y-reverse-transition>
@@ -18,6 +18,9 @@ export default {
 			this.$router.push('/login')
 		})
 	},
-	data: () => ({ data: null, poka_version: null })
+	data: () => ({
+		data: null,
+		name: JSON.parse(sessionStorage.login).name
+	})
 };
 </script>
