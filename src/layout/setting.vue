@@ -55,7 +55,7 @@ export default {
 		items: [
 			{ text: i18n.t("settings"), icon: 'settings', to: "/setting" },
 			{ divider: true },
-			{ text: i18n.t('settings_network'), icon: 'cloud', to: "/settings/network" },
+			{ text: i18n.t('settings_network'), icon: 'wifi', to: "/settings/network" },
 			{ text: i18n.t('settingInterface._'), icon: 'layers', to: "/settings/interface" },
 			{ text: i18n.t('settingUser.title'), icon: 'person', to: "/settings/user" },
 			{ text: i18n.t('settingPins.title'), icon: 'push_pin', to: "/settings/pins" },

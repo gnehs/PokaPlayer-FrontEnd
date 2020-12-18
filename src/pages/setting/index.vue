@@ -44,7 +44,7 @@ export default {
 		aboutDialog: false,
 		isAdmin: JSON.parse(sessionStorage.getItem("login")).role == 'admin' || false,
 		settingItems: [
-			{ text: i18n.t('settings_network'), icon: 'cloud', to: "/settings/network" },
+			{ text: i18n.t('settings_network'), icon: 'wifi', to: "/settings/network" },
 			{ text: i18n.t('settingInterface._'), icon: 'layers', to: "/settings/interface" },
 			{ text: i18n.t('settingUser.title'), icon: 'person', to: "/settings/user" },
 			{ text: i18n.t('settingPins.title'), icon: 'push_pin', to: "/settings/pins" },
