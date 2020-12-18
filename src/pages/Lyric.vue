@@ -419,7 +419,7 @@ export default {
 							//最高者若超過 .7 則載入歌詞
 							if (result.lyrics[0].rate > 35 && set) {
 								this.loadLrc(result.lyrics[0].lyric);
-								this.$snackbar('歌詞正確嗎？打開歌詞搜尋視窗來儲存！')
+								this.$snackbar('歌詞正確嗎？打開歌詞搜尋來儲存。')
 							} else {
 								this.$snackbar('未發現匹配歌詞，您可以於歌詞搜尋中嘗試手動匹配')
 							}
