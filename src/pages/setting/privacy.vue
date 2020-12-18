@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<poka-header :title="$t('settingPravicy.title')" />
-		<div class="poka-notify cloud">
+		<div class="poka-notify">
 			<h1>{{$t('settingPravicy.notify.title')}}</h1>
 			<p style="margin-bottom:0">{{$t('settingPravicy.notify.body')}}</p>
 		</div>
@@ -46,12 +46,10 @@ export default {
 	methods: {
 		async setDataRecord() {
 			this.dataRecord = !this.dataRecord
-
-			let n = { dataRecord: this.dataRecord }
 			this.axios({
 				method: "post",
 				url: _setting(`server`) + "/setting/",
-				data: { n }
+				data: { dataRecord: this.dataRecord }
 			});
 		},
 		async getDataRecordCount() {
