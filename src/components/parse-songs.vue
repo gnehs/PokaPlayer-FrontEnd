@@ -218,6 +218,8 @@
 		font-size: 18px
 		line-height: 1.25em
 		opacity: 0.999
+	.head,.artist
+		max-width: 95%
 .moreDialog-content
 	.item
 		.v-avatar
