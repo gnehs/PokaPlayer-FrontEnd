@@ -45,41 +45,60 @@
 		</transition-group>
 		<v-dialog v-model="moreDialogShow" max-width="400">
 			<v-card>
-				<v-img
-					v-if="moreDialogTemp"
-					height="200px"
-					class="white--text align-end moreDialog-cover"
-					:src=" moreDialogTemp.cover
+				<div class="d-flex flex-column align-center moreDialog-header" v-if="moreDialogTemp">
+					<v-img
+						v-if="moreDialogTemp"
+						width="200px"
+						aspect-ratio="1"
+						class="moreDialog-cover"
+						:src=" moreDialogTemp.cover
 							? moreDialogTemp.cover.startsWith('http')
 								? moreDialogTemp.cover
 								: server + moreDialogTemp.cover
 							: defaultCover
 					"
-					@click="moreDialog_goto_artist"
-				>
-					<div class="header">
-						<div class="head t-ellipsis">{{moreDialogTemp.name}}</div>
-						<div class="t-ellipsis">{{moreDialogTemp.artist}}</div>
-					</div>
-				</v-img>
-				<v-card-text>
+					></v-img>
+					<div class="head t-ellipsis">{{moreDialogTemp.name}}</div>
+					<div class="artist t-ellipsis">{{moreDialogTemp.artist}}</div>
+				</div>
+				<v-card-text class="moreDialog-content">
 					<div class="poka list" v-if="moreDialogTemp">
 						<div class="item" v-ripple @click="openPlaylistDialog();moreDialogShow=false">
 							<div class="content">
-								<v-avatar size="24px" item>
-									<v-icon class="material-icons-outlined">playlist_add</v-icon>
+								<v-avatar size="42px" item>
+									<v-icon class="material-icons-outlined" color="primary">playlist_add</v-icon>
 								</v-avatar>
 								<div class="header">
 									<div class="head">{{$t('songAction_add2playlist')}}</div>
 								</div>
 							</div>
+							<div class="action">
+								<v-btn icon>
+									<v-icon>keyboard_arrow_right</v-icon>
+								</v-btn>
+							</div>
 						</div>
 						<v-divider />
-
+						<div class="item" @click="moreDialog_goto_artist" v-ripple>
+							<div class="content">
+								<v-avatar size="42px" item>
+									<v-icon class="material-icons-outlined" color="primary">mic</v-icon>
+								</v-avatar>
+								<div class="header">
+									<div class="head t-ellipsis">{{moreDialogTemp.artist}}</div>
+									<div>{{$t('songAction_artist')}}</div>
+								</div>
+								<div class="action">
+									<v-btn icon>
+										<v-icon>keyboard_arrow_right</v-icon>
+									</v-btn>
+								</div>
+							</div>
+						</div>
 						<div class="item" @click="moreDialog_goto_album" v-ripple>
 							<div class="content">
-								<v-avatar size="24px" item>
-									<v-icon class="material-icons-outlined">album</v-icon>
+								<v-avatar size="42px" item>
+									<v-icon class="material-icons-outlined" color="primary">album</v-icon>
 								</v-avatar>
 								<div class="header">
 									<div class="head t-ellipsis">{{moreDialogTemp.album}}</div>
@@ -88,12 +107,17 @@
 										<span v-else>{{$t('songAction_album')}}</span>
 									</div>
 								</div>
+								<div class="action">
+									<v-btn icon>
+										<v-icon>keyboard_arrow_right</v-icon>
+									</v-btn>
+								</div>
 							</div>
 						</div>
 						<div class="item" v-ripple>
 							<div class="content">
-								<v-avatar size="24px" item>
-									<v-icon class="material-icons-outlined">cloud</v-icon>
+								<v-avatar size="42px" item>
+									<v-icon class="material-icons-outlined" color="primary">storage</v-icon>
 								</v-avatar>
 								<div class="header">
 									<div class="head t-ellipsis">{{$t(`source.${moreDialogTemp.source}`)}}</div>
@@ -103,8 +127,8 @@
 						</div>
 						<div class="item" v-if="moreDialogTemp.codec" v-ripple>
 							<div class="content">
-								<v-avatar size="24px" item>
-									<v-icon class="material-icons-outlined">insert_drive_file</v-icon>
+								<v-avatar size="42px" item>
+									<v-icon class="material-icons-outlined" color="primary">insert_drive_file</v-icon>
 								</v-avatar>
 								<div class="header">
 									<div class="head t-ellipsis">{{moreDialogTemp.codec.toUpperCase()}}</div>
@@ -182,27 +206,37 @@
 	</div>
 </template>
 <style lang="sass">
-.moreDialog-cover
-	background: #000
-	margin-bottom: 8px
-	.v-image__image
-		transition: all .25s ease
-	&:hover
-		cursor: pointer
-		.v-image__image
-			opacity: .8
-	&:active
-		.v-image__image
-			opacity: 1
-	.header
-		padding: 8px 32px
-		background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.4))
-		.head
-			font-weight: bold
-			font-size: 1.2rem
-			line-height: 1.5rem
-		>:not(.head)
-			opacity: .7
+.moreDialog-header
+	padding: 16px 0
+	.moreDialog-cover
+		background: #555
+		border-radius: 4px
+		margin-bottom: 8px
+		box-shadow: 0 0.8px 1.9px rgba(0, 0, 0, 0.02),0 2.3px 4.5px rgba(0, 0, 0, 0.028),0 4.8px 8.5px rgba(0, 0, 0, 0.035),0 9.2px 15.2px rgba(0, 0, 0, 0.042),0 16.9px 28.4px rgba(0, 0, 0, 0.05),0 26px 68px rgba(0, 0, 0, 0.07)
+	.head
+		font-weight: bold
+		font-size: 18px
+		line-height: 1.25em
+		opacity: 0.999
+.moreDialog-content
+	.item
+		.v-avatar
+			position: relative
+			&:before
+				background-color: var(--v-primary-base)
+				-webkit-backdrop-filter: blur(10px)
+				bottom: 0
+				content: ""
+				left: 0
+				opacity: 0.1
+				pointer-events: none
+				position: absolute
+				right: 0
+				top: 0
+				border-radius: 4px
+				transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1)
+		&:hover .v-avatar:before
+			opacity: .2
 </style>
 <script>
 export default {
