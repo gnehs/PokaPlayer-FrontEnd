@@ -380,13 +380,13 @@ nav
 	box-sizing: border-box
 	height: 69px
 	max-height: 69px
-	backdrop-filter: blur(3px)
+	backdrop-filter: blur(4px)
 	z-index: 99
 	position: fixed
-	background-color: rgba(255, 255, 255, 0.9)
+	background-color: rgba(245, 245, 245, 0.7)
 	@media (prefers-color-scheme: dark)
 		&
-			background-color: rgba(40, 37, 53, 0.95)
+			background-color: rgba(47, 43, 62, 0.7)
 	.song-info
 		display: grid
 		grid-gap: 10px
