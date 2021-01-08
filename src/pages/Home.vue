@@ -14,13 +14,14 @@ export default {
 	created() {
 		this.axios.get(_setting(`server`) + "/pokaapi/home/").then(response => {
 			this.data = response.data;
+			this.name = JSON.parse(sessionStorage.login).name
 		}).catch(e => {
 			this.$router.push('/login')
 		})
 	},
 	data: () => ({
 		data: null,
-		name: JSON.parse(sessionStorage.login).name
+		name: null
 	})
 };
 </script>
