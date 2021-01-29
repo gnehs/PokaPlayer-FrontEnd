@@ -1,10 +1,17 @@
-<template lang="pug">
-div(style="position: sticky;top: 15px;")
-	.header-wrapper
-		.bg(:style=`Object.assign({backgroundImage: 'url("'+bg+'")'},bgStyle)`,:class="{blur: blurbg}")
-	.hw-header(v-if='title',:style="headerStyle")
-		.hw-title(style="line-height: normal;") {{title}}
-		.hw-subtitle {{subtitle}}
+ <template>
+	<div style="position: sticky;top: 16px;">
+		<div class="header-wrapper">
+			<div
+				class="bg"
+				:style="Object.assign({backgroundImage: `url('${bg}')`},bgStyle)"
+				:class="{blur: blurbg}"
+			/>
+		</div>
+		<div class="hw-header" style="line-height: normal;" v-if="title" :style="headerStyle">
+			<div class="hw-title">{{title}}</div>
+			<div class="hw-subtitle">{{subtitle}}</div>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -34,8 +41,7 @@ export default {
 				let scrollTop = document.querySelector('main').scrollTop;
 				let scrollHeight = document.querySelector('main').scrollHeight
 				let targetHideHeight = 40
-				this.headerStyle.opacity = scrollTop > targetHideHeight ? 0 : 1
-				this.headerStyle.transform = `translate(0,-${scrollTop > targetHideHeight ? 20 : (scrollTop / targetHideHeight * 20)}px)`
+				this.headerStyle.transform = `translate(0,-${(scrollTop / targetHideHeight * 35)}px)`
 				this.bgStyle.transform = `scale(1.12) translate(0,-${scrollTop / scrollHeight * 50}px)`
 			}
 		}
@@ -78,9 +84,7 @@ export default {
 		filter: blur(5px)
 .hw-header
 	font-weight: bold
-	margin-left: 16px
-	margin-top: 32px
-	margin-bottom: 32px
+	margin: 64px 0 32px
 	position: relative
 	font-family: var(--product-font)
 	transition: opacity .25s ease
