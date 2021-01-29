@@ -145,8 +145,9 @@ export default new Router({
 			redirect: '/home'
 		},
 		{
-			path: '/',
+			path: '/settings',
 			name: 'setting',
+			redirect: '/settings/network',
 			component: settingLayout,
 			children: [{
 				path: '/settings/interface',

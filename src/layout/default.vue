@@ -162,7 +162,7 @@ export default {
 			{ icon: 'edit', text: i18n.t("composer"), to: "/composer" },
 			{ icon: 'video_library', text: i18n.t("playlist"), to: "/playlist" },
 			{ divider: true },
-			{ icon: 'settings', text: i18n.t("settings"), to: "/settings/network" },
+			{ icon: 'settings', text: i18n.t("settings"), to: "/settings" },
 		],
 	}),
 

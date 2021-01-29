@@ -27,7 +27,7 @@
 			</router-link>
 		</div>
 		<transition name="fade" mode="out-in" v-on:enter="pageEnter">
-			<router-view :key="$route.path" />
+			<router-view />
 		</transition>
 	</div>
 </template>
@@ -87,7 +87,6 @@ export default {
 		align-items: center
 		padding: 6px 8px
 		padding-right: 12px
-		margin: 0 4px
 		text-decoration: none
 		transition: all .2s ease
 		color: #000
