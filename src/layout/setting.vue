@@ -11,7 +11,7 @@
 				v-ripple
 			>
 				<v-icon>{{item.icon}}</v-icon>
-				<span>{{item.text}}</span>
+				<span>{{$t(item.text)}}</span>
 			</router-link>
 			<router-link
 				class="setting-nav-item"
@@ -23,7 +23,7 @@
 				v-ripple
 			>
 				<v-icon>{{item.icon}}</v-icon>
-				<span>{{item.text}}</span>
+				<span>{{$t(item.text)}}</span>
 			</router-link>
 		</div>
 		<transition name="fade" mode="out-in" v-on:enter="pageEnter">
@@ -39,14 +39,14 @@ export default {
 		isAdmin: false,
 		settings: { darkMode: window._setting("darkMode") },
 		items: [
-			{ text: i18n.t('settings_network'), icon: 'wifi', to: "/settings/network" },
-			{ text: i18n.t('settingInterface._'), icon: 'layers', to: "/settings/interface" },
-			{ text: i18n.t('settingUser.title'), icon: 'person', to: "/settings/user" },
-			{ text: i18n.t('settingPins.title'), icon: 'push_pin', to: "/settings/pins" },
+			{ text: 'settings_network', icon: 'wifi', to: "/settings/network" },
+			{ text: 'settingInterface._', icon: 'layers', to: "/settings/interface" },
+			{ text: 'settingUser.title', icon: 'person', to: "/settings/user" },
+			{ text: 'settingPins.title', icon: 'push_pin', to: "/settings/pins" },
 		],
 		adminItems: [
-			{ text: i18n.t('settings_systemAndUpdate'), icon: 'system_update', to: "/settings/system" },
-			{ text: i18n.t('settingUserManagement.title'), icon: 'person', to: "/settings/admin/users" },
+			{ text: 'settings_systemAndUpdate', icon: 'system_update', to: "/settings/system" },
+			{ text: 'settingUserManagement.title', icon: 'person', to: "/settings/admin/users" },
 		]
 	}),
 	created() {
