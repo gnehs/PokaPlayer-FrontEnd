@@ -1,6 +1,39 @@
 <template>
 	<div>
-		<poka-header :title="$t('settingUser.title')" />
+		<!--隱私-->
+		<v-subheader>{{$t('settingPravicy.title')}}</v-subheader>
+		<div class="poka-notify">
+			<h1>{{$t('settingPravicy.notify.title')}}</h1>
+			<p style="margin-bottom:0">{{$t('settingPravicy.notify.body')}}</p>
+		</div>
+		<div class="poka list">
+			<div class="item" v-ripple @click="setDataRecord">
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon :color="dataRecord?'purple':null">analytics</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">{{$t('settingPravicy.dataRecord._')}}</div>
+						<div class="t-ellipsis">{{$t('settingPravicy.dataRecord.'+(dataRecord?'enabled':'disabled'))}}</div>
+					</div>
+				</div>
+			</div>
+			<div class="item" v-ripple @click="clearRecord">
+				<div class="content">
+					<v-avatar size="42px" item>
+						<v-icon>clear</v-icon>
+					</v-avatar>
+					<div class="header">
+						<div class="head t-ellipsis">{{$t('settingPravicy.dataRecord.clear')}}</div>
+						<div
+							class="t-ellipsis"
+						>{{dataRecordCount>-1?$t('settingPravicy.dataRecord.logged',{count:dataRecordCount}):$t('settingPravicy.dataRecord.loading')}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--使用者-->
+		<v-subheader>{{$t('settingUser.title')}}</v-subheader>
 		<div class="poka list">
 			<div class="item" @click="copyID" v-if="userdata" v-ripple>
 				<div class="content">
@@ -143,6 +176,7 @@
 export default {
 	name: "SettingUser",
 	data: () => ({
+		//使用者
 		userdata: null,
 		temp: {
 			changeNamePrompt: false,
@@ -153,12 +187,19 @@ export default {
 			changePassword: "",
 			changePassword2: "",
 			changePasswordold: ""
-		}
+		},
+		//隱私
+		dataRecord: window._setting("dataRecord"),
+		dataRecordCount: -1
 	}),
 	created() {
+		//使用者
 		this.axios.get(_setting(`server`) + "/profile/").then(response => { this.userdata = response.data; });
+		//隱私
+		this.getDataRecordCount()
 	},
 	methods: {
+		//使用者
 		copyID() {
 			navigator.clipboard.writeText(this.userdata._id).then(() => {
 				this.$snackbar(i18n.t("copy.success"));
@@ -227,6 +268,29 @@ export default {
 			sessionStorage.removeItem("login");
 			_player.pause()
 			this.axios(_setting(`server`) + "/logout").then(e => this.$router.push("/login"));
+		},
+		//隱私
+		async setDataRecord() {
+			this.dataRecord = !this.dataRecord
+			this.axios({
+				method: "post",
+				url: _setting(`server`) + "/setting/",
+				data: { dataRecord: this.dataRecord }
+			});
+		},
+		async getDataRecordCount() {
+			this.axios(_setting(`server`) + `/pokaapi/v2/record/count/user?${Date.now()}`)
+				.then(r => {
+					this.dataRecordCount = r.data
+				});
+		},
+		async clearRecord() {
+			if (confirm('您確定要清除資料嗎？'))
+				this.axios.post(_setting(`server`) + `/pokaapi/v2/record/clear`)
+					.then(r => {
+						this.$snackbar('資料已清除')
+						this.dataRecordCount = 0
+					});
 		}
 	}
 };

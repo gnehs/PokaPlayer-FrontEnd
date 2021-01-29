@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<poka-header :title="$t('settingInterface._')" :bg="setting.bg" />
 		<v-subheader>{{$t('settingInterface.lang')}}</v-subheader>
 		<div class="poka list">
 			<div class="item" @click="lang_dialog=true" v-ripple>

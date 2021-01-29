@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<poka-header :title="$t('settingPins.title')" />
 		<div class="poka list" v-if="pins">
 			<div class="item" v-ripple v-for="pin of pins" :key="pin._id" @click="unPin(pin)">
 				<div class="content">

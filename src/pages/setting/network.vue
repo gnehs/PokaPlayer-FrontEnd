@@ -1,7 +1,5 @@
 <template>
 	<div>
-		<poka-header :title="$t('settings_network')" />
-
 		<div class="poka list">
 			<div class="item" @click="showSoundQualityDialog=true" v-ripple>
 				<div class="content">

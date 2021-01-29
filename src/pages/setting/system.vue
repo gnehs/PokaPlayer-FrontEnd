@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<poka-header :title="$t('settings_systemAndUpdate')" />
 		<div class="poka list">
 			<v-subheader>{{$t('settings_system')}}</v-subheader>
 			<div class="item" @click="restartConfirmActive=true" v-ripple>

@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<poka-header :title="$t('settingUserManagement.title')" />
 		<poka-loader v-if="!users" />
 		<v-slide-y-reverse-transition>
 			<div class="poka list" v-if="users">
@@ -109,7 +108,17 @@
 			</v-card>
 		</v-dialog>
 		<v-fab-transition v-if="!createUserDialog">
-			<v-btn color="primary" fab large dark bottom right fixed @click="openCreateUserDialog">
+			<v-btn
+				color="primary"
+				fab
+				large
+				dark
+				bottom
+				right
+				fixed
+				style="bottom: calc(16px + 69px);"
+				@click="openCreateUserDialog"
+			>
 				<v-icon>mdi-account-plus</v-icon>
 			</v-btn>
 		</v-fab-transition>

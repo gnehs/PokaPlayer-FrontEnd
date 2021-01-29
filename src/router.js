@@ -23,13 +23,11 @@ import Shuffle from '@/pages/shuffle'
 import Lyric from '@/pages/Lyric'
 import LyricEdit from '@/pages/LyricEdit'
 import Search from '@/pages/Search'
-import Setting from '@/pages/setting/index'
 import SettingNetwork from '@/pages/setting/network'
 import SettingInterface from '@/pages/setting/interface'
 import SettingSystem from '@/pages/setting/system'
 import SettingUser from '@/pages/setting/user'
 import SettingPins from '@/pages/setting/pins'
-import SettingPrivacy from '@/pages/setting/privacy'
 import SettingAdminUsers from '@/pages/setting/admin/users'
 
 Vue.use(Router)
@@ -145,7 +143,37 @@ export default new Router({
 		}, {
 			path: '',
 			redirect: '/home'
-		}]
+		},
+		{
+			path: '/',
+			name: 'setting',
+			component: settingLayout,
+			children: [{
+				path: '/settings/interface',
+				name: 'SettingInterface',
+				component: SettingInterface
+			}, {
+				path: '/settings/network',
+				name: 'SettingNetwork',
+				component: SettingNetwork
+			}, {
+				path: '/settings/system',
+				name: 'SettingSystem',
+				component: SettingSystem
+			}, {
+				path: '/settings/user',
+				name: 'SettingUser',
+				component: SettingUser
+			}, {
+				path: '/settings/pins',
+				name: 'SettingPins',
+				component: SettingPins
+			}, {
+				path: '/settings/admin/users',
+				name: 'SettingAdminUsers',
+				component: SettingAdminUsers
+			}]
+		},]
 	}, {
 		path: '/',
 		name: 'empty',
@@ -154,43 +182,6 @@ export default new Router({
 			path: '/login',
 			name: 'Login',
 			component: Login
-		}]
-	}, {
-		path: '/',
-		name: 'setting',
-		component: settingLayout,
-		children: [{
-			path: '/setting',
-			name: 'Setting',
-			component: Setting
-		}, {
-			path: '/settings/interface',
-			name: 'SettingInterface',
-			component: SettingInterface
-		}, {
-			path: '/settings/network',
-			name: 'SettingNetwork',
-			component: SettingNetwork
-		}, {
-			path: '/settings/system',
-			name: 'SettingSystem',
-			component: SettingSystem
-		}, {
-			path: '/settings/user',
-			name: 'SettingUser',
-			component: SettingUser
-		}, {
-			path: '/settings/pins',
-			name: 'SettingPins',
-			component: SettingPins
-		}, {
-			path: '/settings/privacy',
-			name: 'SettingPrivacy',
-			component: SettingPrivacy
-		}, {
-			path: '/settings/admin/users',
-			name: 'SettingAdminUsers',
-			component: SettingAdminUsers
 		}]
 	}, {
 		path: '*',

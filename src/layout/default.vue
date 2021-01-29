@@ -162,7 +162,7 @@ export default {
 			{ icon: 'edit', text: i18n.t("composer"), to: "/composer" },
 			{ icon: 'video_library', text: i18n.t("playlist"), to: "/playlist" },
 			{ divider: true },
-			{ icon: 'settings', text: i18n.t("settings"), to: "/setting" },
+			{ icon: 'settings', text: i18n.t("settings"), to: "/settings/network" },
 		],
 	}),
 
@@ -186,6 +186,9 @@ export default {
 				const fromDepth = from.path.split("/").length;
 				transitionName = toDepth < fromDepth ? "zoom-out" : "zoom-in";
 				transitionName = toDepth == fromDepth ? "fade" : transitionName; //同一層
+			}
+			if (to.path.split("/")[1] == 'settings' && from.path.split("/")[1] == 'settings') {
+				transitionName = 'none'
 			}
 			this.transitionName = transitionName;
 			let el = document.querySelector("main");
