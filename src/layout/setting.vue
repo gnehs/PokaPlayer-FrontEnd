@@ -1,9 +1,9 @@
 <template>
 	<div>
 		<poka-header :title="$t('settings')" subtitle="Customize your PokaPlayer experience." />
-		<div class="setting-nav">
+		<div class="chip-nav">
 			<router-link
-				class="setting-nav-item"
+				class="chip-nav-item"
 				:class="{active:$route.path==item.to}"
 				v-for="item in items"
 				:key="item.to"
@@ -14,7 +14,7 @@
 				<span>{{$t(item.text)}}</span>
 			</router-link>
 			<router-link
-				class="setting-nav-item"
+				class="chip-nav-item"
 				:class="{active:$route.path==item.to}"
 				v-for="item in adminItems"
 				:key="item.to"
@@ -73,39 +73,4 @@ export default {
 		},
 	}
 };
-</script>
-<style lang="sass" scoped>
-.setting-nav
-	position: relative
-	display: flex
-	flex-direction: row
-	overflow-x: scroll
-	margin-bottom: 16px
-	.setting-nav-item
-		display: flex
-		flex-direction: row
-		align-items: center
-		padding: 6px 8px
-		padding-right: 12px
-		text-decoration: none
-		transition: all .2s ease
-		color: #000
-		opacity: .8
-		position: relative
-		font-weight: bold
-		border-radius: 100em
-		.v-icon
-			margin-right: 4px
-		span
-			white-space: pre
-		&.active
-			color: #FFF
-			background: var(--v-primary-base)
-			.v-icon
-				color: #FFF
-
-@media (prefers-color-scheme: dark)
-	.setting-nav
-		.setting-nav-item
-			color: #FFF
-</style>
+</script> 

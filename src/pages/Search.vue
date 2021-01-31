@@ -22,37 +22,32 @@
 		</v-overlay>
 		<v-slide-y-reverse-transition>
 			<div v-if="searchResult">
-				<v-card>
-					<v-toolbar color="primary" dark flat>
-						<v-toolbar-title>{{keyword||$t('search')}}</v-toolbar-title>
-						<template v-slot:extension>
-							<v-tabs v-model="tabs" background-color="transparent" class="primary--text">
-								<v-tab
-									v-for="itemName of Object.keys(searchResult).filter(x=>searchResult[x].length)"
-									:key="itemName"
-								>{{$t(itemName.substring(0, itemName.length-1))}}</v-tab>
-							</v-tabs>
-						</template>
-					</v-toolbar>
+				<div class="chip-nav">
+					<div
+						class="chip-nav-item"
+						v-for="itemName of Object.keys(searchResult).filter(x=>searchResult[x].length)"
+						:key="itemName"
+						:class="{active:active==itemName}"
+						@click="active=itemName"
+						v-ripple
+					>
+						<span>{{$t(itemName.substring(0, itemName.length-1))}}</span>
+					</div>
+				</div>
 
-					<v-tabs-items v-model="tabs">
-						<v-tab-item
-							v-for="itemName of Object.keys(searchResult).filter(x=>searchResult[x].length)"
-							:key="itemName"
-						>
-							<v-card flat>
-								<v-card-text>
-									<poka-parse-songs v-if="itemName=='songs'" :data="searchResult[itemName]" />
-									<poka-parse-albums v-if="itemName=='albums'" :data="searchResult[itemName]" />
-									<poka-parse-playlists v-if="itemName=='playlists'" :data="searchResult[itemName]" />
-									<poka-parse-folders v-if="itemName=='folders'" :data="searchResult[itemName]" />
-									<poka-parse-composers v-if="itemName=='composers'" :data="searchResult[itemName]" />
-									<poka-parse-artists v-if="itemName=='artists'" :data="searchResult[itemName]" />
-								</v-card-text>
-							</v-card>
-						</v-tab-item>
-					</v-tabs-items>
-				</v-card>
+				<div
+					v-for="itemName of Object.keys(searchResult).filter(x=>searchResult[x].length)"
+					:key="itemName"
+				>
+					<div v-show="active==itemName">
+						<poka-parse-songs v-if="itemName=='songs'" :data="searchResult[itemName]" />
+						<poka-parse-albums v-if="itemName=='albums'" :data="searchResult[itemName]" />
+						<poka-parse-playlists v-if="itemName=='playlists' " :data="searchResult[itemName]" />
+						<poka-parse-folders v-if="itemName=='folders' " :data="searchResult[itemName]" />
+						<poka-parse-composers v-if="itemName=='composers' " :data="searchResult[itemName]" />
+						<poka-parse-artists v-if="itemName=='artists' " :data="searchResult[itemName]" />
+					</div>
+				</div>
 			</div>
 		</v-slide-y-reverse-transition>
 	</div>
@@ -99,10 +94,10 @@ export default {
 	name: "Search",
 	data: () => ({
 		keyword: "",
+		active: null,
 		searchResult: false,
 		isLoading: false,
 		searchBoxFocus: false,
-		tabs: null
 	}),
 	created() {
 		if (this.$route.query.keyword) {
@@ -123,6 +118,8 @@ export default {
 				.get(_setting(`server`) + "/pokaapi/search/?keyword=" + this.keyword)
 				.then(response => {
 					this.searchResult = response.data;
+
+					this.active = Object.keys(this.searchResult).filter(x => this.searchResult[x].length)[0]
 					this.isLoading = false;
 				})
 				.catch(e => (this.isLoading = false));

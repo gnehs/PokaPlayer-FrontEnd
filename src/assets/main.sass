@@ -33,6 +33,44 @@ html,body
 	box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.3)
 	
 //---------------------//
+//      chip-nav       //
+//---------------------//
+
+
+.chip-nav
+	position: relative
+	display: flex
+	flex-direction: row
+	overflow-x: scroll
+	margin-bottom: 16px
+	.chip-nav-item
+		display: flex
+		flex-direction: row
+		align-items: center
+		padding: 6px 12px 
+		text-decoration: none
+		transition: all .2s ease
+		color: #000
+		opacity: .8
+		position: relative
+		font-weight: bold
+		border-radius: 100em
+		cursor: pointer
+		.v-icon
+			margin-right: 4px
+		span
+			white-space: pre
+		&.active
+			color: #FFF
+			background: var(--v-primary-base)
+			.v-icon
+				color: #FFF
+
+@media (prefers-color-scheme: dark)
+	.chip-nav
+		.chip-nav-item
+			color: #FFF
+//---------------------//
 //     transition      //
 //---------------------//
 //fade
