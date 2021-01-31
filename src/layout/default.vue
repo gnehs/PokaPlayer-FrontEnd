@@ -39,14 +39,12 @@
 				</v-list-item-group>
 			</v-list>
 		</v-navigation-drawer>
-		<transition :name="transitionName" mode="out-in" v-on:enter="pageEnter">
-			<v-main :key="$route.path">
-				<div class="router-view">
-					<router-view />
-				</div>
-				<div style="height:69px"></div>
-			</v-main>
-		</transition>
+		<v-main>
+			<div class="router-view">
+				<router-view />
+			</div>
+			<div style="height:69px"></div>
+		</v-main>
 		<div class="bottom-player">
 			<div class="app-progress-bar">
 				<v-progress-linear
@@ -147,7 +145,6 @@ export default {
 		audio_title: "PokaPlayer",
 		audio_artist: null,
 		audio_order: _player.options.order,
-		transitionName: "fade",
 		scrollPositions: {},
 		settings: { darkMode: window._setting("darkMode") },
 		items: [
@@ -180,20 +177,17 @@ export default {
 		vhResize();
 		this.drawer = this.$vuetify.breakpoint.mdAndUp
 		this.$router.beforeEach((to, from, next) => {
-			let transitionName = to.meta.transitionName || from.meta.transitionName || "fade";
-			if (transitionName === "slide") {
-				const toDepth = to.path.split("/").length;
-				const fromDepth = from.path.split("/").length;
-				transitionName = toDepth < fromDepth ? "zoom-out" : "zoom-in";
-				transitionName = toDepth == fromDepth ? "fade" : transitionName; //同一層
-			}
-			if (to.path.split("/")[1] == 'settings' && from.path.split("/")[1] == 'settings') {
-				transitionName = 'none'
-			}
-			this.transitionName = transitionName;
 			let el = document.querySelector("main");
 			if (el) this.scrollPositions[from.name] = el.scrollTop;
 			next();
+			this.$nextTick(() => {
+				let currentRouteName = this.$router.history.current.name;
+				let el = document.querySelector("main");
+				if (el && currentRouteName in this.scrollPositions) {
+					let positions = this.scrollPositions[currentRouteName];
+					setTimeout(() => (el.scrollTop = positions), 100);
+				}
+			});
 		});
 		this.axios.defaults.withCredentials = true;
 		this.axios.defaults.baseURL = _setting(`server`);
@@ -327,14 +321,6 @@ export default {
 				}
 			}
 		},
-		pageEnter() {
-			let currentRouteName = this.$router.history.current.name;
-			let el = document.querySelector("main");
-			if (el && currentRouteName in this.scrollPositions) {
-				let positions = this.scrollPositions[currentRouteName];
-				setTimeout(() => (el.scrollTop = positions), 100);
-			}
-		}
 	}
 };
 </script>
