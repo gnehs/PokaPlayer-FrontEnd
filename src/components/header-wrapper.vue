@@ -41,6 +41,7 @@ export default {
 				let scrollTop = document.querySelector('main').scrollTop;
 				let scrollHeight = document.querySelector('main').scrollHeight
 				let targetHideHeight = 40
+				this.headerStyle.opacity = 1 - scrollTop / 200
 				this.headerStyle.transform = `translate(0,-${(scrollTop / targetHideHeight * 35)}px)`
 				this.bgStyle.transform = `scale(1.12) translate(0,-${scrollTop / scrollHeight * 50}px)`
 			}

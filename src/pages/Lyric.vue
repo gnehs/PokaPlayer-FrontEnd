@@ -26,7 +26,7 @@
 					v-else-if="lyricSearching"
 					class="mx-auto blur-card"
 					max-width="344"
-					style="margin-top:32px;"
+					style="margin-top:64px;"
 					key="lyricSearchingcard"
 				>
 					<v-card-text class="text-center">
@@ -39,7 +39,7 @@
 					v-else
 					class="mx-auto blur-card"
 					max-width="344"
-					style="margin-top:32px;"
+					style="margin-top:64px;"
 					key="lrc_noLyrics"
 				>
 					<v-card-text class="text-center">

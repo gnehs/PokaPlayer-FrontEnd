@@ -8,9 +8,9 @@
 				v-if="audio_queue.length>0"
 				:key="audio_index"
 			/>
-			<poka-header v-else key="2" />
+			<poka-header v-if="!audio_queue.length>0" key="2" />
 		</transition>
-		<transition name="slide-left" mode="out-in">
+		<transition name="slide-right" mode="out-in">
 			<poka-parse-songs
 				v-if="audio_queue.length>0"
 				:data="audio_queue"
@@ -27,7 +27,13 @@
 				</template>
 			</poka-parse-songs>
 
-			<v-card v-else class="mx-auto blur-card" max-width="344" style="margin-top:32px;" key="card">
+			<v-card
+				v-if="!audio_queue.length>0"
+				class="mx-auto blur-card"
+				max-width="344"
+				style="margin-top:64px;"
+				key="card"
+			>
 				<v-card-text class="text-center">
 					<v-icon class="display-4 material-icons-outlined">queue_music</v-icon>
 					<p class="headline text--primary">{{$t('app_waitForPlay')}}</p>
