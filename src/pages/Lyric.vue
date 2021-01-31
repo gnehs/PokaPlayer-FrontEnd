@@ -50,21 +50,24 @@
 				</v-card>
 			</transition>
 		</div>
-		<v-fab-transition>
-			<v-btn
-				color="primary"
-				fab
-				large
-				dark
-				bottom
-				right
-				fixed
-				style="bottom: calc(16px + 69px);"
-				@click="openLyricDialog"
-			>
+
+		<v-speed-dial v-model="fab" right open-on-hover style="bottom: calc(16px + 69px);" fixed>
+			<template v-slot:activator>
+				<v-btn v-model="fab" color="primary" dark fab>
+					<v-icon v-if="fab">mdi-close</v-icon>
+					<v-icon v-else>more_horiz</v-icon>
+				</v-btn>
+			</template>
+			<v-btn fab dark small color="green" @click="openLyricDialog">
 				<v-icon>search</v-icon>
 			</v-btn>
-		</v-fab-transition>
+			<v-btn fab dark small color="indigo" @click="editLyric">
+				<v-icon>mdi-pencil</v-icon>
+			</v-btn>
+			<v-btn fab dark small color="cyan" @click="lyric_theme_dialog=true">
+				<v-icon>mdi-palette</v-icon>
+			</v-btn>
+		</v-speed-dial>
 		<v-dialog v-model="showLyricDialog" max-width="420">
 			<v-card>
 				<v-card-title class="headline">{{$t("lrc_search")}}</v-card-title>
@@ -117,9 +120,61 @@
 				</v-card-text>
 				<v-divider></v-divider>
 				<v-card-actions>
-					<v-btn text @click="editLyric">編輯目前的歌詞</v-btn>
 					<v-spacer></v-spacer>
 					<v-btn text @click="showLyricDialog = false">{{$t('cancel')}}</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
+		<v-dialog v-model="lyric_theme_dialog" max-width="300">
+			<v-card>
+				<v-card-title class="headline">{{$t('settingInterface.customize.lyric._')}}</v-card-title>
+				<v-card-text>
+					<div class="poka list">
+						<div class="item" @click="setLyricTheme('bigtext')" v-ripple>
+							<div class="content">
+								<v-avatar size="24px" item>
+									<v-icon>palette</v-icon>
+								</v-avatar>
+								<div class="header">
+									<div class="head">Big text</div>
+								</div>
+							</div>
+						</div>
+						<div class="item" @click="setLyricTheme('default')" v-ripple>
+							<div class="content">
+								<v-avatar size="24px" item>
+									<v-icon>palette</v-icon>
+								</v-avatar>
+								<div class="header">
+									<div class="head">Default</div>
+								</div>
+							</div>
+						</div>
+						<div class="item" @click="setLyricTheme('spacing')" v-ripple>
+							<div class="content">
+								<v-avatar size="24px" item>
+									<v-icon>palette</v-icon>
+								</v-avatar>
+								<div class="header">
+									<div class="head">Spacing</div>
+								</div>
+							</div>
+						</div>
+						<div class="item" @click="setLyricTheme('underline')" v-ripple>
+							<div class="content">
+								<v-avatar size="24px" item>
+									<v-icon>palette</v-icon>
+								</v-avatar>
+								<div class="header">
+									<div class="head">Underline</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn text @click="lyric_theme_dialog = false">{{$t('cancel')}}</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
@@ -274,6 +329,8 @@ export default {
 		audio_artist: null,
 		audio_cover: null,
 		showLyricDialog: false,
+		lyric_theme_dialog: false,
+		fab: false,
 		lyric: [],
 		lyric_raw: null,
 		lyricFocus: 0,
@@ -284,7 +341,7 @@ export default {
 		Lyric_Update: null,
 		lyric_color: null,
 		lyric_shadow_color: null,
-		lyric_theme: _setting('lyricTheme')
+		lyric_theme: _setting('lyricTheme'),
 	}),
 	created() {
 		this.updateLyric();
@@ -471,7 +528,17 @@ export default {
 				});
 				this.$snackbar(i18n.t('lrc_saved'));
 			}
-		}
+		},
+		setLyricTheme(lyricTheme) {
+			window._setting("lyricTheme", lyricTheme);
+			this.lyric_theme_dialog = false
+			this.lyric_theme = lyricTheme
+			this.axios({
+				method: "post",
+				url: _setting(`server`) + "/setting/",
+				data: { n: { lyricTheme } }
+			});
+		},
 	}
 };
 </script>
