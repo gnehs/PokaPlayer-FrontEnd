@@ -65,7 +65,7 @@ export default {
 			font-weight: bold
 		>.artist-name
 			font-size: 1.5em
-			line-height:  1.5em
+			line-height: 1.5em
 		>.grow
 			flex: 1
 		>.footer
