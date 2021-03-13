@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "aplayer": "^1.10.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "colorthief": "^2.3.2",
     "pug": "^3.0.1",
     "pug-plain-loader": "^1.0.0",
