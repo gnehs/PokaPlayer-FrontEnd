@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-app-bar v-if="!$vuetify.breakpoint.mdAndUp" app>
+		<v-app-bar v-if="!$vuetify.breakpoint.mdAndUp" app class="v-sheet--outlined">
 			<v-app-bar-nav-icon @click.stop="toggleMenu()" />
 			<v-toolbar-title style="width: 300px">
 				<span>PokaPlayer</span>
