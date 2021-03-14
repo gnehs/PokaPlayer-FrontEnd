@@ -22,7 +22,7 @@
 				<h1>PokaPlayer</h1>
 			</div>
 			<v-divider v-show="$vuetify.breakpoint.lgAndUp" style="margin: 0px 0;" />
-			<v-list nav dense>
+			<v-list dense shaped>
 				<v-list-item-group color="primary">
 					<template v-for="item in items">
 						<v-divider v-if="item.divider" :key="item.text" style="margin: 4px 0;" />
