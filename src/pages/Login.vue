@@ -147,6 +147,7 @@
 		background: var(--bg, rgb(242, 242, 242));
 		background-size: cover;
 		background-position: center;
+		--bg-color: #fff;
 		.logo {
 			padding: 8px 12px;
 			width: 100%;
@@ -156,16 +157,16 @@
 		}
 		.login-form,
 		.footer {
-			background: rgb(255, 255, 255);
-			backdrop-filter: blur(4px);
+			background: var(--bg-color);
 		}
 		.login-form {
 			flex: 1;
 			border-radius: 48px 0 0 0;
 			.form-container {
-				max-width: 350px;
+				width: 350px;
 				margin: 0 auto;
-				margin-top: 72px;
+				padding: 72px 32px;
+				border-radius: 32px;
 				h1 {
 					text-align: center;
 					margin: 24px 0;
@@ -189,21 +190,25 @@
 		}
 	}
 
-	@media (max-width: 1200px) {
-		.login-row {
-			display: block;
+	@media (min-width: 768px) {
+		.login-container {
 			.login-form {
-				position: relative;
-				width: 100vw;
+				background: transparent;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				.form-container {
+					background: var(--bg-color);
+				}
+			}
+			.footer {
+				background: transparent;
 			}
 		}
 	}
 	@media (prefers-color-scheme: dark) {
 		.login-container {
-			.login-form,
-			.footer {
-				background: #282535;
-			}
+			--bg-color: #282535;
 		}
 	}
 </style>
