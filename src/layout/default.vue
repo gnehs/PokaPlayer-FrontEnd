@@ -440,6 +440,18 @@ nav
 			height: 64px
 			justify-content: flex-end
 			padding-right: 8px
+@media screen and (min-width: 768px)
+	.bottom-player .song-info .left
+		.song-title
+			margin-left: calc(var(--cover-size) * 1.5 + 16px)
+		.cover
+			position: absolute
+			bottom: 4px
+			left: 0px
+			transform: scale(1.5)
+			transform-origin: left bottom
+			z-index: 3
+			box-shadow: 0 0 15px #00000033
 @media screen and (max-width: 600px)
 	.bottom-player
 		.song-info
