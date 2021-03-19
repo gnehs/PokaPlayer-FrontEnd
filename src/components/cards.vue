@@ -17,8 +17,8 @@ export default {
 	--text-color: #000
 	display: flex
 	flex-wrap: wrap
-	max-width: calc(100% + 4px * 2)
-	width: calc(100% + 4px * 2)
+	max-width: calc(100% + 8px * 2)
+	width: calc(100% + 8px * 2)
 	margin: -8px
 	.card
 		--size: calc(16.6% - 8px)
