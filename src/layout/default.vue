@@ -373,6 +373,8 @@ nav
 	z-index: 99
 	position: fixed
 	background-color: rgba(245, 245, 245, 0.7)
+
+	--cover-size: 56px
 	@media (prefers-color-scheme: dark)
 		&
 			background-color: rgba(47, 43, 62, 0.7)
@@ -402,14 +404,12 @@ nav
 					font-weight: bold
 			.cover
 				margin: 0 8px
-				--cover-size: 56px
 				height: var(--cover-size)
 				min-width: var(--cover-size)
-				position: relative
 				background-size: cover
 				background-position: center
 				background-position: center
-				border-radius: 4px
+				border-radius: 8px
 				overflow: hidden
 				img
 					transition: all .6s cubic-bezier(0.55, 0, 0.1, 1)

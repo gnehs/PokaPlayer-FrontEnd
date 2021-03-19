@@ -64,7 +64,7 @@ export default {
 			height: 0
 			padding-bottom: 100%
 			background-size: cover
-			border-radius: .8em
+			border-radius: 16px
 			box-shadow: 0 0.4px 0.3px rgba(0, 0, 0, 0.008),0 1.1px 0.8px rgba(0, 0, 0, 0.012),0 2.2px 1.5px rgba(0, 0, 0, 0.015),0 4.2px 2.7px rgba(0, 0, 0, 0.018),0 7.8px 5px rgba(0, 0, 0, 0.022),0 12px 12px rgba(0, 0, 0, 0.03)
 			transition: all .2s
 			will-change: box-shadow, transform, filter

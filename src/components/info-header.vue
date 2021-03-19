@@ -46,7 +46,7 @@ export default {
 		flex-direction: column
 		background-size: cover
 		background-position: center
-		border-radius: .8em
+		border-radius: 16px
 		box-shadow: 0 10px 15px #0000002e
 	&>.info-data
 		flex: 1

@@ -210,7 +210,7 @@
 	padding: 16px 0
 	.moreDialog-cover
 		background: #555
-		border-radius: 4px
+		border-radius: 16px
 		margin-bottom: 8px
 		box-shadow: 0 0.8px 1.9px rgba(0, 0, 0, 0.02),0 2.3px 4.5px rgba(0, 0, 0, 0.028),0 4.8px 8.5px rgba(0, 0, 0, 0.035),0 9.2px 15.2px rgba(0, 0, 0, 0.042),0 16.9px 28.4px rgba(0, 0, 0, 0.05),0 26px 68px rgba(0, 0, 0, 0.07)
 	.head

@@ -18,7 +18,7 @@
 	position: relative
 	margin: 16px 2px
 	padding: 24px 32px
-	border-radius: 8px
+	border-radius: 16px
 	background-size: 240px
 	background-position: right
 	background-repeat: no-repeat
