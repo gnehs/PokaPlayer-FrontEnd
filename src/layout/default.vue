@@ -22,22 +22,19 @@
 				<h1>PokaPlayer</h1>
 			</div>
 			<v-divider v-show="$vuetify.breakpoint.lgAndUp" style="margin: 0px 0;" />
-			<v-list dense shaped>
-				<v-list-item-group color="primary">
-					<template v-for="item in items">
-						<v-divider v-if="item.divider" :key="item.text" style="margin: 4px 0;" />
-						<v-list-item v-else :key="item.text" :to="item.to" link>
-							<v-list-item-action>
-								<v-icon class="material-icons-outlined" v-text="item.icon"></v-icon>
-								<v-icon class="material-icons" v-text="item.icon"></v-icon>
-							</v-list-item-action>
-							<v-list-item-content>
-								<v-list-item-title>{{ item.text }}</v-list-item-title>
-							</v-list-item-content>
-						</v-list-item>
-					</template>
-				</v-list-item-group>
-			</v-list>
+			<div class="poka list">
+				<template v-for="item in items">
+					<v-divider v-if="item.divider" :key="item.text" style="margin: 4px 0;" />
+					<router-link class="item" v-else v-ripple :to="item.to" :key="item.text" active-class="active">
+						<div class="content">
+							<v-icon class="material-icons-outlined" color="primary" v-text="item.icon" />
+							<div class="header" style="margin-left: 16px">
+								<div class="head">{{ item.text }}</div>
+							</div>
+						</div>
+					</router-link>
+				</template>
+			</div>
 		</v-navigation-drawer>
 		<v-main>
 			<div class="router-view">
@@ -127,8 +124,7 @@
 		</div>
 	</div>
 </template>
-<script>
-import Vue from "vue";
+<script> 
 export default {
 	name: "App",
 	data: () => ({
@@ -182,7 +178,6 @@ export default {
 			next();
 			this.$nextTick(() => {
 				let currentRouteName = this.$router.history.current.name;
-				let el = document.querySelector("main");
 				if (el && currentRouteName in this.scrollPositions) {
 					let positions = this.scrollPositions[currentRouteName];
 					setTimeout(() => (el.scrollTop = positions), 100);
