@@ -27,7 +27,11 @@
 					<v-divider v-if="item.divider" :key="item.text" style="margin: 4px 0;" />
 					<router-link class="item" v-else v-ripple :to="item.to" :key="item.text" active-class="active">
 						<div class="content">
-							<v-icon class="material-icons-outlined" color="primary" v-text="item.icon" />
+							<v-icon
+								class="material-icons-outlined"
+								:color="$vuetify.theme.isDark?'#FFF':'primary'"
+								v-text="item.icon"
+							/>
 							<div class="header" style="margin-left: 16px">
 								<div class="head">{{ item.text }}</div>
 							</div>
@@ -342,13 +346,9 @@ main
 	font-family: var(--product-font)
 
 nav
-	.v-list
-		.v-list-item.theme--dark
-			&.v-list-item--active::before
-				opacity: 1
-				background-color: var(--v-primary-base) !important
-			.v-list-item__action,.v-list-item__content
-				z-index: 1
+	.poka.list
+		.item,.item.active:before
+			border-radius: 0
 
 @media (min-width: 576px)
 	.router-view
