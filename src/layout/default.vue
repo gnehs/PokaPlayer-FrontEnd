@@ -7,9 +7,9 @@
 			style="box-shadow: 0px 0px 0px .5px rgb(0 0 0 / 20%)"
 		>
 			<v-app-bar-nav-icon @click.stop="toggleMenu()" />
-			<v-toolbar-title style="width: 300px">
-				<span>PokaPlayer</span>
-			</v-toolbar-title>
+			<div class="poka-drawer-logo">
+				<h1>PokaPlayer</h1>
+			</div>
 			<v-spacer />
 			<v-btn icon @click="switch_audio_order">
 				<v-icon class="material-icons-outlined" v-if="audio_order==='list'">repeat</v-icon>
@@ -23,10 +23,10 @@
 			:mobile-breakpoint="960"
 			app
 		>
-			<div class="poka-drawer-logo" v-show="$vuetify.breakpoint.lgAndUp">
+			<div class="poka-drawer-logo">
 				<h1>PokaPlayer</h1>
 			</div>
-			<v-divider v-show="$vuetify.breakpoint.lgAndUp" style="margin: 0px 0;" />
+			<v-divider style="margin: 0px 0;" />
 			<div class="poka list">
 				<template v-for="item in items">
 					<v-divider v-if="item.divider" :key="item.text" style="margin: 4px 0;" />
@@ -347,8 +347,11 @@ main
 .v-navigation-drawer:not(.v-navigation-drawer--is-mobile)
 	height: calc(var(--vh,1vh) * 100 - 69px) !important
 .poka-drawer-logo
-	padding: 8px 16px
+	padding: 0 16px
 	font-family: var(--product-font)
+	h1
+		font-size: 24px
+		line-height: 56px
 
 nav
 	.poka.list
