@@ -156,54 +156,46 @@ export default {
 		},
 		update() {
 			window._player.pause();
-			this.axios.get("/upgrade").then(e => {
-				this.showUpdateingDialog = true;
-				this.updateLog += window.i18n.t("settings_update_update2", { version: this.newVersion.tag }) + "\n";
-				if (e.data == "upgrade") {
-					setTimeout(() => {
-						alert("更新完成！");
-						location.reload();
-					}, 30 * 1000);
-				} else if (e.data == "socket") {
-					_socket.emit("login", {
-						username: window._setting(`username`),
-						password: window._setting(`password`)
-					});
-					_socket.emit("update");
+			this.showUpdateingDialog = true;
+			this.updateLog += window.i18n.t("settings_update_update2", { version: this.newVersion.tag }) + "\n";
 
-					window._socket.on("Permission Denied Desu", () => {
-						this.showUpdateingDialog = false;
-						alert("Permission Denied");
+			_socket.emit("login", {
+				username: window._setting(`username`),
+				password: window._setting(`password`)
+			});
+			_socket.emit("update");
+
+			window._socket.on("Permission Denied Desu", () => {
+				this.showUpdateingDialog = false;
+				alert("Permission Denied");
+			});
+			window._socket.on("init", () => {
+				this.updateLog += window.i18n.t("settings_update_initializing") + "\n";
+			});
+			window._socket.on("git", data => {
+				this.updateLog +=
+					{
+						fetch: window.i18n.t("settings_update_git_fetch"),
+						reset: window.i18n.t("settings_update_git_reset"),
+						api: window.i18n.t("settings_update_git_api")
+					}[data] + "\n";
+			});
+			window._socket.on("restart", () => {
+				this.updateLog +=
+					window.i18n.t("settings_restarting") + "...\n";
+			});
+			window._socket.on("hello", () => {
+				this.showRestartCompleted = true;
+			});
+			window._socket.on("err", async data => {
+				const delay = interval => {
+					return new Promise(resolve => {
+						setTimeout(resolve, interval);
 					});
-					window._socket.on("init", () => {
-						this.updateLog += window.i18n.t("settings_update_initializing") + "\n";
-					});
-					window._socket.on("git", data => {
-						this.updateLog +=
-							{
-								fetch: window.i18n.t("settings_update_git_fetch"),
-								reset: window.i18n.t("settings_update_git_reset"),
-								api: window.i18n.t("settings_update_git_api")
-							}[data] + "\n";
-					});
-					window._socket.on("restart", () => {
-						this.updateLog +=
-							window.i18n.t("settings_restarting") + "...\n";
-					});
-					window._socket.on("hello", () => {
-						this.showRestartCompleted = true;
-					});
-					window._socket.on("err", async data => {
-						const delay = interval => {
-							return new Promise(resolve => {
-								setTimeout(resolve, interval);
-							});
-						};
-						this.updateLog += `[ERROR] ${data}`;
-						await delay(1000);
-						this.showUpdateingDialog = false;
-					});
-				}
+				};
+				this.updateLog += `[ERROR] ${data}`;
+				await delay(1000);
+				this.showUpdateingDialog = false;
 			});
 		},
 		restart() {
