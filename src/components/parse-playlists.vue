@@ -10,7 +10,7 @@
 			<poka-card
 				v-if="type=='folder'"
 				:poka-icon="icon||'folder'"
-				:key="index"
+				:key="`/playlist/f/${encodeURIComponent(id)}`"
 				:to="`/playlist/f/${encodeURIComponent(id)}`"
 				:poka-title="name"
 				:poka-subtitle="$t(`source.${source}`)"
@@ -20,7 +20,7 @@
 			<poka-card
 				v-if="!type||type!='folder'"
 				:poka-icon="icon||'queue_music'"
-				:key="index"
+				:key="`/playlist/p/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
 				:to="`/playlist/p/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
 				:poka-bg="image||false"
 				:poka-title="name"

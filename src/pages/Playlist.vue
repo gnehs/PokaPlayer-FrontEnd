@@ -11,23 +11,36 @@
 <script>
 export default {
 	name: "Playlist",
+	watch: {
+		'$route.path': function (val, oldVal) {
+			this.fetchData();
+		}
+	},
 	created() {
-		let routerParams = this.$route.params.pathMatch, routerNames = this.$route.name
-		this.axios
-			.get(_setting(`server`) + `/pokaapi/playlists?rnd=${Math.floor(Math.random() * 9999999)}`)
-			.then(response => {
-				if (routerNames == 'PlaylistFolder') {
-					this.title = response.data.playlists.filter(x => x.id == routerParams)[0].name
-					this.data = response.data.playlists.filter(x => x.id == routerParams)[0].playlists
-				} else {
-					this.data = response.data.playlists;
-				}
-			});
+		this.fetchData();
 	},
 	data: () => ({
 		data: null,
+		rawData: null,
 		server: _setting(`server`),
 		title: i18n.t('playlist')
-	})
+	}),
+	methods: {
+		async fetchData() {
+			let routerParams = this.$route.params.pathMatch,
+				routerNames = this.$route.name
+			this.data = null
+			if (!this.rawData) {
+				this.rawData = (await this.axios(_setting(`server`) + `/pokaapi/playlists?rnd=${Math.floor(Math.random() * 9999999)}`)).data.playlists
+			}
+			if (routerNames == 'PlaylistFolder') {
+				this.title = this.rawData.filter(x => x.id == routerParams)[0].name
+				this.data = this.rawData.filter(x => x.id == routerParams)[0].playlists
+			} else {
+				this.title = i18n.t('playlist')
+				this.data = this.rawData;
+			}
+		}
+	},
 };
 </script>
