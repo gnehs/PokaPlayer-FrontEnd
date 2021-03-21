@@ -2,10 +2,12 @@
 	<div>
 		<!--隱私-->
 		<v-subheader>{{$t('settingPravicy.title')}}</v-subheader>
-		<v-alert text color="info" icon="analytics">
-			<h3 class="headline">{{$t('settingPravicy.notify.title')}}</h3>
-			<div>{{$t('settingPravicy.notify.body')}}</div>
-		</v-alert>
+		<v-card outlined>
+			<v-card-text>
+				<div class="headline text--primary">{{$t('settingPravicy.notify.title')}}</div>
+				<div>{{$t('settingPravicy.notify.body')}}</div>
+			</v-card-text>
+		</v-card>
 		<div class="poka list">
 			<div class="item" v-ripple @click="setDataRecord">
 				<div class="content">

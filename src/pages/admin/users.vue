@@ -125,7 +125,7 @@
 				style="bottom: calc(16px + 69px);"
 				@click="openCreateUserDialog"
 			>
-				<v-icon>mdi-account-plus</v-icon>
+				<v-icon class="material-icons-outlined">person_add</v-icon>
 			</v-btn>
 		</v-fab-transition>
 	</div>
