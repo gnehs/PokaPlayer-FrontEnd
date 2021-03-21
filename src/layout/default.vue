@@ -318,7 +318,7 @@ export default {
 			}
 			// add admin page
 			if (userProfile.data.role == 'admin') {
-				let debugItem = { icon: "admin_panel_settings", text: "Admin", to: "/admin" };
+				let debugItem = { icon: "admin_panel_settings", text: i18n.t("settingIndex.adminItems"), to: "/admin" };
 				if (!this.items.filter(x => x.text == 'Admin').length) {
 					this.items.push(debugItem);
 				}

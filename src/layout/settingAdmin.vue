@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<poka-header title="Admin" />
+		<poka-header :title="$t(`settingIndex.adminItems`)" />
 		<div class="chip-nav">
 			<router-link
 				class="chip-nav-item"
