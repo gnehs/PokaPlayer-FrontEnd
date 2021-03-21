@@ -28,8 +28,10 @@ import SettingNetwork from '@/pages/setting/network'
 import SettingInterface from '@/pages/setting/interface'
 import SettingUser from '@/pages/setting/user'
 import SettingPins from '@/pages/setting/pins'
+
 import AdminUsers from '@/pages/admin/users'
 import AdminSystem from '@/pages/admin/system'
+import AdminLog from '@/pages/admin/log'
 
 Vue.use(Router)
 
@@ -180,6 +182,10 @@ export default new Router({
 				path: '/admin/users',
 				name: 'SettingAdminUsers',
 				component: AdminUsers
+			}, {
+				path: '/admin/log',
+				name: 'AdminLog',
+				component: AdminLog
 			}]
 		},]
 	}, {

@@ -1,0 +1,75 @@
+<template>
+	<div>
+		<v-slide-y-reverse-transition>
+			<div class="poka list" v-if="logs.length">
+				<div class="item" v-ripple v-for="item of logs" :key="item._id">
+					<div class="content">
+						<v-icon
+							class="material-icons-outlined"
+							:color="$vuetify.theme.isDark?'#FFF':'primary'"
+							v-text="{user:'person',system:'dns'}[item.type]"
+						/>
+						<div class="header">
+							<div class="head t-ellipsis">
+								{{item.event}}
+								<span style="font-size: .7em;opacity: .7;font-weight: normal;">{{item.user}}</span>
+							</div>
+							<div class="t-ellipsis">{{item.discription}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</v-slide-y-reverse-transition>
+		<v-card
+			class="mx-auto blur-card"
+			max-width="344"
+			style="margin-top:32px;"
+			key="card"
+			v-if="!logs.length"
+		>
+			<v-card-text class="text-center">
+				<v-icon class="material-icons-outlined display-4">receipt_long</v-icon>
+				<p class="headline text--primary">There are no log(s) here.</p>
+			</v-card-text>
+		</v-card>
+		<v-fab-transition>
+			<v-btn
+				color="primary"
+				fab
+				large
+				dark
+				bottom
+				right
+				fixed
+				style="bottom: calc(16px + 69px);"
+				v-if="logs.length"
+				@click="clearLogs"
+			>
+				<v-icon class="material-icons-outlined">clear_all</v-icon>
+			</v-btn>
+		</v-fab-transition>
+	</div>
+</template>
+
+<script>
+export default {
+	name: "AdminLogs",
+	data: () => ({
+		logs: []
+	}),
+	created() {
+		this.getLogs()
+	},
+	methods: {
+		async getLogs() {
+			let { data: result } = await this.axios(`${_setting('server')}/pokaapi/v2/log?${new Date()}`)
+			this.logs = result
+		},
+		async clearLogs() {
+			await this.axios.post(`${_setting('server')}/pokaapi/v2/log/clear`)
+			this.getLogs()
+
+		}
+	}
+}
+</script>

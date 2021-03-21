@@ -27,6 +27,7 @@ export default {
 		adminItems: [
 			{ text: 'settings_systemAndUpdate', icon: 'system_update', to: "/admin/system" },
 			{ text: 'settingUserManagement.title', icon: 'person', to: "/admin/users" },
+			{ text: 'adminLog.title', icon: 'receipt_long', to: "/admin/log" },
 		]
 	}),
 	created() {

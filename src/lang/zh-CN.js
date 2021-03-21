@@ -308,6 +308,9 @@ export default {
 		title: "钉选管理",
 		deleteConfirm: '您确定要取消钉选此项目吗？'
 	},
+	adminLog: {
+		title: '日誌'
+	},
 	"source": {
 		"DSM": "DSM",
 		"poka": "PokaPlayer",

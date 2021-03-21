@@ -305,6 +305,9 @@ export default {
 		title: "Pins management",
 		deleteConfirm: 'Are you sure want to unpin?'
 	},
+	adminLog: {
+		title: 'Log'
+	},
 	"source": {
 		"DSM": "DSM",
 		"poka": "PokaPlayer",
