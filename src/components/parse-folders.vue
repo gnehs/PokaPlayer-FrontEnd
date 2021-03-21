@@ -2,15 +2,17 @@
 	<div class="poka two list">
 		<router-link
 			class="item"
-			v-for="{name, image, id, source} in data"
+			v-for="{name, id, source} in data"
 			:key="id"
 			:to="`/folder/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
 			v-ripple
 		>
 			<div class="content">
-				<v-avatar size="42px" item>
-					<v-icon>folder</v-icon>
-				</v-avatar>
+				<v-icon
+					class="material-icons-outlined"
+					:color="$vuetify.theme.isDark?'#FFF':'primary'"
+					v-text="'folder'"
+				/>
 				<div class="header">
 					<div class="head t-ellipsis">{{name}}</div>
 					<div class="t-ellipsis">{{$t(`source.${source}`)}}</div>

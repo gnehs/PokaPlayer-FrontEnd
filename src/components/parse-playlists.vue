@@ -6,7 +6,7 @@
 			to="/playlist/"
 			:poka-title="$t('back')"
 		/>
-		<template v-for="({name, image, id, source, type, icon}, index) in data">
+		<template v-for="{name, image, id, source, type, icon} in data">
 			<poka-card
 				v-if="type=='folder'"
 				:poka-icon="icon||'folder'"
