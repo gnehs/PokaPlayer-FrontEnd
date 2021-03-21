@@ -2,27 +2,31 @@
 	<div>
 		<poka-header :blurbg="true" :bg="cover||null" />
 		<info-header :title="name" :subtitle="artist" :cover="cover" :songs="songs&&songs.length">
-			<pin-button
-				v-if="songs"
-				:source="$route.params.source"
-				:id="$route.params.id"
-				type="album"
-				:cover="cover"
-				:artist="artist"
-				:name="name"
-				btn-type="icon-button"
-			/>
+			<v-fade-transition>
+				<pin-button
+					v-if="songs"
+					:source="$route.params.source"
+					:id="$route.params.id"
+					type="album"
+					:cover="cover"
+					:artist="artist"
+					:name="name"
+					btn-type="icon-button"
+				/>
+			</v-fade-transition>
 		</info-header>
 		<v-divider v-if="name" />
-		<poka-parse-songs style="margin: 16px 0;" :data="songs" v-if="songs" />
-		<poka-loader v-if="!songs" style="margin: 20px 0;" />
-		<v-divider v-if="artistAlbums" />
-		<h1
-			v-if="artistAlbums"
-			class="title"
-			style="padding-left: 0.5em;margin-top: 8px;"
-		>{{$t('albumsOfSameArtist')}}</h1>
-		<poka-parse-albums v-if="artistAlbums" :data="artistAlbums" />
+		<poka-loader v-if="!songs" style="margin: 64px 0;" />
+		<v-slide-y-reverse-transition>
+			<poka-parse-songs style="margin: 16px 0;" :data="songs" v-if="songs" />
+		</v-slide-y-reverse-transition>
+		<v-slide-y-reverse-transition>
+			<div v-if="artistAlbums">
+				<v-divider />
+				<h1 class="title" style="padding-left: 0.5em;margin-top: 8px;">{{$t('albumsOfSameArtist')}}</h1>
+				<poka-parse-albums :data="artistAlbums" />
+			</div>
+		</v-slide-y-reverse-transition>
 	</div>
 </template>
 
@@ -51,10 +55,11 @@ export default {
 			//取得專輯資料
 			let albumSource = this.$route.params.source;
 			let albumID = this.$route.params.id;
-
+			console.log(this.$route.query)
 			this.songs = null
-			this.name = '█'.repeat(10)
-			this.artist = '█'.repeat(10)
+			this.name = this.$route.query.name || '█'.repeat(10)
+			this.artist = this.$route.query.artist || '█'.repeat(10)
+			this.cover = Boolean(this.$route.query.cover) ? (this.server + this.$route.query.cover) : null
 			await this.axios
 				.get(`${this.server}/pokaapi/album?moduleName=${encodeURIComponent(albumSource)}&id=${encodeURIComponent(albumID)}`)
 				.then(response => {
@@ -72,7 +77,6 @@ export default {
 				this.artistAlbums = response.data.albums.filter(x => x.id != albumID); //篩選掉這張專輯
 				if (this.artistAlbums.length < 1) this.artistAlbums = null;
 			});
-
 		}
 	}
 };

@@ -6,7 +6,9 @@
 			<div class="artist-name" :title="subtitle">{{subtitle}}</div>
 			<div class="grow"></div>
 			<div class="footer">
-				<div class="time" v-if="songs">{{$t("album_total", { songs: songs })}}</div>
+				<v-fade-transition>
+					<div class="time" v-if="songs" :key="songs">{{$t("album_total", { songs: songs })}}</div>
+				</v-fade-transition>
 				<div class="actions">
 					<slot />
 				</div>
