@@ -29,7 +29,7 @@
 		>
 			<v-card-text class="text-center">
 				<v-icon class="material-icons-outlined display-4">receipt_long</v-icon>
-				<p class="headline text--primary">There are no log(s) here.</p>
+				<p class="headline text--primary">No logs available</p>
 			</v-card-text>
 		</v-card>
 		<v-fab-transition>
