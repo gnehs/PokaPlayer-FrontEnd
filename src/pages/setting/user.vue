@@ -196,7 +196,7 @@ export default {
 	}),
 	created() {
 		//使用者
-		this.axios.get(_setting(`server`) + "/profile/").then(response => { this.userdata = response.data; });
+		this.axios.get(_setting(`server`) + "/pokaapi/v2/user/").then(response => { this.userdata = response.data; });
 		//隱私
 		this.getDataRecordCount()
 	},
@@ -213,7 +213,7 @@ export default {
 			if (this.temp.changeNameValue == "" || !this.temp.changeNameValue)
 				return this.$snackbar(window.i18n.t("settingUser.changeName.result.error"));
 			this.axios
-				.post(_setting(`server`) + "/changeName/", { n: this.temp.changeNameValue })
+				.post(_setting(`server`) + "/pokaapi/v2/user/name/", { n: this.temp.changeNameValue })
 				.then(response => {
 					if (response.data.success) {
 						this.userdata.name = this.temp.changeNameValue;
@@ -227,7 +227,7 @@ export default {
 			if (this.temp.changeUsernameValue == "" || !this.temp.changeUsernameValue)
 				return this.$snackbar(window.i18n.t("settingUser.changeUsername.result.error"));
 			this.axios
-				.post(_setting(`server`) + "/changeUsername/", { n: this.temp.changeUsernameValue })
+				.post(_setting(`server`) + "/pokaapi/v2/user/username/", { n: this.temp.changeUsernameValue })
 				.then(response => {
 					if (response.data.success) {
 						this.userdata.username = this.temp.changeUsernameValue;
@@ -251,7 +251,7 @@ export default {
 			if (this.temp.changePassword === this.temp.changePasswordold)
 				return this.$snackbar(window.i18n.t("settingUser.changePassword.result.same"));
 			this.axios
-				.post(_setting(`server`) + "/changePassword/", {
+				.post(_setting(`server`) + "/pokaapi/v2/user/password/", {
 					oldpassword: this.temp.changePasswordold,
 					password: this.temp.changePassword
 				})
@@ -276,7 +276,7 @@ export default {
 			this.dataRecord = !this.dataRecord
 			this.axios({
 				method: "post",
-				url: _setting(`server`) + "/setting/",
+				url: _setting(`server`) + "/pokaapi/v2/user/setting/",
 				data: { dataRecord: this.dataRecord }
 			});
 		},

@@ -535,7 +535,7 @@ export default {
 			this.lyric_theme = lyricTheme
 			this.axios({
 				method: "post",
-				url: _setting(`server`) + "/setting/",
+				url: _setting(`server`) + "/pokaapi/v2/user/setting/",
 				data: { n: { lyricTheme } }
 			});
 		},

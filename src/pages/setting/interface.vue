@@ -378,7 +378,7 @@ export default {
 			//同步設定
 			this.axios({
 				method: "post",
-				url: _setting(`server`) + "/setting/",
+				url: _setting(`server`) + "/pokaapi/v2/user/setting/",
 				data: { n: { headerBgSource: bg } }
 			});
 		},
@@ -398,7 +398,7 @@ export default {
 			let cssVariable = window._setting('cssVariable')
 			this.axios({
 				method: "post",
-				url: _setting(`server`) + "/setting/",
+				url: _setting(`server`) + "/pokaapi/v2/user/setting/",
 				data: { n: { cssVariable } }
 			});
 
@@ -420,7 +420,7 @@ export default {
 			let theme = window._setting('theme')
 			this.axios({
 				method: "post",
-				url: _setting(`server`) + "/setting/",
+				url: _setting(`server`) + "/pokaapi/v2/user/setting/",
 				data: { n: { theme } }
 			});
 		},
@@ -432,7 +432,7 @@ export default {
 			//同步設定
 			this.axios({
 				method: "post",
-				url: _setting(`server`) + "/setting/",
+				url: _setting(`server`) + "/pokaapi/v2/user/setting/",
 				data: { n: { lang } }
 			});
 		},
@@ -441,7 +441,7 @@ export default {
 			this.lyric_theme_dialog = false
 			this.axios({
 				method: "post",
-				url: _setting(`server`) + "/setting/",
+				url: _setting(`server`) + "/pokaapi/v2/user/setting/",
 				data: { n: { lyricTheme } }
 			});
 		},
@@ -456,7 +456,7 @@ export default {
 			n[settingkey] = value
 			this.axios({
 				method: "post",
-				url: _setting(`server`) + "/setting/",
+				url: _setting(`server`) + "/pokaapi/v2/user/setting/",
 				data: { n }
 			});
 		}

@@ -76,7 +76,7 @@ export default {
 				//同步設定
 				this.axios({
 					method: "post",
-					url: _setting(`server`) + "/setting/",
+					url: _setting(`server`) + "/pokaapi/v2/user/setting/",
 					data: { n: { audioQuality: quality } }
 				});
 			} catch (e) {

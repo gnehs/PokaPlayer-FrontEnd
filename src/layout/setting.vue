@@ -41,7 +41,7 @@ export default {
 			// 沒登入滾回登入頁面
 			if (!response.data.login) return this.$router.push("/login");
 			// 標記為已登入
-			let userProfile = await this.axios.get(_setting(`server`) + "/profile/");
+			let userProfile = await this.axios.get(_setting(`server`) + "/pokaapi/v2/user/");
 			sessionStorage.setItem("login", JSON.stringify(userProfile.data));
 			// sync settings
 			let settings = JSON.parse(userProfile.data.settings)

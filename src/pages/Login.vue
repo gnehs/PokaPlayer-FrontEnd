@@ -270,7 +270,7 @@ export default {
 				_setting(`server`, this.server);
 				// 同步設定
 				let settingReq = (await this.axios(
-					this.server + "/setting/"
+					this.server + "/pokaapi/v2/user/setting/"
 				)).data;
 				for (let i of Object.keys(settingReq.settings)) {
 					_setting(i, settingReq.settings[i]);
