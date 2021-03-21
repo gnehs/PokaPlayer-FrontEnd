@@ -5,7 +5,7 @@
 
 		<v-btn
 			outlined
-			to="/settings/system?update=true"
+			to="/admin/system?update=true"
 			color="white"
 			dark
 		>{{$t('settings_update_go2UpdatePage')}}</v-btn>

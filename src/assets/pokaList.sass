@@ -23,6 +23,8 @@
 			overflow: hidden
 			display: flex
 			align-items: center
+			.v-icon + .header
+				margin-left: 16px
 			.header
 				flex: 1
 				overflow: hidden
@@ -31,6 +33,11 @@
 					font-size: 1rem
 					line-height: 1.5rem
 					opacity: .999
+					color: #000
+
+					@media (prefers-color-scheme: dark) 
+						&
+							color: #FFF
 				>:not(.head)
 					opacity: .7
 		.action

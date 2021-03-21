@@ -1,11 +1,11 @@
 <template>
 	<div>
-		<poka-header :title="$t('settings')" />
+		<poka-header title="Admin" />
 		<div class="chip-nav">
 			<router-link
 				class="chip-nav-item"
 				:class="{active:$route.path==item.to}"
-				v-for="item in items"
+				v-for="item in adminItems"
 				:key="item.to"
 				:to="item.to"
 				v-ripple
@@ -24,15 +24,14 @@ export default {
 	name: "App",
 	data: () => ({
 		settings: { darkMode: window._setting("darkMode") },
-		items: [
-			{ text: 'settings_network', icon: 'wifi', to: "/settings/network" },
-			{ text: 'settingInterface._', icon: 'layers', to: "/settings/interface" },
-			{ text: 'settingUser.title', icon: 'person', to: "/settings/user" },
-			{ text: 'settingPins.title', icon: 'push_pin', to: "/settings/pins" },
-		],
+		adminItems: [
+			{ text: 'settings_systemAndUpdate', icon: 'system_update', to: "/admin/system" },
+			{ text: 'settingUserManagement.title', icon: 'person', to: "/admin/users" },
+		]
 	}),
 	created() {
 		this.getStatus();
+		this.isAdmin = JSON.parse(sessionStorage.getItem("login")).role == 'admin' || false
 	},
 	methods: {
 		async getStatus() {

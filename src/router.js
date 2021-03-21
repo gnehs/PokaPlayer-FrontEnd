@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import defaultLayout from '@/layout/default'
 import emptyLayout from '@/layout/empty'
 import settingLayout from '@/layout/setting'
+import adminLayout from '@/layout/settingAdmin'
 
 import Album from '@/pages/Album'
 import AlbumSongs from '@/pages/AlbumSongs'
@@ -25,10 +26,10 @@ import LyricEdit from '@/pages/LyricEdit'
 import Search from '@/pages/Search'
 import SettingNetwork from '@/pages/setting/network'
 import SettingInterface from '@/pages/setting/interface'
-import SettingSystem from '@/pages/setting/system'
 import SettingUser from '@/pages/setting/user'
 import SettingPins from '@/pages/setting/pins'
-import SettingAdminUsers from '@/pages/setting/admin/users'
+import AdminUsers from '@/pages/admin/users'
+import AdminSystem from '@/pages/admin/system'
 
 Vue.use(Router)
 
@@ -158,10 +159,6 @@ export default new Router({
 				name: 'SettingNetwork',
 				component: SettingNetwork
 			}, {
-				path: '/settings/system',
-				name: 'SettingSystem',
-				component: SettingSystem
-			}, {
 				path: '/settings/user',
 				name: 'SettingUser',
 				component: SettingUser
@@ -169,10 +166,20 @@ export default new Router({
 				path: '/settings/pins',
 				name: 'SettingPins',
 				component: SettingPins
+			}]
+		}, {
+			path: '/admin',
+			name: 'settingAdmin',
+			redirect: '/admin/users',
+			component: adminLayout,
+			children: [{
+				path: '/admin/system',
+				name: 'SettingSystem',
+				component: AdminSystem
 			}, {
-				path: '/settings/admin/users',
+				path: '/admin/users',
 				name: 'SettingAdminUsers',
-				component: SettingAdminUsers
+				component: AdminUsers
 			}]
 		},]
 	}, {

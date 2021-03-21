@@ -19,7 +19,6 @@
 		<v-navigation-drawer
 			v-model="drawer"
 			:clipped="$vuetify.breakpoint.mdAndUp"
-			:mini-variant="$vuetify.breakpoint.mdOnly"
 			:mobile-breakpoint="960"
 			app
 		>
@@ -37,7 +36,7 @@
 								:color="$vuetify.theme.isDark?'#FFF':'primary'"
 								v-text="item.icon"
 							/>
-							<div class="header" style="margin-left: 16px">
+							<div class="header">
 								<div class="head">{{ item.text }}</div>
 							</div>
 						</div>
@@ -316,6 +315,13 @@ export default {
 			let settings = JSON.parse(userProfile.data.settings)
 			for (let i of Object.keys(settings)) {
 				_setting(i, settings[i]);
+			}
+			// add admin page
+			if (userProfile.data.role == 'admin') {
+				let debugItem = { icon: "admin_panel_settings", text: "Admin", to: "/admin" };
+				if (!this.items.filter(x => x.text == 'Admin').length) {
+					this.items.push(debugItem);
+				}
 			}
 			// add debug page
 			if (response.data.debug) {

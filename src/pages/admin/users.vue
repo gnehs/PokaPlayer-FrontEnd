@@ -5,9 +5,11 @@
 			<div class="poka list" v-if="users">
 				<div class="item" v-ripple v-for="user in users" :key="user._id" @click="openUserDialog(user)">
 					<div class="content">
-						<v-avatar size="24px" item>
-							<v-icon>mdi-account</v-icon>
-						</v-avatar>
+						<v-icon
+							class="material-icons-outlined"
+							:color="$vuetify.theme.isDark?'#FFF':'primary'"
+							v-text="'person'"
+						/>
 						<div class="header">
 							<div class="head t-ellipsis">{{user.username}}</div>
 							<div class="t-ellipsis">{{$t('settingUserManagement.role.' + user.role)}}</div>
@@ -48,9 +50,11 @@
 						<v-divider style="margin: 4px 0;" />
 						<div class="item" v-ripple @click="changePassword">
 							<div class="content">
-								<v-avatar size="28px" item>
-									<v-icon>mdi-lock</v-icon>
-								</v-avatar>
+								<v-icon
+									class="material-icons-outlined"
+									:color="$vuetify.theme.isDark?'#FFF':'primary'"
+									v-text="'lock'"
+								/>
 								<div class="header">
 									<div class="head t-ellipsis">{{$t('settingUserManagement.dialog.changePassword')}}</div>
 								</div>
@@ -58,9 +62,11 @@
 						</div>
 						<div class="item" v-ripple @click="deleteUser">
 							<div class="content">
-								<v-avatar size="28px" item>
-									<v-icon>mdi-delete</v-icon>
-								</v-avatar>
+								<v-icon
+									class="material-icons-outlined"
+									:color="$vuetify.theme.isDark?'#FFF':'primary'"
+									v-text="'delete'"
+								/>
 								<div class="header">
 									<div class="head t-ellipsis">{{$t('settingUserManagement.dialog.deleteUser')}}</div>
 								</div>
