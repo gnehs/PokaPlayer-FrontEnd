@@ -44,10 +44,15 @@ export default {
 		compareVersion(local, remote) {
 			local = local.split(".").map(e => parseInt(e));
 			remote = remote.split(".").map(e => parseInt(e));
-			//版本號加權對比
-			local = local[0] * 1000 * 1000 + local[1] * 1000 + local[2];
-			remote = remote[0] * 1000 * 1000 + remote[1] * 1000 + remote[2];
-			return remote > local;
+			if (remote[0] > local[0]) {
+				return true
+			} else if (remote[1] > local[1]) {
+				return true
+			} else if (remote[2] > local[2]) {
+				return true
+			} else {
+				return false
+			}
 		},
 		async fetchNewVersion(currentVersion, isAdmin) {
 			let storageId = `poka-github-check-${new Date().toJSON().slice(0, 10).replace(/-/g, '/')}`
