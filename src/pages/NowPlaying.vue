@@ -99,7 +99,7 @@ export default {
 					//換歌ㄌ
 					this.bgSlideAnimation = this.audio_index > audio_index_temp ? 'slide-left' : 'slide-right'
 					this.$nextTick(() => {
-						let activeItem = document.querySelector(".poka.list > .active");
+						let activeItem = document.querySelector(".v-main .poka.list > .active");
 						if (activeItem) {
 							let sh = activeItem.offsetTop - document.querySelector("main").clientHeight * 0.5 + activeItem.clientHeight * 0.75;
 							sh += 69 //底部播放器
