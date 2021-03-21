@@ -21,7 +21,7 @@
 			<poka-parse-songs style="margin: 16px 0;" :data="songs" v-if="songs" />
 		</v-slide-y-reverse-transition>
 		<v-slide-y-reverse-transition>
-			<div v-if="artistAlbums">
+			<div v-if="artistAlbums&&songs">
 				<v-divider />
 				<h1 class="title" style="padding-left: 0.5em;margin-top: 8px;">{{$t('albumsOfSameArtist')}}</h1>
 				<poka-parse-albums :data="artistAlbums" />
