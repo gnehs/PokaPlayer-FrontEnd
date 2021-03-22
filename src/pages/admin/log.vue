@@ -10,11 +10,13 @@
 							v-text="{user:'person',system:'dns'}[item.type]"
 						/>
 						<div class="header">
-							<div class="head t-ellipsis">
-								{{item.event}}
-								<span style="font-size: .7em;opacity: .7;font-weight: normal;">{{item.user}}</span>
-							</div>
+							<div class="head t-ellipsis">{{item.event}}</div>
 							<div class="t-ellipsis">{{item.discription}}</div>
+						</div>
+						<div class="action" style="font-size: .7em;opacity: .7;text-align: right;">
+							{{item.user}}
+							<br />
+							{{new Date(item.time).toLocaleString()}}
 						</div>
 					</div>
 				</div>
@@ -32,7 +34,7 @@
 				<p class="headline text--primary">No logs available</p>
 			</v-card-text>
 		</v-card>
-		<v-fab-transition>
+		<!--<v-fab-transition>
 			<v-btn
 				color="primary"
 				fab
@@ -47,7 +49,7 @@
 			>
 				<v-icon class="material-icons-outlined">clear_all</v-icon>
 			</v-btn>
-		</v-fab-transition>
+		</v-fab-transition>-->
 	</div>
 </template>
 
@@ -62,8 +64,15 @@ export default {
 	},
 	methods: {
 		async getLogs() {
-			let { data: result } = await this.axios(`${_setting('server')}/pokaapi/v2/log?${new Date()}`)
-			this.logs = result
+			let { data: result } = await this.axios(`${_setting('server')}/pokaapi/v2/log?${Math.random().toString(36).substring(7)}`)
+			let { data: users } = await this.axios(`${_setting('server')}/pokaapi/v2/users/list?${Math.random().toString(36).substring(7)}`)
+
+			this.logs = result.map(x => {
+				for (let { _id, username } of users) {
+					x.discription = x.discription.replace(new RegExp(`{${_id}}`, "g"), username)
+				}
+				return x
+			})
 		},
 		async clearLogs() {
 			await this.axios.post(`${_setting('server')}/pokaapi/v2/log/clear`)
