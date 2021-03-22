@@ -97,6 +97,20 @@
 					<span class="time">{{audio_totalTime}}</span>
 				</div>
 				<div class="right" v-if="audio_artist">
+					<div
+						:style="`display: flex;padding: 20px 0;min-width: 160px;justify-content: flex-end;`"
+						@mouseover="audio_volume_hover=true"
+						@mouseleave="audio_volume_hover=false"
+					>
+						<v-fade-transition>
+							<v-slider v-show="audio_volume_hover" v-model="audio_volume" hide-details style thumb-label></v-slider>
+						</v-fade-transition>
+						<v-btn icon @click="audio_volume=0">
+							<v-icon class="material-icons-outlined" v-if="audio_volume==0">volume_off</v-icon>
+							<v-icon class="material-icons-outlined" v-else-if="audio_volume<50">volume_down</v-icon>
+							<v-icon class="material-icons-outlined" v-else>volume_up</v-icon>
+						</v-btn>
+					</div>
 					<v-btn icon @click="switch_audio_order">
 						<v-icon class="material-icons-outlined" v-if="audio_order==='list'">repeat</v-icon>
 						<v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
@@ -149,6 +163,8 @@ export default {
 		audio_title: "PokaPlayer",
 		audio_artist: null,
 		audio_order: _player.options.order,
+		audio_volume: 100,
+		audio_volume_hover: false,
 		scrollPositions: {},
 		settings: { darkMode: window._setting("darkMode") },
 		items: [
@@ -166,7 +182,11 @@ export default {
 			{ icon: 'settings', text: i18n.t("settings"), to: "/settings" },
 		],
 	}),
-
+	watch: {
+		audio_volume(val) {
+			_player.volume(val / 100, true)
+		}
+	},
 	destroyed() {
 		if (this.audio_interval) clearInterval(this.audio_interval);
 	},
