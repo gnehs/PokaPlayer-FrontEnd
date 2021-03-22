@@ -11,13 +11,14 @@
 <script>
 export default {
 	name: "Home",
-	created() {
-		this.axios.get(_setting(`server`) + "/pokaapi/home/").then(response => {
-			this.data = response.data;
+	async created() {
+		try {
+			let { data } = await this.axios.get(`${_setting('server')}/pokaapi/home/?${Math.random().toString(36).substring(7)}`)
+			this.data = data;
 			this.name = JSON.parse(sessionStorage.login).name
-		}).catch(e => {
+		} catch (e) {
 			this.$router.push('/login')
-		})
+		}
 	},
 	data: () => ({
 		data: null,
