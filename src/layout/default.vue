@@ -71,7 +71,9 @@
 			<div class="song-info">
 				<div class="left">
 					<div class="cover">
-						<img :src="audio_cover" />
+						<v-fade-transition mode="out-in">
+							<img :src="audio_cover" :key="audio_cover" />
+						</v-fade-transition>
 					</div>
 					<div class="song-title" @click="$router.push($route.path!='/now'?'/now':'/lyric')">
 						<div class="song-name">{{audio_title}}</div>
@@ -105,7 +107,7 @@
 						<v-fade-transition>
 							<v-slider v-show="audio_volume_hover" v-model="audio_volume" hide-details style thumb-label></v-slider>
 						</v-fade-transition>
-						<v-btn icon @click="audio_volume=0">
+						<v-btn icon @click="audio_volume?audio_volume=0:audio_volume=100">
 							<v-icon class="material-icons-outlined" v-if="audio_volume==0">volume_off</v-icon>
 							<v-icon class="material-icons-outlined" v-else-if="audio_volume<50">volume_down</v-icon>
 							<v-icon class="material-icons-outlined" v-else>volume_up</v-icon>
@@ -438,6 +440,7 @@ nav
 				background-size: cover
 				background-position: center
 				background-position: center
+				background-color: white
 				border-radius: 8px
 				overflow: hidden
 				img
