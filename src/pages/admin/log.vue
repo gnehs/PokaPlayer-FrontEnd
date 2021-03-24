@@ -2,7 +2,13 @@
 	<div>
 		<v-slide-y-reverse-transition>
 			<div class="poka list" v-if="logs.length">
-				<div class="item" v-ripple v-for="item of logs" :key="item._id">
+				<div
+					class="item log"
+					:class="[`level-${item.level}`]"
+					v-for="item of logs"
+					:key="item._id"
+					v-ripple
+				>
 					<div class="content">
 						<v-icon
 							class="material-icons-outlined"
@@ -13,8 +19,8 @@
 							<div class="head t-ellipsis">{{item.event}}</div>
 							<div class="t-ellipsis">{{item.discription}}</div>
 						</div>
-						<div class="action" style="font-size: .7em;opacity: .7;text-align: right;">
-							{{item.user}}
+						<div class="action" style="opacity: .7;text-align: right;">
+							<strong>{{item.user}}</strong>
 							<br />
 							{{new Date(item.time).toLocaleString()}}
 						</div>
@@ -51,8 +57,17 @@
 			</v-btn>
 		</v-fab-transition>-->
 	</div>
-</template>
-
+</template> 
+<style lang="sass">
+.poka.list
+	.item.log
+		font-family: 'Ubuntu Mono', monospace
+		&.level
+			&-warn
+				background-color: #ffff003b
+			&-error
+				background-color: #ff00003b
+</style>
 <script>
 export default {
 	name: "AdminLogs",
