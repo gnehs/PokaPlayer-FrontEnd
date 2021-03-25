@@ -52,21 +52,14 @@
 		</v-main>
 		<div class="bottom-player">
 			<div class="app-progress-bar">
-				<v-progress-linear
+				<v-slider
+					min="0"
+					max="100"
+					step="0.000001"
 					v-model="audio_currentTimePercent"
-					:buffer-value="audio_bufferPercent"
-					color="primary"
-				></v-progress-linear>
-				<label class="pure-material-slider">
-					<input
-						type="range"
-						min="0"
-						max="100"
-						step="0.000001"
-						v-model="audio_currentTimePercent"
-						v-on:input="audio_seek"
-					/>
-				</label>
+					@change="audio_seek"
+					hide-details
+				></v-slider>
 			</div>
 			<div class="song-info">
 				<div class="left">
@@ -370,10 +363,10 @@ main
 	height: calc(var(--vh,1vh) * 100)
 	overflow: hidden
 	overflow-y: scroll
-	margin-bottom: -69px
+	margin-bottom: -64px
 
 .v-navigation-drawer:not(.v-navigation-drawer--is-mobile)
-	height: calc(var(--vh,1vh) * 100 - 69px) !important
+	height: calc(var(--vh,1vh) * 100 - 64px) !important
 .poka-drawer-logo
 	padding: 0 16px
 	font-family: var(--product-font)
@@ -398,8 +391,8 @@ nav
 
 .bottom-player
 	box-sizing: border-box
-	height: 69px
-	max-height: 69px
+	height: 64px
+	max-height: 64px
 	backdrop-filter: blur(4px)
 	z-index: 99
 	position: fixed
@@ -409,6 +402,8 @@ nav
 	@media (prefers-color-scheme: dark)
 		&
 			background-color: rgba(47, 43, 62, 0.7)
+	.app-progress-bar
+		margin: -16px -8px
 	.song-info
 		display: grid
 		grid-gap: 10px

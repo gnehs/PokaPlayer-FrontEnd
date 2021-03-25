@@ -1,7 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import '@/assets/poka.js'
-import '@/assets/MaterialSlider.css'
 
 import Vue from 'vue'
 import App from './App'
@@ -17,7 +16,7 @@ import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
 
 import * as PokaComponents from './poka-component'
-Object.values(PokaComponents).forEach(PokaComponents => Vue.component(PokaComponents.name, PokaComponents))
+Object.values(PokaComponents).forEach(x => Vue.component(x.name, x))
 
 import vuetify from './plugins/vuetify';
 
@@ -42,11 +41,9 @@ new Vue({
   router,
   i18n,
   store,
-
   components: {
     App
   },
-
   template: '<App/>',
   vuetify,
   render: h => h(App)
