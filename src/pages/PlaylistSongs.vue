@@ -27,8 +27,19 @@
 			<v-card>
 				<v-card-title class="headline">{{$t('playlist_page.edit_title')}}</v-card-title>
 				<v-card-text>
-					<v-text-field v-model="editData.name" :label="$t('playlist_page.title_input')" outlined></v-text-field>
-					<v-text-field v-model="editData.image" :label="$t('playlist_page.cover_input')" outlined></v-text-field>
+					<v-text-field
+						v-model="editData.name"
+						:label="$t('playlist_page.title_input')"
+						outlined
+						hide-details
+					/>
+					<br />
+					<v-text-field
+						v-model="editData.image"
+						:label="$t('playlist_page.cover_input')"
+						outlined
+						hide-details
+					/>
 				</v-card-text>
 				<v-card-actions>
 					<v-btn text @click="playlistDialog = false;playlistDel=true">{{$t('playlist_page.del')}}</v-btn>
