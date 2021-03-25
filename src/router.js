@@ -48,16 +48,10 @@ export default new Router({
 			path: '/lyric/edit',
 			name: 'LyricEdit',
 			component: LyricEdit,
-			meta: {
-				transitionName: 'slide'
-			}
 		}, {
 			path: '/album/songs/:source/:id',
 			name: 'AlbumSongs',
 			component: AlbumSongs,
-			meta: {
-				transitionName: 'slide'
-			}
 		}, {
 			path: '/album',
 			name: 'Album',
@@ -70,7 +64,6 @@ export default new Router({
 			name: 'ArtistAlbum',
 			component: Albums,
 			meta: {
-				transitionName: 'slide',
 				type: "artist"
 			}
 		}, {
@@ -82,7 +75,6 @@ export default new Router({
 			name: 'ComposerAlbum',
 			component: Albums,
 			meta: {
-				transitionName: 'slide',
 				type: "composer"
 			}
 		}, {
@@ -94,7 +86,6 @@ export default new Router({
 			name: 'folderFiles',
 			component: Folder,
 			meta: {
-				transitionName: 'slide',
 				root: false
 			}
 		}, {
@@ -112,16 +103,10 @@ export default new Router({
 			path: '/playlist/f/*',
 			name: 'PlaylistFolder',
 			component: Playlist,
-			meta: {
-				transitionName: 'slide'
-			}
 		}, {
 			path: '/playlist/p/:source/:id',
 			component: PlaylistSongs,
 			name: 'PlaylistSongs',
-			meta: {
-				transitionName: 'slide'
-			}
 		}, {
 			path: '/playlist',
 			name: 'Playlist',
