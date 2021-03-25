@@ -37,7 +37,7 @@ export default {
 		this.fetchData()
 	},
 	watch: {
-		'$route.path': function (val, oldVal) {
+		'$route.path': function () {
 			this.fetchData();
 		}
 	},

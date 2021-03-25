@@ -6,12 +6,10 @@ import emptyLayout from '@/layout/empty'
 import settingLayout from '@/layout/setting'
 import adminLayout from '@/layout/settingAdmin'
 
-import Album from '@/pages/Album'
+import Albums from '@/pages/Albums'
 import AlbumSongs from '@/pages/AlbumSongs'
 import Artist from '@/pages/Artist'
-import ArtistAlbum from '@/pages/ArtistAlbum'
 import Composer from '@/pages/Composer'
-import ComposerAlbum from '@/pages/ComposerAlbum'
 import Debug from '@/pages/Debug'
 import Folder from '@/pages/Folder'
 import Home from '@/pages/Home'
@@ -63,13 +61,17 @@ export default new Router({
 		}, {
 			path: '/album',
 			name: 'Album',
-			component: Album
+			component: Albums,
+			meta: {
+				type: "album"
+			}
 		}, {
 			path: '/artist/:source/:id',
 			name: 'ArtistAlbum',
-			component: ArtistAlbum,
+			component: Albums,
 			meta: {
-				transitionName: 'slide'
+				transitionName: 'slide',
+				type: "artist"
 			}
 		}, {
 			path: '/artist',
@@ -78,9 +80,10 @@ export default new Router({
 		}, {
 			path: '/composer/:source/:id',
 			name: 'ComposerAlbum',
-			component: ComposerAlbum,
+			component: Albums,
 			meta: {
-				transitionName: 'slide'
+				transitionName: 'slide',
+				type: "composer"
 			}
 		}, {
 			path: '/composer',
