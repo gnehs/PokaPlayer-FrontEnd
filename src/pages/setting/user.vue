@@ -112,8 +112,9 @@
 					<v-text-field
 						:label="$t('settingUser.changeName.placeholder')"
 						v-model.trim="temp.changeNameValue"
-						filled
-					></v-text-field>
+						outlined
+						hide-details
+					/>
 				</v-card-text>
 				<v-card-actions>
 					<v-spacer />
@@ -129,8 +130,9 @@
 					<v-text-field
 						:label="$t('settingUser.changeUsername.placeholder')"
 						v-model.trim="temp.changeUsernameValue"
-						filled
-					></v-text-field>
+						outlined
+						hide-details
+					/>
 				</v-card-text>
 				<v-card-actions>
 					<v-spacer />
@@ -151,18 +153,23 @@
 						:label="$t('settingUser.changePassword.oldPassword')"
 						v-model="temp.changePasswordold"
 						outlined
-					></v-text-field>
+						hide-details
+					/>
+					<br />
 					<v-text-field
 						:label="$t('settingUser.changePassword.newPassword')"
 						v-model="temp.changePassword"
 						outlined
-					></v-text-field>
+						hide-details
+					/>
+					<br />
 					<v-text-field
 						:label="$t('settingUser.changePassword.confirmPassword')"
 						v-model="temp.changePassword2"
 						:hint="$t('settingUser.changePassword.confirmPasswordHelperText')"
 						outlined
-					></v-text-field>
+						hide-details
+					/>
 				</v-card-text>
 				<v-card-actions>
 					<v-spacer />

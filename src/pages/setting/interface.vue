@@ -124,7 +124,7 @@
 					</div>
 				</v-card-text>
 				<v-card-actions>
-					<v-spacer></v-spacer>
+					<v-spacer />
 					<v-btn text @click="bg_height_dialog = false">{{$t('back')}}</v-btn>
 				</v-card-actions>
 			</v-card>
@@ -149,7 +149,7 @@
 					</poka-cards>
 				</v-card-text>
 				<v-card-actions>
-					<v-spacer></v-spacer>
+					<v-spacer />
 					<v-btn text @click="customize_bg_dialog = false">{{$t('done')}}</v-btn>
 				</v-card-actions>
 			</v-card>
@@ -169,7 +169,7 @@
 					></v-color-picker>
 				</v-card-text>
 				<v-card-actions>
-					<v-spacer></v-spacer>
+					<v-spacer />
 					<v-btn text @click="theme_dialog = false">{{$t('done')}}</v-btn>
 				</v-card-actions>
 			</v-card>
@@ -211,7 +211,7 @@
 					</div>
 				</v-card-text>
 				<v-card-actions>
-					<v-spacer></v-spacer>
+					<v-spacer />
 					<v-btn text @click="lang_dialog = false">{{$t('cancel')}}</v-btn>
 				</v-card-actions>
 			</v-card>
@@ -264,7 +264,7 @@
 					</div>
 				</v-card-text>
 				<v-card-actions>
-					<v-spacer></v-spacer>
+					<v-spacer />
 					<v-btn text @click="lyric_theme_dialog = false">{{$t('cancel')}}</v-btn>
 				</v-card-actions>
 			</v-card>

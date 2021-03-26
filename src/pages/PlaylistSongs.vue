@@ -26,7 +26,7 @@
 		<v-dialog v-model="playlistDialog" max-width="400">
 			<v-card>
 				<v-card-title class="headline">{{$t('playlist_page.edit_title')}}</v-card-title>
-				<v-card-text>
+				<v-card-text style="padding-bottom: 0;">
 					<v-text-field
 						v-model="editData.name"
 						:label="$t('playlist_page.title_input')"
@@ -43,7 +43,7 @@
 				</v-card-text>
 				<v-card-actions>
 					<v-btn text @click="playlistDialog = false;playlistDel=true">{{$t('playlist_page.del')}}</v-btn>
-					<v-spacer></v-spacer>
+					<v-spacer />
 					<v-btn text @click="editPlaylist">{{$t('done')}}</v-btn>
 				</v-card-actions>
 			</v-card>
@@ -54,7 +54,7 @@
 				<v-card-text>{{$t("playlist_page.delconfirm",{title})}}</v-card-text>
 				<v-card-actions>
 					<v-btn text @click="playlistDel = false">{{$t('cancel')}}</v-btn>
-					<v-spacer></v-spacer>
+					<v-spacer />
 					<v-btn text @click="playlistDel = false;delPlaylist()">{{$t('ok')}}</v-btn>
 				</v-card-actions>
 			</v-card>

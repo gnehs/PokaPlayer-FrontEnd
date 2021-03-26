@@ -142,7 +142,7 @@
 					</div>
 				</v-card-text>
 				<v-card-actions>
-					<v-spacer></v-spacer>
+					<v-spacer />
 					<v-btn text @click="moreDialogShow = false">{{$t('back')}}</v-btn>
 				</v-card-actions>
 			</v-card>
@@ -151,7 +151,7 @@
 			<v-card id="playlist-dialog">
 				<v-toolbar flat>
 					<v-card-title class="headline">{{$t("songAction_add2playlist")}}</v-card-title>
-					<v-spacer></v-spacer>
+					<v-spacer />
 					<v-btn icon @click="openCreatePlaylistDialog">
 						<v-icon class="material-icons-outlined">add</v-icon>
 					</v-btn>
@@ -185,7 +185,7 @@
 					>{{$t('playlist_page.playlist_empty')}}</p>
 				</v-card-text>
 				<v-card-actions>
-					<v-spacer></v-spacer>
+					<v-spacer />
 					<v-btn text @click="playlistDialog = false">{{$t('done')}}</v-btn>
 				</v-card-actions>
 			</v-card>
@@ -198,7 +198,7 @@
 				</v-card-text>
 				<v-card-actions>
 					<v-btn text @click="createPlaylistDialog = false">{{$t('back')}}</v-btn>
-					<v-spacer></v-spacer>
+					<v-spacer />
 					<v-btn text @click="createPlaylist">{{$t('done')}}</v-btn>
 				</v-card-actions>
 			</v-card>

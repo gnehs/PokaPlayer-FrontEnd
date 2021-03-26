@@ -120,7 +120,7 @@
 				</v-card-text>
 				<v-divider></v-divider>
 				<v-card-actions>
-					<v-spacer></v-spacer>
+					<v-spacer />
 					<v-btn text @click="showLyricDialog = false">{{$t('cancel')}}</v-btn>
 				</v-card-actions>
 			</v-card>
@@ -173,7 +173,7 @@
 					</div>
 				</v-card-text>
 				<v-card-actions>
-					<v-spacer></v-spacer>
+					<v-spacer />
 					<v-btn text @click="lyric_theme_dialog = false">{{$t('cancel')}}</v-btn>
 				</v-card-actions>
 			</v-card>
