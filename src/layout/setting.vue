@@ -10,7 +10,7 @@
 				:to="item.to"
 				v-ripple
 			>
-				<v-icon>{{item.icon}}</v-icon>
+				<v-icon class="material-icons-outlined">{{item.icon}}</v-icon>
 				<span>{{$t(item.text)}}</span>
 			</router-link>
 		</div>
