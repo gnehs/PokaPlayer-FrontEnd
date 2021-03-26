@@ -1,5 +1,5 @@
 <template>
-	<v-bottom-sheet v-model="dialog" inset>
+	<v-bottom-sheet v-model="dialog" inset content-class="poka-home-dialog-sheet">
 		<template v-slot:activator="{ on }">
 			<poka-card
 				:poka-bg="false"
@@ -10,24 +10,26 @@
 				@click.native="dialog=true"
 			/>
 		</template>
-		<v-card class="poka-home-card" v-if="dialog">
-			<div class="hw-header" style="line-height: normal;">
-				<div class="hw-title">{{$t(data.title)}}</div>
-				<div class="hw-subtitle">{{$t(`source.${data.source}`)}}</div>
-			</div>
-			<div class="chip-nav" v-if="filteredKeys.length>1">
-				<div
-					class="chip-nav-item"
+
+		<v-toolbar>
+			<v-toolbar-title>{{$t(data.title)}}</v-toolbar-title>
+			<div v-if="filteredKeys.length>1">
+				<v-chip
+					class="ma-1"
 					v-for="itemName of filteredKeys"
 					:key="itemName"
 					:class="{active:active==itemName}"
 					@click="active=itemName"
-					v-ripple
-				>
-					<span>{{$t(itemName.substring(0, itemName.length-1))}}</span>
-				</div>
+					:outlined="active!=itemName"
+					pill
+				>{{$t(itemName.substring(0, itemName.length-1))}}</v-chip>
 			</div>
-
+			<v-spacer />
+			<v-btn icon @click="dialog = false">
+				<v-icon>mdi-close</v-icon>
+			</v-btn>
+		</v-toolbar>
+		<div class="poka-home-card" v-if="dialog" tile elevation="0">
 			<div v-for="itemName of filteredKeys" :key="itemName">
 				<div v-show="active==itemName">
 					<poka-parse-songs v-if="itemName=='songs'" :data="data[itemName]" />
@@ -38,15 +40,20 @@
 					<poka-parse-artists v-if="itemName=='artists' " :data="data[itemName]" />
 				</div>
 			</div>
-		</v-card>
+		</div>
 	</v-bottom-sheet>
 </template>
-<style lang="sass" scoped>
-.poka-home-card
-	padding: 16px
-	overflow: hidden auto
-	max-height: 80vh
-	position: relative
+<style lang="sass">
+.poka-home-dialog-sheet.poka-home-dialog-sheet.poka-home-dialog-sheet
+	border-radius: 16px 16px 0 0
+	overflow: hidden
+	.poka-home-card.poka-home-card.poka-home-card
+		padding: 16px
+		overflow: hidden auto
+		max-height: 80vh
+		position: relative
+		border-radius: 0 !important
+		background-color: #FFF
 </style>
 <script>
 export default {
