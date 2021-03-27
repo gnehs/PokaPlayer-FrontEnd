@@ -22,6 +22,8 @@ import Shuffle from '@/pages/shuffle'
 import Lyric from '@/pages/Lyric'
 import LyricEdit from '@/pages/LyricEdit'
 import Search from '@/pages/Search'
+import Review from '@/pages/Review'
+
 import SettingNetwork from '@/pages/setting/network'
 import SettingInterface from '@/pages/setting/interface'
 import SettingUser from '@/pages/setting/user'
@@ -131,6 +133,10 @@ export default new Router({
 			path: '/debug',
 			name: 'Debug',
 			component: Debug
+		}, {
+			path: '/review',
+			name: 'Review',
+			component: Review
 		}, {
 			path: '',
 			redirect: '/home'
