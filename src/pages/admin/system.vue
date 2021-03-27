@@ -74,7 +74,7 @@
 		<v-dialog v-model="showUpdateingDialog" persistent max-width="280">
 			<v-card>
 				<v-card-text style="padding: 0;">
-					<pre class="log">{{updateLog}}</pre>
+					<pre class="log" style="width: 280px;height: 200px">{{updateLog}}</pre>
 					<v-progress-linear indeterminate color="primary" v-show="!showRestartCompleted"></v-progress-linear>
 				</v-card-text>
 				<v-card-actions v-show="showRestartCompleted">
@@ -225,17 +225,17 @@ export default {
 	}
 };
 </script>
-<style lang="sass" scoped>
+<style lang="sass">
 pre.log
 	background: #000
 	padding: 5px
-	width: 280px
-	height: 200px
-	overflow: scroll
+	overflow: auto
+	max-width: 100%
 	font-family: 'Ubuntu Mono', monospace
 	color: #FFF
+	white-space: pre-wrap
 </style>
-<style lang="sass" >
+<style lang="sass">
 .changelog
 	font-family: 'Ubuntu Mono', monospace
 	color: currentColor
