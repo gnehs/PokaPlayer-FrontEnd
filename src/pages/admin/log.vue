@@ -1,7 +1,13 @@
 <template>
 	<div>
 		<v-slide-y-reverse-transition>
-			<div class="poka list" v-if="logs.length">
+			<transition-group
+				name="songlist"
+				tag="div"
+				class="poka list"
+				v-if="logs.length"
+				style="position: relative"
+			>
 				<div
 					class="item log"
 					:class="[`level-${item.level}`]"
@@ -27,8 +33,12 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</transition-group>
 		</v-slide-y-reverse-transition>
+		<div style="text-align:center" v-show="displayMore&&logs.length">
+			<v-btn rounded color="primary" dark @click="getLogs" :loading="loading">More</v-btn>
+		</div>
+		<poka-loader v-if="loading&&!logs.length" />
 		<v-card
 			class="mx-auto blur-card"
 			max-width="344"
@@ -50,7 +60,7 @@
 						<v-icon>mdi-close</v-icon>
 					</v-btn>
 				</v-toolbar>
-				<div class="poka list" v-if="logDialogData">
+				<div class="poka two list" v-if="logDialogData">
 					<div class="item log" v-ripple>
 						<div class="content">
 							<v-icon
@@ -126,7 +136,9 @@ export default {
 		loading: true,
 		logDialog: false,
 		logDialogData: null,
-		logs: []
+		logs: [],
+		page: 0,
+		displayMore: true,
 	}),
 	created() {
 		this.getLogs()
@@ -134,15 +146,19 @@ export default {
 	methods: {
 		async getLogs() {
 			this.loading = true
-			let { data: result } = await this.axios(`${_setting('server')}/pokaapi/v2/log?${Math.random().toString(36).substring(7)}`)
+			let { data: result } = await this.axios(`${_setting('server')}/pokaapi/v2/log?page=${this.page}&${Math.random().toString(36).substring(7)}`)
 			let { data: users } = await this.axios(`${_setting('server')}/pokaapi/v2/users/list?${Math.random().toString(36).substring(7)}`)
-			this.logs = result.map(x => {
+			this.logs = [...this.logs, ...result.map(x => {
 				if (x.discription) x.description = x.discription //fix typo
 				for (let { _id, username } of users) {
 					x.description = x.description.replace(new RegExp(`{${_id}}`, "g"), username)
 				}
 				return x
-			})
+			})]
+			if (!result.length) {
+				this.displayMore = false
+			}
+			this.page++
 			this.loading = false
 		},
 		async clearLogs() {
