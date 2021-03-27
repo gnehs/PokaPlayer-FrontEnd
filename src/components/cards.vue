@@ -100,7 +100,7 @@ export default {
 			opacity: .75
 		.image
 			background-color: var(--card-background-color,#607D8Ba1)
-			backdrop-filter: blur(5px)
+			backdrop-filter: blur(8px)
 		&:nth-child(14n+2)
 			--card-background-color: #F44336a1
 		&:nth-child(14n+3)
