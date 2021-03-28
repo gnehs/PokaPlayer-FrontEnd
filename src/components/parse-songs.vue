@@ -289,9 +289,13 @@ export default {
 			this.createPlaylistName = ''
 		},
 		async createPlaylist() {
-			await this.axios.post(`${this.server}/pokaapi/playlist/create`, { name: this.createPlaylistName })
-			this.createPlaylistDialog = false
-			await this.updatePlaylistData()
+			if (this.createPlaylistName != '') {
+				await this.axios.post(`${this.server}/pokaapi/playlist/create`, { name: this.createPlaylistName })
+				this.createPlaylistDialog = false
+				await this.updatePlaylistData()
+			} else {
+				this.$snackbar(i18n.t('playlist_page.edit_empty'));
+			}
 		},
 		async updatePlaylistData() {
 			let res = (await this.axios.post(`${this.server}/pokaapi/playlist/song/exist`, this.moreDialogTemp)).data
