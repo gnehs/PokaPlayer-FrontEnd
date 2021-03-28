@@ -20,6 +20,7 @@
 			<h1 class="text-center text-h3 font-weight-thin review-title">版本更新</h1>
 			<h1 class="text-center text-h3 font-weight-thin review-title">社群貢獻</h1>
 			<h1 class="text-center text-h3 font-weight-thin review-title">感謝有你</h1>
+			<p class="text-center text-h5 font-weight-thin">感謝你使用 PokaPlayer，希望未來可以陪伴你走過更多時光！</p>
 		</div>
 	</div>
 </template>
