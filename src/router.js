@@ -3,14 +3,11 @@ import Router from 'vue-router'
 
 import defaultLayout from '@/layout/default'
 import emptyLayout from '@/layout/empty'
-import settingLayout from '@/layout/setting'
-import adminLayout from '@/layout/settingAdmin'
 
 import Albums from '@/pages/Albums'
 import AlbumSongs from '@/pages/AlbumSongs'
 import Artist from '@/pages/Artist'
 import Composer from '@/pages/Composer'
-import Debug from '@/pages/Debug'
 import Folder from '@/pages/Folder'
 import Home from '@/pages/Home'
 import Login from '@/pages/Login'
@@ -22,16 +19,6 @@ import Shuffle from '@/pages/shuffle'
 import Lyric from '@/pages/Lyric'
 import LyricEdit from '@/pages/LyricEdit'
 import Search from '@/pages/Search'
-import Review from '@/pages/Review'
-
-import SettingNetwork from '@/pages/setting/network'
-import SettingInterface from '@/pages/setting/interface'
-import SettingUser from '@/pages/setting/user'
-import SettingPins from '@/pages/setting/pins'
-
-import AdminUsers from '@/pages/admin/users'
-import AdminSystem from '@/pages/admin/system'
-import AdminLog from '@/pages/admin/log'
 
 Vue.use(Router)
 
@@ -132,11 +119,11 @@ export default new Router({
 		}, {
 			path: '/debug',
 			name: 'Debug',
-			component: Debug
+			component: () => import('@/pages/Debug'),
 		}, {
 			path: '/review',
 			name: 'Review',
-			component: Review
+			component: () => import('@/pages/Review'),
 		}, {
 			path: '',
 			redirect: '/home'
@@ -145,41 +132,41 @@ export default new Router({
 			path: '/settings',
 			name: 'setting',
 			redirect: '/settings/network',
-			component: settingLayout,
+			component: () => import(/* webpackChunkName: "setting" */  '@/layout/setting'),
 			children: [{
 				path: '/settings/interface',
 				name: 'SettingInterface',
-				component: SettingInterface
+				component: () => import(/* webpackChunkName: "setting" */ '@/pages/setting/interface'),
 			}, {
 				path: '/settings/network',
 				name: 'SettingNetwork',
-				component: SettingNetwork
+				component: () => import(/* webpackChunkName: "setting" */ '@/pages/setting/network'),
 			}, {
 				path: '/settings/user',
 				name: 'SettingUser',
-				component: SettingUser
+				component: () => import(/* webpackChunkName: "setting" */ '@/pages/setting/user'),
 			}, {
 				path: '/settings/pins',
 				name: 'SettingPins',
-				component: SettingPins
+				component: () => import(/* webpackChunkName: "setting" */ '@/pages/setting/pins'),
 			}]
 		}, {
 			path: '/admin',
 			name: 'settingAdmin',
-			redirect: '/admin/users',
-			component: adminLayout,
+			redirect: '/admin/system',
+			component: () => import(/* webpackChunkName: "setting-admin" */ '@/layout/settingAdmin'),
 			children: [{
 				path: '/admin/system',
 				name: 'SettingSystem',
-				component: AdminSystem
+				component: () => import(/* webpackChunkName: "setting-admin" */'@/pages/admin/system')
 			}, {
 				path: '/admin/users',
 				name: 'SettingAdminUsers',
-				component: AdminUsers
+				component: () => import(/* webpackChunkName: "setting-admin" */'@/pages/admin/users')
 			}, {
 				path: '/admin/log',
 				name: 'AdminLog',
-				component: AdminLog
+				component: () => import(/* webpackChunkName: "setting-admin" */'@/pages/admin/log')
 			}]
 		},]
 	}, {
