@@ -267,6 +267,7 @@ export default {
 				this.audio_cover = cover;
 				this.audio_currentTime = this.secondToTime(currentTime);
 				this.audio_totalTime = this.secondToTime(totalTime)
+				this.updatePositionState()
 				// record
 				if (totalTime && currentTime + 10 > totalTime && !this.audio_recored && window._setting("dataRecord")) {
 					this.audio_recored = true
