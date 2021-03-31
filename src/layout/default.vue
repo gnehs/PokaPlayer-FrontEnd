@@ -296,9 +296,9 @@ export default {
 		updatePositionState() {
 			if ('setPositionState' in navigator.mediaSession) {
 				navigator.mediaSession.setPositionState({
-					duration: Math.round(_player.audio.duration),
+					duration: Math.round(_player.audio.duration || 0),
 					playbackRate: 1,
-					position: Math.round(_player.audio.currentTime)
+					position: Math.round(_player.audio.currentTime || 0)
 				});
 			}
 		},
