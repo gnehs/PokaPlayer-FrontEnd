@@ -219,8 +219,13 @@ export default {
 		if ("mediaSession" in navigator) {
 			navigator.mediaSession.setActionHandler("play", () => _player.toggle());
 			navigator.mediaSession.setActionHandler("pause", () => _player.pause());
-			navigator.mediaSession.setActionHandler("previoustrack", () => _payer.skipBack());
+			navigator.mediaSession.setActionHandler("previoustrack", () => _player.skipBack());
 			navigator.mediaSession.setActionHandler("nexttrack", () => _player.skipForward());
+			try {
+				navigator.mediaSession.setActionHandler('seekto', event => _player.seek(event.seekTime));
+			} catch (error) {
+				console.warn('Warning! The "seekto" media session action is not supported.');
+			}
 		}
 		this.audio_interval = setInterval(() => {
 			let currentTime = _player.audio.currentTime || 0,
@@ -228,40 +233,42 @@ export default {
 			this.audio_paused = _player.paused;
 			this.audio_order = _player.options.order;
 			if (_player.list.audios.length > 0) {
-				let nowPlaying = _player.list.audios[_player.list.index];
-				if (this.audio_title != nowPlaying.name) {
-					this.audio_recored = false
+				let { name: title, artist, album, cover } = _player.list.audios[_player.list.index];
+				if (this.audio_title != title) {
+					this.audio_recored = false;
+					// mediaSession
+					if ("mediaSession" in navigator) {
+						//寫入 mediaSession.metadata
+						navigator.mediaSession.metadata = new MediaMetadata({
+							title,
+							artist,
+							album,
+							artwork: [{ src: cover }]
+						});
+					}
 				}
 				let buffered = _player.audio.buffered;
 				let audioBuffered = currentTime > 1 ? (buffered.end(buffered.length - 1) / totalTime) * 100 : 0
 				let cent = (currentTime / totalTime) * 100;
 				this.audio_currentTimePercent = cent;
 				this.audio_bufferPercent = audioBuffered;
-				this.audio_title = nowPlaying.name;
-				this.audio_artist = nowPlaying.artist;
-				this.audio_cover = nowPlaying.cover;
+				this.audio_title = title;
+				this.audio_artist = artist;
+				this.audio_cover = cover;
 				this.audio_currentTime = this.secondToTime(currentTime);
-				this.audio_totalTime = this.secondToTime(totalTime);
+				this.audio_totalTime = this.secondToTime(totalTime)
 				// mediaSession
-				if ("mediaSession" in navigator) {
-					//讀圖片
-					let image = document.querySelector(".cover img");
-					let artworkData = [{
-						src: image.complete ? nowPlaying.cover : "/static/img/icons/512x512.png",
-						sizes: image.complete ? `${image.naturalWidth}x${image.naturalHeight}` : "512x512",
-						type: "image/png"
-					}];
-					//寫入 mediaSession.metadata
-					navigator.mediaSession.metadata = new MediaMetadata({
-						title: nowPlaying.name,
-						artist: nowPlaying.artist,
-						artwork: artworkData
+				if ('setPositionState' in navigator.mediaSession) {
+					navigator.mediaSession.setPositionState({
+						duration: totalTime,
+						playbackRate: 1,
+						position: currentTime
 					});
 				}
 				// record
 				if (totalTime && currentTime + 10 > totalTime && !this.audio_recored && window._setting("dataRecord")) {
 					this.audio_recored = true
-					this.axios.post(`${_setting('server')}/pokaapi/v2/record/add`, nowPlaying)
+					this.axios.post(`${_setting('server')}/pokaapi/v2/record/add`, _player.list.audios[_player.list.index])
 				}
 			} else {
 				this.audio_currentTime = "0:00";
