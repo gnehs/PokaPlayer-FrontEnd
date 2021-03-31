@@ -217,12 +217,21 @@ export default {
 		});
 		_socket.emit('send-nickname', _setting('nickname'));
 		if ("mediaSession" in navigator) {
-			navigator.mediaSession.setActionHandler("play", () => _player.toggle());
-			navigator.mediaSession.setActionHandler("pause", () => _player.pause());
+			navigator.mediaSession.setActionHandler("play", () => {
+				_player.toggle()
+				navigator.mediaSession.playbackState = "playing";
+			});
+			navigator.mediaSession.setActionHandler("pause", () => {
+				_player.pause()
+				navigator.mediaSession.playbackState = "paused";
+			});
 			navigator.mediaSession.setActionHandler("previoustrack", () => _player.skipBack());
 			navigator.mediaSession.setActionHandler("nexttrack", () => _player.skipForward());
 			try {
-				navigator.mediaSession.setActionHandler('seekto', event => _player.seek(event.seekTime));
+				navigator.mediaSession.setActionHandler('seekto', event => {
+					_player.seek(event.seekTime)
+					this.updatePositionState()
+				});
 			} catch (error) {
 				console.warn('Warning! The "seekto" media session action is not supported.');
 			}
@@ -245,6 +254,7 @@ export default {
 							album,
 							artwork: [{ src: cover }]
 						});
+						this.updatePositionState()
 					}
 				}
 				let buffered = _player.audio.buffered;
@@ -257,14 +267,6 @@ export default {
 				this.audio_cover = cover;
 				this.audio_currentTime = this.secondToTime(currentTime);
 				this.audio_totalTime = this.secondToTime(totalTime)
-				// mediaSession
-				if ('setPositionState' in navigator.mediaSession) {
-					navigator.mediaSession.setPositionState({
-						duration: totalTime,
-						playbackRate: 1,
-						position: currentTime
-					});
-				}
 				// record
 				if (totalTime && currentTime + 10 > totalTime && !this.audio_recored && window._setting("dataRecord")) {
 					this.audio_recored = true
@@ -290,6 +292,15 @@ export default {
 			let SS = Math.floor(second % 60);
 			SS = SS < 10 ? "0" + SS : SS;
 			return MM + ":" + SS;
+		},
+		updatePositionState() {
+			if ('setPositionState' in navigator.mediaSession) {
+				navigator.mediaSession.setPositionState({
+					duration: _player.audio.duration,
+					playbackRate: 1,
+					position: _player.audio.currentTime
+				});
+			}
 		},
 		audio_toggle() {
 			if (_player.list.audios.length > 0) {
