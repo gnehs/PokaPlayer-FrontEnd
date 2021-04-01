@@ -157,7 +157,7 @@ export default {
 		update() {
 			window._player.pause();
 			this.showUpdateingDialog = true;
-			this.updateLog += window.i18n.t("settings_update_update2", { version: this.newVersion.tag }) + "\n";
+			this.updateLog += this.$t("settings_update_update2", { version: this.newVersion.tag }) + "\n";
 
 			_socket.emit("login", {
 				username: window._setting(`username`),
@@ -170,19 +170,19 @@ export default {
 				alert("Permission Denied");
 			});
 			window._socket.on("init", () => {
-				this.updateLog += window.i18n.t("settings_update_initializing") + "\n";
+				this.updateLog += this.$t("settings_update_initializing") + "\n";
 			});
 			window._socket.on("git", data => {
 				this.updateLog +=
 					{
-						fetch: window.i18n.t("settings_update_git_fetch"),
-						reset: window.i18n.t("settings_update_git_reset"),
-						api: window.i18n.t("settings_update_git_api")
+						fetch: this.$t("settings_update_git_fetch"),
+						reset: this.$t("settings_update_git_reset"),
+						api: this.$t("settings_update_git_api")
 					}[data] + "\n";
 			});
 			window._socket.on("restart", () => {
 				this.updateLog +=
-					window.i18n.t("settings_restarting") + "...\n";
+					this.$t("settings_restarting") + "...\n";
 			});
 			window._socket.on("hello", () => {
 				this.showRestartCompleted = true;

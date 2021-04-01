@@ -201,48 +201,48 @@ export default {
 		dataRecord: window._setting("dataRecord"),
 		dataRecordCount: -1
 	}),
-	created() {
+	async created() {
 		//使用者
-		this.axios.get(_setting(`server`) + "/pokaapi/v2/user/").then(response => { this.userdata = response.data; });
+		this.userdata = (await this.axios.get(_setting(`server`) + "/pokaapi/v2/user/")).data
 		//隱私
-		this.getDataRecordCount()
+		this.dataRecordCount = (await this.axios(_setting(`server`) + `/pokaapi/v2/record/count/user?${Date.now()}`)).data
 	},
 	methods: {
 		//使用者
 		copyID() {
 			navigator.clipboard.writeText(this.userdata._id).then(() => {
-				this.$snackbar(i18n.t("copy.success"));
+				this.$snackbar(this.$t("copy.success"));
 			}, () => {
-				this.$snackbar(i18n.t("copy.failed"))
+				this.$snackbar(this.$t("copy.failed"))
 			});
 		},
 		changeName() {
 			if (this.temp.changeNameValue == "" || !this.temp.changeNameValue)
-				return this.$snackbar(window.i18n.t("settingUser.changeName.result.error"));
+				return this.$snackbar(this.$t("settingUser.changeName.result.error"));
 			this.axios
 				.post(_setting(`server`) + "/pokaapi/v2/user/name/", { n: this.temp.changeNameValue })
 				.then(response => {
 					if (response.data.success) {
 						this.userdata.name = this.temp.changeNameValue;
-						this.$snackbar(window.i18n.t("settingUser.changeName.result.success", { name: this.temp.changeNameValue }));
+						this.$snackbar(this.$t("settingUser.changeName.result.success", { name: this.temp.changeNameValue }));
 					} else {
-						this.$snackbar(window.i18n.t("settingUser.changeName.result.error"));
+						this.$snackbar(this.$t("settingUser.changeName.result.error"));
 					}
 				});
 		},
 		changeUsername() {
 			if (this.temp.changeUsernameValue == "" || !this.temp.changeUsernameValue)
-				return this.$snackbar(window.i18n.t("settingUser.changeUsername.result.error"));
+				return this.$snackbar(this.$t("settingUser.changeUsername.result.error"));
 			this.axios
 				.post(_setting(`server`) + "/pokaapi/v2/user/username/", { n: this.temp.changeUsernameValue })
 				.then(response => {
 					if (response.data.success) {
 						this.userdata.username = this.temp.changeUsernameValue;
-						this.$snackbar(window.i18n.t("settingUser.changeUsername.result.success", { name: this.temp.changeUsernameValue }));
+						this.$snackbar(this.$t("settingUser.changeUsername.result.success", { name: this.temp.changeUsernameValue }));
 					} else if (response.data.error) {
 						this.$snackbar(response.data.error);
 					} else {
-						this.$snackbar(window.i18n.t("settingUser.changeUsername.result.error"));
+						this.$snackbar(this.$t("settingUser.changeUsername.result.error"));
 					}
 				});
 		},
@@ -252,11 +252,11 @@ export default {
 				this.temp.changePassword2 == "" || !this.temp.changePassword2 ||
 				this.temp.changePasswordold == "" || !this.temp.changePasswordold
 			)
-				return this.$snackbar(window.i18n.t("settingUser.changePassword.result.error"));
+				return this.$snackbar(this.$t("settingUser.changePassword.result.error"));
 			if (this.temp.changePassword !== this.temp.changePassword2)
-				return this.$snackbar(window.i18n.t("settingUser.changePassword.result.inconsistent"));
+				return this.$snackbar(this.$t("settingUser.changePassword.result.inconsistent"));
 			if (this.temp.changePassword === this.temp.changePasswordold)
-				return this.$snackbar(window.i18n.t("settingUser.changePassword.result.same"));
+				return this.$snackbar(this.$t("settingUser.changePassword.result.same"));
 			this.axios
 				.post(_setting(`server`) + "/pokaapi/v2/user/password/", {
 					oldpassword: this.temp.changePasswordold,
@@ -264,12 +264,12 @@ export default {
 				})
 				.then(response => {
 					if (response.data.success) {
-						this.$snackbar(window.i18n.t("settingUser.changePassword.result.success"));
+						this.$snackbar(this.$t("settingUser.changePassword.result.success"));
 						this.temp.changePasswordDialog = false;
 					} else if (response.data.error) {
 						this.$snackbar(response.data.error);
 					} else {
-						this.$snackbar(window.i18n.t("settingUser.changePassword.result.error"));
+						this.$snackbar(this.$t("settingUser.changePassword.result.error"));
 					}
 				});
 		},
@@ -281,17 +281,12 @@ export default {
 		//隱私
 		async setDataRecord() {
 			this.dataRecord = !this.dataRecord
+			// sync setting
 			this.axios({
 				method: "post",
 				url: _setting(`server`) + "/pokaapi/v2/user/setting/",
 				data: { dataRecord: this.dataRecord }
 			});
-		},
-		async getDataRecordCount() {
-			this.axios(_setting(`server`) + `/pokaapi/v2/record/count/user?${Date.now()}`)
-				.then(r => {
-					this.dataRecordCount = r.data
-				});
 		},
 		async clearRecord() {
 			if (confirm('您確定要清除資料嗎？'))
