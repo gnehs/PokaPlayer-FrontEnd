@@ -53,6 +53,18 @@
             v-if="moreDialogTemp"
             width="200px"
             aspect-ratio="1"
+            class="moreDialog-cover-shadow"
+            :src=" moreDialogTemp.cover
+							? moreDialogTemp.cover.startsWith('http')
+								? moreDialogTemp.cover
+								: server + moreDialogTemp.cover
+							: defaultCover
+					"
+          ></v-img>
+          <v-img
+            v-if="moreDialogTemp"
+            width="200px"
+            aspect-ratio="1"
             class="moreDialog-cover"
             :src=" moreDialogTemp.cover
 							? moreDialogTemp.cover.startsWith('http')
@@ -215,11 +227,16 @@
 <style lang="sass">
 .moreDialog-header
 	padding: 16px 0
+	position: relative
 	.moreDialog-cover
 		background: #555
 		border-radius: 16px
 		margin-bottom: 8px
-		box-shadow: 0 0.8px 1.9px rgba(0, 0, 0, 0.02),0 2.3px 4.5px rgba(0, 0, 0, 0.028),0 4.8px 8.5px rgba(0, 0, 0, 0.035),0 9.2px 15.2px rgba(0, 0, 0, 0.042),0 16.9px 28.4px rgba(0, 0, 0, 0.05),0 26px 68px rgba(0, 0, 0, 0.07)
+	.moreDialog-cover-shadow
+		position: absolute
+		filter: blur(20px) brightness(.9)
+		opacity: .5
+		transform: translateY(8px)
 	.head
 		font-weight: bold
 		font-size: 18px
