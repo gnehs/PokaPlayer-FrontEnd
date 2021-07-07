@@ -1,12 +1,12 @@
 <template>
-	<div class="poka cards">
-		<slot />
-	</div>
+  <div class="poka cards">
+    <slot />
+  </div>
 </template>
 
 <script>
 export default {
-	name: "poka-cards"
+  name: "poka-cards"
 };
 </script>
 <style lang="sass">

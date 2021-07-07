@@ -1,32 +1,32 @@
 <template>
-	<div class="info-header">
-		<div class="cover" :style="`background-image: url('${cover}')`" />
-		<div class="info-data">
-			<div class="album-name" :title="title">{{title}}</div>
-			<div class="artist-name" :title="subtitle">{{subtitle}}</div>
-			<div class="grow"></div>
-			<div class="footer">
-				<v-fade-transition>
-					<div class="time" v-if="songs" :key="songs">{{$t("album_total", { songs: songs })}}</div>
-				</v-fade-transition>
-				<div class="actions">
-					<slot />
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="info-header">
+    <div class="cover" :style="`background-image: url('${cover}')`" />
+    <div class="info-data">
+      <div class="album-name" :title="title">{{title}}</div>
+      <div class="artist-name" :title="subtitle">{{subtitle}}</div>
+      <div class="grow"></div>
+      <div class="footer">
+        <v-fade-transition>
+          <div class="time" v-if="songs" :key="songs">{{$t("album_total", { songs: songs })}}</div>
+        </v-fade-transition>
+        <div class="actions">
+          <slot />
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 export default {
-	name: "info-header",
-	props: {
-		cover: String,
-		title: String,
-		subtitle: String,
-		songs: { default: 0 }
-	},
-	data: () => ({}),
-	created() { }
+  name: "info-header",
+  props: {
+    cover: String,
+    title: String,
+    subtitle: String,
+    songs: { default: 0 }
+  },
+  data: () => ({}),
+  created() {}
 };
 </script>
 

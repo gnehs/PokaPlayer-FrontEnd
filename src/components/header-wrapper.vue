@@ -1,66 +1,76 @@
  <template>
-	<div style="position: sticky;top: 16px;">
-		<div class="header-wrapper">
-			<div
-				class="bg"
-				:style="Object.assign({backgroundImage: `url('${bg}')`},bgStyle)"
-				:class="{blur: blurbg}"
-			/>
-		</div>
-		<div class="hw-header" style="line-height: normal;" v-if="title" :style="headerStyle">
-			<div class="hw-title">{{title}}</div>
-			<div class="hw-subtitle">{{subtitle}}</div>
-		</div>
-	</div>
+  <div style="position: sticky;top: 16px;">
+    <div class="header-wrapper">
+      <div
+        class="bg"
+        :style="Object.assign({backgroundImage: `url('${bg}')`},bgStyle)"
+        :class="{blur: blurbg}"
+      />
+    </div>
+    <div class="hw-header" style="line-height: normal;" v-if="title" :style="headerStyle">
+      <div class="hw-title">{{title}}</div>
+      <div class="hw-subtitle">{{subtitle}}</div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-	name: "poka-header",
-	data: () => ({
-		headerStyle: {
-			opacity: 1,
-			transform: ''
-		},
-		bgStyle: {
-			transform: '',
-		}
-	}),
-	props: {
-		title: String,
-		subtitle: String,
-		bg: {
-			type: String,
-			default: _setting(`headerBgSource`)
-		},
-		blurbg: { type: Boolean, default: false }
-	},
-	methods: {
-		handleScroll(event) {
-			if (document.querySelector('main')) {
-				let scrollTop = document.querySelector('main').scrollTop;
-				let scrollHeight = document.querySelector('main').scrollHeight
-				let targetHideHeight = 40
-				this.headerStyle.opacity = 1 - scrollTop / 200
-				this.headerStyle.transform = `translate(0,-${(scrollTop / targetHideHeight * 35)}px)`
-				this.bgStyle.transform = `scale(1.12) translate(0,-${scrollTop / scrollHeight * 50}px)`
-			}
-		}
-	},
-	mounted() {
-		this.handleScroll()
-		if (document.querySelector('main'))
-			document.querySelector('main').addEventListener('scroll', this.handleScroll);
-	},
-	created() {
-		this.handleScroll()
-		if (document.querySelector('main'))
-			document.querySelector('main').addEventListener('scroll', this.handleScroll);
-	},
-	destroyed() {
-		if (document.querySelector('main'))
-			document.querySelector('main').removeEventListener('scroll', this.handleScroll);
-	}
+  name: "poka-header",
+  data: () => ({
+    headerStyle: {
+      opacity: 1,
+      transform: ""
+    },
+    bgStyle: {
+      transform: ""
+    }
+  }),
+  props: {
+    title: String,
+    subtitle: String,
+    bg: {
+      type: String,
+      default: _setting(`headerBgSource`)
+    },
+    blurbg: { type: Boolean, default: false }
+  },
+  methods: {
+    handleScroll(event) {
+      if (document.querySelector("main")) {
+        let scrollTop = document.querySelector("main").scrollTop;
+        let scrollHeight = document.querySelector("main").scrollHeight;
+        let targetHideHeight = 40;
+        this.headerStyle.opacity = 1 - scrollTop / 200;
+        this.headerStyle.transform = `translate(0,-${(scrollTop /
+          targetHideHeight) *
+          35}px)`;
+        this.bgStyle.transform = `scale(1.12) translate(0,-${(scrollTop /
+          scrollHeight) *
+          50}px)`;
+      }
+    }
+  },
+  mounted() {
+    this.handleScroll();
+    if (document.querySelector("main"))
+      document
+        .querySelector("main")
+        .addEventListener("scroll", this.handleScroll);
+  },
+  created() {
+    this.handleScroll();
+    if (document.querySelector("main"))
+      document
+        .querySelector("main")
+        .addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    if (document.querySelector("main"))
+      document
+        .querySelector("main")
+        .removeEventListener("scroll", this.handleScroll);
+  }
 };
 </script>
 <style lang="sass">

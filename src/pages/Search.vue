@@ -1,56 +1,56 @@
 <template>
-	<div>
-		<div class="search-box" :class="{focus: searchBoxFocus}">
-			<input
-				class="search-input"
-				type="text"
-				v-on:keyup.enter="searchClick"
-				v-model.trim="keyword"
-				:placeholder="$t('search')"
-				autocomplete="off"
-				@focus="searchBoxFocus = true"
-				@blur="searchBoxFocus = false"
-				required
-			/>
-			<button class="search-button" @click="search">
-				<v-icon>search</v-icon>
-			</button>
-		</div>
+  <div>
+    <div class="search-box" :class="{focus: searchBoxFocus}">
+      <input
+        class="search-input"
+        type="text"
+        v-on:keyup.enter="searchClick"
+        v-model.trim="keyword"
+        :placeholder="$t('search')"
+        autocomplete="off"
+        @focus="searchBoxFocus = true"
+        @blur="searchBoxFocus = false"
+        required
+      />
+      <button class="search-button" @click="search">
+        <v-icon>search</v-icon>
+      </button>
+    </div>
 
-		<v-overlay absolute :value="isLoading">
-			<poka-loader />
-		</v-overlay>
-		<v-slide-y-reverse-transition>
-			<div v-if="searchResult">
-				<div class="chip-nav">
-					<div
-						class="chip-nav-item"
-						v-for="itemName of Object.keys(searchResult).filter(x=>searchResult[x].length)"
-						:key="itemName"
-						:class="{active:active==itemName}"
-						@click="active=itemName"
-						v-ripple
-					>
-						<span>{{$t(itemName.substring(0, itemName.length-1))}}</span>
-					</div>
-				</div>
+    <v-overlay absolute :value="isLoading">
+      <poka-loader />
+    </v-overlay>
+    <v-slide-y-reverse-transition>
+      <div v-if="searchResult">
+        <div class="chip-nav">
+          <div
+            class="chip-nav-item"
+            v-for="itemName of Object.keys(searchResult).filter(x=>searchResult[x].length)"
+            :key="itemName"
+            :class="{active:active==itemName}"
+            @click="active=itemName"
+            v-ripple
+          >
+            <span>{{$t(itemName.substring(0, itemName.length-1))}}</span>
+          </div>
+        </div>
 
-				<div
-					v-for="itemName of Object.keys(searchResult).filter(x=>searchResult[x].length)"
-					:key="itemName"
-				>
-					<div v-show="active==itemName">
-						<poka-parse-songs v-if="itemName=='songs'" :data="searchResult[itemName]" />
-						<poka-parse-albums v-if="itemName=='albums'" :data="searchResult[itemName]" />
-						<poka-parse-playlists v-if="itemName=='playlists' " :data="searchResult[itemName]" />
-						<poka-parse-folders v-if="itemName=='folders' " :data="searchResult[itemName]" />
-						<poka-parse-composers v-if="itemName=='composers' " :data="searchResult[itemName]" />
-						<poka-parse-artists v-if="itemName=='artists' " :data="searchResult[itemName]" />
-					</div>
-				</div>
-			</div>
-		</v-slide-y-reverse-transition>
-	</div>
+        <div
+          v-for="itemName of Object.keys(searchResult).filter(x=>searchResult[x].length)"
+          :key="itemName"
+        >
+          <div v-show="active==itemName">
+            <poka-parse-songs v-if="itemName=='songs'" :data="searchResult[itemName]" />
+            <poka-parse-albums v-if="itemName=='albums'" :data="searchResult[itemName]" />
+            <poka-parse-playlists v-if="itemName=='playlists' " :data="searchResult[itemName]" />
+            <poka-parse-folders v-if="itemName=='folders' " :data="searchResult[itemName]" />
+            <poka-parse-composers v-if="itemName=='composers' " :data="searchResult[itemName]" />
+            <poka-parse-artists v-if="itemName=='artists' " :data="searchResult[itemName]" />
+          </div>
+        </div>
+      </div>
+    </v-slide-y-reverse-transition>
+  </div>
 </template>
 
 <style lang="sass" scoped>
@@ -91,39 +91,41 @@
 </style>
 <script>
 export default {
-	name: "Search",
-	data: () => ({
-		keyword: "",
-		active: null,
-		searchResult: false,
-		isLoading: false,
-		searchBoxFocus: false,
-	}),
-	created() {
-		if (this.$route.query.keyword) {
-			this.keyword = this.$route.query.keyword
-			this.search()
-		}
-	},
-	methods: {
-		searchClick() {
-			this.$router.replace({ query: { keyword: this.keyword } })
-			this.search()
-		},
-		search() {
-			if (!this.keyword || this.keyword == "") return;
-			this.isLoading = true;
+  name: "Search",
+  data: () => ({
+    keyword: "",
+    active: null,
+    searchResult: false,
+    isLoading: false,
+    searchBoxFocus: false
+  }),
+  created() {
+    if (this.$route.query.keyword) {
+      this.keyword = this.$route.query.keyword;
+      this.search();
+    }
+  },
+  methods: {
+    searchClick() {
+      this.$router.replace({ query: { keyword: this.keyword } });
+      this.search();
+    },
+    search() {
+      if (!this.keyword || this.keyword == "") return;
+      this.isLoading = true;
 
-			this.axios
-				.get(_setting(`server`) + "/pokaapi/search/?keyword=" + this.keyword)
-				.then(response => {
-					this.searchResult = response.data;
+      this.axios
+        .get(_setting(`server`) + "/pokaapi/search/?keyword=" + this.keyword)
+        .then(response => {
+          this.searchResult = response.data;
 
-					this.active = Object.keys(this.searchResult).filter(x => this.searchResult[x].length)[0]
-					this.isLoading = false;
-				})
-				.catch(e => (this.isLoading = false));
-		}
-	}
+          this.active = Object.keys(this.searchResult).filter(
+            x => this.searchResult[x].length
+          )[0];
+          this.isLoading = false;
+        })
+        .catch(e => (this.isLoading = false));
+    }
+  }
 };
 </script>

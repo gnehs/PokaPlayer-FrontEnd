@@ -1,12 +1,12 @@
 <template>
-	<div>
-		<v-progress-circular indeterminate color="primary" />
-	</div>
+  <div>
+    <v-progress-circular indeterminate color="primary" />
+  </div>
 </template>
 
 <script>
 export default {
-	name: "poka-loader"
+  name: "poka-loader"
 };
 </script>
 <style lang="sass" scoped>
