@@ -1,6 +1,7 @@
 <template>
   <div>
-    <poka-header :title="name?$t('header_welcome_with_name',{name}):$t('header_welcome')" />
+    <poka-header title="媒體庫" />
+    <library-menu />
     <poka-update />
     <poka-loader v-if="!data" />
     <v-slide-y-reverse-transition>
@@ -8,6 +9,7 @@
     </v-slide-y-reverse-transition>
   </div>
 </template>
+
 <script>
 export default {
   name: "Home",
@@ -30,3 +32,6 @@ export default {
   })
 };
 </script>
+
+<style>
+</style>

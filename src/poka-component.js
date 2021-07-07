@@ -8,6 +8,7 @@ import pokaLoader from '@/components/loader.vue'
 import pinButton from '@/components/pinButton.vue'
 import playRandomButton from '@/components/playRandomButton.vue'
 import pokaUpdate from '@/components/poka-update.vue'
+import libraryMenu from '@/components/libraryMenu.vue'
 // parseData
 import parsePlaylists from '@/components/parse-playlists.vue'
 import parseSongs from '@/components/parse-songs.vue'
@@ -28,6 +29,7 @@ export {
     playRandomButton,
     pokaUpdate,
     infoHeader,
+    libraryMenu,
     // parseData
     parsePlaylists,
     parseSongs,

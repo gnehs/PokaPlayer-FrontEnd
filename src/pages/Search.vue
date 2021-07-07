@@ -1,5 +1,7 @@
 <template>
   <div>
+    <poka-header :title="$t('search')" />
+    <library-menu />
     <div class="search-box" :class="{focus: searchBoxFocus}">
       <input
         class="search-input"
@@ -66,6 +68,7 @@
 	transition-property: border, box-shadow
 	transition-timing-function: ease
 	background-color: white
+	position: relative
 	&:hover,&.focus
 		box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28)
 		border: 1px solid #90909000

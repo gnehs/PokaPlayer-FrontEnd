@@ -27,28 +27,25 @@
       </div>
       <v-divider style="margin: 0px 0;" />
       <div class="poka list">
-        <template v-for="item in items">
-          <v-divider v-if="item.divider" :key="item.text" style="margin: 4px 0;" />
-          <router-link
-            class="item"
-            v-else
-            v-ripple
-            :to="item.to"
-            :key="item.text"
-            active-class="active"
-          >
-            <div class="content">
-              <v-icon
-                class="material-icons-outlined"
-                :color="$vuetify.theme.isDark?'#FFF':'primary'"
-                v-text="item.icon"
-              />
-              <div class="header">
-                <div class="head">{{ item.text }}</div>
-              </div>
+        <router-link
+          class="item"
+          v-for="item in items"
+          v-ripple
+          :to="item.to"
+          :key="item.text"
+          active-class="active"
+        >
+          <div class="content">
+            <v-icon
+              class="material-icons-outlined"
+              :color="$vuetify.theme.isDark?'#FFF':'primary'"
+              v-text="item.icon"
+            />
+            <div class="header">
+              <div class="head">{{ item.text }}</div>
             </div>
-          </router-link>
-        </template>
+          </div>
+        </router-link>
       </div>
     </v-navigation-drawer>
     <v-main>
@@ -176,17 +173,9 @@ export default {
     scrollPositions: {},
     settings: { darkMode: window._setting("darkMode") },
     items: [
-      { icon: "home", text: i18n.t("home"), to: "/home" },
+      { icon: "library_music", text: "媒體庫", to: "/library" },
       { icon: "playlist_play", text: i18n.t("nowplaying"), to: "/now" },
       { icon: "subtitles", text: i18n.t("lrc"), to: "/lyric" },
-      { divider: true },
-      { icon: "search", text: i18n.t("search"), to: "/search" },
-      { icon: "album", text: i18n.t("album"), to: "/album" },
-      { icon: "folder", text: i18n.t("folder"), to: "/folder" },
-      { icon: "keyboard_voice", text: i18n.t("artist"), to: "/artist" },
-      { icon: "edit", text: i18n.t("composer"), to: "/composer" },
-      { icon: "video_library", text: i18n.t("playlist"), to: "/playlist" },
-      { divider: true },
       { icon: "settings", text: i18n.t("settings"), to: "/settings" }
     ]
   }),
@@ -249,6 +238,7 @@ export default {
       );
       try {
         navigator.mediaSession.setActionHandler("seekto", event => {
+          console.log("seek to", event.seekTime);
           _player.seek(event.seekTime);
           this.updatePositionState();
         });
@@ -318,6 +308,7 @@ export default {
         this.audio_recored = false;
         this.audio_cover = _setting(`headerBgSource`);
         if ("mediaSession" in navigator) {
+          console.log("[mediaSession] metadata cleared.");
           navigator.mediaSession.metadata = null;
         }
       }

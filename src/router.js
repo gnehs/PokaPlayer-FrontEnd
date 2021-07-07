@@ -9,13 +9,13 @@ import AlbumSongs from '@/pages/AlbumSongs'
 import Artist from '@/pages/Artist'
 import Composer from '@/pages/Composer'
 import Folder from '@/pages/Folder'
-import Home from '@/pages/Home'
 import Login from '@/pages/Login'
 import NowPlaying from '@/pages/NowPlaying'
 import Notfound from '@/pages/Notfound'
 import Playlist from '@/pages/Playlist'
 import PlaylistSongs from '@/pages/PlaylistSongs'
 import Shuffle from '@/pages/shuffle'
+import Library from '@/pages/Library'
 import Lyric from '@/pages/Lyric'
 import LyricEdit from '@/pages/LyricEdit'
 import Search from '@/pages/Search'
@@ -28,8 +28,12 @@ export default new Router({
 		path: '/',
 		name: 'root',
 		component: defaultLayout,
-		redirect: '/home',
+		redirect: '/library',
 		children: [{
+			path: '/library',
+			name: 'Library',
+			component: Library
+		}, {
 			path: '/lyric',
 			name: 'Lyric',
 			component: Lyric
@@ -105,10 +109,6 @@ export default new Router({
 			name: 'Search',
 			component: Search
 		}, {
-			path: '/home',
-			name: 'Home',
-			component: Home
-		}, {
 			path: '/shuffle',
 			name: 'Shuffle',
 			component: Shuffle
@@ -126,7 +126,7 @@ export default new Router({
 			component: () => import('@/pages/Review'),
 		}, {
 			path: '',
-			redirect: '/home'
+			redirect: '/library'
 		},
 		{
 			path: '/settings',

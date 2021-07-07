@@ -2,10 +2,11 @@
   <div>
     <poka-header
       :title="name||$t('album')"
-      :subtitle="name?$t(type):null"
+      :subtitle="name&&type!='album'?$t(type):null"
       :blurbg="type!='album'"
       :bg="cover"
     />
+    <library-menu />
     <v-slide-y-reverse-transition>
       <poka-parse-albums v-if="data" :data="data.albums" />
     </v-slide-y-reverse-transition>
@@ -27,7 +28,7 @@ export default {
   data: () => ({
     data: null,
     cover: null,
-    name: "",
+    name: null,
     type: null,
     server: _setting(`server`)
   }),
@@ -36,7 +37,6 @@ export default {
       this.type = this.$route.meta.type;
       this.data = null;
       this.cover = _setting(`headerBgSource`);
-      this.name = "Loading...";
 
       let url,
         type = this.$route.meta.type;
@@ -46,6 +46,7 @@ export default {
       if (type == "album") {
         url = _setting(`server`) + "/pokaapi/albums/";
       } else {
+        this.name = "Loading...";
         url = `${
           this.server
         }/pokaapi/${type}Albums/?moduleName=${encodeURIComponent(

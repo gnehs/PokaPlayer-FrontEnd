@@ -1,6 +1,7 @@
 <template>
   <div>
     <poka-header :title="title" />
+    <library-menu />
     <v-slide-y-reverse-transition>
       <poka-parse-playlists v-if="data" :data="data" />
     </v-slide-y-reverse-transition>

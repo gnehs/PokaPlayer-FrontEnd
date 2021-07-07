@@ -1,6 +1,7 @@
 <template>
   <div>
     <poka-header :title="$t('folder')" />
+    <library-menu />
     <v-slide-y-reverse-transition>
       <v-btn @click="goBack" v-show="!$route.meta.root" style="margin-bottom: 16px">
         <v-icon>arrow_back</v-icon>
