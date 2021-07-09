@@ -4,7 +4,7 @@
     <div class="info-data">
       <div class="album-name" :title="title">{{title}}</div>
       <div class="artist-name" :title="subtitle">{{subtitle}}</div>
-      <div class="grow"></div>
+      <div class="grow" />
       <div class="footer">
         <v-fade-transition>
           <div class="time" v-if="songs" :key="songs">{{$t("album_total", { songs: songs })}}</div>
@@ -24,9 +24,7 @@ export default {
     title: String,
     subtitle: String,
     songs: { default: 0 }
-  },
-  data: () => ({}),
-  created() {}
+  }
 };
 </script>
 
