@@ -1,5 +1,15 @@
 <template>
-  <v-btn outlined color="primary" @click="randomPlay" :disabled="loadingRandom">
+  <v-btn
+    outlined
+    color="primary"
+    @click="randomPlay"
+    :disabled="loadingRandom"
+    v-if="!$vuetify.theme.isDark"
+  >
+    <span v-if="!loadingRandom">{{$t('playlist_random')}}</span>
+    <span v-else>{{$t('loading')}}</span>
+  </v-btn>
+  <v-btn outlined color="white" dark @click="randomPlay" :disabled="loadingRandom" v-else>
     <span v-if="!loadingRandom">{{$t('playlist_random')}}</span>
     <span v-else>{{$t('loading')}}</span>
   </v-btn>
