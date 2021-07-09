@@ -69,22 +69,15 @@ export default {
 			transition: all .2s
 			will-change: box-shadow, transform, filter
 			position: relative
-			overflow: hidden
+			background-color: var(--card-background-color,#607D8Ba1)
+			.v-image
+				border-radius: 16px
 		&:hover .image
 			transform: translateY(-5px)
 			box-shadow: 0 0.8px 1.9px rgba(0, 0, 0, 0.02),0 2.3px 4.5px rgba(0, 0, 0, 0.028),0 4.8px 8.5px rgba(0, 0, 0, 0.035),0 9.2px 15.2px rgba(0, 0, 0, 0.042),0 16.9px 28.4px rgba(0, 0, 0, 0.05),0 26px 68px rgba(0, 0, 0, 0.07)
 		&:active .image
 			transform: translateY(-5px)
 			filter: brightness(80%)
-		.image i
-			position: absolute
-			font-size: calc(3vmax + 18px)
-			color: #FFF
-			display: flex
-			top: 0
-			bottom: 0
-			left: 0
-			right: 0
 		.title
 			font-size: 1.5em !important
 			padding-top: 5px
@@ -98,9 +91,18 @@ export default {
 			line-height: 1.5em
 			color: var(--text-color)
 			opacity: .75
-		.image
-			background-color: var(--card-background-color,#607D8Ba1)
+		.icon
+			position: absolute
+			background-color: rgba(0,0,0,.25)
 			backdrop-filter: blur(8px)
+			border-radius: 16px
+			padding: 12px
+			box-shadow: 0 0.4px 0.3px rgba(0, 0, 0, 0.008),0 1.1px 0.8px rgba(0, 0, 0, 0.012),0 2.2px 1.5px rgba(0, 0, 0, 0.015),0 4.2px 2.7px rgba(0, 0, 0, 0.018),0 7.8px 5px rgba(0, 0, 0, 0.022),0 12px 12px rgba(0, 0, 0, 0.03)
+			bottom: 8px
+			right: 8px
+			i
+				font-size: 24px
+				color: #fff
 		&:nth-child(14n+2)
 			--card-background-color: #F44336a1
 		&:nth-child(14n+3)
