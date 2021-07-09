@@ -1,12 +1,12 @@
 <template>
   <div>
     <v-app-bar
-      v-if="!$vuetify.breakpoint.mdAndUp"
       color="#FFF"
+      clipped-left
       app
-      style="box-shadow: 0px 0px 0px .5px rgb(0 0 0 / 20%)"
+      :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark?'rgba(255, 255, 255, 0.12)':`rgb(0 0 0 / 20%)`}`"
     >
-      <v-app-bar-nav-icon @click.stop="toggleMenu()" />
+      <v-app-bar-nav-icon @click.stop="toggleMenu()" v-if="!$vuetify.breakpoint.mdAndUp" />
       <div class="poka-drawer-logo">
         <h1>PokaPlayer</h1>
       </div>
@@ -20,12 +20,21 @@
       v-model="drawer"
       :clipped="$vuetify.breakpoint.mdAndUp"
       :mobile-breakpoint="960"
+      :mini-variant="$vuetify.breakpoint.mdAndUp"
       app
     >
-      <div class="poka-drawer-logo">
-        <h1>PokaPlayer</h1>
-      </div>
-      <v-divider style="margin: 0px 0;" />
+      <v-app-bar
+        color="#FFF"
+        :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark?'rgba(255, 255, 255, 0.12)':`rgb(0 0 0 / 20%)`}`"
+        v-if="!$vuetify.breakpoint.mdAndUp"
+      >
+        <v-btn icon @click="toggleMenu">
+          <v-icon class="material-icons-outlined">close</v-icon>
+        </v-btn>
+        <div class="poka-drawer-logo">
+          <h1>PokaPlayer</h1>
+        </div>
+      </v-app-bar>
       <div class="poka list">
         <router-link
           class="item"
@@ -34,6 +43,7 @@
           :to="item.to"
           :key="item.text"
           active-class="active"
+          :title="item.text"
         >
           <div class="content">
             <v-icon
