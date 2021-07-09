@@ -409,140 +409,149 @@ export default {
 </script>
 <style lang="sass" scoped>
 nav
-	.v-list-item
-		.material-icons:not(.material-icons-outlined)
-			display: none
-		&.v-item--active
-			.material-icons:not(.material-icons-outlined)
-				display: block
-			.material-icons-outlined
-				display: none
+  &.v-navigation-drawer--mini-variant
+    .poka-drawer-logo
+      text-align: center
+      padding: 0
+    .poka.list
+      .item
+        .content
+          display: block
+          padding: .88em 0
+          text-align: center
+          .header
+            margin-left: 0
+            .head
+              font-size: 10px
+              font-weight: normal
+              overflow: hidden
+              white-space: nowrap
+              text-overflow: ellipsis
 main
-	height: calc(var(--vh,1vh) * 100)
-	overflow: hidden
-	overflow-y: scroll
-	margin-bottom: -64px
+  height: calc(var(--vh,1vh) * 100)
+  overflow: hidden
+  overflow-y: scroll
+  margin-bottom: -64px
 
 .v-navigation-drawer:not(.v-navigation-drawer--is-mobile)
-	height: calc(var(--vh,1vh) * 100 - 64px) !important
+  height: calc(var(--vh,1vh) * 100 - 64px) !important
 .poka-drawer-logo
-	padding: 0 16px
-	font-family: var(--product-font)
-	h1
-		font-size: 24px
-		line-height: 56px
+  font-family: var(--product-font)
+  h1
+    font-size: 24px
+    line-height: 56px
 
 nav
-	.poka.list
-		.item,.item.active:before
-			border-radius: 0
+  .poka.list
+    .item,.item.active:before
+      border-radius: 0
 
 @media (min-width: 576px)
-	.router-view
-		padding: 16px
+  .router-view
+    padding: 16px
 
 .v-app-bar
-	box-shadow: inset 0 -1px 0 0 #dadce0
+  box-shadow: inset 0 -1px 0 0 #dadce0
 @media (prefers-color-scheme: dark)
-	.v-app-bar
-		box-shadow: inset 0 -1px 0 0 hsla(0,0%,100%,.12)
+  .v-app-bar
+    box-shadow: inset 0 -1px 0 0 hsla(0,0%,100%,.12)
 
 .bottom-player
-	box-sizing: border-box
-	height: 64px
-	max-height: 64px
-	backdrop-filter: blur(4px)
-	z-index: 99
-	position: fixed
-	background-color: rgba(245, 245, 245, 0.7)
+  box-sizing: border-box
+  height: 64px
+  max-height: 64px
+  backdrop-filter: blur(4px)
+  z-index: 99
+  position: fixed
+  background-color: rgba(245, 245, 245, 0.7)
 
-	--cover-size: 56px
-	@media (prefers-color-scheme: dark)
-		&
-			background-color: rgba(47, 43, 62, 0.7)
-	.app-progress-bar
-		margin: -16px -8px
-	.song-info
-		display: grid
-		grid-gap: 10px
-		grid-template-columns: .5fr 250px .5fr
-		width: 100vw
-		max-width: 100vw
-		box-sizing: border-box
-		.left
-			display: flex
-			align-items: center
-			overflow: hidden
-			height: 64px
-			.song-title
-				flex: 1
-				overflow: hidden
-				cursor: pointer
-				.song-name,.song-artist
-					padding-left: 2px
-					overflow: hidden
-					text-overflow: ellipsis
-					white-space: nowrap
-					line-height: 24px
-				.song-name
-					font-weight: bold
-			.cover
-				margin: 0 8px
-				height: var(--cover-size)
-				min-width: var(--cover-size)
-				background-size: cover
-				background-position: center
-				background-position: center
-				background-color: white
-				border-radius: 8px
-				overflow: hidden
-				img
-					transition: all .6s cubic-bezier(0.55, 0, 0.1, 1)
-					width: var(--cover-size)
-					height: var(--cover-size)
-					max-width: var(--cover-size)
-					max-height: var(--cover-size)
-					object-fit: cover
-		.center
-			display: flex
-			align-items: center
-			height: 64px
-			justify-content: center
-			span.time
-				font-family: var(--product-font)
-				width: 2.8em
-				text-align: center
-		.right
-			display: flex
-			align-items: center
-			height: 64px
-			justify-content: flex-end
-			padding-right: 8px
-		.right-s
-			width: 144px
-			display: none
-			align-items: center
-			height: 64px
-			justify-content: flex-end
-			padding-right: 8px
+  --cover-size: 56px
+  @media (prefers-color-scheme: dark)
+    &
+      background-color: rgba(47, 43, 62, 0.7)
+  .app-progress-bar
+    margin: -16px -8px
+  .song-info
+    display: grid
+    grid-gap: 10px
+    grid-template-columns: .5fr 250px .5fr
+    width: 100vw
+    max-width: 100vw
+    box-sizing: border-box
+    .left
+      display: flex
+      align-items: center
+      overflow: hidden
+      height: 64px
+      .song-title
+        flex: 1
+        overflow: hidden
+        cursor: pointer
+        .song-name,.song-artist
+          padding-left: 2px
+          overflow: hidden
+          text-overflow: ellipsis
+          white-space: nowrap
+          line-height: 24px
+        .song-name
+          font-weight: bold
+      .cover
+        margin: 0 8px
+        height: var(--cover-size)
+        min-width: var(--cover-size)
+        background-size: cover
+        background-position: center
+        background-position: center
+        background-color: white
+        border-radius: 8px
+        overflow: hidden
+        img
+          transition: all .6s cubic-bezier(0.55, 0, 0.1, 1)
+          width: var(--cover-size)
+          height: var(--cover-size)
+          max-width: var(--cover-size)
+          max-height: var(--cover-size)
+          object-fit: cover
+    .center
+      display: flex
+      align-items: center
+      height: 64px
+      justify-content: center
+      span.time
+        font-family: var(--product-font)
+        width: 2.8em
+        text-align: center
+    .right
+      display: flex
+      align-items: center
+      height: 64px
+      justify-content: flex-end
+      padding-right: 8px
+    .right-s
+      width: 144px
+      display: none
+      align-items: center
+      height: 64px
+      justify-content: flex-end
+      padding-right: 8px
 @media screen and (min-width: 768px)
-	.bottom-player .song-info .left
-		.song-title
-			margin-left: calc(var(--cover-size) * 1.5 + 16px)
-		.cover
-			position: absolute
-			bottom: 4px
-			left: 0px
-			transform: scale(1.5)
-			transform-origin: left bottom
-			z-index: 3
-			box-shadow: 0 0 15px #00000033
+  .bottom-player .song-info .left
+    .song-title
+      margin-left: calc(var(--cover-size) * 1.5 + 16px)
+    .cover
+      position: absolute
+      bottom: 4px
+      left: 0px
+      transform: scale(1.5)
+      transform-origin: left bottom
+      z-index: 3
+      box-shadow: 0 0 15px #00000033
 @media screen and (max-width: 600px)
-	.bottom-player
-		.song-info
-			grid-template-columns: 1fr 144px
-			.center,.right
-				display: none
-			.right-s
-				display: flex
+  .bottom-player
+    .song-info
+      grid-template-columns: 1fr 144px
+      .center,.right
+        display: none
+      .right-s
+        display: flex
 </style>
