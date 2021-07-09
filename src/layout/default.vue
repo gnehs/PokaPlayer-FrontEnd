@@ -4,6 +4,7 @@
       color="#FFF"
       clipped-left
       app
+      v-if="!$vuetify.breakpoint.mdAndUp"
       :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark?'rgba(255, 255, 255, 0.12)':`rgb(0 0 0 / 20%)`}`"
     >
       <v-app-bar-nav-icon @click.stop="toggleMenu()" v-if="!$vuetify.breakpoint.mdAndUp" />
@@ -35,6 +36,12 @@
           <h1>PokaPlayer</h1>
         </div>
       </v-app-bar>
+      <img
+        src="/img/icons/icon.svg"
+        v-if="$vuetify.breakpoint.mdAndUp"
+        style="padding: 8px; width: 100%;"
+        @click="$router.push('/')"
+      />
       <div class="poka list">
         <router-link
           class="item"
