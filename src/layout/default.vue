@@ -85,8 +85,10 @@
           </v-btn>
 
           <v-btn small fab depressed @click="audio_toggle" color="primary">
-            <v-icon class="material-icons-outlined" key="play" v-if="audio_paused">play_arrow</v-icon>
-            <v-icon class="material-icons-outlined" key="pause" v-else>pause</v-icon>
+            <v-icon
+              class="anicons"
+              :style="{'font-variation-settings':audio_paused?``:`'TIME' 100`}"
+            >H</v-icon>
           </v-btn>
 
           <v-btn icon @click="audio_next">
@@ -136,8 +138,10 @@
           </v-btn>
 
           <v-btn small fab depressed @click="audio_toggle" color="primary">
-            <v-icon class="material-icons-outlined" key="play" v-if="audio_paused">play_arrow</v-icon>
-            <v-icon class="material-icons-outlined" key="pause" v-else>pause</v-icon>
+            <v-icon
+              class="anicons"
+              :style="{'font-variation-settings':audio_paused?``:`'TIME' 100`}"
+            >H</v-icon>
           </v-btn>
 
           <v-btn icon @click="audio_next">
