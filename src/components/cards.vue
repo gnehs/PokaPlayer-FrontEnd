@@ -175,6 +175,14 @@ export default {
 	.poka.cards .card
 		--size: calc(16.6% - 8px)
 
+@media (min-width: 1500px)
+	.poka.cards .card
+		--size: calc(100% / 7 - 8px)
+
+@media (min-width: 1800px)
+	.poka.cards .card
+		--size: calc(100% / 8 - 8px)
+
 @media (max-width: 575.98px)
 	.poka
 		&.doubling.ten.cards .card
