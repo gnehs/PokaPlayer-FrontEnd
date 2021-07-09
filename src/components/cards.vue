@@ -69,7 +69,7 @@ export default {
 			transition: all .2s
 			will-change: box-shadow, transform, filter
 			position: relative
-			background-color: var(--card-background-color,#607D8Ba1)
+			background-color: var(--card-background-color,#607D8B)
 			.v-image
 				border-radius: 16px
 		&:hover .image
@@ -104,31 +104,31 @@ export default {
 				font-size: 24px
 				color: #fff
 		&:nth-child(14n+2)
-			--card-background-color: #F44336a1
+			--card-background-color: #F44336
 		&:nth-child(14n+3)
-			--card-background-color: #E91E63a1
+			--card-background-color: #E91E63
 		&:nth-child(14n+4)
-			--card-background-color: #9C27B0a1
+			--card-background-color: #9C27B0
 		&:nth-child(14n+5)
-			--card-background-color: #FF9800a1
+			--card-background-color: #FF9800
 		&:nth-child(14n+6)
-			--card-background-color: #2196F3a1
+			--card-background-color: #2196F3
 		&:nth-child(14n+7)
-			--card-background-color: #00BCD4a1
+			--card-background-color: #00BCD4
 		&:nth-child(14n+8)
-			--card-background-color: #009688a1
+			--card-background-color: #009688
 		&:nth-child(14n+9)
-			--card-background-color: #4CAF50a1
+			--card-background-color: #4CAF50
 		&:nth-child(14n+10)
-			--card-background-color: #8BC34Aa1
+			--card-background-color: #8BC34A
 		&:nth-child(14n+11)
-			--card-background-color: #FFC107a1
+			--card-background-color: #FFC107
 		&:nth-child(14n+12)
-			--card-background-color: #3F51B5a1
+			--card-background-color: #3F51B5
 		&:nth-child(14n+13)
-			--card-background-color: #FF5722a1
+			--card-background-color: #FF5722
 		&:nth-child(14n+14)
-			--card-background-color: #795548a1
+			--card-background-color: #795548
 	&.two.cards .card
 		--size: calc(100% / 2 - 8px)
 	&.three.cards .card
