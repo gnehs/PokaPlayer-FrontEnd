@@ -1,11 +1,7 @@
  <template>
   <div style="position: sticky;top: 16px;">
     <div class="header-wrapper">
-      <div
-        class="bg"
-        :style="Object.assign({backgroundImage: `url('${bg}')`},bgStyle)"
-        :class="{blur: blurbg}"
-      />
+      <div class="bg" :style="{backgroundImage: `url('${bg}')`}" :class="{blur: blurbg}" />
     </div>
     <div class="hw-header" style="line-height: normal;" v-if="title" :style="headerStyle">
       <div class="hw-title">{{title}}</div>
@@ -20,9 +16,6 @@ export default {
   data: () => ({
     headerStyle: {
       opacity: 1,
-      transform: ""
-    },
-    bgStyle: {
       transform: ""
     }
   }),
@@ -45,9 +38,6 @@ export default {
         this.headerStyle.transform = `translate(0,-${(scrollTop /
           targetHideHeight) *
           35}px)`;
-        this.bgStyle.transform = `scale(1.12) translate(0,-${(scrollTop /
-          scrollHeight) *
-          50}px)`;
       }
     }
   },
