@@ -464,7 +464,7 @@ nav
   box-sizing: border-box
   height: 64px
   max-height: 64px
-  backdrop-filter: blur(4px)
+  backdrop-filter: blur(8px)
   z-index: 99
   position: fixed
   background-color: rgba(245, 245, 245, 0.7)
