@@ -7,6 +7,7 @@
           :key="id"
           :to="`/composer/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
           :poka-bg="cover||false"
+          poka-icon="edit"
           :poka-title="name||'未知'"
           :poka-subtitle="$t(`source.${source}`)"
         />

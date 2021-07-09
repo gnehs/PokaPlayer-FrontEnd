@@ -6,6 +6,7 @@
           v-for="{name, cover, id, source} in data"
           :key="id"
           :to="`/artist/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
+          poka-icon="keyboard_voice"
           :poka-bg="cover||false"
           :poka-title="name||'未知'"
           :poka-subtitle="$t(`source.${source}`)"
