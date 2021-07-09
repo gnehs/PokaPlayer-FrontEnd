@@ -48,6 +48,7 @@
       right
       fixed
       style="bottom: calc(16px + 69px);"
+      v-if="!hideFab"
       @click="changeView"
     >
       <v-icon v-if="composerView=='card'" class="material-icons-outlined">list</v-icon>
@@ -59,7 +60,10 @@
 <script>
 export default {
   name: "poka-parse-composers",
-  props: ["data"],
+  props: {
+    data: { type: Object },
+    hideFab: { type: Boolean, default: false }
+  },
   data: () => ({
     server: _setting(`server`),
     composerView: _setting(`composerView`)
