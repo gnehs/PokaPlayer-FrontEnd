@@ -1,6 +1,6 @@
 <template>
   <div>
-    <poka-header :blurbg="true" :bg="cover" />
+    <poka-header :blurbg="!isCoverGenerate" :bg="cover" />
     <info-header
       :title="title||$t('loading')"
       :subtitle="$t('playlist')"
@@ -63,12 +63,14 @@
 </template>
 
 <script>
+const GeoPattern = require("geopattern");
 export default {
   name: "PlaylistSongs",
   data: () => ({
     data: null,
     title: null,
-    cover: _setting(`headerBgSource`),
+    cover: null,
+    isCoverGenerate: false,
     server: _setting(`server`),
     editData: {
       name: null,
@@ -119,6 +121,11 @@ export default {
             if (!this.data.playlists[0].image.startsWith("http")) {
               this.cover = this.server + this.cover;
             }
+          } else {
+            this.cover = GeoPattern.generate(this.title, {
+              baseColor: "#fc0"
+            }).toDataUri();
+            this.isCoverGenerate = true;
           }
           this.fromPoka = this.data.playlists[0].source == "poka";
         });

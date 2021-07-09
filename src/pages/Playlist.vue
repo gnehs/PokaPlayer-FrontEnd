@@ -1,7 +1,7 @@
 <template>
   <div>
-    <poka-header :title="title" />
-    <library-menu />
+    <poka-header :title="title" :bg="cover" />
+    <library-menu v-show="$route.name == 'Playlist'" />
     <v-slide-y-reverse-transition>
       <poka-parse-playlists v-if="data" :data="data" />
     </v-slide-y-reverse-transition>
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+const GeoPattern = require("geopattern");
 export default {
   name: "Playlist",
   watch: {
@@ -23,7 +24,7 @@ export default {
   data: () => ({
     data: null,
     rawData: null,
-    server: _setting(`server`),
+    cover: null,
     title: i18n.t("playlist")
   }),
   methods: {
@@ -39,9 +40,13 @@ export default {
       if (routerNames == "PlaylistFolder") {
         this.title = this.rawData.filter(x => x.id == routerParams)[0].name;
         this.data = this.rawData.filter(x => x.id == routerParams)[0].playlists;
+        this.cover = GeoPattern.generate(this.title, {
+          baseColor: "#fc0"
+        }).toDataUri();
       } else {
         this.title = i18n.t("playlist");
         this.data = this.rawData;
+        this.cover = _setting(`headerBgSource`);
       }
     }
   }
