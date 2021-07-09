@@ -13,7 +13,8 @@ export default {
 		failed: 'Unable to write to clipboard.'
 	},
 	"home": "Home",
-	"nowplaying": "Now Playing",
+	"nowplaying": "Player",
+	"library": "Library",
 	"lrc": "Lyrics",
 	"search": "Search",
 	"album": "Albums",
@@ -23,6 +24,7 @@ export default {
 	"composer": "Composers",
 	"playlist": "Playlists",
 	"settings": "Settings",
+	"debug": "Debug",
 	"ok": "OK",
 	"cancel": "Cancel",
 	"reset": "Reset",
@@ -174,7 +176,7 @@ export default {
 	"settings_restartDialog_title": "Are you sure to restart?",
 	"settingIndex": {
 		'normalItems': 'General',
-		'adminItems': 'Server management',
+		'adminItems': 'Server',
 	},
 	"settingInterface": {
 		"_": "Interface",

@@ -59,7 +59,7 @@
               v-text="item.icon"
             />
             <div class="header">
-              <div class="head">{{ item.text }}</div>
+              <div class="head">{{ $t(item.text) }}</div>
             </div>
           </div>
         </router-link>
@@ -194,10 +194,10 @@ export default {
     scrollPositions: {},
     settings: { darkMode: window._setting("darkMode") },
     items: [
-      { icon: "library_music", text: "媒體庫", to: "/library" },
-      { icon: "playlist_play", text: i18n.t("nowplaying"), to: "/now" },
-      { icon: "subtitles", text: i18n.t("lrc"), to: "/lyric" },
-      { icon: "settings", text: i18n.t("settings"), to: "/settings" }
+      { icon: "library_music", text: "library", to: "/library" },
+      { icon: "playlist_play", text: "nowplaying", to: "/now" },
+      { icon: "subtitles", text: "lrc", to: "/lyric" },
+      { icon: "settings", text: "settings", to: "/settings" }
     ]
   }),
   watch: {
@@ -410,7 +410,7 @@ export default {
       if (userProfile.data.role == "admin") {
         let debugItem = {
           icon: "admin_panel_settings",
-          text: i18n.t("settingIndex.adminItems"),
+          text: "settingIndex.adminItems",
           to: "/admin"
         };
         if (!this.items.filter(x => x.text == "Admin").length) {
@@ -419,7 +419,7 @@ export default {
       }
       // add debug page
       if (response.data.debug) {
-        let debugItem = { icon: "bug_report", text: "Debug", to: "/debug" };
+        let debugItem = { icon: "bug_report", text: "debug", to: "/debug" };
         if (!this.items.filter(x => x.text == "Debug").length) {
           this.items.push(debugItem);
         }

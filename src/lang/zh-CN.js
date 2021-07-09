@@ -14,6 +14,7 @@ export default {
 	},
 	"home": "首页",
 	"nowplaying": "现正播放",
+	"library": "媒體庫",
 	"lrc": "歌词",
 	"search": "搜寻",
 	"album": "专辑",
@@ -23,6 +24,7 @@ export default {
 	"composer": "作曲者",
 	"playlist": "播放清单",
 	"settings": "设定",
+	"debug": "除錯",
 	"ok": "好",
 	"cancel": "取消",
 	"reset": "重置",
@@ -176,7 +178,7 @@ export default {
 	"settings_restartDialog_title": "确定要重新启动吗？",
 	"settingIndex": {
 		'normalItems': '一般设定项目',
-		'adminItems': '服务器管理',
+		'adminItems': '服务器',
 	},
 	"settingInterface": {
 		"_": "界面",

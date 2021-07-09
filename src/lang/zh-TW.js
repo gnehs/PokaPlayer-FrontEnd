@@ -14,6 +14,7 @@ export default {
 	},
 	"home": "首頁",
 	"nowplaying": "現正播放",
+	"library": "媒體庫",
 	"lrc": "歌詞",
 	"search": "搜尋",
 	"album": "專輯",
@@ -23,6 +24,7 @@ export default {
 	"composer": "作曲者",
 	"playlist": "播放清單",
 	"settings": "設定",
+	"debug": "除錯",
 	"ok": "好",
 	"cancel": "取消",
 	"reset": "重置",
@@ -176,7 +178,7 @@ export default {
 	"settings_restartDialog_title": "確定要重新啟動嗎？",
 	"settingIndex": {
 		'normalItems': '一般設定項目',
-		'adminItems': '伺服器管理',
+		'adminItems': '伺服器',
 	},
 	"settingInterface": {
 		"_": "介面",
