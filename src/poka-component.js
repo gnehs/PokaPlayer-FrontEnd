@@ -17,7 +17,6 @@ import parseAlbums from '@/components/parse-albums.vue'
 import parseComposers from '@/components/parse-composers.vue'
 import parseFolders from '@/components/parse-folders.vue'
 import parseHome from '@/components/parse-home.vue'
-import parseHomeDialog from '@/components/parse-home-dialog.vue'
 export {
     // pokaComponent
     about,
@@ -38,5 +37,4 @@ export {
     parseComposers,
     parseFolders,
     parseHome,
-    parseHomeDialog,
 }
