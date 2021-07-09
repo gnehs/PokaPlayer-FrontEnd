@@ -93,13 +93,13 @@ export default {
 			opacity: .75
 		.icon
 			position: absolute
-			background-color: rgba(0,0,0,.25)
+			background-color: rgba(0,0,0,.35)
 			backdrop-filter: blur(8px)
 			border-radius: 16px
 			padding: 12px
-			box-shadow: 0 0.4px 0.3px rgba(0, 0, 0, 0.008),0 1.1px 0.8px rgba(0, 0, 0, 0.012),0 2.2px 1.5px rgba(0, 0, 0, 0.015),0 4.2px 2.7px rgba(0, 0, 0, 0.018),0 7.8px 5px rgba(0, 0, 0, 0.022),0 12px 12px rgba(0, 0, 0, 0.03)
-			bottom: 8px
-			right: 8px
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25)
+			bottom: 4px
+			right: 4px
 			i
 				font-size: 24px
 				color: #fff
