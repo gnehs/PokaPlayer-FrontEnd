@@ -226,43 +226,43 @@
 </template>
 <style lang="sass">
 .moreDialog-header
-	padding: 16px 0
-	position: relative
-	.moreDialog-cover
-		background: #555
-		border-radius: 16px
-		margin-bottom: 8px
-	.moreDialog-cover-shadow
-		position: absolute
-		filter: blur(20px) brightness(.9)
-		opacity: .5
-		transform: translateY(8px)
-	.head
-		font-weight: bold
-		font-size: 18px
-		line-height: 1.25em
-		opacity: 0.999
-	.head,.artist
-		max-width: 95%
+  padding: 16px 0
+  position: relative
+  .moreDialog-cover
+    background: #555
+    border-radius: 16px
+    margin-bottom: 8px
+  .moreDialog-cover-shadow
+    position: absolute
+    filter: blur(20px) brightness(.9)
+    opacity: .5
+    transform: translateY(8px)
+  .head
+    font-weight: bold
+    font-size: 18px
+    line-height: 1.25em
+    opacity: 0.999
+  .head,.artist
+    max-width: 95%
 .moreDialog-content
-	.item
-		.v-avatar
-			position: relative
-			&:before
-				background-color: var(--v-primary-base)
-				-webkit-backdrop-filter: blur(10px)
-				bottom: 0
-				content: ""
-				left: 0
-				opacity: 0.1
-				pointer-events: none
-				position: absolute
-				right: 0
-				top: 0
-				border-radius: 4px
-				transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1)
-		&:hover .v-avatar:before
-			opacity: .2
+  .item
+    .v-avatar
+      position: relative
+      &:before
+        background-color: var(--v-primary-base)
+        backdrop-filter: blur(8px)
+        bottom: 0
+        content: ""
+        left: 0
+        opacity: 0.1
+        pointer-events: none
+        position: absolute
+        right: 0
+        top: 0
+        border-radius: 4px
+        transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1)
+    &:hover .v-avatar:before
+      opacity: .2
 </style>
 <script>
 export default {

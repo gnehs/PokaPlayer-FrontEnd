@@ -38,64 +38,64 @@ export default {
 @import "@/assets/main.sass"
 </style>
 <style lang="scss">
-	.page-container {
-		overflow: hidden;
-		height: 100vh;
-		width: 100vw;
-		&.theme--dark {
-			background: #282535 !important;
-		}
-	}
-	.theme--dark.v-sheet,
-	.theme--dark.v-navigation-drawer,
-	.theme--dark.v-tabs-items,
-	.theme--dark.v-stepper {
-		border-color: #2f2b3e;
-		background: #2f2b3e !important;
-	}
-	.v-application.v-application {
-		font-family: var(--default-font);
-	}
-	.v-card:not(.v-sheet--tile):not(.v-card--shaped) {
-		border-radius: 8px !important;
-	}
-	.v-card + .v-card {
-		margin-top: 16px;
-	}
-	.t-ellipsis {
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-	.v-snack--bottom.withBottomPlayer {
-		padding-bottom: 77px !important;
-	}
-	.v-snack__wrapper {
-		background-color: rgba(57, 53, 77, 0.8) !important;
-		backdrop-filter: blur(3px) !important;
-	}
-	nav .theme--dark.v-list-item--active:hover::before,
-	nav .theme--dark.v-list-item--active::before {
-		opacity: 0.2;
-		background-color: #776ea0;
-	}
-	nav .theme--dark.v-list-item--active,
-	nav .theme--dark.v-list-item--active {
-		color: #fff !important;
-	}
-	.material-icons-outlined.material-icons-outlined.material-icons-outlined {
-		font-family: "Material Icons Outlined" !important;
-	}
-	#playlist-dialog {
-		.theme--dark.v-list-item--active:hover::before,
-		.theme--dark.v-list-item--active::before {
-			opacity: 0 !important;
-		}
-		.theme--dark.v-list-item,
-		.v-list-item--link:before {
-			border-radius: 8px !important;
-		}
-	}
+  .page-container {
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    &.theme--dark {
+      background: #282535 !important;
+    }
+  }
+  .theme--dark.v-sheet,
+  .theme--dark.v-navigation-drawer,
+  .theme--dark.v-tabs-items,
+  .theme--dark.v-stepper {
+    border-color: #2f2b3e;
+    background: #2f2b3e !important;
+  }
+  .v-application.v-application {
+    font-family: var(--default-font);
+  }
+  .v-card:not(.v-sheet--tile):not(.v-card--shaped) {
+    border-radius: 8px !important;
+  }
+  .v-card + .v-card {
+    margin-top: 16px;
+  }
+  .t-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .v-snack--bottom.withBottomPlayer {
+    padding-bottom: 77px !important;
+  }
+  .v-snack__wrapper {
+    background-color: rgba(57, 53, 77, 0.8) !important;
+    backdrop-filter: blur(3px) !important;
+  }
+  nav .theme--dark.v-list-item--active:hover::before,
+  nav .theme--dark.v-list-item--active::before {
+    opacity: 0.2;
+    background-color: #776ea0;
+  }
+  nav .theme--dark.v-list-item--active,
+  nav .theme--dark.v-list-item--active {
+    color: #fff !important;
+  }
+  .material-icons-outlined.material-icons-outlined.material-icons-outlined {
+    font-family: "Material Icons Outlined" !important;
+  }
+  #playlist-dialog {
+    .theme--dark.v-list-item--active:hover::before,
+    .theme--dark.v-list-item--active::before {
+      opacity: 0 !important;
+    }
+    .theme--dark.v-list-item,
+    .v-list-item--link:before {
+      border-radius: 8px !important;
+    }
+  }
 </style>
 <style lang="sass">
 //---------------------//

@@ -10,66 +10,70 @@
 </template>
 <style lang="sass" scoped>
 .library-menu
-    display: grid
-    grid-template-columns: repeat(4,1fr)
-    position: relative
-    gap: 8px
-    --item-bg: 255,255,255
-    justify-content: center
-    flex-wrap: wrap
-    margin: 8px 0
-    .item
-        text-align: center
-        text-decoration: none
-        padding: 8px
-        border-radius: 16px
-        display: flex
-        align-items: center
-        background-color: rgba(var(--item-bg),.75)
-        backdrop-filter: blur(10px)
-        box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.1)
-        color: #000
+  display: grid
+  grid-template-columns: repeat(4,1fr)
+  position: relative
+  gap: 8px
+  --item-bg: 255,255,255
+  --item-text-color: #000
+  justify-content: center
+  flex-wrap: wrap
+  margin: 8px 0
+  .item
+    text-align: center
+    text-decoration: none
+    padding: 8px
+    border-radius: 16px
+    display: flex
+    align-items: center
+    background-color: rgba(var(--item-bg),.75)
+    backdrop-filter: blur(8px)
+    box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.1)
+    color: var(--item-text-color)
+    .v-icon
+      color: var(--v-primary-base)
+    .text
+      font-size: 18px
+      margin-left: 16px
+      font-weight: bold
+    .v-avatar
+      position: relative
+      &:before
+        background-color: var(--v-primary-base)
+        bottom: 0
+        content: ""
+        left: 0
+        opacity: 0.1
+        pointer-events: none
+        position: absolute
+        right: 0
+        top: 0
+        border-radius: 4px
+        transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1)
+        box-shadow: 0px 4px 14px 0px rgb(0 0 0 / 100%)
+    &.router-link-active
+      background-color: var(--v-primary-base)
+      color: #fff
+      .v-avatar
+        position: relative
+        &:before
+          background-color: #fff
         .v-icon
-            color: var(--v-primary-base)
-        .text
-            font-size: 18px
-            margin-left: 16px
-            font-weight: bold
-        .v-avatar
-            position: relative
-            &:before
-                background-color: var(--v-primary-base)
-                bottom: 0
-                content: ""
-                left: 0
-                opacity: 0.1
-                pointer-events: none
-                position: absolute
-                right: 0
-                top: 0
-                border-radius: 4px
-                transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1)
-                box-shadow: 0px 4px 14px 0px rgb(0 0 0 / 100%)
-        &.router-link-active
-            background-color: var(--v-primary-base)
-            color: #fff
-            .v-avatar
-                position: relative
-                &:before
-                    background-color: #fff
-            .v-icon
-                color: #fff
-        &:hover:not(.router-link-active)
-            background-color: rgba(var(--item-bg),1)
-            .v-avatar:before
-                opacity: .2
+          color: #fff
+    &:hover:not(.router-link-active)
+      background-color: rgba(var(--item-bg),1)
+      .v-avatar:before
+        opacity: .2
 @media (prefers-color-scheme: dark)
+  .library-menu
+    --item-bg: 47,43,62
+    --item-text-color: #fff
 @media screen and (max-width: 768px)
-    .library-menu
-        grid-template-columns: repeat(2,1fr)
+  .library-menu
+    grid-template-columns: repeat(2,1fr)
 @media screen and (min-width: 1366px)
-    .library-menu
-        grid-template-columns: repeat(6,1fr)
+  .library-menu
+    grid-template-columns: repeat(6,1fr)
 </style>
 <script>
 export default {
