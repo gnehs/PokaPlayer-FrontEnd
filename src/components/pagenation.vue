@@ -1,10 +1,10 @@
 <template>
-  <div class="poka-pagenation" v-show="length>1">
+  <div class="poka-pagenation" v-show="length>1" ref="pagenation">
     <div
       class="poka-pagenation-item"
       v-for="n in length"
       :key="n"
-      @click="$emit('input', n)"
+      @click="switchPage(n)"
       :class="{active: value == n}"
     >{{n}}</div>
   </div>
@@ -19,6 +19,15 @@ export default {
     },
     length: {
       type: Number
+    }
+  },
+  methods: {
+    switchPage(n) {
+      this.$emit("input", n);
+      this.$refs.pagenation.parentElement.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
     }
   }
 };
