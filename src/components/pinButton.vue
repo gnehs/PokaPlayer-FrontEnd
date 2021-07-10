@@ -17,22 +17,18 @@
     </v-btn>
   </v-fab-transition>
   <v-btn
-    icon
     @click="pin"
-    class="v-pin-btn"
     :loading="loading"
+    color="primary"
+    class="rounded-lg"
+    :outlined="!isPinned"
     v-else-if="isPinned != null && isPinned != 'disabled' && btnType == 'icon-button'"
   >
-    <v-icon v-if="isPinned">push_pin</v-icon>
-    <v-icon v-else class="material-icons-outlined">push_pin</v-icon>
+    <v-icon v-if="isPinned" class="mr-2">push_pin</v-icon>
+    <v-icon v-else class="material-icons-outlined mr-2">push_pin</v-icon>
+    {{$t('pin')}}
   </v-btn>
-</template>
-<style lang="sass" scoped>
-.v-btn.v-pin-btn
-  height: 42px
-  min-width: 42px
-  width: 42px
-</style>
+</template> 
 
 <script>
 export default {

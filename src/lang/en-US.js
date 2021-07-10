@@ -128,6 +128,7 @@ export default {
 	"moduleShowName_DSM": "DSM",
 	"sessionExpired": "Session expired, please log in again",
 	"add2nowPlaying": "Add this list to queue",
+	"pin": "釘選",
 	"pin_failed": "Failed to pin",
 	"unpin_failed": "Failed to unpin",
 	"settings_dark": "Night Mode",

@@ -130,6 +130,7 @@ export default {
 	"moduleShowName_DSM": "DSM",
 	"sessionExpired": "Session 過期，請重新登入",
 	"add2nowPlaying": "將此頁歌曲加入到現正播放",
+	"pin": "釘選",
 	"pin_failed": "釘選失敗",
 	"unpin_failed": "取消釘選失敗",
 	"settings_dark": "夜間模式",
