@@ -1,10 +1,8 @@
 <template>
-  <transition name="fade" mode="out-in">
-    <div class="cover" :style="{'--size': size}" :key="parsedCover">
-      <img class="cover-shadow" loading="lazy" :src="parsedCover" />
-      <img class="cover-img" loading="lazy" :src="parsedCover" />
-    </div>
-  </transition>
+  <div class="cover" :style="{'--size': size}" :key="parsedCover">
+    <v-img aspect-ratio="1" class="cover-shadow" :src="parsedCover" />
+    <v-img aspect-ratio="1" class="cover-img" :src="parsedCover" />
+  </div>
 </template>
 
 <script>
@@ -29,16 +27,12 @@ export default {
   },
   methods: {
     updateImg() {
-      this.parsedCover = GeoPattern.generate(this.name, {
-        baseColor: "#fc0"
-      }).toDataUri();
       if (this.cover) {
-        let img = new Image();
-        let vm = this;
-        img.onload = function() {
-          vm.parsedCover = vm.cover;
-        };
-        img.src = this.cover;
+        this.parsedCover = this.cover;
+      } else {
+        this.parsedCover = GeoPattern.generate(this.name, {
+          baseColor: "#fc0"
+        }).toDataUri();
       }
     }
   }
