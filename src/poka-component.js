@@ -9,7 +9,7 @@ import pokaCards from '@/components/cards.vue'
 import pokaLoader from '@/components/loader.vue'
 import pinButton from '@/components/pinButton.vue'
 import playRandomButton from '@/components/playRandomButton.vue'
-import pagenation from '@/components/pagenation.vue'
+import pagination from '@/components/pagination.vue'
 import pokaUpdate from '@/components/poka-update.vue'
 import libraryMenu from '@/components/libraryMenu.vue'
 // parseData
@@ -31,7 +31,7 @@ export {
     pokaLoader,
     pinButton,
     playRandomButton,
-    pagenation,
+    pagination,
     pokaUpdate,
     infoHeader,
     libraryMenu,

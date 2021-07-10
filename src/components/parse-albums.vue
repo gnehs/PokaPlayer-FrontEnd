@@ -2,7 +2,7 @@
   <div>
     <poka-cards>
       <poka-card
-        v-for="{name, artist, cover, id, source} in $pagenation(data,page)"
+        v-for="{name, artist, cover, id, source} in $pagination(data,page)"
         :key="id"
         :to="`/album/songs/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}?cover=${encodeURIComponent(cover||false)}&name=${encodeURIComponent(name)}&artist=${encodeURIComponent(artist)}`"
         :poka-bg="cover||false"
@@ -12,7 +12,7 @@
         :source="$t(`source.${source}`)"
       />
     </poka-cards>
-    <poka-pagenation :length="$getPages(data)" v-model="page" />
+    <poka-pagination :length="$getPages(data)" v-model="page" />
   </div>
 </template>
 

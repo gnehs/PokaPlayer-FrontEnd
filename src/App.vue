@@ -27,7 +27,7 @@ export default {
         duration
       );
     };
-    Vue.prototype.$pagenation = (items, page, itemPerPage = 40) => {
+    Vue.prototype.$pagination = (items, page, itemPerPage = 40) => {
       page -= 1;
       return items.slice(page * itemPerPage, page * itemPerPage + itemPerPage);
     };

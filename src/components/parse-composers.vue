@@ -3,7 +3,7 @@
     <v-fade-transition>
       <poka-cards v-if="composerView=='card'">
         <poka-card
-          v-for="{name, cover, id, source} in $pagenation(data,page)"
+          v-for="{name, cover, id, source} in $pagination(data,page)"
           :key="id"
           :to="`/composer/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
           :poka-bg="cover||false"
@@ -18,7 +18,7 @@
         <div
           class="item"
           style="user-select: none;"
-          v-for="{name, cover, id, source} in $pagenation(data,page)"
+          v-for="{name, cover, id, source} in $pagination(data,page)"
           :key="id"
           @click="$router.push(`/composer/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`)"
           v-ripple
@@ -39,7 +39,7 @@
         </div>
       </div>
     </v-fade-transition>
-    <poka-pagenation :length="$getPages(data)" v-model="page" />
+    <poka-pagination :length="$getPages(data)" v-model="page" />
     <v-btn
       color="primary"
       fab
