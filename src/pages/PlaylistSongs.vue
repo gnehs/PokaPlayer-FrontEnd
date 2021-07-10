@@ -16,8 +16,16 @@
         :name="title"
         btn-type="icon-button"
       />
-      <v-btn icon v-if="fromPoka" @click="playlistDialog=true">
-        <v-icon>edit</v-icon>
+
+      <v-btn
+        v-if="fromPoka"
+        @click="playlistDialog=true"
+        outlined
+        color="info"
+        class="ml-2 rounded-lg"
+      >
+        <v-icon class="material-icons-outlined mr-2">edit</v-icon>
+        {{$t('playlist_page.edit_title')}}
       </v-btn>
     </info-header>
     <v-divider />

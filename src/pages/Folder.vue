@@ -3,10 +3,7 @@
     <poka-header :title="$t('folder')" />
     <library-menu />
     <v-slide-y-reverse-transition>
-      <v-btn @click="goBack" v-show="!$route.meta.root" style="margin-bottom: 16px">
-        <v-icon>arrow_back</v-icon>
-        {{$t('back')}}
-      </v-btn>
+      <back v-show="!$route.meta.root" style="margin-bottom: 16px" />
     </v-slide-y-reverse-transition>
     <v-slide-y-reverse-transition>
       <poka-parse-folders v-if="data" :data="data.folders" />
