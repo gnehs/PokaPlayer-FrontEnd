@@ -49,30 +49,15 @@
     <v-dialog v-model="moreDialogShow" max-width="400">
       <v-card>
         <div class="d-flex flex-column align-center moreDialog-header" v-if="moreDialogTemp">
-          <v-img
-            v-if="moreDialogTemp"
-            width="200px"
-            aspect-ratio="1"
-            class="moreDialog-cover-shadow"
-            :src=" moreDialogTemp.cover
+          <poka-cover
+            :cover="moreDialogTemp.cover
 							? moreDialogTemp.cover.startsWith('http')
 								? moreDialogTemp.cover
 								: server + moreDialogTemp.cover
-							: defaultCover
-					"
-          ></v-img>
-          <v-img
-            v-if="moreDialogTemp"
-            width="200px"
-            aspect-ratio="1"
-            class="moreDialog-cover"
-            :src=" moreDialogTemp.cover
-							? moreDialogTemp.cover.startsWith('http')
-								? moreDialogTemp.cover
-								: server + moreDialogTemp.cover
-							: defaultCover
-					"
-          ></v-img>
+							: defaultCover"
+            size="200px"
+            style="margin: 0 auto;margin-bottom: 8px;display: block;"
+          />
           <div class="head t-ellipsis">{{moreDialogTemp.name}}</div>
           <div class="artist t-ellipsis">{{moreDialogTemp.artist}}</div>
         </div>
@@ -228,15 +213,6 @@
 .moreDialog-header
   padding: 16px 0
   position: relative
-  .moreDialog-cover
-    background: #555
-    border-radius: 16px
-    margin-bottom: 8px
-  .moreDialog-cover-shadow
-    position: absolute
-    filter: blur(20px) brightness(.9)
-    opacity: .5
-    transform: translateY(8px)
   .head
     font-weight: bold
     font-size: 18px

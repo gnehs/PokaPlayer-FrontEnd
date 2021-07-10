@@ -1,14 +1,22 @@
 <template lang="pug">
 router-link.card(v-if="to", :to="to", :data-source="parsed_source || undefined")
   .image
-    v-img(v-if="parsed_pokaBg", :src="parsed_pokaBg", aspect-ratio="1")
+    poka-cover(
+      :cover="parsed_pokaBg",
+      :name="pokaTitle",
+      style="position: absolute"
+    )
     .icon(v-if="pokaIcon")
       v-icon.material-icons-outlined {{ pokaIcon }}
   .title(:class="{ 't-ellipsis': ellipsis }") {{ pokaTitle }}
   .subtitle(:class="{ 't-ellipsis': ellipsis }") {{ pokaSubtitle }}
 a.card(v-else, :data-source="parsed_source || undefined")
   .image
-    v-img(v-if="parsed_pokaBg", :src="parsed_pokaBg", aspect-ratio="1")
+    poka-cover(
+      :cover="parsed_pokaBg",
+      :name="pokaTitle",
+      style="position: absolute"
+    )
     .icon(v-if="pokaIcon", :class="{ 'with-img': !!parsed_pokaBg }")
       v-icon.material-icons-outlined {{ pokaIcon }}
   .title(:class="{ 't-ellipsis': ellipsis }") {{ pokaTitle }}
