@@ -27,6 +27,13 @@ export default {
         duration
       );
     };
+    Vue.prototype.$pagenation = (items, page, itemPerPage = 40) => {
+      page -= 1;
+      return items.slice(page * itemPerPage, page * itemPerPage + itemPerPage);
+    };
+    Vue.prototype.$getPages = (items, itemPerPage = 40) => {
+      return Math.ceil(items.length / itemPerPage);
+    };
     // set theme color
     this.$vuetify.theme.themes.dark.primary = window._setting("theme");
     this.$vuetify.theme.themes.light.primary = window._setting("theme");
@@ -110,24 +117,24 @@ export default {
 //       v-card        //
 //---------------------//
 .v-card.blur-card
-	background-color: rgb(255 255 255 / 70%) !important
-	backdrop-filter: blur(20px)
-	box-shadow: 0px 4px 14px 0px rgb(0 0 0 / 10%) !important
-	&.theme--dark
-		background: rgb(47 43 62 / .7) !important
+  background-color: rgb(255 255 255 / 70%) !important
+  backdrop-filter: blur(20px)
+  box-shadow: 0px 4px 14px 0px rgb(0 0 0 / 10%) !important
+  &.theme--dark
+    background: rgb(47 43 62 / .7) !important
 //---------------------//
 //       dial0g        //
 //---------------------//
 .v-dialog--fullscreen
-	margin: 0 5px !important
-	width: calc(100vw - 10px) !important
-	top: auto !important
-	bottom: 3px !important
-	min-height: 90% !important
-	height: 90% !important
+  margin: 0 5px !important
+  width: calc(100vw - 10px) !important
+  top: auto !important
+  bottom: 3px !important
+  min-height: 90% !important
+  height: 90% !important
 .v-dialog__content.v-dialog__content--active
-	background-color: rgb(0 0 0 / 40%)
-	backdrop-filter: blur(10px)
+  background-color: rgb(0 0 0 / 40%)
+  backdrop-filter: blur(10px)
 .v-dialog.v-dialog--fullscreen > .v-card > .v-card__text
-	padding: 0 2px 20px !important
+  padding: 0 2px 20px !important
 </style>

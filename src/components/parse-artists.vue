@@ -3,7 +3,7 @@
     <v-fade-transition>
       <poka-cards v-show="artistView=='card'">
         <poka-card
-          v-for="{name, cover, id, source} in data"
+          v-for="{name, cover, id, source} in $pagenation(data,page)"
           :key="id"
           :to="`/artist/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
           poka-icon="keyboard_voice"
@@ -18,7 +18,7 @@
         <div
           class="item"
           style="user-select: none;"
-          v-for="{name, cover, id, source} in data"
+          v-for="{name, cover, id, source} in $pagenation(data,page)"
           :key="id"
           @click="$router.push(`/artist/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`)"
           v-ripple
@@ -39,6 +39,7 @@
         </div>
       </div>
     </v-fade-transition>
+    <poka-pagenation :length="$getPages(data)" v-model="page" />
     <v-btn
       color="primary"
       fab
@@ -66,7 +67,8 @@ export default {
   },
   data: () => ({
     server: _setting(`server`),
-    artistView: _setting(`artistView`)
+    artistView: _setting(`artistView`),
+    page: 1
   }),
   methods: {
     coverPaser(cover) {
