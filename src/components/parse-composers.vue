@@ -62,7 +62,7 @@
 export default {
   name: "poka-parse-composers",
   props: {
-    data: { type: Object },
+    data: { type: Array },
     hideFab: { type: Boolean, default: false }
   },
   data: () => ({
