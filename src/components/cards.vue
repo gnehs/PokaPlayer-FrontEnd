@@ -47,10 +47,12 @@ export default {
 	z-index: 1
 	top: 11px
 	background-color: rgba(0, 0, 0, 0.4)
+	background: linear-gradient(135deg, rgba(0,0,0,.4),rgba(0,0,0,.8))
 	padding: 3px 5px
 	border-radius: 4px
 	font-size: 12px
 	max-width: 7em
+	backdrop-filter: blur(8px)
 	white-space: nowrap
 	overflow: hidden
 	text-overflow: ellipsis

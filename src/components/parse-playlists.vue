@@ -6,7 +6,7 @@
       to="/playlist/"
       :poka-title="$t('back')"
     />
-    <template v-for="{name, image, id, source, type, icon} in data">
+    <template v-for="{name, image, cover, id, source, type, icon} in data">
       <poka-card
         v-if="type=='folder'"
         :poka-icon="icon||'folder'"
@@ -14,7 +14,6 @@
         :to="`/playlist/f/${encodeURIComponent(id)}`"
         :poka-title="name"
         :poka-subtitle="$t(`source.${source}`)"
-        :source="$t(`source.${source}`)"
       />
 
       <poka-card
@@ -22,10 +21,9 @@
         :poka-icon="icon||'queue_music'"
         :key="`/playlist/p/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
         :to="`/playlist/p/${encodeURIComponent(source)}/${encodeURIComponent(id||'unknown')}`"
-        :poka-bg="image||false"
+        :poka-bg="image||cover||false"
         :poka-title="name"
         :poka-subtitle="$t(`source.${source}`)"
-        :source="$t(`source.${source}`)"
       />
     </template>
   </poka-cards>
