@@ -1,35 +1,60 @@
 <template>
   <div>
     <poka-header :blurbg="true" :bg="cover||null" />
-    <info-header :title="name" :subtitle="artist" :cover="cover" :songs="songs&&songs.length">
-      <v-fade-transition>
-        <pin-button
-          v-if="songs"
-          :source="$route.params.source"
-          :id="$route.params.id"
-          type="album"
-          :cover="cover"
-          :artist="artist"
-          :name="name"
-          btn-type="icon-button"
-        />
-      </v-fade-transition>
-    </info-header>
-    <v-divider v-if="name" />
-    <poka-loader v-if="!songs" style="margin: 64px 0;" />
-    <v-slide-y-reverse-transition>
-      <poka-parse-songs style="margin: 16px 0;" :data="songs" v-if="songs" />
-    </v-slide-y-reverse-transition>
-    <v-slide-y-reverse-transition>
-      <div v-if="artistAlbums&&songs">
-        <v-divider />
-        <h1 class="title" style="padding-left: 0.5em;margin-top: 8px;">{{$t('albumsOfSameArtist')}}</h1>
-        <poka-parse-albums :data="artistAlbums" />
+    <div class="album-songs-container">
+      <div class="album-info">
+        <info-header :title="name" :subtitle="artist" :cover="cover" :songs="songs&&songs.length">
+          <v-fade-transition>
+            <pin-button
+              v-if="songs"
+              :source="$route.params.source"
+              :id="$route.params.id"
+              type="album"
+              :cover="cover"
+              :artist="artist"
+              :name="name"
+              btn-type="icon-button"
+            />
+          </v-fade-transition>
+        </info-header>
       </div>
-    </v-slide-y-reverse-transition>
+      <v-divider :vertical="$vuetify.breakpoint.mdAndUp" />
+      <div class="album-songs">
+        <poka-loader v-if="!songs" style="margin: 64px 0;" />
+        <h1 class="title" v-show="songs" style="margin: 8px 16px;">{{$t('song')}}</h1>
+        <v-slide-y-reverse-transition>
+          <poka-parse-songs style="margin: 16px 0;" :data="songs" v-if="songs" />
+        </v-slide-y-reverse-transition>
+        <v-slide-y-reverse-transition>
+          <div v-if="artistAlbums&&songs">
+            <v-divider />
+            <div class="px-4">
+              <h1 class="title" style="margin: 8px 0;">{{$t('albumsOfSameArtist')}}</h1>
+              <poka-parse-albums :data="artistAlbums" />
+            </div>
+          </div>
+        </v-slide-y-reverse-transition>
+      </div>
+    </div>
   </div>
 </template>
+<style lang="sass" scoped>
+@media (min-width: 960px)
 
+  .album-songs-container
+    display: flex
+    min-height: calc(100vh - 69px - 16px * 2)
+    width: 100%
+    position: relative
+    padding-left: 300px
+    .album-info
+      width: 300px
+      position: fixed
+      top: 0
+      left: calc( 56px + 8px )
+    .album-songs
+      flex: 1
+</style> 
 <script>
 export default {
   name: "AlbumSongs",

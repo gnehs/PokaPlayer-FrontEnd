@@ -466,7 +466,8 @@ nav
   .poka.list
     .item,.item.active:before
       border-radius: 0
-
+.router-view
+  min-height: calc(100% - 69px)
 @media (min-width: 576px)
   .router-view
     padding: 16px

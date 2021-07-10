@@ -5,7 +5,7 @@
       :cover="cover"
       :name="title"
       size="240px"
-      style="margin: 0 auto;margin-bottom: 8px;display: block;"
+      style="margin: 8px auto;margin-bottom: 8px;display: block;"
     />
     <div class="info-title" :title="title">{{title}}</div>
     <div class="metadatas">

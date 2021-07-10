@@ -1,36 +1,43 @@
 <template>
   <div>
     <poka-header :blurbg="!isCoverGenerate" :bg="cover" />
-    <info-header
-      :title="title||$t('loading')"
-      :subtitle="$t('playlist')"
-      :cover="cover"
-      :songs="data?data.songs.length:0||0"
-    >
-      <pin-button
-        v-if="title"
-        :source="$route.params.source"
-        :id="$route.params.id"
+    <div class="playlist-songs-container">
+      <info-header
+        :title="title||$t('loading')"
+        :subtitle="$t('playlist')"
         :cover="cover"
-        type="playlist"
-        :name="title"
-        btn-type="icon-button"
-      />
-
-      <v-btn
-        v-if="fromPoka"
-        @click="playlistDialog=true"
-        outlined
-        color="info"
-        class="ml-2 rounded-lg"
+        :songs="data?data.songs.length:0||0"
+        class="playlist-info"
       >
-        <v-icon class="material-icons-outlined mr-2">edit</v-icon>
-        {{$t('playlist_page.edit_title')}}
-      </v-btn>
-    </info-header>
-    <v-divider />
-    <poka-parse-songs v-if="data" :data="data.songs" />
-    <poka-loader v-else />
+        <pin-button
+          v-if="title"
+          :source="$route.params.source"
+          :id="$route.params.id"
+          :cover="cover"
+          type="playlist"
+          :name="title"
+          btn-type="icon-button"
+        />
+
+        <v-btn
+          v-if="fromPoka"
+          @click="playlistDialog=true"
+          outlined
+          color="info"
+          class="ml-2 rounded-lg"
+        >
+          <v-icon class="material-icons-outlined mr-2">edit</v-icon>
+          {{$t('playlist_page.edit_title')}}
+        </v-btn>
+      </info-header>
+
+      <v-divider :vertical="$vuetify.breakpoint.mdAndUp" />
+      <div class="playlist-songs">
+        <h1 class="title" v-show="data" style="margin: 8px 16px;">{{$t('song')}}</h1>
+        <poka-parse-songs v-if="data" :data="data.songs" />
+        <poka-loader v-else />
+      </div>
+    </div>
     <v-dialog v-model="playlistDialog" max-width="400">
       <v-card>
         <v-card-title class="headline">{{$t('playlist_page.edit_title')}}</v-card-title>
@@ -70,6 +77,22 @@
   </div>
 </template>
 
+<style lang="sass" scoped>
+@media (min-width: 960px)
+  .playlist-songs-container
+    display: flex
+    min-height: calc(100vh - 69px - 16px * 2)
+    width: 100%
+    position: relative
+    padding-left: 300px
+    .playlist-info
+      width: 300px
+      position: fixed
+      top: 0
+      left: calc( 56px + 8px )
+    .playlist-songs
+      flex: 1
+</style> 
 <script>
 const GeoPattern = require("geopattern");
 export default {
