@@ -1,16 +1,37 @@
 <template>
   <div>
     <portal to="app-bar">
-      <v-app-bar color="#FFF" clipped-left app :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`">
+      <v-app-bar
+        color="#FFF"
+        clipped-left
+        app
+        :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`"
+      >
         <back icon />
         <v-toolbar-title>{{ title }}</v-toolbar-title>
         <v-spacer />
       </v-app-bar>
     </portal>
     <poka-header :blurbg="!isCoverGenerate" :bg="cover" />
-    <div class="playlist-songs-container">
-      <info-header :title="title || $t('loading')" :subtitle="$t('playlist')" :cover="cover" :songs="data ? data.songs.length : 0 || 0" class="playlist-info">
-        <pin-button v-if="title" :source="$route.params.source" :id="$route.params.id" :cover="cover" type="playlist" :name="title" btn-type="icon-button" />
+    <poka-loader v-if="!data" />
+
+    <div class="playlist-songs-container" v-if="data">
+      <info-header
+        :title="title || $t('loading')"
+        :subtitle="$t('playlist')"
+        :cover="cover"
+        :songs="data ? data.songs.length : 0 || 0"
+        class="playlist-info"
+      >
+        <pin-button
+          v-if="title"
+          :source="$route.params.source"
+          :id="$route.params.id"
+          :cover="cover"
+          type="playlist"
+          :name="title"
+          btn-type="icon-button"
+        />
 
         <v-btn v-if="fromPoka" @click="playlistDialog = true" outlined color="info" class="ml-2 rounded-lg">
           <v-icon class="material-icons-outlined mr-2">edit</v-icon>
@@ -20,13 +41,11 @@
 
       <v-divider :vertical="$vuetify.breakpoint.mdAndUp" />
       <div class="playlist-songs">
-        <h1 class="title" v-show="data" style="margin: 8px 16px">
-          {{ $t('song') }}
-        </h1>
-        <poka-parse-songs v-if="data" :data="data.songs" />
-        <poka-loader v-else />
+        <h1 class="title" style="margin: 8px 16px" v-text="$t('song')" />
+        <poka-parse-songs :data="data.songs" />
       </div>
     </div>
+
     <v-dialog v-model="playlistDialog" max-width="400">
       <v-card>
         <v-card-title class="headline">{{ $t('playlist_page.edit_title') }}</v-card-title>
@@ -93,8 +112,8 @@ export default {
   data: () => ({
     data: null,
     title: null,
-    cover: null,
-    isCoverGenerate: false,
+    cover: _setting(`headerBgSource`),
+    isCoverGenerate: true,
     server: _setting(`server`),
     editData: {
       name: null,
@@ -128,24 +147,27 @@ export default {
       let source = encodeURIComponent(this.$route.params.source)
       let playlistId = encodeURIComponent(this.$route.params.id)
       let server = this.server
-      this.axios.get(`${server}/pokaapi/playlistSongs/?moduleName=${source}&id=${playlistId}&rnd=${Math.floor(Math.random() * 9999999)}`).then(response => {
-        this.data = response.data
-        this.title = this.data.playlists[0].name
-        this.editData.name = this.data.playlists[0].name
-        if (this.data.playlists[0].image) {
-          this.cover = this.data.playlists[0].image
-          this.editData.image = this.data.playlists[0].image
-          if (!this.data.playlists[0].image.startsWith('http')) {
-            this.cover = this.server + this.cover
+      this.axios
+        .get(`${server}/pokaapi/playlistSongs/?moduleName=${source}&id=${playlistId}&rnd=${Math.floor(Math.random() * 9999999)}`)
+        .then(response => {
+          this.data = response.data
+          this.title = this.data.playlists[0].name
+          this.editData.name = this.data.playlists[0].name
+          if (this.data.playlists[0].image) {
+            this.cover = this.data.playlists[0].image
+            this.editData.image = this.data.playlists[0].image
+            this.isCoverGenerate = false
+            if (!this.data.playlists[0].image.startsWith('http')) {
+              this.cover = this.server + this.cover
+            }
+          } else {
+            this.cover = GeoPattern.generate(this.title, {
+              baseColor: '#fc0'
+            }).toDataUri()
+            this.isCoverGenerate = true
           }
-        } else {
-          this.cover = GeoPattern.generate(this.title, {
-            baseColor: '#fc0'
-          }).toDataUri()
-          this.isCoverGenerate = true
-        }
-        this.fromPoka = this.data.playlists[0].source == 'poka'
-      })
+          this.fromPoka = this.data.playlists[0].source == 'poka'
+        })
     }
   }
 }
