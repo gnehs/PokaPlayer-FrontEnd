@@ -130,7 +130,13 @@ export default {
 				--card-background-color: #FF5722
 			&:nth-child(14n+14)
 				--card-background-color: #795548
-@media (min-width: 768px)
-	.poka.cards .card
-		grid-template-columns: repeat(auto-fill,minmax(128px, 1fr))
+@media (max-width: 768px)
+	.poka.cards
+		grid-template-columns: repeat(auto-fill,minmax(150px, 1fr))
+		.card
+			.icon
+				padding: 8px
+				border-radius: 16px
+				i
+					font-size: 22px
 </style>
