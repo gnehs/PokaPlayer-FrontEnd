@@ -2,12 +2,19 @@
   <div>
     <poka-header :title="$t(`settingIndex.adminItems`)" />
     <div class="chip-nav">
-      <router-link class="chip-nav-item" :class="{ active: $route.path == item.to }" v-for="item in adminItems" :key="item.to" :to="item.to" v-ripple>
+      <router-link
+        class="chip-nav-item"
+        :class="{ active: $route.path == item.to }"
+        v-for="item in adminItems"
+        :key="item.to"
+        :to="item.to"
+        v-ripple
+      >
         <v-icon class="material-icons-outlined">{{ item.icon }}</v-icon>
         <span>{{ $t(item.text) }}</span>
       </router-link>
     </div>
-    <transition name="fade" mode="out-in" v-on:enter="pageEnter">
+    <transition name="fade" mode="out-in">
       <router-view />
     </transition>
   </div>
