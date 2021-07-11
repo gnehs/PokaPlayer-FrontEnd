@@ -3,7 +3,13 @@
     <div class="poka-pagination-item" @click="switchPage(value - 1)" :class="{ disabled: value == 1 }">
       <v-icon>chevron_left</v-icon>
     </div>
-    <div class="poka-pagination-item" v-for="n of pages" :key="n" @click="switchPage(n)" :class="{ active: value == n, disabled: n == '...' }">
+    <div
+      class="poka-pagination-item"
+      v-for="(n, i) of pages"
+      :key="i"
+      @click="switchPage(n)"
+      :class="{ active: value == n, disabled: n == '...' }"
+    >
       {{ n }}
     </div>
     <div class="poka-pagination-item" @click="switchPage(value + 1)" :class="{ disabled: value == length }">
@@ -31,7 +37,7 @@ export default {
   },
   methods: {
     switchPage(n) {
-      if (n != '...') {
+      if (n != '...' && n != this.value) {
         this.$emit('input', n)
         this.$refs.pagination.parentElement.scrollIntoView({
           behavior: 'smooth',
@@ -83,15 +89,15 @@ export default {
       color: rgba(0,0,0,.5)
       background-color: rgba(0,0,0,.025)
       pointer-events: none
-      &.active
-        box-shadow: 0 4px 8px var(--v-primary-base)
-        background-color: var(--v-primary-base) !important
-        color: #fff
-        transform: translateY(-4px)
-        &:hover
-          background-color: rgba(0,0,0,.075)
-        &:active
-          background-color: rgba(0,0,0,.1)
+    &.active
+      box-shadow: 0 4px 8px var(--v-primary-base)
+      background-color: var(--v-primary-base) !important
+      color: #fff
+      transform: translateY(-4px)
+      &:hover
+        background-color: rgba(0,0,0,.075)
+      &:active
+        background-color: rgba(0,0,0,.1)
 @media screen and (max-width: 512px)
   .poka-pagination
     .poka-pagination-item
