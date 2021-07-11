@@ -38,12 +38,10 @@ export default {
 				position: absolute
 				color: #FFF
 				display: block
-				position: absolute
 				text-align: right
 				right: 10px
 				z-index: 1
 				top: 11px
-				background-color: rgba(0, 0, 0, 0.4)
 				background: linear-gradient(135deg, rgba(0,0,0,.4),rgba(0,0,0,.8))
 				padding: 3px 5px
 				border-radius: 4px
