@@ -114,6 +114,10 @@ export default {
   box-shadow: 0px 4px 14px 0px rgb(0 0 0 / 10%) !important
   &.theme--dark
     background: rgb(47 43 62 / .7) !important
+.theme--light,
+.theme--dark
+  &.v-tabs-items
+    background-color: transparent !important
 //---------------------//
 //       dial0g        //
 //---------------------//

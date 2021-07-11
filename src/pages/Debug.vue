@@ -1,29 +1,43 @@
 <template>
   <div>
-    <poka-header title="Debug" />
-    <div class="title">Snackbar</div>
-    <v-btn text @click="$snackbar('test test 123')">Open Snackbar</v-btn>
+    <portal to="app-bar">
+      <v-app-bar
+        color="#FFF"
+        clipped-left
+        app
+        :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`"
+      >
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-    <v-expansion-panels>
-      <v-expansion-panel>
-        <v-expansion-panel-header>Audios</v-expansion-panel-header>
-        <v-expansion-panel-content>
-          <pre>{{ audios }}</pre>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-      <v-expansion-panel>
-        <v-expansion-panel-header>Config</v-expansion-panel-header>
-        <v-expansion-panel-content>
-          <pre>{{ pokaSetting }}</pre>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-      <v-expansion-panel>
-        <v-expansion-panel-header>Lyric</v-expansion-panel-header>
-        <v-expansion-panel-content>
-          <pre>{{ lyric }}</pre>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-    </v-expansion-panels>
+        <v-toolbar-title>{{ $t('debug') }}</v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+        <template v-slot:extension>
+          <v-tabs v-model="tab" align-with-title>
+            <v-tab>Audios</v-tab>
+            <v-tab>Config</v-tab>
+            <v-tab>Lyric</v-tab>
+            <v-tab>Other</v-tab>
+          </v-tabs>
+        </template>
+      </v-app-bar>
+    </portal>
+    <v-tabs-items v-model="tab">
+      <v-tab-item>
+        <pre>{{ audios }}</pre>
+      </v-tab-item>
+      <v-tab-item>
+        <pre>{{ pokaSetting }}</pre>
+      </v-tab-item>
+      <v-tab-item>
+        <pre>{{ lyric }}</pre>
+      </v-tab-item>
+      <v-tab-item>
+        <div class="title">Snackbar</div>
+        <v-btn text @click="$snackbar('test test 123')">Open Snackbar</v-btn>
+      </v-tab-item>
+    </v-tabs-items>
   </div>
 </template>
 
@@ -32,6 +46,7 @@ export default {
   name: 'Debug',
   created() {},
   data: () => ({
+    tab: null,
     pokaSetting: JSON.parse(localStorage.pokaSetting),
     audios: _player.list.audios,
     lyric: _lrc.lyrics_all
