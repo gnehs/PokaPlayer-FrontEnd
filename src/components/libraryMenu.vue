@@ -1,6 +1,13 @@
 <template>
   <div class="chip-nav">
-    <router-link class="chip-nav-item" :class="{ active: $route.path == item.to }" v-for="item in items" :key="item.to" :to="item.to" v-ripple>
+    <router-link
+      class="chip-nav-item"
+      :class="{ active: $route.path == item.to }"
+      v-for="item in items"
+      :key="item.to"
+      :to="item.to"
+      v-ripple
+    >
       <v-icon class="material-icons-outlined">{{ item.icon }}</v-icon>
       <span>{{ $t(item.text) }}</span>
     </router-link>
@@ -12,7 +19,7 @@ export default {
   data: () => ({
     items: [
       { icon: 'library_music', text: 'library', to: '/library' },
-      { icon: 'search', text: 'search', to: '/search' },
+      //{ icon: 'search', text: 'search', to: '/search' },
       { icon: 'album', text: 'album', to: '/album' },
       { icon: 'folder', text: 'folder', to: '/folder' },
       { icon: 'keyboard_voice', text: 'artist', to: '/artist' },

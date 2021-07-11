@@ -10,6 +10,7 @@
         <back icon />
         <v-toolbar-title>{{ title }}</v-toolbar-title>
         <v-spacer />
+        <poka-searchbar />
       </v-app-bar>
     </portal>
     <poka-header :blurbg="!isCoverGenerate" :bg="cover" />

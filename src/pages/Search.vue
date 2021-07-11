@@ -1,24 +1,6 @@
 <template>
   <div>
-    <poka-header :title="$t('search')" />
-    <library-menu />
-    <div class="search-box" :class="{ focus: searchBoxFocus }">
-      <input
-        class="search-input"
-        type="text"
-        v-on:keyup.enter="searchClick"
-        v-model.trim="keyword"
-        :placeholder="$t('search')"
-        autocomplete="off"
-        @focus="searchBoxFocus = true"
-        @blur="searchBoxFocus = false"
-        required
-      />
-      <button class="search-button" @click="search">
-        <v-icon>search</v-icon>
-      </button>
-    </div>
-
+    <poka-header :title="keyword" :subtitle="$t('search')" />
     <v-overlay absolute :value="isLoading">
       <poka-loader />
     </v-overlay>
@@ -102,6 +84,14 @@ export default {
   created() {
     if (this.$route.query.keyword) {
       this.keyword = this.$route.query.keyword
+      this.search()
+    }
+  },
+  watch: {
+    '$route.query.keyword'() {
+      console.log(this.$route.query.keyword)
+      this.keyword = this.$route.query.keyword
+
       this.search()
     }
   },

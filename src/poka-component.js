@@ -12,6 +12,7 @@ import playRandomButton from "@/components/playRandomButton.vue";
 import pagination from "@/components/pagination.vue";
 import pokaUpdate from "@/components/poka-update.vue";
 import libraryMenu from "@/components/libraryMenu.vue";
+import searchbar from "@/components/searchbar.vue";
 // parseData
 import parsePlaylists from "@/components/parse-playlists.vue";
 import parseSongs from "@/components/parse-songs.vue";
@@ -35,6 +36,7 @@ export {
   pokaUpdate,
   infoHeader,
   libraryMenu,
+  searchbar,
   // parseData
   parsePlaylists,
   parseSongs,

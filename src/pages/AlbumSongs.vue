@@ -1,10 +1,16 @@
 <template>
   <div>
     <portal to="app-bar">
-      <v-app-bar color="#FFF" clipped-left app :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`">
+      <v-app-bar
+        color="#FFF"
+        clipped-left
+        app
+        :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`"
+      >
         <back icon />
         <v-toolbar-title>{{ name }}</v-toolbar-title>
         <v-spacer />
+        <poka-searchbar />
       </v-app-bar>
     </portal>
     <poka-header :blurbg="true" :bg="cover || null" />
@@ -12,7 +18,16 @@
       <div class="album-info">
         <info-header :title="name" :subtitle="artist" :cover="cover" :songs="songs && songs.length">
           <v-fade-transition>
-            <pin-button v-if="songs" :source="$route.params.source" :id="$route.params.id" type="album" :cover="cover" :artist="artist" :name="name" btn-type="icon-button" />
+            <pin-button
+              v-if="songs"
+              :source="$route.params.source"
+              :id="$route.params.id"
+              type="album"
+              :cover="cover"
+              :artist="artist"
+              :name="name"
+              btn-type="icon-button"
+            />
           </v-fade-transition>
         </info-header>
       </div>
@@ -86,12 +101,14 @@ export default {
       this.name = this.$route.query.name || '█'.repeat(10)
       this.artist = this.$route.query.artist || '█'.repeat(10)
       this.cover = Boolean(this.$route.query.cover) ? this.server + this.$route.query.cover : null
-      await this.axios.get(`${this.server}/pokaapi/album?moduleName=${encodeURIComponent(albumSource)}&id=${encodeURIComponent(albumID)}`).then(response => {
-        this.songs = response.data.songs
-        this.artist = response.data.artist
-        this.cover = this.server + response.data.cover.replace(/'/, "\\'")
-        this.name = response.data.name
-      })
+      await this.axios
+        .get(`${this.server}/pokaapi/album?moduleName=${encodeURIComponent(albumSource)}&id=${encodeURIComponent(albumID)}`)
+        .then(response => {
+          this.songs = response.data.songs
+          this.artist = response.data.artist
+          this.cover = this.server + response.data.cover.replace(/'/, "\\'")
+          this.name = response.data.name
+        })
       // 取得相同演出者的專輯
       let ArtistId = this.artist
       let ArtistSource = albumSource
