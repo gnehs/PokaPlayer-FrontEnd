@@ -63,3 +63,4 @@ typings/
 #webpack
 /dist
 copy.sh
+.DS_Store

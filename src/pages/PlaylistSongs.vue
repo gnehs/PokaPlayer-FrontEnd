@@ -1,5 +1,17 @@
 <template>
   <div>
+    <portal to="app-bar">
+      <v-app-bar
+        color="#FFF"
+        clipped-left
+        app
+        :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark?'rgba(255, 255, 255, 0.12)':`rgb(0 0 0 / 20%)`}`"
+      >
+        <back icon />
+        <v-toolbar-title>{{title}}</v-toolbar-title>
+        <v-spacer />
+      </v-app-bar>
+    </portal>
     <poka-header :blurbg="!isCoverGenerate" :bg="cover" />
     <div class="playlist-songs-container">
       <info-header
@@ -81,14 +93,14 @@
 @media (min-width: 960px)
   .playlist-songs-container
     display: flex
-    min-height: calc(100vh - 69px - 16px * 2)
+    min-height: calc(100vh - 69px - 16px * 2 - 56px)
     width: 100%
     position: relative
     padding-left: 300px
     .playlist-info
       width: 300px
       position: fixed
-      top: 0
+      top: 56px
       left: calc( 56px + 8px )
     .playlist-songs
       flex: 1

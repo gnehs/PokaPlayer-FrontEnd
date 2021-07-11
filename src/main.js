@@ -9,6 +9,9 @@ import i18n from './lang'
 import store from './store'
 import './registerServiceWorker'
 
+import PortalVue from 'portal-vue'
+Vue.use(PortalVue)
+
 import axios from 'axios'
 axios.defaults.withCredentials = true
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
@@ -48,4 +51,3 @@ new Vue({
   vuetify,
   render: h => h(App)
 })
-

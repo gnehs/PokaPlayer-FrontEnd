@@ -1,22 +1,24 @@
 <template>
   <div>
-    <v-app-bar
-      color="#FFF"
-      clipped-left
-      app
-      v-if="!$vuetify.breakpoint.mdAndUp"
-      :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark?'rgba(255, 255, 255, 0.12)':`rgb(0 0 0 / 20%)`}`"
-    >
-      <v-app-bar-nav-icon @click.stop="toggleMenu()" v-if="!$vuetify.breakpoint.mdAndUp" />
-      <div class="poka-drawer-logo">
-        <h1>PokaPlayer</h1>
-      </div>
-      <v-spacer />
-      <v-btn icon @click="switch_audio_order">
-        <v-icon class="material-icons-outlined" v-if="audio_order==='list'">repeat</v-icon>
-        <v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
-      </v-btn>
-    </v-app-bar>
+    <portal-target name="app-bar" slim>
+      <v-app-bar
+        color="#FFF"
+        clipped-left
+        app
+        v-if="!$vuetify.breakpoint.mdAndUp"
+        :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark?'rgba(255, 255, 255, 0.12)':`rgb(0 0 0 / 20%)`}`"
+      >
+        <v-app-bar-nav-icon @click.stop="toggleMenu()" v-if="!$vuetify.breakpoint.mdAndUp" />
+        <div class="poka-drawer-logo">
+          <h1>PokaPlayer</h1>
+        </div>
+        <v-spacer />
+        <v-btn icon @click="switch_audio_order">
+          <v-icon class="material-icons-outlined" v-if="audio_order==='list'">repeat</v-icon>
+          <v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
+        </v-btn>
+      </v-app-bar>
+    </portal-target>
     <v-navigation-drawer
       v-model="drawer"
       :clipped="$vuetify.breakpoint.mdAndUp"

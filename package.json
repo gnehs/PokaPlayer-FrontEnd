@@ -14,6 +14,7 @@
     "axios": "^0.21.1",
     "colorthief": "^2.3.2",
     "geopattern": "^1.2.3",
+    "portal-vue": "^2.1.7",
     "pug": "^3.0.1",
     "pug-plain-loader": "^1.0.0",
     "register-service-worker": "^1.7.1",
