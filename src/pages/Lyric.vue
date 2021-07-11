@@ -1,7 +1,12 @@
 <template>
   <div :theme="lyric_theme">
     <transition name="fade" mode="out-in">
-      <poka-header :blurbg="true" :bg="audio_cover" v-if="audio_cover" :key="audio_cover" />
+      <poka-header
+        :blurbg="true"
+        :bg="audio_cover"
+        v-if="audio_cover"
+        :key="audio_cover"
+      />
       <poka-header v-else key="2" />
     </transition>
     <div v-on:dblclick="openLyricDialog">
@@ -10,15 +15,27 @@
           v-if="lyric.length > 1"
           class="lyric"
           key="lyric"
-          :class="{lyricTranslated:lyricTranslated}"
+          :class="{ lyricTranslated: lyricTranslated }"
         >
           <p
             v-for="(item, index) of lyric"
             :key="index"
-            :data-lyric-set="lyricTranslated?Math.floor((index-lyricFocus)/2):index-lyricFocus"
-            :class="[{focus: index==lyricFocus},{tl:lyricTranslated?Math.floor((index-lyricFocus)/2)!=Math.round((index-lyricFocus)/2):false}]"
+            :data-lyric-set="
+              lyricTranslated
+                ? Math.floor((index - lyricFocus) / 2)
+                : index - lyricFocus
+            "
+            :class="[
+              { focus: index == lyricFocus },
+              {
+                tl: lyricTranslated
+                  ? Math.floor((index - lyricFocus) / 2) !=
+                    Math.round((index - lyricFocus) / 2)
+                  : false
+              }
+            ]"
           >
-            <span>{{item.text}}</span>
+            <span>{{ item.text }}</span>
           </p>
         </div>
 
@@ -31,7 +48,7 @@
         >
           <v-card-text class="text-center">
             <v-icon class="material-icons-outlined display-4">subtitles</v-icon>
-            <p class="headline text--primary">{{$t('loading')}}</p>
+            <p class="headline text--primary">{{ $t("loading") }}</p>
           </v-card-text>
         </v-card>
 
@@ -44,14 +61,22 @@
         >
           <v-card-text class="text-center">
             <v-icon class="material-icons-outlined display-4">subtitles</v-icon>
-            <p class="headline text--primary">{{$t('lrc_noLyrics')}}</p>
-            <v-btn outlined color="primary" @click="showLyricDialog = true">{{$t('lrc_search')}}</v-btn>
+            <p class="headline text--primary">{{ $t("lrc_noLyrics") }}</p>
+            <v-btn outlined color="primary" @click="showLyricDialog = true">{{
+              $t("lrc_search")
+            }}</v-btn>
           </v-card-text>
         </v-card>
       </transition>
     </div>
 
-    <v-speed-dial v-model="fab" right open-on-hover style="bottom: calc(16px + 69px);" fixed>
+    <v-speed-dial
+      v-model="fab"
+      right
+      open-on-hover
+      style="bottom: calc(16px + 69px);"
+      fixed
+    >
       <template v-slot:activator>
         <v-btn v-model="fab" color="primary" dark fab>
           <v-icon v-if="fab">mdi-close</v-icon>
@@ -64,13 +89,13 @@
       <v-btn fab dark small color="indigo" @click="editLyric">
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
-      <v-btn fab dark small color="cyan" @click="lyric_theme_dialog=true">
+      <v-btn fab dark small color="cyan" @click="lyric_theme_dialog = true">
         <v-icon>mdi-palette</v-icon>
       </v-btn>
     </v-speed-dial>
     <v-dialog v-model="showLyricDialog" max-width="420">
       <v-card>
-        <v-card-title class="headline">{{$t("lrc_search")}}</v-card-title>
+        <v-card-title class="headline">{{ $t("lrc_search") }}</v-card-title>
         <v-card-text style="padding-bottom: 0;">
           <v-text-field
             :label="$t('lrc_search')"
@@ -82,52 +107,76 @@
             solo
           ></v-text-field>
           <p style="margin-top: -22px">
-            <small>{{$t('lrc_enter2search')}}</small>
+            <small>{{ $t("lrc_enter2search") }}</small>
           </p>
         </v-card-text>
         <v-divider />
-        <v-card-text style="max-height: 400px;overflow: scroll;overflow-x:hidden">
+        <v-card-text
+          style="max-height: 400px;overflow: scroll;overflow-x:hidden"
+        >
           <div class="poka list" style="width: 372px;">
-            <div class="item" @click="loadLrc(`[00:00.000]`,true);showLyricDialog = false" v-ripple>
-              <div class="content">
-                <div class="header">
-                  <div class="head t-ellipsis">{{$t('lrc_notLoad')}}</div>
-                  <div class="t-ellipsis">{{$t('lrc_notLoad_description')}}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="poka list" v-if="!lyricSearching&&lyricSearchResult" style="width: 100%;">
             <div
               class="item"
-              v-for="(item, index) of lyricSearchResult"
-              :key="index"
-              @click="loadLrc(item.lyric,true);showLyricDialog = false"
+              @click="
+                loadLrc(`[00:00.000]`, true);
+                showLyricDialog = false;
+              "
               v-ripple
             >
               <div class="content">
                 <div class="header">
-                  <div class="head t-ellipsis">{{item.name}}</div>
-                  <div class="t-ellipsis">{{item.artist}}</div>
+                  <div class="head t-ellipsis">{{ $t("lrc_notLoad") }}</div>
+                  <div class="t-ellipsis">
+                    {{ $t("lrc_notLoad_description") }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="poka list"
+            v-if="!lyricSearching && lyricSearchResult"
+            style="width: 100%;"
+          >
+            <div
+              class="item"
+              v-for="(item, index) of lyricSearchResult"
+              :key="index"
+              @click="
+                loadLrc(item.lyric, true);
+                showLyricDialog = false;
+              "
+              v-ripple
+            >
+              <div class="content">
+                <div class="header">
+                  <div class="head t-ellipsis">{{ item.name }}</div>
+                  <div class="t-ellipsis">{{ item.artist }}</div>
                 </div>
               </div>
             </div>
           </div>
           <poka-loader v-else-if="lyricSearching" />
           <div style="text-align:center;padding: 40px 0;" v-else>
-            <v-btn @click="dialogSearch" color="primary">{{$t('search')}}</v-btn>
+            <v-btn @click="dialogSearch" color="primary">{{
+              $t("search")
+            }}</v-btn>
           </div>
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer />
-          <v-btn text @click="showLyricDialog = false">{{$t('cancel')}}</v-btn>
+          <v-btn text @click="showLyricDialog = false">{{
+            $t("cancel")
+          }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
     <v-dialog v-model="lyric_theme_dialog" max-width="300">
       <v-card>
-        <v-card-title class="headline">{{$t('settingInterface.customize.lyric._')}}</v-card-title>
+        <v-card-title class="headline">{{
+          $t("settingInterface.customize.lyric._")
+        }}</v-card-title>
         <v-card-text>
           <div class="poka list">
             <div class="item" @click="setLyricTheme('bigtext')" v-ripple>
@@ -174,7 +223,9 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn text @click="lyric_theme_dialog = false">{{$t('cancel')}}</v-btn>
+          <v-btn text @click="lyric_theme_dialog = false">{{
+            $t("cancel")
+          }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

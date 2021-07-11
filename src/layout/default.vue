@@ -6,15 +6,26 @@
         clipped-left
         app
         v-if="!$vuetify.breakpoint.mdAndUp"
-        :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark?'rgba(255, 255, 255, 0.12)':`rgb(0 0 0 / 20%)`}`"
+        :style="
+          `box-shadow: 0px 0px 0px 1px ${
+            $vuetify.theme.isDark
+              ? 'rgba(255, 255, 255, 0.12)'
+              : `rgb(0 0 0 / 20%)`
+          }`
+        "
       >
-        <v-app-bar-nav-icon @click.stop="toggleMenu()" v-if="!$vuetify.breakpoint.mdAndUp" />
+        <v-app-bar-nav-icon
+          @click.stop="toggleMenu()"
+          v-if="!$vuetify.breakpoint.mdAndUp"
+        />
         <div class="poka-drawer-logo">
           <h1>PokaPlayer</h1>
         </div>
         <v-spacer />
         <v-btn icon @click="switch_audio_order">
-          <v-icon class="material-icons-outlined" v-if="audio_order==='list'">repeat</v-icon>
+          <v-icon class="material-icons-outlined" v-if="audio_order === 'list'"
+            >repeat</v-icon
+          >
           <v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
         </v-btn>
       </v-app-bar>
@@ -28,7 +39,13 @@
     >
       <v-app-bar
         color="#FFF"
-        :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark?'rgba(255, 255, 255, 0.12)':`rgb(0 0 0 / 20%)`}`"
+        :style="
+          `box-shadow: 0px 0px 0px 1px ${
+            $vuetify.theme.isDark
+              ? 'rgba(255, 255, 255, 0.12)'
+              : `rgb(0 0 0 / 20%)`
+          }`
+        "
         v-if="!$vuetify.breakpoint.mdAndUp"
       >
         <v-btn icon @click="toggleMenu">
@@ -57,7 +74,7 @@
           <div class="content">
             <v-icon
               class="material-icons-outlined"
-              :color="$vuetify.theme.isDark?'#FFF':'primary'"
+              :color="$vuetify.theme.isDark ? '#FFF' : 'primary'"
               v-text="item.icon"
             />
             <div class="header">
@@ -91,13 +108,18 @@
               <img :src="audio_cover" :key="audio_cover" />
             </v-fade-transition>
           </div>
-          <div class="song-title" @click="$router.push($route.path!='/now'?'/now':'/lyric')">
-            <div class="song-name">{{audio_title}}</div>
-            <div class="song-artist">{{audio_artist||$t('app_waitForPlay')}}</div>
+          <div
+            class="song-title"
+            @click="$router.push($route.path != '/now' ? '/now' : '/lyric')"
+          >
+            <div class="song-name">{{ audio_title }}</div>
+            <div class="song-artist">
+              {{ audio_artist || $t("app_waitForPlay") }}
+            </div>
           </div>
         </div>
         <div class="center">
-          <span class="time">{{audio_currentTime}}</span>
+          <span class="time">{{ audio_currentTime }}</span>
 
           <v-btn icon @click="audio_previous">
             <v-icon class="material-icons-outlined">skip_previous</v-icon>
@@ -106,21 +128,26 @@
           <v-btn small fab depressed @click="audio_toggle" color="primary">
             <v-icon
               class="anicons"
-              :style="{'font-variation-settings':audio_paused?``:`'TIME' 100`}"
-            >H</v-icon>
+              :style="{
+                'font-variation-settings': audio_paused ? `` : `'TIME' 100`
+              }"
+              >H</v-icon
+            >
           </v-btn>
 
           <v-btn icon @click="audio_next">
             <v-icon class="material-icons-outlined">skip_next</v-icon>
           </v-btn>
 
-          <span class="time">{{audio_totalTime}}</span>
+          <span class="time">{{ audio_totalTime }}</span>
         </div>
         <div class="right" v-if="audio_artist">
           <div
-            :style="`display: flex;padding: 20px 0;min-width: 160px;justify-content: flex-end;`"
-            @mouseover="audio_volume_hover=true"
-            @mouseleave="audio_volume_hover=false"
+            :style="
+              `display: flex;padding: 20px 0;min-width: 160px;justify-content: flex-end;`
+            "
+            @mouseover="audio_volume_hover = true"
+            @mouseleave="audio_volume_hover = false"
           >
             <v-fade-transition>
               <v-slider
@@ -131,17 +158,30 @@
                 thumb-label
               ></v-slider>
             </v-fade-transition>
-            <v-btn icon @click="audio_volume?audio_volume=0:audio_volume=100">
-              <v-icon class="material-icons-outlined" v-if="audio_volume==0">volume_off</v-icon>
-              <v-icon class="material-icons-outlined" v-else-if="audio_volume<50">volume_down</v-icon>
+            <v-btn
+              icon
+              @click="audio_volume ? (audio_volume = 0) : (audio_volume = 100)"
+            >
+              <v-icon class="material-icons-outlined" v-if="audio_volume == 0"
+                >volume_off</v-icon
+              >
+              <v-icon
+                class="material-icons-outlined"
+                v-else-if="audio_volume < 50"
+                >volume_down</v-icon
+              >
               <v-icon class="material-icons-outlined" v-else>volume_up</v-icon>
             </v-btn>
           </div>
           <v-btn icon @click="switch_audio_order">
-            <v-icon class="material-icons-outlined" v-if="audio_order==='list'">repeat</v-icon>
+            <v-icon
+              class="material-icons-outlined"
+              v-if="audio_order === 'list'"
+              >repeat</v-icon
+            >
             <v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
           </v-btn>
-          <v-btn icon to="/now" v-if="$route.path!='/now'">
+          <v-btn icon to="/now" v-if="$route.path != '/now'">
             <v-icon class="material-icons-outlined">playlist_play</v-icon>
           </v-btn>
           <v-btn icon to="/lyric" v-else>
@@ -159,8 +199,11 @@
           <v-btn small fab depressed @click="audio_toggle" color="primary">
             <v-icon
               class="anicons"
-              :style="{'font-variation-settings':audio_paused?``:`'TIME' 100`}"
-            >H</v-icon>
+              :style="{
+                'font-variation-settings': audio_paused ? `` : `'TIME' 100`
+              }"
+              >H</v-icon
+            >
           </v-btn>
 
           <v-btn icon @click="audio_next">

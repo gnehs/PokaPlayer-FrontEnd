@@ -11,23 +11,33 @@
       <div
         class="item"
         style="user-select: none;"
-        v-for="(song,index) of data"
-        :key="nowPlaying?song.uuid:index"
-        :class="{active:index==activeIndex}"
+        v-for="(song, index) of data"
+        :key="nowPlaying ? song.uuid : index"
+        :class="{ active: index == activeIndex }"
         @contextmenu.prevent="moreDialog(song)"
-        @click="nowPlaying?playSong(index):$addSongs({songs:data,index:index})"
+        @click="
+          nowPlaying
+            ? playSong(index)
+            : $addSongs({ songs: data, index: index })
+        "
         v-ripple
       >
         <div class="content">
           <v-avatar size="42px" item>
             <v-img
-              :src="song.cover?(song.cover.startsWith('http')?song.cover:server+song.cover):defaultCover"
+              :src="
+                song.cover
+                  ? song.cover.startsWith('http')
+                    ? song.cover
+                    : server + song.cover
+                  : defaultCover
+              "
               alt="cover"
             />
           </v-avatar>
           <div class="header">
-            <div class="head t-ellipsis">{{song.name}}</div>
-            <div class="t-ellipsis">{{song.artist}}</div>
+            <div class="head t-ellipsis">{{ song.name }}</div>
+            <div class="t-ellipsis">{{ song.artist }}</div>
           </div>
         </div>
         <div class="action">
@@ -37,7 +47,10 @@
             </v-btn>
             <v-btn
               icon
-              @click.stop="$addSongs({songs:[song],clear:false});isInSongList.push(index);"
+              @click.stop="
+                $addSongs({ songs: [song], clear: false });
+                isInSongList.push(index);
+              "
             >
               <v-icon v-if="isInSongList.includes(index)">done</v-icon>
               <v-icon v-else>add</v-icon>
@@ -48,28 +61,42 @@
     </transition-group>
     <v-dialog v-model="moreDialogShow" max-width="400">
       <v-card>
-        <div class="d-flex flex-column align-center moreDialog-header" v-if="moreDialogTemp">
+        <div
+          class="d-flex flex-column align-center moreDialog-header"
+          v-if="moreDialogTemp"
+        >
           <poka-cover
-            :cover="moreDialogTemp.cover
-							? moreDialogTemp.cover.startsWith('http')
-								? moreDialogTemp.cover
-								: server + moreDialogTemp.cover
-							: defaultCover"
+            :cover="
+              moreDialogTemp.cover
+                ? moreDialogTemp.cover.startsWith('http')
+                  ? moreDialogTemp.cover
+                  : server + moreDialogTemp.cover
+                : defaultCover
+            "
             size="200px"
             style="margin: 0 auto;margin-bottom: 8px;display: block;"
           />
-          <div class="head t-ellipsis">{{moreDialogTemp.name}}</div>
-          <div class="artist t-ellipsis">{{moreDialogTemp.artist}}</div>
+          <div class="head t-ellipsis">{{ moreDialogTemp.name }}</div>
+          <div class="artist t-ellipsis">{{ moreDialogTemp.artist }}</div>
         </div>
         <v-card-text class="moreDialog-content">
           <div class="poka list" v-if="moreDialogTemp">
-            <div class="item" v-ripple @click="openPlaylistDialog();moreDialogShow=false">
+            <div
+              class="item"
+              v-ripple
+              @click="
+                openPlaylistDialog();
+                moreDialogShow = false;
+              "
+            >
               <div class="content">
                 <v-avatar size="42px" item>
-                  <v-icon class="material-icons-outlined" color="primary">playlist_add</v-icon>
+                  <v-icon class="material-icons-outlined" color="primary"
+                    >playlist_add</v-icon
+                  >
                 </v-avatar>
                 <div class="header">
-                  <div class="head">{{$t('songAction_add2playlist')}}</div>
+                  <div class="head">{{ $t("songAction_add2playlist") }}</div>
                 </div>
               </div>
               <div class="action">
@@ -82,11 +109,13 @@
             <div class="item" @click="moreDialog_goto_artist" v-ripple>
               <div class="content">
                 <v-avatar size="42px" item>
-                  <v-icon class="material-icons-outlined" color="primary">mic</v-icon>
+                  <v-icon class="material-icons-outlined" color="primary"
+                    >mic</v-icon
+                  >
                 </v-avatar>
                 <div class="header">
-                  <div class="head t-ellipsis">{{moreDialogTemp.artist}}</div>
-                  <div>{{$t('songAction_artist')}}</div>
+                  <div class="head t-ellipsis">{{ moreDialogTemp.artist }}</div>
+                  <div>{{ $t("songAction_artist") }}</div>
                 </div>
                 <div class="action">
                   <v-btn icon>
@@ -98,13 +127,17 @@
             <div class="item" @click="moreDialog_goto_album" v-ripple>
               <div class="content">
                 <v-avatar size="42px" item>
-                  <v-icon class="material-icons-outlined" color="primary">album</v-icon>
+                  <v-icon class="material-icons-outlined" color="primary"
+                    >album</v-icon
+                  >
                 </v-avatar>
                 <div class="header">
-                  <div class="head t-ellipsis">{{moreDialogTemp.album}}</div>
+                  <div class="head t-ellipsis">{{ moreDialogTemp.album }}</div>
                   <div class="t-ellipsis">
-                    <span v-if="moreDialogTemp.year">{{moreDialogTemp.year}}</span>
-                    <span v-else>{{$t('songAction_album')}}</span>
+                    <span v-if="moreDialogTemp.year">{{
+                      moreDialogTemp.year
+                    }}</span>
+                    <span v-else>{{ $t("songAction_album") }}</span>
                   </div>
                 </div>
                 <div class="action">
@@ -117,23 +150,33 @@
             <div class="item" v-ripple>
               <div class="content">
                 <v-avatar size="42px" item>
-                  <v-icon class="material-icons-outlined" color="primary">storage</v-icon>
+                  <v-icon class="material-icons-outlined" color="primary"
+                    >storage</v-icon
+                  >
                 </v-avatar>
                 <div class="header">
-                  <div class="head t-ellipsis">{{$t(`source.${moreDialogTemp.source}`)}}</div>
-                  <div class="t-ellipsis">{{moreDialogTemp.id}}</div>
+                  <div class="head t-ellipsis">
+                    {{ $t(`source.${moreDialogTemp.source}`) }}
+                  </div>
+                  <div class="t-ellipsis">{{ moreDialogTemp.id }}</div>
                 </div>
               </div>
             </div>
             <div class="item" v-if="moreDialogTemp.codec" v-ripple>
               <div class="content">
                 <v-avatar size="42px" item>
-                  <v-icon class="material-icons-outlined" color="primary">insert_drive_file</v-icon>
+                  <v-icon class="material-icons-outlined" color="primary"
+                    >insert_drive_file</v-icon
+                  >
                 </v-avatar>
                 <div class="header">
-                  <div class="head t-ellipsis">{{moreDialogTemp.codec.toUpperCase()}}</div>
+                  <div class="head t-ellipsis">
+                    {{ moreDialogTemp.codec.toUpperCase() }}
+                  </div>
                   <div class="t-ellipsis">
-                    <span v-if="moreDialogTemp.bitrate">{{moreDialogTemp.bitrate/1000}}k</span>
+                    <span v-if="moreDialogTemp.bitrate"
+                      >{{ moreDialogTemp.bitrate / 1000 }}k</span
+                    >
                     <span v-else>Codec</span>
                   </div>
                 </div>
@@ -143,14 +186,16 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn text @click="moreDialogShow = false">{{$t('back')}}</v-btn>
+          <v-btn text @click="moreDialogShow = false">{{ $t("back") }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
     <v-dialog v-model="playlistDialog" max-width="400">
       <v-card id="playlist-dialog">
         <v-toolbar flat>
-          <v-card-title class="headline">{{$t("songAction_add2playlist")}}</v-card-title>
+          <v-card-title class="headline">{{
+            $t("songAction_add2playlist")
+          }}</v-card-title>
           <v-spacer />
           <v-btn icon @click="openCreatePlaylistDialog">
             <v-icon class="material-icons-outlined">add</v-icon>
@@ -160,17 +205,20 @@
           <poka-loader />
         </v-card-text>
         <v-card-text style="height: 300px;" v-else>
-          <v-list v-if="playlists.length>0">
+          <v-list v-if="playlists.length > 0">
             <v-list-item-group v-model="existsPlaylists" multiple>
               <template v-for="(item, i) in playlists">
                 <v-list-item
                   :key="`item-${i}`"
                   :value="item"
-                  @click="toggleSongOfPlaylist(item);"
+                  @click="toggleSongOfPlaylist(item)"
                   :title="item.name"
                 >
                   <v-list-item-action>
-                    <v-checkbox color="primary" :input-value="existsPlaylists.includes(item._id)" />
+                    <v-checkbox
+                      color="primary"
+                      :input-value="existsPlaylists.includes(item._id)"
+                    />
                   </v-list-item-action>
                   <v-list-item-content>
                     <v-list-item-title v-text="item.name" class="t-ellipsis" />
@@ -182,17 +230,21 @@
           <p
             style="user-select: none;margin:100px 0;text-align: center;"
             v-else
-          >{{$t('playlist_page.playlist_empty')}}</p>
+          >
+            {{ $t("playlist_page.playlist_empty") }}
+          </p>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn text @click="playlistDialog = false">{{$t('done')}}</v-btn>
+          <v-btn text @click="playlistDialog = false">{{ $t("done") }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
     <v-dialog v-model="createPlaylistDialog" max-width="400">
       <v-card>
-        <v-card-title class="headline">{{$t('playlist_page.add_title')}}</v-card-title>
+        <v-card-title class="headline">{{
+          $t("playlist_page.add_title")
+        }}</v-card-title>
         <v-card-text>
           <v-text-field
             v-model="createPlaylistName"
@@ -201,9 +253,11 @@
           ></v-text-field>
         </v-card-text>
         <v-card-actions>
-          <v-btn text @click="createPlaylistDialog = false">{{$t('back')}}</v-btn>
+          <v-btn text @click="createPlaylistDialog = false">{{
+            $t("back")
+          }}</v-btn>
           <v-spacer />
-          <v-btn text @click="createPlaylist">{{$t('done')}}</v-btn>
+          <v-btn text @click="createPlaylist">{{ $t("done") }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

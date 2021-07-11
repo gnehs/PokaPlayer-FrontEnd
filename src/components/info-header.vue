@@ -1,15 +1,10 @@
 <template>
   <div class="info-header">
-    <poka-cover
-      :cover="cover"
-      :name="title"
-      size="240px"
-      style="margin: 8px auto;margin-bottom: 8px;display: block;"
-    />
-    <div class="info-title" :title="title">{{title}}</div>
+    <poka-cover :cover="cover" :name="title" size="240px" style="margin: 8px auto; margin-bottom: 8px; display: block" />
+    <div class="info-title" :title="title">{{ title }}</div>
     <div class="metadatas">
-      <span class="meta" v-if="subtitle">{{subtitle}}</span>
-      <span class="meta" v-if="songs" :key="songs">{{$t("album_total", { songs: songs })}}</span>
+      <span class="meta" v-if="subtitle">{{ subtitle }}</span>
+      <span class="meta" v-if="songs" :key="songs">{{ $t('album_total', { songs: songs }) }}</span>
     </div>
     <div class="actions">
       <slot />
@@ -18,14 +13,14 @@
 </template>
 <script>
 export default {
-  name: "info-header",
+  name: 'info-header',
   props: {
     cover: String,
     title: String,
     subtitle: String,
     songs: { default: 0 }
   }
-};
+}
 </script>
 
 <style lang="sass" scoped>

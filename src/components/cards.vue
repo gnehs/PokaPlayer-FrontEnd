@@ -6,8 +6,8 @@
 
 <script>
 export default {
-  name: "poka-cards"
-};
+  name: 'poka-cards'
+}
 </script>
 <style lang="sass">
 .theme--dark

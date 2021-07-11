@@ -1,22 +1,22 @@
- <template>
-  <div style="position: sticky;top: 16px;">
+<template>
+  <div style="position: sticky; top: 16px">
     <div class="header-wrapper">
-      <div class="bg" :style="{backgroundImage: `url('${bg}')`}" :class="{blur: blurbg}" />
+      <div class="bg" :style="{ backgroundImage: `url('${bg}')` }" :class="{ blur: blurbg }" />
     </div>
-    <div class="hw-header" style="line-height: normal;" v-if="title" :style="headerStyle">
-      <div class="hw-title">{{title}}</div>
-      <div class="hw-subtitle">{{subtitle}}</div>
+    <div class="hw-header" style="line-height: normal" v-if="title" :style="headerStyle">
+      <div class="hw-title">{{ title }}</div>
+      <div class="hw-subtitle">{{ subtitle }}</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "poka-header",
+  name: 'poka-header',
   data: () => ({
     headerStyle: {
       opacity: 1,
-      transform: ""
+      transform: ''
     }
   }),
   props: {
@@ -30,37 +30,26 @@ export default {
   },
   methods: {
     handleScroll(event) {
-      if (document.querySelector("main")) {
-        let scrollTop = document.querySelector("main").scrollTop;
-        let targetHideHeight = 40;
-        this.headerStyle.opacity = 1 - scrollTop / 200;
-        this.headerStyle.transform = `translate(0,-${(scrollTop /
-          targetHideHeight) *
-          35}px)`;
+      if (document.querySelector('main')) {
+        let scrollTop = document.querySelector('main').scrollTop
+        let targetHideHeight = 40
+        this.headerStyle.opacity = 1 - scrollTop / 200
+        this.headerStyle.transform = `translate(0,-${(scrollTop / targetHideHeight) * 35}px)`
       }
     }
   },
   mounted() {
-    this.handleScroll();
-    if (document.querySelector("main"))
-      document
-        .querySelector("main")
-        .addEventListener("scroll", this.handleScroll);
+    this.handleScroll()
+    if (document.querySelector('main')) document.querySelector('main').addEventListener('scroll', this.handleScroll)
   },
   created() {
-    this.handleScroll();
-    if (document.querySelector("main"))
-      document
-        .querySelector("main")
-        .addEventListener("scroll", this.handleScroll);
+    this.handleScroll()
+    if (document.querySelector('main')) document.querySelector('main').addEventListener('scroll', this.handleScroll)
   },
   destroyed() {
-    if (document.querySelector("main"))
-      document
-        .querySelector("main")
-        .removeEventListener("scroll", this.handleScroll);
+    if (document.querySelector('main')) document.querySelector('main').removeEventListener('scroll', this.handleScroll)
   }
-};
+}
 </script>
 <style lang="sass">
 .header-wrapper

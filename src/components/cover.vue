@@ -1,63 +1,63 @@
 <template>
-  <div class="cover" :style="{'--size': size}" :key="parsedCover">
+  <div class="cover" :style="{ '--size': size }" :key="parsedCover">
     <v-img aspect-ratio="1" class="cover-shadow" :src="parsedCover" />
     <v-img aspect-ratio="1" class="cover-img" :src="parsedCover" />
   </div>
 </template>
 
 <script>
-const GeoPattern = require("geopattern");
+const GeoPattern = require('geopattern')
 export default {
-  name: "poka-cover",
+  name: 'poka-cover',
   props: {
     cover: { type: String },
     size: { type: String },
-    name: { type: String, default: "cover" }
+    name: { type: String, default: 'cover' }
   },
   data: () => ({
     parsedCover: null
   }),
   watch: {
     cover() {
-      this.updateImg();
+      this.updateImg()
     }
   },
   created() {
-    this.updateImg();
+    this.updateImg()
   },
   methods: {
     updateImg() {
       if (this.cover) {
-        this.parsedCover = this.cover;
+        this.parsedCover = this.cover
       } else {
         this.parsedCover = GeoPattern.generate(this.name, {
-          baseColor: "#fc0"
-        }).toDataUri();
+          baseColor: '#fc0'
+        }).toDataUri()
       }
     }
   }
-};
+}
 </script>
 <style lang="sass" scoped>
 .cover
+  position: relative
+  --size: 100%
+  width: var(--size)
+  height: var(--size)
+  display: inline-block
+  .cover-img,.cover-shadow
+    object-fit: cover
+    border-radius: 16px
+    width: 100%
+    height: 100%
+  .cover-img
     position: relative
-    --size: 100%
-    width: var(--size)
-    height: var(--size)
-    display: inline-block
-    .cover-img,.cover-shadow
-        object-fit: cover
-        border-radius: 16px
-        width: 100%
-        height: 100%
-    .cover-img
-        position: relative
-    .cover-shadow
-        position: absolute
-        filter: blur(20px) brightness(.9)
-        opacity: .5
-        transform: translateY(8px)
-        top: 0
-        left: 0
-        transition: .2s ease
+  .cover-shadow
+    position: absolute
+    filter: blur(20px) brightness(.9)
+    opacity: .5
+    transform: translateY(8px)
+    top: 0
+    left: 0
+    transition: .2s ease
 </style>

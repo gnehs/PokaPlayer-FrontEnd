@@ -6,11 +6,11 @@
 
 <script>
 export default {
-  name: "poka-loader"
-};
+  name: 'poka-loader'
+}
 </script>
 <style lang="sass" scoped>
 div
-	text-align: center
-	margin-top: 8px
+  text-align: center
+  margin-top: 8px
 </style>

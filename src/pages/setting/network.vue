@@ -1,14 +1,18 @@
 <template>
   <div>
     <div class="poka list">
-      <div class="item" @click="showSoundQualityDialog=true" v-ripple>
+      <div class="item" @click="showSoundQualityDialog = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
             <v-icon>music_note</v-icon>
           </v-avatar>
           <div class="header">
-            <div class="head t-ellipsis">{{$t('settings_network_soundQuality')}}</div>
-            <div class="t-ellipsis">{{$t(`settings_network_soundQuality_${soundQuality}`)}}</div>
+            <div class="head t-ellipsis">
+              {{ $t('settings_network_soundQuality') }}
+            </div>
+            <div class="t-ellipsis">
+              {{ $t(`settings_network_soundQuality_${soundQuality}`) }}
+            </div>
           </div>
         </div>
       </div>
@@ -16,7 +20,7 @@
 
     <v-dialog v-model="showSoundQualityDialog" max-width="800">
       <v-card>
-        <v-card-title class="headline">{{$t("settings_network_soundQuality")}}</v-card-title>
+        <v-card-title class="headline">{{ $t('settings_network_soundQuality') }}</v-card-title>
 
         <v-card-text>
           <poka-cards class="poka four doubling cards" :hide-overflow="false">
@@ -52,7 +56,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn text @click="showSoundQualityDialog = false">{{$t('cancel')}}</v-btn>
+          <v-btn text @click="showSoundQualityDialog = false">{{ $t('cancel') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -61,28 +65,28 @@
 
 <script>
 export default {
-  name: "SettingNetwork",
+  name: 'SettingNetwork',
   data: () => ({
-    soundQuality: window._setting("audioQuality"),
+    soundQuality: window._setting('audioQuality'),
     showSoundQualityDialog: false
   }),
   methods: {
     setSoundQuality(quality) {
       try {
-        this.soundQuality = quality;
-        this.showSoundQualityDialog = false;
-        window._setting("audioQuality", quality);
+        this.soundQuality = quality
+        this.showSoundQualityDialog = false
+        window._setting('audioQuality', quality)
 
         //同步設定
         this.axios({
-          method: "post",
-          url: _setting(`server`) + "/pokaapi/v2/user/setting/",
+          method: 'post',
+          url: _setting(`server`) + '/pokaapi/v2/user/setting/',
           data: { n: { audioQuality: quality } }
-        });
+        })
       } catch (e) {
-        console.error(e);
+        console.error(e)
       }
     }
   }
-};
+}
 </script>

@@ -8,19 +8,19 @@
       <v-expansion-panel>
         <v-expansion-panel-header>Audios</v-expansion-panel-header>
         <v-expansion-panel-content>
-          <pre>{{audios}}</pre>
+          <pre>{{ audios }}</pre>
         </v-expansion-panel-content>
       </v-expansion-panel>
       <v-expansion-panel>
         <v-expansion-panel-header>Config</v-expansion-panel-header>
         <v-expansion-panel-content>
-          <pre>{{pokaSetting}}</pre>
+          <pre>{{ pokaSetting }}</pre>
         </v-expansion-panel-content>
       </v-expansion-panel>
       <v-expansion-panel>
         <v-expansion-panel-header>Lyric</v-expansion-panel-header>
         <v-expansion-panel-content>
-          <pre>{{lyric}}</pre>
+          <pre>{{ lyric }}</pre>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
@@ -29,12 +29,12 @@
 
 <script>
 export default {
-  name: "Debug",
+  name: 'Debug',
   created() {},
   data: () => ({
     pokaSetting: JSON.parse(localStorage.pokaSetting),
     audios: _player.list.audios,
     lyric: _lrc.lyrics_all
   })
-};
+}
 </script>

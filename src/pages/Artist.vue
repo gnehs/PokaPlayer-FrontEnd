@@ -11,15 +11,15 @@
 
 <script>
 export default {
-  name: "Artist",
+  name: 'Artist',
   created() {
-    this.axios.get(_setting(`server`) + "/pokaapi/artists/").then(response => {
-      this.data = response.data;
-    });
+    this.axios.get(_setting(`server`) + '/pokaapi/artists/').then(response => {
+      this.data = response.data
+    })
   },
   data: () => ({
     data: null,
     server: _setting(`server`)
   })
-};
+}
 </script>

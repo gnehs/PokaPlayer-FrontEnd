@@ -6,16 +6,16 @@
           v-if="lyric.length > 1"
           class="lyric-view"
           key="lyric"
-          :class="{lyricTranslated:lyricTranslated}"
+          :class="{ lyricTranslated: lyricTranslated }"
         >
           <p
             v-for="(item, index) of lyric"
             :key="index"
-            :class="{focus:index==lyricFocus}"
+            :class="{ focus: index == lyricFocus }"
             @click="musicSeek(item.timestamp)"
           >
-            <span class="timestamp">{{timeToTag(item.timestamp)}}</span>
-            {{item.text}}
+            <span class="timestamp">{{ timeToTag(item.timestamp) }}</span>
+            {{ item.text }}
           </p>
         </div>
         <div id="lyric-edit">
@@ -46,24 +46,33 @@
           <v-card class="mx-auto" id="lyric-edit-time-shift">
             <v-card-text style="padding-bottom:0">
               <div>時間平移</div>
-              <p
-                class="display-1 text--primary"
-                style="margin-bottom:0"
-              >{{timeShiftValue>=0?'+':''}}{{timeShiftValue}}s</p>
+              <p class="display-1 text--primary" style="margin-bottom:0">
+                {{ timeShiftValue >= 0 ? "+" : "" }}{{ timeShiftValue }}s
+              </p>
             </v-card-text>
             <v-card-actions>
-              <v-btn text @click="timeShift(-0.5)" color="red accent-4">-0.5s</v-btn>
-              <v-btn text @click="timeShift(-0.1)" color="red accent-4">-0.1s</v-btn>
+              <v-btn text @click="timeShift(-0.5)" color="red accent-4"
+                >-0.5s</v-btn
+              >
+              <v-btn text @click="timeShift(-0.1)" color="red accent-4"
+                >-0.1s</v-btn
+              >
               <v-btn text @click="timeShift(0.1)" color="primary">+0.1s</v-btn>
               <v-btn text @click="timeShift(0.5)" color="primary">+0.5s</v-btn>
               <v-spacer />
-              <v-btn text @click="timeShift(-timeShiftValue)" color="primary">重置</v-btn>
+              <v-btn text @click="timeShift(-timeShiftValue)" color="primary"
+                >重置</v-btn
+              >
             </v-card-actions>
           </v-card>
           <v-card class="mx-auto" id="lyric-edit-text-editor">
             <v-card-text style="padding-bottom:0">
               <div>文字編輯器</div>
-              <v-textarea v-model="lyric_raw" max-height="100%" rows="20"></v-textarea>
+              <v-textarea
+                v-model="lyric_raw"
+                max-height="100%"
+                rows="20"
+              ></v-textarea>
             </v-card-text>
           </v-card>
         </div>

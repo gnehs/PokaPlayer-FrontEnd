@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="poka list">
-      <v-subheader>{{$t('settings_system')}}</v-subheader>
-      <div class="item" @click="restartConfirmActive=true" v-ripple>
+      <v-subheader>{{ $t("settings_system") }}</v-subheader>
+      <div class="item" @click="restartConfirmActive = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
             <v-icon>autorenew</v-icon>
           </v-avatar>
           <div class="header">
-            <div class="head t-ellipsis">{{$t('settings_restart')}}</div>
+            <div class="head t-ellipsis">{{ $t("settings_restart") }}</div>
           </div>
         </div>
       </div>
@@ -18,10 +18,10 @@
             <v-icon>system_update</v-icon>
           </v-avatar>
           <div class="header">
-            <div class="head t-ellipsis">{{$t('settings_update')}}</div>
+            <div class="head t-ellipsis">{{ $t("settings_update") }}</div>
             <div class="t-ellipsis">
-              {{checkUpadteStatus}}
-              <span v-if="poka_debug">(debug: {{poka_debug}})</span>
+              {{ checkUpadteStatus }}
+              <span v-if="poka_debug">(debug: {{ poka_debug }})</span>
             </div>
           </div>
         </div>
@@ -30,43 +30,65 @@
 
     <v-dialog v-model="restartConfirmActive" max-width="420">
       <v-card>
-        <v-card-title class="headline">{{$t("settings_restartDialog_title")}}</v-card-title>
+        <v-card-title class="headline">{{
+          $t("settings_restartDialog_title")
+        }}</v-card-title>
         <v-card-text style="padding-bottom: 0;">
-          <p>{{$t('settings_updateDialog_note')}}</p>
+          <p>{{ $t("settings_updateDialog_note") }}</p>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn text @click="restartConfirmActive=false">{{$t('cancel')}}</v-btn>
-          <v-btn text @click="restartConfirmActive=false;restart()" color="primary">{{$t('ok')}}</v-btn>
+          <v-btn text @click="restartConfirmActive = false">{{
+            $t("cancel")
+          }}</v-btn>
+          <v-btn
+            text
+            @click="
+              restartConfirmActive = false;
+              restart();
+            "
+            color="primary"
+            >{{ $t("ok") }}</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
 
     <v-dialog v-model="showUpdateDialog" max-width="420">
       <v-card>
-        <v-card-title
-          class="headline"
-        >{{$t("settings_updateDialog_title", { version: this.newVersion.tag})}}</v-card-title>
+        <v-card-title class="headline">{{
+          $t("settings_updateDialog_title", { version: this.newVersion.tag })
+        }}</v-card-title>
         <v-card-text style="padding-bottom: 0;">
           <p class="changelog" v-html="newVersion.body" />
-          <p>{{$t('settings_updateDialog_note')}}</p>
-          <p v-if="poka_debug" v-html="$t('settings_updateDialog_note_dev')"></p>
+          <p>{{ $t("settings_updateDialog_note") }}</p>
+          <p
+            v-if="poka_debug"
+            v-html="$t('settings_updateDialog_note_dev')"
+          ></p>
           <p>
             <a
               href="https://github.com/gnehs/PokaPlayer/releases"
               target="_blank"
-            >{{$t('settings_updateDialog_view_previous')}}</a>
+              >{{ $t("settings_updateDialog_view_previous") }}</a
+            >
           </p>
         </v-card-text>
         <v-divider />
         <v-card-actions>
           <v-spacer />
-          <v-btn text @click="showUpdateDialog = false">{{$t('cancel')}}</v-btn>
+          <v-btn text @click="showUpdateDialog = false">{{
+            $t("cancel")
+          }}</v-btn>
           <v-btn
             text
-            @click="showUpdateDialog = false;update()"
+            @click="
+              showUpdateDialog = false;
+              update();
+            "
             color="primary"
-          >{{$t('settings_update')}}</v-btn>
+            >{{ $t("settings_update") }}</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -74,12 +96,20 @@
     <v-dialog v-model="showUpdateingDialog" persistent max-width="280">
       <v-card>
         <v-card-text style="padding: 0;">
-          <pre class="log" style="width: 280px;height: 200px">{{updateLog}}</pre>
-          <v-progress-linear indeterminate color="primary" v-show="!showRestartCompleted"></v-progress-linear>
+          <pre class="log" style="width: 280px;height: 200px">{{
+            updateLog
+          }}</pre>
+          <v-progress-linear
+            indeterminate
+            color="primary"
+            v-show="!showRestartCompleted"
+          ></v-progress-linear>
         </v-card-text>
         <v-card-actions v-show="showRestartCompleted">
           <v-spacer />
-          <v-btn text color="primary" @click="reload">{{$t('settings_update_reconnect')}}</v-btn>
+          <v-btn text color="primary" @click="reload">{{
+            $t("settings_update_reconnect")
+          }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -90,16 +120,22 @@
         <p
           v-show="!showRestartCompleted"
           class="headline text-center font-weight-bold"
-        >{{$t("settings_restarting")}}</p>
+        >
+          {{ $t("settings_restarting") }}
+        </p>
         <p
           v-show="showRestartCompleted"
           class="headline text-center font-weight-bold"
-        >{{$t("settings_restart_completed")}}</p>
+        >
+          {{ $t("settings_restart_completed") }}
+        </p>
         <poka-loader v-show="!showRestartCompleted" />
         <br />
         <v-card-actions v-show="showRestartCompleted">
           <v-spacer />
-          <v-btn text color="primary" @click="reload">{{$t('settings_update_reconnect')}}</v-btn>
+          <v-btn text color="primary" @click="reload">{{
+            $t("settings_update_reconnect")
+          }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
