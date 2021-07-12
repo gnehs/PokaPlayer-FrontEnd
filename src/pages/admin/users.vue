@@ -6,7 +6,7 @@
         <poka-card
           v-for="user in users"
           :key="user._id"
-          @click="openUserDialog(user)"
+          @click.native="openUserDialog(user)"
           :poka-bg="false"
           :poka-title="user.username"
           :poka-subtitle="$t('settingUserManagement.role.' + user.role)"
