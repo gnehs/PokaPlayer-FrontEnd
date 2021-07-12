@@ -1,20 +1,15 @@
-<template lang="pug">
-router-link.card(v-if='to', :to='to', :data-source='parsed_source || undefined')
-  .image
-    poka-cover(:cover='parsed_pokaBg', :name='pokaTitle', style='position: absolute')
-    .icon(v-if='pokaIcon')
-      v-icon.material-icons-outlined {{ pokaIcon }}
-  .title(:class='{ "t-ellipsis": ellipsis }') {{ pokaTitle }}
-  .subtitle(:class='{ "t-ellipsis": ellipsis }') {{ pokaSubtitle }}
-a.card(v-else, :data-source='parsed_source || undefined')
-  .image
-    poka-cover(:cover='parsed_pokaBg', :name='pokaTitle', style='position: absolute')
-    .icon(v-if='pokaIcon', :class='{ "with-img": !!parsed_pokaBg }')
-      v-icon.material-icons-outlined {{ pokaIcon }}
-  .title(:class='{ "t-ellipsis": ellipsis }') {{ pokaTitle }}
-  .subtitle(:class='{ "t-ellipsis": ellipsis }') {{ pokaSubtitle }}
+<template>
+  <div :is="to ? 'router-link' : 'a'" :to="to" :data-source="parsed_source || undefined" @click="$emit(`click`, fn)" class="card">
+    <div class="image">
+      <poka-cover :cover="parsed_pokaBg" :name="pokaTitle" style="position: absolute" />
+      <div class="icon" v-if="pokaIcon">
+        <v-icon class="material-icons-outlined">{{ pokaIcon }}</v-icon>
+      </div>
+    </div>
+    <div class="title" :class="{ 't-ellipsis': ellipsis }" v-text="pokaTitle" />
+    <div class="subtitle" :class="{ 't-ellipsis': ellipsis }" v-text="pokaSubtitle" />
+  </div>
 </template>
-
 <script>
 const GeoPattern = require('geopattern')
 export default {
@@ -25,8 +20,9 @@ export default {
     source: { default: '' },
     pokaTitle: String,
     pokaSubtitle: String,
-    to: String,
-    pokaIcon: { type: String }
+    to: { type: String, default: null },
+    pokaIcon: { type: String },
+    fn: { type: Function, default: () => {} }
   },
   data: () => ({ parsed_source: null, parsed_pokaBg: null }),
   created() {
