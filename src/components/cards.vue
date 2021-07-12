@@ -74,19 +74,19 @@ export default {
 			&:active .image
 				transform: translateY(-5px)
 				filter: brightness(80%)
-			.title
-				font-size: 1.5em !important
+			.poka-card-title
+				font-size: 15px !important
 				padding-top: 5px
 				line-height: 1.5em
-				font-weight: bold
+				font-weight: normal
 				color: var(--text-color)
 				opacity: .9
-			.subtitle
+			.poka-card-subtitle
 				font-size: 1em !important
 				padding-top: 0px
-				line-height: 1.5em
+				line-height: 12px
 				color: var(--text-color)
-				opacity: .75
+				opacity: .6
 			.icon
 				position: absolute
 				background-color: rgba(0,0,0,.75)
@@ -130,7 +130,7 @@ export default {
 				--card-background-color: #795548
 @media (max-width: 768px)
 	.poka.cards
-		grid-template-columns: repeat(auto-fill,minmax(150px, 1fr))
+		grid-template-columns: repeat(auto-fill,minmax(128px, 1fr))
 		.card
 			.icon
 				padding: 8px

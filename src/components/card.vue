@@ -6,8 +6,8 @@
         <v-icon class="material-icons-outlined">{{ pokaIcon }}</v-icon>
       </div>
     </div>
-    <div class="title" :class="{ 't-ellipsis': ellipsis }" v-text="pokaTitle" />
-    <div class="subtitle" :class="{ 't-ellipsis': ellipsis }" v-text="pokaSubtitle" />
+    <div class="poka-card-title" :class="{ 't-ellipsis': ellipsis }" v-text="pokaTitle" />
+    <div class="poka-card-subtitle" :class="{ 't-ellipsis': ellipsis }" v-text="pokaSubtitle" />
   </div>
 </template>
 <script>
