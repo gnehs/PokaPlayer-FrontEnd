@@ -35,7 +35,7 @@
       </v-tab-item>
       <v-tab-item>
         <div class="title">Snackbar</div>
-        <v-btn text @click="$snackbar('test test 123')">Open Snackbar</v-btn>
+        <v-btn depressed @click="$snackbar('test test 123')">Open Snackbar</v-btn>
       </v-tab-item>
     </v-tabs-items>
   </div>

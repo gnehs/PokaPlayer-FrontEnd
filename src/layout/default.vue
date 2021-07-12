@@ -13,7 +13,7 @@
         </div>
         <v-spacer />
         <poka-searchbar v-model="showSeachBar" />
-        <v-btn icon @click="switch_audio_order">
+        <v-btn icon @click="switch_audio_order" v-if="$route.path == '/now'">
           <v-icon class="material-icons-outlined" v-if="audio_order === 'list'">repeat</v-icon>
           <v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
         </v-btn>
