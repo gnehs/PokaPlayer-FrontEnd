@@ -1,7 +1,7 @@
 <template>
   <a :data-source="parsed_source" @click="handleClick" class="card" ref="card">
     <div class="image">
-      <poka-cover :cover="parsed_pokaBg" :name="pokaTitle" style="position: absolute" hide-shadow />
+      <poka-cover :cover="parsed_pokaBg" :name="pokaTitle" hide-shadow />
       <div class="icon" v-if="pokaIcon">
         <v-icon class="material-icons-outlined">{{ pokaIcon }}</v-icon>
       </div>

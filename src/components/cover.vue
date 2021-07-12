@@ -1,7 +1,8 @@
 <template>
-  <div class="cover" :style="{ '--size': size }" :key="parsedCover">
-    <v-img aspect-ratio="1" class="cover-shadow" :src="parsedCover" v-if="!hideShadow" />
-    <v-img aspect-ratio="1" class="cover-img" :src="parsedCover" />
+  <div :key="parsedCover" class="cover" :style="{ '--size': size }">
+    <overdrive :id="cover" :duration="300">
+      <img aspect-ratio="1" class="cover-img" :src="parsedCover" />
+    </overdrive>
   </div>
 </template>
 
@@ -41,7 +42,6 @@ export default {
 </script>
 <style lang="sass" scoped>
 .cover
-  position: relative
   --size: 100%
   width: var(--size)
   height: var(--size)

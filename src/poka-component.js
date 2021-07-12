@@ -21,6 +21,7 @@ import parseAlbums from "@/components/parse-albums.vue";
 import parseComposers from "@/components/parse-composers.vue";
 import parseFolders from "@/components/parse-folders.vue";
 import parseHome from "@/components/parse-home.vue";
+import overdrive from "@/components/overdrive.vue";
 export {
   // pokaComponent
   about,
@@ -45,4 +46,5 @@ export {
   parseComposers,
   parseFolders,
   parseHome
+  , overdrive
 };

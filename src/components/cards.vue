@@ -63,6 +63,8 @@ export default {
 				.v-image
 					border-radius: 16px
 					transition: filter .2s ease
+				.cover
+					position: absolute
 			&:hover .image
 				background-color: #000
 				.v-image
