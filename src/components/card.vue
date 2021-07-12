@@ -1,5 +1,5 @@
 <template>
-  <div :is="to ? 'router-link' : 'a'" :to="to" :data-source="parsed_source || undefined" @click="$emit(`click`, fn)" class="card">
+  <div :is="to ? 'router-link' : 'a'" :to="to" :data-source="parsed_source" @click="$emit(`click`, fn)" class="card">
     <div class="image">
       <poka-cover :cover="parsed_pokaBg" :name="pokaTitle" style="position: absolute" />
       <div class="icon" v-if="pokaIcon">
@@ -17,7 +17,7 @@ export default {
   props: {
     pokaBg: { default: null },
     ellipsis: { default: true },
-    source: { default: '' },
+    source: { type: String, default: null },
     pokaTitle: String,
     pokaSubtitle: String,
     to: { type: String, default: null },
