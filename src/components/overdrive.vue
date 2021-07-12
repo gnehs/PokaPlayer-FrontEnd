@@ -38,7 +38,8 @@ export default {
     saveElement() {
       elements[this.id] = {
         el: this.$slots.default,
-        pos: this.getClonedStyles(this.$el.firstChild)
+        pos: this.getClonedStyles(this.$el.firstChild),
+        time: null
       }
     },
 
@@ -76,8 +77,7 @@ export default {
         clonedElement.style.left = targetPosition.left
         clonedElement.style.width = targetPosition.width
         clonedElement.style.height = targetPosition.height
-        console.log(clonedElement.style.top, targetPosition.top, clonedElement.style.left, targetPosition.left)
-      }, 50)
+      }, 20)
       setTimeout(_ => {
         clearInterval(i)
         targetElement.style.opacity = 1
@@ -99,14 +99,18 @@ export default {
   mounted() {
     const matchElement = elements[this.id]
     // If element matched and doesn't exceed 500ms
-    if (matchElement && new Date().getTime() - matchElement.time < 10000) {
+    if (matchElement && new Date().getTime() - matchElement.time < 300 && matchElement.time != null) {
       this.handleMatch()
     } else {
       this.saveElement()
     }
+
+    this.$el.addEventListener('click', _ => {
+      elements[this.id].time = new Date().getTime()
+    })
   },
   beforeDestroy() {
-    elements[this.id].time = new Date().getTime()
+    this.$el.removeEventListener('click')
   },
   render(h) {
     return h(this.tag, [this.$slots.default])
