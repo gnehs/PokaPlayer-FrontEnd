@@ -51,29 +51,24 @@ export default {
 				white-space: nowrap
 				overflow: hidden
 				text-overflow: ellipsis
-				transition: all .2s
-				will-change: transform
-			&[data-source]:hover:before
-				transform: translateY(-5px)
 			.image
 				height: 0
 				padding-bottom: 100%
 				background-size: cover
 				border-radius: 16px
-				transition: all .2s
-				will-change: box-shadow, transform, filter
+				transition: all .2s ease
 				position: relative
 				background-color: var(--card-background-color,#607D8B)
+				box-shadow: 0 4px 7px rgba(0,0,0,.25)
 				.v-image
 					border-radius: 16px
+					transition: filter .2s ease
 			&:hover .image
-				transform: translateY(-5px)
-				.cover-shadow
-					transform: translateY(13px)
-					opacity: .7
-			&:active .image
-				transform: translateY(-5px)
-				filter: brightness(80%)
+				background-color: #000
+				.v-image
+					filter: brightness(80%)
+			&:active .image .v-image
+				filter: brightness(70%)
 			.poka-card-title
 				font-size: 15px !important
 				padding-top: 5px

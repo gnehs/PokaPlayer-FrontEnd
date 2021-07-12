@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="album-songs">
     <portal to="app-bar">
       <v-app-bar
         color="#FFF"
@@ -74,8 +74,17 @@
 <script>
 export default {
   name: 'AlbumSongs',
-  created() {
+  async created() {
     this.fetchData()
+    if (document.documentTransition) {
+      await document.documentTransition.start({
+        sharedElements: [
+          this.$refs['album-songs'].querySelector('.album-info .cover'),
+          this.$refs['album-songs'].querySelector('.album-info .info-title'),
+          this.$refs['album-songs'].querySelector('.album-info .meta:nth-child(1)')
+        ]
+      })
+    }
   },
   watch: {
     '$route.path': function() {

@@ -1,6 +1,6 @@
 <template>
   <div class="cover" :style="{ '--size': size }" :key="parsedCover">
-    <v-img aspect-ratio="1" class="cover-shadow" :src="parsedCover" />
+    <v-img aspect-ratio="1" class="cover-shadow" :src="parsedCover" v-if="!hideShadow" />
     <v-img aspect-ratio="1" class="cover-img" :src="parsedCover" />
   </div>
 </template>
@@ -12,7 +12,8 @@ export default {
   props: {
     cover: { type: String },
     size: { type: String },
-    name: { type: String, default: 'cover' }
+    name: { type: String, default: 'cover' },
+    hideShadow: { type: Boolean, default: false }
   },
   data: () => ({
     parsedCover: null

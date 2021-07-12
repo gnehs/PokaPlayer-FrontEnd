@@ -1,14 +1,14 @@
 <template>
-  <div :is="to ? 'router-link' : 'a'" :to="to" :data-source="parsed_source" @click="$emit(`click`, fn)" class="card">
+  <a :data-source="parsed_source" @click="handleClick" class="card" ref="card">
     <div class="image">
-      <poka-cover :cover="parsed_pokaBg" :name="pokaTitle" style="position: absolute" />
+      <poka-cover :cover="parsed_pokaBg" :name="pokaTitle" style="position: absolute" hide-shadow />
       <div class="icon" v-if="pokaIcon">
         <v-icon class="material-icons-outlined">{{ pokaIcon }}</v-icon>
       </div>
     </div>
     <div class="poka-card-title" :class="{ 't-ellipsis': ellipsis }" v-text="pokaTitle" />
     <div class="poka-card-subtitle" :class="{ 't-ellipsis': ellipsis }" v-text="pokaSubtitle" />
-  </div>
+  </a>
 </template>
 <script>
 const GeoPattern = require('geopattern')
@@ -22,7 +22,7 @@ export default {
     pokaSubtitle: String,
     to: { type: String, default: null },
     pokaIcon: { type: String },
-    fn: { type: Function, default: () => {} }
+    fn: { type: Function, default: null }
   },
   data: () => ({ parsed_source: null, parsed_pokaBg: null }),
   created() {
@@ -42,6 +42,16 @@ export default {
       this.parsed_pokaBg = GeoPattern.generate(this.pokaTitle, {
         baseColor: '#fc0'
       }).toDataUri()
+    }
+  },
+  methods: {
+    async handleClick() {
+      if (this.to) {
+        this.$router.push(this.to)
+      }
+      if (this.fn) {
+        this.$emit(`click`, fn)
+      }
     }
   }
 }
