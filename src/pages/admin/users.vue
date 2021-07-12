@@ -2,19 +2,17 @@
   <div>
     <poka-loader v-if="!users" />
     <v-slide-y-reverse-transition>
-      <div class="poka list" v-if="users">
-        <div class="item" v-ripple v-for="user in users" :key="user._id" @click="openUserDialog(user)">
-          <div class="content">
-            <v-icon class="material-icons-outlined" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="'person'" />
-            <div class="header">
-              <div class="head t-ellipsis">{{ user.username }}</div>
-              <div class="t-ellipsis">
-                {{ $t('settingUserManagement.role.' + user.role) }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <poka-cards v-if="users">
+        <poka-card
+          v-for="user in users"
+          :key="user._id"
+          @click="openUserDialog(user)"
+          :poka-bg="false"
+          :poka-title="user.username"
+          :poka-subtitle="$t('settingUserManagement.role.' + user.role)"
+          poka-icon="person"
+        />
+      </poka-cards>
     </v-slide-y-reverse-transition>
     <v-dialog v-model="userDialog" max-width="300">
       <v-card>
