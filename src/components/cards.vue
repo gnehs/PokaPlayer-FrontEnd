@@ -16,18 +16,14 @@ export default {
 .poka
 	&.cards
 		--text-color: #000
-		max-width: calc(100% + 8px * 2)
-		width: calc(100% + 8px * 2)
-		margin: -8px
 		display: grid
-		grid-template-columns: repeat(auto-fill,minmax(192px, 1fr))
+		grid-template-columns: repeat(auto-fill,minmax(176px, 1fr))
+		grid-gap: 16px 12px
 		.card
 			height: 0
 			font-size: 11px
-			margin: .8em 4px
 			background-position: center
 			background-size: cover
-			padding: .475em .5em
 			display: block
 			height: auto
 			padding-bottom: 0
@@ -127,6 +123,7 @@ export default {
 @media (max-width: 768px)
 	.poka.cards
 		grid-template-columns: repeat(auto-fill,minmax(128px, 1fr))
+		grid-gap: 8px 12px
 		.card
 			.icon
 				padding: 8px
