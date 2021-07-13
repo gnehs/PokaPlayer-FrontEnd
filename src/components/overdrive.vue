@@ -1,3 +1,8 @@
+<template>
+  <div :is="tag" @click="click">
+    <slot />
+  </div>
+</template>
 <script>
 const elements = {}
 
@@ -94,6 +99,9 @@ export default {
           this.cache()
         }, this.duration)
       })
+    },
+    click() {
+      elements[this.id].time = new Date().getTime()
     }
   },
   mounted() {
@@ -104,16 +112,6 @@ export default {
     } else {
       this.saveElement()
     }
-
-    this.$el.addEventListener('click', _ => {
-      elements[this.id].time = new Date().getTime()
-    })
-  },
-  beforeDestroy() {
-    this.$el.removeEventListener('click')
-  },
-  render(h) {
-    return h(this.tag, [this.$slots.default])
   }
 }
 </script>

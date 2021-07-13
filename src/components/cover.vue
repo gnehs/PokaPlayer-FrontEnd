@@ -1,9 +1,8 @@
 <template>
-  <div :key="parsedCover" class="cover" :style="{ '--size': size }">
-    <overdrive :id="cover" :duration="300">
-      <img aspect-ratio="1" class="cover-img" :src="parsedCover" />
-    </overdrive>
-  </div>
+  <overdrive :id="cover" :duration="300" :key="parsedCover" class="cover" :style="{ '--size': size }">
+    <img aspect-ratio="1" class="cover-img" :src="parsedCover" />
+    <img aspect-ratio="1" class="cover-shadow" :src="parsedCover" v-if="!hideShadow" />
+  </overdrive>
 </template>
 
 <script>
@@ -61,4 +60,5 @@ export default {
     top: 0
     left: 0
     transition: .2s ease
+    z-index: -1
 </style>
