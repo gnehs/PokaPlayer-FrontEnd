@@ -60,16 +60,15 @@ export default {
 				position: relative
 				background-color: var(--card-background-color,#607D8B)
 				box-shadow: 0 4px 7px rgba(0,0,0,.25)
-				.v-image
+				.cover
 					border-radius: 16px
 					transition: filter .2s ease
-				.cover
 					position: absolute
 			&:hover .image
 				background-color: #000
-				.v-image
+				.cover
 					filter: brightness(80%)
-			&:active .image .v-image
+			&:active .image .cover
 				filter: brightness(70%)
 			.poka-card-title
 				font-size: 15px !important

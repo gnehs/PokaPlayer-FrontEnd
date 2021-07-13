@@ -4,9 +4,9 @@
       <poka-card
         v-for="{ name, artist, cover, id, source } in $pagination(data, page)"
         :key="id"
-        :to="`/album/songs/${encodeURIComponent(source)}/${encodeURIComponent(id || 'unknown')}?cover=${encodeURIComponent(cover || false)}&name=${encodeURIComponent(
-          name
-        )}&artist=${encodeURIComponent(artist)}`"
+        :to="`/album/songs/${encodeURIComponent(source)}/${encodeURIComponent(id || 'unknown')}?cover=${encodeURIComponent(
+          cover || false
+        )}&name=${encodeURIComponent(name)}&artist=${encodeURIComponent(artist)}`"
         :poka-bg="cover || false"
         :poka-title="name"
         :poka-subtitle="artist"
@@ -24,11 +24,7 @@ export default {
   props: ['data'],
   data: () => ({
     server: _setting(`server`),
-    page: 1,
-    pages: 0
-  }),
-  created() {
-    this.pages = Math.ceil(this.data.length / 80)
-  }
+    page: 1
+  })
 }
 </script>

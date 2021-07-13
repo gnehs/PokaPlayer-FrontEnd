@@ -96,7 +96,6 @@ export default {
         const clone = document.querySelector(`[data-clone="${this.id}"]`)
         setTimeout(_ => {
           document.body.removeChild(clone)
-          this.cache()
         }, this.duration)
       })
     },

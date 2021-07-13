@@ -76,15 +76,6 @@ export default {
   name: 'AlbumSongs',
   async created() {
     this.fetchData()
-    if (document.documentTransition) {
-      await document.documentTransition.start({
-        sharedElements: [
-          this.$refs['album-songs'].querySelector('.album-info .cover'),
-          this.$refs['album-songs'].querySelector('.album-info .info-title'),
-          this.$refs['album-songs'].querySelector('.album-info .meta:nth-child(1)')
-        ]
-      })
-    }
   },
   watch: {
     '$route.path': function() {
@@ -105,8 +96,8 @@ export default {
       //取得專輯資料
       let albumSource = this.$route.params.source
       let albumID = this.$route.params.id
-      console.log(this.$route.query)
       this.songs = null
+      // get info from $route.query
       this.name = this.$route.query.name || '█'.repeat(10)
       this.artist = this.$route.query.artist || '█'.repeat(10)
       this.cover = Boolean(this.$route.query.cover) ? this.server + this.$route.query.cover : null
