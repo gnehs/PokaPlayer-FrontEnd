@@ -44,7 +44,7 @@ export default {
   --size: 100%
   width: var(--size)
   height: var(--size)
-  display: inline-block
+  position: relative
   .cover-img,.cover-shadow
     object-fit: cover
     border-radius: 16px
@@ -52,6 +52,8 @@ export default {
     height: 100%
   .cover-img
     position: relative
+
+    z-index: 1
   .cover-shadow
     position: absolute
     filter: blur(20px) brightness(.9)
@@ -60,5 +62,4 @@ export default {
     top: 0
     left: 0
     transition: .2s ease
-    z-index: -1
 </style>

@@ -37,20 +37,16 @@
         <h1 class="title" v-show="songs" style="margin: 8px 16px">
           {{ $t('song') }}
         </h1>
-        <v-slide-y-reverse-transition>
-          <poka-parse-songs style="margin: 16px 0" :data="songs" v-if="songs" />
-        </v-slide-y-reverse-transition>
-        <v-slide-y-reverse-transition>
-          <div v-if="artistAlbums && songs">
-            <v-divider />
-            <div class="px-4">
-              <h1 class="title" style="margin: 8px 0">
-                {{ $t('albumsOfSameArtist') }}
-              </h1>
-              <poka-parse-albums :data="artistAlbums" />
-            </div>
+        <poka-parse-songs style="margin: 16px 0" :data="songs" v-if="songs" />
+        <div v-if="artistAlbums && songs">
+          <v-divider />
+          <div class="px-4">
+            <h1 class="title" style="margin: 8px 0">
+              {{ $t('albumsOfSameArtist') }}
+            </h1>
+            <poka-parse-albums :data="artistAlbums" />
           </div>
-        </v-slide-y-reverse-transition>
+        </div>
       </div>
     </div>
   </div>

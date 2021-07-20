@@ -48,8 +48,7 @@ export default {
 				overflow: hidden
 				text-overflow: ellipsis
 			.image
-				height: 0
-				padding-bottom: 100%
+				aspect-ratio: 1
 				background-size: cover
 				border-radius: 16px
 				transition: all .2s ease
@@ -81,6 +80,7 @@ export default {
 				opacity: .6
 			.icon
 				position: absolute
+				z-index: 2
 				background-color: rgba(0,0,0,.75)
 				background: linear-gradient(135deg, rgba(0,0,0,.4),rgba(0,0,0,.8))
 				opacity: 1
