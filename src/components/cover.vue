@@ -52,7 +52,6 @@ export default {
     height: 100%
   .cover-img
     position: relative
-
     z-index: 1
   .cover-shadow
     position: absolute
