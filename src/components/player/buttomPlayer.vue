@@ -10,7 +10,7 @@
             <img :src="audio_cover" :key="audio_cover" />
           </v-fade-transition>
         </div>
-        <div class="song-title" @click="this.router.push('/fullscreen')">
+        <div class="song-title" @click="$router.push('/fullscreen')">
           <div class="song-name">{{ audio_title }}</div>
           <div class="song-artist">
             {{ audio_artist || $t('app_waitForPlay') }}
