@@ -173,11 +173,6 @@ export default {
 		margin-left: 0
 	.player-cover
 		margin-bottom: 16px
-		img
-			width: var(--size)
-			height: var(--size)
-			object-fit: cover
-			border-radius: 16px
 	.player-title
 		font-weight: bold
 		font-size: 24px
