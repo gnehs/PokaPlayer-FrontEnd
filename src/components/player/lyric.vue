@@ -1,61 +1,52 @@
 <template>
   <div :theme="lyric_theme">
-    <transition name="fade" mode="out-in">
-      <poka-header :blurbg="true" :bg="audio_cover" v-if="audio_cover" :key="audio_cover" />
-      <poka-header v-else key="2" />
-    </transition>
-    <div v-on:dblclick="openLyricDialog">
-      <transition name="fade" mode="out-in">
-        <div v-if="lyric.length > 1" class="lyric" key="lyric" :class="{ lyricTranslated: lyricTranslated }">
-          <p
-            v-for="(item, index) of lyric"
-            :key="index"
-            :data-lyric-set="lyricTranslated ? Math.floor((index - lyricFocus) / 2) : index - lyricFocus"
-            :class="[
-              { focus: index == lyricFocus },
-              {
-                tl: lyricTranslated ? Math.floor((index - lyricFocus) / 2) != Math.round((index - lyricFocus) / 2) : false
-              }
-            ]"
-          >
-            <span>{{ item.text }}</span>
-          </p>
-        </div>
-
-        <v-card v-else-if="lyricSearching" class="mx-auto blur-card" max-width="344" style="margin-top: 64px" key="lyricSearchingcard">
-          <v-card-text class="text-center">
-            <v-icon class="material-icons-outlined display-4">subtitles</v-icon>
-            <p class="headline text--primary">{{ $t('loading') }}</p>
-          </v-card-text>
-        </v-card>
-
-        <v-card v-else class="mx-auto blur-card" max-width="344" style="margin-top: 64px" key="lrc_noLyrics">
-          <v-card-text class="text-center">
-            <v-icon class="material-icons-outlined display-4">subtitles</v-icon>
-            <p class="headline text--primary">{{ $t('lrc_noLyrics') }}</p>
-            <v-btn outlined color="primary" @click="showLyricDialog = true">{{ $t('lrc_search') }}</v-btn>
-          </v-card-text>
-        </v-card>
-      </transition>
-    </div>
-
-    <v-speed-dial v-model="fab" right open-on-hover style="bottom: calc(16px + 69px)" fixed>
-      <template v-slot:activator>
-        <v-btn v-model="fab" color="primary" dark fab>
-          <v-icon v-if="fab">mdi-close</v-icon>
-          <v-icon v-else>more_horiz</v-icon>
+    <portal to="fullscreen-player-action">
+      <div class="action">
+        <v-btn dark icon @click="openLyricDialog">
+          <v-icon>search</v-icon>
         </v-btn>
-      </template>
-      <v-btn fab dark small color="green" @click="openLyricDialog">
-        <v-icon>search</v-icon>
-      </v-btn>
-      <v-btn fab dark small color="indigo" @click="editLyric">
-        <v-icon>mdi-pencil</v-icon>
-      </v-btn>
-      <v-btn fab dark small color="cyan" @click="lyric_theme_dialog = true">
-        <v-icon>mdi-palette</v-icon>
-      </v-btn>
-    </v-speed-dial>
+        <v-btn dark icon @click="editLyric">
+          <v-icon>mdi-pencil</v-icon>
+        </v-btn>
+        <v-btn dark icon @click="lyric_theme_dialog = true">
+          <v-icon>mdi-palette</v-icon>
+        </v-btn>
+      </div>
+    </portal>
+    <div v-on:dblclick="openLyricDialog">
+      <div v-if="lyric.length > 1" class="lyric" key="lyric" :class="{ lyricTranslated: lyricTranslated }">
+        <div style="height: 200px" />
+        <p
+          v-for="(item, index) of lyric"
+          :key="index"
+          :data-lyric-set="lyricTranslated ? Math.floor((index - lyricFocus) / 2) : index - lyricFocus"
+          :class="{
+            focus: index == lyricFocus,
+            tl: lyricTranslated ? Math.floor((index - lyricFocus) / 2) != Math.round((index - lyricFocus) / 2) : false
+          }"
+        >
+          <span>{{ item.text }}</span>
+        </p>
+        <div style="height: 200px" />
+      </div>
+      <poka-loader v-else-if="lyricSearching" style="margin-top: 30vh !important" color="#fff" />
+      <v-card v-else class="mx-auto blur-card" max-width="344" style="margin-top: 30vh" key="lrc_noLyrics">
+        <v-card-text class="text-center">
+          <v-icon class="material-icons-outlined display-4">subtitles</v-icon>
+          <p class="headline text--primary">{{ $t('lrc_noLyrics') }}</p>
+          <v-btn outlined color="primary" @click="showLyricDialog = true">{{ $t('lrc_search') }}</v-btn>
+        </v-card-text>
+      </v-card>
+    </div>
+    <v-card class="save-current-lyric mx-auto blur-card" max-width="400" v-if="lyric_save_toast">
+      <v-card-title>歌詞正確嗎？</v-card-title>
+      <v-card-text>按下「儲存」讓下次也會載入相同的歌詞。</v-card-text>
+      <v-card-actions>
+        <v-btn text @click="lyric_save_toast = false">取消</v-btn>
+        <v-spacer />
+        <v-btn color="primary" @click="saveCurrentLyric">儲存</v-btn>
+      </v-card-actions>
+    </v-card>
     <v-dialog v-model="showLyricDialog" max-width="420">
       <v-card>
         <v-card-title class="headline">{{ $t('lrc_search') }}</v-card-title>
@@ -180,150 +171,16 @@
     </v-dialog>
   </div>
 </template>
-<style lang="sass" scoped>
-[theme="default"] .lyric
-  text-align: center
-  padding: 80px 0
-  p
-    transition: all 0.5s cubic-bezier(0.77, 0, 0.18, 1), color 0.2s linear, opacity 0.2s linear
-    opacity: .4
-    line-height: 1.3em
-    font-size: 1em
-    >span
-      line-height: 1.3em
-    &.focus
-      opacity: 1
-      font-weight: 700
-      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
-      font-size: 1.4em
-      .theme--dark &
-        text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
-      &+.tl
-        font-size: 1.2em
-    &.tl
-      opacity: .25
-      transform: translateY(-10px)
-  &.lyricTranslated
-    p.focus:not(:empty) + p
-      opacity: .8
-      transform: translateY(-8px)
-      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
-      font-weight: 700
-      .theme--dark &
-        text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
-@media (min-width: 576px)
-  [theme="default"] .lyric
-    font-size: 18px
-[theme="bigtext"] .lyric
-  padding: 160px 25px
-  p
-    font-size: 2em
-    line-height: 1.5em
-    font-weight: 900
-    transform: translateY(.1px)
-    transition: all .3s ease
-    opacity: .1
-    &.focus
-      opacity: 1
-      filter: none
-      &+.tl
-        opacity: 1
-        filter: none
-    &.tl
-      transform: translateY(-.4em)
-      font-size: 1.5em
-
-    @for $i from -4 through -1
-      &[data-lyric-set="#{$i}"]
-        transition-delay: #{.05*-$i}s
-        opacity: #{.5+.1*$i}
-    @for $i from 1 through 4
-      &[data-lyric-set="#{$i}"]
-        transition-delay: #{.05*-$i}s
-        opacity: #{.5-.1*$i}
-[theme="spacing"] .lyric
-  padding: 160px 25px
-  text-align: center
-  p
-    font-size: 1.5em
-    transform: translateY(.1px)
-    transition: all .5s ease
-    opacity: .25
-    >span
-      padding: .25em .2em
-      transition: all .6s ease
-    &.focus
-      opacity: 1
-      letter-spacing: 1px
-      >span:not(:empty)
-        color: #FFF
-        background: var(--v-primary-base)
-        z-index: 1
-      &+.tl
-        opacity: 1
-        transform: translateY(-.75em)
-    &.tl
-      transform-origin: top
-      font-size: 1.25em
-      transform: translateY(-.75em) scale(.9)
-
-    @for $i from -3 through -1
-      &[data-lyric-set="#{$i}"]
-        opacity: #{.25*(4+$i)}
-    @for $i from 1 through 3
-      &[data-lyric-set="#{$i}"]
-        opacity: #{.25*(4-$i)}
-[theme="underline"] .lyric
-  padding: 160px 25px
-  text-align: center
-  p
-    font-size: 1.5em
-    font-weight: bold
-    transform: translateY(.1px)
-    transition: all .5s ease
-    opacity: .25
-    >span
-      padding: .25em .2em
-      transition: .5s ease
-      position: relative
-      background-image: linear-gradient(transparent calc(65% - 5px),var(--v-primary-lighten3) 5px)
-      background-size: 0
-      background-repeat: no-repeat
-
-    &.focus
-      opacity: 1
-      >span:not(:empty)
-        background-size: 100%
-      &+.tl
-        opacity: 1
-    &.tl
-      transform-origin: top
-      font-size: 1.25em
-      font-weight: normal
-      transform: translateY(-.75em)
-
-    @for $i from -3 through -1
-      &[data-lyric-set="#{$i}"]
-        opacity: #{.25*(4+$i)}
-    @for $i from 1 through 3
-      &[data-lyric-set="#{$i}"]
-        opacity: #{.25*(4-$i)}
-
-@media (prefers-color-scheme: dark)
-  [theme="underline"] .lyric p > span
-    background-image: linear-gradient(transparent calc(65% - 5px),var(--v-primary-darken3) 5px)
-</style>
 
 <script>
 export default {
-  name: 'LyricEdit',
+  name: 'player-lyric',
   data: () => ({
     audio_title: null,
     audio_artist: null,
     audio_cover: null,
     showLyricDialog: false,
     lyric_theme_dialog: false,
-    fab: false,
     lyric: [],
     lyric_raw: null,
     lyricFocus: 0,
@@ -334,7 +191,8 @@ export default {
     Lyric_Update: null,
     lyric_color: null,
     lyric_shadow_color: null,
-    lyric_theme: _setting('lyricTheme')
+    lyric_theme: _setting('lyricTheme'),
+    lyric_save_toast: false
   }),
   created() {
     this.updateLyric()
@@ -358,11 +216,24 @@ export default {
     },
     openLyricDialog() {
       this.showLyricDialog = true
-      let nowPlaying = _player.list.audios[_player.list.index]
       this.lyricSearchkeyword = this.audio_title + ' ' + this.audio_artist
     },
     dialogSearch() {
       this.getLyricByKeyword(this.lyricSearchkeyword, false) //搜尋一下
+    },
+    focusLyric() {
+      this.$nextTick(() => {
+        //等 Vue 好了再去更新捲動條
+        let focusedLyric = document.querySelector('.lyric [data-lyric-set="0"].focus')
+        if (focusedLyric) {
+          focusedLyric.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          })
+        } else {
+          this.lyricFocus = 0
+        }
+      })
     },
     updateLyric() {
       let nowPlaying = _player.list.audios[_player.list.index]
@@ -371,6 +242,7 @@ export default {
           //找歌詞囉
           window._lrc.load(`[00:00.000]`)
           this.lyricFocus = 0
+          this.lyric_save_toast = false
           this.lyricSearching = true
           this.lyricSearchResult = null
           this.lyricSearchkeyword = nowPlaying.name + ' ' + nowPlaying.artist
@@ -385,18 +257,7 @@ export default {
             let lyricFocus_temp = window._lrc.select(_player.audio.currentTime)
             if (this.lyricFocus != lyricFocus_temp) {
               this.lyricFocus = lyricFocus_temp
-              this.$nextTick(() => {
-                //等 Vue 好了再去更新捲動條
-                let focusedLyric = document.querySelector('.lyric [data-lyric-set="0"].focus')
-                if (focusedLyric) {
-                  focusedLyric.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
-                  })
-                } else {
-                  this.lyricFocus = 0
-                }
-              })
+              this.focusLyric()
             }
           }
         }
@@ -407,7 +268,7 @@ export default {
     },
     getLyric(title, artist, id = false, source) {
       let lyricRegex = /\[([0-9.:]*)\]/i
-      let response, url
+      let url
       if (id) {
         url =
           _setting(`server`) +
@@ -447,7 +308,7 @@ export default {
               //最高者若超過 .7 則載入歌詞
               if (result.lyrics[0].rate > 35 && set) {
                 this.loadLrc(result.lyrics[0].lyric)
-                this.$snackbar('歌詞正確嗎？打開歌詞搜尋來儲存。')
+                this.lyric_save_toast = true
               } else {
                 this.$snackbar('未發現匹配歌詞，您可以於歌詞搜尋中嘗試手動匹配')
               }
@@ -465,14 +326,9 @@ export default {
       return Math.round((rate / (a.length * 2)) * 10000) / 100
     },
     loadLrc(lrc, save = false) {
+      this.lyric_save_toast = false
       window._lrc.load(lrc)
       this.lyric_raw = lrc
-      this.$vuetify.goTo(0, {
-        duration: 250,
-        offset: 0,
-        container: 'main',
-        easing: 'easeInOutCubic'
-      })
       this.lyricFocus = 0 // 歌詞進度歸零
       try {
         //如果最後兩個時間相同把後面那個的時間調到一個世紀後
@@ -501,6 +357,7 @@ export default {
         })
         this.$snackbar(i18n.t('lrc_saved'))
       }
+      this.updateLyric()
     },
     setLyricTheme(lyricTheme) {
       window._setting('lyricTheme', lyricTheme)
@@ -511,7 +368,150 @@ export default {
         url: _setting(`server`) + '/pokaapi/v2/user/setting/',
         data: { n: { lyricTheme } }
       })
+    },
+    saveCurrentLyric() {
+      this.loadLrc(this.lyric_raw, true)
     }
   }
 }
 </script>
+
+<style lang="sass" scoped>
+.save-current-lyric
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
+  margin: auto
+[theme="default"] .lyric
+  text-align: center
+  padding: 0 0
+  p
+    transition: all 0.5s cubic-bezier(0.77, 0, 0.18, 1), color 0.2s linear, opacity 0.2s linear
+    opacity: .4
+    line-height: 1.3em
+    font-size: 1em
+    >span
+      line-height: 1.3em
+    &.focus
+      opacity: 1
+      font-weight: 700
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
+      font-size: 1.4em
+      .theme--dark &
+        text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
+    &+.tl
+      font-size: 1.2em
+      opacity: 1
+    &.tl
+      transform: translateY(-10px)
+    &.lyricTranslated
+      p.focus:not(:empty) + p
+        opacity: .8
+        transform: translateY(-8px)
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
+        font-weight: 700
+        .theme--dark &
+          text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
+@media (min-width: 576px)
+[theme="default"] .lyric
+  font-size: 18px
+[theme="bigtext"] .lyric
+  padding: 0 25px
+  p
+    font-size: 2em
+    line-height: 1.5em
+    font-weight: 900
+    transform: translateY(.1px)
+    transition: all .3s ease
+    opacity: .1
+    &.focus
+      opacity: 1
+      filter: none
+      &+.tl
+        opacity: 1
+        filter: none
+    &.tl
+      transform: translateY(-.4em)
+      font-size: 1.5em
+
+    @for $i from -4 through -1
+      &[data-lyric-set="#{$i}"]
+        transition-delay: #{.05*-$i}s
+        opacity: #{.5+.1*$i}
+    @for $i from 1 through 4
+      &[data-lyric-set="#{$i}"]
+        transition-delay: #{.05*-$i}s
+        opacity: #{.5-.1*$i}
+[theme="spacing"] .lyric
+  padding: 0 25px
+  text-align: center
+  p
+    font-size: 1.5em
+    transform: translateY(.1px)
+    transition: all .5s ease
+    opacity: .25
+    >span
+      padding: .25em .2em
+      transition: all .6s ease
+    &.focus
+      opacity: 1
+      letter-spacing: 1px
+      >span:not(:empty)
+        color: #FFF
+        background: var(--v-primary-base)
+        z-index: 1
+      &+.tl
+        opacity: 1
+        transform: translateY(-.75em)
+    &.tl
+      transform-origin: top
+      font-size: 1.25em
+      transform: translateY(-.75em) scale(.9)
+
+    @for $i from -3 through -1
+      &[data-lyric-set="#{$i}"]
+        opacity: #{.25*(4+$i)}
+    @for $i from 1 through 3
+      &[data-lyric-set="#{$i}"]
+        opacity: #{.25*(4-$i)}
+[theme="underline"] .lyric
+  padding: 0 25px
+  text-align: center
+  p
+    font-size: 1.5em
+    font-weight: bold
+    transform: translateY(.1px)
+    transition: all .5s ease
+    opacity: .25
+    >span
+      padding: .25em .2em
+      transition: .5s ease
+      position: relative
+      background-image: linear-gradient(transparent calc(65% - 5px),var(--v-primary-lighten3) 5px)
+      background-size: 0
+      background-repeat: no-repeat
+
+    &.focus
+      opacity: 1
+      >span:not(:empty)
+        background-size: 100%
+      &+.tl
+        opacity: 1
+      &.tl
+        transform-origin: top
+        font-size: 1.25em
+        font-weight: normal
+        transform: translateY(-.75em)
+
+    @for $i from -3 through -1
+      &[data-lyric-set="#{$i}"]
+        opacity: #{.25*(4+$i)}
+    @for $i from 1 through 3
+      &[data-lyric-set="#{$i}"]
+        opacity: #{.25*(4-$i)}
+
+@media (prefers-color-scheme: dark)
+  [theme="underline"] .lyric p > span
+    background-image: linear-gradient(transparent calc(65% - 5px),var(--v-primary-darken3) 5px)
+</style>

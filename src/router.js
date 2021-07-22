@@ -10,13 +10,11 @@ import Artist from "@/pages/Artist";
 import Composer from "@/pages/Composer";
 import Folder from "@/pages/Folder";
 import Login from "@/pages/Login";
-import NowPlaying from "@/pages/NowPlaying";
 import Notfound from "@/pages/Notfound";
 import Playlist from "@/pages/Playlist";
 import PlaylistSongs from "@/pages/PlaylistSongs";
 import Shuffle from "@/pages/shuffle";
 import Library from "@/pages/Library";
-import Lyric from "@/pages/Lyric";
 import LyricEdit from "@/pages/LyricEdit";
 import Search from "@/pages/Search";
 
@@ -34,12 +32,18 @@ export default new Router({
         {
           path: "/library",
           name: "Library",
-          component: Library
+          component: Library,
+          meta: {
+            fullscreen: false
+          }
         },
         {
-          path: "/lyric",
-          name: "Lyric",
-          component: Lyric
+          path: "/fullscreen",
+          name: "fullscreen",
+          component: Library,
+          meta: {
+            fullscreen: true
+          }
         },
         {
           path: "/lyric/edit",
@@ -100,11 +104,6 @@ export default new Router({
           meta: {
             root: true
           }
-        },
-        {
-          path: "/now",
-          name: "NowPlaying",
-          component: NowPlaying
         },
         {
           path: "/playlist/f/*",

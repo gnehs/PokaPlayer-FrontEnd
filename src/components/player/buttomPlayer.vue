@@ -10,7 +10,7 @@
             <img :src="audio_cover" :key="audio_cover" />
           </v-fade-transition>
         </div>
-        <div class="song-title" @click="$router.push($route.path != '/now' ? '/now' : '/lyric')">
+        <div class="song-title" @click="fullscreen = !fullscreen">
           <div class="song-name">{{ audio_title }}</div>
           <div class="song-artist">
             {{ audio_artist || $t('app_waitForPlay') }}
@@ -25,13 +25,7 @@
         </v-btn>
 
         <v-btn small fab depressed @click="audio_toggle" color="primary">
-          <v-icon
-            class="anicons"
-            :style="{
-              'font-variation-settings': audio_paused ? `` : `'TIME' 100`
-            }"
-            >H</v-icon
-          >
+          <v-icon class="anicons" :style="{ 'font-variation-settings': audio_paused ? `` : `'TIME' 100` }">H</v-icon>
         </v-btn>
 
         <v-btn icon @click="audio_next">
@@ -59,7 +53,7 @@
           <v-icon class="material-icons-outlined" v-if="audio_order === 'list'">repeat</v-icon>
           <v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
         </v-btn>
-        <v-btn icon>
+        <v-btn icon to="/fullscreen">
           <v-icon class="material-icons-outlined">expand_less</v-icon>
         </v-btn>
       </div>
@@ -72,13 +66,7 @@
         </v-btn>
 
         <v-btn small fab depressed @click="audio_toggle" color="primary">
-          <v-icon
-            class="anicons"
-            :style="{
-              'font-variation-settings': audio_paused ? `` : `'TIME' 100`
-            }"
-            >H</v-icon
-          >
+          <v-icon class="anicons" :style="{ 'font-variation-settings': audio_paused ? `` : `'TIME' 100` }">H</v-icon>
         </v-btn>
 
         <v-btn icon @click="audio_next">
@@ -89,30 +77,82 @@
         <play-random-button />
       </div>
     </div>
+    <v-dialog v-model="fullscreen" fullscreen transition="dialog-bottom-transition">
+      <div class="fullscreen-player">
+        <v-fade-transition>
+          <div class="fullscreen-player-background" :style="{ backgroundImage: `url('${audio_cover}')` }" :key="audio_cover"></div>
+        </v-fade-transition>
+        <v-btn
+          icon
+          @click="
+            $router.go(-1)
+            $router.push('/')
+          "
+          dark
+          class="close"
+          large
+          v-if="$vuetify.breakpoint.mdAndUp"
+        >
+          <v-icon class="material-icons-outlined">expand_more</v-icon>
+        </v-btn>
+        <div class="fullscreen-player-content">
+          <player-player v-if="$vuetify.breakpoint.mdAndUp" />
+          <div class="player-content">
+            <div class="nav">
+              <div class="nav-items">
+                <div
+                  class="nav-item"
+                  :class="{ active: nav_active == 'player' }"
+                  @click="nav_active = 'player'"
+                  v-show="!$vuetify.breakpoint.mdAndUp"
+                >
+                  Player
+                </div>
+                <div class="nav-item" :class="{ active: nav_active == 'playlist' }" @click="nav_active = 'playlist'">Playlist</div>
+                <div class="nav-item" :class="{ active: nav_active == 'lyric' }" @click="nav_active = 'lyric'">Lyric</div>
+              </div>
+              <portal-target name="fullscreen-player-action" slim>
+                <div class="action"></div>
+              </portal-target>
+            </div>
+            <player-player class="player-list" v-if="nav_active == 'player'" />
+            <player-playlist class="player-list" v-if="nav_active == 'playlist'" />
+            <player-lyric class="player-list" v-if="nav_active == 'lyric'" />
+          </div>
+        </div>
+      </div>
+    </v-dialog>
   </div>
 </template>
 
 <script>
 export default {
   name: 'buttom-player',
-  data: () => ({
-    audio_interval: null,
-    audio_currentTimePercent: 100,
-    audio_bufferPercent: 100,
-    audio_currentTime: '0:00',
-    audio_totalTime: '0:00',
-    audio_paused: true,
-    audio_recored: false,
-    audio_cover: _setting(`headerBgSource`),
-    audio_title: 'PokaPlayer',
-    audio_artist: null,
-    audio_order: _player.options.order,
-    audio_volume: 100,
-    audio_volume_hover: false
-  }),
+  data() {
+    return {
+      audio_interval: null,
+      audio_currentTimePercent: 100,
+      audio_bufferPercent: 100,
+      audio_currentTime: '0:00',
+      audio_totalTime: '0:00',
+      audio_paused: true,
+      audio_recored: false,
+      audio_cover: _setting(`headerBgSource`),
+      audio_title: 'PokaPlayer',
+      audio_artist: null,
+      audio_order: _player.options.order,
+      audio_volume: 100,
+      audio_volume_hover: false,
+      nav_active: 'playlist',
+      fullscreen: this.$route.path == '/fullscreen'
+    }
+  },
   watch: {
     audio_volume(val) {
       _player.volume(val / 100, true)
+    },
+    '$route.path': function(val, oldVal) {
+      this.fullscreen = this.$route.path == '/fullscreen'
     }
   },
   destroyed() {
@@ -139,7 +179,7 @@ export default {
         console.warn('Warning! The "seekto" media session action is not supported.')
       }
     }
-    _player.audio.addEventListener('canplay', function() {
+    _player.on('loadedmetadata', function() {
       if ('setPositionState' in navigator.mediaSession) {
         navigator.mediaSession.setPositionState({
           duration: _player.audio.duration || 0,
@@ -159,7 +199,6 @@ export default {
           this.audio_recored = false
           // mediaSession
           if ('mediaSession' in navigator) {
-            //寫入 mediaSession.metadata
             navigator.mediaSession.metadata = new MediaMetadata({
               title,
               artist,
@@ -234,7 +273,108 @@ export default {
   }
 }
 </script>
-
+<style lang="sass" >
+.fullscreen-player
+  position: relative
+  height: 100vh
+  width: 100vw
+  background-color: #000
+  overflow: hidden
+  display: grid
+  place-content: center
+  color: #fff
+  *
+    box-sizing: border-box
+  .fullscreen-player-background
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    margin: auto
+    width: 100%
+    height: 100%
+    background-size: cover
+    background-position: center
+    opacity: .6
+    overflow: hidden
+    &::before
+      content: ""
+      position: absolute
+      width: 100%
+      height: 100vh
+      backdrop-filter: blur(128px)
+  .close
+    position: absolute
+    right: 8px
+    top: 8px
+  .fullscreen-player-content
+    width: calc(100vw - 32px)
+    max-width: 1200px
+    position: relative
+    display: flex
+    gap: 24px
+    align-items: center
+    height: calc(100vh - 32px)
+    .player-content
+      height: 100%
+      flex: 1
+      display: flex
+      flex-direction: column
+      .nav
+        display: flex
+        align-items: center
+        justify-content: center
+        .nav-items
+          display: flex
+          .nav-item
+            width: 80px
+            font-size: 18px
+            line-height: 2em
+            cursor: pointer
+            position: relative
+            font-weight: bold
+            text-align: center
+            padding-bottom: 4px
+            &:before
+              position: absolute
+              content: ''
+              width: 100%
+              bottom: 0
+              left: 0
+              height: 4px
+              background-color: #fff
+              border-radius: 4px 4px 0 0
+              transform: scaleY(0)
+              transform-origin: center bottom
+              transition: transform .2s, opacity .2s
+            &:not(.active):hover
+              &:before
+                transform: none
+                opacity: .4
+                transform: scaleY(0.5)
+            &.active
+              &:before
+                transform: none
+        .action
+          flex: 1
+          text-align: right
+      .player-list
+        flex: 1
+        height: 100%
+        width: 100%
+        max-width: calc(100vw - 32px)
+        overflow-y: scroll
+        .poka.list
+          gap: 0
+          .active
+            background-color: rgba(0,0,0,.25)
+            color: #fff
+            .v-btn
+              color: #fff
+            &:before
+              display: none
+</style>
 <style lang="sass" scoped>
 .bottom-player
   box-sizing: border-box

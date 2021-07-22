@@ -12,7 +12,9 @@ import libraryMenu from "@/components/libraryMenu.vue";
 import searchbar from "@/components/searchbar.vue";
 // player
 import bottomPlayer from "@/components/player/buttomPlayer.vue";
-import playerDialog from "@/components/player/playerDialog.vue";
+import lyric from "@/components/player/lyric.vue";
+import playlist from "@/components/player/playlist.vue";
+import player from "@/components/player/player.vue";
 // btn
 import back from "@/components/btn/back.vue";
 import playRandomButton from "@/components/btn/playRandomButton.vue";
@@ -30,8 +32,7 @@ import parseHome from "@/components/parse/parse-home.vue";
 import overdrive from "@/components/overdrive.vue";
 export {
   // player
-  bottomPlayer,
-  playerDialog,
+  bottomPlayer, lyric, playlist, player,
   // pokaComponent
   about,
   back,
