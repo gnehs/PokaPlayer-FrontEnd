@@ -18,7 +18,7 @@ export default {
       if (this.to) {
         this.$router.push(this.to)
       } else {
-        this.$router.push('/')
+        this.$router.go(-1)
       }
     }
   }

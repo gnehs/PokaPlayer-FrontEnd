@@ -7,7 +7,7 @@
         app
         :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`"
       >
-        <back icon />
+        <back icon to="/" />
         <v-toolbar-title>{{ $t('debug') }}</v-toolbar-title>
         <v-spacer />
         <menu-btn />
