@@ -318,9 +318,11 @@ export default {
     height: calc(100vh - 32px)
     .player-content
       height: 100%
+      width: 100%
       flex: 1
       display: flex
       flex-direction: column
+      overflow: hidden
       .nav
         display: flex
         align-items: center
