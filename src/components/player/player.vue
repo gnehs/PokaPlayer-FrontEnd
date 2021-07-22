@@ -13,7 +13,7 @@
     </portal>
     <div class="player-cover">
       <v-fade-transition mode="out-in">
-        <poka-cover :cover="audio_cover" size="400px" :key="audio_cover" />
+        <poka-cover :cover="audio_cover" size="var(--size)" :key="audio_cover" />
       </v-fade-transition>
     </div>
     <div class="player-title">{{ audio_title }}</div>
@@ -202,4 +202,11 @@ export default {
 		.play-btn
 			background-color: rgb(0 0 0 / 35%)
 			backdrop-filter: blur(10px)
+@media screen and (max-width: 768px) and (max-aspect-ratio: 16/9)
+	.player
+		--size: 80vw
+
+@media screen and (max-height: 700px)
+	.player
+		--size: 50vmin
 </style>
