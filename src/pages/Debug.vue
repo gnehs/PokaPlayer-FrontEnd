@@ -8,11 +8,9 @@
         :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`"
       >
         <back icon />
-
         <v-toolbar-title>{{ $t('debug') }}</v-toolbar-title>
-
-        <v-spacer></v-spacer>
-
+        <v-spacer />
+        <menu-btn />
         <template v-slot:extension>
           <v-tabs v-model="tab" align-with-title>
             <v-tab>Audios</v-tab>
