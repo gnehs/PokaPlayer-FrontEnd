@@ -10,12 +10,17 @@ export default {
   name: 'back',
   props: {
     dark: { type: Boolean, default: false },
-    icon: { type: Boolean, default: false }
+    icon: { type: Boolean, default: false },
+    to: { type: String }
   },
   methods: {
     back() {
-      this.$router.go(-1)
-      this.$router.push('/')
+      if (this.to) {
+        this.$router.push(this.to)
+      } else {
+        this.$router.go(-1)
+        this.$router.push('/')
+      }
     }
   }
 }
