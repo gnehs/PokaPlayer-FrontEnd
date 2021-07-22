@@ -18,7 +18,7 @@ export default {
 		--text-color: #000
 		display: grid
 		grid-template-columns: repeat(auto-fill,minmax(176px, 1fr))
-		grid-gap: 16px 12px
+		grid-gap: 32px 24px
 		.card
 			height: 0
 			font-size: 11px
@@ -54,26 +54,23 @@ export default {
 				transition: all .2s ease
 				position: relative
 				background-color: var(--card-background-color,#607D8B)
-				box-shadow: 0 4px 7px rgba(0,0,0,.25)
 				.cover
 					border-radius: 16px
 					transition: filter .2s ease
 					position: absolute
 			&:hover .image
 				background-color: #000
-				.cover
-					filter: brightness(80%)
-			&:active .image .cover
-				filter: brightness(70%)
+				box-shadow: 0 16px 25px rgba(0,0,0,.2)
 			.poka-card-title
-				font-size: 15px !important
+				font-size: 16px
 				padding-top: 5px
 				line-height: 1.5em
 				font-weight: normal
 				color: var(--text-color)
+				font-weight: bold
 				opacity: .9
 			.poka-card-subtitle
-				font-size: 1em !important
+				font-size: 12px
 				padding-top: 0px
 				line-height: 12px
 				color: var(--text-color)

@@ -13,6 +13,7 @@ import pagination from "@/components/pagination.vue";
 import pokaUpdate from "@/components/poka-update.vue";
 import libraryMenu from "@/components/libraryMenu.vue";
 import searchbar from "@/components/searchbar.vue";
+import menuBtn from "@/components/menuBtn.vue";
 // parseData
 import parsePlaylists from "@/components/parse-playlists.vue";
 import parseSongs from "@/components/parse-songs.vue";
@@ -21,6 +22,7 @@ import parseAlbums from "@/components/parse-albums.vue";
 import parseComposers from "@/components/parse-composers.vue";
 import parseFolders from "@/components/parse-folders.vue";
 import parseHome from "@/components/parse-home.vue";
+
 import overdrive from "@/components/overdrive.vue";
 export {
   // pokaComponent
@@ -47,4 +49,5 @@ export {
   parseFolders,
   parseHome
   , overdrive
+  , menuBtn
 };

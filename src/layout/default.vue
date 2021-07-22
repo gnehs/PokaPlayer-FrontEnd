@@ -7,36 +7,18 @@
         app
         :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`"
       >
-        <v-app-bar-nav-icon @click.stop="toggleMenu()" v-if="!$vuetify.breakpoint.mdAndUp" />
-        <div class="poka-drawer-logo" v-if="!showSeachBar || $vuetify.breakpoint.mdAndUp">
+        <router-link to="/" class="poka-logo" v-if="!showSeachBar || $vuetify.breakpoint.mdAndUp">
           <h1>PokaPlayer</h1>
-        </div>
+        </router-link>
         <v-spacer />
         <poka-searchbar v-model="showSeachBar" />
         <v-btn icon @click="switch_audio_order" v-if="$route.path == '/now'">
           <v-icon class="material-icons-outlined" v-if="audio_order === 'list'">repeat</v-icon>
           <v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
         </v-btn>
+        <menu-btn />
       </v-app-bar>
     </portal-target>
-    <v-navigation-drawer
-      v-model="drawer"
-      :clipped="$vuetify.breakpoint.mdAndUp"
-      :mobile-breakpoint="960"
-      :mini-variant="$vuetify.breakpoint.mdAndUp"
-      app
-    >
-      <div class="poka list">
-        <router-link class="item" v-for="item in items" v-ripple :to="item.to" :key="item.text" active-class="active" :title="item.text">
-          <div class="content">
-            <v-icon class="material-icons-outlined" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="item.icon" />
-            <div class="header">
-              <div class="head">{{ $t(item.text) }}</div>
-            </div>
-          </div>
-        </router-link>
-      </div>
-    </v-navigation-drawer>
     <v-main>
       <div class="router-view">
         <router-view />
@@ -143,8 +125,6 @@
 export default {
   name: 'App',
   data: () => ({
-    menuVisible: false,
-    drawer: null,
     audio_interval: null,
     audio_currentTimePercent: 100,
     audio_bufferPercent: 100,
@@ -160,13 +140,7 @@ export default {
     audio_volume_hover: false,
     scrollPositions: {},
     settings: { darkMode: window._setting('darkMode') },
-    showSeachBar: false,
-    items: [
-      { icon: 'library_music', text: 'library', to: '/library' },
-      { icon: 'playlist_play', text: 'nowplaying', to: '/now' },
-      { icon: 'subtitles', text: 'lrc', to: '/lyric' },
-      { icon: 'settings', text: 'settings', to: '/settings' }
-    ]
+    showSeachBar: false
   }),
   watch: {
     audio_volume(val) {
@@ -185,7 +159,6 @@ export default {
     }
     window.addEventListener('resize', vhResize)
     vhResize()
-    this.drawer = this.$vuetify.breakpoint.mdAndUp
     this.$router.beforeEach((to, from, next) => {
       let el = document.querySelector('main')
       if (el) this.scrollPositions[from.name] = el.scrollTop
@@ -317,12 +290,6 @@ export default {
     audio_seek() {
       _player.seek((this.audio_currentTimePercent / 100) * _player.audio.duration)
     },
-    closeMenu() {
-      this.drawer = false
-    },
-    toggleMenu() {
-      this.drawer = !this.drawer
-    },
     switch_audio_order() {
       _player.options.order = _player.options.order === 'random' ? 'list' : 'random'
       this.audio_order = _player.options.order
@@ -345,58 +312,19 @@ export default {
       for (let i of Object.keys(settings)) {
         _setting(i, settings[i])
       }
-      // add admin page
-      if (userProfile.data.role == 'admin') {
-        let debugItem = {
-          icon: 'admin_panel_settings',
-          text: 'settingIndex.adminItems',
-          to: '/admin'
-        }
-        if (!this.items.filter(x => x.text == 'Admin').length) {
-          this.items.push(debugItem)
-        }
-      }
-      // add debug page
-      if (response.data.debug) {
-        let debugItem = { icon: 'bug_report', text: 'debug', to: '/debug' }
-        if (!this.items.filter(x => x.text == 'Debug').length) {
-          this.items.push(debugItem)
-        }
-      }
     }
   }
 }
 </script>
 <style lang="sass" scoped>
-nav
-  &.v-navigation-drawer--mini-variant
-    .poka-drawer-logo
-      text-align: center
-      padding: 0
-    .poka.list
-      .item
-        .content
-          display: block
-          padding: .88em 0
-          text-align: center
-          .header
-            margin-left: 0
-            .head
-              font-size: 10px
-              font-weight: normal
-              overflow: hidden
-              white-space: nowrap
-              text-overflow: ellipsis
 main
   height: calc(var(--vh,1vh) * 100)
   overflow: hidden
   overflow-y: scroll
   margin-bottom: -64px
-
-.v-navigation-drawer:not(.v-navigation-drawer--is-mobile)
-  height: calc(var(--vh,1vh) * 100 - 64px) !important
-.poka-drawer-logo
+.poka-logo
   font-family: var(--product-font)
+  text-decoration: none
   h1
     font-size: 24px
     line-height: 56px

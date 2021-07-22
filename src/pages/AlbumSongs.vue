@@ -63,7 +63,7 @@
       width: 300px
       position: fixed
       top: 56px
-      left: calc( 56px + 8px )
+      left: 8px
     .album-songs
       flex: 1
 </style>
