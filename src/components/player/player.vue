@@ -28,7 +28,7 @@
         <v-icon class="material-icons-outlined">skip_previous</v-icon>
       </v-btn>
 
-      <v-btn dark @click="audio_toggle" color="gray" fab>
+      <v-btn dark @click="audio_toggle" color="gray" class="play-btn" fab>
         <v-icon class="anicons" :style="{ 'font-variation-settings': audio_paused ? `` : `'TIME' 100` }">H</v-icon>
       </v-btn>
 
@@ -184,6 +184,8 @@ export default {
 		margin-bottom: 16px
 	.v-input
 		flex: initial
+		.v-slider__track-background.v-slider__track-background
+			background-color: rgba(255,255,255,.3) !important
 	.player-duration
 		display: grid
 		grid-template-columns: repeat(2, 1fr)
@@ -194,4 +196,7 @@ export default {
 			text-align: right
 	.player-control
 		text-align: center
+		.play-btn
+			background-color: rgb(0 0 0 / 35%)
+			backdrop-filter: blur(10px)
 </style>
