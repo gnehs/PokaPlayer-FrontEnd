@@ -78,6 +78,10 @@ export default {
     },
     audio_clean() {
       _player.list.clear()
+    },
+    switch_audio_order() {
+      _player.options.order = _player.options.order === 'random' ? 'list' : 'random'
+      this.audio_order = _player.options.order
     }
   }
 }
