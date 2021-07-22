@@ -9,6 +9,8 @@
       >
         <back icon to="/" />
         <v-toolbar-title>{{ $t(`settingIndex.adminItems`) }}</v-toolbar-title>
+        <v-spacer />
+        <menu-btn />
       </v-app-bar>
     </portal>
     <poka-header :title="$t(`settingIndex.adminItems`)" />
