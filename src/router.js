@@ -8,6 +8,7 @@ import Albums from "@/pages/Albums";
 import AlbumSongs from "@/pages/AlbumSongs";
 import Artist from "@/pages/Artist";
 import Composer from "@/pages/Composer";
+import Empty from "@/pages/Empty";
 import Folder from "@/pages/Folder";
 import Login from "@/pages/Login";
 import Notfound from "@/pages/Notfound";
@@ -40,7 +41,7 @@ export default new Router({
         {
           path: "/fullscreen",
           name: "fullscreen",
-          component: Library,
+          component: Empty,
           meta: {
             fullscreen: true
           }
