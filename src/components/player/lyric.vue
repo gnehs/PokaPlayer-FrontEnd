@@ -11,6 +11,9 @@
         <v-btn dark icon @click="lyric_theme_dialog = true">
           <v-icon>mdi-palette</v-icon>
         </v-btn>
+        <v-btn icon @click="$router.go(-1)" dark large v-if="$vuetify.breakpoint.mdAndUp">
+          <v-icon class="material-icons-outlined">expand_more</v-icon>
+        </v-btn>
       </div>
     </portal>
     <div v-on:dblclick="openLyricDialog">

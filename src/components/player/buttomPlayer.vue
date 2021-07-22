@@ -82,19 +82,6 @@
         <v-fade-transition>
           <div class="fullscreen-player-background" :style="{ backgroundImage: `url('${audio_cover}')` }" :key="audio_cover"></div>
         </v-fade-transition>
-        <v-btn
-          icon
-          @click="
-            $router.go(-1)
-            $router.push('/')
-          "
-          dark
-          class="close"
-          large
-          v-if="$vuetify.breakpoint.mdAndUp"
-        >
-          <v-icon class="material-icons-outlined">expand_more</v-icon>
-        </v-btn>
         <div class="fullscreen-player-content">
           <player-player v-if="$vuetify.breakpoint.mdAndUp" />
           <div class="player-content">

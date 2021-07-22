@@ -6,6 +6,9 @@
           <v-icon class="material-icons-outlined" v-if="audio_order === 'list'">repeat</v-icon>
           <v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
         </v-btn>
+        <v-btn icon @click="$router.go(-1)" dark large v-if="$vuetify.breakpoint.mdAndUp">
+          <v-icon class="material-icons-outlined">expand_more</v-icon>
+        </v-btn>
       </div>
     </portal>
     <div class="player-cover">
