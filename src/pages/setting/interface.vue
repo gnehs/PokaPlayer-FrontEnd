@@ -164,7 +164,11 @@
         <v-card-title class="headline">{{ $t('settingInterface.customize.bg._') }}</v-card-title>
         <v-card-text>
           <poka-cards>
-            <poka-card @click.native="bg_prompt_active = true" poka-icon="link" :poka-title="$t('settingInterface.customize.bg.custom_link')" />
+            <poka-card
+              @click.native="bg_prompt_active = true"
+              poka-icon="link"
+              :poka-title="$t('settingInterface.customize.bg.custom_link')"
+            />
             <poka-card v-for="{ name, src } in imgSources" @click.native="setBg(src)" :key="src" :poka-bg="src" :poka-title="name" />
           </poka-cards>
         </v-card-text>
@@ -178,7 +182,15 @@
       <v-card>
         <v-card-title class="headline">{{ $t('settingInterface.customize.theme_color._') }}</v-card-title>
         <v-card-text>
-          <v-color-picker style="margin: 8px auto !important" flat mode="hex" v-model="color" class="ma-2" :swatches="swatches" show-swatches></v-color-picker>
+          <v-color-picker
+            style="margin: 8px auto !important"
+            flat
+            mode="hex"
+            v-model="color"
+            class="ma-2"
+            :swatches="swatches"
+            show-swatches
+          ></v-color-picker>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
@@ -372,7 +384,7 @@ export default {
     setBgHeight(h) {
       switch (h) {
         case 'full':
-          window._CSSsetting('--pokabgheight', 'calc( 100vh - 69px - 64px )')
+          window._CSSsetting('--pokabgheight', 'calc(var(--vh, 1vh) * 100 - 69px - 64px )')
           break
         case 'none':
           window._CSSsetting('--pokabgheight', '0px')

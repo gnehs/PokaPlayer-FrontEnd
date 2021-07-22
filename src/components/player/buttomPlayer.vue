@@ -263,7 +263,7 @@ export default {
 <style lang="sass" >
 .fullscreen-player
   position: relative
-  height: 100vh
+  height: calc(var(--vh,1vh) * 100)
   width: 100vw
   background-color: #000
   overflow: hidden
@@ -289,7 +289,7 @@ export default {
       content: ""
       position: absolute
       width: 100%
-      height: 100vh
+      height: calc(var(--vh,1vh) * 100)
       backdrop-filter: blur(128px)
   .close
     position: absolute
@@ -302,7 +302,7 @@ export default {
     display: flex
     gap: 24px
     align-items: center
-    height: calc(100vh - 32px)
+    height: calc(var(--vh,1vh) * 100 - 32px)
     .player-content
       height: 100%
       width: 100%

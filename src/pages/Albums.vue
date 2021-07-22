@@ -7,7 +7,7 @@
         app
         :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`"
       >
-        <back icon />
+        <back icon :to="'/' + type" />
         <v-toolbar-title>{{ name }}</v-toolbar-title>
         <v-spacer />
         <poka-searchbar />

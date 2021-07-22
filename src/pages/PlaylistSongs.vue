@@ -7,7 +7,7 @@
         app
         :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`"
       >
-        <back icon />
+        <back icon to="/playlist" />
         <v-toolbar-title>{{ title }}</v-toolbar-title>
         <v-spacer />
         <poka-searchbar />
@@ -94,7 +94,7 @@
 @media (min-width: 960px)
   .playlist-songs-container
     display: flex
-    min-height: calc(100vh - 69px - 16px * 2 - 56px)
+    min-height: calc(var(--vh, 1vh) * 100 - 69px - 16px * 2 - 56px)
     width: 100%
     position: relative
     padding-left: 300px

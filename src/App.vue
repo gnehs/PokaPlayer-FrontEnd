@@ -47,7 +47,7 @@ export default {
 <style lang="scss">
   .page-container {
     overflow: hidden;
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     width: 100vw;
     &.theme--dark {
       background: #282535 !important;

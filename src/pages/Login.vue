@@ -11,7 +11,14 @@
         <h1>{{ $t('header_welcome') }}</h1>
         <v-text-field class="rounded-input" outlined :label="$t('login_page.server')" v-model.trim="server" :disabled="logining" />
         <v-text-field class="rounded-input" outlined :label="$t('login_page.username')" v-model="username" :disabled="logining" />
-        <v-text-field class="rounded-input" outlined :label="$t('login_page.password')" type="password" v-model="password" :disabled="logining" />
+        <v-text-field
+          class="rounded-input"
+          outlined
+          :label="$t('login_page.password')"
+          type="password"
+          v-model="password"
+          :disabled="logining"
+        />
         <div class="d-flex justify-center">
           <v-btn :disabled="logining" rounded large color="primary" type="submit" width="110px">{{ $t('login') }}</v-btn>
         </div>
@@ -92,7 +99,7 @@
 </style>
 <style lang="scss" scoped>
   .login-container {
-    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     width: 100vw;
     display: flex;
     flex-direction: column;
