@@ -7,7 +7,7 @@
           <v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
         </v-btn>
         <v-btn icon dark @click="audio_clean"> <v-icon class="material-icons-outlined">clear_all</v-icon></v-btn>
-        <v-btn icon @click="$router.go(-1)" dark large v-if="$vuetify.breakpoint.mdAndUp">
+        <v-btn icon @click="$router.go(-1)" dark large>
           <v-icon class="material-icons-outlined">expand_more</v-icon>
         </v-btn>
       </div>
