@@ -2,7 +2,6 @@ export default {
   title: "中文（台灣）",
   loading: "載入中...",
   header_welcome: "歡迎使用",
-  header_welcome_with_name: "歡迎，{name}",
   checkUpdate_poka: "有新版本可供更新：{version}",
   checkUpdate_button: "更新",
   pingServer_title: "提示",
@@ -326,5 +325,14 @@ export default {
     DSM: "DSM",
     poka: "PokaPlayer",
     Netease2: "網易雲音樂"
+  },
+  lyricEditor: {
+    title: "歌詞編輯器",
+    instructionsTitle: '使用說明',
+    instructionsContent: '左側為歌詞預覽，右側則是編輯區塊<br />編輯完成後請按左下角打勾儲存歌詞，若要取消編輯點擊返回鍵即可跳出<br />點擊歌詞預覽的歌詞即可將歌曲轉跳至該時間，若是雙語歌詞，請點選原文部份<br />若有任何問題或功能建議，歡迎透過「設定->關於->GitHub->Issues」提出',
+    instructionsContentPhone: '上方為歌詞預覽，下方則是編輯區塊<br />編輯完成後請按左下角打勾儲存歌詞，若要取消編輯點擊返回鍵即可跳出<br />點擊歌詞預覽的歌詞即可將歌曲轉跳至該時間，若是雙語歌詞，請點選原文部份<br />若有任何問題或功能建議，歡迎透過「設定->關於->GitHub->Issues」提出',
+    timeShifting: '時間平移',
+    timeShiftingReset: '重置',
+    textEditor: '文字編輯器'
   }
 };

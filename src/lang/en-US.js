@@ -2,7 +2,6 @@ export default {
   title: "English (US)",
   loading: "Loading...",
   header_welcome: "Welcome",
-  header_welcome_with_name: "Hi, {name}",
   checkUpdate_poka: "Update Available: {version}",
   checkUpdate_button: "Update",
   pingServer_title: "Hint",
@@ -329,5 +328,14 @@ export default {
     DSM: "DSM",
     poka: "PokaPlayer",
     Netease2: "Netease"
+  },
+  lyricEditor: {
+    title: "Lyric Editor",
+    instructionsTitle: 'Instructions',
+    instructionsContent: 'Lyrics preview at the top, editing block at the bottom <br />After editing, please click the checkbox in the bottom left corner to save the lyrics, if you want to cancel the editing click the back button to leave <br />Click on the lyrics in the lyric preview to skip to that time, for bilingual lyrics, please click on the original part <br />If you have any questions or feature suggestions, please feel free to ask via "Settings->About->GitHub->Issues".',
+    instructionsContentPhone: 'Lyrics preview at the top, editing block at the bottom<br />After editing, please click the checkbox in the bottom left corner to save the lyrics, if you want to cancel the editing click the back button to leave <br />Click on the lyrics in the lyric preview to skip to that time, for bilingual lyrics, please click on the original part <br />If you have any questions or feature suggestions, please feel free to ask via "Settings->About->GitHub->Issues".',
+    timeShifting: 'Time Shifting',
+    timeShiftingReset: 'Reset',
+    textEditor: 'Text Editor'
   }
 };
