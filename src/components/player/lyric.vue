@@ -33,13 +33,11 @@
         <div style="height: 200px" />
       </div>
       <poka-loader v-else-if="lyricSearching" style="margin-top: 30vh !important" color="#fff" />
-      <v-card v-else class="mx-auto blur-card" max-width="344" style="margin-top: 30vh" key="lrc_noLyrics">
-        <v-card-text class="text-center">
-          <v-icon class="material-icons-outlined display-4">subtitles</v-icon>
-          <p class="headline text--primary">{{ $t('lrc_noLyrics') }}</p>
-          <v-btn outlined color="primary" @click="showLyricDialog = true">{{ $t('lrc_search') }}</v-btn>
-        </v-card-text>
-      </v-card>
+      <div v-else class="text-center" style="margin-top: 30vh">
+        <v-icon class="material-icons-outlined display-4" dark>subtitles</v-icon>
+        <p class="headline">{{ $t('lrc_noLyrics') }}</p>
+        <v-btn color="primary" @click="showLyricDialog = true">{{ $t('lrc_search') }}</v-btn>
+      </div>
     </div>
     <v-card class="save-current-lyric mx-auto blur-card" max-width="400" v-if="lyric_save_toast">
       <v-card-title>歌詞正確嗎？</v-card-title>
@@ -244,6 +242,7 @@ export default {
         if (this.audio_title != nowPlaying.name) {
           //找歌詞囉
           window._lrc.load(`[00:00.000]`)
+          this.lyric = window._lrc.getLyrics()
           this.lyricFocus = 0
           this.lyric_save_toast = false
           this.lyricSearching = true
@@ -255,7 +254,6 @@ export default {
           this.audio_cover = nowPlaying.cover
         } else {
           //更新時間就好
-          this.lyric = window._lrc.getLyrics()
           if (this.lyric.length > 1) {
             let lyricFocus_temp = window._lrc.select(_player.audio.currentTime)
             if (this.lyricFocus != lyricFocus_temp) {
@@ -312,8 +310,6 @@ export default {
               if (result.lyrics[0].rate > 35 && set) {
                 this.loadLrc(result.lyrics[0].lyric)
                 this.lyric_save_toast = true
-              } else {
-                this.$snackbar('未發現匹配歌詞，您可以於歌詞搜尋中嘗試手動匹配')
               }
               this.lyricSearchResult = result.lyrics
             }
@@ -330,7 +326,13 @@ export default {
     },
     loadLrc(lrc, save = false) {
       this.lyric_save_toast = false
-      window._lrc.load(lrc)
+      try {
+        window._lrc.load(lrc)
+      } catch (e) {
+        window._lrc.load(`[00:00.000]`)
+        return this.$snackbar('Cannot load this plain text lyric.')
+      }
+      this.lyric = window._lrc.getLyrics()
       this.lyric_raw = lrc
       this.lyricFocus = 0 // 歌詞進度歸零
       try {
@@ -358,7 +360,7 @@ export default {
           source: nowPlaying.source,
           lyric: lrc
         })
-        this.$snackbar(i18n.t('lrc_saved'))
+        this.$snackbar(this.$t('lrc_saved'))
       }
       this.updateLyric()
     },
