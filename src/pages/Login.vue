@@ -66,7 +66,6 @@
     <v-dialog v-model="clearSessionDialog" max-width="420">
       <v-card>
         <v-card-title class="headline">{{ $t('login_page.session._') }}</v-card-title>
-
         <v-card-text>
           <p>{{ $t('login_page.session.description') }}</p>
           <p>{{ $t('login_page.session.description2') }}</p>
@@ -74,12 +73,9 @@
           <v-text-field outlined :label="$t('login_page.username')" v-model="username" :disabled="logining"></v-text-field>
           <v-text-field outlined :label="$t('login_page.password')" type="password" v-model="password" :disabled="logining"></v-text-field>
         </v-card-text>
-
         <v-card-actions>
           <v-spacer />
-
           <v-btn text @click="clearSessionDialog = false">{{ $t('cancel') }}</v-btn>
-
           <v-btn color="red" text @click="clearSession">{{ $t('reset') }}</v-btn>
         </v-card-actions>
       </v-card>
@@ -177,12 +173,9 @@ export default {
   data: () => ({
     logining: false,
     bg: _setting(`headerBgSource`),
-
     server: null,
-    serverError: null,
     password: null,
     username: null,
-    passwordError: null,
     // clear session
     clearSessionDialog: false,
     // change lang
@@ -203,28 +196,23 @@ export default {
       this.lang_dialog = false
     },
     async login() {
-      this.passwordError = null
-      this.serverError = null
       this.server = this.server.replace(/\/$/, '') // remove last "/"
-      if (!this.password || !this.server) {
-        if (!this.password) {
-          this.passwordError = 'Wrong password'
-        }
-        if (!this.server) {
-          this.serverError = 'Unable to connect to server'
-        }
-        return
+      if (!this.password || !this.server || !this.username) {
+        return this.$snackbar('Please fill in all fields')
       }
       this.logining = true
-      await this.axios.get(this.server + '/logout/')
-      let response = await this.axios({
-        method: 'post',
-        url: this.server + '/login/',
-        data: { password: this.password, username: this.username },
-        config: { headers: { 'Content-Type': 'multipart/form-data' } }
-      })
-        .catch(error => (this.serverError = 'Unable to connect to server'))
-        .then(res => res.data)
+      let response
+      try {
+        await this.axios.get(this.server + '/logout/')
+        response = await this.axios({
+          method: 'post',
+          url: this.server + '/login/',
+          data: { password: this.password, username: this.username }
+        }).then(res => res.data)
+      } catch (error) {
+        this.$snackbar(this.$t('requestError'))
+      }
+      this.logining = false
       if (response.success) {
         _setting(`password`, this.password)
         _setting(`username`, this.username)
@@ -234,19 +222,13 @@ export default {
         for (let i of Object.keys(settingReq.settings)) {
           _setting(i, settingReq.settings[i])
         }
-        //login socket
-        _socket.emit('login', {
-          username: window._setting(`username`),
-          password: window._setting(`password`)
-        })
-        _socket.emit('send-nickname', _setting('nickname'))
         // 轉到首頁
         this.$router.push('/')
         //重新整理來啟用新設定值
         window.location.reload()
       } else {
         this.logining = false
-        this.passwordError = 'Wrong password'
+        this.$snackbar('Wrong password')
         this.password = ''
         return false
       }
