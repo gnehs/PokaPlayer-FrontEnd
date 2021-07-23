@@ -84,7 +84,7 @@
         </v-fade-transition>
         <div class="fullscreen-player-content">
           <player-player v-if="$vuetify.breakpoint.mdAndUp" />
-          <div class="player-content">
+          <div class="player-content" :style="{ overflow: nav_active == 'player' ? 'initial' : 'hidden' }">
             <div class="nav">
               <div class="nav-items">
                 <div
