@@ -3,7 +3,12 @@
     <div class="app-progress-bar">
       <v-slider min="0" max="100" step="0.000001" v-model="audio_currentTimePercent" @change="audio_seek" hide-details></v-slider>
     </div>
-    <div class="song-info">
+    <div
+      class="song-info"
+      v-touch="{
+        up: () => $router.push('/fullscreen')
+      }"
+    >
       <div class="left">
         <div class="cover">
           <v-fade-transition mode="out-in">
@@ -102,9 +107,28 @@
                 <div class="action"></div>
               </portal-target>
             </div>
-            <player-player class="player-list" v-if="nav_active == 'player'" />
-            <player-playlist class="player-list" v-if="nav_active == 'playlist'" />
-            <player-lyric class="player-list" v-if="nav_active == 'lyric'" />
+            <player-player
+              class="player-list"
+              v-if="nav_active == 'player'"
+              v-touch="{
+                left: () => (nav_active = 'playlist')
+              }"
+            />
+            <player-playlist
+              class="player-list"
+              v-if="nav_active == 'playlist'"
+              v-touch="{
+                left: () => (nav_active = 'lyric'),
+                right: () => (nav_active = 'player')
+              }"
+            />
+            <player-lyric
+              class="player-list"
+              v-if="nav_active == 'lyric'"
+              v-touch="{
+                right: () => (nav_active = 'playlist')
+              }"
+            />
           </div>
         </div>
       </div>
