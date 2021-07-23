@@ -1,8 +1,5 @@
 <template>
-  <div
-    style="display: flex; justify-content: flex-end"
-    :style="{ width: $vuetify.breakpoint.mdAndUp ? 'initial' : '100%', flex: $vuetify.breakpoint.mdAndUp ? '1' : 'initial' }"
-  >
+  <div style="display: flex; justify-content: flex-end">
     <v-slide-x-reverse-transition>
       <form @submit.prevent="search" v-show="value" :style="{ width: $vuetify.breakpoint.mdAndUp ? '380px' : '100%' }">
         <v-text-field

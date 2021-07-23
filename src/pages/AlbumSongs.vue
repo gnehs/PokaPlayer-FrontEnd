@@ -8,9 +8,9 @@
         :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`"
       >
         <back icon />
-        <v-toolbar-title>{{ name }}</v-toolbar-title>
+        <v-toolbar-title v-show="!showSeachBar || $vuetify.breakpoint.mdAndUp">{{ name }}</v-toolbar-title>
         <v-spacer />
-        <poka-searchbar />
+        <poka-searchbar v-model="showSeachBar" />
       </v-app-bar>
     </portal>
     <poka-header :blurbg="true" :bg="cover || null" />
@@ -85,7 +85,8 @@ export default {
     artist: null,
     songs: null,
     artistAlbums: null,
-    server: _setting(`server`)
+    server: _setting(`server`),
+    showSeachBar: false
   }),
   methods: {
     async fetchData() {

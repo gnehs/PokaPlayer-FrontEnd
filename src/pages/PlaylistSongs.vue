@@ -8,9 +8,9 @@
         :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`"
       >
         <back icon to="/playlist" />
-        <v-toolbar-title>{{ title }}</v-toolbar-title>
+        <v-toolbar-title v-show="!showSeachBar || $vuetify.breakpoint.mdAndUp">{{ title }}</v-toolbar-title>
         <v-spacer />
-        <poka-searchbar />
+        <poka-searchbar v-model="showSeachBar" />
       </v-app-bar>
     </portal>
     <poka-header :blurbg="!isCoverGenerate" :bg="cover" />
@@ -123,7 +123,9 @@ export default {
     fromPoka: false,
     playlistDialog: false,
     playlistDel: false,
-    playlistDelConfirm: ''
+    playlistDelConfirm: '',
+    //
+    showSeachBar: false
   }),
   created() {
     this.fetchData()
