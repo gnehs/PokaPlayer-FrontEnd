@@ -1,14 +1,14 @@
 <template>
   <div :theme="lyric_theme">
     <portal to="fullscreen-player-action">
-      <div class="action"> 
+      <div class="action">
         <v-btn dark icon @click="editLyric">
           <v-icon>mdi-pencil</v-icon>
         </v-btn>
         <v-btn dark icon @click="lyric_theme_dialog = true">
           <v-icon>mdi-palette</v-icon>
         </v-btn>
-        <v-btn icon @click="$router.go(-1)" dark large  >
+        <v-btn icon @click="$router.go(-1)" dark large v-show="$vuetify.breakpoint.mdAndUp">
           <v-icon class="material-icons-outlined">expand_more</v-icon>
         </v-btn>
       </div>

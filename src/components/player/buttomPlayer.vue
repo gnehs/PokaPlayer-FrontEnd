@@ -90,7 +90,12 @@
         <div class="fullscreen-player-content">
           <player-player v-if="$vuetify.breakpoint.mdAndUp" />
           <div class="player-content" :style="{ overflow: nav_active == 'player' ? 'initial' : 'hidden' }">
-            <div class="nav">
+            <div
+              class="nav"
+              v-touch="{
+                down: () => $router.go(-1)
+              }"
+            >
               <div class="nav-items">
                 <div
                   class="nav-item"

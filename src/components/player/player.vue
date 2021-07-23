@@ -2,11 +2,7 @@
   <div class="player">
     <portal to="fullscreen-player-action">
       <div class="action">
-        <v-btn icon dark @click="switch_audio_order">
-          <v-icon class="material-icons-outlined" v-if="audio_order === 'list'">repeat</v-icon>
-          <v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
-        </v-btn>
-        <v-btn icon @click="$router.go(-1)" dark large>
+        <v-btn icon @click="$router.go(-1)" dark large v-show="$vuetify.breakpoint.mdAndUp">
           <v-icon class="material-icons-outlined">expand_more</v-icon>
         </v-btn>
       </div>
@@ -23,21 +19,27 @@
     <v-slider color="#fff" min="0" max="100" step="0.001" v-model="audio_currentTimePercent" @change="audio_seek" hide-details />
     <div class="player-duration">
       <div class="time">{{ audio_currentTime }}</div>
-
       <div class="time">{{ audio_totalTime }}</div>
     </div>
     <div class="player-control">
+      <v-btn icon @click="switch_audio_order" dark large>
+        <v-icon class="material-icons-outlined" v-if="audio_order === 'list'">repeat</v-icon>
+        <v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
+      </v-btn>
+
       <v-btn icon @click="audio_previous" dark large>
         <v-icon class="material-icons-outlined">skip_previous</v-icon>
       </v-btn>
 
-      <v-btn dark @click="audio_toggle" color="gray" class="play-btn" fab>
+      <v-btn dark @click="audio_toggle" color="white" elevation="2" outlined fab>
         <v-icon class="anicons" :style="{ 'font-variation-settings': audio_paused ? `` : `'TIME' 100` }">H</v-icon>
       </v-btn>
 
       <v-btn icon @click="audio_next" dark large>
         <v-icon class="material-icons-outlined">skip_next</v-icon>
       </v-btn>
+
+      <v-btn icon dark large disabled> <v-icon class="material-icons-outlined">playlist_add</v-icon></v-btn>
     </div>
   </div>
 </template>
@@ -161,47 +163,44 @@ export default {
 </script>
 <style lang="sass">
 .player
-	--size: 400px
-	width: var(--size) !important
-	display: flex
-	flex-direction: column
-	margin: 0 auto
-	overflow: initial !important
-	justify-content: center
-	.v-slider--horizontal
-		margin-right: 0
-		margin-left: 0
-	.player-cover
-		margin-bottom: 16px
-	.player-title
-		font-weight: bold
-		font-size: 24px
-	.player-artist
-		font-size: 18px
-		opacity: .8
-		margin-bottom: 16px
-	.v-input
-		flex: initial
-		.v-slider__track-background.v-slider__track-background
-			background-color: rgba(255,255,255,.3) !important
-	.player-duration
-		display: grid
-		grid-template-columns: repeat(2, 1fr)
-		margin-top: -8px
-		.time
-			text-align: left
-		.time + .time
-			text-align: right
-	.player-control
-		text-align: center
-		.play-btn
-			background-color: rgb(0 0 0 / 35%)
-			backdrop-filter: blur(10px)
+  --size: 400px
+  width: var(--size) !important
+  display: flex
+  flex-direction: column
+  margin: 0 auto
+  overflow: initial !important
+  justify-content: center
+  .v-slider--horizontal
+    margin-right: 0
+    margin-left: 0
+  .player-cover
+    margin-bottom: 16px
+  .player-title
+    font-weight: bold
+    font-size: 24px
+  .player-artist
+    font-size: 18px
+    opacity: .8
+    margin-bottom: 16px
+  .v-input
+    flex: initial
+    .v-slider__track-background.v-slider__track-background
+      background-color: rgba(255,255,255,.3) !important
+  .player-duration
+    display: grid
+    grid-template-columns: repeat(2, 1fr)
+    margin-top: -8px
+    .time
+      text-align: left
+    .time + .time
+      text-align: right
+  .player-control
+    text-align: center
 @media screen and (max-width: 768px) and (max-aspect-ratio: 16/9)
-	.player
-		--size: 80vw
+  .player
+    --size: 80vw
 
 @media screen and (max-height: 700px)
-	.player
-		--size: 50vmin
+  .player
+    --size: 50vmin
 </style>

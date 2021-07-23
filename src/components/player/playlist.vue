@@ -2,12 +2,8 @@
   <div>
     <portal to="fullscreen-player-action">
       <div class="action">
-        <v-btn icon dark @click="switch_audio_order">
-          <v-icon class="material-icons-outlined" v-if="audio_order === 'list'">repeat</v-icon>
-          <v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
-        </v-btn>
         <v-btn icon dark @click="audio_clean"> <v-icon class="material-icons-outlined">clear_all</v-icon></v-btn>
-        <v-btn icon @click="$router.go(-1)" dark large>
+        <v-btn icon @click="$router.go(-1)" dark large v-show="$vuetify.breakpoint.mdAndUp">
           <v-icon class="material-icons-outlined">expand_more</v-icon>
         </v-btn>
       </div>
