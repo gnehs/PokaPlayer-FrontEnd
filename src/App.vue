@@ -14,7 +14,7 @@ export default {
     //註冊點心條組件
     Vue.prototype.$snackbar = (msg = ``, duration = 1500) => {
       this.snackbar.message = msg
-      this.snackbar.withBottomPlayer = document.querySelectorAll('.bottom-player').length
+      this.snackbar.withBottomPlayer = document.querySelectorAll('.bottom-player').length && this.$route.path != '/fullscreen'
       this.snackbar.show = true
       clearTimeout(this.snackbar.timeout)
       this.snackbar.timeout = setTimeout(() => (this.snackbar.show = false), duration)
