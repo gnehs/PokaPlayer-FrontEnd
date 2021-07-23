@@ -1,6 +1,5 @@
 <template>
   <poka-cards>
-    <poka-card v-if="$route.name == 'PlaylistFolder'" poka-icon="arrow_back_ios" to="/playlist/" :poka-title="$t('back')" />
     <template v-for="{ name, image, cover, id, source, type, icon } in data">
       <poka-card
         v-if="type == 'folder'"

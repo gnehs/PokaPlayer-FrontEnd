@@ -1,5 +1,19 @@
 <template>
   <div>
+    <portal to="app-bar" v-if="$route.name == 'PlaylistFolder'">
+      <v-app-bar
+        color="#FFF"
+        clipped-left
+        app
+        :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`"
+      >
+        <back icon to="/playlist" />
+        <v-toolbar-title v-show="!showSeachBar || $vuetify.breakpoint.mdAndUp">{{ title }}</v-toolbar-title>
+        <v-spacer />
+        <poka-searchbar v-model="showSeachBar" />
+      </v-app-bar>
+    </portal>
+    <poka-header :title="$route.name == 'PlaylistFolder' ? '' : title" :bg="cover" />
     <library-menu v-show="$route.name == 'Playlist'" />
     <v-slide-y-reverse-transition>
       <poka-parse-playlists v-if="data" :data="data" />
