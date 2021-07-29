@@ -7,7 +7,7 @@
         app
         :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`"
       >
-        <back icon to="/fullscreen" />
+        <back icon to="/library" />
         <v-toolbar-title>{{ $t('lyricEditor.title') }}</v-toolbar-title>
         <v-spacer />
       </v-app-bar>
