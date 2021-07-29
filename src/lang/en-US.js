@@ -327,7 +327,8 @@ export default {
   source: {
     DSM: "DSM",
     poka: "PokaPlayer",
-    Netease2: "Netease"
+    Netease2: "Netease",
+    QQMusic: "QQ Music",
   },
   lyricEditor: {
     title: "Lyric Editor",

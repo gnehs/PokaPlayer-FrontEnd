@@ -13,7 +13,7 @@ export default {
   },
   home: "首页",
   nowplaying: "现正播放",
-  library: "媒體庫",
+  library: "媒体库",
   lrc: "歌词",
   search: "搜寻",
   album: "专辑",
@@ -23,7 +23,7 @@ export default {
   composer: "作曲者",
   playlist: "播放清单",
   settings: "设定",
-  debug: "除錯",
+  debug: "调试",
   ok: "好",
   cancel: "取消",
   reset: "重置",
@@ -130,7 +130,7 @@ export default {
   moduleShowName_DSM: "DSM",
   sessionExpired: "Session 过期，请重新登入",
   add2nowPlaying: "将此页歌曲加入到现正播放",
-  pin: "釘選",
+  pin: "钉选",
   pin_failed: "钉选失败",
   unpin_failed: "取消钉选失败",
   settings_dark: "夜间模式",
@@ -177,7 +177,7 @@ export default {
     "注意：若您未开启 Docker 自动重启功能，您必须手动开启 PokaPlayer",
   settings_updateDialog_note_dev:
     "若在开发机器上进行更新，<mark>可能导致 Git 爆炸</mark>",
-  settings_updateDialog_view_previous: "查看先前的更新日誌",
+  settings_updateDialog_view_previous: "查看先前的更新日志",
   settings_updateDialog_title: "{version} 更新日志",
   settings_restart: "重新启动",
   settings_restarting: "正在重新启动",
@@ -274,8 +274,8 @@ export default {
       create: "建立使用者",
       createBtn: "建立",
       userCreated: "使用者建立成功",
-      userCreateFailed: "使用者建立失敗",
-      userCreateUsernameRepeat: "使用者名稱已被使用",
+      userCreateFailed: "建立使用者时发生错误",
+      userCreateUsernameRepeat: "使用者名称已被使用",
       //edit
       edit: "编辑使用者",
       //changePassword
@@ -296,22 +296,22 @@ export default {
     }
   },
   settingPravicy: {
-    title: "隱私",
-    description: "資料紀錄設定",
+    title: "隐私",
+    description: "资料纪录设定",
     notify: {
-      title: "關於 PokaPlayer 記錄",
+      title: "关于 PokaPlayer 记录",
       body:
-        "資料僅會於您的伺服器進行運算，不會被上傳至網路進行分析。 該功能可提供您更優質的使用體驗（如：年度回顧、最近播放）。 若您有疑慮可於下方關閉此功能，並將已記錄的資料清除。"
+        "资料仅会于您的服务器进行运算，不会被上传至网络进行分析。 该功能可提供您更优质的使用体验（如：年度回顾、最近播放）。 若您有疑虑可于下方关闭此功能，并将已记录的资料清除。"
     },
     dataRecord: {
-      _: "資料紀錄",
-      enabled: "啟用",
+      _: "资料纪录",
+      enabled: "启用",
       disabled: "已停用",
-      clear: "清除目前已紀錄資料",
-      logged: "目前已記錄 {count} 筆資料",
-      loading: "正在統計資料...",
-      confirm: "您確定要清除資料嗎？",
-      cleared: "資料已清除"
+      clear: "清除目前已纪录资料",
+      logged: "目前已记录 {count} 笔资料",
+      loading: "正在统计资料...",
+      confirm: "您确定要清除资料吗？",
+      cleared: "资料已清除"
     }
   },
   settingPins: {
@@ -319,11 +319,21 @@ export default {
     deleteConfirm: "您确定要取消钉选此项目吗？"
   },
   adminLog: {
-    title: "日誌"
+    title: "日志"
   },
   source: {
     DSM: "DSM",
     poka: "PokaPlayer",
-    Netease2: "网易云音乐"
+    Netease2: "网易云音乐",
+    QQMusic: "QQ 音乐",
+  },
+  lyricEditor: {
+    title: "歌词编辑器",
+    instructionsTitle: '使用说明',
+    instructionsContent: '左侧为歌词预览，右侧则是编辑区块<br />编辑完成后请按左下角打勾储存歌词，若要取消编辑点击返回键即可跳出<br />点击歌词预览的歌词即可将歌曲转跳至该时间，若是双语歌词，请点选原文部分<br />若有任何问题或功能建议，欢迎通过「设定->关于->GitHub->Issues」提出',
+    instructionsContentPhone: '上方为歌词预览，下方则是编辑区块<br />编辑完成后请按左下角打勾储存歌词，若要取消编辑点击返回键即可跳出<br />点击歌词预览的歌词即可将歌曲转跳至该时间，若是双语歌词，请点选原文部分<br />若有任何问题或功能建议，欢迎通过「设定->关于->GitHub->Issues」提出',
+    timeShifting: '时间平移',
+    timeShiftingReset: '重置',
+    textEditor: '文字编辑器'
   }
 };

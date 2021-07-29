@@ -97,7 +97,7 @@
               <div class="content">
                 <div class="header">
                   <div class="head t-ellipsis">{{ item.name }}</div>
-                  <div class="t-ellipsis">{{ item.artist }}</div>
+                  <div class="t-ellipsis">{{ item.artist }} ({{ $t('source.' + item.source) }})</div>
                 </div>
               </div>
             </div>

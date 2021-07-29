@@ -324,7 +324,8 @@ export default {
   source: {
     DSM: "DSM",
     poka: "PokaPlayer",
-    Netease2: "網易雲音樂"
+    Netease2: "網易雲音樂",
+    QQMusic: "QQ 音樂",
   },
   lyricEditor: {
     title: "歌詞編輯器",
