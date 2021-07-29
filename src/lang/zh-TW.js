@@ -335,5 +335,12 @@ export default {
     timeShifting: '時間平移',
     timeShiftingReset: '重置',
     textEditor: '文字編輯器'
+  },
+  review: {
+    notify: {
+      title: "您的年度回顧",
+      description: "來看看這一年里您最常聽的歌曲、專輯與其他有關統計",
+      go: "走吧"
+    }
   }
 };

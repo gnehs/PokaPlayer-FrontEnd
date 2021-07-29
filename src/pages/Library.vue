@@ -3,6 +3,7 @@
     <poka-header title="媒體庫" />
     <library-menu />
     <poka-update />
+    <poka-review />
     <poka-loader v-if="!data" />
     <v-slide-y-reverse-transition>
       <poka-parse-home v-if="data" :data="data" />
