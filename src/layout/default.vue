@@ -16,7 +16,7 @@
         <menu-btn />
       </v-app-bar>
     </portal-target>
-    <v-navigation-drawer app v-model="drawer" :mini-variant="$vuetify.breakpoint.mdAndUp" clipped>
+    <v-navigation-drawer app v-model="drawer" :mini-variant="$vuetify.breakpoint.mdAndUp" clipped :permanent="$vuetify.breakpoint.mdAndUp">
       <v-app-bar color="#FFF" :style="`box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.12)`" v-if="!$vuetify.breakpoint.mdAndUp">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <router-link to="/" class="ml-2 poka-logo" v-if="!showSeachBar || $vuetify.breakpoint.mdAndUp">
