@@ -4,7 +4,11 @@
       <transition-group name="songlist" tag="div" class="poka list" v-if="logs.length" style="position: relative">
         <div class="item log" :class="[`level-${item.level}`]" v-for="item of logs" :key="item._id" @click="openLogDialog(item)" v-ripple>
           <div class="content">
-            <v-icon class="material-icons-outlined" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="{ user: 'person', system: 'dns' }[item.type]" />
+            <v-icon
+              class="bx"
+              :color="$vuetify.theme.isDark ? '#FFF' : 'primary'"
+              v-text="{ user: 'bx-user', system: 'bx-server' }[item.type]"
+            />
             <div class="header">
               <div class="head t-ellipsis">{{ item.event }}</div>
               <div class="t-ellipsis">{{ item.description }}</div>
@@ -24,7 +28,7 @@
     <poka-loader v-if="loading && !logs.length" />
     <v-card class="mx-auto blur-card" max-width="344" style="margin-top: 32px" key="card" v-if="!logs.length && !loading">
       <v-card-text class="text-center">
-        <v-icon class="material-icons-outlined display-4">receipt_long</v-icon>
+        <v-icon class="bx bx-lg mb-2">bx-file</v-icon>
         <p class="headline text--primary">No logs available</p>
       </v-card-text>
     </v-card>
@@ -34,13 +38,17 @@
           <v-toolbar-title>{{ logDialogData.event }}</v-toolbar-title>
           <v-spacer />
           <v-btn icon @click="logDialog = false">
-            <v-icon>mdi-close</v-icon>
+            <v-icon class="bx">bx-x</v-icon>
           </v-btn>
         </v-toolbar>
         <div class="poka two list" v-if="logDialogData">
           <div class="item log" v-ripple>
             <div class="content">
-              <v-icon class="material-icons-outlined" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="{ user: 'person', system: 'dns' }[logDialogData.type]" />
+              <v-icon
+                class="bx"
+                :color="$vuetify.theme.isDark ? '#FFF' : 'primary'"
+                v-text="{ user: 'bx-user', system: 'bx-server' }[logDialogData.type]"
+              />
               <div class="header">
                 <div class="head t-ellipsis">{{ logDialogData.type }}</div>
                 <div class="t-ellipsis">Type</div>
@@ -49,7 +57,11 @@
           </div>
           <div class="item log" v-ripple>
             <div class="content">
-              <v-icon class="material-icons-outlined" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="{ info: 'info', warn: 'warning', error: 'close' }[logDialogData.level]" />
+              <v-icon
+                class="bx"
+                :color="$vuetify.theme.isDark ? '#FFF' : 'primary'"
+                v-text="{ info: 'bx-info-circle', warn: 'bx-error', error: 'bx-error-circle' }[logDialogData.level]"
+              />
               <div class="header">
                 <div class="head t-ellipsis">{{ logDialogData.level }}</div>
                 <div class="t-ellipsis">Level</div>
@@ -58,7 +70,7 @@
           </div>
           <div class="item log" v-ripple>
             <div class="content">
-              <v-icon class="material-icons-outlined" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="'access_time'" />
+              <v-icon class="bx" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="'bx-time'" />
               <div class="header">
                 <div class="head t-ellipsis">
                   {{ new Date(logDialogData.time).toLocaleString() }}
@@ -69,7 +81,7 @@
           </div>
           <div class="item log" v-ripple>
             <div class="content">
-              <v-icon class="material-icons-outlined" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="'person'" />
+              <v-icon class="bx" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="'bx-user'" />
               <div class="header">
                 <div class="head t-ellipsis">{{ logDialogData.user }}</div>
                 <div class="t-ellipsis">User</div>

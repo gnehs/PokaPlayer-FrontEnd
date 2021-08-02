@@ -2,7 +2,7 @@
   <v-menu bottom left>
     <template v-slot:activator="{ on, attrs }">
       <v-btn icon v-bind="attrs" v-on="on">
-        <v-icon class="material-icons-outlined">more_vert</v-icon>
+        <v-icon class="bx">bx-dots-vertical-rounded</v-icon>
       </v-btn>
     </template>
 
