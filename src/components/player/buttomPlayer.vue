@@ -83,7 +83,7 @@
       </div>
     </div>
     <v-dialog v-model="fullscreen" fullscreen transition="dialog-bottom-transition">
-      <div class="fullscreen-player">
+      <div class="fullscreen-player" v-if="fullscreen">
         <v-fade-transition>
           <div class="fullscreen-player-background" :style="{ backgroundImage: `url('${audio_cover}')` }" :key="audio_cover"></div>
         </v-fade-transition>
@@ -401,7 +401,7 @@ export default {
   backdrop-filter: blur(8px)
   z-index: 99
   position: fixed
-  background-color: rgba(245, 245, 245, 0.7)
+  background-color: rgba(245, 245, 245, 0.95)
 
   --cover-size: 56px
   @media (prefers-color-scheme: dark)
