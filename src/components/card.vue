@@ -3,7 +3,7 @@
     <div class="image">
       <poka-cover :cover="parsed_pokaBg" :name="pokaTitle" hide-shadow />
       <div class="icon" v-if="pokaIcon">
-        <v-icon class="material-icons-outlined">{{ pokaIcon }}</v-icon>
+        <v-icon class="bx">{{ pokaIcon }}</v-icon>
       </div>
     </div>
     <div class="poka-card-title" :class="{ 't-ellipsis': ellipsis }" v-text="pokaTitle" />

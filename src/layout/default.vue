@@ -29,21 +29,21 @@
           <template v-slot:activator="{ on, attrs }">
             <v-list-item :to="item.to" link v-bind="attrs" v-on="on">
               <v-list-item-icon>
-                <v-icon class="material-icons-outlined">{{ item.icon }}</v-icon>
+                <v-icon class="bx">{{ item.icon }} </v-icon>
               </v-list-item-icon>
 
               <v-list-item-content>
                 <v-list-item-title>{{ $t(item.text) }}</v-list-item-title>
               </v-list-item-content>
-            </v-list-item></template
-          >
+            </v-list-item>
+          </template>
           <span>{{ $t(item.text) }}</span>
         </v-tooltip>
       </v-list>
       <v-list dense nav v-else>
         <v-list-item v-for="item in items" :key="item.text" :to="item.to" link>
           <v-list-item-icon>
-            <v-icon class="material-icons-outlined">{{ item.icon }}</v-icon>
+            <v-icon class="bx">{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
@@ -71,13 +71,13 @@ export default {
       showSeachBar: false,
       drawer: this.$vuetify.breakpoint.mdAndUp,
       items: [
-        { icon: 'library_music', text: 'library', to: '/library' },
+        { icon: 'bx-library', text: 'library', to: '/library' },
         //{ icon: 'search', text: 'search', to: '/search' },
-        { icon: 'album', text: 'album', to: '/album' },
-        { icon: 'folder', text: 'folder', to: '/folder' },
-        { icon: 'keyboard_voice', text: 'artist', to: '/artist' },
-        { icon: 'edit', text: 'composer', to: '/composer' },
-        { icon: 'video_library', text: 'playlist', to: '/playlist' }
+        { icon: 'bx-album', text: 'album', to: '/album' },
+        { icon: 'bx-folder', text: 'folder', to: '/folder' },
+        { icon: 'bx-microphone', text: 'artist', to: '/artist' },
+        { icon: 'bx-pencil', text: 'composer', to: '/composer' },
+        { icon: 'bxs-playlist', text: 'playlist', to: '/playlist' }
       ]
     }
   },

@@ -10,7 +10,7 @@
           :poka-bg="false"
           :poka-title="user.username"
           :poka-subtitle="$t('settingUserManagement.role.' + user.role)"
-          poka-icon="person"
+          poka-icon="bx-user"
         />
       </poka-cards>
     </v-slide-y-reverse-transition>
@@ -52,7 +52,7 @@
             <v-divider style="margin: 4px 0" />
             <div class="item" v-ripple @click="changePassword">
               <div class="content">
-                <v-icon class="material-icons-outlined" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="'lock'" />
+                <v-icon class="bx" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="'bx-lock-alt'" />
                 <div class="header">
                   <div class="head t-ellipsis">
                     {{ $t('settingUserManagement.dialog.changePassword') }}
@@ -62,7 +62,7 @@
             </div>
             <div class="item" v-ripple @click="deleteUser">
               <div class="content">
-                <v-icon class="material-icons-outlined" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="'delete'" />
+                <v-icon class="bx" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="'bx-trash'" />
                 <div class="header">
                   <div class="head t-ellipsis">
                     {{ $t('settingUserManagement.dialog.deleteUser') }}
@@ -96,7 +96,7 @@
     </v-dialog>
     <v-fab-transition v-if="!createUserDialog">
       <v-btn color="primary" fab large dark bottom right fixed style="bottom: calc(16px + 69px)" @click="openCreateUserDialog">
-        <v-icon class="material-icons-outlined">person_add</v-icon>
+        <v-icon class="bx">bx-user-plus</v-icon>
       </v-btn>
     </v-fab-transition>
   </div>

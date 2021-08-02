@@ -1,8 +1,14 @@
 <template>
   <div class="poka two list">
-    <router-link class="item" v-for="{ name, id, source } in data" :key="id" :to="`/folder/${encodeURIComponent(source)}/${encodeURIComponent(id || 'unknown')}`" v-ripple>
+    <router-link
+      class="item"
+      v-for="{ name, id, source } in data"
+      :key="id"
+      :to="`/folder/${encodeURIComponent(source)}/${encodeURIComponent(id || 'unknown')}`"
+      v-ripple
+    >
       <div class="content">
-        <v-icon class="material-icons-outlined" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="'folder'" />
+        <v-icon class="bx" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'">bx-folder</v-icon>
         <div class="header">
           <div class="head t-ellipsis">{{ name }}</div>
           <div class="t-ellipsis">{{ $t(`source.${source}`) }}</div>

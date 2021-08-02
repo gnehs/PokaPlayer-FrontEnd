@@ -27,15 +27,15 @@
     <div class="footer">
       <div class="left-btns">
         <v-btn class="mx-1" @click="lang_dialog = true" depressed fab small>
-          <v-icon>mdi-translate</v-icon>
+          <v-icon class="bx">bx-planet</v-icon>
         </v-btn>
         <v-btn class="mx-1" @click="clearSessionDialog = true" depressed fab small>
-          <v-icon>mdi-lock-reset</v-icon>
+          <v-icon class="bx">bx-bolt-circle</v-icon>
         </v-btn>
       </div>
       <div class="right-btns">
         <v-btn href="https://github.com/gnehs/PokaPlayer" target="_blank" depressed fab small>
-          <v-icon>mdi-github</v-icon>
+          <v-icon class="bx">bxl-github</v-icon>
         </v-btn>
       </div>
     </div>
@@ -48,7 +48,7 @@
             <div class="item" v-for="(lang, index) of languages" :key="`lang${lang}-${index}`" @click="setLang(lang)" v-ripple>
               <div class="content">
                 <v-avatar size="24px" item>
-                  <v-icon>translate</v-icon>
+                  <v-icon class="bx">bx-planet</v-icon>
                 </v-avatar>
                 <div class="header">
                   <div class="head t-ellipsis">{{ $t('title', lang) }}</div>

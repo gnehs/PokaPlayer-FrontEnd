@@ -26,7 +26,7 @@
         <span class="time">{{ audio_currentTime }}</span>
 
         <v-btn icon @click="audio_previous">
-          <v-icon class="material-icons-outlined">skip_previous</v-icon>
+          <v-icon class="bx">bx-skip-previous</v-icon>
         </v-btn>
 
         <v-btn small fab depressed @click="audio_toggle" color="primary">
@@ -34,7 +34,7 @@
         </v-btn>
 
         <v-btn icon @click="audio_next">
-          <v-icon class="material-icons-outlined">skip_next</v-icon>
+          <v-icon class="bx">bx-skip-next</v-icon>
         </v-btn>
 
         <span class="time">{{ audio_totalTime }}</span>
@@ -49,17 +49,17 @@
             <v-slider v-show="audio_volume_hover" v-model="audio_volume" hide-details style thumb-label></v-slider>
           </v-fade-transition>
           <v-btn icon @click="audio_volume ? (audio_volume = 0) : (audio_volume = 100)">
-            <v-icon class="material-icons-outlined" v-if="audio_volume == 0">volume_off</v-icon>
-            <v-icon class="material-icons-outlined" v-else-if="audio_volume < 50">volume_down</v-icon>
-            <v-icon class="material-icons-outlined" v-else>volume_up</v-icon>
+            <v-icon class="bx" v-if="audio_volume == 0">volume-mute</v-icon>
+            <v-icon class="bx" v-else-if="audio_volume < 50">volume-low</v-icon>
+            <v-icon class="bx" v-else>volume-full</v-icon>
           </v-btn>
         </div>
         <v-btn icon @click="switch_audio_order">
-          <v-icon class="material-icons-outlined" v-if="audio_order === 'list'">repeat</v-icon>
-          <v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
+          <v-icon class="bx" v-if="audio_order === 'list'">bx-sync</v-icon>
+          <v-icon class="bx" v-else>bx-shuffle</v-icon>
         </v-btn>
         <v-btn icon to="/fullscreen">
-          <v-icon class="material-icons-outlined">expand_less</v-icon>
+          <v-icon class="bx">bx-up-arrow</v-icon>
         </v-btn>
       </div>
       <div class="right" v-else>
@@ -67,7 +67,7 @@
       </div>
       <div class="right-s" v-if="audio_artist">
         <v-btn icon @click="audio_previous">
-          <v-icon class="material-icons-outlined">skip_previous</v-icon>
+          <v-icon class="bx">bx-skip-previous</v-icon>
         </v-btn>
 
         <v-btn small fab depressed @click="audio_toggle" color="primary">
@@ -75,7 +75,7 @@
         </v-btn>
 
         <v-btn icon @click="audio_next">
-          <v-icon class="material-icons-outlined">skip_next</v-icon>
+          <v-icon class="bx">bx-skip-next</v-icon>
         </v-btn>
       </div>
       <div class="right-s" v-else>

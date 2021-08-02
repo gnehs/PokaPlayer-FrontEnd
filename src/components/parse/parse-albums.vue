@@ -10,7 +10,7 @@
         :poka-bg="cover || false"
         :poka-title="name"
         :poka-subtitle="artist"
-        poka-icon="album"
+        poka-icon="bx-album"
         :source="$t(`source.${source}`)"
       />
     </poka-cards>

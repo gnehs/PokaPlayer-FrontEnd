@@ -10,7 +10,7 @@
       <v-list-item-group color="primary">
         <v-list-item v-for="(item, i) in items" :key="i" :to="item.to">
           <v-list-item-icon>
-            <v-icon class="material-icons-outlined" v-text="item.icon" />
+            <v-icon class="bx" v-text="item.icon" />
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>{{ $t(item.text) }}</v-list-item-title>
@@ -25,7 +25,7 @@
 export default {
   name: 'menu-btn',
   data: () => ({
-    items: [{ icon: 'settings', text: 'settings', to: '/settings' }]
+    items: [{ icon: 'bx-cog', text: 'settings', to: '/settings' }]
   }),
   created() {
     this.getStatus()
@@ -44,7 +44,7 @@ export default {
       // add admin page
       if (userProfile.data.role == 'admin') {
         let debugItem = {
-          icon: 'admin_panel_settings',
+          icon: 'bx-server',
           text: 'settingIndex.adminItems',
           to: '/admin'
         }
@@ -54,7 +54,7 @@ export default {
       }
       // add debug page
       if (response.data.debug) {
-        let debugItem = { icon: 'bug_report', text: 'debug', to: '/debug' }
+        let debugItem = { icon: 'bx-bug', text: 'debug', to: '/debug' }
         if (!this.items.filter(x => x.text == 'debug').length) {
           this.items.push(debugItem)
         }

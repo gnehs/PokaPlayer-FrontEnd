@@ -5,7 +5,7 @@
       <div class="item" @click="lang_dialog = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>translate</v-icon>
+            <v-icon class="bx">bx-planet</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">{{ $t('settingInterface.lang') }}</div>
@@ -19,7 +19,7 @@
       <div class="item" @click="customize_bg_dialog = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>landscape</v-icon>
+            <v-icon class="bx">bx-image</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">
@@ -34,7 +34,7 @@
       <div class="item" @click="bg_height_dialog = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>style</v-icon>
+            <v-icon class="bx">bx-paint-roll</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">
@@ -50,7 +50,7 @@
       <div class="item" @click="theme_dialog = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>palette</v-icon>
+            <v-icon class="bx">bx-palette</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">
@@ -65,7 +65,7 @@
       <div class="item" @click="lyric_theme_dialog = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>palette</v-icon>
+            <v-icon class="bx">bx-palette</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">
@@ -81,7 +81,7 @@
       <div class="item" @click="changeStyle('artist')" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>{{ view.artist == 'card' ? 'view_module' : 'list' }}</v-icon>
+            <v-icon class="bx">{{ view.artist == 'card' ? 'bx-grid-alt' : 'bx-list-ul' }}</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">
@@ -96,7 +96,7 @@
       <div class="item" @click="changeStyle('composer')" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>{{ view.composer == 'card' ? 'view_module' : 'list' }}</v-icon>
+            <v-icon class="bx">{{ view.composer == 'card' ? 'bx-grid-alt' : 'bx-list-ul' }}</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">
@@ -118,7 +118,7 @@
             <div class="item" @click="setBgHeight('full')" v-ripple>
               <div class="content">
                 <v-avatar size="24px" item>
-                  <v-icon>star</v-icon>
+                  <v-icon class="bx">bxs-star</v-icon>
                 </v-avatar>
                 <div class="header">
                   <div class="head">
@@ -130,7 +130,7 @@
             <div class="item" @click="setBgHeight('half')" v-ripple>
               <div class="content">
                 <v-avatar size="24px" item>
-                  <v-icon>star_half</v-icon>
+                  <v-icon class="bx">bxs-star-half</v-icon>
                 </v-avatar>
                 <div class="header">
                   <div class="head">
@@ -142,7 +142,7 @@
             <div class="item" @click="setBgHeight('none')" v-ripple>
               <div class="content">
                 <v-avatar size="24px" item>
-                  <v-icon>star_border</v-icon>
+                  <v-icon class="bx">bx-star</v-icon>
                 </v-avatar>
                 <div class="header">
                   <div class="head">
@@ -219,7 +219,7 @@
             <div class="item" v-for="(lang, index) of languages" :key="`lang${lang}-${index}`" @click="setLang(lang)" v-ripple>
               <div class="content">
                 <v-avatar size="24px" item>
-                  <v-icon>translate</v-icon>
+                  <v-icon class="bx">bx-planet</v-icon>
                 </v-avatar>
                 <div class="header">
                   <div class="head t-ellipsis">{{ $t('title', lang) }}</div>
@@ -242,7 +242,7 @@
             <div class="item" @click="setLyricTheme('bigtext')" v-ripple>
               <div class="content">
                 <v-avatar size="24px" item>
-                  <v-icon>palette</v-icon>
+                  <v-icon class="bx">bx-palette</v-icon>
                 </v-avatar>
                 <div class="header">
                   <div class="head">Big text</div>
@@ -252,7 +252,7 @@
             <div class="item" @click="setLyricTheme('default')" v-ripple>
               <div class="content">
                 <v-avatar size="24px" item>
-                  <v-icon>palette</v-icon>
+                  <v-icon class="bx">bx-palette</v-icon>
                 </v-avatar>
                 <div class="header">
                   <div class="head">Default</div>
@@ -262,7 +262,7 @@
             <div class="item" @click="setLyricTheme('spacing')" v-ripple>
               <div class="content">
                 <v-avatar size="24px" item>
-                  <v-icon>palette</v-icon>
+                  <v-icon class="bx">bx-palette</v-icon>
                 </v-avatar>
                 <div class="header">
                   <div class="head">Spacing</div>
@@ -272,7 +272,7 @@
             <div class="item" @click="setLyricTheme('underline')" v-ripple>
               <div class="content">
                 <v-avatar size="24px" item>
-                  <v-icon>palette</v-icon>
+                  <v-icon class="bx">bx-palette</v-icon>
                 </v-avatar>
                 <div class="header">
                   <div class="head">Underline</div>

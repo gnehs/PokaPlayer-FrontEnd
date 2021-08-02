@@ -6,7 +6,7 @@
           v-for="{ name, cover, id, source } in $pagination(data, page)"
           :key="id"
           :to="`/artist/${encodeURIComponent(source)}/${encodeURIComponent(id || 'unknown')}`"
-          poka-icon="keyboard_voice"
+          poka-icon="bx-microphone"
           :poka-bg="cover || false"
           :poka-title="name || '未知'"
           :poka-subtitle="$t(`source.${source}`)"
@@ -38,10 +38,6 @@
       </div>
     </v-fade-transition>
     <poka-pagination :length="$getPages(data)" v-model="page" />
-    <v-btn color="primary" fab large dark bottom right fixed style="bottom: calc(16px + 69px)" v-if="!hideFab" @click="changeView">
-      <v-icon v-if="artistView == 'card'" class="material-icons-outlined">list</v-icon>
-      <v-icon v-else class="material-icons-outlined">grid_on</v-icon>
-    </v-btn>
   </div>
 </template>
 
@@ -49,8 +45,7 @@
 export default {
   name: 'poka-parse-artists',
   props: {
-    data: { type: Array },
-    hideFab: { type: Boolean, default: false }
+    data: { type: Array }
   },
   data: () => ({
     server: _setting(`server`),
@@ -62,10 +57,6 @@ export default {
       if (cover.startsWith('http')) return cover
       else if (cover) return _setting(`server`) + cover
       else return _setting(`headerBgSource`)
-    },
-    changeView() {
-      this.artistView = this.artistView == 'list' ? 'card' : 'list'
-      _setting(`artistView`, this.artistView)
     }
   }
 }

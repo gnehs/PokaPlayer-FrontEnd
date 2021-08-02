@@ -7,7 +7,7 @@
           :key="id"
           :to="`/composer/${encodeURIComponent(source)}/${encodeURIComponent(id || 'unknown')}`"
           :poka-bg="cover || false"
-          poka-icon="edit"
+          poka-icon="bx-pencil"
           :poka-title="name || '未知'"
           :poka-subtitle="$t(`source.${source}`)"
         />
@@ -38,10 +38,6 @@
       </div>
     </v-fade-transition>
     <poka-pagination :length="$getPages(data)" v-model="page" />
-    <v-btn color="primary" fab large dark bottom right fixed style="bottom: calc(16px + 69px)" v-if="!hideFab" @click="changeView">
-      <v-icon v-if="composerView == 'card'" class="material-icons-outlined">list</v-icon>
-      <v-icon v-else class="material-icons-outlined">grid_on</v-icon>
-    </v-btn>
   </div>
 </template>
 
@@ -49,8 +45,7 @@
 export default {
   name: 'poka-parse-composers',
   props: {
-    data: { type: Array },
-    hideFab: { type: Boolean, default: false }
+    data: { type: Array }
   },
   data: () => ({
     server: _setting(`server`),
@@ -62,10 +57,6 @@ export default {
       if (cover.startsWith('http')) return cover
       else if (cover) return _setting(`server`) + cover
       else return _setting(`headerBgSource`)
-    },
-    changeView() {
-      this.composerView = this.composerView == 'list' ? 'card' : 'list'
-      _setting(`composerView`, this.composerView)
     }
   }
 }

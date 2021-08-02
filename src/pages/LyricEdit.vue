@@ -59,7 +59,7 @@
 
     <v-fab-transition>
       <v-btn color="primary" fab large dark bottom right fixed style="bottom: calc(16px + 69px)" @click="saveLyric">
-        <v-icon>done</v-icon>
+        <v-icon class="bx">bx-check</v-icon>
       </v-btn>
     </v-fab-transition>
   </div>

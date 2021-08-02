@@ -1,13 +1,18 @@
 <template>
   <v-fab-transition v-if="isPinned != null && isPinned != 'disabled' && btnType == 'speed-dial'">
     <v-btn color="primary" fab large dark bottom right fixed style="bottom: calc(16px + 69px)" :loading="loading" @click="pin">
-      <v-icon v-if="isPinned">push_pin</v-icon>
-      <v-icon v-else class="material-icons-outlined">push_pin</v-icon>
+      <v-icon class="bx">{{ isPinned ? 'bxs-pin' : 'bx-pin' }}</v-icon>
     </v-btn>
   </v-fab-transition>
-  <v-btn @click="pin" :loading="loading" color="primary" class="rounded-lg" :outlined="!isPinned" v-else-if="isPinned != null && isPinned != 'disabled' && btnType == 'icon-button'">
-    <v-icon v-if="isPinned" class="mr-2">push_pin</v-icon>
-    <v-icon v-else class="material-icons-outlined mr-2">push_pin</v-icon>
+  <v-btn
+    @click="pin"
+    :loading="loading"
+    color="primary"
+    class="rounded-lg"
+    :outlined="!isPinned"
+    v-else-if="isPinned != null && isPinned != 'disabled' && btnType == 'icon-button'"
+  >
+    <v-icon class="bx mr-2">{{ isPinned ? 'bxs-pin' : 'bx-pin' }}</v-icon>
     {{ $t('pin') }}
   </v-btn>
 </template>

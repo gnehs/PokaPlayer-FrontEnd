@@ -23,7 +23,7 @@
         :to="item.to"
         v-ripple
       >
-        <v-icon class="material-icons-outlined">{{ item.icon }}</v-icon>
+        <v-icon class="bx">{{ item.icon }}</v-icon>
         <span>{{ $t(item.text) }}</span>
       </router-link>
     </div>
@@ -38,17 +38,9 @@ export default {
   data: () => ({
     settings: { darkMode: window._setting('darkMode') },
     adminItems: [
-      {
-        text: 'settings_systemAndUpdate',
-        icon: 'system_update',
-        to: '/admin/system'
-      },
-      {
-        text: 'settingUserManagement.title',
-        icon: 'person',
-        to: '/admin/users'
-      },
-      { text: 'adminLog.title', icon: 'receipt_long', to: '/admin/log' }
+      { text: 'settings_systemAndUpdate', icon: 'bx-server', to: '/admin/system' },
+      { text: 'settingUserManagement.title', icon: 'bx-user', to: '/admin/users' },
+      { text: 'adminLog.title', icon: 'bx-file', to: '/admin/log' }
     ]
   }),
   created() {

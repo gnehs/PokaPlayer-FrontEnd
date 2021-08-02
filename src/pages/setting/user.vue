@@ -14,7 +14,7 @@
       <div class="item" v-ripple @click="setDataRecord">
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon :color="dataRecord ? 'purple' : null">analytics</v-icon>
+            <v-icon class="bx" :color="dataRecord ? 'purple' : null">bx-data</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">
@@ -29,7 +29,7 @@
       <div class="item" v-ripple @click="clearRecord">
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>clear</v-icon>
+            <v-icon class="bx">bx-x</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">
@@ -54,7 +54,7 @@
       <div class="item" @click="copyID" v-if="userdata" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>mdi-account-key</v-icon>
+            <v-icon class="bx">bx-key</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">ID</div>
@@ -65,7 +65,7 @@
       <div class="item" @click="temp.changeNamePrompt = true" v-if="userdata" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>person</v-icon>
+            <v-icon class="bx">bx-user</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">{{ $t('settingUser.name') }}</div>
@@ -76,7 +76,7 @@
       <div class="item" @click="temp.changeUsernamePrompt = true" v-if="userdata" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>alternate_email</v-icon>
+            <v-icon class="bx">bx-at</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">{{ $t('settingUser.username') }}</div>
@@ -87,7 +87,7 @@
       <div class="item" v-if="userdata">
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>settings</v-icon>
+            <v-icon class="bx">bx-cog</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">{{ $t('settingUser.role') }}</div>
@@ -98,7 +98,7 @@
       <div class="item" @click="temp.changePasswordDialog = true" v-if="userdata">
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>lock</v-icon>
+            <v-icon class="bx">bx-lock</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">{{ $t('settingUser.password') }}</div>
@@ -111,7 +111,7 @@
       <div class="item" @click="logout" v-if="userdata">
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>exit_to_app</v-icon>
+            <v-icon class="bx">bx-log-out-circle</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">{{ $t('settings_logout') }}</div>
@@ -146,7 +146,12 @@
       <v-card>
         <v-card-title class="headline">{{ $t('settingUser.changeName.title') }}</v-card-title>
         <v-card-text style="padding-bottom: 0">
-          <v-text-field :label="$t('settingUser.changeUsername.placeholder')" v-model.trim="temp.changeUsernameValue" outlined hide-details />
+          <v-text-field
+            :label="$t('settingUser.changeUsername.placeholder')"
+            v-model.trim="temp.changeUsernameValue"
+            outlined
+            hide-details
+          />
         </v-card-text>
         <v-card-actions>
           <v-spacer />
@@ -228,7 +233,8 @@ export default {
       )
     },
     changeName() {
-      if (this.temp.changeNameValue == '' || !this.temp.changeNameValue) return this.$snackbar(this.$t('settingUser.changeName.result.error'))
+      if (this.temp.changeNameValue == '' || !this.temp.changeNameValue)
+        return this.$snackbar(this.$t('settingUser.changeName.result.error'))
       this.axios
         .post(_setting(`server`) + '/pokaapi/v2/user/name/', {
           n: this.temp.changeNameValue
@@ -247,7 +253,8 @@ export default {
         })
     },
     changeUsername() {
-      if (this.temp.changeUsernameValue == '' || !this.temp.changeUsernameValue) return this.$snackbar(this.$t('settingUser.changeUsername.result.error'))
+      if (this.temp.changeUsernameValue == '' || !this.temp.changeUsernameValue)
+        return this.$snackbar(this.$t('settingUser.changeUsername.result.error'))
       this.axios
         .post(_setting(`server`) + '/pokaapi/v2/user/username/', {
           n: this.temp.changeUsernameValue
@@ -277,7 +284,8 @@ export default {
         !this.temp.changePasswordold
       )
         return this.$snackbar(this.$t('settingUser.changePassword.result.error'))
-      if (this.temp.changePassword !== this.temp.changePassword2) return this.$snackbar(this.$t('settingUser.changePassword.result.inconsistent'))
+      if (this.temp.changePassword !== this.temp.changePassword2)
+        return this.$snackbar(this.$t('settingUser.changePassword.result.inconsistent'))
       if (this.temp.changePassword === this.temp.changePasswordold) return this.$snackbar(this.$t('settingUser.changePassword.result.same'))
       this.axios
         .post(_setting(`server`) + '/pokaapi/v2/user/password/', {

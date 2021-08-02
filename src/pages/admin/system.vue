@@ -5,7 +5,7 @@
       <div class="item" @click="restartConfirmActive = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>autorenew</v-icon>
+            <v-icon class="bx">bx-loader</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">{{ $t('settings_restart') }}</div>
@@ -15,7 +15,7 @@
       <div class="item" @click="openUpdateDialog" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>system_update</v-icon>
+            <v-icon class="bx">bx-cloud-upload</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">{{ $t('settings_update') }}</div>
@@ -244,17 +244,18 @@ pre.log
 </style>
 <style lang="sass">
 .update-container
-  background-color: rgba(0,0,0,.05)
   .release-note
     .title
       font-size: 24px !important
       padding: 16px
       padding-top: 64px
+      background-color: rgba(0,0,0,.05)
   .actions
     padding: 16px
     p
       font-size: 12px
       opacity: .5
+      margin-bottom: 8px
 
 .changelog
   padding: 16px

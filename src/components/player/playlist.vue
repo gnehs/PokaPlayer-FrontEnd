@@ -2,9 +2,9 @@
   <div>
     <portal to="fullscreen-player-action">
       <div class="action">
-        <v-btn icon dark @click="audio_clean"> <v-icon class="material-icons-outlined">clear_all</v-icon></v-btn>
+        <v-btn icon dark @click="audio_clean"> <v-icon class="bx">bx-menu-alt-right</v-icon></v-btn>
         <v-btn icon @click="$router.go(-1)" dark large v-show="$vuetify.breakpoint.mdAndUp">
-          <v-icon class="material-icons-outlined">expand_more</v-icon>
+          <v-icon class="bx">bx-chevron-down</v-icon>
         </v-btn>
       </div>
     </portal>
@@ -19,7 +19,7 @@
       </template>
     </poka-parse-songs>
     <div v-if="!audio_queue.length" style="margin-top: 30vh; text-align: center">
-      <v-icon class="display-4 material-icons-outlined" dark>queue_music</v-icon>
+      <v-icon class="bx bx-lg mb-2" dark>bxs-playlist</v-icon>
       <p class="headline">{{ $t('app_waitForPlay') }}</p>
       <p>{{ $t('app_waitForPlay_description') }}</p>
       <play-random-button />

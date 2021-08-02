@@ -1,7 +1,7 @@
 <template>
   <div class="poka-pagination" v-show="length > 1" ref="pagination">
     <div class="poka-pagination-item" @click="switchPage(value - 1)" :class="{ disabled: value == 1 }">
-      <v-icon>chevron_left</v-icon>
+      <v-icon class="bx">bx-chevron-left</v-icon>
     </div>
     <div
       class="poka-pagination-item"
@@ -13,7 +13,7 @@
       {{ n }}
     </div>
     <div class="poka-pagination-item" @click="switchPage(value + 1)" :class="{ disabled: value == length }">
-      <v-icon>chevron_right</v-icon>
+      <v-icon class="bx">bx-chevron-right</v-icon>
     </div>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="poka-loader">
-    <v-progress-circular indeterminate :color="color" />
+    <i class="bx bx-loader bx-spin bx-md"></i>
   </div>
 </template>
 

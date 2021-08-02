@@ -23,12 +23,12 @@
     </div>
     <div class="player-control">
       <v-btn icon @click="switch_audio_order" dark large>
-        <v-icon class="material-icons-outlined" v-if="audio_order === 'list'">repeat</v-icon>
-        <v-icon class="material-icons-outlined" v-else>shuffle</v-icon>
+        <v-icon class="bx" v-if="audio_order === 'list'">bx-sync</v-icon>
+        <v-icon class="bx" v-else>bx-shuffle</v-icon>
       </v-btn>
 
       <v-btn icon @click="audio_previous" dark large>
-        <v-icon class="material-icons-outlined">skip_previous</v-icon>
+        <v-icon class="bx">bx-skip-previous</v-icon>
       </v-btn>
 
       <v-btn dark @click="audio_toggle" color="white" elevation="2" outlined fab>
@@ -36,10 +36,10 @@
       </v-btn>
 
       <v-btn icon @click="audio_next" dark large>
-        <v-icon class="material-icons-outlined">skip_next</v-icon>
+        <v-icon class="bx">bx-skip-next</v-icon>
       </v-btn>
 
-      <v-btn icon dark large disabled> <v-icon class="material-icons-outlined">playlist_add</v-icon></v-btn>
+      <v-btn icon dark large disabled> <v-icon class="bx">bx-list-plus</v-icon></v-btn>
     </div>
   </div>
 </template>

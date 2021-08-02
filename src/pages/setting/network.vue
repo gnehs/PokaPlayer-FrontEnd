@@ -4,7 +4,7 @@
       <div class="item" @click="showSoundQualityDialog = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon>music_note</v-icon>
+            <v-icon class="bx">bx-music</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">

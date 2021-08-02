@@ -23,7 +23,7 @@
         :to="item.to"
         v-ripple
       >
-        <v-icon class="material-icons-outlined">{{ item.icon }}</v-icon>
+        <v-icon class="bx">{{ item.icon }}</v-icon>
         <span>{{ $t(item.text) }}</span>
       </router-link>
     </div>
@@ -38,10 +38,10 @@ export default {
   data: () => ({
     settings: { darkMode: window._setting('darkMode') },
     items: [
-      { text: 'settings_network', icon: 'wifi', to: '/settings/network' },
-      { text: 'settingInterface._', icon: 'layers', to: '/settings/interface' },
-      { text: 'settingUser.title', icon: 'person', to: '/settings/user' },
-      { text: 'settingPins.title', icon: 'push_pin', to: '/settings/pins' }
+      { text: 'settings_network', icon: 'bx-server', to: '/settings/network' },
+      { text: 'settingInterface._', icon: 'bx-extension', to: '/settings/interface' },
+      { text: 'settingUser.title', icon: 'bx-user', to: '/settings/user' },
+      { text: 'settingPins.title', icon: 'bx-pin', to: '/settings/pins' }
     ]
   }),
   created() {

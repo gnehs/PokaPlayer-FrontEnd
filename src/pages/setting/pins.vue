@@ -15,7 +15,7 @@
           </div>
           <div class="action">
             <v-btn icon>
-              <v-icon>mdi-delete</v-icon>
+              <v-icon class="bx">bx-trash</v-icon>
             </v-btn>
           </div>
         </div>

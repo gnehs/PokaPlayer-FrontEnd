@@ -3,13 +3,13 @@
     <portal to="fullscreen-player-action">
       <div class="action">
         <v-btn dark icon @click="editLyric">
-          <v-icon>mdi-pencil</v-icon>
+          <v-icon class="bx">bx-edit</v-icon>
         </v-btn>
         <v-btn dark icon @click="lyric_theme_dialog = true">
-          <v-icon>mdi-palette</v-icon>
+          <v-icon class="bx">bx-palette</v-icon>
         </v-btn>
         <v-btn icon @click="$router.go(-1)" dark large v-show="$vuetify.breakpoint.mdAndUp">
-          <v-icon class="material-icons-outlined">expand_more</v-icon>
+          <v-icon class="bx">bx-chevron-down</v-icon>
         </v-btn>
       </div>
     </portal>
@@ -31,7 +31,7 @@
       </div>
       <poka-loader v-else-if="lyricSearching" style="margin-top: 30vh !important" color="#fff" />
       <div v-else class="text-center" style="margin-top: 30vh">
-        <v-icon class="material-icons-outlined display-4" dark>subtitles</v-icon>
+        <v-icon class="bx bx-lg mb-2" dark>bx-captions</v-icon>
         <p class="headline">{{ $t('lrc_noLyrics') }}</p>
         <v-btn color="primary" @click="showLyricDialog = true">{{ $t('lrc_search') }}</v-btn>
       </div>
@@ -122,7 +122,7 @@
             <div class="item" @click="setLyricTheme('bigtext')" v-ripple>
               <div class="content">
                 <v-avatar size="24px" item>
-                  <v-icon>palette</v-icon>
+                  <v-icon class="bx">bx-palette</v-icon>
                 </v-avatar>
                 <div class="header">
                   <div class="head">Big text</div>
@@ -132,7 +132,7 @@
             <div class="item" @click="setLyricTheme('default')" v-ripple>
               <div class="content">
                 <v-avatar size="24px" item>
-                  <v-icon>palette</v-icon>
+                  <v-icon class="bx">bx-palette</v-icon>
                 </v-avatar>
                 <div class="header">
                   <div class="head">Default</div>
@@ -142,7 +142,7 @@
             <div class="item" @click="setLyricTheme('spacing')" v-ripple>
               <div class="content">
                 <v-avatar size="24px" item>
-                  <v-icon>palette</v-icon>
+                  <v-icon class="bx">bx-palette</v-icon>
                 </v-avatar>
                 <div class="header">
                   <div class="head">Spacing</div>
@@ -152,7 +152,7 @@
             <div class="item" @click="setLyricTheme('underline')" v-ripple>
               <div class="content">
                 <v-avatar size="24px" item>
-                  <v-icon>palette</v-icon>
+                  <v-icon class="bx">bx-palette</v-icon>
                 </v-avatar>
                 <div class="header">
                   <div class="head">Underline</div>
