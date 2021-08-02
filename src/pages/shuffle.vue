@@ -5,7 +5,7 @@ export default {
   name: 'Shuffle',
   created() {
     this.$randomPlay()
-    this.$router.push('/home')
+    this.$router.push('/')
   }
 }
 </script>
