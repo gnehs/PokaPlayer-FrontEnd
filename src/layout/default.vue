@@ -7,7 +7,7 @@
         clipped-left
         :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`"
       >
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="!$vuetify.breakpoint.mdAndUp" />
+        <v-btn @click.stop="drawer = !drawer" v-if="!$vuetify.breakpoint.mdAndUp" icon> <v-icon class="bx">bx-menu</v-icon></v-btn>
         <router-link to="/" class="poka-logo" v-if="!showSeachBar || $vuetify.breakpoint.mdAndUp">
           <h1>PokaPlayer</h1>
         </router-link>
@@ -18,7 +18,7 @@
     </portal-target>
     <v-navigation-drawer app v-model="drawer" :mini-variant="$vuetify.breakpoint.mdAndUp" clipped :permanent="$vuetify.breakpoint.mdAndUp">
       <v-app-bar color="#FFF" :style="`box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.12)`" v-if="!$vuetify.breakpoint.mdAndUp">
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-btn @click.stop="drawer = !drawer" icon> <v-icon class="bx">bx-x</v-icon></v-btn>
         <router-link to="/" class="ml-2 poka-logo" v-if="!showSeachBar || $vuetify.breakpoint.mdAndUp">
           <h1>PokaPlayer</h1>
         </router-link>

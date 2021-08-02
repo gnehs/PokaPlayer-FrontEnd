@@ -11,10 +11,10 @@
     <poka-parse-songs v-if="audio_queue.length" :data="audio_queue" now-playing :active-index="audio_index">
       <template slot-scope="props">
         <v-btn icon @click.stop="props.moreDialog(props.song)" v-show="isSafari" dark>
-          <v-icon class="material-icons-outlined">more_horiz</v-icon>
+          <v-icon class="bx">bx-dots-vertical-rounded</v-icon>
         </v-btn>
         <v-btn icon @click.stop="removeSong(props.index)" dark>
-          <v-icon class="material-icons-outlined">close</v-icon>
+          <v-icon class="bx">bx-x</v-icon>
         </v-btn>
       </template>
     </poka-parse-songs>
