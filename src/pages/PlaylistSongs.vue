@@ -17,29 +17,24 @@
     <poka-loader v-if="!data" />
 
     <div class="playlist-songs-container" v-if="data">
-      <info-header
-        :title="title || $t('loading')"
-        :subtitle="$t('playlist')"
-        :cover="cover"
-        :songs="data ? data.songs.length : 0 || 0"
-        class="playlist-info"
-      >
-        <pin-button
-          v-if="title"
-          :source="$route.params.source"
-          :id="$route.params.id"
-          :cover="cover"
-          type="playlist"
-          :name="title"
-          btn-type="icon-button"
-        />
+      <div class="playlist-info">
+        <info-header :title="title || $t('loading')" :subtitle="$t('playlist')" :cover="cover" :songs="data ? data.songs.length : 0 || 0">
+          <pin-button
+            v-if="title"
+            :source="$route.params.source"
+            :id="$route.params.id"
+            :cover="cover"
+            type="playlist"
+            :name="title"
+            btn-type="icon-button"
+          />
 
-        <v-btn v-if="fromPoka" @click="playlistDialog = true" outlined color="info" class="ml-2 rounded-lg">
-          <v-icon class="material-icons-outlined mr-2">edit</v-icon>
-          {{ $t('playlist_page.edit_title') }}
-        </v-btn>
-      </info-header>
-
+          <v-btn v-if="fromPoka" @click="playlistDialog = true" outlined color="info" class="ml-2 rounded-lg">
+            <v-icon class="material-icons-outlined mr-2">edit</v-icon>
+            {{ $t('playlist_page.edit_title') }}
+          </v-btn>
+        </info-header>
+      </div>
       <v-divider :vertical="$vuetify.breakpoint.mdAndUp" />
       <div class="playlist-songs">
         <h1 class="title" style="margin: 8px 16px" v-text="$t('song')" />
@@ -96,13 +91,11 @@
     display: flex
     min-height: calc(var(--vh, 1vh) * 100 - 69px - 16px * 2 - 56px)
     width: 100%
-    position: relative
-    padding-left: 300px
     .playlist-info
       width: 300px
-      position: fixed
-      top: 56px
-      left: 8px
+      .info-header
+        position: sticky
+        top: 0
     .playlist-songs
       flex: 1
 </style>

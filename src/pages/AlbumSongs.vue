@@ -58,12 +58,11 @@
     min-height: calc(100vh - 69px - 16px * 2 - 56px)
     width: 100%
     position: relative
-    padding-left: 300px
     .album-info
       width: 300px
-      position: fixed
-      top: 56px
-      left: 8px
+      .info-header
+        position: sticky
+        top: 0
     .album-songs
       flex: 1
 </style>
