@@ -105,6 +105,9 @@ export default {
   }
 </style>
 <style lang="sass">
+// icon
+.v-icon
+  font-style: normal !important
 //---------------------//
 //       v-card        //
 //---------------------//
@@ -142,7 +145,6 @@ export default {
       border-radius: 8px !important
       &::before
         border-radius: 8px !important
-
       .v-list-item__icon
         height: 24px
         margin-top: 12px
@@ -156,6 +158,6 @@ export default {
         color: #000 !important
         z-index: 1
       &::before
-        opacity: 1
+        opacity: 0
         background-color: #fff
 </style>
