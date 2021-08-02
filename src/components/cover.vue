@@ -44,12 +44,12 @@ export default {
   --size: 100%
   width: var(--size)
   position: relative
-  aspect-ratio: 1/1
   .cover-img,.cover-shadow
     object-fit: cover
     border-radius: 16px
     width: 100%
     height: 100%
+    aspect-ratio: 1
   .cover-img
     position: relative
     z-index: 1
