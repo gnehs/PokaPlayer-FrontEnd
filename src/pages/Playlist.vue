@@ -14,7 +14,6 @@
       </v-app-bar>
     </portal>
     <poka-header :title="$route.name == 'PlaylistFolder' ? '' : title" :bg="cover" />
-    <library-menu v-show="$route.name == 'Playlist'" />
     <v-slide-y-reverse-transition>
       <poka-parse-playlists v-if="data" :data="data" />
     </v-slide-y-reverse-transition>

@@ -127,4 +127,35 @@ export default {
   backdrop-filter: blur(10px)
 .v-dialog.v-dialog--fullscreen > .v-card > .v-card__text
   padding: 0 2px 20px !important
+// tooltip
+.v-tooltip__content
+  background-color: rgb(255, 255, 255) !important
+  color: #000 !important
+  box-shadow: 0px 4px 14px 0px rgba(0 0 0 / 10%) !important
+// nav
+.v-navigation-drawer
+  &.v-navigation-drawer--mini-variant
+    width: 64px !important
+  .v-list--nav
+    .v-list-item
+      padding: 0 12px
+      border-radius: 8px !important
+      &::before
+        border-radius: 8px !important
+
+      .v-list-item__icon
+        height: 24px
+        margin-top: 12px
+        margin-bottom: 12px
+      .v-list-item__content
+        padding: 16px 0
+    .v-list-item--active
+      color: #000 !important
+      box-shadow: 0px 4px 14px 0px rgba(0 0 0 / 10%) !important
+      .v-list-item__content
+        color: #000 !important
+        z-index: 1
+      &::before
+        opacity: 1
+        background-color: #fff
 </style>

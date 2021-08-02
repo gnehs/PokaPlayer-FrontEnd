@@ -3,10 +3,11 @@
     <portal-target name="app-bar" slim>
       <v-app-bar
         color="#FFF"
-        clipped-left
         app
+        clipped-left
         :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`"
       >
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer" v-if="!$vuetify.breakpoint.mdAndUp" />
         <router-link to="/" class="poka-logo" v-if="!showSeachBar || $vuetify.breakpoint.mdAndUp">
           <h1>PokaPlayer</h1>
         </router-link>
@@ -15,6 +16,42 @@
         <menu-btn />
       </v-app-bar>
     </portal-target>
+    <v-navigation-drawer app v-model="drawer" :mini-variant="$vuetify.breakpoint.mdAndUp" clipped>
+      <v-app-bar color="#FFF" :style="`box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.12)`" v-if="!$vuetify.breakpoint.mdAndUp">
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <router-link to="/" class="ml-2 poka-logo" v-if="!showSeachBar || $vuetify.breakpoint.mdAndUp">
+          <h1>PokaPlayer</h1>
+        </router-link>
+        <v-spacer />
+      </v-app-bar>
+      <v-list dense nav v-if="$vuetify.breakpoint.mdAndUp">
+        <v-tooltip right v-for="item in items" :key="item.text">
+          <template v-slot:activator="{ on, attrs }">
+            <v-list-item :to="item.to" link v-bind="attrs" v-on="on">
+              <v-list-item-icon>
+                <v-icon class="material-icons-outlined">{{ item.icon }}</v-icon>
+              </v-list-item-icon>
+
+              <v-list-item-content>
+                <v-list-item-title>{{ $t(item.text) }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item></template
+          >
+          <span>{{ $t(item.text) }}</span>
+        </v-tooltip>
+      </v-list>
+      <v-list dense nav v-else>
+        <v-list-item v-for="item in items" :key="item.text" :to="item.to" link>
+          <v-list-item-icon>
+            <v-icon class="material-icons-outlined">{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ $t(item.text) }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
     <v-main>
       <div class="router-view">
         <router-view />
@@ -27,11 +64,23 @@
 <script>
 export default {
   name: 'App',
-  data: () => ({
-    scrollPositions: {},
-    settings: { darkMode: window._setting('darkMode') },
-    showSeachBar: false
-  }),
+  data() {
+    return {
+      scrollPositions: {},
+      settings: { darkMode: window._setting('darkMode') },
+      showSeachBar: false,
+      drawer: this.$vuetify.breakpoint.mdAndUp,
+      items: [
+        { icon: 'library_music', text: 'library', to: '/library' },
+        //{ icon: 'search', text: 'search', to: '/search' },
+        { icon: 'album', text: 'album', to: '/album' },
+        { icon: 'folder', text: 'folder', to: '/folder' },
+        { icon: 'keyboard_voice', text: 'artist', to: '/artist' },
+        { icon: 'edit', text: 'composer', to: '/composer' },
+        { icon: 'video_library', text: 'playlist', to: '/playlist' }
+      ]
+    }
+  },
   created() {
     // 狀態欄顏色
     document.getElementsByTagName('meta')['theme-color'].content = this.$vuetify.theme.isDark ? 'rgb(47, 43, 62)' : 'rgb(245, 245, 245)'
@@ -106,7 +155,7 @@ nav
       border-radius: 0
 .router-view
   min-height: calc(100% - 69px)
-  padding: 16px
+  padding: 24px
 
 .v-app-bar
   box-shadow: inset 0 -1px 0 0 #dadce0

@@ -1,7 +1,6 @@
 <template>
   <div>
     <poka-header :title="$t('artist')" />
-    <library-menu />
     <v-slide-y-reverse-transition>
       <poka-parse-artists v-if="data" :data="data.artists" />
     </v-slide-y-reverse-transition>

@@ -9,7 +9,6 @@ import pokaLoader from "@/components/loader.vue";
 import pagination from "@/components/pagination.vue";
 import pokaUpdate from "@/components/poka-update.vue";
 import pokaReview from "@/components/poka-review.vue";
-import libraryMenu from "@/components/libraryMenu.vue";
 import searchbar from "@/components/searchbar.vue";
 // player
 import bottomPlayer from "@/components/player/buttomPlayer.vue";
@@ -48,7 +47,6 @@ export {
   pokaUpdate,
   pokaReview,
   infoHeader,
-  libraryMenu,
   searchbar,
   // parseData
   parsePlaylists,

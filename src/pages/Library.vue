@@ -1,7 +1,6 @@
 <template>
   <div>
     <poka-header title="媒體庫" />
-    <library-menu />
     <poka-update />
     <poka-review />
     <poka-loader v-if="!data" />

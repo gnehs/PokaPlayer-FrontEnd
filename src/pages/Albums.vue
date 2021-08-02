@@ -15,7 +15,6 @@
     </portal>
     <poka-header v-if="type == 'album'" :title="name" :bg="cover" />
     <poka-header v-else :title="$t(type)" blurbg :bg="cover" />
-    <library-menu v-if="type == 'album'" />
     <v-slide-y-reverse-transition>
       <poka-parse-albums v-if="data" :data="data.albums" />
     </v-slide-y-reverse-transition>
