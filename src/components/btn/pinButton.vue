@@ -7,9 +7,9 @@
   <v-btn
     @click="pin"
     :loading="loading"
-    color="primary"
+    :color="$vuetify.theme.isDark ? '#FFF' : 'primary'"
     class="rounded-lg"
-    :outlined="!isPinned"
+    outlined
     v-else-if="isPinned != null && isPinned != 'disabled' && btnType == 'icon-button'"
   >
     <v-icon class="bx mr-2">{{ isPinned ? 'bxs-pin' : 'bx-pin' }}</v-icon>

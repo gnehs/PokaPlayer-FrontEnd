@@ -153,11 +153,12 @@ export default {
         padding: 16px 0
     .v-list-item--active
       color: #000 !important
+      background: #fff !important
       box-shadow: 0px 4px 14px 0px rgba(0 0 0 / 10%) !important
       .v-list-item__content
         color: #000 !important
         z-index: 1
       &::before
-        opacity: 0
+        opacity: 0 !important
         background-color: #fff
 </style>

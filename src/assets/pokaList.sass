@@ -1,8 +1,10 @@
 .poka.list
 	.theme--light &
+		color: #000
 		--hoverbg: rgba(101, 99, 99, 0.08)
 	.theme--dark &
-		--hoverbg: rgba(255, 255, 255, 0.2)
+		color: #fff
+		--hoverbg: rgba(255, 255, 255, 0.025)
 	.item
 		line-height: 1.25em
 		color: inherit
@@ -12,7 +14,7 @@
 		display: flex
 		align-items: center
 		transition: all .2s cubic-bezier(0.59, 0.12, 0.34, 0.95)
-		width: 100%
+		width: 100% 
 		&:not(.active):hover
 			background-color: var(--hoverbg)
 			cursor: pointer
@@ -25,6 +27,9 @@
 			align-items: center
 			.v-icon + .header
 				margin-left: 16px
+			@media (prefers-color-scheme: dark) 
+				i
+					color: #fff !important
 			.header
 				flex: 1
 				overflow: hidden
@@ -33,7 +38,6 @@
 					font-size: 1rem
 					line-height: 1.5rem
 					opacity: .999
-					color: currentColor
 				>:not(.head)
 					opacity: .7
 		.action
