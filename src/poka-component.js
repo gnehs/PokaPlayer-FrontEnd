@@ -1,5 +1,4 @@
 // pokaComponent
-import about from "@/components/about.vue";
 import cover from "@/components/cover.vue";
 import headerWrapper from "@/components/header-wrapper.vue";
 import infoHeader from "@/components/info-header.vue";
@@ -34,7 +33,6 @@ export {
   // player
   bottomPlayer, lyric, playlist, player,
   // pokaComponent
-  about,
   back,
   cover,
   headerWrapper,

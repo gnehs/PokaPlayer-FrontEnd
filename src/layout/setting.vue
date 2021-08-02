@@ -41,7 +41,8 @@ export default {
       { text: 'settings_network', icon: 'bx-server', to: '/settings/network' },
       { text: 'settingInterface._', icon: 'bx-extension', to: '/settings/interface' },
       { text: 'settingUser.title', icon: 'bx-user', to: '/settings/user' },
-      { text: 'settingPins.title', icon: 'bx-pin', to: '/settings/pins' }
+      { text: 'settingPins.title', icon: 'bx-pin', to: '/settings/pins' },
+      { text: 'settings_about', icon: 'bx-info-circle', to: '/settings/about' }
     ]
   }),
   created() {
