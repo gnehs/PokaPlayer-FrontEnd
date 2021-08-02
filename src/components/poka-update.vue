@@ -8,7 +8,7 @@
 </template>
 <style lang="sass" scoped>
 .update-notify
-  background: #2f2b3e
+  background: var(--surface3)
   text-shadow: 0 0 6px #2f2b3e
   position: relative
   margin: 16px 2px
@@ -19,7 +19,7 @@
   background-repeat: no-repeat
   background-image: url('/img/update.svg')
   color: #FFF
-  box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.3)
+  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.25)
 </style>
 <script>
 export default {

@@ -1,16 +1,25 @@
 
-//-------------//
-//    Fonts    //
-//-------------//
+// Themes
+[color-scheme="dim"]
+	--surface1: rgb(46, 53, 56)
+	--surface2: rgb(57, 66, 70)
+	--surface3: rgb(73, 78, 80) 
+[color-scheme="purple"]
+	--surface1: #282535
+	--surface2: #2f2b3e
+	--surface3: #433e5a
+[color-scheme="dark"]
+	--surface1: rgb(23, 26, 28)
+	--surface2: rgb(34, 40, 42)
+	--surface3: rgb(48, 52, 54)
+// Fonts
 html,body
 	--default-font: 'Georama', 'Noto Sans TC', 'Noto Sans JP', sans-serif
 	--product-font: "Product Sans", var(--default-font)
 	font-family: var(--default-font)
 	overflow: hidden !important
 		
-//---------------------//
-//       notify        //
-//---------------------//
+// notify
 .poka-notify
 	--poka-notify-bg: var(--v-primary-base)
 	background: var(--poka-notify-bg)
@@ -22,9 +31,7 @@ html,body
 	color: #FFF
 	box-shadow: 0 3px 5px 0px rgba(0, 0, 0, 0.3)
 	
-//---------------------//
-//      chip-nav       //
-//---------------------//
+// chip-nav
 
 
 .chip-nav
@@ -62,16 +69,12 @@ html,body
 	.chip-nav
 		.chip-nav-item
 			color: #FFF
-//---------------------//
-//       Anicons       //
-//---------------------//
+// Anicons
 .anicons 
 	font-family: "Anicons Regular", sans-serif 
 	font-variation-settings: "TIME" 1
 	transition: font-variation-settings 0.4s ease 
-//---------------------//
-//     transition      //
-//---------------------//
+// transition
 //fade
 .fade-enter-active,.fade-leave-active
 	transition: opacity 0.15s linear

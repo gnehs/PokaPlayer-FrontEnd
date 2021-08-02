@@ -406,7 +406,7 @@ export default {
   --cover-size: 56px
   @media (prefers-color-scheme: dark)
     &
-      background-color: rgba(47, 43, 62, 0.7)
+      background-color: var(--surface2)
   .app-progress-bar
     margin: -16px -8px
   .song-info

@@ -50,15 +50,15 @@ export default {
     height: calc(var(--vh, 1vh) * 100);
     width: 100vw;
     &.theme--dark {
-      background: #282535 !important;
+      background: var(--surface1) !important;
     }
   }
   .theme--dark.v-sheet,
   .theme--dark.v-navigation-drawer,
   .theme--dark.v-tabs-items,
   .theme--dark.v-stepper {
-    border-color: #2f2b3e;
-    background: #2f2b3e !important;
+    border-color: var(--surface2);
+    background: var(--surface2) !important;
   }
   .v-application.v-application {
     font-family: var(--default-font);

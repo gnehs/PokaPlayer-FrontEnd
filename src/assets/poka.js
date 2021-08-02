@@ -94,6 +94,7 @@ window._setting = (setting, value) => {
       .substring(8)
       .toUpperCase()}`,
     theme: "#5c95c4",
+    'color-scheme': "dim",
     lyricTheme: "default",
     artistView: "card",
     composerView: "card",
@@ -150,3 +151,4 @@ let root = document.documentElement;
 for (let [key, value] of Object.entries(_setting("cssVariable"))) {
   root.style.setProperty(key, value);
 }
+root.setAttribute("color-scheme", _setting("color-scheme"))

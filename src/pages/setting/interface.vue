@@ -50,7 +50,7 @@
       <div class="item" @click="theme_dialog = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
-            <v-icon class="bx">bx-palette</v-icon>
+            <v-icon class="bx">bxs-paint</v-icon>
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">
@@ -59,6 +59,17 @@
             <div class="t-ellipsis">
               {{ $t('settingInterface.customize.theme_color.description') }}
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="item" @click="theme_scheme_dialog = true" v-ripple>
+        <div class="content">
+          <v-avatar size="42px" item>
+            <v-icon class="bx">bxs-color-fill</v-icon>
+          </v-avatar>
+          <div class="header">
+            <div class="head t-ellipsis">暗色主題配色方案</div>
+            <div class="t-ellipsis">選擇暗色主題的配色方案，讓您的主題更為美觀。</div>
           </div>
         </div>
       </div>
@@ -287,6 +298,35 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="theme_scheme_dialog" max-width="300">
+      <v-card>
+        <v-card-title class="headline">暗色主題配色方案</v-card-title>
+        <v-card-text>
+          <div class="poka list">
+            <div class="item" @click="setThemeScheme(item)" v-ripple v-for="item of theme_scheme_list" :key="item" :color-scheme="item">
+              <div class="content">
+                <v-avatar size="24px" item>
+                  <v-icon class="bx" style="color: var(--surface1) !important; text-shadow: 0 0 1px #fff">bxs-circle</v-icon>
+                </v-avatar>
+                <v-avatar size="24px" item>
+                  <v-icon class="bx" style="color: var(--surface2) !important; text-shadow: 0 0 1px #fff">bxs-circle</v-icon>
+                </v-avatar>
+                <v-avatar size="24px" item>
+                  <v-icon class="bx" style="color: var(--surface3) !important; text-shadow: 0 0 1px #fff">bxs-circle</v-icon>
+                </v-avatar>
+                <div class="header">
+                  <div class="head" style="text-transform: capitalize">{{ item }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn text @click="theme_scheme_dialog = false">{{ $t('cancel') }}</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -302,6 +342,8 @@ export default {
     lyric_theme_dialog: false,
     // theme
     theme_dialog: false,
+    theme_scheme_dialog: false,
+    theme_scheme_list: ['dark', 'dim', 'purple'],
     // bgheight
     bg_height_dialog: false,
     // style
@@ -441,6 +483,19 @@ export default {
         method: 'post',
         url: _setting(`server`) + '/pokaapi/v2/user/setting/',
         data: { n: { lyricTheme } }
+      })
+    },
+    setThemeScheme(scheme) {
+      window._setting('color-scheme', scheme)
+
+      let root = document.documentElement
+      root.setAttribute('color-scheme', _setting('color-scheme'))
+
+      this.theme_scheme_dialog = false
+      this.axios({
+        method: 'post',
+        url: _setting(`server`) + '/pokaapi/v2/user/setting/',
+        data: { n: { 'color-scheme': scheme } }
       })
     },
     changeStyle(name) {
