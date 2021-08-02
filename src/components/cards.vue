@@ -17,7 +17,7 @@ export default {
 	&.cards
 		--text-color: #000
 		display: grid
-		grid-template-columns: repeat(auto-fill,minmax(176px, 1fr))
+		grid-template-columns: repeat(auto-fill,minmax(136px, 1fr))
 		grid-gap: 32px 24px
 		.card
 			height: 0

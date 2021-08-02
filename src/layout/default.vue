@@ -155,7 +155,7 @@ nav
       border-radius: 0
 .router-view
   min-height: calc(100% - 69px)
-  padding: 24px
+  padding: 16px
 
 .v-app-bar
   box-shadow: inset 0 -1px 0 0 #dadce0
