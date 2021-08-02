@@ -93,6 +93,7 @@
     width: 100%
     .playlist-info
       width: 300px
+      margin-right: 4px
       .info-header
         position: sticky
         top: 0
