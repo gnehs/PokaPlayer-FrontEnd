@@ -79,8 +79,8 @@ export default {
 				position: absolute
 				z-index: 2
 				background-color: rgba(0,0,0,.75)
-				background: linear-gradient(135deg, rgba(0,0,0,.4),rgba(0,0,0,.8))
-				opacity: 1
+				background: var(--surface2)
+				opacity: .8
 				backdrop-filter: blur(8px)
 				border-radius: 16px
 				padding: 12px
