@@ -2,7 +2,7 @@
   <div>
     <v-subheader>{{ $t('settingInterface.lang') }}</v-subheader>
     <div class="poka list">
-      <div class="item" @click="lang_dialog = true" v-ripple>
+      <div class="item" @click="langDialog = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
             <v-icon class="bx">bx-planet</v-icon>
@@ -16,7 +16,7 @@
     </div>
     <v-subheader>{{ $t('settingInterface.customize.bg._') }}</v-subheader>
     <div class="poka list">
-      <div class="item" @click="customize_bg_dialog = true" v-ripple>
+      <div class="item" @click="customizeBgDialog = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
             <v-icon class="bx">bx-image</v-icon>
@@ -31,7 +31,7 @@
           </div>
         </div>
       </div>
-      <div class="item" @click="bg_height_dialog = true" v-ripple>
+      <div class="item" @click="bgHeightDialog = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
             <v-icon class="bx">bx-paint-roll</v-icon>
@@ -47,7 +47,7 @@
         </div>
       </div>
       <v-subheader>{{ $t('settingInterface.customize.theme') }}</v-subheader>
-      <div class="item" @click="theme_dialog = true" v-ripple>
+      <div class="item" @click="themeDialog = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
             <v-icon class="bx">bxs-paint</v-icon>
@@ -62,7 +62,7 @@
           </div>
         </div>
       </div>
-      <div class="item" @click="theme_scheme_dialog = true" v-ripple>
+      <div class="item" @click="themeSchemeDialog = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
             <v-icon class="bx">bxs-color-fill</v-icon>
@@ -73,7 +73,7 @@
           </div>
         </div>
       </div>
-      <div class="item" @click="lyric_theme_dialog = true" v-ripple>
+      <div class="item" @click="lyricThemeDialog = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
             <v-icon class="bx">bx-palette</v-icon>
@@ -121,7 +121,7 @@
       </div>
     </div>
 
-    <v-dialog v-model="bg_height_dialog" max-width="300">
+    <v-dialog v-model="bgHeightDialog" max-width="300">
       <v-card>
         <div class="dialog-title mb-2">{{ $t('settingInterface.customize.bg_cover._') }}</div>
         <v-card-text>
@@ -166,18 +166,18 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn text @click="bg_height_dialog = false">{{ $t('back') }}</v-btn>
+          <v-btn text @click="bgHeightDialog = false">{{ $t('back') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="customize_bg_dialog" max-width="1200">
+    <v-dialog v-model="customizeBgDialog" max-width="1200">
       <v-card>
         <div class="dialog-title mb-2">{{ $t('settingInterface.customize.bg._') }}</div>
         <v-card-text>
           <poka-cards>
             <poka-card
-              @click.native="bg_prompt_active = true"
-              poka-icon="link"
+              @click.native="bgPromptActive = true"
+              poka-icon="bx-link"
               :poka-title="$t('settingInterface.customize.bg.custom_link')"
             />
             <poka-card v-for="{ name, src } in imgSources" @click.native="setBg(src)" :key="src" :poka-bg="src" :poka-title="name" />
@@ -185,11 +185,11 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn text @click="customize_bg_dialog = false">{{ $t('done') }}</v-btn>
+          <v-btn text @click="customizeBgDialog = false">{{ $t('done') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="theme_dialog" max-width="340">
+    <v-dialog v-model="themeDialog" max-width="340">
       <v-card>
         <div class="dialog-title mb-2">{{ $t('settingInterface.customize.theme_color._') }}</div>
         <v-card-text>
@@ -205,15 +205,15 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn text @click="theme_dialog = false">{{ $t('done') }}</v-btn>
+          <v-btn text @click="themeDialog = false">{{ $t('done') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="bg_prompt_active" max-width="420">
+    <v-dialog v-model="bgPromptActive" max-width="420">
       <v-card>
         <div class="dialog-title mb-2">{{ $t('settingInterface.customize.bg._') }}</div>
         <v-card-text style="padding-bottom: 0">
-          <v-text-field label="URL" v-model.trim="bg_prompt_textbox" filled></v-text-field>
+          <v-text-field label="URL" v-model.trim="bgPromptTextbox" filled></v-text-field>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
@@ -222,7 +222,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="lang_dialog" max-width="300">
+    <v-dialog v-model="langDialog" max-width="300">
       <v-card>
         <div class="dialog-title mb-2">{{ $t('settingInterface.lang') }}</div>
         <v-card-text>
@@ -241,11 +241,11 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn text @click="lang_dialog = false">{{ $t('cancel') }}</v-btn>
+          <v-btn text @click="langDialog = false">{{ $t('cancel') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="lyric_theme_dialog" max-width="300">
+    <v-dialog v-model="lyricThemeDialog" max-width="300">
       <v-card>
         <div class="dialog-title mb-2">{{ $t('settingInterface.customize.lyric._') }}</div>
         <v-card-text>
@@ -294,16 +294,16 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn text @click="lyric_theme_dialog = false">{{ $t('cancel') }}</v-btn>
+          <v-btn text @click="lyricThemeDialog = false">{{ $t('cancel') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <v-dialog v-model="theme_scheme_dialog" max-width="300">
+    <v-dialog v-model="themeSchemeDialog" max-width="300">
       <v-card>
         <div class="dialog-title mb-2">暗色主題配色方案</div>
         <v-card-text>
           <div class="poka list">
-            <div class="item" @click="setThemeScheme(item)" v-ripple v-for="item of theme_scheme_list" :key="item" :color-scheme="item">
+            <div class="item" @click="setThemeScheme(item)" v-ripple v-for="item of themeSchemeList" :key="item" :color-scheme="item">
               <div class="content">
                 <v-avatar size="24px" item>
                   <v-icon class="bx" style="color: var(--surface1) !important; text-shadow: 0 0 1px #fff">bxs-circle</v-icon>
@@ -323,7 +323,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn text @click="theme_scheme_dialog = false">{{ $t('cancel') }}</v-btn>
+          <v-btn text @click="themeSchemeDialog = false">{{ $t('cancel') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -335,26 +335,26 @@ export default {
   name: 'SettingCustomize',
   data: () => ({
     // lang
-    lang_dialog: false,
+    langDialog: false,
     languages: Object.keys(window.i18n.messages),
     currentLang: window.i18n.locale,
     //lyric theme
-    lyric_theme_dialog: false,
+    lyricThemeDialog: false,
     // theme
-    theme_dialog: false,
-    theme_scheme_dialog: false,
-    theme_scheme_list: ['dark', 'dim', 'purple'],
+    themeDialog: false,
+    themeSchemeDialog: false,
+    themeSchemeList: ['dark', 'dim', 'purple'],
     // bgheight
-    bg_height_dialog: false,
+    bgHeightDialog: false,
     // style
     view: {
       artist: _setting(`artistView`),
       composer: _setting(`composerView`)
     },
     // custombg
-    customize_bg_dialog: false,
-    bg_prompt_active: false,
-    bg_prompt_textbox: window._setting('headerBgSource'),
+    customizeBgDialog: false,
+    bgPromptActive: false,
+    bgPromptTextbox: window._setting('headerBgSource'),
     setting: { bg: window._setting('headerBgSource') },
     imgSources: [
       {
@@ -435,7 +435,7 @@ export default {
           window._CSSsetting('--pokabgheight', '400px')
           break
       }
-      //this.bg_height_dialog = false
+      //this.bgHeightDialog = false
       let cssVariable = window._setting('cssVariable')
       this.axios({
         method: 'post',
@@ -444,12 +444,12 @@ export default {
       })
     },
     bg_prompt_cancel() {
-      this.bg_prompt_active = false
-      this.bg_prompt_textbox = window._setting('headerBgSource')
+      this.bgPromptActive = false
+      this.bgPromptTextbox = window._setting('headerBgSource')
     },
     bg_prompt_ok() {
-      this.bg_prompt_active = false
-      this.setBg(this.bg_prompt_textbox)
+      this.bgPromptActive = false
+      this.setBg(this.bgPromptTextbox)
     },
     setPrimaryColor(color) {
       this.$vuetify.theme.themes.dark.primary = color
@@ -468,7 +468,7 @@ export default {
       window.i18n.locale = lang
       this.currentLang = lang
       window._setting('lang', lang)
-      this.lang_dialog = false
+      this.langDialog = false
       //同步設定
       this.axios({
         method: 'post',
@@ -478,7 +478,7 @@ export default {
     },
     setLyricTheme(lyricTheme) {
       window._setting('lyricTheme', lyricTheme)
-      this.lyric_theme_dialog = false
+      this.lyricThemeDialog = false
       this.axios({
         method: 'post',
         url: _setting(`server`) + '/pokaapi/v2/user/setting/',
