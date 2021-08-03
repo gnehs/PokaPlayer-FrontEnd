@@ -491,7 +491,13 @@ export default {
       let root = document.documentElement
       root.setAttribute('color-scheme', _setting('color-scheme'))
 
-      this.theme_scheme_dialog = false
+      document.getElementsByTagName('meta')['theme-color'].content = this.$vuetify.theme.isDark
+        ? getComputedStyle(root)
+            .getPropertyValue('--surface2')
+            .trim()
+        : 'rgb(245, 245, 245)'
+
+      this.themeSchemeDialog = false
       this.axios({
         method: 'post',
         url: _setting(`server`) + '/pokaapi/v2/user/setting/',

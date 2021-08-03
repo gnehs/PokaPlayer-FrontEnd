@@ -82,8 +82,6 @@ export default {
     }
   },
   created() {
-    // 狀態欄顏色
-    document.getElementsByTagName('meta')['theme-color'].content = this.$vuetify.theme.isDark ? 'rgb(47, 43, 62)' : 'rgb(245, 245, 245)'
     function vhResize() {
       let vh = window.innerHeight * 0.01
       document.documentElement.style.setProperty('--vh', `${vh}px`)

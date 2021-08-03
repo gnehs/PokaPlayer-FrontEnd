@@ -29,6 +29,18 @@ export default {
     // set theme color
     this.$vuetify.theme.themes.dark.primary = window._setting('theme')
     this.$vuetify.theme.themes.light.primary = window._setting('theme')
+    // update theme-color
+    this.$nextTick(() => {
+      let root = document.documentElement
+      root.setAttribute('color-scheme', _setting('color-scheme'))
+      console.log(getComputedStyle(root).getPropertyValue('--surface2'))
+      this.$vuetify.theme.themes.dark.primary = getComputedStyle(root).getPropertyValue('--surface2')
+      document.getElementsByTagName('meta')['theme-color'].content = this.$vuetify.theme.isDark
+        ? getComputedStyle(root)
+            .getPropertyValue('--surface2')
+            .trim()
+        : 'rgb(245, 245, 245)'
+    })
   },
   data: () => ({
     snackbar: {

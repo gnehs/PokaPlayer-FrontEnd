@@ -151,4 +151,3 @@ let root = document.documentElement;
 for (let [key, value] of Object.entries(_setting("cssVariable"))) {
   root.style.setProperty(key, value);
 }
-root.setAttribute("color-scheme", _setting("color-scheme"))

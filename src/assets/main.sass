@@ -55,20 +55,18 @@ html,body
 		font-weight: bold
 		border-radius: 100em
 		cursor: pointer
+		@media (prefers-color-scheme: dark)
+			color: #FFF
+			opacity: 1
 		.v-icon
 			margin-right: 4px
 		span
 			white-space: pre
 		&.active
-			color: #FFF
+			color: #fff
 			background: var(--v-primary-base)
 			.v-icon
-				color: #FFF
-
-@media (prefers-color-scheme: dark)
-	.chip-nav
-		.chip-nav-item
-			color: #FFF
+				color: currentColor
 // Anicons
 .anicons 
 	font-family: "Anicons Regular", sans-serif 
