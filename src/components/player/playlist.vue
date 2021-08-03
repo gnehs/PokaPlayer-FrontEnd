@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="theme--dark">
     <portal to="fullscreen-player-action">
       <div class="action">
         <v-btn icon dark @click="audio_clean"> <v-icon class="bx">bx-menu-alt-right</v-icon></v-btn>

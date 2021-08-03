@@ -1,20 +1,21 @@
 .poka.list
 	.theme--light &
-		color: #000
+		--text-color: #000 !important
 		--hoverbg: rgba(101, 99, 99, 0.08)
-	.theme--dark &
-		color: #fff
+	.theme--dark & 
+		--text-color: #fff !important
 		--hoverbg: rgba(255, 255, 255, 0.025)
+	
 	.item
-		line-height: 1.25em
-		color: inherit
+		line-height: 1.25em 
 		text-decoration: none
 		letter-spacing: .01785714em
 		border-radius: 4px
 		display: flex
 		align-items: center
 		transition: all .2s cubic-bezier(0.59, 0.12, 0.34, 0.95)
-		width: 100% 
+		width: 100%
+		color: var(--text-color)
 		&:not(.active):hover
 			background-color: var(--hoverbg)
 			cursor: pointer
