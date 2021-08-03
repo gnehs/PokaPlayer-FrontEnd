@@ -53,10 +53,4 @@ export default {
     })
   }
 }
-</script>
-<style lang="sass" scoped>
-.version
-    .version-number
-        font-size: 1.5em
-    .version-description
-</style>
+</script> 
