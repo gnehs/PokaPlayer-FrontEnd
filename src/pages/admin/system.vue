@@ -30,7 +30,7 @@
 
     <v-dialog v-model="restartConfirmActive" max-width="420">
       <v-card>
-        <v-card-title class="headline">{{ $t('settings_restartDialog_title') }}</v-card-title>
+        <div class="dialog-title mb-2">{{ $t('settings_restartDialog_title') }}</div>
         <v-card-text style="padding-bottom: 0">
           <p>{{ $t('settings_updateDialog_note') }}</p>
         </v-card-text>
@@ -53,8 +53,8 @@
     <v-dialog v-model="showUpdateDialog" max-width="512">
       <v-card>
         <div class="update-container">
+          <div class="dialog-title">{{ $t('settings_updateDialog_title', { version: newVersion.tag }) }}</div>
           <div class="release-note">
-            <div class="title">{{ $t('settings_updateDialog_title', { version: newVersion.tag }) }}</div>
             <p class="changelog mb-0" v-html="newVersion.body" />
           </div>
           <div class="actions">
@@ -244,12 +244,6 @@ pre.log
 </style>
 <style lang="sass">
 .update-container
-  .release-note
-    .title
-      font-size: 24px !important
-      padding: 16px
-      padding-top: 64px
-      background-color: rgba(0,0,0,.05)
   .actions
     padding: 16px
     p

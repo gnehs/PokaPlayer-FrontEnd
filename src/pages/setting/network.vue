@@ -20,8 +20,7 @@
 
     <v-dialog v-model="showSoundQualityDialog" max-width="800">
       <v-card>
-        <v-card-title class="headline">{{ $t('settings_network_soundQuality') }}</v-card-title>
-
+        <div class="dialog-title mb-2">{{ $t('settings_network_soundQuality') }}</div>
         <v-card-text>
           <poka-cards class="poka four doubling cards" :hide-overflow="false">
             <poka-card

@@ -16,7 +16,7 @@
     </v-slide-y-reverse-transition>
     <v-dialog v-model="userDialog" max-width="300">
       <v-card>
-        <v-card-title class="headline">{{ $t('settingUserManagement.dialog.edit') }}</v-card-title>
+        <div class="dialog-title mb-2">{{ $t('settingUserManagement.dialog.edit') }}</div>
         <v-card-text>
           <div class="poka list">
             <div class="item" v-ripple>

@@ -161,4 +161,11 @@ export default {
       &::before
         opacity: 0 !important
         background-color: #fff
+
+.dialog-title
+  font-size: 24px !important
+  padding: 24px
+  padding-bottom: 8px
+  padding-top: 64px
+  background-color: rgba(0,0,0,.05)
 </style>

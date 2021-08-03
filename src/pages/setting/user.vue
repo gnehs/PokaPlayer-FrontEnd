@@ -123,9 +123,9 @@
 
     <v-dialog v-model="temp.changeNamePrompt" max-width="300">
       <v-card>
-        <v-card-title class="headline">{{ $t('settingUser.changeName.title') }}</v-card-title>
+        <div class="dialog-title mb-2">{{ $t('settingUser.changeName.title') }}</div>
         <v-card-text style="padding-bottom: 0">
-          <v-text-field :label="$t('settingUser.changeName.placeholder')" v-model.trim="temp.changeNameValue" outlined hide-details />
+          <v-text-field :label="$t('settingUser.changeName.placeholder')" v-model.trim="temp.changeNameValue" hide-details />
         </v-card-text>
         <v-card-actions>
           <v-spacer />
@@ -144,14 +144,9 @@
     </v-dialog>
     <v-dialog v-model="temp.changeUsernamePrompt" max-width="300">
       <v-card>
-        <v-card-title class="headline">{{ $t('settingUser.changeName.title') }}</v-card-title>
+        <div class="dialog-title mb-2">{{ $t('settingUser.changeUsername.title') }}</div>
         <v-card-text style="padding-bottom: 0">
-          <v-text-field
-            :label="$t('settingUser.changeUsername.placeholder')"
-            v-model.trim="temp.changeUsernameValue"
-            outlined
-            hide-details
-          />
+          <v-text-field :label="$t('settingUser.changeUsername.placeholder')" v-model.trim="temp.changeUsernameValue" hide-details />
         </v-card-text>
         <v-card-actions>
           <v-spacer />
@@ -170,18 +165,14 @@
     </v-dialog>
     <v-dialog v-model="temp.changePasswordDialog" max-width="300">
       <v-card>
-        <v-card-title class="headline">{{ $t('settingUser.changePassword.title') }}</v-card-title>
+        <div class="dialog-title mb-2">{{ $t('settingUser.changePassword.title') }}</div>
         <v-card-text>
-          <v-text-field :label="$t('settingUser.changePassword.oldPassword')" v-model="temp.changePasswordold" outlined hide-details />
-          <br />
-          <v-text-field :label="$t('settingUser.changePassword.newPassword')" v-model="temp.changePassword" outlined hide-details />
-          <br />
+          <v-text-field :label="$t('settingUser.changePassword.oldPassword')" v-model="temp.changePasswordold" hide-details />
+          <v-text-field :label="$t('settingUser.changePassword.newPassword')" v-model="temp.changePassword" hide-details />
           <v-text-field
             :label="$t('settingUser.changePassword.confirmPassword')"
             v-model="temp.changePassword2"
             :hint="$t('settingUser.changePassword.confirmPasswordHelperText')"
-            outlined
-            hide-details
           />
         </v-card-text>
         <v-card-actions>

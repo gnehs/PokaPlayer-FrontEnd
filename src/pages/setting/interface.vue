@@ -123,7 +123,7 @@
 
     <v-dialog v-model="bg_height_dialog" max-width="300">
       <v-card>
-        <v-card-title class="headline">{{ $t('settingInterface.customize.bg_cover._') }}</v-card-title>
+        <div class="dialog-title mb-2">{{ $t('settingInterface.customize.bg_cover._') }}</div>
         <v-card-text>
           <div class="poka list">
             <div class="item" @click="setBgHeight('full')" v-ripple>
@@ -172,7 +172,7 @@
     </v-dialog>
     <v-dialog v-model="customize_bg_dialog" max-width="1200">
       <v-card>
-        <v-card-title class="headline">{{ $t('settingInterface.customize.bg._') }}</v-card-title>
+        <div class="dialog-title mb-2">{{ $t('settingInterface.customize.bg._') }}</div>
         <v-card-text>
           <poka-cards>
             <poka-card
@@ -191,7 +191,7 @@
     </v-dialog>
     <v-dialog v-model="theme_dialog" max-width="340">
       <v-card>
-        <v-card-title class="headline">{{ $t('settingInterface.customize.theme_color._') }}</v-card-title>
+        <div class="dialog-title mb-2">{{ $t('settingInterface.customize.theme_color._') }}</div>
         <v-card-text>
           <v-color-picker
             style="margin: 8px auto !important"
@@ -211,7 +211,7 @@
     </v-dialog>
     <v-dialog v-model="bg_prompt_active" max-width="420">
       <v-card>
-        <v-card-title class="headline">{{ $t('settingInterface.customize.bg._') }}</v-card-title>
+        <div class="dialog-title mb-2">{{ $t('settingInterface.customize.bg._') }}</div>
         <v-card-text style="padding-bottom: 0">
           <v-text-field label="URL" v-model.trim="bg_prompt_textbox" filled></v-text-field>
         </v-card-text>
@@ -224,7 +224,7 @@
     </v-dialog>
     <v-dialog v-model="lang_dialog" max-width="300">
       <v-card>
-        <v-card-title class="headline">{{ $t('settingInterface.lang') }}</v-card-title>
+        <div class="dialog-title mb-2">{{ $t('settingInterface.lang') }}</div>
         <v-card-text>
           <div class="poka list">
             <div class="item" v-for="(lang, index) of languages" :key="`lang${lang}-${index}`" @click="setLang(lang)" v-ripple>
@@ -247,7 +247,7 @@
     </v-dialog>
     <v-dialog v-model="lyric_theme_dialog" max-width="300">
       <v-card>
-        <v-card-title class="headline">{{ $t('settingInterface.customize.lyric._') }}</v-card-title>
+        <div class="dialog-title mb-2">{{ $t('settingInterface.customize.lyric._') }}</div>
         <v-card-text>
           <div class="poka list">
             <div class="item" @click="setLyricTheme('bigtext')" v-ripple>
@@ -300,7 +300,7 @@
     </v-dialog>
     <v-dialog v-model="theme_scheme_dialog" max-width="300">
       <v-card>
-        <v-card-title class="headline">暗色主題配色方案</v-card-title>
+        <div class="dialog-title mb-2">暗色主題配色方案</div>
         <v-card-text>
           <div class="poka list">
             <div class="item" @click="setThemeScheme(item)" v-ripple v-for="item of theme_scheme_list" :key="item" :color-scheme="item">
