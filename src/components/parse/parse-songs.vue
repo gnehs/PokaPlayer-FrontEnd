@@ -166,20 +166,23 @@
           <poka-loader />
         </v-card-text>
         <v-card-text style="height: 300px" v-else>
-          <v-list v-if="playlists.length > 0">
-            <v-list-item-group v-model="existsPlaylists" multiple>
-              <template v-for="(item, i) in playlists">
-                <v-list-item :key="`item-${i}`" :value="item" @click="toggleSongOfPlaylist(item)" :title="item.name">
-                  <v-list-item-action>
-                    <v-checkbox color="primary" :input-value="existsPlaylists.includes(item._id)" />
-                  </v-list-item-action>
-                  <v-list-item-content>
-                    <v-list-item-title v-text="item.name" class="t-ellipsis" />
-                  </v-list-item-content>
-                </v-list-item>
-              </template>
-            </v-list-item-group>
-          </v-list>
+          <div class="poka list" v-if="playlists.length > 0">
+            <div
+              class="item"
+              v-ripple
+              v-for="(item, i) in playlists"
+              :key="`item-${i}`"
+              @click="toggleSongOfPlaylist(item)"
+              :title="item.name"
+            >
+              <div class="content">
+                <v-icon class="bx mx-2">{{ existsPlaylists.includes(item._id) ? 'bxs-checkbox-checked' : 'bx-checkbox' }}</v-icon>
+                <div class="header">
+                  <div class="head t-ellipsis">{{ item.name }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
           <p style="user-select: none; margin: 100px 0; text-align: center" v-else>
             {{ $t('playlist_page.playlist_empty') }}
           </p>
