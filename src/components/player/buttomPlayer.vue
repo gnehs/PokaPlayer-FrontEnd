@@ -190,20 +190,19 @@ export default {
         navigator.mediaSession.setActionHandler('seekto', event => {
           console.log('seek to', event.seekTime)
           _player.seek(event.seekTime)
+
+          if ('setPositionState' in navigator.mediaSession) {
+            navigator.mediaSession.setPositionState({
+              duration: _player.audio.duration || 0,
+              playbackRate: 1,
+              position: _player.audio.currentTime || 0
+            })
+          }
         })
       } catch (error) {
         console.warn('Warning! The "seekto" media session action is not supported.')
       }
     }
-    _player.on('loadedmetadata', function() {
-      if ('setPositionState' in navigator.mediaSession) {
-        navigator.mediaSession.setPositionState({
-          duration: _player.audio.duration || 0,
-          playbackRate: 1,
-          position: _player.audio.currentTime || 0
-        })
-      }
-    })
     this.audio_interval = setInterval(() => {
       let currentTime = _player.audio.currentTime || 0,
         totalTime = _player.audio.duration || 0

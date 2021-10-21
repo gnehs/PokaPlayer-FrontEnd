@@ -23,7 +23,7 @@
             v-if="title"
             :source="$route.params.source"
             :id="$route.params.id"
-            :cover="cover"
+            :cover="isCoverGenerate ? null : cover"
             type="playlist"
             :name="title"
             btn-type="icon-button"
