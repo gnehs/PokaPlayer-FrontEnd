@@ -49,9 +49,9 @@
             <v-slider v-show="audio_volume_hover" v-model="audio_volume" hide-details style thumb-label></v-slider>
           </v-fade-transition>
           <v-btn icon @click="audio_volume ? (audio_volume = 0) : (audio_volume = 100)">
-            <v-icon class="bx" v-if="audio_volume == 0">volume-mute</v-icon>
-            <v-icon class="bx" v-else-if="audio_volume < 50">volume-low</v-icon>
-            <v-icon class="bx" v-else>volume-full</v-icon>
+            <v-icon class="bx" v-if="audio_volume == 0">bx-volume-mute</v-icon>
+            <v-icon class="bx" v-else-if="audio_volume < 50">bx-volume-low</v-icon>
+            <v-icon class="bx" v-else>bx-volume-full</v-icon>
           </v-btn>
         </div>
         <v-btn icon @click="switch_audio_order">
