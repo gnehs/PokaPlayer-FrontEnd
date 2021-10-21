@@ -46,7 +46,8 @@ export default {
         routerNames = this.$route.name
       this.data = null
       if (!this.rawData) {
-        this.rawData = (await this.axios(_setting(`server`) + `/pokaapi/playlists`)).data.playlists
+        let { playlists, playlistFolders } = (await this.axios(_setting(`server`) + `/pokaapi/playlists`)).data
+        this.rawData = [...playlists, ...playlistFolders]
       }
       if (routerNames == 'PlaylistFolder') {
         this.title = this.rawData.filter(x => x.id == routerParams)[0].name
