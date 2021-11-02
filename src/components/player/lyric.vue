@@ -273,7 +273,7 @@ export default {
           `/pokaapi/lyric/?moduleName=${encodeURIComponent(source)}&id=${encodeURIComponent(id)}&time=${new Date().getTime()}`
 
         this.axios(url).then(response => {
-          if (response.data.lyrics[0].lyric && response.data.lyrics[0].lyric.match(lyricRegex)) {
+          if (response.data.lyrics.length && response.data.lyrics[0].lyric.match(lyricRegex)) {
             if (title == this.audio_title) {
               //透過 id 找到歌詞ㄌ
               this.loadLrc(response.data.lyrics[0].lyric)
