@@ -29,9 +29,6 @@
         <v-btn class="mx-1" @click="lang_dialog = true" depressed fab small>
           <v-icon class="bx">bx-planet</v-icon>
         </v-btn>
-        <v-btn class="mx-1" @click="clearSessionDialog = true" depressed fab small>
-          <v-icon class="bx">bx-bolt-circle</v-icon>
-        </v-btn>
       </div>
       <div class="right-btns">
         <v-btn href="https://github.com/gnehs/PokaPlayer" target="_blank" depressed fab small>
@@ -60,23 +57,6 @@
         <v-card-actions>
           <v-spacer />
           <v-btn text @click="lang_dialog = false">{{ $t('cancel') }}</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-    <v-dialog v-model="clearSessionDialog" max-width="420">
-      <v-card>
-        <v-card-title class="headline">{{ $t('login_page.session._') }}</v-card-title>
-        <v-card-text>
-          <p>{{ $t('login_page.session.description') }}</p>
-          <p>{{ $t('login_page.session.description2') }}</p>
-          <v-text-field outlined :label="$t('login_page.server')" v-model.trim="server" :disabled="logining"></v-text-field>
-          <v-text-field outlined :label="$t('login_page.username')" v-model="username" :disabled="logining"></v-text-field>
-          <v-text-field outlined :label="$t('login_page.password')" type="password" v-model="password" :disabled="logining"></v-text-field>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn text @click="clearSessionDialog = false">{{ $t('cancel') }}</v-btn>
-          <v-btn color="red" text @click="clearSession">{{ $t('reset') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -176,8 +156,6 @@ export default {
     server: null,
     password: null,
     username: null,
-    // clear session
-    clearSessionDialog: false,
     // change lang
     lang_dialog: false,
     languages: Object.keys(window.i18n.messages),
@@ -231,20 +209,6 @@ export default {
         this.$snackbar('Wrong password')
         this.password = ''
         return false
-      }
-    },
-    async clearSession() {
-      this.clearSessionDialog = false
-      let clrres = await this.axios({
-        method: 'post',
-        url: this.server + '/clear-session/',
-        data: { password: this.password, username: this.username },
-        config: { headers: { 'Content-Type': 'multipart/form-data' } }
-      })
-      if (clrres.data.success) {
-        this.$snackbar(i18n.t('login_page.session.success'))
-      } else {
-        this.$snackbar(i18n.t('login_page.session.fail') + clrres.data.e)
       }
     }
   }
