@@ -294,14 +294,6 @@ export default {
         .then(result => result.data)
         .then(result => {
           if (result.lyrics.length > 0) {
-            //計算傳回歌詞匹配率
-            result.lyrics.forEach(element => {
-              let rate = this.matchRate(this.audio_title, element.name) * 0.7 + this.matchRate(this.audio_artist, element.artist) * 0.3
-              rate = Math.round(rate * 100) / 100
-              element.rate = rate > 0 ? (rate > 100 ? 90.25 : rate) : 0
-            })
-            //以匹配率排序
-            result.lyrics.sort((a, b) => b.rate - a.rate)
             if (keyword == this.lyricSearchkeyword) {
               //最高者若超過 .7 則載入歌詞
               if (result.lyrics[0].rate > 35 && set) {
@@ -313,13 +305,6 @@ export default {
           }
           this.lyricSearching = false
         })
-    },
-    matchRate(a, b, rate = 0) {
-      a = a.toLowerCase()
-      b = b.toLowerCase()
-      for (let c of a.split('')) b.includes(c) ? rate++ : rate--
-      for (let c of b.split('')) a.includes(c) ? rate++ : rate--
-      return Math.round((rate / (a.length * 2)) * 10000) / 100
     },
     loadLrc(lrc, save = false) {
       this.lyric_save_toast = false
