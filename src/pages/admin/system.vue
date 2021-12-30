@@ -39,13 +39,9 @@
           <v-btn text @click="restartConfirmActive = false">{{ $t('cancel') }}</v-btn>
           <v-btn
             text
-            @click="
-              restartConfirmActive = false
-              restart()
-            "
+            @click="restartConfirmActive = false; restart()"
             color="primary"
-            >{{ $t('ok') }}</v-btn
-          >
+          >{{ $t('ok') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -53,7 +49,9 @@
     <v-dialog v-model="showUpdateDialog" max-width="512">
       <v-card>
         <div class="update-container">
-          <div class="dialog-title">{{ $t('settings_updateDialog_title', { version: newVersion.tag }) }}</div>
+          <div
+            class="dialog-title"
+          >{{ $t('settings_updateDialog_title', { version: newVersion.tag }) }}</div>
           <div class="release-note">
             <p class="changelog mb-0" v-html="newVersion.body" />
           </div>
@@ -62,20 +60,31 @@
             <p>{{ $t('settings_updateDialog_note') }}</p>
             <p v-if="poka_debug" v-html="$t('settings_updateDialog_note_dev')" />
             <v-btn
-              @click="
-                showUpdateDialog = false
-                update()
-              "
+              @click="showUpdateDialog = false; update()"
               block
               large
               depressed
               color="primary"
-              >{{ $t('settings_update') }}
+            >{{ $t('settings_update') }}</v-btn>
+            <v-btn
+              @click="showUpdateDialog = false"
+              text
+              block
+              class="mt-1"
+              outlined
+            >{{ $t('cancel') }}</v-btn>
+            <v-btn
+              href="https://github.com/gnehs/PokaPlayer/releases"
+              target="_blank"
+              text
+              block
+              outlined
+              class="mt-1"
+            >
+              {{
+                $t('settings_updateDialog_view_previous')
+              }}
             </v-btn>
-            <v-btn @click="showUpdateDialog = false" text block class="mt-1" outlined>{{ $t('cancel') }}</v-btn>
-            <v-btn href="https://github.com/gnehs/PokaPlayer/releases" target="_blank" text block outlined class="mt-1">{{
-              $t('settings_updateDialog_view_previous')
-            }}</v-btn>
           </div>
         </div>
       </v-card>
@@ -97,12 +106,14 @@
     <v-dialog v-model="showRestartingDialog" persistent max-width="280">
       <v-card>
         <br />
-        <p v-show="!showRestartCompleted" class="headline text-center font-weight-bold">
-          {{ $t('settings_restarting') }}
-        </p>
-        <p v-show="showRestartCompleted" class="headline text-center font-weight-bold">
-          {{ $t('settings_restart_completed') }}
-        </p>
+        <p
+          v-show="!showRestartCompleted"
+          class="headline text-center font-weight-bold"
+        >{{ $t('settings_restarting') }}</p>
+        <p
+          v-show="showRestartCompleted"
+          class="headline text-center font-weight-bold"
+        >{{ $t('settings_restart_completed') }}</p>
         <poka-loader v-show="!showRestartCompleted" />
         <br />
         <v-card-actions v-show="showRestartCompleted">
