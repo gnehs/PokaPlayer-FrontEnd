@@ -20,30 +20,34 @@
     </div>
 
     <poka-loader v-if="!data" style="margin-top: 64px;" />
-    <div v-if="data">
-      <!-- <div class="review-block">
+    <v-slide-y-reverse-transition>
+      <div v-if="data">
+        <!-- <div class="review-block">
         <h1 class="text-h4 review-title">嘿</h1>
         <p>去年你一共在 PokaPlayer 聽了 {{ data.total }} 首歌，在 {{ data.days[0]._id }} 聽了最多首歌，居然有 {{ data.days[0].count }} 首！</p>
-      </div>-->
-      <div class="review-block">
-        <h1 class="text-h4 review-title mb-4">{{ $t('review.page.mostPlayedSongs') }}</h1>
-        <poka-parse-songs :data="data.songs" />
+        </div>-->
+        <div class="review-block">
+          <h1 class="text-h4 review-title mb-4">{{ $t('review.page.mostPlayedSongs') }}</h1>
+          <poka-parse-songs :data="data.songs" />
+        </div>
+        <div class="review-block">
+          <h1 class="text-h4 review-title mb-4">{{ $t('review.page.mostPlayedAlbums') }}</h1>
+          <poka-parse-albums :data="data.albums" />
+        </div>
+        <div class="review-block">
+          <h1 class="text-h4 review-title mb-4">{{ $t('review.page.mostPlayedArtists') }}</h1>
+          <poka-parse-artists :data="data.artists" />
+        </div>
+        <div class="review-block">
+          <h1
+            class="text-center text-h3 font-weight-thin review-title"
+          >{{ $t('review.page.thankYouTitle') }}</h1>
+          <p
+            class="text-center text-h5 font-weight-thin"
+          >{{ $t('review.page.thankYouDescription') }}</p>
+        </div>
       </div>
-      <div class="review-block">
-        <h1 class="text-h4 review-title mb-4">{{ $t('review.page.mostPlayedAlbums') }}</h1>
-        <poka-parse-albums :data="data.albums" />
-      </div>
-      <div class="review-block">
-        <h1 class="text-h4 review-title mb-4">{{ $t('review.page.mostPlayedArtists') }}</h1>
-        <poka-parse-artists :data="data.artists" />
-      </div>
-      <div class="review-block">
-        <h1
-          class="text-center text-h3 font-weight-thin review-title"
-        >{{ $t('review.page.thankYouTitle') }}</h1>
-        <p class="text-center text-h5 font-weight-thin">{{ $t('review.page.thankYouDescription') }}</p>
-      </div>
-    </div>
+    </v-slide-y-reverse-transition>
   </div>
 </template>
 <style lang="sass" scoped>
