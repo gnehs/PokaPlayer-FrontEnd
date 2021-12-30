@@ -6,7 +6,6 @@ import Vue from "vue";
 import App from "./App";
 import router from "./router";
 import i18n from "./lang";
-import store from "./store";
 import "./registerServiceWorker";
 
 import PortalVue from "portal-vue";
@@ -41,7 +40,6 @@ new Vue({
   el: "#app",
   router,
   i18n,
-  store,
   components: {
     App
   },
