@@ -4,7 +4,7 @@
 ## Screenshot
 ![](https://i.imgur.com/E8FGWr3.png)
 ## Build Setup
-
+> use node.js v14
 ``` bash
 # install dependencies
 npm install
