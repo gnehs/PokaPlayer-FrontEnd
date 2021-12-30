@@ -1,5 +1,17 @@
 <template>
   <div>
+    <portal to="app-bar">
+      <v-app-bar
+        color="#FFF"
+        clipped-left
+        app
+        :style="`box-shadow: 0px 0px 0px 1px ${$vuetify.theme.isDark ? 'rgba(255, 255, 255, 0.12)' : `rgb(0 0 0 / 20%)`}`"
+      >
+        <back icon to="/" />
+        <v-toolbar-title>{{ $t('review.notify.title') }}</v-toolbar-title>
+        <v-spacer />
+      </v-app-bar>
+    </portal>
     <div class="review-block">
       <div class="text-center">
         <h1 class="text-h1 font-weight-thin">{{ $t('review.page.title') }}</h1>
