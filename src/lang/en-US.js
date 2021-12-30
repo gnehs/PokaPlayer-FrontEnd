@@ -338,5 +338,21 @@ export default {
     timeShifting: 'Time Shifting',
     timeShiftingReset: 'Reset',
     textEditor: 'Text Editor'
+  },
+  review: {
+    notify: {
+      title: "Your year in review",
+      description: "Review your most listened to songs, albums and other related statistics for the year",
+      go: "Go"
+    },
+    page: {
+      title: "Review",
+      subtitle: "Your {year} year in review",
+      mostPlayedSongs: "Most listened songs",
+      mostPlayedAlbums: "Most listened to albums",
+      mostPlayedArtists: "Most listened to artists",
+      thankYouTitle: "Thank you for having you",
+      thankYouDescription: "Thank you for using PokaPlayer, I hope to accompany you for more time in the future!",
+    }
   }
 };
