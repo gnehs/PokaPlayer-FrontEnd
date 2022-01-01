@@ -28,7 +28,6 @@ import parseComposers from "@/components/parse/parse-composers.vue";
 import parseFolders from "@/components/parse/parse-folders.vue";
 import parseHome from "@/components/parse/parse-home.vue";
 
-import overdrive from "@/components/overdrive.vue";
 export {
   // player
   bottomPlayer, lyric, playlist, player,
@@ -53,7 +52,6 @@ export {
   parseAlbums,
   parseComposers,
   parseFolders,
-  parseHome
-  , overdrive
-  , menuBtn
+  parseHome,
+  menuBtn
 };

@@ -1,8 +1,8 @@
 <template>
-  <overdrive :id="cover" :duration="300" :key="parsedCover" class="cover" :style="{ '--size': size }">
+  <div class="cover" :style="{ '--size': size }">
     <img aspect-ratio="1" class="cover-img" :src="parsedCover" />
     <img aspect-ratio="1" class="cover-shadow" :src="parsedCover" v-if="!hideShadow" />
-  </overdrive>
+  </div>
 </template>
 
 <script>
