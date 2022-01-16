@@ -25,7 +25,7 @@
 export default {
   name: 'menu-btn',
   data: () => ({
-    items: [{ icon: 'bx-cog', text: 'settings', to: '/settings' }]
+    items: [{ icon: 'bx-cog', text: 'settings.title', to: '/settings' }]
   }),
   created() {
     this.getStatus()

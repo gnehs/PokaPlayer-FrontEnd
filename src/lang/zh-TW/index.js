@@ -22,7 +22,6 @@ export default {
   song: "歌曲",
   composer: "作曲者",
   playlist: "播放清單",
-  settings: "設定",
   debug: "除錯",
   ok: "好",
   cancel: "取消",
@@ -351,5 +350,10 @@ export default {
       thankYouTitle: "感謝有你",
       thankYouDescription: "感謝你使用 PokaPlayer，希望未來可以陪伴你走過更多時光！",
     }
+  },
+  install: require('./install').default,
+  settings: {
+    title: "設定",
+    config: require('./settings/config').default,
   }
 };

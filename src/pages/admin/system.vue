@@ -80,11 +80,7 @@
               block
               outlined
               class="mt-1"
-            >
-              {{
-                $t('settings_updateDialog_view_previous')
-              }}
-            </v-btn>
+            >{{ $t('settings_updateDialog_view_previous') }}</v-btn>
           </div>
         </div>
       </v-card>

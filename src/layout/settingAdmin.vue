@@ -39,6 +39,7 @@ export default {
     settings: { darkMode: window._setting('darkMode') },
     adminItems: [
       { text: 'settings_systemAndUpdate', icon: 'bx-server', to: '/admin/system' },
+      { text: 'settings.config.title', icon: 'bx-layer', to: '/admin/config' },
       { text: 'settingUserManagement.title', icon: 'bx-user', to: '/admin/users' },
       { text: 'adminLog.title', icon: 'bx-file', to: '/admin/log' }
     ]

@@ -354,5 +354,10 @@ export default {
       thankYouTitle: "Thank you for having you",
       thankYouDescription: "Thank you for using PokaPlayer, I hope to accompany you for more time in the future!",
     }
+  },
+  install: require('./install').default,
+  settings: {
+    title: "Settings",
+    config: require('./settings/config').default,
   }
 };

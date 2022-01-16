@@ -351,5 +351,10 @@ export default {
       thankYouTitle: "感谢有你",
       thankYouDescription: "感谢你使用 PokaPlayer，希望未来可以陪伴你走过更多时光！",
     }
+  },
+  install: require('./install').default,
+  settings: {
+    title: "設定",
+    config: require('./settings/config').default,
   }
 };

@@ -18,6 +18,7 @@ import Shuffle from "@/pages/shuffle";
 import Library from "@/pages/Library";
 import LyricEdit from "@/pages/LyricEdit";
 import Search from "@/pages/Search";
+import Install from "@/pages/install/Install";
 
 Vue.use(Router);
 
@@ -219,6 +220,14 @@ export default new Router({
                 )
             },
             {
+              path: "/admin/config",
+              name: "SettingAdminConfig",
+              component: () =>
+                import(
+                  /* webpackChunkName: "setting-admin" */ "@/pages/admin/config"
+                )
+            },
+            {
               path: "/admin/log",
               name: "AdminLog",
               component: () =>
@@ -239,7 +248,12 @@ export default new Router({
           path: "/login",
           name: "Login",
           component: Login
-        }
+        },
+        {
+          path: "/install",
+          name: "install",
+          component: Install
+        },
       ]
     },
     {

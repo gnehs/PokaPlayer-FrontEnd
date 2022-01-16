@@ -27,7 +27,6 @@ import parseAlbums from "@/components/parse/parse-albums.vue";
 import parseComposers from "@/components/parse/parse-composers.vue";
 import parseFolders from "@/components/parse/parse-folders.vue";
 import parseHome from "@/components/parse/parse-home.vue";
-
 export {
   // player
   bottomPlayer, lyric, playlist, player,
