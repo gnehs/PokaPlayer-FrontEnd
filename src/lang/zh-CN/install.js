@@ -1,11 +1,11 @@
 export default {
-  title: "歡迎使用",
-  description: "安裝嚮導將會協助您初始化 PokaPlayer，請按照指示完成安裝。",
+  title: "欢迎使用",
+  description: "安装向导将会协助您初始化 PokaPlayer，请按照指示完成安装。",
   next: "下一步",
   database: {
-    title: "資料庫",
-    description: "PokaPlayer 需要連接到 MongoDB 才能正常運作，請輸入您的 MongoDB 資訊。",
-    help: "如何填寫 URI",
+    title: "数据库",
+    description: "PokaPlayer 需要连接到 MongoDB 才能正常运作，请输入您的 MongoDB 资讯。",
+    help: "如何填写 URI",
   },
   init: {
     title: "初始化",
@@ -13,7 +13,7 @@ export default {
   },
   done: {
     title: "完成",
-    description: "PokaPlayer 已經安裝完成，請登入以繼續使用。",
+    description: "PokaPlayer 已经安装完成，请登入以继续使用。",
     enter: "登入",
   }
 }
