@@ -295,7 +295,9 @@ export default {
       name: "Name",
       username: "Username",
       role: "Role",
-      password: "Password"
+      password: "Password",
+      createTime: "Created time",
+      lastLoginTime: "Last login"
     }
   },
   settingPravicy: {

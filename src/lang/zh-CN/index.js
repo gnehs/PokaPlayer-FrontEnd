@@ -292,7 +292,9 @@ export default {
       name: "名称",
       username: "使用者名称",
       role: "权限",
-      password: "密码"
+      password: "密码",
+      createTime: "建立時間",
+      lastLoginTime: "上次登入"
     }
   },
   settingPravicy: {

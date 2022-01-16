@@ -291,7 +291,9 @@ export default {
       name: "名稱",
       username: "使用者名稱",
       role: "權限",
-      password: "密碼"
+      password: "密碼",
+      createTime: "建立時間",
+      lastLoginTime: "上次登入"
     }
   },
   settingPravicy: {

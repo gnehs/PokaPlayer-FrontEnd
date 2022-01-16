@@ -22,9 +22,7 @@
             <div class="item" v-ripple>
               <div class="content">
                 <div class="header">
-                  <div class="head t-ellipsis">
-                    {{ $t('settingUserManagement.field.name') }}
-                  </div>
+                  <div class="head t-ellipsis">{{ $t('settingUserManagement.field.name') }}</div>
                   <div class="t-ellipsis">{{ userTemp.name }}</div>
                 </div>
               </div>
@@ -32,9 +30,7 @@
             <div class="item" v-ripple>
               <div class="content">
                 <div class="header">
-                  <div class="head t-ellipsis">
-                    {{ $t('settingUserManagement.field.username') }}
-                  </div>
+                  <div class="head t-ellipsis">{{ $t('settingUserManagement.field.username') }}</div>
                   <div class="t-ellipsis">{{ userTemp.username }}</div>
                 </div>
               </div>
@@ -42,31 +38,51 @@
             <div class="item" v-ripple>
               <div class="content">
                 <div class="header">
-                  <div class="head t-ellipsis">
-                    {{ $t('settingUserManagement.field.role') }}
-                  </div>
+                  <div class="head t-ellipsis">{{ $t('settingUserManagement.field.role') }}</div>
                   <div class="t-ellipsis">{{ userTemp.role }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="item" v-ripple>
+              <div class="content">
+                <div class="header">
+                  <div class="head t-ellipsis">{{ $t('settingUserManagement.field.createTime') }}</div>
+                  <div class="t-ellipsis">{{ new Date(userTemp.createTime).toLocaleString() }}</div>
+                </div>
+              </div>
+            </div>
+            <div class="item" v-ripple>
+              <div class="content">
+                <div class="header">
+                  <div class="head t-ellipsis">{{ $t('settingUserManagement.field.lastLoginTime') }}</div>
+                  <div class="t-ellipsis">{{ new Date(userTemp.lastLoginTime).toLocaleString() }}</div>
                 </div>
               </div>
             </div>
             <v-divider style="margin: 4px 0" />
             <div class="item" v-ripple @click="changePassword">
               <div class="content">
-                <v-icon class="bx" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="'bx-lock-alt'" />
+                <v-icon
+                  class="bx"
+                  :color="$vuetify.theme.isDark ? '#FFF' : 'primary'"
+                  v-text="'bx-lock-alt'"
+                />
                 <div class="header">
-                  <div class="head t-ellipsis">
-                    {{ $t('settingUserManagement.dialog.changePassword') }}
-                  </div>
+                  <div
+                    class="head t-ellipsis"
+                  >{{ $t('settingUserManagement.dialog.changePassword') }}</div>
                 </div>
               </div>
             </div>
             <div class="item" v-ripple @click="deleteUser">
               <div class="content">
-                <v-icon class="bx" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="'bx-trash'" />
+                <v-icon
+                  class="bx"
+                  :color="$vuetify.theme.isDark ? '#FFF' : 'primary'"
+                  v-text="'bx-trash'"
+                />
                 <div class="header">
-                  <div class="head t-ellipsis">
-                    {{ $t('settingUserManagement.dialog.deleteUser') }}
-                  </div>
+                  <div class="head t-ellipsis">{{ $t('settingUserManagement.dialog.deleteUser') }}</div>
                 </div>
               </div>
             </div>
@@ -82,20 +98,51 @@
       <v-card>
         <v-card-title class="headline">{{ $t('settingUserManagement.dialog.create') }}</v-card-title>
         <v-card-text>
-          <v-text-field :label="$t('settingUserManagement.field.name')" v-model="userTemp.name" outlined></v-text-field>
-          <v-text-field :label="$t('settingUserManagement.field.username')" v-model="userTemp.username" outlined></v-text-field>
-          <v-text-field :label="$t('settingUserManagement.field.password')" v-model="userTemp.password" outlined></v-text-field>
-          <v-select :label="$t('settingUserManagement.field.role')" :items="['admin', 'user']" v-model="userTemp.role" outlined></v-select>
+          <v-text-field
+            :label="$t('settingUserManagement.field.name')"
+            v-model="userTemp.name"
+            outlined
+          ></v-text-field>
+          <v-text-field
+            :label="$t('settingUserManagement.field.username')"
+            v-model="userTemp.username"
+            outlined
+          ></v-text-field>
+          <v-text-field
+            :label="$t('settingUserManagement.field.password')"
+            v-model="userTemp.password"
+            outlined
+          ></v-text-field>
+          <v-select
+            :label="$t('settingUserManagement.field.role')"
+            :items="['admin', 'user']"
+            v-model="userTemp.role"
+            outlined
+          ></v-select>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
           <v-btn text @click="createUserDialog = false" color="primary">{{ $t('back') }}</v-btn>
-          <v-btn text @click="createUser" color="primary">{{ $t('settingUserManagement.dialog.createBtn') }}</v-btn>
+          <v-btn
+            text
+            @click="createUser"
+            color="primary"
+          >{{ $t('settingUserManagement.dialog.createBtn') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
     <v-fab-transition v-if="!createUserDialog">
-      <v-btn color="primary" fab large dark bottom right fixed style="bottom: calc(16px + 69px)" @click="openCreateUserDialog">
+      <v-btn
+        color="primary"
+        fab
+        large
+        dark
+        bottom
+        right
+        fixed
+        style="bottom: calc(16px + 69px)"
+        @click="openCreateUserDialog"
+      >
         <v-icon class="bx">bx-user-plus</v-icon>
       </v-btn>
     </v-fab-transition>
