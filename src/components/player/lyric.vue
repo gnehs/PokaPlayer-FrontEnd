@@ -14,7 +14,12 @@
       </div>
     </portal>
     <div v-on:dblclick="openLyricDialog">
-      <div v-if="lyric.length > 1" class="lyric" key="lyric" :class="{ lyricTranslated: lyricTranslated }">
+      <div
+        v-if="lyric.length > 1"
+        class="lyric"
+        key="lyric"
+        :class="{ lyricTranslated: lyricTranslated }"
+      >
         <div style="height: 200px" />
         <p
           v-for="(item, index) of lyric"
@@ -68,7 +73,7 @@
             <div
               class="item"
               @click="
-                loadLrc(`[00:00.000]`, true)
+  loadLrc(`[00:00.000]`, true)
                 showLyricDialog = false
               "
               v-ripple
@@ -76,9 +81,7 @@
               <div class="content">
                 <div class="header">
                   <div class="head t-ellipsis">{{ $t('lrc_notLoad') }}</div>
-                  <div class="t-ellipsis">
-                    {{ $t('lrc_notLoad_description') }}
-                  </div>
+                  <div class="t-ellipsis">{{ $t('lrc_notLoad_description') }}</div>
                 </div>
               </div>
             </div>
@@ -89,7 +92,7 @@
               v-for="(item, index) of lyricSearchResult"
               :key="index"
               @click="
-                loadLrc(item.lyric, true)
+  loadLrc(item.lyric, true)
                 showLyricDialog = false
               "
               v-ripple
@@ -295,11 +298,9 @@ export default {
         .then(result => {
           if (result.lyrics.length > 0) {
             if (keyword == this.lyricSearchkeyword) {
-              //最高者若超過 .7 則載入歌詞
-              if (result.lyrics[0].rate > 35 && set) {
-                this.loadLrc(result.lyrics[0].lyric)
-                this.lyric_save_toast = true
-              }
+              this.loadLrc(result.lyrics[0].lyric)
+              this.lyric_save_toast = true
+
               this.lyricSearchResult = result.lyrics
             }
           }
