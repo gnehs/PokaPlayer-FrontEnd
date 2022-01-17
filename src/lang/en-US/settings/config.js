@@ -45,5 +45,9 @@ export default {
     order_hot: "Hot",
     order_time: "Time",
     categories: "Categories",
+  },
+  saveDialog: {
+    title: "Save Configuration",
+    description: "Restart the server to load the new settings file",
   }
 }

@@ -45,5 +45,9 @@ export default {
     order_hot: "热门",
     order_time: "最新",
     categories: "分类",
+  },
+  saveDialog: {
+    title: "保存设定",
+    description: "将会重新启动服务器，以便载入新的设定档",
   }
 }

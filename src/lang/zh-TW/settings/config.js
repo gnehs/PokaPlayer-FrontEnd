@@ -45,5 +45,9 @@ export default {
     order_hot: "熱門",
     order_time: "最新",
     categories: "分類",
+  },
+  saveDialog: {
+    title: "儲存設定",
+    description: "將會重新啟動伺服器，以便載入新的設定檔",
   }
 }
