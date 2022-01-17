@@ -72,6 +72,7 @@ export default {
   display: flex
   flex-direction: column
   align-items: flex-start
+  user-select: none
   .v-icon
     font-size: 24px
     margin-right: 16px
