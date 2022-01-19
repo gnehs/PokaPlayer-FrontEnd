@@ -182,7 +182,7 @@ export default new Router({
             },
             {
               path: "/settings/pins",
-              name: "SettingPins",
+              name: "settings.pins",
               component: () =>
                 import(/* webpackChunkName: "setting" */ "@/pages/setting/pins")
             },

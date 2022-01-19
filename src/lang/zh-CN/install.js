@@ -1,4 +1,4 @@
-export default {
+﻿export default {
   title: "欢迎使用",
   description: "安装向导将会协助您初始化 PokaPlayer，请按照指示完成安装。",
   next: "下一步",

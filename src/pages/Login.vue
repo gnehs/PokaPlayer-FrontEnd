@@ -9,18 +9,37 @@
     <div class="login-form">
       <form class="form-container" @submit.prevent="login">
         <h1>{{ $t('header_welcome') }}</h1>
-        <v-text-field class="rounded-input" outlined :label="$t('login_page.server')" v-model.trim="server" :disabled="logining" />
-        <v-text-field class="rounded-input" outlined :label="$t('login_page.username')" v-model="username" :disabled="logining" />
         <v-text-field
           class="rounded-input"
           outlined
-          :label="$t('login_page.password')"
+          :label="$t('login.server')"
+          v-model.trim="server"
+          :disabled="logining"
+        />
+        <v-text-field
+          class="rounded-input"
+          outlined
+          :label="$t('login.username')"
+          v-model="username"
+          :disabled="logining"
+        />
+        <v-text-field
+          class="rounded-input"
+          outlined
+          :label="$t('login.password')"
           type="password"
           v-model="password"
           :disabled="logining"
         />
         <div class="d-flex justify-center">
-          <v-btn :disabled="logining" rounded large color="primary" type="submit" width="110px">{{ $t('login') }}</v-btn>
+          <v-btn
+            :disabled="logining"
+            rounded
+            large
+            color="primary"
+            type="submit"
+            width="110px"
+          >{{ $t('login.title') }}</v-btn>
         </div>
       </form>
     </div>
@@ -39,10 +58,16 @@
 
     <v-dialog v-model="lang_dialog" max-width="300">
       <v-card>
-        <v-card-title class="headline">{{ $t('settingInterface.lang') }}</v-card-title>
+        <v-card-title class="headline">{{ $t('settings.interface.lang') }}</v-card-title>
         <v-card-text>
           <div class="poka list">
-            <div class="item" v-for="(lang, index) of languages" :key="`lang${lang}-${index}`" @click="setLang(lang)" v-ripple>
+            <div
+              class="item"
+              v-for="(lang, index) of languages"
+              :key="`lang${lang}-${index}`"
+              @click="setLang(lang)"
+              v-ripple
+            >
               <div class="content">
                 <v-avatar size="24px" item>
                   <v-icon class="bx">bx-planet</v-icon>
@@ -63,89 +88,89 @@
   </div>
 </template>
 <style lang="scss">
-  .v-text-field--outlined.rounded-input {
-    border-radius: 100em;
-    .v-input__slot {
-      padding: 0 24px !important;
-    }
-    fieldset {
-      padding-left: 19px !important;
-    }
+.v-text-field--outlined.rounded-input {
+  border-radius: 100em;
+  .v-input__slot {
+    padding: 0 24px !important;
   }
+  fieldset {
+    padding-left: 19px !important;
+  }
+}
 </style>
 <style lang="scss" scoped>
-  .login-container {
-    height: calc(var(--vh, 1vh) * 100);
+.login-container {
+  height: calc(var(--vh, 1vh) * 100);
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg, rgb(242, 242, 242));
+  background-size: cover;
+  background-position: center;
+  --bg-color: #fff;
+  .logo {
+    padding: 8px 12px;
+    width: 100%;
+    img {
+      width: 40px;
+    }
+  }
+  .login-form,
+  .footer {
+    background: var(--bg-color);
+  }
+  .login-form {
+    flex: 1;
+    border-radius: 48px 0 0 0;
+    .form-container {
+      width: 350px;
+      margin: 0 auto;
+      padding: 72px 32px;
+      border-radius: 32px;
+      h1 {
+        text-align: center;
+        margin: 24px 0;
+      }
+    }
+  }
+  .footer {
     width: 100vw;
+    align-content: center;
     display: flex;
-    flex-direction: column;
-    background: var(--bg, rgb(242, 242, 242));
-    background-size: cover;
-    background-position: center;
-    --bg-color: #fff;
-    .logo {
-      padding: 8px 12px;
-      width: 100%;
-      img {
-        width: 40px;
-      }
+    .left-btns {
+      padding: 8px;
+      align-self: center;
     }
-    .login-form,
-    .footer {
-      background: var(--bg-color);
-    }
-    .login-form {
+    .right-btns {
       flex: 1;
-      border-radius: 48px 0 0 0;
+      padding: 8px;
+      text-align: right;
+      align-self: center;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .login-container {
+    .login-form {
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       .form-container {
-        width: 350px;
-        margin: 0 auto;
-        padding: 72px 32px;
-        border-radius: 32px;
-        h1 {
-          text-align: center;
-          margin: 24px 0;
-        }
+        background: var(--bg-color);
       }
     }
     .footer {
-      width: 100vw;
-      align-content: center;
-      display: flex;
-      .left-btns {
-        padding: 8px;
-        align-self: center;
-      }
-      .right-btns {
-        flex: 1;
-        padding: 8px;
-        text-align: right;
-        align-self: center;
-      }
+      background: transparent;
     }
   }
-
-  @media (min-width: 768px) {
-    .login-container {
-      .login-form {
-        background: transparent;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .form-container {
-          background: var(--bg-color);
-        }
-      }
-      .footer {
-        background: transparent;
-      }
-    }
+}
+@media (prefers-color-scheme: dark) {
+  .login-container {
+    --bg-color: #282535;
   }
-  @media (prefers-color-scheme: dark) {
-    .login-container {
-      --bg-color: #282535;
-    }
-  }
+}
 </style>
 <script>
 export default {

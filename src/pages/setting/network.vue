@@ -7,12 +7,8 @@
             <v-icon class="bx">bx-music</v-icon>
           </v-avatar>
           <div class="header">
-            <div class="head t-ellipsis">
-              {{ $t('settings_network_soundQuality') }}
-            </div>
-            <div class="t-ellipsis">
-              {{ $t(`settings_network_soundQuality_${soundQuality}`) }}
-            </div>
+            <div class="head t-ellipsis">{{ $t('settings.network.soundQuality.title') }}</div>
+            <div class="t-ellipsis">{{ $t(`settings.network.soundQuality.${soundQuality}.title`) }}</div>
           </div>
         </div>
       </div>
@@ -20,36 +16,17 @@
 
     <v-dialog v-model="showSoundQualityDialog" max-width="800">
       <v-card>
-        <div class="dialog-title mb-2">{{ $t('settings_network_soundQuality') }}</div>
+        <div class="dialog-title mb-2">{{ $t('settings.network.soundQuality.title') }}</div>
         <v-card-text>
           <poka-cards class="poka four doubling cards" :hide-overflow="false">
             <poka-card
+              v-for="(item, index) of ['Low', 'Medium', 'High', 'Ori']"
               @click.native="setSoundQuality('Low')"
+              :key="index"
               poka-icon="bx-music"
               :ellipsis="false"
-              :poka-title="$t('settings_network_soundQuality_Low')"
-              :poka-subtitle="$t('settings_network_soundQuality_Low_description')"
-            />
-            <poka-card
-              @click.native="setSoundQuality('Med')"
-              poka-icon="bx-music"
-              :ellipsis="false"
-              :poka-title="$t('settings_network_soundQuality_Med')"
-              :poka-subtitle="$t('settings_network_soundQuality_Med_description')"
-            />
-            <poka-card
-              @click.native="setSoundQuality('High')"
-              poka-icon="bx-music"
-              :ellipsis="false"
-              :poka-title="$t('settings_network_soundQuality_High')"
-              :poka-subtitle="$t('settings_network_soundQuality_High_description')"
-            />
-            <poka-card
-              @click.native="setSoundQuality('Ori')"
-              poka-icon="bx-music"
-              :ellipsis="false"
-              :poka-title="$t('settings_network_soundQuality_Ori')"
-              :poka-subtitle="$t('settings_network_soundQuality_Ori_description')"
+              :poka-title="$t(`settings.network.soundQuality.${item}.title`)"
+              :poka-subtitle="$t(`settings.network.soundQuality.${item}.description`)"
             />
           </poka-cards>
         </v-card-text>

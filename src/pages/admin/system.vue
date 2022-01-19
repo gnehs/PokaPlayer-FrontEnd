@@ -18,7 +18,7 @@
             <v-icon class="bx">bx-cloud-upload</v-icon>
           </v-avatar>
           <div class="header">
-            <div class="head t-ellipsis">{{ $t('settings_update') }}</div>
+            <div class="head t-ellipsis">{{ $t('settings.update.title') }}</div>
             <div class="t-ellipsis">
               {{ checkUpadteStatus }}
               <span v-if="poka_debug">(debug: {{ poka_debug }})</span>
@@ -32,7 +32,7 @@
       <v-card>
         <div class="dialog-title mb-2">{{ $t('settings_restartDialog_title') }}</div>
         <v-card-text style="padding-bottom: 0">
-          <p>{{ $t('settings_updateDialog_note') }}</p>
+          <p>{{ $t('settings.update.dialog_note') }}</p>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
@@ -51,21 +51,21 @@
         <div class="update-container">
           <div
             class="dialog-title"
-          >{{ $t('settings_updateDialog_title', { version: newVersion.tag }) }}</div>
+          >{{ $t('settings.update.dialog_title', { version: newVersion.tag }) }}</div>
           <div class="release-note">
             <p class="changelog mb-0" v-html="newVersion.body" />
           </div>
           <div class="actions">
             <v-spacer />
-            <p>{{ $t('settings_updateDialog_note') }}</p>
-            <p v-if="poka_debug" v-html="$t('settings_updateDialog_note_dev')" />
+            <p>{{ $t('settings.update.dialog_note') }}</p>
+            <p v-if="poka_debug" v-html="$t('settings.update.dialog_note_dev')" />
             <v-btn
               @click="showUpdateDialog = false; update()"
               block
               large
               depressed
               color="primary"
-            >{{ $t('settings_update') }}</v-btn>
+            >{{ $t('settings.update.title') }}</v-btn>
             <v-btn
               @click="showUpdateDialog = false"
               text
@@ -80,7 +80,7 @@
               block
               outlined
               class="mt-1"
-            >{{ $t('settings_updateDialog_view_previous') }}</v-btn>
+            >{{ $t('settings.update.dialog_view_previous') }}</v-btn>
           </div>
         </div>
       </v-card>
@@ -94,7 +94,7 @@
         </v-card-text>
         <v-card-actions v-show="showRestartCompleted">
           <v-spacer />
-          <v-btn text color="primary" @click="reload">{{ $t('settings_update_reconnect') }}</v-btn>
+          <v-btn text color="primary" @click="reload">{{ $t('settings.update.reconnect') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -114,7 +114,7 @@
         <br />
         <v-card-actions v-show="showRestartCompleted">
           <v-spacer />
-          <v-btn text color="primary" @click="reload">{{ $t('settings_update_reconnect') }}</v-btn>
+          <v-btn text color="primary" @click="reload">{{ $t('settings.update.reconnect') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -159,12 +159,12 @@ export default {
           if (this.compareVersion(this.poka_version, e[0].tag_name)) {
             this.newVersion.prerelease = e[0].prerelease
             this.newVersion.tag = e[0].tag_name
-            this.checkUpadteStatus = i18n.t('settings_update_update2', { version: this.newVersion.tag })
+            this.checkUpadteStatus = i18n.t('settings.update.update2', { version: this.newVersion.tag })
             if (this.$route.query.update) {
               this.showUpdateDialog = true
             }
           } else {
-            this.checkUpadteStatus = i18n.t('settings_update_latestVersion')
+            this.checkUpadteStatus = i18n.t('settings.update.latestVersion')
           }
         })
         .catch(e => console.error(e))

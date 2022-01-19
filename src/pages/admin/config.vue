@@ -233,9 +233,7 @@
       </v-fab-transition>
       <v-dialog v-model="saveDialog" persistent max-width="500px">
         <v-card>
-          <v-card-title>
-            <span class="head">{{ $t('settings.config.saveDialog.title') }}</span>
-          </v-card-title>
+          <div class="dialog-title mb-2">{{ $t('settings.config.saveDialog.title') }}</div>
           <v-card-text>{{ $t('settings.config.saveDialog.description') }}</v-card-text>
           <v-card-actions>
             <v-spacer />
@@ -246,15 +244,9 @@
       </v-dialog>
       <v-dialog v-model="restartDialog" persistent max-width="280">
         <v-card>
-          <br />
-          <p
-            v-show="!restartCompleted"
-            class="headline text-center font-weight-bold"
-          >{{ $t('settings_restarting') }}</p>
-          <p
-            v-show="restartCompleted"
-            class="headline text-center font-weight-bold"
-          >{{ $t('settings_restart_completed') }}</p>
+          <div
+            class="dialog-title mb-4"
+          >{{ restartCompleted ? $t('settings_restart_completed') : $t('settings_restarting') }}</div>
           <poka-loader v-show="!restartCompleted" />
           <br />
           <v-card-actions v-show="restartCompleted">

@@ -22,50 +22,17 @@ export default {
   song: "歌曲",
   composer: "作曲者",
   playlist: "播放清单",
-  settings: "设定",
   debug: "调试",
   ok: "好",
   cancel: "取消",
   reset: "重置",
   done: "完成",
   back: "返回",
-  login: "登入",
-  login_page: {
+  login: {
+    title: "登入",
     server: "服务器",
     username: "使用者名称",
     password: "密码",
-    features: {
-      opensource: {
-        title: "开放源代码",
-        description: "所有的源代码都在 GitHub"
-      },
-      module: {
-        title: "模组化",
-        description: "接入任何服务皆不是难事"
-      },
-      streaming: {
-        title: "随时随地串流",
-        description: "连上网便能听歌"
-      },
-      fastinstall: {
-        title: "快速安装",
-        description: "可使用 Docker 快速部署"
-      }
-    },
-    tips: {
-      firstLogin: {
-        title: "首次登入？",
-        description: "默认使用者名称与密码皆为「poka」，登入后可至设定更改。"
-      }
-    },
-    session: {
-      _: "重置 session",
-      description: "若您持续无法登入，可能是 session 发生错误。",
-      description2:
-        "您可以于下方输入管理员账号进行重置，但请注意，此动作将重置所有使用者的登入状态。",
-      success: "重置成功，请尝试登入",
-      fail: "重置失败，错误原因："
-    }
   },
   nothingFound: "找不到",
   requestError: "请求失败，请再试一次",
@@ -98,87 +65,23 @@ export default {
   lrc_notLoad_description: "点选清除目前的歌词",
   lrc_noLyrics: "无歌词",
   lrc_saved: "歌词已储存",
-  songAction_title: "歌曲操作",
-  songAction_name: "歌曲名称",
-  songAction_artist: "演出者",
-  songAction_album: "专辑",
-  songAction_source: "来源",
-  songAction_like: "收藏",
-  songAction_like_success: "已收藏「{name}」",
-  songAction_like_failed: "收藏或取消收藏「{name}」时发生了错误",
-  songAction_unlike: "取消收藏",
-  songAction_unlike_success: "已取消收藏「{name}」",
-  songAction_unlike_failed: "取消收藏「{name}」时发生了错误",
-  songAction_rating: "评等",
-  songAction_rating0: "清除评等",
-  songAction_rating4song: "为「{name}」评等",
-  songAction_rating_success: "为「{name}」评等 {star} 星成功！",
-  songAction_rating_failed: "为「{name}」评等 {star} 星失败。",
-  songAction_rating0_success: "为「{name}」清除评等成功！",
-  songAction_rating0_failed: "为「{name}」清除评等失败。",
   songAction_add2playlist: "加入到播放清单",
-  songAction_add2playlist_songNotExist: "{source}",
-  songAction_add2playlist_songExist: "{source} / 该歌曲已存在，点选来删除",
-  songAction_add2playlist_failed: "处理 {name} 时发生了错误",
-  songAction_add2playlist_add_success: "已将 {name} 加入到 {playlist}",
-  songAction_add2playlist_remove_success: "已将 {name} 从 {playlist} 删除",
   album_total: "{songs} 首歌曲",
   albumsOfSameArtist: "来自相同演出者的其他专辑",
-  addSong_total: "已添加 {total} 首歌",
-  addSong_name: "已添加 {name}",
   moduleShowName_Netease: "网易云音乐",
   moduleShowName_DSM: "DSM",
-  sessionExpired: "Session 过期，请重新登入",
-  add2nowPlaying: "将此页歌曲加入到现正播放",
   pin: "钉选",
   pin_failed: "钉选失败",
   unpin_failed: "取消钉选失败",
   settings_dark: "夜间模式",
-  settings_network: "网络",
-  settings_network_description: "音质",
-  settings_network_soundQuality: "音质",
-  settings_network_soundQuality_Low: "低音质",
-  settings_network_soundQuality_Med: "中等音质",
-  settings_network_soundQuality_High: "高音质(建议)",
-  settings_network_soundQuality_Ori: "原始音质",
-  settings_network_soundQuality_Low_description:
-    "128K，跟 YouTube 差不多的烂音质，在网络夭寿慢的情况下请选择此选项",
-  settings_network_soundQuality_Med_description:
-    "音质只比 YouTube 好那么一点点，可在 3G 网络下流畅的串流",
-  settings_network_soundQuality_High_description:
-    "音质较原始音质略差，可在 4G 网络下流畅的串流",
-  settings_network_soundQuality_Ori_description:
-    "在网络状况许可下，可选择此选项聆听高音质音乐",
   settings_lang: "语言",
-  settings_lang_description: "设定您的 PokaPlayer 语言",
   settings_systemAndUpdate: "系统和更新",
-  settings_systemAndUpdate_description: "更新 PokaPlayer、重新启动",
   settings_about: "关于",
-  settings_about_description: "PokaPlayer 相关信息、错误回报等",
   settings_about_contributions: "贡献者",
   settings_about_errorEeport: "错误回报",
   settings_account: "账号",
   settings_logout: "登出",
   settings_system: "系统",
-  settings_update: "软件更新",
-  settings_update_checking4updates: "正在检查更新...",
-  settings_update_latestVersion: "您的 PokaPlayer 已是最新版本",
-  settings_update_update2: "更新至 {version}",
-  settings_update_canUpdate2: "可更新至 {version}",
-  settings_update_go2UpdatePage: "前往更新页面",
-  settings_update_srvRestart: "服务器重新启动",
-  settings_update_reconnect: "重新连接",
-  settings_update_initializing: "正在初始化...",
-  settings_update_updating: "正在更新...",
-  settings_update_git_fetch: "初始化完成",
-  settings_update_git_reset: "更新档下载完成",
-  settings_update_git_api: "API 更新完成",
-  settings_updateDialog_note:
-    "注意：若您未开启 Docker 自动重启功能，您必须手动开启 PokaPlayer",
-  settings_updateDialog_note_dev:
-    "若在开发机器上进行更新，<mark>可能导致 Git 爆炸</mark>",
-  settings_updateDialog_view_previous: "查看先前的更新日志",
-  settings_updateDialog_title: "{version} 更新日志",
   settings_restart: "重新启动",
   settings_restarting: "正在重新启动",
   settings_restart_completed: "重新启动完成！",
@@ -186,139 +89,6 @@ export default {
   settingIndex: {
     normalItems: "一般设定项目",
     adminItems: "服务器"
-  },
-  settingInterface: {
-    _: "界面",
-    customize: {
-      _: "个人化",
-      bg: {
-        _: "自订背景",
-        description: "更改背景图片",
-        custom_link: "自订连结"
-      },
-      bg_cover: {
-        _: "背景覆盖",
-        description: "更改背景覆盖样式或将其隐藏",
-        options: {
-          full: "全覆盖",
-          half: "半覆盖",
-          none: "无背景"
-        }
-      },
-      theme: "主题",
-      theme_color: {
-        _: "主色",
-        description: "设定 PokaPlayer 的主题色彩"
-      },
-      lyric: {
-        _: "歌词页面主题",
-        description: "设定歌词页面的主题"
-      },
-      layout: {
-        _: "布局",
-        list: "清单",
-        card: "卡片",
-        artist: "演出者页面布局",
-        composer: "作曲者页面布局"
-      }
-    },
-    lang: "语言"
-  },
-  settingUser: {
-    title: "使用者",
-    description: "检视您的资料、修改密码",
-    name: "名称",
-    username: "使用者名称",
-    role: "权限",
-    password: "密码",
-    passwordDescription: "轻触此处来更改密码",
-    changeName: {
-      title: "更改名称",
-      placeholder: "输入新的名称",
-      result: {
-        success: "名称成功更改为 {name}",
-        error: "名称更改失败"
-      }
-    },
-    changeUsername: {
-      title: "更改使用者名称",
-      placeholder: "输入新的使用者名称",
-      result: {
-        success: "使用者名称成功更改为 {name}，下次请用新的使用者名称来登入",
-        error: "使用者名称更改失败"
-      }
-    },
-    changePassword: {
-      title: "更改密码",
-      oldPassword: "旧密码",
-      newPassword: "新密码",
-      confirmPassword: "确认密码",
-      confirmPasswordHelperText: "再输入一次您的新密码",
-      done: "更改密码",
-      result: {
-        inconsistent: "两次密码不一致",
-        same: "密码不可与旧密码相同",
-        success: "密码更改成功",
-        error: "密码更改失败"
-      }
-    }
-  },
-  settingUserManagement: {
-    title: "使用者管理",
-    role: {
-      user: "普通使用者",
-      admin: "管理员"
-    },
-    dialog: {
-      //create
-      create: "建立使用者",
-      createBtn: "建立",
-      userCreated: "使用者建立成功",
-      userCreateFailed: "建立使用者时发生错误",
-      userCreateUsernameRepeat: "使用者名称已被使用",
-      //edit
-      edit: "编辑使用者",
-      //changePassword
-      changePassword: "更改密码",
-      changePasswordSuccess: "密码已变更",
-      changePasswordFailed: "更改密码时发生了错误",
-      enterNewPassword: "请输入新密码",
-      //deleteUser
-      deleteUser: "删除使用者",
-      deleteUserFailed: "删除使用者时发生了错误"
-    },
-
-    field: {
-      name: "名称",
-      username: "使用者名称",
-      role: "权限",
-      password: "密码",
-      createTime: "建立時間",
-      lastLoginTime: "上次登入"
-    }
-  },
-  settingPravicy: {
-    title: "隐私",
-    description: "资料纪录设定",
-    notify: {
-      title: "关于 PokaPlayer 记录",
-      body:
-        "资料仅会于您的服务器进行运算，不会被上传至网络进行分析。 该功能可提供您更优质的使用体验（如：年度回顾、最近播放）。 若您有疑虑可于下方关闭此功能，并将已记录的资料清除。"
-    },
-    dataRecord: {
-      _: "资料纪录",
-      enabled: "启用",
-      disabled: "已停用",
-      clear: "清除目前已纪录资料",
-      logged: "目前已记录 {count} 笔资料",
-      loading: "正在统计资料...",
-      confirm: "您确定要清除资料吗？",
-      cleared: "资料已清除"
-    }
-  },
-  settingPins: {
-    title: "钉选管理",
-    deleteConfirm: "您确定要取消钉选此项目吗？"
   },
   adminLog: {
     title: "日志"
@@ -338,25 +108,7 @@ export default {
     timeShiftingReset: '重置',
     textEditor: '文字编辑器'
   },
-  review: {
-    notify: {
-      title: "您的年度回顾",
-      description: "回顾这一年里您最常听的歌曲、专辑与其他有关统计",
-      go: "走吧"
-    },
-    page: {
-      title: "Review",
-      subtitle: "你的 {year} 年度回顾",
-      mostPlayedSongs: "收听最多的歌曲",
-      mostPlayedAlbums: "收听最多的专辑",
-      mostPlayedArtists: "收听最多的演出者",
-      thankYouTitle: "感谢有你",
-      thankYouDescription: "感谢你使用 PokaPlayer，希望未来可以陪伴你走过更多时光！",
-    }
-  },
+  review: require('./review').default,
   install: require('./install').default,
-  settings: {
-    title: "設定",
-    config: require('./settings/config').default,
-  }
+  settings: require('./settings/index').default,
 };

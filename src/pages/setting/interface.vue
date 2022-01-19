@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-subheader>{{ $t('settingInterface.lang') }}</v-subheader>
+    <v-subheader>{{ $t('settings.interface.lang') }}</v-subheader>
     <div class="poka list">
       <div class="item" @click="langDialog = true" v-ripple>
         <div class="content">
@@ -8,13 +8,13 @@
             <v-icon class="bx">bx-planet</v-icon>
           </v-avatar>
           <div class="header">
-            <div class="head t-ellipsis">{{ $t('settingInterface.lang') }}</div>
+            <div class="head t-ellipsis">{{ $t('settings.interface.lang') }}</div>
             <div class="t-ellipsis">{{ $t('title', currentLang) }}</div>
           </div>
         </div>
       </div>
     </div>
-    <v-subheader>{{ $t('settingInterface.customize.bg._') }}</v-subheader>
+    <v-subheader>{{ $t('settings.interface.customize.bg._') }}</v-subheader>
     <div class="poka list">
       <div class="item" @click="customizeBgDialog = true" v-ripple>
         <div class="content">
@@ -22,12 +22,8 @@
             <v-icon class="bx">bx-image</v-icon>
           </v-avatar>
           <div class="header">
-            <div class="head t-ellipsis">
-              {{ $t('settingInterface.customize.bg._') }}
-            </div>
-            <div class="t-ellipsis">
-              {{ $t('settingInterface.customize.bg.description') }}
-            </div>
+            <div class="head t-ellipsis">{{ $t('settings.interface.customize.bg._') }}</div>
+            <div class="t-ellipsis">{{ $t('settings.interface.customize.bg.description') }}</div>
           </div>
         </div>
       </div>
@@ -37,28 +33,20 @@
             <v-icon class="bx">bx-paint-roll</v-icon>
           </v-avatar>
           <div class="header">
-            <div class="head t-ellipsis">
-              {{ $t('settingInterface.customize.bg_cover._') }}
-            </div>
-            <div class="t-ellipsis">
-              {{ $t('settingInterface.customize.bg_cover.description') }}
-            </div>
+            <div class="head t-ellipsis">{{ $t('settings.interface.customize.bg_cover._') }}</div>
+            <div class="t-ellipsis">{{ $t('settings.interface.customize.bg_cover.description') }}</div>
           </div>
         </div>
       </div>
-      <v-subheader>{{ $t('settingInterface.customize.theme') }}</v-subheader>
+      <v-subheader>{{ $t('settings.interface.customize.theme') }}</v-subheader>
       <div class="item" @click="themeDialog = true" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
             <v-icon class="bx">bxs-paint</v-icon>
           </v-avatar>
           <div class="header">
-            <div class="head t-ellipsis">
-              {{ $t('settingInterface.customize.theme_color._') }}
-            </div>
-            <div class="t-ellipsis">
-              {{ $t('settingInterface.customize.theme_color.description') }}
-            </div>
+            <div class="head t-ellipsis">{{ $t('settings.interface.customize.theme_color._') }}</div>
+            <div class="t-ellipsis">{{ $t('settings.interface.customize.theme_color.description') }}</div>
           </div>
         </div>
       </div>
@@ -79,28 +67,20 @@
             <v-icon class="bx">bx-palette</v-icon>
           </v-avatar>
           <div class="header">
-            <div class="head t-ellipsis">
-              {{ $t('settingInterface.customize.lyric._') }}
-            </div>
-            <div class="t-ellipsis">
-              {{ $t('settingInterface.customize.lyric.description') }}
-            </div>
+            <div class="head t-ellipsis">{{ $t('settings.interface.customize.lyric._') }}</div>
+            <div class="t-ellipsis">{{ $t('settings.interface.customize.lyric.description') }}</div>
           </div>
         </div>
       </div>
-      <v-subheader>{{ $t('settingInterface.customize.layout._') }}</v-subheader>
+      <v-subheader>{{ $t('settings.interface.customize.layout._') }}</v-subheader>
       <div class="item" @click="changeStyle('artist')" v-ripple>
         <div class="content">
           <v-avatar size="42px" item>
             <v-icon class="bx">{{ view.artist == 'card' ? 'bx-grid-alt' : 'bx-list-ul' }}</v-icon>
           </v-avatar>
           <div class="header">
-            <div class="head t-ellipsis">
-              {{ $t('settingInterface.customize.layout.artist') }}
-            </div>
-            <div class="t-ellipsis">
-              {{ $t('settingInterface.customize.layout.' + view.artist) }}
-            </div>
+            <div class="head t-ellipsis">{{ $t('settings.interface.customize.layout.artist') }}</div>
+            <div class="t-ellipsis">{{ $t('settings.interface.customize.layout.' + view.artist) }}</div>
           </div>
         </div>
       </div>
@@ -110,12 +90,8 @@
             <v-icon class="bx">{{ view.composer == 'card' ? 'bx-grid-alt' : 'bx-list-ul' }}</v-icon>
           </v-avatar>
           <div class="header">
-            <div class="head t-ellipsis">
-              {{ $t('settingInterface.customize.layout.composer') }}
-            </div>
-            <div class="t-ellipsis">
-              {{ $t('settingInterface.customize.layout.' + view.composer) }}
-            </div>
+            <div class="head t-ellipsis">{{ $t('settings.interface.customize.layout.composer') }}</div>
+            <div class="t-ellipsis">{{ $t('settings.interface.customize.layout.' + view.composer) }}</div>
           </div>
         </div>
       </div>
@@ -123,7 +99,7 @@
 
     <v-dialog v-model="bgHeightDialog" max-width="300">
       <v-card>
-        <div class="dialog-title mb-2">{{ $t('settingInterface.customize.bg_cover._') }}</div>
+        <div class="dialog-title mb-2">{{ $t('settings.interface.customize.bg_cover._') }}</div>
         <v-card-text>
           <div class="poka list">
             <div class="item" @click="setBgHeight('full')" v-ripple>
@@ -132,9 +108,7 @@
                   <v-icon class="bx">bxs-star</v-icon>
                 </v-avatar>
                 <div class="header">
-                  <div class="head">
-                    {{ $t('settingInterface.customize.bg_cover.options.full') }}
-                  </div>
+                  <div class="head">{{ $t('settings.interface.customize.bg_cover.options.full') }}</div>
                 </div>
               </div>
             </div>
@@ -144,9 +118,7 @@
                   <v-icon class="bx">bxs-star-half</v-icon>
                 </v-avatar>
                 <div class="header">
-                  <div class="head">
-                    {{ $t('settingInterface.customize.bg_cover.options.half') }}
-                  </div>
+                  <div class="head">{{ $t('settings.interface.customize.bg_cover.options.half') }}</div>
                 </div>
               </div>
             </div>
@@ -156,9 +128,7 @@
                   <v-icon class="bx">bx-star</v-icon>
                 </v-avatar>
                 <div class="header">
-                  <div class="head">
-                    {{ $t('settingInterface.customize.bg_cover.options.none') }}
-                  </div>
+                  <div class="head">{{ $t('settings.interface.customize.bg_cover.options.none') }}</div>
                 </div>
               </div>
             </div>
@@ -172,15 +142,21 @@
     </v-dialog>
     <v-dialog v-model="customizeBgDialog" max-width="1200">
       <v-card>
-        <div class="dialog-title mb-2">{{ $t('settingInterface.customize.bg._') }}</div>
+        <div class="dialog-title mb-2">{{ $t('settings.interface.customize.bg._') }}</div>
         <v-card-text>
           <poka-cards>
             <poka-card
               @click.native="bgPromptActive = true"
               poka-icon="bx-link"
-              :poka-title="$t('settingInterface.customize.bg.custom_link')"
+              :poka-title="$t('settings.interface.customize.bg.custom_link')"
             />
-            <poka-card v-for="{ name, src } in imgSources" @click.native="setBg(src)" :key="src" :poka-bg="src" :poka-title="name" />
+            <poka-card
+              v-for="{ name, src } in imgSources"
+              @click.native="setBg(src)"
+              :key="src"
+              :poka-bg="src"
+              :poka-title="name"
+            />
           </poka-cards>
         </v-card-text>
         <v-card-actions>
@@ -191,7 +167,7 @@
     </v-dialog>
     <v-dialog v-model="themeDialog" max-width="340">
       <v-card>
-        <div class="dialog-title mb-2">{{ $t('settingInterface.customize.theme_color._') }}</div>
+        <div class="dialog-title mb-2">{{ $t('settings.interface.customize.theme_color._') }}</div>
         <v-card-text>
           <v-color-picker
             style="margin: 8px auto !important"
@@ -211,7 +187,7 @@
     </v-dialog>
     <v-dialog v-model="bgPromptActive" max-width="420">
       <v-card>
-        <div class="dialog-title mb-2">{{ $t('settingInterface.customize.bg._') }}</div>
+        <div class="dialog-title mb-2">{{ $t('settings.interface.customize.bg._') }}</div>
         <v-card-text style="padding-bottom: 0">
           <v-text-field label="URL" v-model.trim="bgPromptTextbox" filled></v-text-field>
         </v-card-text>
@@ -224,10 +200,16 @@
     </v-dialog>
     <v-dialog v-model="langDialog" max-width="300">
       <v-card>
-        <div class="dialog-title mb-2">{{ $t('settingInterface.lang') }}</div>
+        <div class="dialog-title mb-2">{{ $t('settings.interface.lang') }}</div>
         <v-card-text>
           <div class="poka list">
-            <div class="item" v-for="(lang, index) of languages" :key="`lang${lang}-${index}`" @click="setLang(lang)" v-ripple>
+            <div
+              class="item"
+              v-for="(lang, index) of languages"
+              :key="`lang${lang}-${index}`"
+              @click="setLang(lang)"
+              v-ripple
+            >
               <div class="content">
                 <v-avatar size="24px" item>
                   <v-icon class="bx">bx-planet</v-icon>
@@ -247,7 +229,7 @@
     </v-dialog>
     <v-dialog v-model="lyricThemeDialog" max-width="300">
       <v-card>
-        <div class="dialog-title mb-2">{{ $t('settingInterface.customize.lyric._') }}</div>
+        <div class="dialog-title mb-2">{{ $t('settings.interface.customize.lyric._') }}</div>
         <v-card-text>
           <div class="poka list">
             <div class="item" @click="setLyricTheme('bigtext')" v-ripple>
@@ -303,16 +285,32 @@
         <div class="dialog-title mb-2">暗色主題配色方案</div>
         <v-card-text>
           <div class="poka list">
-            <div class="item" @click="setThemeScheme(item)" v-ripple v-for="item of themeSchemeList" :key="item" :color-scheme="item">
+            <div
+              class="item"
+              @click="setThemeScheme(item)"
+              v-ripple
+              v-for="item of themeSchemeList"
+              :key="item"
+              :color-scheme="item"
+            >
               <div class="content">
                 <v-avatar size="24px" item>
-                  <v-icon class="bx" style="color: var(--surface1) !important; text-shadow: 0 0 1px #fff">bxs-circle</v-icon>
+                  <v-icon
+                    class="bx"
+                    style="color: var(--surface1) !important; text-shadow: 0 0 1px #fff"
+                  >bxs-circle</v-icon>
                 </v-avatar>
                 <v-avatar size="24px" item>
-                  <v-icon class="bx" style="color: var(--surface2) !important; text-shadow: 0 0 1px #fff">bxs-circle</v-icon>
+                  <v-icon
+                    class="bx"
+                    style="color: var(--surface2) !important; text-shadow: 0 0 1px #fff"
+                  >bxs-circle</v-icon>
                 </v-avatar>
                 <v-avatar size="24px" item>
-                  <v-icon class="bx" style="color: var(--surface3) !important; text-shadow: 0 0 1px #fff">bxs-circle</v-icon>
+                  <v-icon
+                    class="bx"
+                    style="color: var(--surface3) !important; text-shadow: 0 0 1px #fff"
+                  >bxs-circle</v-icon>
                 </v-avatar>
                 <div class="header">
                   <div class="head" style="text-transform: capitalize">{{ item }}</div>
@@ -493,8 +491,8 @@ export default {
 
       document.getElementsByTagName('meta')['theme-color'].content = this.$vuetify.theme.isDark
         ? getComputedStyle(root)
-            .getPropertyValue('--surface2')
-            .trim()
+          .getPropertyValue('--surface2')
+          .trim()
         : 'rgb(245, 245, 245)'
 
       this.themeSchemeDialog = false

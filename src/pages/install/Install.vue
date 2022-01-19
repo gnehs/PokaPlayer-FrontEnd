@@ -36,6 +36,7 @@
             large
             color="primary"
             width="110px"
+            disabled
             @click="step = 2"
           >{{ $t('install.next') }}</v-btn>
         </div>
@@ -73,7 +74,7 @@
         <h1>{{ $t('install.done.title') }}</h1>
         <p class="text-center">{{ $t('install.done.description') }}</p>
         <div class="d-flex justify-center mt-8">
-          <v-btn rounded large color="primary" width="110px" to="/login">{{ $t('login') }}</v-btn>
+          <v-btn rounded large color="primary" width="110px" to="/login">{{ $t('login.title') }}</v-btn>
         </div>
       </div>
     </div>

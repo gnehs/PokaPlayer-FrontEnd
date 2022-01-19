@@ -1,21 +1,21 @@
 export default {
-  title: "System Settings",
+  title: "System settings",
   enabled: "Enabled",
   disabled: "Disabled",
   pokaplayer: {
     title: "PokaPlayer",
     debug: {
-      title: "Debug Mode",
+      title: "Debug mode",
       description: "Only for developers",
     },
     sc2tc: {
-      title: "Simplified to Traditional",
-      description: "Convert lyrics to Traditional Chinese",
+      title: "S2T",
+      description: "Convert Chinese to Traditional Chinese",
     },
     fixPunctuation: {
       title: "Fix Punctuation",
-      description: "Replace punctuation characters in Taiwan",
-    }
+      description: "Fix chinese punctuation",
+    },
   },
   DSM: {
     title: "DSM",
@@ -27,7 +27,7 @@ export default {
   },
   QQMusic: {
     title: "QQ Music",
-    description: "Lyrics Source",
+    description: "Lyrics source",
   },
   Netease2: {
     title: "Netease Cloud Music",
@@ -47,7 +47,7 @@ export default {
     categories: "Categories",
   },
   saveDialog: {
-    title: "Save Configuration",
-    description: "Restart the server to load the new settings file",
-  }
-}
+    title: "Save settings",
+    description: "The server will restart to load the new settings file",
+  },
+};

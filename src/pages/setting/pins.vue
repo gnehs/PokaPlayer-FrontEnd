@@ -9,7 +9,9 @@
           <div class="header">
             <div class="head t-ellipsis">
               {{ pin.name }}
-              <span style="font-size: 0.7em; opacity: 0.7; font-weight: normal">{{ $t(`source.${pin.source}`) }}</span>
+              <span
+                style="font-size: 0.7em; opacity: 0.7; font-weight: normal"
+              >{{ $t(`source.${pin.source}`) }}</span>
             </div>
             <div class="t-ellipsis">{{ $t(pin.type) }}</div>
           </div>
@@ -26,7 +28,7 @@
 
 <script>
 export default {
-  name: 'SettingPins',
+  name: 'settings.pins',
   data: () => ({
     pins: null
   }),
@@ -43,7 +45,7 @@ export default {
       })
     },
     async unPin(pin) {
-      if (confirm(i18n.t('settingPins.deleteConfirm'))) {
+      if (confirm(i18n.t('settings.pins.deleteConfirm'))) {
         this.axios.post(`${_setting('server')}/pokaapi/v2/pin/unpin`, pin).then(r => {
           this.getPins()
         })

@@ -1,4 +1,4 @@
-export default {
+﻿export default {
   title: "系统设定",
   enabled: "启用",
   disabled: "停用",
@@ -47,7 +47,7 @@ export default {
     categories: "分类",
   },
   saveDialog: {
-    title: "保存设定",
+    title: "储存设定",
     description: "将会重新启动服务器，以便载入新的设定档",
   }
 }

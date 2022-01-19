@@ -9,20 +9,20 @@
           @click.native="openUserDialog(user)"
           :poka-bg="false"
           :poka-title="user.username"
-          :poka-subtitle="$t('settingUserManagement.role.' + user.role)"
+          :poka-subtitle="$t('settings.userManagement.role.' + user.role)"
           poka-icon="bx-user"
         />
       </poka-cards>
     </v-slide-y-reverse-transition>
     <v-dialog v-model="userDialog" max-width="300">
       <v-card>
-        <div class="dialog-title mb-2">{{ $t('settingUserManagement.dialog.edit') }}</div>
+        <div class="dialog-title mb-2">{{ $t('settings.userManagement.dialog.edit') }}</div>
         <v-card-text>
           <div class="poka list">
             <div class="item" v-ripple>
               <div class="content">
                 <div class="header">
-                  <div class="head t-ellipsis">{{ $t('settingUserManagement.field.name') }}</div>
+                  <div class="head t-ellipsis">{{ $t('settings.userManagement.field.name') }}</div>
                   <div class="t-ellipsis">{{ userTemp.name }}</div>
                 </div>
               </div>
@@ -30,7 +30,7 @@
             <div class="item" v-ripple>
               <div class="content">
                 <div class="header">
-                  <div class="head t-ellipsis">{{ $t('settingUserManagement.field.username') }}</div>
+                  <div class="head t-ellipsis">{{ $t('settings.userManagement.field.username') }}</div>
                   <div class="t-ellipsis">{{ userTemp.username }}</div>
                 </div>
               </div>
@@ -38,7 +38,7 @@
             <div class="item" v-ripple>
               <div class="content">
                 <div class="header">
-                  <div class="head t-ellipsis">{{ $t('settingUserManagement.field.role') }}</div>
+                  <div class="head t-ellipsis">{{ $t('settings.userManagement.field.role') }}</div>
                   <div class="t-ellipsis">{{ userTemp.role }}</div>
                 </div>
               </div>
@@ -46,7 +46,7 @@
             <div class="item" v-ripple>
               <div class="content">
                 <div class="header">
-                  <div class="head t-ellipsis">{{ $t('settingUserManagement.field.createTime') }}</div>
+                  <div class="head t-ellipsis">{{ $t('settings.userManagement.field.createTime') }}</div>
                   <div class="t-ellipsis">{{ new Date(userTemp.createTime).toLocaleString() }}</div>
                 </div>
               </div>
@@ -54,7 +54,9 @@
             <div class="item" v-ripple>
               <div class="content">
                 <div class="header">
-                  <div class="head t-ellipsis">{{ $t('settingUserManagement.field.lastLoginTime') }}</div>
+                  <div
+                    class="head t-ellipsis"
+                  >{{ $t('settings.userManagement.field.lastLoginTime') }}</div>
                   <div class="t-ellipsis">{{ new Date(userTemp.lastLoginTime).toLocaleString() }}</div>
                 </div>
               </div>
@@ -70,7 +72,7 @@
                 <div class="header">
                   <div
                     class="head t-ellipsis"
-                  >{{ $t('settingUserManagement.dialog.changePassword') }}</div>
+                  >{{ $t('settings.userManagement.dialog.changePassword') }}</div>
                 </div>
               </div>
             </div>
@@ -82,7 +84,7 @@
                   v-text="'bx-trash'"
                 />
                 <div class="header">
-                  <div class="head t-ellipsis">{{ $t('settingUserManagement.dialog.deleteUser') }}</div>
+                  <div class="head t-ellipsis">{{ $t('settings.userManagement.dialog.deleteUser') }}</div>
                 </div>
               </div>
             </div>
@@ -96,25 +98,25 @@
     </v-dialog>
     <v-dialog v-model="createUserDialog" max-width="300">
       <v-card>
-        <v-card-title class="headline">{{ $t('settingUserManagement.dialog.create') }}</v-card-title>
+        <v-card-title class="headline">{{ $t('settings.userManagement.dialog.create') }}</v-card-title>
         <v-card-text>
           <v-text-field
-            :label="$t('settingUserManagement.field.name')"
+            :label="$t('settings.userManagement.field.name')"
             v-model="userTemp.name"
             outlined
           ></v-text-field>
           <v-text-field
-            :label="$t('settingUserManagement.field.username')"
+            :label="$t('settings.userManagement.field.username')"
             v-model="userTemp.username"
             outlined
           ></v-text-field>
           <v-text-field
-            :label="$t('settingUserManagement.field.password')"
+            :label="$t('settings.userManagement.field.password')"
             v-model="userTemp.password"
             outlined
           ></v-text-field>
           <v-select
-            :label="$t('settingUserManagement.field.role')"
+            :label="$t('settings.userManagement.field.role')"
             :items="['admin', 'user']"
             v-model="userTemp.role"
             outlined
@@ -127,7 +129,7 @@
             text
             @click="createUser"
             color="primary"
-          >{{ $t('settingUserManagement.dialog.createBtn') }}</v-btn>
+          >{{ $t('settings.userManagement.dialog.createBtn') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -201,19 +203,19 @@ export default {
       let { name, username, password, role } = this.userTemp
       let createUserResult = await this.axios.post(_setting(`server`) + '/pokaapi/v2/users/create', { name, username, password, role })
       if (createUserResult.data.success) {
-        this.$snackbar(i18n.t('settingUserManagement.dialog.userCreated'))
+        this.$snackbar(i18n.t('settings.userManagement.dialog.userCreated'))
         this.createUserDialog = false
         this.fetchUsers()
       } else {
         if (createUserResult.data.error == 'username already taken') {
-          this.$snackbar(i18n.t('settingUserManagement.dialog.userCreateUsernameRepeat'))
+          this.$snackbar(i18n.t('settings.userManagement.dialog.userCreateUsernameRepeat'))
         } else {
-          this.$snackbar(i18n.t('settingUserManagement.dialog.userCreateFailed'))
+          this.$snackbar(i18n.t('settings.userManagement.dialog.userCreateFailed'))
         }
       }
     },
     async changePassword() {
-      let password = prompt(i18n.t('settingUserManagement.dialog.enterNewPassword'))
+      let password = prompt(i18n.t('settings.userManagement.dialog.enterNewPassword'))
       if (password) {
         await this.axios
           .post(_setting(`server`) + '/pokaapi/v2/users/change-password', {
@@ -221,9 +223,9 @@ export default {
             password
           })
           .catch(e => {
-            this.$snackbar(i18n.t('settingUserManagement.dialog.changePasswordFailed'))
+            this.$snackbar(i18n.t('settings.userManagement.dialog.changePasswordFailed'))
           })
-        this.$snackbar(i18n.t('settingUserManagement.dialog.changePasswordSuccess'))
+        this.$snackbar(i18n.t('settings.userManagement.dialog.changePasswordSuccess'))
       }
     },
     async deleteUser() {
@@ -233,7 +235,7 @@ export default {
             _id: this.userTemp._id
           })
           .catch(e => {
-            this.$snackbar(i18n.t('settingUserManagement.dialog.deleteUserFailed'))
+            this.$snackbar(i18n.t('settings.userManagement.dialog.deleteUserFailed'))
           })
         this.userDialog = false
         this.fetchUsers()
