@@ -1,8 +1,21 @@
 <template>
   <div>
     <v-slide-y-reverse-transition>
-      <transition-group name="songlist" tag="div" class="poka list" v-if="logs.length" style="position: relative">
-        <div class="item log" :class="[`level-${item.level}`]" v-for="item of logs" :key="item._id" @click="openLogDialog(item)" v-ripple>
+      <transition-group
+        name="songlist"
+        tag="div"
+        class="poka list"
+        v-if="logs.length"
+        style="position: relative"
+      >
+        <div
+          class="item log"
+          :class="[`level-${item.level}`]"
+          v-for="item of logs"
+          :key="item._id"
+          @click="openLogDialog(item)"
+          v-ripple
+        >
           <div class="content">
             <v-icon
               class="bx"
@@ -26,7 +39,13 @@
       <v-btn rounded color="primary" dark @click="getLogs" :loading="loading">More</v-btn>
     </div>
     <poka-loader v-if="loading && !logs.length" />
-    <v-card class="mx-auto blur-card" max-width="344" style="margin-top: 32px" key="card" v-if="!logs.length && !loading">
+    <v-card
+      class="mx-auto blur-card"
+      max-width="344"
+      style="margin-top: 32px"
+      key="card"
+      v-if="!logs.length && !loading"
+    >
       <v-card-text class="text-center">
         <v-icon class="bx bx-lg mb-2">bx-file</v-icon>
         <p class="headline text--primary">No logs available</p>
@@ -70,18 +89,24 @@
           </div>
           <div class="item log" v-ripple>
             <div class="content">
-              <v-icon class="bx" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="'bx-time'" />
+              <v-icon
+                class="bx"
+                :color="$vuetify.theme.isDark ? '#FFF' : 'primary'"
+                v-text="'bx-time'"
+              />
               <div class="header">
-                <div class="head t-ellipsis">
-                  {{ new Date(logDialogData.time).toLocaleString() }}
-                </div>
+                <div class="head t-ellipsis">{{ new Date(logDialogData.time).toLocaleString() }}</div>
                 <div class="t-ellipsis">Time</div>
               </div>
             </div>
           </div>
           <div class="item log" v-ripple>
             <div class="content">
-              <v-icon class="bx" :color="$vuetify.theme.isDark ? '#FFF' : 'primary'" v-text="'bx-user'" />
+              <v-icon
+                class="bx"
+                :color="$vuetify.theme.isDark ? '#FFF' : 'primary'"
+                v-text="'bx-user'"
+              />
               <div class="header">
                 <div class="head t-ellipsis">{{ logDialogData.user }}</div>
                 <div class="t-ellipsis">User</div>
@@ -117,6 +142,13 @@ export default {
   }),
   created() {
     this.getLogs()
+    if (document.querySelector('main')) document.querySelector('main').addEventListener('scroll', this.handleScroll)
+  },
+  mounted() {
+    if (document.querySelector('main')) document.querySelector('main').addEventListener('scroll', this.handleScroll)
+  },
+  destroyed() {
+    if (document.querySelector('main')) document.querySelector('main').removeEventListener('scroll', this.handleScroll)
   },
   methods: {
     async getLogs() {
@@ -154,7 +186,15 @@ export default {
     openLogDialog(item) {
       this.logDialogData = JSON.parse(JSON.stringify(item))
       this.logDialog = true
+    },
+    handleScroll(event) {
+      if (document.querySelector('main') && this.displayMore) {
+        let { scrollTop, scrollHeight } = document.querySelector('main')
+        if (scrollTop + window.innerHeight >= scrollHeight - 500) {
+          this.getLogs()
+        }
+      }
     }
-  }
+  },
 }
 </script>
