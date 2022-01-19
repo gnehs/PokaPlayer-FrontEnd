@@ -56,8 +56,8 @@
             <v-icon class="bx">bxs-color-fill</v-icon>
           </v-avatar>
           <div class="header">
-            <div class="head t-ellipsis">暗色主題配色方案</div>
-            <div class="t-ellipsis">選擇暗色主題的配色方案，讓您的主題更為美觀。</div>
+            <div class="head t-ellipsis">{{ $t('settings.interface.customize.themeScheme._') }}</div>
+            <div class="t-ellipsis">{{ $t('settings.interface.customize.themeScheme.description') }}</div>
           </div>
         </div>
       </div>
@@ -282,7 +282,7 @@
     </v-dialog>
     <v-dialog v-model="themeSchemeDialog" max-width="300">
       <v-card>
-        <div class="dialog-title mb-2">暗色主題配色方案</div>
+        <div class="dialog-title mb-2">{{ $t('settings.interface.customize.themeScheme._') }}</div>
         <v-card-text>
           <div class="poka list">
             <div

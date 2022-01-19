@@ -251,7 +251,7 @@
           <br />
           <v-card-actions v-show="restartCompleted">
             <v-spacer />
-            <v-btn text color="primary" @click="reload">{{ $t('settings_update_reconnect') }}</v-btn>
+            <v-btn text color="primary" @click="reload">{{ $t('settings.update.reconnect') }}</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

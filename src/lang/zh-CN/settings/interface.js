@@ -21,6 +21,10 @@
       _: "主色",
       description: "设定 PokaPlayer 的主题色彩"
     },
+    themeScheme: {
+      _: "暗色主題配色方案",
+      description: "選擇暗色主題的配色方案，讓您的主題更為美觀。"
+    },
     lyric: {
       _: "歌词页面主题",
       description: "设定歌词页面的主题"

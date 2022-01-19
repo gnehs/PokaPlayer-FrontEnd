@@ -21,6 +21,10 @@ export default {
       _: "Theme color",
       description: "Change the theme color"
     },
+    themeScheme: {
+      _: "Dark theme color scheme",
+      description: "Select the color scheme for dark theme"
+    },
     lyric: {
       _: "Lyric theme",
       description: "Change the theme of lyric page"

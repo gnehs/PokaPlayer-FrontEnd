@@ -8,7 +8,9 @@
           </v-avatar>
           <div class="header">
             <div class="head t-ellipsis">{{ $t('settings.network.soundQuality.title') }}</div>
-            <div class="t-ellipsis">{{ $t(`settings.network.soundQuality.${soundQuality}.title`) }}</div>
+            <div
+              class="t-ellipsis"
+            >{{ $t(`settings.network.soundQuality.${soundQuality.toLocaleLowerCase()}.title`) }}</div>
           </div>
         </div>
       </div>
@@ -25,8 +27,8 @@
               :key="index"
               poka-icon="bx-music"
               :ellipsis="false"
-              :poka-title="$t(`settings.network.soundQuality.${item}.title`)"
-              :poka-subtitle="$t(`settings.network.soundQuality.${item}.description`)"
+              :poka-title="$t(`settings.network.soundQuality.${item.toLocaleLowerCase()}.title`)"
+              :poka-subtitle="$t(`settings.network.soundQuality.${item.toLocaleLowerCase()}.description`)"
             />
           </poka-cards>
         </v-card-text>

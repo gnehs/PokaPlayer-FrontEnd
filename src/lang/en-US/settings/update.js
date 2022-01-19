@@ -15,5 +15,5 @@ export default {
   dialog_note: "Notice: If you have not enabled Docker auto-restart, you must manually start PokaPlayer.",
   dialog_note_dev: "If you update on developing machine, <mark>it may cause Git to crash</mark>",
   dialog_view_previous: "View previous update log",
-  dialog_title: "{version} update log",
+  dialog_title: "{version} Update log",
 }

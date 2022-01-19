@@ -21,6 +21,10 @@ export default {
       _: "主色",
       description: "設定 PokaPlayer 的主題色彩"
     },
+    themeScheme: {
+      _: "暗色主題配色方案",
+      description: "選擇暗色主題的配色方案，讓您的主題更為美觀。"
+    },
     lyric: {
       _: "歌詞頁面主題",
       description: "設定歌詞頁面的主題"

@@ -125,7 +125,7 @@
 export default {
   name: 'SettingSystem',
   data: () => ({
-    checkUpadteStatus: i18n.t('settings_update_checking4updates'),
+    checkUpadteStatus: i18n.t('settings.update.checking4updates'),
     restartConfirmActive: false,
     showUpdateDialog: false,
     showUpdateingDialog: false,
@@ -172,7 +172,7 @@ export default {
     update() {
       window._player.pause()
       this.showUpdateingDialog = true
-      this.updateLog += this.$t('settings_update_update2', { version: this.newVersion.tag }) + '\n'
+      this.updateLog += this.$t('settings.update.update2', { version: this.newVersion.tag }) + '\n'
 
       _socket.emit('login', {
         username: window._setting(`username`),
@@ -185,14 +185,14 @@ export default {
         alert('Permission Denied')
       })
       window._socket.on('init', () => {
-        this.updateLog += this.$t('settings_update_initializing') + '\n'
+        this.updateLog += this.$t('settings.update.initializing') + '\n'
       })
       window._socket.on('git', data => {
         this.updateLog +=
           {
-            fetch: this.$t('settings_update_git_fetch'),
-            reset: this.$t('settings_update_git_reset'),
-            api: this.$t('settings_update_git_api')
+            fetch: this.$t('settings.update.git_fetch'),
+            reset: this.$t('settings.update.git_reset'),
+            api: this.$t('settings.update.git_api')
           }[data] + '\n'
       })
       window._socket.on('restart', () => {

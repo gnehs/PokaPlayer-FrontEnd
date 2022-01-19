@@ -1,9 +1,14 @@
 <template>
   <div class="update-notify" key="0" v-if="checkUpadteStatus">
-    <h1>{{ $t('settings_update') }}</h1>
+    <h1>{{ $t('settings.update.title') }}</h1>
     <p>{{ checkUpadteStatus }}</p>
 
-    <v-btn outlined to="/admin/system?update=true" color="white" dark>{{ $t('settings_update_go2UpdatePage') }}</v-btn>
+    <v-btn
+      outlined
+      to="/admin/system?update=true"
+      color="white"
+      dark
+    >{{ $t('settings.update.go2UpdatePage') }}</v-btn>
   </div>
 </template>
 <style lang="sass" scoped>
@@ -66,7 +71,7 @@ export default {
           .catch(e => console.error(e))
       }
       if (this.compareVersion(currentVersion, githubRes[0].tag_name) || this.debug) {
-        this.checkUpadteStatus = i18n.t('settings_update_canUpdate2', {
+        this.checkUpadteStatus = i18n.t('settings.update.canUpdate2', {
           version: githubRes[0].tag_name
         })
         if (this.debug) this.checkUpadteStatus += ` (debug: ${this.debug})`
