@@ -119,7 +119,7 @@
     </v-dialog>
     <v-dialog v-model="lyric_theme_dialog" max-width="300">
       <v-card>
-        <v-card-title class="headline">{{ $t('settingInterface.customize.lyric._') }}</v-card-title>
+        <v-card-title class="headline">{{ $t('settings.interface.customize.lyric._') }}</v-card-title>
         <v-card-text>
           <div class="poka list">
             <div class="item" @click="setLyricTheme('bigtext')" v-ripple>
@@ -388,9 +388,9 @@ export default {
       font-size: 1.4em
       .theme--dark &
         text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
-    &+.tl
-      font-size: 1.2em
-      opacity: 1
+      &+.tl
+        font-size: 1.2em
+        opacity: 1
     &.tl
       transform: translateY(-10px)
     &.lyricTranslated
@@ -402,35 +402,35 @@ export default {
         .theme--dark &
           text-shadow: 0 1px 4px rgba(255, 255, 255, 0.4)
 @media (min-width: 576px)
-[theme="default"] .lyric
-  font-size: 18px
-[theme="bigtext"] .lyric
-  padding: 0 25px
-  p
-    font-size: 2em
-    line-height: 1.5em
-    font-weight: 900
-    transform: translateY(.1px)
-    transition: all .3s ease
-    opacity: .1
-    &.focus
-      opacity: 1
-      filter: none
-      &+.tl
+  [theme="default"] .lyric
+    font-size: 18px
+  [theme="bigtext"] .lyric
+    padding: 0 25px
+    p
+      font-size: 2em
+      line-height: 1.5em
+      font-weight: 900
+      transform: translateY(.1px)
+      transition: all .3s ease
+      opacity: .1
+      &.focus
         opacity: 1
         filter: none
-    &.tl
-      transform: translateY(-.4em)
-      font-size: 1.5em
+        &+.tl
+          opacity: 1
+          filter: none
+      &.tl
+        transform: translateY(-.4em)
+        font-size: 1.5em
 
-    @for $i from -4 through -1
-      &[data-lyric-set="#{$i}"]
-        transition-delay: #{.05*-$i}s
-        opacity: #{.5+.1*$i}
-    @for $i from 1 through 4
-      &[data-lyric-set="#{$i}"]
-        transition-delay: #{.05*-$i}s
-        opacity: #{.5-.1*$i}
+      @for $i from -4 through -1
+        &[data-lyric-set="#{$i}"]
+          transition-delay: #{.05*-$i}s
+          opacity: #{.5+.1*$i}
+      @for $i from 1 through 4
+        &[data-lyric-set="#{$i}"]
+          transition-delay: #{.05*-$i}s
+          opacity: #{.5-.1*$i}
 [theme="spacing"] .lyric
   padding: 0 25px
   text-align: center
