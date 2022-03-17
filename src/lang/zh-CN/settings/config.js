@@ -40,6 +40,7 @@
     method: "登入方式",
     account: "账号",
     password: "密码",
+    countrycode: "國碼",
     limit: "取得数量",
     order: "排序",
     order_hot: "热门",

@@ -40,6 +40,7 @@ export default {
     method: "Login Method",
     account: "Account",
     password: "Password",
+    countrycode: "Country code",
     limit: "Limit",
     order: "Order",
     order_hot: "Hot",

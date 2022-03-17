@@ -116,11 +116,31 @@
             outlined
             required
           />
+          <v-row no-gutters v-if="configs.Netease2.login.method == 'phone'">
+            <v-col cols="3">
+              <v-text-field
+                v-model="configs.Netease2.login.countrycode"
+                :label="$t('settings.config.Netease2.countrycode')"
+                outlined
+                required
+              />
+            </v-col>
+            <v-col cols="9">
+              <v-text-field
+                v-model="configs.Netease2.login.account"
+                :label="$t('settings.config.Netease2.account')"
+                class="ml-2"
+                outlined
+                required
+              />
+            </v-col>
+          </v-row>
           <v-text-field
             v-model="configs.Netease2.login.account"
             :label="$t('settings.config.Netease2.account')"
             outlined
             required
+            v-else
           />
           <v-text-field
             v-model="configs.Netease2.login.password"

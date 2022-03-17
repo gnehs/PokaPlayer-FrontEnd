@@ -40,6 +40,7 @@ export default {
     method: "登入方式",
     account: "帳號",
     password: "密碼",
+    countrycode: "國碼",
     limit: "取得數量",
     order: "排序",
     order_hot: "熱門",
