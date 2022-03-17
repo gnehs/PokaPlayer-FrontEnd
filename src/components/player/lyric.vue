@@ -365,6 +365,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+
 .save-current-lyric
   position: absolute
   bottom: 0
@@ -404,33 +405,34 @@ export default {
 @media (min-width: 576px)
   [theme="default"] .lyric
     font-size: 18px
-  [theme="bigtext"] .lyric
-    padding: 0 25px
-    p
-      font-size: 2em
-      line-height: 1.5em
-      font-weight: 900
-      transform: translateY(.1px)
-      transition: all .3s ease
-      opacity: .1
-      &.focus
+[theme="bigtext"] .lyric
+  padding: 0 25px
+  p
+    font-size: 2em
+    line-height: 1.5em
+    font-weight: 900
+    transform: translateY(.1px)
+    transition: all .3s ease
+    opacity: .1
+    filter: blur(.5px)
+    &.focus
+      opacity: 1
+      filter: none
+      &+.tl
         opacity: 1
         filter: none
-        &+.tl
-          opacity: 1
-          filter: none
-      &.tl
-        transform: translateY(-.4em)
-        font-size: 1.5em
+    &.tl
+      transform: translateY(-.4em)
+      font-size: 1.5em
 
-      @for $i from -4 through -1
-        &[data-lyric-set="#{$i}"]
-          transition-delay: #{.05*-$i}s
-          opacity: #{.5+.1*$i}
-      @for $i from 1 through 4
-        &[data-lyric-set="#{$i}"]
-          transition-delay: #{.05*-$i}s
-          opacity: #{.5-.1*$i}
+    @for $i from -4 through -1
+      &[data-lyric-set="#{$i}"]
+        transition-delay: #{.05*-$i}s
+        opacity: #{.5+.1*$i}
+    @for $i from 1 through 4
+      &[data-lyric-set="#{$i}"]
+        transition-delay: #{.05*-$i}s
+        opacity: #{.5-.1*$i}
 [theme="spacing"] .lyric
   padding: 0 25px
   text-align: center
