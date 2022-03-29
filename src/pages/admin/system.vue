@@ -87,14 +87,19 @@
     </v-dialog>
 
     <v-dialog v-model="showUpdateingDialog" persistent max-width="280">
-      <v-card>
+      <v-card dark style="background-color: rgb(0, 0, 0)!important;">
         <v-card-text style="padding: 0">
           <pre class="log" style="width: 280px; height: 200px">{{ updateLog }}</pre>
-          <v-progress-linear indeterminate color="primary" v-show="!showRestartCompleted"></v-progress-linear>
+          <v-progress-linear indeterminate color="black" v-show="!showRestartCompleted"></v-progress-linear>
         </v-card-text>
         <v-card-actions v-show="showRestartCompleted">
-          <v-spacer />
-          <v-btn text color="primary" @click="reload">{{ $t('settings.update.reconnect') }}</v-btn>
+          <v-btn
+            text
+            color="white"
+            @click="reload"
+            block
+            outlined
+          >{{ $t('settings.update.reconnect') }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -192,7 +197,7 @@ export default {
           {
             fetch: this.$t('settings.update.git_fetch'),
             reset: this.$t('settings.update.git_reset'),
-            api: this.$t('settings.update.git_api')
+            package_updated: this.$t('settings.update.package_updated'),
           }[data] + '\n'
       })
       window._socket.on('restart', () => {

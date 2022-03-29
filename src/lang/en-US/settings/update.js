@@ -11,9 +11,9 @@ export default {
   updating: "Updating...",
   git_fetch: "Initialize complete.",
   git_reset: "Update download complete.",
-  git_api: "API update complete.",
+  package_updated: "Package update complete.",
   dialog_note: "Notice: If you have not enabled Docker auto-restart, you must manually start PokaPlayer.",
-  dialog_note_dev: "If you update on developing machine, <mark>it may cause Git to crash</mark>",
+  dialog_note_dev: "Development mode update only shows the simulation result of the interface.",
   dialog_view_previous: "View previous update log",
   dialog_title: "{version} Update log",
 }

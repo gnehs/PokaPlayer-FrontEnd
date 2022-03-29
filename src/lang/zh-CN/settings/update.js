@@ -11,11 +11,11 @@
   updating: "正在更新...",
   git_fetch: "初始化完成",
   git_reset: "更新档下载完成",
-  git_api: "API 更新完成",
+  package_updated: "套件更新完成",
   dialog_note:
     "注意：若您未开启 Docker 自动重启功能，您必须手动开启 PokaPlayer",
   dialog_note_dev:
-    "若在开发机器上进行更新，<mark>可能导致 Git 爆炸</mark>",
+    "開發模式更新僅顯示用於測試介面的模擬結果",
   dialog_view_previous: "查看先前的更新日志",
   dialog_title: "{version} 更新日志",
 }
