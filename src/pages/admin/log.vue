@@ -114,7 +114,7 @@
             </div>
           </div>
         </div>
-        <pre class="log" style="padding: 16px">{{ logDialogData.description }}</pre>
+        <pre class="log" style="padding: 16px;overflow-y: scroll;">{{ logDialogData.description }}</pre>
       </v-card>
     </v-dialog>
   </div>
