@@ -1,10 +1,15 @@
 <template>
   <div style="display: flex; justify-content: flex-end">
     <v-slide-x-reverse-transition>
-      <form @submit.prevent="search" v-show="value" :style="{ width: $vuetify.breakpoint.mdAndUp ? '380px' : '100%' }">
+      <form
+        @submit.prevent="search"
+        v-show="value"
+        :style="{ width: $vuetify.breakpoint.mdAndUp ? '380px' : '100%' }"
+      >
         <v-text-field
-          :label="$t('search') + '...'"
+          :placeholder="$t('search') + '…'"
           v-model="seachBarVal"
+          autofocus
           solo
           flat
           background-color="rgba(0,0,0,.1)"
@@ -14,21 +19,13 @@
         />
       </form>
     </v-slide-x-reverse-transition>
-    <v-btn
-      icon
-      @click="
-        value = !value
-        $emit('input', value)
-        seachBarVal = ''
-      "
-    >
+    <v-btn icon @click="toggleSearchbar">
       <v-icon
         class="anicons"
         :style="{
           'font-variation-settings': value ? `'TIME' 100` : ``
         }"
-        >7</v-icon
-      >
+      >7</v-icon>
     </v-btn>
   </div>
 </template>
@@ -47,7 +44,14 @@ export default {
   }),
   methods: {
     search() {
-      this.$router.push('/search?keyword=' + encodeURIComponent(this.seachBarVal))
+      if (this.seachBarVal != '') {
+        this.$router.push('/search?keyword=' + encodeURIComponent(this.seachBarVal))
+      }
+    },
+    toggleSearchbar() {
+      this.value = !this.value;
+      this.$emit('input', this.value);
+      this.seachBarVal = '';
     }
   }
 }
