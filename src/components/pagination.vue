@@ -1,6 +1,10 @@
 <template>
   <div class="poka-pagination" v-show="length > 1" ref="pagination">
-    <div class="poka-pagination-item" @click="switchPage(value - 1)" :class="{ disabled: value == 1 }">
+    <div
+      class="poka-pagination-item"
+      @click="switchPage(value - 1)"
+      :class="{ disabled: value == 1 }"
+    >
       <v-icon class="bx">bx-chevron-left</v-icon>
     </div>
     <div
@@ -9,10 +13,12 @@
       :key="i"
       @click="switchPage(n)"
       :class="{ active: value == n, disabled: n == '...' }"
+    >{{ n }}</div>
+    <div
+      class="poka-pagination-item"
+      @click="switchPage(value + 1)"
+      :class="{ disabled: value == length }"
     >
-      {{ n }}
-    </div>
-    <div class="poka-pagination-item" @click="switchPage(value + 1)" :class="{ disabled: value == length }">
       <v-icon class="bx">bx-chevron-right</v-icon>
     </div>
   </div>
@@ -39,10 +45,8 @@ export default {
     switchPage(n) {
       if (n != '...' && n != this.value) {
         this.$emit('input', n)
-        this.$refs.pagination.parentElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        })
+        const y = this.$refs.pagination.parentElement.offsetTop - 16
+        document.querySelector('main').scrollTo({ top: y, behavior: 'smooth' });
         this.$nextTick(() => {
           this.updatePages()
         })
