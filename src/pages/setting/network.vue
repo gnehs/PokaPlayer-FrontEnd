@@ -23,7 +23,7 @@
           <poka-cards class="poka four doubling cards" :hide-overflow="false">
             <poka-card
               v-for="(item, index) of ['Low', 'Medium', 'High', 'Ori']"
-              @click.native="setSoundQuality('Low')"
+              @click.native="setSoundQuality(item)"
               :key="index"
               poka-icon="bx-music"
               :ellipsis="false"
