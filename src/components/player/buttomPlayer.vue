@@ -382,6 +382,19 @@ export default {
         width: 100%
         max-width: calc(100vw - 32px)
         overflow-y: scroll
+        &::-webkit-scrollbar
+          width: 4px
+        &::-webkit-scrollbar-track
+          background: transparent
+        &::-webkit-scrollbar-thumb
+          background: #888
+          border-radius: 2px
+        &::-webkit-scrollbar-thumb:hover
+          background: #777
+        &::-webkit-scrollbar-thumb:active
+          background: #666
+        &::-webkit-scrollbar-button
+          display: none
         .poka.list
           gap: 0
           .active
