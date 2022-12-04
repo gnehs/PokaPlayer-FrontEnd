@@ -42,7 +42,7 @@ export default {
   name: 'poka-review',
   created() {
     let currentTime = new Date()
-    if (currentTime.getMonth() == 12 - 1 && currentTime.getDate() > 25) {
+    if (currentTime.getMonth() == 12 - 1) {
       this.showNotify = true
     }
   },
