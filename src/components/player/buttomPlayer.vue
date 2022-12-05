@@ -191,13 +191,7 @@ export default {
           console.log('seek to', event.seekTime)
           _player.seek(event.seekTime)
 
-          if ('setPositionState' in navigator.mediaSession) {
-            navigator.mediaSession.setPositionState({
-              duration: _player.audio.duration || 0,
-              playbackRate: 1,
-              position: _player.audio.currentTime || 0
-            })
-          }
+          this.updatePositionState();
         })
       } catch (error) {
         console.warn('Warning! The "seekto" media session action is not supported.')
@@ -232,6 +226,9 @@ export default {
         this.audio_cover = cover
         this.audio_currentTime = this.secondToTime(currentTime)
         this.audio_totalTime = this.secondToTime(totalTime)
+
+        this.updatePositionState();
+        
         // record
         if (totalTime && currentTime + 10 > totalTime && !this.audio_recored && window._setting('dataRecord')) {
           this.audio_recored = true
@@ -246,8 +243,9 @@ export default {
         this.audio_artist = null
         this.audio_recored = false
         this.audio_cover = _setting(`headerBgSource`)
+        if (!navigator?.mediaSession?.metadata) return;
+
         if ('mediaSession' in navigator) {
-          console.log('[mediaSession] metadata cleared.')
           navigator.mediaSession.metadata = null
         }
       }
@@ -284,6 +282,13 @@ export default {
     switch_audio_order() {
       _player.options.order = _player.options.order === 'random' ? 'list' : 'random'
       this.audio_order = _player.options.order
+    },
+    updatePositionState(){
+      if (navigator?.mediaSession?.setPositionState) navigator.mediaSession.setPositionState({
+        duration: _player.audio.duration || 0,
+        playbackRate: 1,
+        position: _player.audio.currentTime || 0
+      })
     }
   }
 }
