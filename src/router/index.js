@@ -16,7 +16,19 @@ const router = createRouter({
             path: '/',
             name: 'Library',
             component: () => import('../pages/Library.vue')
+          },
+          {
+            path: '/settings',
+            name: 'Settings',
+            component: () => import('../pages/settings/Index.vue')
+          },
+          // 404
+          {
+            path: '/:pathMatch(.*)*',
+            name: '404',
+            component: () => import('../pages/404.vue')
           }
+
         ]
       }]
   }]

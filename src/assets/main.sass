@@ -1,12 +1,20 @@
 \:root
   --background-layer-1: #fff
   --background-layer-2: #f2f2f2
+  --background-layer-3: #e6e6e6
   --border-radius: 16px
   --padding: calc(var(--border-radius) / 2)
-  --text-color: #333
-  --border-color: #ccc
-  --border-focus-color: #878787
+  --text-color-value: 51,51,51
+  --text-color: rgba(var(--text-color-value), 1)
+  --border-color: rgba(var(--text-color-value), .1)
+  --border-focus-color: rgba(var(--text-color-value), .2)
   --border-width: 1px
   --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05)
+  --transition: 0.15s ease
+  --primary-color: #007bff
 body,html
   font-size: 16px
+  h1
+    font-size: 42px
+    font-weight: 400
+    margin: .2em 0
