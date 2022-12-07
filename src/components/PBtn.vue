@@ -18,6 +18,10 @@ export default {
       type: Boolean,
       default: false
     },
+    icon: {
+      type: Boolean,
+      default: false
+    }
   }
 }
 </script>

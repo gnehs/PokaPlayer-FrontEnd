@@ -142,13 +142,14 @@ export default {
         position: absolute
         left: calc(var(--padding) * 8)
         transition: all var(--transition)
-        transform: scale(0.2)
+        transform: scale(0.75) translateX(calc(var(--padding) * -5))
         filter: blur(2px)
         background-color: var(--background-layer-1)
         border: var(--border-width) solid var(--border-color)
         padding: var(--padding) calc(var(--padding) * 2)
         box-shadow: var(--box-shadow)
         border-radius: var(--border-radius)
+        pointer-events: none
       &:hover
         background-color: rgba(var(--text-color-value),0.05)
         .nav-item-text

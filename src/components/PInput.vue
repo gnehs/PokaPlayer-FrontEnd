@@ -55,6 +55,7 @@ export default {
       transition: all var(--transition)
   &:not(.value):not(:has(input:focus))
     .poka-text-input-label
+      cursor: text
       .poka-text-input-label-text
         transform: translateY(calc(var(--padding) * 2 + 16px)) translateX(var(--padding)) scale(1.1429)
         opacity: .5
