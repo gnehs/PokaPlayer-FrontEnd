@@ -1,37 +1,22 @@
 <template>
-  Library
-  Library
-  Library
-  Library
-  Library
-  Library
-  Library
-  Library
-  Library
-  Library
-  Library
-  Library
-  Library
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  Library<br>
-  <div style="height: 1000px;"></div>
-  Library<br>
+  <div>
+    Hi, {{ name }}
+  </div>
 </template>
+<script>
+import { useUserStore } from '@/stores/user'
+export default {
+
+  setup() {
+    const userStore = useUserStore()
+    return {
+      userStore
+    }
+  },
+  data() {
+    return {
+      name: this.userStore.userInfo.name
+    }
+  }
+}
+</script>

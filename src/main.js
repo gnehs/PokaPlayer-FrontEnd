@@ -17,7 +17,7 @@ Object.entries(components).forEach(([path, definition]) => {
   // Register component on this Vue instance
   app.component(componentName, definition.default)
 })
-app.provide('$PokaAPI', new PokaAPI())
+app.config.globalProperties.$PokaAPI = new PokaAPI()
 app.use(createPinia())
 app.use(router)
 

@@ -1,9 +1,7 @@
-<script setup>
-import { RouterView, RouterLink } from 'vue-router'
-</script>
+
 
 <template>
-  <div class="default-layout-container">
+  <div class="default-layout-container" v-if="!starting">
     <div class="header">
       <div class="logo">
         PokaPlayer
@@ -13,7 +11,6 @@ import { RouterView, RouterLink } from 'vue-router'
       </div>
       <div class="header-actions">
         <router-link class="header-action-item" v-for="item in actions" :to="item.to">
-
           <i class='nav-item-icon bx' :class="item.icon"></i>
         </router-link>
       </div>
@@ -31,15 +28,27 @@ import { RouterView, RouterLink } from 'vue-router'
       <bottom-player />
     </div>
   </div>
-  <LoginDialog v-model="loginDialog" />
+  <Loader v-else />
 </template>
 
 <script>
+import { useUserStore } from '@/stores/user'
+import { RouterView, RouterLink } from 'vue-router'
 export default {
   name: 'DefaultLayout',
+  setup() {
+    const userStore = useUserStore()
+    return {
+      userStore
+    }
+  },
+  components: {
+    RouterView,
+    RouterLink
+  },
   data() {
     return {
-      loginDialog: true,
+      starting: true,
       actions: [
         {
           icon: 'bx-cog',
@@ -55,6 +64,21 @@ export default {
         { icon: 'bx-pencil', text: 'composers', to: '/composers' },
         { icon: 'bxs-playlist', text: 'playlists', to: '/playlists' }
       ]
+    }
+  },
+  mounted() {
+    this.start()
+  },
+  methods: {
+    async start() {
+      try {
+        let userInfo = await this.$PokaAPI.getUserInfo()
+        this.starting = false
+        this.userStore.setUserInfo(userInfo)
+      } catch (e) {
+        console.log(e)
+        this.$router.push('/login')
+      }
     }
   }
 }

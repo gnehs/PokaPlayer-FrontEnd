@@ -1,8 +1,7 @@
 export default class {
-  #server
-  #username
-  #password
-  #isLogin = false
+  #server = localStorage.getItem('server') || ''
+  #username = localStorage.getItem('username') || ''
+  #password = localStorage.getItem('password') || ''
   constructor() {
   }
   /**
@@ -16,13 +15,38 @@ export default class {
     this.#server = server.replace(/\/$/, '') // remove last "/"
     this.#username = username
     this.#password = password
-    await fetch(this.#server + '/logout/')
-    return await fetch(this.#server + '/login/', {
+    await fetch('/pokaapi/v2/user/logout/')
+
+    let res = await fetch('/pokaapi/v2/user/login/', {
       method: 'POST',
-      body: {
+      credentials: "same-origin",
+      body: JSON.stringify({
         username: this.#username,
         password: this.#password
+      }),
+      headers: {
+        'Content-Type': 'application/json'
       }
     }).then(response => response.json())
+    if (res.success) {
+      localStorage.setItem('server', this.#server)
+      localStorage.setItem('username', this.#username)
+      localStorage.setItem('password', this.#password)
+    }
+    return res
+  }
+  /**
+   * Get user info
+   * @return {Promise}
+   */
+  async getUserInfo() {
+    return await fetch('/pokaapi/v2/user/', {
+      method: 'GET',
+      credentials: "same-origin",
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(response => response.json())
+
   }
 }
