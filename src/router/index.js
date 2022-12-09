@@ -17,6 +17,11 @@ const router = createRouter({
           component: () => import('../pages/Library.vue')
         },
         {
+          path: '/recommend',
+          name: 'Recommend',
+          component: () => import('../pages/Recommend.vue')
+        },
+        {
           path: '/settings',
           name: 'Settings',
           component: () => import('../pages/settings/Index.vue')

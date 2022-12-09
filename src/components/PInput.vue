@@ -44,6 +44,7 @@ export default {
 .poka-text-input-container
   display: flex
   flex-direction: column
+  width: 100%
   &+.poka-text-input-container
     margin-top: calc(var(--padding) * 2)
   .poka-text-input-label

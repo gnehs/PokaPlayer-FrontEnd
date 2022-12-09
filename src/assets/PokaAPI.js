@@ -1,18 +1,15 @@
 export default class {
-  #server = localStorage.getItem('server') || ''
   #username = localStorage.getItem('username') || ''
   #password = localStorage.getItem('password') || ''
   constructor() {
   }
   /**
     * Send Login Request
-    * @param  {string} server
     * @param  {string} username
     * @param  {string} password
     * @return {Promise}
     */
-  async login(server, username, password) {
-    this.#server = server.replace(/\/$/, '') // remove last "/"
+  async login(username, password) {
     this.#username = username
     this.#password = password
     await fetch('/pokaapi/v2/user/logout/')
@@ -29,7 +26,6 @@ export default class {
       }
     }).then(response => response.json())
     if (res.success) {
-      localStorage.setItem('server', this.#server)
       localStorage.setItem('username', this.#username)
       localStorage.setItem('password', this.#password)
     }

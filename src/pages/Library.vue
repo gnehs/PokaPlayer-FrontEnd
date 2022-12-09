@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>資料庫</h1>
     Hi, {{ name }}
   </div>
 </template>

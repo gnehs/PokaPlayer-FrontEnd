@@ -6,12 +6,13 @@
       <div class="logo">
         PokaPlayer
       </div>
-      <div class="search-bar">
-        <input type="text" placeholder="Search" />
+      <div class="header-center" id="header-center">
+        123
       </div>
-      <div class="header-actions">
-        <router-link class="header-action-item" v-for="item in actions" :to="item.to">
+      <div class="header-actions" id="header-actions">
+        <router-link class="nav-item" v-for="item in actions" :to="item.to">
           <i class='nav-item-icon bx' :class="item.icon"></i>
+          <div class="nav-item-text">{{ item.text }}</div>
         </router-link>
       </div>
     </div>
@@ -50,10 +51,7 @@ export default {
     return {
       starting: true,
       actions: [
-        {
-          icon: 'bx-cog',
-          to: '/settings'
-        }
+        { icon: 'bx-cog', text: 'settings', to: '/settings', }
       ],
       nav: [
         { icon: 'bx-library', text: 'library', to: '/' },
@@ -104,90 +102,74 @@ export default {
       grid-template-columns: auto 1fr
     .logo
       padding: var(--border-radius)
-      font-family: 'Product Sans'
+      font-family: 'Product Sans', sans-serif
       font-size: 24px
-    .search-bar
+    .header-center
       display: flex
       align-items: center
       justify-content: center
       @media (max-width: 768px)
         display: none
-      input
-        width: 396px
-        padding: calc(var(--padding) * 1.5)
-        border: var(--border-width) solid var(--border-color)
-        border-radius: var(--border-radius)
-        background-color: var(--background-layer-1)
-        color: var(--text-color)
-        &:focus
-          outline: none
-          border-color: var(--border-focus-color)
     .header-actions
-      padding: var(--padding)
       display: flex
       align-items: center
       justify-content: flex-end
-      .header-action-item
-        padding: var(--padding)
-        display: flex
-        align-items: center
-        justify-content: center
-        text-decoration: none
-        border-radius: var(--border-radius)
-        &:hover
-          background-color: rgba(var(--text-color-value),0.05)
-        &:active
-          background-color: rgba(var(--text-color-value),0.1)
+      .nav-item
 
-        i
-          font-size: 24px
-          color: var(--text-color)
+        .nav-item-text
+          left: initial
+          top: calc(var(--padding) * 8)
+          right: 0
+          transform: scale(0.75) translateY(calc(var(--padding) * -5))
+        &:hover .nav-item-text
+          transform: none
   .nav
     grid-area: nav
     padding: 0 var(--padding)
-    .nav-item
-      padding: calc(var(--padding) * 2)
-      display: block
+  .nav-item
+    padding: calc(var(--padding) * 2)
+    display: block
+    border-radius: var(--border-radius)
+    color: var(--text-color)
+    text-decoration: none
+    display: flex
+    align-items: center
+
+    position: relative
+    transform: scale(.95)
+    transition: all var(--transition)
+    &:not(:first-child)
+      margin-top: calc(var(--padding) / 2)
+    .nav-item-icon
+      font-size: 24px
+    .nav-item-text
+      opacity: 0
+      position: absolute
+      left: calc(var(--padding) * 8)
+      transition: all var(--transition)
+      transform: scale(0.75) translateX(calc(var(--padding) * -5))
+      filter: blur(2px)
+      background-color: var(--background-layer-1)
+      border: var(--border-width) solid var(--border-color)
+      padding: var(--padding) calc(var(--padding) * 2)
+      box-shadow: var(--box-shadow)
       border-radius: var(--border-radius)
-      color: var(--text-color)
-      text-decoration: none
-      display: flex
-      align-items: center
-
-      position: relative
-
-      &:not(:first-child)
-        margin-top: calc(var(--padding) / 2)
-      .nav-item-icon
-        margin-right: calc(var(--padding) * 2)
-        font-size: 24px
+      pointer-events: none
+    &:hover
+      background-color: rgba(var(--text-color-value),0.05)
       .nav-item-text
-        opacity: 0
-        position: absolute
-        left: calc(var(--padding) * 8)
-        transition: all var(--transition)
-        transform: scale(0.75) translateX(calc(var(--padding) * -5))
-        filter: blur(2px)
-        background-color: var(--background-layer-1)
-        border: var(--border-width) solid var(--border-color)
-        padding: var(--padding) calc(var(--padding) * 2)
-        box-shadow: var(--box-shadow)
-        border-radius: var(--border-radius)
-        pointer-events: none
-      &:hover
-        background-color: rgba(var(--text-color-value),0.05)
-        .nav-item-text
-          opacity: 1
-          filter: blur(0)
-          transform: none
-      @media (max-width: 768px)
-        padding: calc(var(--padding) * 1.5)
-        .nav-item-text
-          left: calc(var(--padding) * 7)
-        .nav-item-icon
-          margin-right: 0
-      &.router-link-exact-active
-        background-color: rgba(var(--text-color-value),0.1)
+        opacity: 1
+        filter: blur(0)
+        transform: none
+    @media (max-width: 768px)
+      padding: calc(var(--padding) * 1.5)
+      .nav-item-text
+        left: calc(var(--padding) * 7)
+      .nav-item-icon
+        margin-right: 0
+    &.router-link-exact-active
+      background-color: rgba(var(--text-color-value),0.1)
+      transform: none
   .main
     grid-area: main
     background-color: var(--background-layer-1)

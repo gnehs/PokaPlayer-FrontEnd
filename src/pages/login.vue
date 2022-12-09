@@ -1,13 +1,14 @@
 <template>
-  <div>
-    <h1>登入</h1>
-    {{ server }}
-    <form @submit.prevent="login">
-      <p-input label="server" v-model="server" />
-      <p-input label="username" v-model="username" />
-      <p-input label="password" v-model="password" type="password" />
-      <p-btn type="submit">Login</p-btn>
-    </form>
+  <div class="login-container">
+    <div class="login-form">
+      <img class="logo" src="/img/icon.svg" alt="logo" />
+      <h1>PokaPlayer</h1>
+      <form @submit.prevent="login">
+        <p-input label="username" v-model="username" required />
+        <p-input label="password" v-model="password" type="password" required />
+        <p-btn type="submit" block style="margin-top: calc(var(--padding) * 2);">Login</p-btn>
+      </form>
+    </div>
   </div>
 </template>
 <script>
@@ -15,14 +16,13 @@ export default {
   name: 'LoginDialog',
   data() {
     return {
-      server: localStorage.getItem('server') || '',
       username: localStorage.getItem('username') || '',
       password: localStorage.getItem('password') || '',
     }
   },
   methods: {
     async login() {
-      let res = await this.$PokaAPI.login(this.server, this.username, this.password)
+      let res = await this.$PokaAPI.login(this.username, this.password)
       if (res.success) {
         this.$router.push('/')
       }
@@ -30,3 +30,33 @@ export default {
   }
 }
 </script>
+<style lang="sass" scoped>
+.login-container
+  display: flex
+  justify-content: center
+  align-items: center
+  height: 100vh
+  background-color: var(--background-layer-2)
+  .login-form
+    display: flex
+    flex-direction: column
+    align-items: center
+    background-color: var(--background-layer-1)
+    padding: calc(var(--padding) * 2)
+    border-radius: var(--border-radius)
+    .logo
+      --size: 72px
+      width: var(--size)
+      height: var(--size)
+      margin-top: calc(-1 * var(--size) / 2)
+    h1
+      font-size: 24px
+      text-align: left
+      font-family: 'Product Sans', sans-serif
+      margin-bottom: calc(var(--padding) * 4)
+    form
+      display: flex
+      flex-direction: column
+      align-items: center
+      width: 400px
+</style>

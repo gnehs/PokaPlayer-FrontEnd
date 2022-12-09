@@ -1,5 +1,5 @@
 <template>
-  <button class="p-btn" :class="{outline,text,icon}" :color="color" v-bind="$attrs">
+  <button class="p-btn" :class="{outline,text,icon,block}" :color="color" v-bind="$attrs">
     <slot />
   </button>
 </template>
@@ -21,6 +21,10 @@ export default {
     icon: {
       type: Boolean,
       default: false
+    },
+    block: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -34,8 +38,12 @@ export default {
   border-radius: var(--border-radius)
   cursor: pointer
   transition: all var(--transition)
+  font-size: 14px
+  line-height: 1.5
   &:hover
     background-color: var(--background-layer-3)
+  &:active
+    background-color: var(--background-layer-4)
   &.outline
     background-color: transparent
     border: 1px solid var(--background-layer-2)
@@ -51,4 +59,7 @@ export default {
     background-color: transparent
     &:hover
       background-color: var(--background-layer-3)
+  &.block
+    width: 100%
+    display: block
 </style>
