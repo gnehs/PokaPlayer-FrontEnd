@@ -29,28 +29,32 @@
       align-items: center
       justify-content: center
 
-      --cover-size: 64px
+      --cover-size: calc(var(--padding) * 5 + 24px)
       width: var(--cover-size)
       height: var(--cover-size)
+      display: flex
+      flex-direction: column
+      justify-content: center
+      margin-left: calc(var(--padding) / 2)
+
+      @media (max-width: 768px)
+        --cover-size: calc(var(--padding) * 3.5 + 24px)
       img
         width: var(--cover-size)
         height: var(--cover-size)
         border-radius: var(--border-radius)
         object-fit: cover
-      display: flex
-      flex-direction: column
-      justify-content: center
-      margin-left: calc(var(--padding) / 2)
     .track-info-text
       margin-left: var(--padding)
       display: flex
       flex-direction: column
       justify-content: center
+      font-size: 18px
+      @media (max-width: 768px)
+        font-size: 16px
       .track-name
-        font-size: 18px
         font-weight: 700
       .track-artist
-        font-size: 18px
         color: var(--text-color)
         opacity: .75
   .track-control

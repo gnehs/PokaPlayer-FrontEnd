@@ -8,15 +8,14 @@
   display: flex
   align-items: center
   justify-content: center
-  min-height: 100vh
-  min-height: 100svh
+  margin-top: 30vh
   .loader__spinner
     width: 40px
     height: 40px
     border: 4px solid transparent
     border-top-color: var(--primary-color)
     border-radius: 50%
-    animation: spin 1s linear infinite
+    animation: spin .5s linear infinite
     @keyframes spin
       to
         transform: rotate(360deg)
