@@ -28,7 +28,10 @@ const router = createRouter({
           {
             path: '/album/:source/:id',
             name: 'Album',
-            component: () => import('../pages/Album.vue')
+            component: () => import('../pages/Album.vue'),
+            meta: {
+              type: 'album'
+            }
           },
           {
             path: '/artists',
@@ -76,6 +79,19 @@ const router = createRouter({
             path: '/playlists',
             name: 'Playlists',
             component: () => import('../pages/Playlists.vue')
+          },
+          {
+            path: '/playlists/folder/:id',
+            name: 'PlaylistsFolder',
+            component: () => import('../pages/Playlists.vue')
+          },
+          {
+            path: '/playlist/:source/:id',
+            name: 'Playlist',
+            component: () => import('../pages/Album.vue'),
+            meta: {
+              type: 'playlist'
+            }
           },
           {
             path: '/settings',

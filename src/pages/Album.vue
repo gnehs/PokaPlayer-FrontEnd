@@ -5,27 +5,32 @@ const PokaAPI = inject('PokaAPI')
 const $route = useRoute();
 const albumData = ref(null);
 onMounted(async () => {
-  albumData.value = await PokaAPI.getAlbum($route.params.source, $route.params.id)
+  if ($route.meta.type == 'album') {
+    albumData.value = await PokaAPI.getAlbum($route.params.source, $route.params.id)
+  }
+  if ($route.meta.type == 'playlist') {
+    albumData.value = await PokaAPI.getPlaylist($route.params.source, $route.params.id)
+  }
 });
 </script>
 <template>
   <div v-if="albumData">
     <Teleport to="#header-center">
-      <p> {{ albumData.name }} <br /><small style="opacity: 0.5">專輯</small></p>
+      <p> {{ albumData.name ?? albumData.playlists[0].name }} <br /><small style="opacity: 0.5">{{ $route.meta.type }}</small></p>
     </Teleport>
     <div class="header">
       <div class="cover">
-        <img :src="albumData.cover" />
+        <img :src="albumData.cover ?? albumData.playlists[0].image" />
       </div>
       <div class="album-info">
         <div class="title">
-          {{ albumData.name }}
+          {{ albumData.name ?? albumData.playlists[0].name }}
         </div>
         <div class="artist">
-          {{ albumData.artist }}
+          {{ albumData.artist ?? albumData.playlists[0].source }}
         </div>
         <div class="meta">
-          <span>專輯</span>
+          <span>{{ $route.meta.type }}</span>
           <span>{{ albumData.songs.length }} 首歌曲</span>
         </div>
         <div class="actions">

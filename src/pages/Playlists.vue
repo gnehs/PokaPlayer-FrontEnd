@@ -1,17 +1,42 @@
 <script setup>
-import { ref, onMounted, inject } from 'vue'
+import { ref, onMounted, inject, watch } from 'vue'
 import { useRoute } from 'vue-router'
 const PokaAPI = inject('PokaAPI')
 const $route = useRoute();
 const playlists = ref(null);
 onMounted(async () => {
-  playlists.value = await PokaAPI.getPlaylists()
+  await getData()
 });
+watch(() => $route.path, async () => {
+  await getData()
+})
+async function getData() {
+  playlists.value = null
+  let res = await PokaAPI.getPlaylists()
+  if ($route.params?.id) res = res.playlistFolders.filter(p => p.id == $route.params.id)[0]
+  console.log(res)
+  playlists.value = res
+}
 </script>
 <template>
   <div v-if="playlists">
-    <parse-playlists :items="playlists.playlists" />
+    <div v-if="playlists.playlists?.length">
+      <h4 style="margin-bottom: calc(var(--padding) * 2)">playlists</h4>
+      <parse-playlists :items="playlists.playlists" />
+    </div>
+    <div v-if="playlists.playlistFolders?.length">
+      <h4 style="margin: calc(var(--padding) * 2) 0">Folders</h4>
+      <p-list-items>
+        <p-list-item v-for="item of playlists.playlistFolders" :to="`/playlists/folder/${item.id}`">
+          <p-list-item-icon-btn>
+            <i class='bx bx-folder'></i>
+          </p-list-item-icon-btn>
+          <p-list-item-content
+            :title="item.name"
+            :description="item.source" />
+        </p-list-item>
+      </p-list-items>
+    </div>
   </div>
   <Loader v-else />
-  <pre>{{ playlists }}</pre>
 </template>

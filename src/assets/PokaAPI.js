@@ -146,4 +146,14 @@ export default class {
   async getPlaylists() {
     return await this.#fetch({ url: '/pokaapi/playlists/' })
   }
+  /**
+   * Get Playlist
+   * @return {Promise} Promise object represents playlists
+   * @memberof PokaAPI
+   */
+  async getPlaylist(source, id) {
+    source = encodeURIComponent(source)
+    id = encodeURIComponent(id)
+    return await this.#fetch({ url: `/pokaapi/playlistSongs/?moduleName=${source}&id=${id}` })
+  }
 }
