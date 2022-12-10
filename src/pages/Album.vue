@@ -1,22 +1,11 @@
 <script setup>
-import { ref, onMounted, getCurrentInstance } from 'vue'
+import { ref, onMounted, inject } from 'vue'
 import { useRoute } from 'vue-router'
+const PokaAPI = inject('PokaAPI')
 const $route = useRoute();
-const $PokaAPI = getCurrentInstance().appContext.config.globalProperties.$PokaAPI;
 const albumData = ref(null);
-const yearMeta = ref(null);
 onMounted(async () => {
-  albumData.value = await $PokaAPI.getAlbum($route.params.source, $route.params.id)
-  let years = albumData.value.songs.map(x => x?.year).filter(x => x)
-  if (years.length) {
-    let startyear = Math.min(...years)
-    let endyear = Math.max(...years)
-    if (startyear == endyear) {
-      yearMeta.value = startyear
-    } else {
-      yearMeta.value = `${startyear} - ${endyear}`
-    }
-  }
+  albumData.value = await PokaAPI.getAlbum($route.params.source, $route.params.id)
 });
 </script>
 <template>
@@ -37,12 +26,13 @@ onMounted(async () => {
         </div>
         <div class="meta">
           <span>專輯</span>
-          <span v-if="yearMeta">{{ yearMeta }}</span>
           <span>{{ albumData.songs.length }} 首歌曲</span>
         </div>
         <div class="actions">
           <p-btn><i class='bx bx-play'></i> 全部播放</p-btn>
-          <p-btn><i class='bx bx-shuffle'></i> 隨機播放</p-btn>
+          <p-btn outline> <i class='bx bx-shuffle'></i> 隨機播放</p-btn>
+          <div class="spacer" />
+          <p-btn> <i class='bx bxs-pin'></i>釘選</p-btn>
         </div>
       </div>
     </div>
@@ -54,6 +44,13 @@ onMounted(async () => {
 .header
   display: flex
   gap: calc(var(--padding) * 2)
+  padding-bottom: calc(var(--padding) * 2)
+  border-bottom: 1px solid var(--background-layer-2)
+  @media (max-width: 768px)
+    flex-direction: column
+    gap: calc(var(--padding))
+    align-items: center
+    text-align: center
   .cover
     width: 200px
     height: 200px
@@ -67,6 +64,8 @@ onMounted(async () => {
   .album-info
     display: flex
     flex-direction: column
+    flex: 1
+    width: 100%
     .title
       font-size: 1.75rem
       font-weight: bold
@@ -78,6 +77,8 @@ onMounted(async () => {
     .meta
       display: flex
       margin-top: calc(var(--padding))
+      @media (max-width: 768px)
+        justify-content: center
       span
         font-size: 0.75rem
         color: var(--text-color)
@@ -91,6 +92,13 @@ onMounted(async () => {
       display: flex
       align-items: flex-end
       gap: var(--padding)
+      margin-top: calc(var(--padding))
+      @media (max-width: 768px)
+        justify-content: flex-end
+        flex-wrap: wrap
+        flex-direction: row
+      .spacer
+        flex: 1
 .p-list-items
   margin: 0 calc(var(--padding) * -1)
   margin-top: calc(var(--padding) * 2)

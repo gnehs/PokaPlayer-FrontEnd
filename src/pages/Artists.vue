@@ -1,13 +1,13 @@
 <script setup>
-import { ref, onMounted, getCurrentInstance, watch } from 'vue'
+import { ref, onMounted, inject, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const $route = useRoute();
-const $PokaAPI = getCurrentInstance().appContext.config.globalProperties.$PokaAPI;
+const PokaAPI = inject('PokaAPI')
 const artistData = ref(null);
 async function loadData() {
   artistData.value = null
-  artistData.value = await $PokaAPI[$route.meta.type == 'artists' ? 'getArtists' : 'getComposers']()
+  artistData.value = await PokaAPI[$route.meta.type == 'artists' ? 'getArtists' : 'getComposers']()
 }
 
 onMounted(async () => { await loadData() });

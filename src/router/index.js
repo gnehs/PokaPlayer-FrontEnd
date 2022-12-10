@@ -78,6 +78,11 @@ const router = createRouter({
             component: () => import('../pages/Folders.vue'),
           },
           {
+            path: '/playlists',
+            name: 'Playlists',
+            component: () => import('../pages/Playlists.vue')
+          },
+          {
             path: '/settings',
             name: 'Settings',
             component: () => import('../pages/settings/Index.vue')

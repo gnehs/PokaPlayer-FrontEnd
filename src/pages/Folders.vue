@@ -1,9 +1,9 @@
 
 <script setup>
-import { ref, onMounted, getCurrentInstance, watch } from 'vue'
+import { ref, onMounted, inject, watch } from 'vue'
 import { useRoute } from 'vue-router'
 const $route = useRoute();
-const $PokaAPI = getCurrentInstance().appContext.config.globalProperties.$PokaAPI
+const PokaAPI = inject('PokaAPI')
 const data = ref(null)
 
 onMounted(async () => {
@@ -11,12 +11,12 @@ onMounted(async () => {
 })
 watch(() => $route.path, async () => {
   await getData()
-}, { deep: true })
+})
 async function getData() {
   let source = $route.params?.source
   let id = $route.params?.id
   data.value = null
-  data.value = await $PokaAPI.getFolders(source, id)
+  data.value = await PokaAPI.getFolders(source, id)
 }
 </script>
 <template>
