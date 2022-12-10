@@ -1,3 +1,7 @@
+/**
+ * PokaAPI
+ * @class PokaAPI
+ */
 export default class {
   #username = localStorage.getItem('username') || ''
   #password = localStorage.getItem('password') || ''
@@ -133,5 +137,13 @@ export default class {
       url = `/pokaapi/folderFiles/?moduleName=${source}&id=${id}`
     }
     return await this.#fetch({ url })
+  }
+  /**
+   * Get Playlists
+   * @return {Promise} Promise object represents playlists
+   * @memberof PokaAPI
+   */
+  async getPlaylists() {
+    return await this.#fetch({ url: '/pokaapi/playlists/' })
   }
 }
