@@ -1,9 +1,9 @@
 <template>
-  <div class="poka-text-input-container" :class="{   value: value.length   }">
-    <label class="poka-text-input-label" :for="randomInputId">
-      <span class="poka-text-input-label-text">{{ label }}</span>
+  <div class="poka-text-input" :class="{   value: value.length   }">
+    <label class="poka-text-input__label" :for="randomInputId">
+      <span class="poka-text-input__label-text">{{ label }}</span>
     </label>
-    <input class="poka-text-input" :id="randomInputId" v-model="value" :type="type" v-bind="$attrs" placeholder="" />
+    <input class="poka-text-input__input" :id="randomInputId" v-model="value" :type="type" v-bind="$attrs" placeholder="" />
   </div>
 </template>
 <script>
@@ -41,16 +41,16 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
-.poka-text-input-container
+.poka-text-input
   display: flex
   flex-direction: column
   width: 100%
-  &+.poka-text-input-container
+  &+.poka-text-input
     margin-top: calc(var(--padding) * 2)
-  .poka-text-input-label
+  .poka-text-input__label
     display: flex
     align-items: center
-    .poka-text-input-label-text
+    .poka-text-input__label-text
       font-size: 14px
       color: var(--text-color)
       transition: all var(--transition)
@@ -66,7 +66,7 @@ export default {
       .poka-text-input-label-text
         color: var(--primary-color)
         font-weight: bold
-  .poka-text-input
+  .poka-text-input__input
     border: none
     outline: none
     background: none

@@ -1,4 +1,3 @@
-
 <script setup>
 import { ref, onMounted, getCurrentInstance } from 'vue'
 import { useRoute } from 'vue-router'

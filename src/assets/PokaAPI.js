@@ -118,4 +118,20 @@ export default class {
     }
     return await this.#fetch({ url })
   }
+  /**
+   * Get Folders
+   * @param  {string} source
+   * @param  {string} id
+   * @return {Promise} Promise object represents folders
+   * @memberof PokaAPI
+   */
+  async getFolders(source, id) {
+    let url = `/pokaapi/folders/`
+    if (source && id) {
+      source = encodeURIComponent(source)
+      id = encodeURIComponent(id)
+      url = `/pokaapi/folderFiles/?moduleName=${source}&id=${id}`
+    }
+    return await this.#fetch({ url })
+  }
 }

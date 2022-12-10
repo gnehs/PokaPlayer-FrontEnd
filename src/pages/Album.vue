@@ -46,11 +46,9 @@ onMounted(async () => {
         </div>
       </div>
     </div>
+    <parse-songs :items="albumData.songs" />
   </div>
   <Loader v-else />
-  <pre>
-    {{ albumData }}
-  </pre>
 </template>
 <style lang="sass" scoped>
 .header
@@ -93,4 +91,7 @@ onMounted(async () => {
       display: flex
       align-items: flex-end
       gap: var(--padding)
+.p-list-items
+  margin: 0 calc(var(--padding) * -1)
+  margin-top: calc(var(--padding) * 2)
 </style>

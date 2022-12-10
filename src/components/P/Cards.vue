@@ -6,6 +6,6 @@
 <style lang="sass" scoped>
 .p-cards
   display: grid
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr))
+  grid-template-columns: repeat(auto-fill, minmax(var(--min-card-width), 1fr))
   gap: calc(var(--padding) * 2)
 </style>
