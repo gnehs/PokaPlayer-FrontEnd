@@ -6,7 +6,7 @@
       <form @submit.prevent="login">
         <p-input label="username" v-model="username" required />
         <p-input label="password" v-model="password" type="password" required />
-        <p-btn type="submit" block style="margin-top: calc(var(--padding) * 2);">Login</p-btn>
+        <p-btn type="submit" block style="margin-top: calc(var(--padding) * 2);" color="primary">Login</p-btn>
       </form>
     </div>
   </div>

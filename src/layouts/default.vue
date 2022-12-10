@@ -1,13 +1,12 @@
 
 
 <template>
-  <div class="default-layout-container" v-if="!starting">
+  <div class="default-layout-container">
     <div class="header">
       <div class="logo">
         PokaPlayer
       </div>
       <div class="header-center" id="header-center">
-        123
       </div>
       <div class="header-actions" id="header-actions">
         <router-link class="nav-item" v-for="item in actions" :to="item.to">
@@ -23,13 +22,13 @@
       </router-link>
     </div>
     <div class="main">
-      <RouterView />
+      <Loader v-if="starting" />
+      <RouterView v-else />
     </div>
     <div class="player">
       <bottom-player />
     </div>
   </div>
-  <Loader v-else />
 </template>
 
 <script>
@@ -93,7 +92,7 @@ export default {
   grid-template-rows: auto 1fr
   grid-template-areas: "header header" "nav main" "player player"
   @media (max-width: 768px)
-    grid-template-columns: calc(var(--padding) * 5 + 24px) 1fr
+    grid-template-columns: calc(var(--padding) * 3.5 + 24px) 1fr
   .header
     grid-area: header
     display: grid
@@ -101,13 +100,16 @@ export default {
     @media (max-width: 768px)
       grid-template-columns: auto 1fr
     .logo
-      padding: var(--border-radius)
+      padding: calc(var(--padding) * 2)
       font-family: 'Product Sans', sans-serif
       font-size: 24px
     .header-center
       display: flex
       align-items: center
       justify-content: center
+      font-weight: bold
+      font-size: 18px
+      text-align: center
       @media (max-width: 768px)
         display: none
     .header-actions
@@ -115,7 +117,6 @@ export default {
       align-items: center
       justify-content: flex-end
       .nav-item
-
         .nav-item-text
           left: initial
           top: calc(var(--padding) * 8)
@@ -126,6 +127,8 @@ export default {
   .nav
     grid-area: nav
     padding: 0 var(--padding)
+    @media (max-width: 768px)
+      padding: 0 calc(var(--padding) * .25)
   .nav-item
     padding: calc(var(--padding) * 2)
     display: block
@@ -138,6 +141,7 @@ export default {
     position: relative
     transform: scale(.95)
     transition: all var(--transition)
+    z-index: 1
     &:not(:first-child)
       margin-top: calc(var(--padding) / 2)
     .nav-item-icon
@@ -157,10 +161,14 @@ export default {
       pointer-events: none
     &:hover
       background-color: rgba(var(--text-color-value),0.05)
+      outline: 0
       .nav-item-text
         opacity: 1
         filter: blur(0)
         transform: none
+    &:active
+      background-color: rgba(var(--text-color-value),0.075)
+
     @media (max-width: 768px)
       padding: calc(var(--padding) * 1.5)
       .nav-item-text

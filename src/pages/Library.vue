@@ -1,13 +1,14 @@
 <template>
   <div>
-    <h1>資料庫</h1>
+    <Teleport to="#header-center">
+      <p>媒體庫</p>
+    </Teleport>
     Hi, {{ name }}
   </div>
 </template>
 <script>
 import { useUserStore } from '@/stores/user'
 export default {
-
   setup() {
     const userStore = useUserStore()
     return {
