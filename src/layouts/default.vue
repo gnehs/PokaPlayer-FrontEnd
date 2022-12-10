@@ -160,14 +160,14 @@ export default {
       border-radius: var(--border-radius)
       pointer-events: none
     &:hover
-      background-color: rgba(var(--text-color-value),0.05)
+      background-color: rgba(var(--text-color-value),0.075)
       outline: 0
       .nav-item-text
         opacity: 1
         filter: blur(0)
         transform: none
     &:active
-      background-color: rgba(var(--text-color-value),0.075)
+      background-color: rgba(var(--text-color-value),0.15)
 
     @media (max-width: 768px)
       padding: calc(var(--padding) * 1.5)
@@ -176,7 +176,7 @@ export default {
       .nav-item-icon
         margin-right: 0
     &.router-link-exact-active
-      background-color: rgba(var(--text-color-value),0.1)
+      background-color: rgba(var(--text-color-value),0.15)
       transform: none
   .main
     grid-area: main

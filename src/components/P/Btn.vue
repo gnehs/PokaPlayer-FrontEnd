@@ -32,9 +32,9 @@ export default {
 <style lang="sass" scoped>
 .p-btn
   color: var(--text-color)
-  background-color: var(--background-layer-2)
+  background-color: rgba(var(--text-color-value), .075)
+  border: 1px solid transparent
   padding: var(--padding) calc(var(--padding) * 2)
-  border: none
   border-radius: var(--border-radius)
   cursor: pointer
   transition: all var(--transition)
@@ -45,28 +45,27 @@ export default {
   align-items: center
   justify-content: center
   gap: var(--padding)
+  box-shadow: inset 0 0 0 100px transparent
   &:hover
-    background-color: var(--background-layer-3)
+    box-shadow: inset 0 0 0 100px rgba(var(--text-color-value), .1)
+    border: 1px solid rgba(var(--text-color-value), .1)
   &:active
-    background-color: var(--background-layer-4)
+    box-shadow: inset 0 0 0 100px rgba(var(--text-color-value), .2)
+    border: 1px solid rgba(var(--text-color-value), .2)
   &[color="primary"]
     background-color: var(--primary-color)
     color: #FFF
   &.outline
     background-color: transparent
-    border: 1px solid var(--background-layer-2)
+    border-color: rgba(var(--text-color-value), .05)
     &:hover
-      background-color: var(--background-layer-3)
-      border: 1px solid var(--background-layer-3)
+      border-color: rgba(var(--text-color-value), .15)
+    &:active
+      border-color: rgba(var(--text-color-value), .25)
   &.text
     background-color: transparent
-    &:hover
-      background-color: var(--background-layer-3)
   &.icon
-    padding: 0
-    background-color: transparent
-    &:hover
-      background-color: var(--background-layer-3)
+    padding: var(--padding)
   &.block
     width: 100%
     display: block

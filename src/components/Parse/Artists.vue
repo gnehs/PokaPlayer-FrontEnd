@@ -8,7 +8,6 @@ const props = defineProps({
 })
 </script>
 <template>
-
   <p-cards>
     <p-card
       v-for="item of items"
