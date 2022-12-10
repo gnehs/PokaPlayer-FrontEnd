@@ -18,11 +18,6 @@ const router = createRouter({
             component: () => import('../pages/Library.vue')
           },
           {
-            path: '/recommend',
-            name: 'Recommend',
-            component: () => import('../pages/Recommend.vue')
-          },
-          {
             path: '/albums',
             name: 'Albums',
             component: () => import('../pages/Albums.vue'),
