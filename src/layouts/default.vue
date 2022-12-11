@@ -11,14 +11,14 @@
       <div class="header-actions" id="header-actions">
         <router-link class="nav-item" v-for="item in actions" :to="item.to">
           <i class='nav-item-icon bx' :class="item.icon"></i>
-          <div class="nav-item-text">{{ item.text }}</div>
+          <div class="nav-item-text">{{ $t(`nav.${item.text}`) }}</div>
         </router-link>
       </div>
     </div>
     <div class="nav">
       <router-link class="nav-item" v-for="item in nav" :to="item.to">
         <i class='nav-item-icon bx' :class="item.icon"></i>
-        <div class="nav-item-text">{{ item.text }}</div>
+        <div class="nav-item-text">{{ $t(`nav.${item.text}`) }}</div>
       </router-link>
     </div>
     <div class="main">
@@ -158,6 +158,7 @@ export default {
       box-shadow: var(--box-shadow)
       border-radius: var(--border-radius)
       pointer-events: none
+      white-space: nowrap
     &:hover
       background-color: rgba(var(--text-color-value),0.075)
       outline: 0

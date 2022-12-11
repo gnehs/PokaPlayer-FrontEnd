@@ -16,7 +16,7 @@ onMounted(async () => {
 <template>
   <div v-if="albumData">
     <Teleport to="#header-center">
-      <p> {{ albumData.name ?? albumData.playlists[0].name }} <br /><small style="opacity: 0.5">{{ $route.meta.type }}</small></p>
+      <p> {{ albumData.name ?? albumData.playlists[0].name }} <br /><small style="opacity: 0.5">{{ $t(`nav.${$route.meta.type}s`) }}</small></p>
     </Teleport>
     <div class="header">
       <div class="cover">
@@ -30,8 +30,8 @@ onMounted(async () => {
           {{ albumData.artist }}
         </div>
         <div class="meta">
-          <span>{{ $route.meta.type }}</span>
-          <span>{{ albumData.songs.length }} 首歌曲</span>
+          <span>{{ $t(`nav.${$route.meta.type}s`) }}</span>
+          <span>{{ $t(`songs`, albumData.songs.length, { count: albumData.songs.length }) }}</span>
         </div>
         <div class="actions">
           <p-btn><i class='bx bx-play'></i> 全部播放</p-btn>

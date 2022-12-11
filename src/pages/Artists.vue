@@ -15,7 +15,7 @@ watch($route, async () => { await loadData() }, { deep: true })
 </script>
 <template>
   <Teleport to="#header-center">
-    <p>{{ $route.meta.type }}</p>
+    <p>{{ $t(`nav.${$route.meta.type}`) }}</p>
   </Teleport>
   <Loader v-if="!artistData" />
   <parse-artists v-else :items="artistData" :type="$route.meta.type" />

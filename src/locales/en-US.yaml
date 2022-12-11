@@ -1,0 +1,13 @@
+language: 'Language'
+language_name: 'English'
+nav:
+  library:   'Library'
+  search:    'Search'
+  albums:    'Albums'
+  artists:   'Artists'
+  composers: 'Composers'
+  playlists: 'Playlists'
+  folders:   'Folders'
+  settings:  'Settings'
+  songs:     'Songs'
+songs: 'no songs | 1 song | {count} songs'

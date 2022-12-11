@@ -14,18 +14,20 @@ async function getData() {
   playlists.value = null
   let res = await PokaAPI.getPlaylists()
   if ($route.params?.id) res = res.playlistFolders.filter(p => p.id == $route.params.id)[0]
-  console.log(res)
   playlists.value = res
 }
 </script>
 <template>
+  <Teleport to="#header-center">
+    <p>{{ playlists?.name || $t(`nav.playlists`) }}</p>
+  </Teleport>
   <div v-if="playlists">
     <div v-if="playlists.playlists?.length">
-      <h4 style="margin-bottom: calc(var(--padding) * 2)">playlists</h4>
+      <h4 style="margin-bottom: calc(var(--padding) * 2)">{{ playlists.name || $t(`nav.playlists`) }}</h4>
       <parse-playlists :items="playlists.playlists" />
     </div>
     <div v-if="playlists.playlistFolders?.length">
-      <h4 style="margin: calc(var(--padding) * 2) 0">Folders</h4>
+      <h4 style="margin: calc(var(--padding) * 2) 0">{{ $t(`nav.folders`) }}</h4>
       <p-list-items>
         <p-list-item v-for="item of playlists.playlistFolders" :to="`/playlists/folder/${item.id}`">
           <p-list-item-icon-btn>

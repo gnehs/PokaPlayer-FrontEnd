@@ -20,13 +20,16 @@ async function getData() {
 }
 </script>
 <template>
+  <Teleport to="#header-center">
+    <p>{{ $t(`nav.folders`) }}</p>
+  </Teleport>
   <div v-if="data">
     <div v-if="data.songs.length">
-      <h4>Songs</h4>
+      <h4>{{ $t(`nav.songs`) }}</h4>
       <parse-songs :items="data.songs" />
     </div>
     <div v-if="data.folders.length">
-      <h4>Folders</h4>
+      <h4>{{ $t(`nav.folders`) }}</h4>
       <p-list-items>
         <p-list-item v-for="item of data.folders" :to="`/folder/${item.source}/${item.id}`">
           <p-list-item-icon-btn>

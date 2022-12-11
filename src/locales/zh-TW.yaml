@@ -1,0 +1,13 @@
+language: '語言'
+language_name: '繁體中文'
+nav:
+  library:   '媒體庫'
+  search:    '搜尋'
+  albums:    '專輯'
+  artists:   '演出者'
+  composers: '作曲者'
+  playlists: '播放清單'
+  folders:   '資料夾'
+  settings:  '設定'
+  songs:     '歌曲'
+songs: '沒有歌曲 | 1 首歌曲 | {count} 首歌曲'
