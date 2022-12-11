@@ -4,6 +4,49 @@ export default class {
     this.player = new APlayer({
       container: document.getElementById("player")
     });
+    if ('mediaSession' in navigator) {
+      setInterval(() => {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: this.trackInfo.name,
+          artist: this.trackInfo.artist,
+          album: this.trackInfo.album,
+          artwork: [
+            { src: this.trackInfo.cover },
+          ]
+        });
+        navigator.mediaSession.playbackState = this.paused ? 'paused' : `playing`
+
+        if ('setPositionState' in navigator.mediaSession) {
+          navigator.mediaSession.setPositionState({
+            duration: this.player.audio.duration || 0,
+            playbackRate: 1,
+            position: this.player.audio.currentTime || 0
+          })
+        }
+      }, 100);
+      navigator.mediaSession.setActionHandler('play', () => {
+        this.player.play()
+        navigator.mediaSession.playbackState = 'playing'
+      })
+      navigator.mediaSession.setActionHandler('pause', () => {
+        this.player.pause()
+        navigator.mediaSession.playbackState = 'paused'
+      })
+      navigator.mediaSession.setActionHandler('previoustrack', () => {
+        this.previous()
+      })
+      navigator.mediaSession.setActionHandler('nexttrack', () => {
+        this.next()
+      })
+      try {
+        navigator.mediaSession.setActionHandler('seekto', event => {
+          console.log('seek to', event.seekTime)
+          this.player.seek(event.seekTime)
+        })
+      } catch (error) {
+        console.warn('Warning! The "seekto" media session action is not supported.')
+      }
+    }
   }
   toggle() {
     this.player.toggle();
