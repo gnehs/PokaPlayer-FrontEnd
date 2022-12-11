@@ -12,7 +12,7 @@ onMounted(async () => {
 <template>
   <div>
     <Teleport to="#header-center">
-      <p>媒體庫</p>
+      <p>{{ $t(`nav.library`) }}</p>
     </Teleport>
     <parse-home :items="home" />
   </div>
