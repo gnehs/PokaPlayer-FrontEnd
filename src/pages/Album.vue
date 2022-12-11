@@ -27,7 +27,7 @@ onMounted(async () => {
           {{ albumData.name ?? albumData.playlists[0].name }}
         </div>
         <div class="artist">
-          {{ albumData.artist ?? albumData.playlists[0].source }}
+          {{ albumData.artist }}
         </div>
         <div class="meta">
           <span>{{ $route.meta.type }}</span>

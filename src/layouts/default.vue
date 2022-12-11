@@ -139,7 +139,6 @@ export default {
     align-items: center
 
     position: relative
-    transform: scale(.95)
     transition: all var(--transition)
     z-index: 1
     &:not(:first-child)
@@ -149,7 +148,7 @@ export default {
     .nav-item-text
       opacity: 0
       position: absolute
-      left: calc(var(--padding) * 8)
+      left: calc(var(--padding) * 7.5)
       transition: all var(--transition)
       transform: scale(0.75) translateX(calc(var(--padding) * -5))
       filter: blur(2px)
