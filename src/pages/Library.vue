@@ -1,24 +1,19 @@
+<script setup>
+import { ref, inject, onMounted } from 'vue'
+// import { useUserStore } from '@/stores/user'
+// const userStore = useUserStore()
+// const name = reactive(userStore.userInfo.name)
+const PokaAPI = inject('PokaAPI')
+const home = ref(null)
+onMounted(async () => {
+  home.value = await PokaAPI.getHome()
+})
+</script>
 <template>
   <div>
     <Teleport to="#header-center">
       <p>媒體庫</p>
     </Teleport>
-    Hi, {{ name }}
+    <parse-home :items="home" />
   </div>
 </template>
-<script>
-import { useUserStore } from '@/stores/user'
-export default {
-  setup() {
-    const userStore = useUserStore()
-    return {
-      userStore
-    }
-  },
-  data() {
-    return {
-      name: this.userStore.userInfo.name
-    }
-  }
-}
-</script>

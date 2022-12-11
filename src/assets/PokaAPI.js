@@ -156,4 +156,12 @@ export default class {
     id = encodeURIComponent(id)
     return await this.#fetch({ url: `/pokaapi/playlistSongs/?moduleName=${source}&id=${id}` })
   }
+  /**
+   * Get Home
+   * @return {Promise} Promise object represents home
+   * @memberof PokaAPI
+   */
+  async getHome() {
+    return await this.#fetch({ url: '/pokaapi/home/' })
+  }
 }

@@ -18,3 +18,10 @@ source:
   Netease2: '網易雲音樂'
   poka: 'Poka'
   DSM: 'DSM'
+home:
+  home_pins: '釘選'
+  home_recentAlbums: '最近新增的專輯'
+  home_hqPlaylist_netease: '高品質播放清單'
+  home_topPlaylist_netease: '熱門播放清單'
+  home_dailyRecommend_netease: '每日推薦'
+  home_netease: '網易雲音樂'

@@ -18,3 +18,10 @@ source:
   Netease2: '网易云音乐'
   poka: 'Poka'
   DSM: 'DSM'
+home:
+  home_pins: '钉选'
+  home_recentAlbums: '最近新增的专辑'
+  home_hqPlaylist_netease: '精品播放列表'
+  home_topPlaylist_netease: '热门播放列表'
+  home_dailyRecommend_netease: '每日推荐'
+  home_netease: '网易云音乐'
