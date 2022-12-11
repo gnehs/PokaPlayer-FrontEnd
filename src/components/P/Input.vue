@@ -1,9 +1,9 @@
 <template>
-  <div class="poka-text-input" :class="{ value: value.length }">
-    <label class="poka-text-input__label" :for="randomInputId">
-      <span class="poka-text-input__label-text">{{ label }}</span>
+  <div class="p-input" :class="{ value: value.length }">
+    <label class="p-input__label" :for="randomInputId">
+      <span class="p-input__label-text">{{ label }}</span>
     </label>
-    <input class="poka-text-input__input" :id="randomInputId" v-model="value" :type="type" v-bind="$attrs" placeholder="" />
+    <input class="p-input__input" :id="randomInputId" v-model="value" :type="type" v-bind="$attrs" placeholder="" />
   </div>
 </template>
 <script>
@@ -41,32 +41,32 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
-.poka-text-input
+.p-input
   display: flex
   flex-direction: column
   width: 100%
-  &+.poka-text-input
+  &+.p-input
     margin-top: calc(var(--padding) * 2)
-  .poka-text-input__label
+  .p-input__label
     display: flex
     align-items: center
-    .poka-text-input__label-text
+    .p-input__label-text
       font-size: 14px
       color: var(--text-color)
       transition: all var(--transition)
   &:not(.value):not(:has(input:focus))
-    .poka-text-input__label
+    .p-input__label
       cursor: text
-      .poka-text-input__label-text
+      .p-input__label-text
         transform: translateY(calc(var(--padding) * 2 + 16px)) translateX(var(--padding)) scale(1.1429)
         opacity: .5
 
   &:has(input:focus)
-    .poka-text-input__label
-      .poka-text-input__label-text
+    .p-input__label
+      .p-input__label-text
         color: var(--primary-color)
         font-weight: bold
-  .poka-text-input__input
+  .p-input__input
     border: none
     outline: none
     background: none
