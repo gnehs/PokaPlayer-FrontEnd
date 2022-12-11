@@ -1,6 +1,5 @@
 <script setup>
 import { reactive, computed } from 'vue'
-
 import { useI18n } from 'vue-i18n'
 const borderRadius = computed({
   get() {
@@ -14,21 +13,22 @@ const padding = reactive(parseInt(document.documentElement.style.getPropertyValu
 function updateCSSVariables(e) {
   document.documentElement.style.setProperty('--padding', e.target.value + 'px')
 }
-const { locale, t } = useI18n({
+const { locale, availableLocales, t } = useI18n({
   inheritLocale: true,
   useScope: 'global'
 })
+console.log(useI18n({
+  inheritLocale: true,
+  useScope: 'global'
+}))
 </script>
 <template>
   <Teleport to="#header-center">
     <p>{{ $t('nav.settings') }}</p>
   </Teleport>
-  <h1>語言</h1>
-  <p>{{ locale }}</p>
+  <h1>語言 {{ locale }}</h1>
   <select v-model="locale">
-    <option value="zh-TW">zh-TW</option>
-    <option value="zh-CN">zh-CN</option>
-    <option value="en-US">en-US</option>
+    <option :value="locale" v-for="locale of availableLocales">{{ t(`language_name`, { locale }) }} - {{ locale }}</option>
   </select>
   <h1>實驗室</h1>
   <p>邊框半徑 </p>
