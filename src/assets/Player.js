@@ -6,14 +6,19 @@ export default class {
     });
     if ('mediaSession' in navigator) {
       setInterval(() => {
-        navigator.mediaSession.metadata = new MediaMetadata({
-          title: this.trackInfo.name,
-          artist: this.trackInfo.artist,
-          album: this.trackInfo.album,
-          artwork: [
-            { src: this.trackInfo.cover },
-          ]
-        });
+        if (this.trackInfo) {
+
+          navigator.mediaSession.metadata = new MediaMetadata({
+            title: this.trackInfo?.name || 'PokaPlayer',
+            artist: this.trackInfo?.artist || 'PokaPlayer',
+            album: this.trackInfo?.album || 'PokaPlayer',
+            artwork: [
+              { src: this.trackInfo?.cover },
+            ]
+          });
+        } else {
+          navigator.mediaSession.metadata = null
+        }
         navigator.mediaSession.playbackState = this.paused ? 'paused' : `playing`
 
         if ('setPositionState' in navigator.mediaSession) {
@@ -40,7 +45,6 @@ export default class {
       })
       try {
         navigator.mediaSession.setActionHandler('seekto', event => {
-          console.log('seek to', event.seekTime)
           this.player.seek(event.seekTime)
         })
       } catch (error) {
