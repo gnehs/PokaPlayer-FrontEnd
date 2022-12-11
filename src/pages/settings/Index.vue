@@ -29,7 +29,8 @@ console.log(useI18n({
   <h1>語言 {{ locale }}</h1>
   <select v-model="locale">
     <!-- TODO: Wait for issue #1235 to be fixed https://github.com/intlify/vue-i18n-next/issues/1235 -->
-    <option :value="locale" v-for="locale of availableLocales">{{ getLocaleMessage(locale).language_name({ normalize: (s) => s[0] }) }}
+    <option :value="locale" v-for="locale of availableLocales">
+      {{ getLocaleMessage(locale).language_name({ normalize: (s) => s[0] }) }}
     </option>
   </select>
   <h1>實驗室</h1>
