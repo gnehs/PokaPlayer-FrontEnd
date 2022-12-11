@@ -58,7 +58,7 @@ export default {
         { icon: 'bx-album', text: 'albums', to: '/albums' },
         { icon: 'bx-folder', text: 'folders', to: '/folders' },
         { icon: 'bx-microphone', text: 'artists', to: '/artists' },
-        { icon: 'bx-pencil', text: 'composers', to: '/composers' },
+        { icon: 'bxs-piano', text: 'composers', to: '/composers' },
         { icon: 'bxs-playlist', text: 'playlists', to: '/playlists' }
       ]
     }
