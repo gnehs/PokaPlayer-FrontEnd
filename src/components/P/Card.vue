@@ -14,7 +14,7 @@ const props = defineProps({
 <template>
   <component class="p-card" :is="to ? `RouterLink` : `div`" :to="to">
     <div class="p-card__img-container">
-      <img class="p-card__img" :src="imgSrc" v-if="imgSrc" />
+      <img class="p-card__img" :src="imgSrc" v-if="imgSrc" loading="lazy" />
       <div class="p-card__icon" v-if="icon">
         <i :class="icon"></i>
       </div>
