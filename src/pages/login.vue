@@ -59,4 +59,5 @@ export default {
       flex-direction: column
       align-items: center
       width: 400px
+      max-width: calc(100vw - 80px)
 </style>

@@ -100,6 +100,9 @@ setInterval(() => {
     align-items: center
     justify-content: center
     gap: calc(var(--padding) / 2)
+    .time
+      @media (max-width: 768px)
+        display: none
   .player-control
     display: flex
     align-items: center
