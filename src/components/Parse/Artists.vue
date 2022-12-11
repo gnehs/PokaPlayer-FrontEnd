@@ -14,7 +14,7 @@ const props = defineProps({
       :key="item.id"
       :imgSrc="item.cover"
       :title="item.name"
-      :source="item.source"
+      :source="$t(`source.${item.source}`)"
       :to="`/${type.slice(0, -1)}/${item.source}/${item.id}`" />
   </p-cards>
 </template>

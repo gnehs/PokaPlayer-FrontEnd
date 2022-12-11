@@ -35,7 +35,7 @@ async function getData() {
           </p-list-item-icon-btn>
           <p-list-item-content
             :title="item.name"
-            :description="item.source" />
+            :description="$t(`source.${item.source}`)" />
         </p-list-item>
       </p-list-items>
     </div>

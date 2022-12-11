@@ -11,3 +11,10 @@ nav:
   settings:  '設定'
   songs:     '歌曲'
 songs: '沒有歌曲 | 1 首歌曲 | {count} 首歌曲'
+404:
+  title: '找不到頁面'
+  description: '這個頁面可能已被移除或是不存在。'
+source:
+  Netease2: '網易雲音樂'
+  poka: 'Poka'
+  DSM: 'DSM'

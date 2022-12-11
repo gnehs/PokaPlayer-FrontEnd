@@ -10,7 +10,7 @@ const props = defineProps({
       :key="item.id"
       :imgSrc="item.image"
       :title="item.name"
-      :source="item.source"
+      :source="$t(`source.${item.source}`)"
       :to="`/playlist/${item.source}/${item.id}`" />
   </p-cards>
 </template>

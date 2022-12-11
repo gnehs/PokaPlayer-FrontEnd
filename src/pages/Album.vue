@@ -32,6 +32,7 @@ onMounted(async () => {
         <div class="meta">
           <span>{{ $t(`nav.${$route.meta.type}s`) }}</span>
           <span>{{ $t(`songs`, albumData.songs.length, { count: albumData.songs.length }) }}</span>
+          <span>{{ $t(`source.${$route.params.source}`) }}</span>
         </div>
         <div class="actions">
           <p-btn><i class='bx bx-play'></i> 全部播放</p-btn>

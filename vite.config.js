@@ -1,4 +1,4 @@
-import path from 'path'
+import { resolve, dirname } from 'node:path'
 import { fileURLToPath, URL } from 'node:url'
 
 import { defineConfig } from 'vite'
@@ -10,8 +10,7 @@ export default defineConfig({
   plugins: [
     vue(),
     vueI18n({
-      include: path.resolve(__dirname, './src/locales/**'),
-      compositionOnly: true
+      include: resolve(dirname(fileURLToPath(import.meta.url)), './src/locales/**')
     })
   ],
   resolve: {

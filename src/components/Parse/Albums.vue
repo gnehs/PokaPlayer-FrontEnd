@@ -11,7 +11,7 @@ const props = defineProps({
       :imgSrc="item.cover"
       :title="item.name"
       :description="item.artist"
-      :source="item.source"
+      :source="$t(`source.${item.source}`)"
       :to="`/album/${item.source}/${item.id}`" />
   </p-cards>
 </template>

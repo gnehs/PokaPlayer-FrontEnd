@@ -11,3 +11,10 @@ nav:
   settings:  'Settings'
   songs:     'Songs'
 songs: 'no songs | 1 song | {count} songs'
+404:
+  title: 'Page not found'
+  description: 'This page may have been removed or does not exist.'
+source:
+  Netease2: 'Netease'
+  poka: 'Poka'
+  DSM: 'DSM'

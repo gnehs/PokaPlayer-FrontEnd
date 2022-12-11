@@ -11,6 +11,7 @@ import './assets/main.sass'
 import PokaAPI from './assets/PokaAPI'
 const app = createApp(App)
 
+// Load all components in ./components/ directory
 const components = import.meta.globEager('./components/**/*.vue')
 Object.entries(components).forEach(([path, definition]) => {
   // Get name of component, based on filename
@@ -21,18 +22,19 @@ Object.entries(components).forEach(([path, definition]) => {
   app.component(componentName, definition.default)
 })
 
+// Set PokaAPI to global
 let pokaAPI = new PokaAPI()
 app.config.globalProperties.$PokaAPI = pokaAPI
+app.provide('PokaAPI', pokaAPI)
 
+// Setup i18n
 const i18n = createI18n({
   legacy: false,
   locale: 'zh-TW',
   messages
 })
-console.log(messages)
-
 app.use(i18n)
-app.provide('PokaAPI', pokaAPI)
+
 app.use(createPinia())
 app.use(router)
 
