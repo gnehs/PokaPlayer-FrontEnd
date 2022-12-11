@@ -25,7 +25,7 @@ async function getData() {
       data = await PokaAPI.getAlbums()
       break
   }
-  albums.value = data.albums
+  albums.value = data?.albums
 }
 </script>
 

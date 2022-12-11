@@ -8,8 +8,8 @@ export default class {
   toggle() {
     this.player.toggle();
   }
-  addSongs(songs, options = { index: 0, clear: true }) {
-    if (options.clear) {
+  addSongs({ songs = [], index = 0, clear = true }) {
+    if (clear) {
       this.player.list.clear();
     }
     let songRes = `original`
@@ -35,12 +35,12 @@ export default class {
     });
 
     this.player.list.add(playlist);
-    if (options.index && this.player.options.order === "random") {
-      this.player.options.order = "list";
-      this.player.list.switch(options.index);
-      this.player.options.order = "random";
-    } else if (options.index) {
-      this.player.list.switch(options.index);
+    if (index && this.player.audioOrder === "random") {
+      this.audioOrder = "list";
+      this.player.list.switch(index);
+      this.audioOrder = "random";
+    } else if (index) {
+      this.player.list.switch(index);
     }
     this.player.play();
   }

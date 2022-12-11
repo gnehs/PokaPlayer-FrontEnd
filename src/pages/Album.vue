@@ -15,7 +15,7 @@ onMounted(async () => {
 });
 function playAll(shuffle = false) {
   player.audioOrder = shuffle ? 'random' : 'list'
-  player.addSongs(albumData.value.songs)
+  player.addSongs({ songs: albumData.value.songs })
 }
 
 </script>

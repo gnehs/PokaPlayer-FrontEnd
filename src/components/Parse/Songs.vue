@@ -9,7 +9,7 @@ const props = defineProps({
 </script>
 <template>
   <p-list-items>
-    <p-list-item v-for="(item, i) of items" @click="player.addSongs(items, { index: i })">
+    <p-list-item v-for="(item, i) of items" @click="player.addSongs({ songs: items, index: i })">
       <p-list-item-img :src="item.cover" />
       <p-list-item-content
         :title="item.name"
