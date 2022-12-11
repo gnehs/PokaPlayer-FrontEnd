@@ -1,6 +1,6 @@
-# pokaplayer
+# PokaPlayer
 
-This template should help get you started developing with Vue 3 in Vite.
+Frontend for PokaPlayer, a web-based music player.
 
 ## Recommended IDE Setup
 
@@ -13,7 +13,8 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 ## Project Setup
 
 ```sh
-npm install
+# TODO: Wait for #424 to be merged https://github.com/vite-pwa/vite-plugin-pwa/pull/424
+npm install --force
 ```
 
 ### Compile and Hot-Reload for Development
