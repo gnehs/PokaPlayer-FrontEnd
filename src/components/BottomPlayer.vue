@@ -29,11 +29,12 @@ setInterval(() => {
     </div>
     <div class="track-info" v-else>
       <div class="cover">
-        <img src="/img/icon.svg" alt="cover" />
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath d='M0 0h1v1H0' fill='%23fff'/%3E%3C/svg%3E"
+          alt="cover" />
       </div>
       <div class="track-info-text">
         <div class="track-name">PokaPlayer</div>
-        <div class="track-artist">Meow~</div>
+        <div class="track-artist">PokaPlayer</div>
       </div>
     </div>
     <div class="track-control">

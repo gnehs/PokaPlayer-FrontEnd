@@ -7,7 +7,6 @@ export default class {
     if ('mediaSession' in navigator) {
       setInterval(() => {
         if (this.trackInfo) {
-
           navigator.mediaSession.metadata = new MediaMetadata({
             title: this.trackInfo?.name || 'PokaPlayer',
             artist: this.trackInfo?.artist || 'PokaPlayer',
