@@ -11,6 +11,7 @@ nav:
   settings:  '設定'
   songs:     '歌曲'
 songs: '沒有歌曲 | 1 首歌曲 | {count} 首歌曲'
+waitForPlay: '佇列中未有歌曲'
 404:
   title: '找不到頁面'
   description: '這個頁面可能已被移除或是不存在。'

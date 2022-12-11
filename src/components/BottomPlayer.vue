@@ -34,7 +34,7 @@ setInterval(() => {
       </div>
       <div class="track-info-text">
         <div class="track-name">PokaPlayer</div>
-        <div class="track-artist">PokaPlayer</div>
+        <div class="track-artist">{{ $t(`waitForPlay`) }}</div>
       </div>
     </div>
     <div class="track-control">
