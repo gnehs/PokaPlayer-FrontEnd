@@ -64,6 +64,8 @@ setInterval(() => {
       display: none
   .track-info
     display: flex
+    align-items: center
+    width: 100%
     .cover
       display: flex
       align-items: center
@@ -85,12 +87,20 @@ setInterval(() => {
         object-fit: cover
     .track-info-text
       margin-left: var(--padding)
-      display: flex
-      flex-direction: column
-      justify-content: center
       font-size: 18px
+      width: 100%
+      max-width: calc(50vw - 125px - 64px - var(--padding) * 2)
+      overflow: hidden
+      flex: 1
       @media (max-width: 768px)
         font-size: 16px
+        max-width: calc(100vw - 134px - 52px - var(--padding) * 2)
+      .track-artist,
+      .track-name
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+        width: 100%
       .track-name
         font-weight: 700
       .track-artist
