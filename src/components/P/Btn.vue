@@ -66,6 +66,7 @@ export default {
     background-color: transparent
   &.icon
     padding: var(--padding)
+    font-size: 24px
   &.block
     width: 100%
     display: block

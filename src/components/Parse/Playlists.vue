@@ -8,7 +8,7 @@ const props = defineProps({
     <p-card
       v-for="item of items"
       :key="item.id"
-      :imgSrc="item.image"
+      :imgSrc="item.cover"
       :title="item.name"
       :source="$t(`source.${item.source}`)"
       :to="`/playlist/${item.source}/${item.id}`" />

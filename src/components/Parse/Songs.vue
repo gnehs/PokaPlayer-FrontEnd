@@ -1,11 +1,15 @@
 <script setup>
+
+import { inject } from 'vue'
+const player = inject('Player')
 const props = defineProps({
   items: Array
 })
+
 </script>
 <template>
   <p-list-items>
-    <p-list-item v-for="item of items">
+    <p-list-item v-for="(item, i) of items" @click="player.addSongs(items, { index: i })">
       <p-list-item-img :src="item.cover" />
       <p-list-item-content
         :title="item.name"
@@ -17,5 +21,4 @@ const props = defineProps({
       </template>
     </p-list-item>
   </p-list-items>
-
 </template>

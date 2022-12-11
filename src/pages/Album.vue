@@ -2,6 +2,7 @@
 import { ref, onMounted, inject } from 'vue'
 import { useRoute } from 'vue-router'
 const PokaAPI = inject('PokaAPI')
+const player = inject('Player')
 const $route = useRoute();
 const albumData = ref(null);
 onMounted(async () => {
@@ -12,6 +13,11 @@ onMounted(async () => {
     albumData.value = await PokaAPI.getPlaylist($route.params.source, $route.params.id)
   }
 });
+function playAll(shuffle = false) {
+  player.audioOrder = shuffle ? 'random' : 'list'
+  player.addSongs(albumData.value.songs)
+}
+
 </script>
 <template>
   <div v-if="albumData">
@@ -20,7 +26,7 @@ onMounted(async () => {
     </Teleport>
     <div class="header">
       <div class="cover">
-        <img :src="albumData.cover ?? albumData.playlists[0].image" />
+        <img :src="(albumData.cover ?? albumData.playlists[0].cover)" />
       </div>
       <div class="album-info">
         <div class="title">
@@ -35,8 +41,8 @@ onMounted(async () => {
           <span>{{ $t(`source.${$route.params.source}`) }}</span>
         </div>
         <div class="actions">
-          <p-btn><i class='bx bx-play'></i> 全部播放</p-btn>
-          <p-btn outline> <i class='bx bx-shuffle'></i> 隨機播放</p-btn>
+          <p-btn @click="playAll()"><i class='bx bx-play'></i> 全部播放</p-btn>
+          <p-btn outline @click="playAll(true)"> <i class='bx bx-shuffle'></i> 隨機播放</p-btn>
           <div class="spacer" />
           <p-btn> <i class='bx bxs-pin'></i>釘選</p-btn>
         </div>

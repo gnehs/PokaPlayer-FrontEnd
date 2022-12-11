@@ -9,6 +9,7 @@ import router from './router'
 import 'reseter.css'
 import './assets/main.sass'
 import PokaAPI from './assets/PokaAPI'
+import Player from './assets/Player'
 const app = createApp(App)
 
 // Load all components in ./components/ directory
@@ -26,6 +27,11 @@ Object.entries(components).forEach(([path, definition]) => {
 let pokaAPI = new PokaAPI()
 app.config.globalProperties.$PokaAPI = pokaAPI
 app.provide('PokaAPI', pokaAPI)
+
+// Set Player to global
+const player = new Player()
+app.config.globalProperties.$Player = player
+app.provide('Player', player)
 
 // Setup i18n
 const i18n = createI18n({
