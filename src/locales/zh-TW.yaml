@@ -12,6 +12,9 @@ nav:
   songs:     '歌曲'
 songs: '沒有歌曲 | 1 首歌曲 | {count} 首歌曲'
 waitForPlay: '佇列中未有歌曲'
+login: '登入'
+username: '使用者名稱'
+password: '密碼'
 404:
   title: '找不到頁面'
   description: '這個頁面可能已被移除或是不存在。'

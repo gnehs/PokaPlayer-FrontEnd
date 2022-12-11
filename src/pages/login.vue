@@ -4,9 +4,9 @@
       <img class="logo" src="/img/icon.svg" alt="logo" />
       <h1>PokaPlayer</h1>
       <form @submit.prevent="login">
-        <p-input label="username" v-model="username" required />
-        <p-input label="password" v-model="password" type="password" required />
-        <p-btn type="submit" block style="margin-top: calc(var(--padding) * 2);" color="primary">Login</p-btn>
+        <p-input :label="$t(`username`)" v-model="username" required />
+        <p-input :label="$t(`password`)" v-model="password" type="password" required />
+        <p-btn type="submit" block style="margin-top: calc(var(--padding) * 2);" color="primary">{{ $t(`login`) }}</p-btn>
       </form>
     </div>
   </div>

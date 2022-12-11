@@ -12,6 +12,9 @@ nav:
   songs:     'Songs'
 songs: 'no songs | 1 song | {count} songs'
 waitForPlay: 'No songs in queue'
+login: 'Login'
+username: 'Username'
+password: 'Password'
 404:
   title: 'Page not found'
   description: 'This page may have been removed or does not exist.'
