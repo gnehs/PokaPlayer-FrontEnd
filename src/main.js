@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { createI18n } from 'vue-i18n'
-import messages from '@intlify/vite-plugin-vue-i18n/messages'
+import messages from '@intlify/unplugin-vue-i18n/messages'
 
 import App from './App.vue'
 import router from './router'
