@@ -14,6 +14,7 @@ onMounted(async () => {
     <Teleport to="#header-center">
       <p>{{ $t(`nav.library`) }}</p>
     </Teleport>
-    <parse-home :items="home" />
+    <parse-home :items="home" v-if="home" />
+    <Loader v-else />
   </div>
 </template>
