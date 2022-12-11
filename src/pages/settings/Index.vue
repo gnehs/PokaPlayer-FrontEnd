@@ -13,7 +13,7 @@ const padding = reactive(parseInt(document.documentElement.style.getPropertyValu
 function updateCSSVariables(e) {
   document.documentElement.style.setProperty('--padding', e.target.value + 'px')
 }
-const { locale, availableLocales, t } = useI18n({
+const { locale, availableLocales, getLocaleMessage } = useI18n({
   inheritLocale: true,
   useScope: 'global'
 })
@@ -28,7 +28,9 @@ console.log(useI18n({
   </Teleport>
   <h1>語言 {{ locale }}</h1>
   <select v-model="locale">
-    <option :value="locale" v-for="locale of availableLocales">{{ t(`language_name`, { locale }) }} - {{ locale }}</option>
+    <!-- TODO: Wait for issue #1235 to be fixed https://github.com/intlify/vue-i18n-next/issues/1235 -->
+    <option :value="locale" v-for="locale of availableLocales">{{ getLocaleMessage(locale).language_name({ normalize: (s) => s[0] }) }}
+    </option>
   </select>
   <h1>實驗室</h1>
   <p>邊框半徑 </p>

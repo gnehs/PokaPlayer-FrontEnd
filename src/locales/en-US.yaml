@@ -1,5 +1,5 @@
 language: 'Language'
-language_name: 'English'
+language_name: 'English (US)'
 nav:
   library:   'Library'
   search:    'Search'
