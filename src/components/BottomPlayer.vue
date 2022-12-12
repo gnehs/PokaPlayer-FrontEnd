@@ -98,6 +98,7 @@ onUnmounted(() => {
         height: var(--cover-size)
         border-radius: var(--border-radius)
         object-fit: cover
+        background-color: #fff
     .track-info-text
       margin-left: var(--padding)
       font-size: 18px

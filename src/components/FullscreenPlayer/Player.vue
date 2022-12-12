@@ -79,6 +79,7 @@ function playerSeek(e) {
       border-radius: var(--border-radius)
       border: 1px solid rgba(var(--text-color-value), .1)
       max-width: 400px
+      background-color: #fff
   .track-info-text
     .track-name,
     .track-artist

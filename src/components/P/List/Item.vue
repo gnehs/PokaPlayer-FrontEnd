@@ -50,6 +50,7 @@ const props = defineProps({
       aspect-ratio: 1/1
       border-radius: var(--border-radius)
       border: 1px solid var(--background-layer-2)
+      background-color: #fff
   .p-list-item__content-content
     .p-list-item__content-title
       font-size: 1rem
