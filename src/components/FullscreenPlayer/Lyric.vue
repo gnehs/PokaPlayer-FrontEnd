@@ -64,10 +64,8 @@ async function getLyric() {
   }
 }
 function timeStampToSeconds(timeStamp) {
-  timeStamp = timeStamp.replace(/\[|\]/g, '')
-  let time = timeStamp.split(':')
-  let seconds = parseInt(time[0]) * 60 + parseFloat(time[1])
-  return seconds
+  let time = timeStamp.replace(/\[|\]/g, '').split(':')
+  return parseInt(time[0]) * 60 + parseFloat(time[1])
 }
 async function loadLyric(lrcString) {
   lrcString = lrcString.replaceAll(`\r`, ``)
@@ -76,9 +74,9 @@ async function loadLyric(lrcString) {
   if (matches?.length > 0) {
     let lines = lrcString.split(`\n`)
     for (let i = 0; i < matches.length; i++) {
-      let seconds = timeStampToSeconds(matches[i])
+      let time = timeStampToSeconds(matches[i])
       let lyric = lines[i].replace(/\[(.+?)\]/, '')
-      result.push({ time: seconds, lyric })
+      result.push({ time, lyric })
     }
     lyric.value = result
     isLyricTranslated.value = result.at(-1).time == result.at(-2).time
