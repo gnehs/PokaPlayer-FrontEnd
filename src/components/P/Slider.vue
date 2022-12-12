@@ -9,7 +9,7 @@ const props = defineProps({
   }
 })
 const valueInPercent = computed(() => {
-  return (props.value / props.max * 100 + 0.5) || 0
+  return (props.value / props.max * 100 + 0.015) || 0
 })
 </script>
 <template>

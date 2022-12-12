@@ -1,8 +1,124 @@
-<template>
+<script setup>
 
-  <div class="fullscreen-player__lyric">Lyric</div>
+import { ref, inject, watch, onUnmounted, onMounted, nextTick } from 'vue'
+const player = inject('Player')
+const PokaAPI = inject('PokaAPI')
+
+const trackInfo = ref(null)
+const currentIndex = ref(-1)
+const rawCurrentTime = ref(-1)
+const currentLyricIndex = ref(-1)
+const isLyricTranslated = ref(false)
+const lyric = ref([])
+const lyricRegex = /\[[0-9]{1,}\:[0-9]{1,2}(\.[0-9]{1,})?\]/g
+let playerInterval = setInterval(() => {
+  trackInfo.value = player.trackInfo
+  currentIndex.value = player.currentIndex
+  rawCurrentTime.value = player.rawCurrentTime
+  // update currentLyricIndex
+  if (lyric.value != []) {
+    for (let i = 0; i < lyric.value.length; i++) {
+      if (rawCurrentTime.value + 0.3 >= lyric.value[i].time) {
+        currentLyricIndex.value = i
+        if (currentLyricIndex.value == lyric.value.length - 1 && isLyricTranslated.value) {
+          currentLyricIndex.value = i - 1
+        }
+      }
+    }
+  }
+}, 100)
+watch(currentLyricIndex, val => {
+  if (val && val != -1) {
+    // lyric changed
+    nextTick(() => {
+      document.querySelector(`.fullscreen-player__lyric .lyric-item.active`)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      })
+    })
+  }
+})
+watch(currentIndex, val => {
+  if (val && val != -1) {
+    // song changed
+    getLyric()
+  }
+})
+onMounted(() => {
+  trackInfo.value = player.trackInfo
+  currentIndex.value = player.currentIndex
+  rawCurrentTime.value = player.rawCurrentTime
+
+  getLyric()
+})
+async function getLyric() {
+  let { id, source } = trackInfo.value
+  lyric.value = []
+  isLyricTranslated.value = false
+  currentLyricIndex.value = -1
+  if (id) {
+    let res = await PokaAPI.getLyric(source, id)
+    console.log(res)
+    loadLyric(res.lyrics[0].lyric)
+  }
+}
+function timeStampToSeconds(timeStamp) {
+  timeStamp = timeStamp.replace(/\[|\]/g, '')
+  let time = timeStamp.split(':')
+  let seconds = parseInt(time[0]) * 60 + parseFloat(time[1])
+  return seconds
+}
+async function loadLyric(lrcString) {
+  lrcString = lrcString.replaceAll(`\r`, ``)
+  let matches = lrcString.match(lyricRegex)
+  let result = []
+  if (matches?.length > 0) {
+    let lines = lrcString.split(`\n`)
+    for (let i = 0; i < matches.length; i++) {
+      let seconds = timeStampToSeconds(matches[i])
+      let lyric = lines[i].replace(lyricRegex, '')
+      result.push({ time: seconds, lyric })
+    }
+    console.log(result)
+    lyric.value = result
+    isLyricTranslated.value = result.at(-1).time == result.at(-2).time
+  }
+}
+onUnmounted(() => {
+  clearInterval(playerInterval)
+})
+</script>
+<template>
+  <div class="fullscreen-player__lyric" :class="{ 'with-translated': isLyricTranslated }">
+    <div class="lyric-item"
+      v-for="(item, i) of lyric"
+      :class="{
+        active: i == currentLyricIndex,
+        translated: currentLyricIndex % 2 != i % 2
+      }">
+      {{ item.lyric }}
+    </div>
+  </div>
 </template>
 <style lang="sass" scoped>
 .fullscreen-player__lyric
-  background-color: #aaa
+  padding-bottom: 25vh
+  .lyric-item
+    line-height: 2
+    font-size: 24px
+    opacity: .5
+    margin: var(--padding)
+    transition: all .3s ease
+    &.active
+      opacity: 1
+  &.with-translated
+
+    .lyric-item
+      margin-bottom: 0
+      &.translated
+        margin-top: 0
+        margin-bottom: var(--padding)
+        font-size: 18px
+      &.active + .translated
+        opacity: 1
 </style>

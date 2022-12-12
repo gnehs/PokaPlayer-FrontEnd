@@ -164,4 +164,14 @@ export default class {
   async getHome() {
     return await this.#fetch({ url: '/pokaapi/home/' })
   }
+  /**
+   * Get Lyric By id
+   * @param  {string} source
+   * @param  {string} id
+   * @return {Promise} Promise object represents lyric
+   * @memberof PokaAPI
+   */
+  async getLyric(source, id) {
+    return await this.#fetch({ url: `/pokaapi/lyric/?moduleName=${source}&id=${id}` })
+  }
 }
