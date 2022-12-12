@@ -102,6 +102,7 @@ export default {
     .logo
       padding: calc(var(--padding) * 2)
       font-family: 'Product Sans', sans-serif
+      font-weight: bold
       font-size: 24px
     .header-center
       display: flex
@@ -151,7 +152,6 @@ export default {
       left: calc(var(--padding) * 7.5)
       transition: all var(--transition)
       transform: scale(0.75) translateX(calc(var(--padding) * -5))
-      filter: blur(2px)
       background-color: var(--background-layer-1)
       border: var(--border-width) solid var(--border-color)
       padding: var(--padding) calc(var(--padding) * 2)
@@ -168,6 +168,7 @@ export default {
         transform: none
     &:active
       background-color: rgba(var(--text-color-value),0.15)
+      transform: scale(.95)
 
     @media (max-width: 768px)
       padding: calc(var(--padding) * 1.5)
@@ -178,6 +179,11 @@ export default {
     &.router-link-exact-active
       background-color: rgba(var(--text-color-value),0.15)
       transform: none
+
+      .nav-item-text
+        transition-delay: .4s
+        opacity: 0
+        transform: scale(0.75) translateX(calc(var(--padding) * -5))
   .main
     grid-area: main
     background-color: var(--background-layer-1)
