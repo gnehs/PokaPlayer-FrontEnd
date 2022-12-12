@@ -3,22 +3,31 @@
 import { inject } from 'vue'
 const player = inject('Player')
 const props = defineProps({
-  items: Array
+  items: Array,
+  currentIndex: {
+    type: Number,
+    default: -1
+  }
 })
+function selectSong(index) {
+  player.addSongs({ songs: props.items, index })
+}
 
 </script>
 <template>
-  <p-list-items>
+  <p-list-items :singleRow="currentIndex != -1">
     <p-list-item v-for="(item, i) of items"
-      @click="player.addSongs({ songs: items, index: i })"
-      @keydown.enter="player.addSongs({ songs: items, index: i })"
+      @click="selectSong(i)"
+      @keydown.enter="selectSong(i)"
+      :active="i == currentIndex"
+      :data-index="i"
       :tabindex="0">
       <p-list-item-img :src="item.cover" />
       <p-list-item-content
         :title="item.name"
         :description="item.artist" />
       <template #actions>
-        <p-list-item-icon-btn @click.stop="player.addSongs({ songs: [item], clear: false })">
+        <p-list-item-icon-btn @click.stop="player.addSongs({ songs: [item], clear: false })" v-if="currentIndex == -1">
           <i class='bx bx-plus'></i>
         </p-list-item-icon-btn>
       </template>

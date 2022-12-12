@@ -55,9 +55,6 @@ export default class {
     this.player.toggle();
   }
   addSongs({ songs = [], index = 0, clear = true }) {
-    if (clear) {
-      this.player.list.clear();
-    }
     let songRes = `original`
     const playlist = songs.map(item => {
       const song = this.#deepcopy(item);
@@ -75,19 +72,15 @@ export default class {
           }
         }
       }
-
       song.uuid = this.#uuid();
       return song;
     });
 
-    this.player.list.add(playlist);
-    if (index && this.player.audioOrder === "random") {
-      this.audioOrder = "list";
-      this.player.list.switch(index);
-      this.audioOrder = "random";
-    } else if (index) {
-      this.player.list.switch(index);
+    if (clear) {
+      this.player.list.clear();
     }
+    this.player.list.add(playlist);
+    this.player.list.switch(index);
     this.player.play();
   }
   next() {
@@ -98,6 +91,9 @@ export default class {
     this.player.skipBack()
     this.player.play()
   }
+  seek(s) {
+    this.player.seek(s)
+  }
   get audioOrder() {
     return this.player.options.order;
   }
@@ -105,7 +101,7 @@ export default class {
     this.player.options.order = mode;
   }
   get trackInfo() {
-    return this.player.list.audios[this.player.list.index];
+    return this.songList[this.currentIndex];
   }
   get paused() {
     return this.player.paused;
@@ -113,8 +109,20 @@ export default class {
   get currentTime() {
     return this.#secondToTime(this.player.audio?.currentTime || 0);
   }
+  get rawCurrentTime() {
+    return this.player.audio?.currentTime || 0
+  }
   get duration() {
     return this.#secondToTime(this.player.audio?.duration || 0)
+  }
+  get rawDuration() {
+    return this.player.audio?.duration || 0
+  }
+  get songList() {
+    return this.player.list.audios;
+  }
+  get currentIndex() {
+    return this.player.list.index;
   }
   #deepcopy(obj) {
     return JSON.parse(JSON.stringify(obj));

@@ -3,10 +3,14 @@
 import { RouterLink } from 'vue-router'
 const props = defineProps({
   to: String,
+  active: {
+    type: Boolean,
+    default: false
+  }
 })
 </script>
 <template>
-  <component class="p-list-item" :is="to ? RouterLink : 'div'" :to="to">
+  <component class="p-list-item" :is="to ? RouterLink : 'div'" :to="to" :class="{ active }">
     <div class="p-list-item__content">
       <slot />
     </div>
@@ -26,9 +30,9 @@ const props = defineProps({
   color: var(--text-color)
   text-decoration: none
   &:hover
-    background-color: var(--background-layer-2)
-  &:active
-    background-color: var(--background-layer-3)
+    background-color: rgba(var(--text-color-value), .05)
+  &:active,&.active
+    background-color: rgba(var(--text-color-value), .1)
   .p-list-item__content,.p-list-item__actions
     display: flex
     gap: var(--padding)

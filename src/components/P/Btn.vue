@@ -52,6 +52,7 @@ export default {
   &:active
     box-shadow: inset 0 0 0 100px rgba(var(--text-color-value), .2)
     border: 1px solid rgba(var(--text-color-value), .2)
+    transform: scale(.95)
   &[color="primary"]
     background-color: var(--primary-color)
     color: #FFF

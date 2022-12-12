@@ -1,6 +1,8 @@
 <script setup>
-import { ref, inject, watch } from 'vue'
+import { ref, inject, watch, onUnmounted } from 'vue'
 const player = inject('Player')
+
+const showFullscreenPlayer = ref(false)
 
 const playerMode = ref(player.audioOrder)
 watch(playerMode, val => player.audioOrder = val)
@@ -9,25 +11,29 @@ const playerPaused = ref(player.paused)
 const currentTime = ref('0:00')
 const duration = ref('0:00')
 const trackInfo = ref(null)
-setInterval(() => {
+let playerInterval = setInterval(() => {
+  playerMode.value = player.audioOrder
   playerPaused.value = player.paused
   currentTime.value = player.currentTime
   duration.value = player.duration
   trackInfo.value = player.trackInfo
 }, 100)
+onUnmounted(() => {
+  clearInterval(playerInterval)
+})
 </script>
 <template>
   <div class="bottom-player">
-    <div class="track-info" v-if="trackInfo">
+    <div class="track-info" v-if="trackInfo" @click="showFullscreenPlayer = true" tabindex="0">
       <div class="cover">
         <img :src="trackInfo.cover" alt="cover" />
       </div>
       <div class="track-info-text">
         <div class="track-name">{{ trackInfo.name }}</div>
-        <div class="track-artist">{{ trackInfo.artist }}</div>
+        <div class="track-artist">{{ trackInfo.artist }} </div>
       </div>
     </div>
-    <div class="track-info" v-else>
+    <div class="track-info" @click="showFullscreenPlayer = true" v-else>
       <div class="cover">
         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath d='M0 0h1v1H0' fill='%23fff'/%3E%3C/svg%3E"
           alt="cover" />
@@ -48,10 +54,16 @@ setInterval(() => {
       <div class="time">{{ duration }}</div>
     </div>
     <div class="player-control">
-      <p-btn icon :text="playerMode != 'random'" @click="playerMode = 'random'"><i class='bx bx-shuffle'></i></p-btn>
-      <p-btn icon :text="playerMode != 'list'" @click="playerMode = 'list'"><i class='bx bx-repeat'></i></p-btn>
+      <p-btn icon text @click="playerMode = playerMode == 'random' ? 'list' : 'random'">
+        <i v-if="playerMode == 'random'" class='bx bx-shuffle'></i>
+        <i v-if="playerMode == 'list'" class='bx bx-repeat'></i>
+      </p-btn>
+      <p-btn icon text @click="showFullscreenPlayer = true"><i class='bx bx-chevron-up'></i></p-btn>
     </div>
   </div>
+  <fullscreen-player
+    :show="showFullscreenPlayer"
+    @close="showFullscreenPlayer = false" />
 </template>
 <style lang="sass" scoped>
 .bottom-player
@@ -66,6 +78,7 @@ setInterval(() => {
     display: flex
     align-items: center
     width: 100%
+    cursor: pointer
     .cover
       display: flex
       align-items: center
