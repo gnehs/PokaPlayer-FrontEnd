@@ -58,8 +58,9 @@ async function getLyric() {
   currentLyricIndex.value = -1
   if (id) {
     let res = await PokaAPI.getLyric(source, id)
-    console.log(res)
-    loadLyric(res.lyrics[0].lyric)
+    if (res.lyrics.length) {
+      loadLyric(res.lyrics[0].lyric)
+    }
   }
 }
 function timeStampToSeconds(timeStamp) {
@@ -76,10 +77,9 @@ async function loadLyric(lrcString) {
     let lines = lrcString.split(`\n`)
     for (let i = 0; i < matches.length; i++) {
       let seconds = timeStampToSeconds(matches[i])
-      let lyric = lines[i].replace(lyricRegex, '')
+      let lyric = lines[i].replace(/\[(.+?)\]/, '')
       result.push({ time: seconds, lyric })
     }
-    console.log(result)
     lyric.value = result
     isLyricTranslated.value = result.at(-1).time == result.at(-2).time
   }
@@ -92,6 +92,7 @@ onUnmounted(() => {
   <div class="fullscreen-player__lyric" :class="{ 'with-translated': isLyricTranslated }">
     <div class="lyric-item"
       v-for="(item, i) of lyric"
+      :data-lyric-set="isLyricTranslated ? Math.floor((i - currentLyricIndex) / 2) : i - currentLyricIndex"
       :class="{
         active: i == currentLyricIndex,
         translated: currentLyricIndex % 2 != i % 2
@@ -106,11 +107,19 @@ onUnmounted(() => {
   .lyric-item
     line-height: 2
     font-size: 24px
-    opacity: .5
+    opacity: .25
     margin: var(--padding)
     transition: all .3s ease
-    &.active
+    &[data-lyric-set="0"]
       opacity: 1
+    &[data-lyric-set="-1"],&[data-lyric-set="1"]
+      opacity: .5
+    &[data-lyric-set="-2"],&[data-lyric-set="2"]
+      opacity: .4875
+    &[data-lyric-set="-3"],&[data-lyric-set="3"]
+      opacity: .325
+    &[data-lyric-set="-4"],&[data-lyric-set="4"]
+      opacity: .2
   &.with-translated
 
     .lyric-item
