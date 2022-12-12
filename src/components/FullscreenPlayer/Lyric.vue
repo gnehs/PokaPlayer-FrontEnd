@@ -57,9 +57,9 @@ async function getLyric() {
   isLyricTranslated.value = false
   currentLyricIndex.value = -1
   if (id) {
-    let res = await PokaAPI.getLyric(source, id)
-    if (res.lyrics.length) {
-      loadLyric(res.lyrics[0].lyric)
+    let { lyrics } = await PokaAPI.getLyric(source, id)
+    if (lyrics.length && lyrics[0].lyric.match(lyricRegex)) {
+      loadLyric(lyrics[0].lyric)
     }
   }
 }
@@ -95,7 +95,7 @@ onUnmounted(() => {
       :data-lyric-set="isLyricTranslated ? Math.floor((i - currentLyricIndex) / 2) : i - currentLyricIndex"
       :class="{
         active: i == currentLyricIndex,
-        translated: currentLyricIndex % 2 != i % 2
+        translated: isLyricTranslated && currentLyricIndex % 2 != i % 2
       }">
       {{ item.lyric }}
     </div>
@@ -107,7 +107,7 @@ onUnmounted(() => {
   .lyric-item
     line-height: 2
     font-size: 24px
-    opacity: .25
+    opacity: .2
     margin: var(--padding)
     transition: all .3s ease
     &[data-lyric-set="0"]
@@ -121,13 +121,10 @@ onUnmounted(() => {
     &[data-lyric-set="-4"],&[data-lyric-set="4"]
       opacity: .2
   &.with-translated
-
     .lyric-item
       margin-bottom: 0
       &.translated
         margin-top: 0
         margin-bottom: var(--padding)
         font-size: 18px
-      &.active + .translated
-        opacity: 1
 </style>
