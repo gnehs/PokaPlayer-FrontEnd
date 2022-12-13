@@ -1,19 +1,22 @@
 <script setup>
 import { ref, computed } from 'vue'
 const props = defineProps({
+  min: {
+    type: Number,
+  },
   max: {
     type: Number,
   },
   value: {
     type: Number,
-  }
+  },
 })
 const valueInPercent = computed(() => {
-  return (props.value / props.max * 100 + 0.015) || 0
+  return ((props.value) / props.max * 100 + 0.015) || 0
 })
 </script>
 <template>
-  <input type="range" :max="max" :value="value" :style="`--value-in-percent: ${valueInPercent}%`" v-bind="$attrs" />
+  <input type="range" :min="min" :max="max" :value="value" :style="`--value-in-percent: ${valueInPercent}%`" v-bind="$attrs" />
 </template>
 <style lang="sass" scoped>
 input

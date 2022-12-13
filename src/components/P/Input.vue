@@ -78,6 +78,7 @@ export default {
     transition: border-bottom var(--transition), box-shadow var(--transition)
     box-shadow: 0px 1px transparent
     border-radius: 0
+    color: var(--text-color)
     &:focus
       border-color: var(--primary-color)
       box-shadow: 0px 1px var(--primary-color)

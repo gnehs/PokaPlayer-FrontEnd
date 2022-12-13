@@ -60,10 +60,10 @@ export default {
   max-width: min(700px, calc(100vw - 60px))
   margin: 0px auto
   padding: calc(var(--padding) * 2)
-  background-color: #fff
+  background-color: var(--background-layer-1)
   border-radius: var(--border-radius)
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33)
-  transition: all 0.3s ease
+  box-shadow: var(--box-shadow)
+  transition: all var(--transition)
   position: sticky
   top: 0
   position: relative

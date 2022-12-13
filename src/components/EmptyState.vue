@@ -24,6 +24,7 @@ const props = defineProps({
   align-items: center
   justify-content: center
   text-align: center
+  color: var(--text-color)
   .empty-state__icon
     font-size: 3rem
     margin-bottom: var(--padding)
