@@ -1,20 +1,29 @@
 <script setup>
 import { ref, onMounted, inject, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 const PokaAPI = inject('PokaAPI')
 const $route = useRoute();
+const $router = useRouter();
+
 const keyword = ref('');
 const searchResult = ref(null);
 const loading = ref(false);
 onMounted(async () => {
-  await getData()
+  let query = $route.query.q
+  if (query) {
+    keyword.value = query
+    await search()
+  }
 });
-watch(() => $route.path, async () => {
-  await getData()
-})
 async function search() {
   if (keyword.value != '') {
     loading.value = true
+    $router.replace({
+      path: '/search',
+      query: {
+        q: keyword.value
+      }
+    })
     searchResult.value = null
     searchResult.value = await PokaAPI.search(keyword.value)
     loading.value = false
@@ -24,13 +33,12 @@ async function search() {
 
 <template>
   <div>
-    <div class="search__input">
-      <p-input v-model="keyword"
-        @keyup.enter="search" />
-      <p-btn @click="search">
+    <form class="search__input" @submit.prevent="search">
+      <p-input v-model="keyword" />
+      <p-btn type="submit">
         <i class="bx bx-search"></i>
       </p-btn>
-    </div>
+    </form>
     <Loader v-if="loading" />
     <template v-if="searchResult">
       <div class="search__result" v-if="searchResult.songs?.length">

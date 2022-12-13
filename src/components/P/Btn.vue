@@ -1,11 +1,15 @@
 <template>
-  <button class="p-btn" :class="{outline,text,icon,block}" :color="color" v-bind="$attrs">
+  <button class="p-btn" :type="type" :class="{outline,text,icon,block}" :color="color" v-bind="$attrs">
     <slot />
   </button>
 </template>
 <script>
 export default {
   props: {
+    type: {
+      type: String,
+      default: 'button'
+    },
     color: {
       type: String,
       default: ''
