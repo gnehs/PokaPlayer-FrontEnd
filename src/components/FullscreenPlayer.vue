@@ -102,6 +102,19 @@ onUnmounted(() => {
       .left,.right
         overflow: hidden
         overflow-y: auto
+        &::-webkit-scrollbar
+          width: 4px
+        &::-webkit-scrollbar-track
+          background: transparent
+        &::-webkit-scrollbar-thumb
+          background: #888
+          border-radius: 2px
+        &::-webkit-scrollbar-thumb:hover
+          background: #777
+        &::-webkit-scrollbar-thumb:active
+          background: #666
+        &::-webkit-scrollbar-button
+          display: none
       .left
         max-height: 100%
         @media screen and (max-width: 768px)
