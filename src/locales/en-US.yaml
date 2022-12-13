@@ -22,6 +22,7 @@ source:
   Netease2: 'Netease'
   poka: 'Poka'
   DSM: 'DSM'
+  QQMusic: 'QQ Music'
 home:
   home_pins: 'Pins'
   home_recentAlbums: 'Recent Albums'

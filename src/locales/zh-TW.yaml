@@ -22,6 +22,7 @@ source:
   Netease2: '網易雲音樂'
   poka: 'Poka'
   DSM: 'DSM'
+  QQMusic: 'QQ 音樂'
 home:
   home_pins: '釘選'
   home_recentAlbums: '最近新增的專輯'

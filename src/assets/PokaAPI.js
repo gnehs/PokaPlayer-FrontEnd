@@ -174,4 +174,13 @@ export default class {
   async getLyric(source, id) {
     return await this.#fetch({ url: `/pokaapi/lyric/?moduleName=${source}&id=${id}` })
   }
+  /**
+   * Get Lyric By Keyword
+   * @param  {string} keyword
+   * @return {Promise} Promise object represents lyric
+   * @memberof PokaAPI
+   */
+  async getLyricByKeyword(keyword) {
+    return await this.#fetch({ url: `/pokaapi/searchLyrics/?keyword=${keyword}` })
+  }
 }
