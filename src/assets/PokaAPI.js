@@ -183,4 +183,13 @@ export default class {
   async getLyricByKeyword(keyword) {
     return await this.#fetch({ url: `/pokaapi/searchLyrics/?keyword=${keyword}` })
   }
+  /**
+   * Search
+   * @param  {string} keyword
+   * @return {Promise} Promise object represents search result
+   * @memberof PokaAPI
+   */
+  async search(keyword) {
+    return await this.#fetch({ url: `/pokaapi/search/?keyword=${keyword}` })
+  }
 }
