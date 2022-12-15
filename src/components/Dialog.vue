@@ -41,7 +41,7 @@ export default {
   overflow: hidden
   background-color: rgba(0, 0, 0, 0.75)
   display: table
-  transition: opacity 0.3s ease
+  transition: opacity var(--transition)
   font-size: 14px
   color: #000
   cursor: pointer
@@ -67,11 +67,6 @@ export default {
   position: sticky
   top: 0
   position: relative
-  .modal-iframe
-    height: 100%
-    height: calc(100svh - 80px)
-    width: calc(100% + 16px * 2)
-    margin: -16px
   .close
     position: sticky
     cursor: pointer
@@ -101,9 +96,8 @@ export default {
 .modal-enter-from, .modal-leave-to
   opacity: 0
 
-.modal-enter-active .modal-container
-
-  transform: scale(.9)
+.modal-enter-active .modal-container,
 .modal-leave-active .modal-container
-  transform: scale(1.1)
+  transform: translateY(100px)
+  opacity: 0
 </style>
