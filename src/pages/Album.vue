@@ -32,9 +32,9 @@ function playAll(shuffle = false) {
         <div class="title">
           {{ albumData.name ?? albumData.playlists[0].name }}
         </div>
-        <div class="artist">
+        <router-link class="artist" :to="`/artist/${$route.params.source}/${albumData.artistId}`">
           {{ albumData.artist }}
-        </div>
+        </router-link>
         <div class="meta">
           <span>{{ $t(`nav.${$route.meta.type}s`) }}</span>
           <span>{{ $t(`songs`, albumData.songs.length, { count: albumData.songs.length }) }}</span>
