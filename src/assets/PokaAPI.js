@@ -199,6 +199,17 @@ export default class {
     return await this.#fetch({ url: `/pokaapi/searchLyrics/?keyword=${keyword}` })
   }
   /**
+   * Save lyric
+   * @param  {string} title
+   * @param  {string} artist
+   * @param  {string} songId
+   * @param  {string} source
+   * @param  {string} lyric
+   */
+  async saveLyric({ title, artist, songId, source, lyric }) {
+    return await this.#fetch({ url: `/pokaapi/lyric`, method: 'POST', body: { title, artist, songId, source, lyric } })
+  }
+  /**
    * Search
    * @param  {string} keyword
    * @return {Promise} Promise object represents search result
