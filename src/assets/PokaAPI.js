@@ -123,6 +123,21 @@ export default class {
     return await this.#fetch({ url })
   }
   /**
+   * Get artist albums
+   * @param  {string} source
+   * @param  {string} type
+   * @param  {string} id
+   * @return {Promise} Promise object represents artist albums
+   * @memberof PokaAPI
+   */
+  async getArtistInfo(source, type, id) {
+    source = encodeURIComponent(source)
+    type = encodeURIComponent(type)
+    id = encodeURIComponent(id)
+    let url = `/pokaapi/${type}/?moduleName=${source}&id=${id}`
+    return await this.#fetch({ url })
+  }
+  /**
    * Get Folders
    * @param  {string} source
    * @param  {string} id
