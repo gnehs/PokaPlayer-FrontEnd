@@ -15,10 +15,12 @@ const searchResult = ref(null)
 const searchKeyword = ref('')
 
 const currentLyricSource = ref(null) // saved, search, or null
+const loading = ref(false)
 
 const lyric = ref([])
 const lyricRegex = /\[[0-9]{1,}\:[0-9]{1,2}(\.[0-9]{1,})?\]/g
 let playerInterval = setInterval(() => {
+  let temp = trackInfo.value?.uuid
   trackInfo.value = player.trackInfo
   currentIndex.value = player.currentIndex
   rawCurrentTime.value = player.rawCurrentTime
@@ -33,6 +35,10 @@ let playerInterval = setInterval(() => {
       }
     }
   }
+  // getLyric when track changed
+  if (temp != trackInfo.value?.uuid) {
+    getLyric()
+  }
 }, 100)
 watch(currentLyricIndex, val => {
   if (val && val != -1) {
@@ -43,12 +49,6 @@ watch(currentLyricIndex, val => {
         block: 'center'
       })
     })
-  }
-})
-watch(currentIndex, val => {
-  if (val && val != -1) {
-    // song changed
-    getLyric()
   }
 })
 onMounted(() => {
@@ -65,8 +65,11 @@ async function getLyric() {
   currentLyricIndex.value = -1
   currentLyricSource.value = null
   searchKeyword.value = `${name} ${artist}`
+  searchResult.value = null
   if (id) {
+    loading.value = true
     let { lyrics } = await PokaAPI.getLyric(source, id)
+    loading.value = false
     if (lyrics.length && lyrics[0].lyric.match(lyricRegex)) {
       currentLyricSource.value = 'saved'
       loadLyric(lyrics[0].lyric)
@@ -77,7 +80,11 @@ async function getLyric() {
 }
 async function searchLyric(keyword, set = true) {
   searchResult.value = null
+
+  loading.value = true
   let { lyrics } = await PokaAPI.getLyricByKeyword(keyword)
+  loading.value = false
+
   searchResult.value = lyrics
   searchKeyword.value = keyword
   if (set && lyrics[0]) {
@@ -119,6 +126,7 @@ onUnmounted(() => {
       }">
       {{ item.lyric }}
     </div>
+    <Loader v-if="loading" />
   </div>
   <Dialog v-model="searchDialog">
     <div class="lyric-search__header">
