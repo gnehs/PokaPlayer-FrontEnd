@@ -38,6 +38,11 @@ async function getData() {
       <p v-if="artistInfo"> {{ artistInfo.name }} <br /><small style="opacity: 0.5">{{ $t(`nav.${$route.meta.type}`) }}</small></p>
       <p v-else>{{ $t(`nav.${$route.meta.type}`) }}</p>
     </Teleport>
+
+    <Teleport to="#header-actions" v-if="artistInfo">
+      <pin-btn :name="artistInfo.name" :cover="artistInfo.cover" :id="$route.params.id" :source="$route.params.source"
+        :type="$route.meta.type == 'artists' ? 'artist' : 'composer'" />
+    </Teleport>
     <Loader v-if="!albums" />
     <parse-albums v-else :items="albums" />
   </div>

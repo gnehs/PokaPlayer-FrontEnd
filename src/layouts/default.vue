@@ -8,7 +8,8 @@
       </div>
       <div class="header-center" id="header-center">
       </div>
-      <div class="header-actions" id="header-actions">
+      <div class="header-actions">
+        <div id="header-actions"></div>
         <router-link class="nav-item" v-for="item in actions" :to="item.to">
           <i class='nav-item-icon bx' :class="item.icon"></i>
           <div class="nav-item-text">{{ $t(`nav.${item.text}`) }}</div>
@@ -117,7 +118,13 @@ export default {
       display: flex
       align-items: center
       justify-content: flex-end
+      gap: calc(var(--padding) / 2)
+      #header-actions
+        display: flex
+        align-items: center
+        gap: calc(var(--padding) / 2)
       .nav-item
+        margin-top: 0
         .nav-item-text
           left: initial
           top: calc(var(--padding) * 8)
