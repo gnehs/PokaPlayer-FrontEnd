@@ -3,7 +3,7 @@
     <transition name="modal">
       <div class="modal-mask" v-if="modelValue" @click="$emit('update:modelValue', false)">
         <div class="modal-wrapper">
-          <div class="modal-container" @click.stop="">
+          <div class="modal-container" @click.stop="" :style="`--max-width: ${maxWidth}`">
             <div class="close" @click="$emit('update:modelValue', false)" v-if="showClose">
               <i class="bx bx-x"></i>
             </div>
@@ -24,6 +24,10 @@ export default {
     showClose: {
       type: Boolean,
       default: false
+    },
+    maxWidth: {
+      type: String,
+      default: 'min(700px, calc(100vw - 60px))'
     }
   }
 }
@@ -57,7 +61,7 @@ export default {
   overflow-x: hidden
   cursor: default
   width: 600px
-  max-width: min(700px, calc(100vw - 60px))
+  max-width: var(--max-width)
   margin: 0px auto
   padding: calc(var(--padding) * 2)
   background-color: var(--background-layer-1)

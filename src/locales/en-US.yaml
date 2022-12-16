@@ -47,3 +47,11 @@ lyric:
     saved:
       title: 'The current lyric comes from the saved lyric'
       description: 'To search for lyrics, please enter a keyword in the box above and click the search button'
+settings:
+  theme:
+    title: 'Theme'
+songDialog:
+  source: 'Source'
+  id: 'ID'
+  year: 'Year'
+  codec: 'Codec'

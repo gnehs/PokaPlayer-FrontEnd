@@ -1,7 +1,8 @@
 <script setup>
 
-import { inject } from 'vue'
+import { ref, inject } from 'vue'
 const player = inject('Player')
+const songInfo = ref(null)
 const props = defineProps({
   items: Array,
   currentIndex: {
@@ -21,7 +22,8 @@ function selectSong(index) {
       @keydown.enter="selectSong(i)"
       :active="i == currentIndex"
       :data-index="i"
-      :tabindex="0">
+      :tabindex="0"
+      @contextmenu.prevent="songInfo = item">
       <p-list-item-img :src="item.cover" />
       <p-list-item-content
         :title="item.name"
@@ -33,4 +35,5 @@ function selectSong(index) {
       </template>
     </p-list-item>
   </p-list-items>
+  <song-dialog v-model="songInfo" />
 </template>

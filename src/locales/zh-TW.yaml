@@ -47,3 +47,11 @@ lyric:
     saved:
       title: '目前歌詞來自已儲存的歌詞'
       description: '若要搜尋歌詞，請在上方輸入關鍵字，並按下搜尋按鈕'
+settings:
+  theme:
+    title: '主題'
+songDialog:
+  source: '來源'
+  id: 'ID'
+  year: '年份'
+  codec: '格式'

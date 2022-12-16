@@ -47,3 +47,11 @@ lyric:
     saved:
       title: '目前歌词来自已储存的歌词'
       description: '若要搜索歌词，请在上方输入关键字，并按下搜索按钮'
+settings:
+  theme:
+    title: '主題'
+songDialog:
+  source: '來源'
+  id: 'ID'
+  year: '年份'
+  codec: '格式'
