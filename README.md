@@ -13,8 +13,7 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 ## Project Setup
 
 ```sh
-# TODO: Wait for #424 to be merged https://github.com/vite-pwa/vite-plugin-pwa/pull/424
-npm install --force
+npm install
 ```
 
 ### Compile and Hot-Reload for Development
