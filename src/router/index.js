@@ -103,6 +103,11 @@ const router = createRouter({
             name: 'Settings',
             component: () => import('../pages/settings/Index.vue')
           },
+          {
+            path: '/settings/theme',
+            name: 'SettingsTheme',
+            component: () => import('../pages/settings/Theme.vue')
+          },
           // 404
           {
             path: '/:pathMatch(.*)*',
