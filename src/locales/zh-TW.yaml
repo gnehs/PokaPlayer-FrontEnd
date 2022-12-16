@@ -30,3 +30,20 @@ home:
   home_topPlaylist_netease: '熱門播放清單'
   home_dailyRecommend_netease: '每日推薦'
   home_netease: '網易雲音樂'
+album:
+  playAll: '全部播放'
+  playAllShuffle: '隨機播放'
+pin:
+  pin: '釘選'
+  unpin: '取消釘選'
+  loading: '載入中'
+lyric:
+  isLyricCorrect:
+    title: '目前的歌詞正確嗎？'
+    description: '點選「正確」後，會將目前歌詞儲存到資料庫，下次聽這首歌時便會載入目前的歌詞。'
+    correct: '正確'
+    search: '搜尋其他歌詞'
+  currentLyricSource:
+    saved:
+      title: '目前歌詞來自已儲存的歌詞'
+      description: '若要搜尋歌詞，請在上方輸入關鍵字，並按下搜尋按鈕'

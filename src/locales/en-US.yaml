@@ -30,3 +30,20 @@ home:
   home_topPlaylist_netease: 'Top Playlist'
   home_dailyRecommend_netease: 'Daily Recommend'
   home_netease: 'Netease'
+album:
+  playAll: 'Play'
+  playAllShuffle: 'Shuffle'
+pin:
+  pin: 'Pin'
+  unpin: 'Unpin'
+  loading: 'Loading'
+lyric:
+  isLyricCorrect:
+    title: 'Is the current lyric correct?'
+    description: 'Click "Correct" to save the current lyric to the database, and the current lyric will be loaded next time you listen to this song.'
+    correct: 'Correct'
+    search: 'Search other lyrics'
+  currentLyricSource:
+    saved:
+      title: 'The current lyric comes from the saved lyric'
+      description: 'To search for lyrics, please enter a keyword in the box above and click the search button'

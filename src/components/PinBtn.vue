@@ -56,7 +56,7 @@ onMounted(async () => {
 })
 </script>
 <template>
-  <p-btn v-if="loading" outline> <i class='bx bx-loader bx-spin'></i>讀取中⋯</p-btn>
-  <p-btn v-else-if="isPinned" outline @click="unpin"> <i class='bx bxs-pin'></i>取消釘選</p-btn>
-  <p-btn v-else @click="pin"> <i class='bx bxs-pin'></i>釘選</p-btn>
+  <p-btn v-if="loading" outline> <i class='bx bx-loader bx-spin'></i>{{ $t(`pin.loading`) }}</p-btn>
+  <p-btn v-else-if="isPinned" outline @click="unpin"> <i class='bx bxs-pin'></i>{{ $t(`pin.unpin`) }}</p-btn>
+  <p-btn v-else @click="pin"> <i class='bx bxs-pin'></i>{{ $t(`pin.pin`) }}</p-btn>
 </template>

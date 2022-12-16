@@ -141,12 +141,12 @@ onUnmounted(() => {
         <i class='bx bx-question-mark'></i>
       </div>
       <div class="content">
-        <div class="title">目前的歌詞正確嗎？</div>
-        <div class="description">點選「正確」後，會將目前歌詞儲存到資料庫，下次聽這首歌時便會載入目前的歌詞。</div>
+        <div class="title">{{ $t(`lyric.isLyricCorrect.title`) }}</div>
+        <div class="description">{{ $t(`lyric.isLyricCorrect.description`) }}</div>
         <div class="actions">
           <!-- <p-btn outline><i class='bx bx-data'></i>將歌詞設為「無」</p-btn> -->
-          <p-btn outline @click="searchDialog = true"><i class='bx bx-search'></i>搜尋其他歌詞</p-btn>
-          <p-btn color="primary" @click="saveCurrentLyric"><i class='bx bx-check'></i>正確</p-btn>
+          <p-btn outline @click="searchDialog = true"><i class='bx bx-search'></i>{{ $t(`lyric.isLyricCorrect.search`) }}</p-btn>
+          <p-btn color="primary" @click="saveCurrentLyric"><i class='bx bx-check'></i>{{ $t(`lyric.isLyricCorrect.correct`) }}</p-btn>
         </div>
       </div>
     </div>
@@ -174,8 +174,8 @@ onUnmounted(() => {
       <empty-state
         style="margin-top: 80px"
         v-if="!searchResult && currentLyricSource == 'saved' && !loading"
-        :title="`目前歌詞來自已儲存的歌詞`"
-        :description="`若要搜尋歌詞，請在上方輸入關鍵字，並按下搜尋按鈕`">
+        :title="$t(`lyric.currentLyricSource.saved.title`)"
+        :description="$t(`lyric.currentLyricSource.saved.description`)">
         <i class='bx bx-save'></i>
       </empty-state>
       <Loader v-if="loading" style="margin-top: 80px" />

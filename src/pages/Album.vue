@@ -41,8 +41,8 @@ function playAll(shuffle = false) {
           <span>{{ $t(`source.${$route.params.source}`) }}</span>
         </div>
         <div class="actions">
-          <p-btn @click="playAll()"><i class='bx bx-play'></i> 全部播放</p-btn>
-          <p-btn outline @click="playAll(true)"> <i class='bx bx-shuffle'></i> 隨機播放</p-btn>
+          <p-btn @click="playAll()"><i class='bx bx-play'></i> {{ $t('album.playAll') }}</p-btn>
+          <p-btn outline @click="playAll(true)"> <i class='bx bx-shuffle'></i> {{ $t('album.playAllShuffle') }}</p-btn>
           <div class="spacer" />
           <pin-btn
             :name="albumData.name ?? albumData.playlists[0].name"
