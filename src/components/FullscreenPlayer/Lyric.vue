@@ -136,13 +136,13 @@ onUnmounted(() => {
 </script>
 <template>
   <div class="fullscreen-player__lyric" :class="{ 'with-translated': isLyricTranslated }" v-on:dblclick="searchDialog = true">
-    <div class="is-lyric-correct" v-if="showIsLyricCorrect">
+    <div class="is-lyric-correct" :class="{ show: showIsLyricCorrect }">
       <div class="icon">
         <i class='bx bx-question-mark'></i>
       </div>
       <div class="content">
         <div class="title">目前的歌詞正確嗎？</div>
-        <div class="description">選擇正確後，會將目前歌詞儲存到資料庫，下次聽這首歌時便會載入目前的歌詞。</div>
+        <div class="description">點選「正確」後，會將目前歌詞儲存到資料庫，下次聽這首歌時便會載入目前的歌詞。</div>
         <div class="actions">
           <!-- <p-btn outline><i class='bx bx-data'></i>將歌詞設為「無」</p-btn> -->
           <p-btn outline @click="searchDialog = true"><i class='bx bx-search'></i>搜尋其他歌詞</p-btn>
@@ -196,25 +196,33 @@ onUnmounted(() => {
     position: sticky
     top: 0
     z-index: 1
-    padding: var(--padding)
     border-radius: var(--border-radius)
     border: 1px solid rgba(var(--text-color-value), .1)
     background-color: var(--background-layer-1)
     display: flex
-    align-items: center
+    // align-items: center
     gap: var(--padding)
+    box-shadow: var(--box-shadow)
+    transition: transform .2s ease, opacity .2s ease
+    max-width: 512px
+    margin: 0 auto
+    &:not(.show)
+      transform: translateY(-100%) scale(.95)
+      transform-origin: top center
+      opacity: 0
+      pointer-events: none
     .icon
-      font-size: 24px
+      font-size: 36px
       display: inline-flex
       align-items: center
       justify-content: center
-      padding: var(--padding)
-      border-radius: var(--border-radius)
-      border: 1px solid rgba(var(--text-color-value), .1)
+      padding: var(--padding) calc(var(--padding) * 2)
+      border-radius: var(--border-radius) 0 0 var(--border-radius)
+      background-color: var(--background-layer-2)
     .content
       flex: 1
-      margin-left: var(--padding)
       line-height: 1.5
+      padding: var(--padding)
       .title
         font-size: 18px
         font-weight: bold
@@ -226,8 +234,6 @@ onUnmounted(() => {
         display: flex
         justify-content: flex-end
         gap: calc(var(--padding) / 2)
-        > p-btn
-          margin-left: var(--padding)
   .lyric-item
     line-height: 2
     font-size: 24px
