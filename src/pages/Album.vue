@@ -44,7 +44,13 @@ function playAll(shuffle = false) {
           <p-btn @click="playAll()"><i class='bx bx-play'></i> 全部播放</p-btn>
           <p-btn outline @click="playAll(true)"> <i class='bx bx-shuffle'></i> 隨機播放</p-btn>
           <div class="spacer" />
-          <p-btn> <i class='bx bxs-pin'></i>釘選</p-btn>
+          <pin-btn
+            :name="albumData.name ?? albumData.playlists[0].name"
+            :cover="albumData.cover ?? albumData.playlists[0].cover"
+            :artist="albumData.artist"
+            :id="$route.params.id"
+            :source="$route.params.source"
+            :type="$route.meta.type" />
         </div>
       </div>
     </div>

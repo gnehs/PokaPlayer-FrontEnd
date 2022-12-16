@@ -218,4 +218,44 @@ export default class {
   async search(keyword) {
     return await this.#fetch({ url: `/pokaapi/search/?keyword=${keyword}` })
   }
+  /**
+   * Get pin status
+   * @param  {string} source
+   * @param  {string} id
+   * @param  {string} name
+   * @param  {string} type
+   * @return {Promise} Promise object represents pin status
+   * @memberof PokaAPI
+   */
+  async getPinStatus({ source, id, name, type }) {
+    return await this.#fetch({ url: `/pokaapi/v2/pin/ispinned`, method: 'POST', body: { source, id, name, type } })
+  }
+  /**
+   * Pin
+   * @param  {string} source
+   * @param  {string} id
+   * @param  {string} name
+   * @param  {string} cover
+   * @param  {string} artist
+   * @param  {string} type
+   * @return {Promise} Promise object represents pin status
+   * @memberof PokaAPI
+   */
+  async pin({ source, id, name, cover, type, artist }) {
+    return await this.#fetch({ url: `/pokaapi/v2/pin/pin`, method: 'POST', body: { source, id, name, type, cover, artist } })
+  }
+  /**
+   * Unpin
+   * @param  {string} source
+   * @param  {string} id
+   * @param  {string} name
+   * @param  {string} cover
+   * @param  {string} artist
+   * @param  {string} type
+   * @return {Promise} Promise object represents pin status
+   * @memberof PokaAPI
+   */
+  async unpin({ source, id, name, cover, type, artist }) {
+    return await this.#fetch({ url: `/pokaapi/v2/pin/unpin`, method: 'POST', body: { source, id, name, type, cover, artist } })
+  }
 }
