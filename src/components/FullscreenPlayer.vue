@@ -1,12 +1,14 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useFullscreenPlayerStore } from '@/stores/fullscreenPlayer'
+
+const fullscreenPlayerStore = useFullscreenPlayerStore()
+const { show: showFullscreenPlayer } = storeToRefs(fullscreenPlayerStore)
+
 const currentPage = ref(`playlist`)
-const props = defineProps({
-  show: {
-    type: Boolean,
-    default: false
-  }
-})
+
+
 let widthChangeListener = () => {
   if (window.innerWidth > 768 && currentPage.value == 'player') {
     currentPage.value = `playlist`
@@ -21,7 +23,7 @@ onUnmounted(() => {
 </script>
 <template>
 
-  <div class="fullscreen-player" :class="{ show }">
+  <div class="fullscreen-player" :class="{ show: showFullscreenPlayer }">
     <div class="fullscreen-player__container">
       <div class="header">
         <div class="left">
@@ -30,7 +32,7 @@ onUnmounted(() => {
           </div>
         </div>
         <div class="right">
-          <p-btn icon @click="$emit('close');">
+          <p-btn icon @click="showFullscreenPlayer = false">
             <i class='bx bx-chevron-down'></i>
           </p-btn>
         </div>

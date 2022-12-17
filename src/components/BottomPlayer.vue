@@ -1,8 +1,10 @@
 <script setup>
-import { ref, inject, watch, onUnmounted } from 'vue'
+import { ref, inject, watch, onUnmounted, computed } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useFullscreenPlayerStore } from '@/stores/fullscreenPlayer'
 const player = inject('Player')
-
-const showFullscreenPlayer = ref(false)
+const fullscreenPlayerStore = useFullscreenPlayerStore()
+const { show: showFullscreenPlayer } = storeToRefs(fullscreenPlayerStore)
 
 const playerMode = ref(player.audioOrder)
 watch(playerMode, val => player.audioOrder = val)
@@ -61,9 +63,7 @@ onUnmounted(() => {
       <p-btn icon text @click="showFullscreenPlayer = true"><i class='bx bx-chevron-up'></i></p-btn>
     </div>
   </div>
-  <fullscreen-player
-    :show="showFullscreenPlayer"
-    @close="showFullscreenPlayer = false" />
+  <fullscreen-player />
 </template>
 <style lang="sass" scoped>
 .bottom-player
