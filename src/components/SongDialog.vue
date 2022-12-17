@@ -1,18 +1,26 @@
 <script setup>
 import { computed } from 'vue'
+
+import { storeToRefs } from 'pinia'
+import { useFullscreenPlayerStore } from '@/stores/fullscreenPlayer'
+const fullscreenPlayerStore = useFullscreenPlayerStore()
+const { show } = storeToRefs(fullscreenPlayerStore)
+
 const emit = defineEmits(['update:modelValue'])
-const props = defineProps({
-  modelValue: Object
-})
+const props = defineProps({ modelValue: Object })
 const showDialog = computed({
   get() {
     return !!props.modelValue
   },
-  set(value) {
+  set() {
     emit('update:modelValue', null)
   }
 })
 
+function closeDialog() {
+  show.value = false
+  showDialog.value = false
+}
 </script>
 <template>
   <Dialog v-model="showDialog" max-width="400px">
@@ -22,9 +30,11 @@ const showDialog = computed({
         <div class="name">{{ modelValue.name }}</div>
         <div class="artist">{{ modelValue.artist }}</div>
       </div>
-
       <p-list-items single-row>
-        <p-list-item :to="`/artist/${modelValue.source}/${modelValue.artistId}`" tabindex="0">
+        <p-list-item
+          :to="`/artist/${modelValue.source}/${modelValue.artistId}`"
+          @click="closeDialog()"
+          tabindex="0">
           <p-list-item-icon-btn>
             <i class='bx bx-microphone'></i>
           </p-list-item-icon-btn>
@@ -37,7 +47,10 @@ const showDialog = computed({
             </p-list-item-icon-btn>
           </template>
         </p-list-item>
-        <p-list-item :to="`/album/${modelValue.source}/${modelValue.albumId}`" tabindex="0">
+        <p-list-item
+          :to="`/album/${modelValue.source}/${modelValue.albumId}`"
+          @click="closeDialog()"
+          tabindex="0">
           <p-list-item-icon-btn>
             <i class="nav-item-icon bx bx-album"></i>
           </p-list-item-icon-btn>
@@ -63,7 +76,7 @@ const showDialog = computed({
             <i class='bx bx-time'></i>
           </p-list-item-icon-btn>
           <p-list-item-content
-            :title="modelValue.year"
+            :title="modelValue.year.toString()"
             :description="$t(`songDialog.year`)" />
         </p-list-item>
         <p-list-item tabindex="0" v-if="modelValue.source">
