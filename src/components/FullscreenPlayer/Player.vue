@@ -16,15 +16,24 @@ const rawDuration = ref(0)
 const trackInfo = ref(null)
 
 let playerInterval = setInterval(() => {
+  updatePlayerInfo()
+}, 100)
+let playerTimeInterval = setInterval(() => {
+  rawCurrentTime.value = player.rawCurrentTime
+  rawDuration.value = player.rawDuration
+}, 1000 / 60)// 60fps
+function updatePlayerInfo() {
   playerMode.value = player.audioOrder
   playerPaused.value = player.paused
   currentTime.value = player.currentTime
   duration.value = player.duration
+  trackInfo.value = player.trackInfo
   rawCurrentTime.value = player.rawCurrentTime
   rawDuration.value = player.rawDuration
-  trackInfo.value = player.trackInfo
-}, 100)
+}
+updatePlayerInfo()
 onUnmounted(() => {
+  clearInterval(playerTimeInterval)
   clearInterval(playerInterval)
 })
 function playerSeek(e) {
@@ -46,6 +55,7 @@ function playerSeek(e) {
       <p-slider
         :value="rawCurrentTime"
         :max="rawDuration"
+        step="0.000001"
         @input="playerSeek"
         @change="playerSeek" />
       <div class="time-items">
