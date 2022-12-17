@@ -41,8 +41,8 @@ function closeDialog() {
             :title="$t(`songDialog.addToPlaylist`)" />
         </p-list-item>
         <p-list-item
-          :to="`/artist/${item.source}/${item.artistId}`"
-          @click="closeDialog()"
+          :to="item.artistId ? `/artist/${item.source}/${item.artistId}` : undefined"
+          @click="item.artistId && closeDialog()"
           tabindex="0">
           <p-list-item-icon-btn>
             <i class='bx bx-microphone'></i>
@@ -51,14 +51,14 @@ function closeDialog() {
             :title="item.artist"
             :description="$t(`nav.artists`)" />
           <template #actions>
-            <p-list-item-icon-btn>
+            <p-list-item-icon-btn v-if="item.artistId">
               <i class='bx bx-right-arrow-alt'></i>
             </p-list-item-icon-btn>
           </template>
         </p-list-item>
         <p-list-item
-          :to="`/album/${item.source}/${item.albumId}`"
-          @click="closeDialog()"
+          :to="item.albumId ? `/album/${item.source}/${item.albumId}` : undefined"
+          @click="item.albumId && closeDialog()"
           tabindex="0">
           <p-list-item-icon-btn>
             <i class="nav-item-icon bx bx-album"></i>
@@ -67,7 +67,7 @@ function closeDialog() {
             :title="item.album"
             :description="$t(`nav.albums`)" />
           <template #actions>
-            <p-list-item-icon-btn>
+            <p-list-item-icon-btn v-if="item.albumId">
               <i class='bx bx-right-arrow-alt'></i>
             </p-list-item-icon-btn>
           </template>
