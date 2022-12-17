@@ -3,6 +3,8 @@
 import { ref, inject, watch, onUnmounted } from 'vue'
 const player = inject('Player')
 
+const addToPlaylistDialog = ref(false)
+
 const playerMode = ref(player.audioOrder)
 watch(playerMode, val => player.audioOrder = val)
 
@@ -12,6 +14,7 @@ const rawCurrentTime = ref(0)
 const duration = ref('0:00')
 const rawDuration = ref(0)
 const trackInfo = ref(null)
+
 let playerInterval = setInterval(() => {
   playerMode.value = player.audioOrder
   playerPaused.value = player.paused
@@ -61,9 +64,10 @@ function playerSeek(e) {
         <i class='bx bx-pause' v-else></i>
       </p-btn>
       <p-btn icon text @click="player.next()"><i class='bx bx-skip-next'></i></p-btn>
-      <p-btn icon text><i class='bx bxs-cat'></i></p-btn>
+      <p-btn icon text @click="addToPlaylistDialog = true"><i class='bx bx-list-plus'></i></p-btn>
     </div>
   </div>
+  <playlist-dialog v-model="addToPlaylistDialog" :item="trackInfo" />
 </template>
 <style lang="sass" scoped>
 .fullscreen-player__player

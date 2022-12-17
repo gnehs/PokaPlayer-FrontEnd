@@ -266,4 +266,23 @@ export default class {
   async unpin({ source, id, name, cover, type, artist }) {
     return await this.#fetch({ url: `/pokaapi/v2/pin/unpin`, method: 'POST', body: { source, id, name, type, cover, artist } })
   }
+  /**
+   * Check song exist in playlist
+   * @param  {object} song
+   * @return {Promise} Promise object represents playlist status
+   * @memberof PokaAPI
+   */
+  async checkSongExistInPlaylist(song) {
+    return await this.#fetch({ url: `/pokaapi/v2/playlist/song/exist`, method: 'POST', body: song })
+  }
+  /**
+   * Toggle song in playlist
+   * @param  {object} song
+   * @param  {string} playlistId
+   * @return {Promise} Promise object represents playlist status
+   * @memberof PokaAPI
+   */
+  async toggleSongInPlaylist(song, playlistId) {
+    return await this.#fetch({ url: `/pokaapi/v2/playlist/song`, method: 'POST', body: { song, playlistId } })
+  }
 }

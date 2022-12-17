@@ -58,7 +58,7 @@ export default class {
     let songRes = `original`
     const playlist = songs.map(item => {
       const song = this.#deepcopy(item);
-      song.originalURL = song.url;
+      song.originalObject = item;
       song.url = song.url + "&songRes=" + songRes;
 
       if (song.source === "DSM") {

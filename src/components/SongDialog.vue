@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 import { storeToRefs } from 'pinia'
 import { useFullscreenPlayerStore } from '@/stores/fullscreenPlayer'
@@ -7,16 +7,16 @@ const fullscreenPlayerStore = useFullscreenPlayerStore()
 const { show } = storeToRefs(fullscreenPlayerStore)
 
 const emit = defineEmits(['update:modelValue'])
-const props = defineProps({ modelValue: Object })
+const props = defineProps({ modelValue: Boolean, item: Object })
 const showDialog = computed({
   get() {
-    return !!props.modelValue
+    return props.modelValue
   },
   set() {
     emit('update:modelValue', null)
   }
 })
-
+const addToPlaylistDialog = ref(false)
 function closeDialog() {
   show.value = false
   showDialog.value = false
@@ -25,21 +25,30 @@ function closeDialog() {
 <template>
   <Dialog v-model="showDialog" max-width="400px">
     <div class="song-info-dialog-content">
-      <img :src="modelValue.cover" class="cover" />
+      <img :src="item.cover" class="cover" />
       <div class="info">
-        <div class="name">{{ modelValue.name }}</div>
-        <div class="artist">{{ modelValue.artist }}</div>
+        <div class="name">{{ item.name }}</div>
+        <div class="artist">{{ item.artist }}</div>
       </div>
       <p-list-items single-row>
         <p-list-item
-          :to="`/artist/${modelValue.source}/${modelValue.artistId}`"
+          @click="addToPlaylistDialog = true"
+          tabindex="0">
+          <p-list-item-icon-btn>
+            <i class='bx bx-list-plus'></i>
+          </p-list-item-icon-btn>
+          <p-list-item-content
+            :title="$t(`songDialog.addToPlaylist`)" />
+        </p-list-item>
+        <p-list-item
+          :to="`/artist/${item.source}/${item.artistId}`"
           @click="closeDialog()"
           tabindex="0">
           <p-list-item-icon-btn>
             <i class='bx bx-microphone'></i>
           </p-list-item-icon-btn>
           <p-list-item-content
-            :title="modelValue.artist"
+            :title="item.artist"
             :description="$t(`nav.artists`)" />
           <template #actions>
             <p-list-item-icon-btn>
@@ -48,14 +57,14 @@ function closeDialog() {
           </template>
         </p-list-item>
         <p-list-item
-          :to="`/album/${modelValue.source}/${modelValue.albumId}`"
+          :to="`/album/${item.source}/${item.albumId}`"
           @click="closeDialog()"
           tabindex="0">
           <p-list-item-icon-btn>
             <i class="nav-item-icon bx bx-album"></i>
           </p-list-item-icon-btn>
           <p-list-item-content
-            :title="modelValue.album"
+            :title="item.album"
             :description="$t(`nav.albums`)" />
           <template #actions>
             <p-list-item-icon-btn>
@@ -63,41 +72,49 @@ function closeDialog() {
             </p-list-item-icon-btn>
           </template>
         </p-list-item>
-        <p-list-item tabindex="0" v-if="modelValue.codec && modelValue.bitrate">
+        <p-list-item tabindex="0" v-if="item.codec && item.bitrate">
           <p-list-item-icon-btn>
             <i class='bx bx-file-blank'></i>
           </p-list-item-icon-btn>
           <p-list-item-content
-            :title="`${modelValue.codec.toUpperCase()} ${modelValue.bitrate / 1000}k`"
+            :title="`${item.codec.toUpperCase()} ${item.bitrate / 1000}k`"
             :description="$t(`songDialog.codec`)" />
         </p-list-item>
-        <p-list-item tabindex="0" v-if="modelValue.year">
+        <p-list-item tabindex="0" v-if="item.year">
           <p-list-item-icon-btn>
             <i class='bx bx-time'></i>
           </p-list-item-icon-btn>
           <p-list-item-content
-            :title="modelValue.year.toString()"
+            :title="item.year.toString()"
             :description="$t(`songDialog.year`)" />
         </p-list-item>
-        <p-list-item tabindex="0" v-if="modelValue.source">
+        <p-list-item tabindex="0" v-if="item.source">
           <p-list-item-icon-btn>
             <i class='bx bx-data'></i>
           </p-list-item-icon-btn>
           <p-list-item-content
-            :title="$t(`source.${modelValue.source}`)"
+            :title="$t(`source.${item.source}`)"
             :description="$t(`songDialog.source`)" />
         </p-list-item>
-        <p-list-item tabindex="0" v-if="modelValue.id">
+        <p-list-item tabindex="0" v-if="item.id">
           <p-list-item-icon-btn>
             <i class='bx bx-tag'></i>
           </p-list-item-icon-btn>
           <p-list-item-content
-            :title="modelValue.id"
+            :title="item.id"
             :description="$t(`songDialog.id`)" />
         </p-list-item>
       </p-list-items>
+      <div style="display: flex;justify-content: flex-end;margin-top: var(--padding);">
+        <p-btn
+          @click="showDialog = false"
+          color="primary">
+          {{ $t('close') }}
+        </p-btn>
+      </div>
     </div>
   </Dialog>
+  <playlist-dialog v-model="addToPlaylistDialog" :item="item" />
 </template>
 <style lang="sass" scoped>
 .song-info-dialog-content

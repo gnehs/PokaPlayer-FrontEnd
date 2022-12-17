@@ -15,6 +15,7 @@ waitForPlay: '队列中未有歌曲'
 login: '登录'
 username: '用户名'
 password: '密码'
+close: '关闭'
 404:
   title: '找不到页面'
   description: '这个页面可能已被移除或是不存在。'
@@ -55,6 +56,7 @@ settings:
     description: '管理钉选项目'
     intro: '点击垃圾桶图示以移除钉选项目'
 songDialog:
+  addToPlaylist: '添加到播放列表'
   source: '來源'
   id: 'ID'
   year: '年份'
