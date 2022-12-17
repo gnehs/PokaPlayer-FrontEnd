@@ -50,6 +50,10 @@ lyric:
 settings:
   theme:
     title: '主題'
+  pins:
+    title: '釘選'
+    description: '管理首頁釘選項目'
+    intro: '點選垃圾桶圖示以移除釘選項目'
 songDialog:
   source: '來源'
   id: 'ID'

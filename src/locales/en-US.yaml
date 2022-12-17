@@ -50,6 +50,10 @@ lyric:
 settings:
   theme:
     title: 'Theme'
+  pins:
+    title: 'Pins'
+    description: 'Manage pinned items'
+    intro: 'Click the trash can icon to remove pinned items'
 songDialog:
   source: 'Source'
   id: 'ID'

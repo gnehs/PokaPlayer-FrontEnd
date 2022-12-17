@@ -25,7 +25,7 @@ const { locale, availableLocales, getLocaleMessage } = useI18n({
     </div>
   </div>
   <div>
-    <p-list-items single-row>
+    <p-list-items>
       <p-list-item to="/settings/theme" tabindex="0">
         <p-list-item-icon-btn>
           <i class='bx bx-brush-alt'></i>
@@ -33,6 +33,14 @@ const { locale, availableLocales, getLocaleMessage } = useI18n({
         <p-list-item-content
           title="主題"
           description="設定您的主題色彩" />
+      </p-list-item>
+      <p-list-item to="/settings/pins" tabindex="0">
+        <p-list-item-icon-btn>
+          <i class='bx bx-pin'></i>
+        </p-list-item-icon-btn>
+        <p-list-item-content
+          :title="$t(`settings.pins.title`)"
+          :description="$t(`settings.pins.description`)" />
       </p-list-item>
     </p-list-items>
   </div>

@@ -226,9 +226,17 @@ export default class {
    * @param  {string} type
    * @return {Promise} Promise object represents pin status
    * @memberof PokaAPI
-   */
+  */
   async getPinStatus({ source, id, name, type }) {
     return await this.#fetch({ url: `/pokaapi/v2/pin/ispinned`, method: 'POST', body: { source, id, name, type } })
+  }
+  /**
+   * Get pins
+   * @return {Promise} Promise object represents pins
+   * @memberof PokaAPI
+  */
+  async getPins() {
+    return await this.#fetch({ url: `/pokaapi/v2/pin/pins`, method: 'POST' })
   }
   /**
    * Pin
