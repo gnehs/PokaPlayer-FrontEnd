@@ -79,7 +79,7 @@ onUnmounted(() => {
     border-radius: var(--border-radius)
   .fullscreen-player__container
     width: min(1200px, calc(100vw - var(--padding) * 2))
-    padding: var(--padding) calc(var(--padding))
+    padding: var(--padding) calc(var(--padding) * 2)
     height: 100vh
     margin: 0 auto
 
