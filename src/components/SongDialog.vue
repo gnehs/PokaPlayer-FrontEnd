@@ -124,6 +124,7 @@ function closeDialog() {
     max-width: 240px
     margin: 0 auto
     aspect-ratio: 1/1
+    object-fit: cover
     border-radius: var(--border-radius)
     border: 1px solid var(--background-layer-2)
   .info

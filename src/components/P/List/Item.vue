@@ -43,6 +43,7 @@ const props = defineProps({
     --size: 42px
     width: var(--size)
     height: var(--size)
+    min-width: var(--size)
     img
       width: 100%
       height: 100%
