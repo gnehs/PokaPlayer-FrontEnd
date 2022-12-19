@@ -24,6 +24,7 @@ source:
   poka: 'Poka'
   DSM: 'DSM'
   QQMusic: 'QQ 音乐'
+  YouTube: 'YouTube'
 home:
   home_pins: '钉选'
   home_recentAlbums: '最近新增的专辑'
