@@ -66,6 +66,7 @@ export default {
   },
   mounted() {
     this.start()
+    this.loadTheme()
   },
   methods: {
     async start() {
@@ -76,6 +77,12 @@ export default {
       } catch (e) {
         console.log(e)
         this.$router.push('/login')
+      }
+    },
+    loadTheme() {
+      let theme = localStorage.getItem('poka.theme')
+      if (theme) {
+        document.documentElement.style.cssText = JSON.parse(theme).cssText
       }
     }
   }

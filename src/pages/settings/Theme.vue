@@ -1,43 +1,57 @@
 <script setup>
-import { ref, computed, watch } from 'vue'
-import { useCssVar } from '@vueuse/core'
+import { computed, watch, nextTick, reactive } from 'vue'
+import { useCssVar, useStorage } from '@vueuse/core'
 
-function computedCssVar(name, initialValue) {
+const pokaTheme = useStorage('poka.theme', { theme: 'light', cssText: `` })
+const cssText = reactive(document.documentElement.style.cssText)
+function computedCssVar(name, initialValue, unit = '') {
   return computed({
     get() {
-      return parseInt(document.documentElement.style.getPropertyValue(name)) || initialValue
+      if (unit)
+        return parseInt(document.documentElement.style.getPropertyValue(name)) || initialValue
+      else
+        return document.documentElement.style.getPropertyValue(name) || initialValue
     },
     set(value) {
-      document.documentElement.style.setProperty(name, value + 'px')
+      document.documentElement.style.setProperty(name, value + unit)
+      pokaTheme.value.cssText = document.documentElement.style.cssText
     }
   })
 }
+const borderRadius = computedCssVar('--border-radius', 12, 'px')
+const padding = computedCssVar('--padding', 8, 'px')
+const minCardWidth = computedCssVar('--min-card-width', 128, 'px')
+const primaryColor = computedCssVar('--primary-color', '#007bff')
+const backgroundLayer1 = computedCssVar('--background-layer-1', '#ffffff')
+const backgroundLayer2 = computedCssVar('--background-layer-2', '#f2f2f2')
+const textColorValue = computedCssVar('--text-color-value', '51,51,51')
 
-const borderRadius = computedCssVar('--border-radius', 12)
-const padding = computedCssVar('--padding', 8)
-const minCardWidth = computedCssVar('--min-card-width', 128)
-const primaryColor = useCssVar('--primary-color', document.querySelector('html'), { initialValue: '#007bff' })
-const backgroundLayer1 = useCssVar('--background-layer-1', document.querySelector('html'), { initialValue: '#ffffff' })
-const backgroundLayer2 = useCssVar('--background-layer-2', document.querySelector('html'), { initialValue: '#f2f2f2' })
-const textColorValue = useCssVar('--text-color-value', document.querySelector('html'), { initialValue: '51,51,51' })
-const theme = ref('light')
-watch(theme, (value) => {
-  if (value === 'light') {
-    backgroundLayer1.value = `#fff`
-    backgroundLayer2.value = `#f2f2f2`
-    textColorValue.value = `51,51,51`
+watch(pokaTheme, (value) => {
+  let theme = {
+    light: {
+      backgroundLayer1: `#fff`,
+      backgroundLayer2: `#f2f2f2`,
+      textColorValue: `51,51,51`
+    },
+    dark: {
+      backgroundLayer1: `#1e1e1e`,
+      backgroundLayer2: `#2e2e2e`,
+      textColorValue: `255,255,255`
+    },
+    red: {
+      backgroundLayer1: `#f52547`,
+      backgroundLayer2: `#d61837`,
+      textColorValue: `255,255,255`
+    }
   }
-  if (value === 'dark') {
-    backgroundLayer1.value = `#1e1e1e`
-    backgroundLayer2.value = `#2e2e2e`
-    textColorValue.value = `255,255,255`
-  }
-  if (value === 'red') {
-    backgroundLayer1.value = `#f52547`
-    backgroundLayer2.value = `#d61837`
-    textColorValue.value = `255,255,255`
+
+  if (Object.keys(theme).includes(value.theme)) {
+    backgroundLayer1.value = theme[value.theme].backgroundLayer1
+    backgroundLayer2.value = theme[value.theme].backgroundLayer2
+    textColorValue.value = theme[value.theme].textColorValue
   }
 })
+
 </script>
 <template>
   <Teleport to="#header-center">
@@ -49,7 +63,7 @@ watch(theme, (value) => {
       <div class="title">主題</div>
     </div>
     <div class="control">
-      <select v-model="theme">
+      <select v-model="pokaTheme.theme">
         <option value="light">亮色系 </option>
         <option value="dark">暗色系 </option>
         <option value="red">新年紅 </option>
@@ -57,7 +71,7 @@ watch(theme, (value) => {
       </select>
     </div>
   </div>
-  <template v-if="theme == 'custom'">
+  <template v-if="pokaTheme.theme == 'custom'">
     <div class="setting-item">
       <div class="content">
         <div class="title">文字顏色</div>
@@ -67,16 +81,16 @@ watch(theme, (value) => {
       </div>
       <div class="control">
         <select v-model="textColorValue">
-          <optgroup label="適用於亮色系">
-            <option value="51,51,51">預設（51） </option>
-            <option value="25,25,25">較暗（25） </option>
-            <option value="0,0,0">最暗（0） </option>
-          </optgroup>
-          <optgroup label="適用於暗色系">
-            <option value="255,255,255">純白（255） </option>
-            <option value="230,230,230">較暗（230） </option>
-            <option value="200,200,200">更暗（200） </option>
-          </optgroup>
+          <optgroup label="darker"> </optgroup>
+
+          <option value="0,0,0">最暗（0） </option>
+          <option value="25,25,25">較暗（25） </option>
+          <option value="51,51,51">預設（51） </option>
+          <option value="255,255,255">純白（255） </option>
+          <option value="230,230,230">較暗（230） </option>
+          <option value="200,200,200">更暗（200） </option>
+
+          <optgroup label="lighter"> </optgroup>
         </select>
       </div>
     </div>
