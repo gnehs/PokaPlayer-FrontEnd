@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
+import { useCssVar } from '@vueuse/core'
 const borderRadius = computed({
   get() {
     return parseInt(document.documentElement.style.getPropertyValue('--border-radius')) || 12
@@ -24,30 +25,9 @@ const minCardWidth = computed({
     document.documentElement.style.setProperty('--min-card-width', value + 'px')
   }
 })
-const backgroundLayer1 = computed({
-  get() {
-    return document.documentElement.style.getPropertyValue('--background-layer-1') || `#fff`
-  },
-  set(value) {
-    document.documentElement.style.setProperty('--background-layer-1', value)
-  }
-})
-const backgroundLayer2 = computed({
-  get() {
-    return document.documentElement.style.getPropertyValue('--background-layer-2') || `#f2f2f2`
-  },
-  set(value) {
-    document.documentElement.style.setProperty('--background-layer-2', value)
-  }
-})
-const textColorValue = computed({
-  get() {
-    return document.documentElement.style.getPropertyValue('--text-color-value') || `51,51,51`
-  },
-  set(value) {
-    document.documentElement.style.setProperty('--text-color-value', value)
-  }
-})
+const backgroundLayer1 = useCssVar('--background-layer-1', document.querySelector('html'), { initialValue: '#ffffff' })
+const backgroundLayer2 = useCssVar('--background-layer-2', document.querySelector('html'), { initialValue: '#f2f2f2' })
+const textColorValue = useCssVar('--text-color-value', document.querySelector('html'), { initialValue: '51,51,51' })
 const theme = ref('light')
 watch(theme, (value) => {
   if (value === 'light') {
@@ -83,76 +63,57 @@ watch(theme, (value) => {
       <select v-model="theme">
         <option value="light">亮色系 </option>
         <option value="dark">暗色系 </option>
-        <option value="red">⛄️雪人胖胖 </option>
+        <option value="red">新年紅 </option>
+        <option value="custom">自訂 </option>
       </select>
     </div>
   </div>
-  <div class="setting-item">
-    <div class="content">
-      <div class="title">文字顏色</div>
-      <div class="description">
-        調整頁面中的文字色系
+  <template v-if="theme == 'custom'">
+    <div class="setting-item">
+      <div class="content">
+        <div class="title">文字顏色</div>
+        <div class="description">
+          調整頁面中的文字色系
+        </div>
+      </div>
+      <div class="control">
+        <select v-model="textColorValue">
+          <optgroup label="適用於亮色系">
+            <option value="51,51,51">預設（51） </option>
+            <option value="25,25,25">較暗（25） </option>
+            <option value="0,0,0">最暗（0） </option>
+          </optgroup>
+          <optgroup label="適用於暗色系">
+            <option value="255,255,255">純白（255） </option>
+            <option value="230,230,230">較暗（230） </option>
+            <option value="200,200,200">更暗（200） </option>
+          </optgroup>
+        </select>
       </div>
     </div>
-    <div class="control">
-      <select v-model="textColorValue">
-        <optgroup label="適用於亮色系">
-          <option value="51,51,51">預設（51） </option>
-          <option value="25,25,25">較暗（25） </option>
-          <option value="0,0,0">最暗（0） </option>
-        </optgroup>
-        <optgroup label="適用於暗色系">
-          <option value="255,255,255">純白（255） </option>
-          <option value="230,230,230">較暗（230） </option>
-          <option value="200,200,200">更暗（200） </option>
-        </optgroup>
-      </select>
-    </div>
-  </div>
-  <div class="setting-item">
-    <div class="content">
-      <div class="title">背景顏色 1</div>
-      <div class="description">
-        調整頁面中的背景顏色
+    <div class="setting-item">
+      <div class="content">
+        <div class="title">背景顏色 </div>
+        <div class="description">
+          調整頁面中的背景顏色
+        </div>
+      </div>
+      <div class="control">
+        <input type="color" v-model="backgroundLayer1" list="presetColors" />
+        <input type="color" v-model="backgroundLayer2" list="presetColors" />
+        <datalist id="presetColors">
+          <option>#ffffff</option>
+          <option>#f2f2f2</option>
+          <option>#eeeeee</option>
+          <option>#333333</option>
+          <option>#2e2e2e</option>
+          <option>#222222</option>
+          <option>#1e1e1e</option>
+          <option>#111111</option>
+        </datalist>
       </div>
     </div>
-    <div class="control">
-      <select v-model="backgroundLayer1">
-        <optgroup label="亮色系">
-          <option value="#fff">預設（#fff） </option>
-          <option value="#f2f2f2">較深（#f2f2f2） </option>
-          <option value="#eee">更深（#eee） </option>
-        </optgroup>
-        <optgroup label="暗色系">
-          <option value="#333">深灰（#333） </option>
-          <option value="#222">更深（#222） </option>
-          <option value="#111">黑色（#111） </option>
-          <option value="#000">純黑（#000） </option>
-        </optgroup>
-      </select>
-    </div>
-  </div>
-  <div class="setting-item">
-    <div class="content">
-      <div class="title">背景顏色 2</div>
-      <div class="description"> 調整頁面中的背景顏色</div>
-    </div>
-    <div class="control">
-      <select v-model="backgroundLayer2">
-        <optgroup label="亮色系">
-          <option value="#fff">純白（#fff） </option>
-          <option value="#f2f2f2">預設（#f2f2f2） </option>
-          <option value="#eee">較深（#eee） </option>
-        </optgroup>
-        <optgroup label="暗色系">
-          <option value="#333">深灰（#333） </option>
-          <option value="#222">更深（#222） </option>
-          <option value="#111">黑色（#111） </option>
-          <option value="#000">純黑（#000） </option>
-        </optgroup>
-      </select>
-    </div>
-  </div>
+  </template>
   <h4 style="margin-bottom: var(--padding)">樣式調整</h4>
   <div class="setting-item">
     <div class="content">
@@ -200,3 +161,51 @@ watch(theme, (value) => {
     </div>
   </div>
 </template>
+<style lang="sass">
+input[type="color"]
+  -webkit-appearance: none
+  border: none
+  width: 32px
+  height: 32px
+  border-radius: var(--border-radius)
+  overflow: hidden
+  transition: all var(--transition)
+  cursor: pointer
+  position: relative
+  &:before
+    content: "\ea07"
+    position: absolute
+    font-family: boxicons!important
+    font-size: 16px
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    color: #fff
+    mix-blend-mode: exclusion
+    z-index: 1
+  &::after
+    // border
+    content: ""
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    border: 1px solid rgba(255,255,255,.1)
+    mix-blend-mode: exclusion
+    border-radius: var(--border-radius)
+  &:hover
+    transform: scale(1.1)
+  &:focus
+    outline: none
+    transform: scale(1.1)
+    box-shadow: var(--box-shadow)
+
+input[type="color"]::-webkit-color-swatch-wrapper
+  padding: 0
+  transform: scale(2)
+
+input[type="color"]::-webkit-color-swatch
+  border: none
+
+</style>
