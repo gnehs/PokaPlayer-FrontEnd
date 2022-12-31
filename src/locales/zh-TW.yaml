@@ -56,6 +56,9 @@ settings:
     title: '釘選'
     description: '管理首頁釘選項目'
     intro: '點選垃圾桶圖示以移除釘選項目'
+  user:
+    title: '使用者'
+    description: '設定資料記錄功能、修改密碼或使用者名稱'
 songDialog:
   addToPlaylist: '新增到播放清單'
   source: '來源'

@@ -56,6 +56,9 @@ settings:
     title: '钉选'
     description: '管理钉选项目'
     intro: '点击垃圾桶图示以移除钉选项目'
+  user:
+    title: '用户'
+    description: 'Data logging, modify password or username'
 songDialog:
   addToPlaylist: '添加到播放列表'
   source: '來源'

@@ -42,6 +42,14 @@ const { locale, availableLocales, getLocaleMessage } = useI18n({
           :title="$t(`settings.pins.title`)"
           :description="$t(`settings.pins.description`)" />
       </p-list-item>
+      <p-list-item to="/settings/user" tabindex="0">
+        <p-list-item-icon-btn>
+          <i class='bx bx-user'></i>
+        </p-list-item-icon-btn>
+        <p-list-item-content
+          :title="$t(`settings.user.title`)"
+          :description="$t(`settings.user.description`)" />
+      </p-list-item>
     </p-list-items>
   </div>
 </template>

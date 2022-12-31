@@ -113,6 +113,11 @@ const router = createRouter({
             name: 'SettingsPins',
             component: () => import('../pages/settings/Pins.vue')
           },
+          {
+            path: '/settings/user',
+            name: 'SettingsUser',
+            component: () => import('../pages/settings/user.vue')
+          },
           // 404
           {
             path: '/:pathMatch(.*)*',
