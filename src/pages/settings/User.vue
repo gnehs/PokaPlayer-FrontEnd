@@ -1,7 +1,12 @@
 <script setup>
 import { ref, computed, watch, inject, onMounted } from 'vue'
+
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/stores/user'
+const userStore = useUserStore()
+const { userInfo } = storeToRefs(userStore)
+
 const PokaAPI = inject('PokaAPI')
-const userInfo = ref(null)
 const editNameDialog = ref(false)
 const editName = ref('')
 const editUsernameDialog = ref(false)
@@ -30,12 +35,6 @@ async function editPasswordFunc() {
   }
   await PokaAPI.changeUserPassword(oldPassword.value, newPassword.value)
   editPasswordDialog.value = false
-}
-onMounted(async () => {
-  await getUserInfo()
-})
-function notAvailable() {
-  window.alert('Not available yet')
 }
 </script>
 <template>
