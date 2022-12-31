@@ -1,30 +1,22 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { useCssVar } from '@vueuse/core'
-const borderRadius = computed({
-  get() {
-    return parseInt(document.documentElement.style.getPropertyValue('--border-radius')) || 12
-  },
-  set(value) {
-    document.documentElement.style.setProperty('--border-radius', value + 'px')
-  }
-})
-const padding = computed({
-  get() {
-    return parseInt(document.documentElement.style.getPropertyValue('--padding')) || 8
-  },
-  set(value) {
-    document.documentElement.style.setProperty('--padding', value + 'px')
-  }
-})
-const minCardWidth = computed({
-  get() {
-    return parseInt(document.documentElement.style.getPropertyValue('--min-card-width')) || 128
-  },
-  set(value) {
-    document.documentElement.style.setProperty('--min-card-width', value + 'px')
-  }
-})
+
+function computedCssVar(name, initialValue) {
+  return computed({
+    get() {
+      return parseInt(document.documentElement.style.getPropertyValue(name)) || initialValue
+    },
+    set(value) {
+      document.documentElement.style.setProperty(name, value + 'px')
+    }
+  })
+}
+
+const borderRadius = computedCssVar('--border-radius', 12)
+const padding = computedCssVar('--padding', 8)
+const minCardWidth = computedCssVar('--min-card-width', 128)
+const primaryColor = useCssVar('--primary-color', document.querySelector('html'), { initialValue: '#007bff' })
 const backgroundLayer1 = useCssVar('--background-layer-1', document.querySelector('html'), { initialValue: '#ffffff' })
 const backgroundLayer2 = useCssVar('--background-layer-2', document.querySelector('html'), { initialValue: '#f2f2f2' })
 const textColorValue = useCssVar('--text-color-value', document.querySelector('html'), { initialValue: '51,51,51' })
@@ -55,9 +47,6 @@ watch(theme, (value) => {
   <div class="setting-item">
     <div class="content">
       <div class="title">主題</div>
-      <div class="description">
-        PokaPlayer 所提供的預設主題，包含了亮色系和暗色系兩種。
-      </div>
     </div>
     <div class="control">
       <select v-model="theme">
@@ -93,12 +82,13 @@ watch(theme, (value) => {
     </div>
     <div class="setting-item">
       <div class="content">
-        <div class="title">背景顏色 </div>
+        <div class="title">顏色 </div>
         <div class="description">
-          調整頁面中的背景顏色
+          調整頁面中的顏色
         </div>
       </div>
       <div class="control">
+        <input type="color" v-model="primaryColor" />
         <input type="color" v-model="backgroundLayer1" list="presetColors" />
         <input type="color" v-model="backgroundLayer2" list="presetColors" />
         <datalist id="presetColors">
@@ -114,11 +104,20 @@ watch(theme, (value) => {
       </div>
     </div>
   </template>
+  <h4 style="margin-bottom: var(--padding)">預覽</h4>
+
+  <p-cards style="margin: calc(var(--padding) * 2) 0">
+    <p-card
+      v-for="i in 4"
+      imgSrc="/img/pwa-512x512.png"
+      title="預覽"
+      source="預覽" />
+  </p-cards>
   <h4 style="margin-bottom: var(--padding)">樣式調整</h4>
   <div class="setting-item">
     <div class="content">
-      <div class="title">最小卡片寬度</div>
-      <div class="description">調整頁面中卡片的最小寬度，也就是調整一排中最多顯示幾張卡片，數值越小卡片越多</div>
+      <div class="title">卡片寬度</div>
+      <div class="description">調整頁面中卡片的寬度，數值越小一行能夠顯示的卡片便會越多</div>
     </div>
     <div class="control">
       <select v-model="minCardWidth">
@@ -181,19 +180,9 @@ input[type="color"]
     left: 50%
     transform: translate(-50%, -50%)
     color: #fff
-    mix-blend-mode: exclusion
+    // mix-blend-mode: exclusion
     z-index: 1
-  &::after
-    // border
-    content: ""
-    position: absolute
-    top: 0
-    left: 0
-    width: 100%
-    height: 100%
-    border: 1px solid rgba(255,255,255,.1)
-    mix-blend-mode: exclusion
-    border-radius: var(--border-radius)
+    filter: drop-shadow(0 0 1px rgba(0,0,0,.1))
   &:hover
     transform: scale(1.1)
   &:focus
