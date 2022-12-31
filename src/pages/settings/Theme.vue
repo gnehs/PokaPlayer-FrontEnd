@@ -78,7 +78,7 @@ watch(pokaTheme, (value) => {
       </div>
       <div class="control">
         <select v-model="textColorValue">
-          <optgroup label="darker"> </optgroup>
+          <optgroup label="🌑"> </optgroup>
 
           <option value="0,0,0">0 </option>
           <option value="25,25,25">25 </option>
@@ -87,7 +87,7 @@ watch(pokaTheme, (value) => {
           <option value="230,230,230">230 </option>
           <option value="255,255,255">255 </option>
 
-          <optgroup label="lighter"> </optgroup>
+          <optgroup label="☀️"> </optgroup>
         </select>
       </div>
     </div>
