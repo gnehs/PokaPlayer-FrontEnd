@@ -54,13 +54,30 @@ lyric:
 settings:
   theme:
     title: 'Theme'
+    description: 'Set the color and attributes of the interface'
+
+    themeAndColor: 'Theme and Color'
+    default: 'Default'
+    preview: 'Preview'
+    preset:
+      light: 'Light'
+      dark: 'Dark'
+      red: 'New Year Red'
+      custom: 'Custom'
+    color: 'Color'
+    textColor: 'Text Color'
+
+    style: 'Style'
+    cardWidth: 'Card Width'
+    borderRadius: 'Border Radius'
+    padding: 'Padding'
   pins:
     title: 'Pins'
     description: 'Manage pinned items'
     intro: 'Click the trash can icon to remove pinned items'
   user:
     title: 'User'
-    description: 'Data logging, modify password or username'
+    description: 'Change password, modify username or name'
     name: 'Name'
     username: 'Username'
     id: 'ID'

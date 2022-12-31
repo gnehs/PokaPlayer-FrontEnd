@@ -31,8 +31,8 @@ const { locale, availableLocales, getLocaleMessage } = useI18n({
           <i class='bx bx-brush-alt'></i>
         </p-list-item-icon-btn>
         <p-list-item-content
-          title="主題"
-          description="設定您的主題色彩" />
+          :title="$t(`settings.theme.title`)"
+          :description="$t(`settings.theme.description`)" />
       </p-list-item>
       <p-list-item to="/settings/pins" tabindex="0">
         <p-list-item-icon-btn>

@@ -57,38 +57,35 @@ watch(pokaTheme, (value) => {
   <Teleport to="#header-center">
     <p>{{ $t('settings.theme.title') }}</p>
   </Teleport>
-  <h4 style="margin-bottom: var(--padding)">主題色彩</h4>
+  <h4 style="margin-bottom: var(--padding)">{{ $t('settings.theme.themeAndColor') }}</h4>
   <div class="setting-item">
     <div class="content">
-      <div class="title">主題</div>
+      <div class="title">{{ $t('settings.theme.title') }}</div>
     </div>
     <div class="control">
       <select v-model="pokaTheme.theme">
-        <option value="light">亮色系 </option>
-        <option value="dark">暗色系 </option>
-        <option value="red">新年紅 </option>
-        <option value="custom">自訂 </option>
+        <option value="light">{{ $t('settings.theme.preset.light') }} </option>
+        <option value="dark">{{ $t('settings.theme.preset.dark') }} </option>
+        <option value="red">{{ $t('settings.theme.preset.red') }} </option>
+        <option value="custom">{{ $t('settings.theme.preset.custom') }} </option>
       </select>
     </div>
   </div>
   <template v-if="pokaTheme.theme == 'custom'">
     <div class="setting-item">
       <div class="content">
-        <div class="title">文字顏色</div>
-        <div class="description">
-          調整頁面中的文字色系
-        </div>
+        <div class="title">{{ $t('settings.theme.textColor') }}</div>
       </div>
       <div class="control">
         <select v-model="textColorValue">
           <optgroup label="darker"> </optgroup>
 
-          <option value="0,0,0">最暗（0） </option>
-          <option value="25,25,25">較暗（25） </option>
-          <option value="51,51,51">預設（51） </option>
-          <option value="255,255,255">純白（255） </option>
-          <option value="230,230,230">較暗（230） </option>
-          <option value="200,200,200">更暗（200） </option>
+          <option value="0,0,0">0 </option>
+          <option value="25,25,25">25 </option>
+          <option value="51,51,51">51 ({{ $t('settings.theme.default') }}) </option>
+          <option value="200,200,200">200</option>
+          <option value="230,230,230">230 </option>
+          <option value="255,255,255">255 </option>
 
           <optgroup label="lighter"> </optgroup>
         </select>
@@ -96,10 +93,7 @@ watch(pokaTheme, (value) => {
     </div>
     <div class="setting-item">
       <div class="content">
-        <div class="title">顏色 </div>
-        <div class="description">
-          調整頁面中的顏色
-        </div>
+        <div class="title">{{ $t('settings.theme.color') }} </div>
       </div>
       <div class="control">
         <input type="color" v-model="primaryColor" />
@@ -118,58 +112,55 @@ watch(pokaTheme, (value) => {
       </div>
     </div>
   </template>
-  <h4 style="margin-bottom: var(--padding)">預覽</h4>
+  <h4 style="margin-bottom: var(--padding)">{{ $t('settings.theme.preview') }}</h4>
 
   <p-cards style="margin: calc(var(--padding) * 2) 0">
     <p-card
       v-for="i in 4"
       imgSrc="/img/pwa-512x512.png"
-      title="預覽"
-      source="預覽" />
+      :title="$t('settings.theme.preview')"
+      :source="$t('settings.theme.preview')" />
   </p-cards>
-  <h4 style="margin-bottom: var(--padding)">樣式調整</h4>
+  <h4 style="margin-bottom: var(--padding)">{{ $t('settings.theme.style') }}</h4>
   <div class="setting-item">
     <div class="content">
-      <div class="title">卡片寬度</div>
-      <div class="description">調整頁面中卡片的寬度，數值越小一行能夠顯示的卡片便會越多</div>
+      <div class="title">{{ $t('settings.theme.cardWidth') }}</div>
     </div>
     <div class="control">
       <select v-model="minCardWidth">
-        <option :value="72">迷你（72px） </option>
-        <option :value="96">小（96px） </option>
-        <option :value="128">預設（128px） </option>
-        <option :value="160">大（160px） </option>
-        <option :value="192">超大（192px） </option>
+        <option :value="72">72px </option>
+        <option :value="96">96px </option>
+        <option :value="128">128px ({{ $t('settings.theme.default') }}) </option>
+        <option :value="160">160px </option>
+        <option :value="192">192px </option>
       </select>
     </div>
   </div>
   <div class="setting-item">
     <div class="content">
-      <div class="title">邊框半徑</div>
-      <div class="description">調整圓角大小</div>
+      <div class="title">{{ $t('settings.theme.borderRadius') }}</div>
     </div>
     <div class="control">
       <select v-model="borderRadius">
-        <option :value="4">方正（4px） </option>
-        <option :value="8">輕微圓角（8px） </option>
-        <option :value="12">預設（12px） </option>
-        <option :value="16">較大圓角（16px） </option>
-        <option :value="24">極大圓角（24px） </option>
+        <option :value="4">4px </option>
+        <option :value="8">8px </option>
+        <option :value="12">12px ({{ $t('settings.theme.default') }})</option>
+        <option :value="16">16px </option>
+        <option :value="24">24px </option>
       </select>
     </div>
   </div>
   <div class="setting-item">
     <div class="content">
-      <div class="title">間距</div>
-      <div class="description">調整元件間的空隙</div>
+      <div class="title">{{ $t('settings.theme.padding') }}</div>
     </div>
     <div class="control">
       <select v-model="padding">
-        <option :value="4">較小（4px） </option>
-        <option :value="8">預設（8px） </option>
-        <option :value="10">稍大（10px） </option>
-        <option :value="12">極大（12px） </option>
-        <option :value="16">巨大（16px） </option>
+        <option :value="4">4px </option>
+        <option :value="8">8px ({{ $t('settings.theme.default') }})</option>
+        <option :value="10">10px </option>
+        <option :value="12">12px </option>
+        <option :value="16">16px </option>
       </select>
     </div>
   </div>

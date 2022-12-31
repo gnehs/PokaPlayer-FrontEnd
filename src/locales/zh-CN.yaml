@@ -54,13 +54,30 @@ lyric:
 settings:
   theme:
     title: '主題'
+    description: '設定介面中的色彩與屬性'
+
+    themeAndColor: '主題與色彩'
+    default: '預設'
+    preview: '預覽'
+    preset:
+      light: '淺色'
+      dark: '深色'
+      red: '新年紅'
+      custom: '自訂'
+    color: '色彩'
+    textColor: '文字色彩'
+
+    style: '樣式'
+    cardWidth: '卡片寬度'
+    borderRadius: '圓角'
+    padding: '間隙'
   pins:
     title: '钉选'
     description: '管理钉选项目'
     intro: '点击垃圾桶图示以移除钉选项目'
   user:
     title: '用户'
-    description: 'Data logging, modify password or username'
+    description: '修改名稱、使用者名稱或密碼'
     name: '用户名'
     username: '用户名'
     id: 'ID'
