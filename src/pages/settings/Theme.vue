@@ -1,9 +1,8 @@
 <script setup>
-import { computed, watch, nextTick, reactive } from 'vue'
-import { useCssVar, useStorage } from '@vueuse/core'
+import { computed, watch, nextTick } from 'vue'
+import { useStorage } from '@vueuse/core'
 
 const pokaTheme = useStorage('poka.theme', { theme: 'light', cssText: `` })
-const cssText = reactive(document.documentElement.style.cssText)
 function computedCssVar(name, initialValue, unit = '') {
   return computed({
     get() {
@@ -50,6 +49,9 @@ watch(pokaTheme, (value) => {
     backgroundLayer2.value = theme[value.theme].backgroundLayer2
     textColorValue.value = theme[value.theme].textColorValue
   }
+  nextTick(() => {
+    pokaTheme.value.cssText = document.documentElement.style.cssText
+  })
 })
 
 </script>
