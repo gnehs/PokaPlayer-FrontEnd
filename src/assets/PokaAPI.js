@@ -285,4 +285,32 @@ export default class {
   async toggleSongInPlaylist(song, playlistId) {
     return await this.#fetch({ url: `/pokaapi/v2/playlist/song`, method: 'POST', body: { song, playlistId } })
   }
+  /**
+   * Change User Name
+   * @param  {string} name
+   * @return {Promise} Promise object represents user name
+   * @memberof PokaAPI
+   */
+  async changeUserName(n) {
+    return await this.#fetch({ url: `/pokaapi/v2/user/name`, method: 'POST', body: { n } })
+  }
+  /**
+   * Change User Username
+   * @param  {string} username
+   * @return {Promise} Promise object represents user username
+   * @memberof PokaAPI
+   */
+  async changeUserUsername(n) {
+    return await this.#fetch({ url: `/pokaapi/v2/user/username`, method: 'POST', body: { n } })
+  }
+  /**
+   * Change User Password
+   * @param  {string} oldpassword
+   * @param  {string} password
+   * @return {Promise} Promise object represents user password
+   * @memberof PokaAPI
+   */
+  async changeUserPassword(oldpassword, password) {
+    return await this.#fetch({ url: `/pokaapi/v2/user/password`, method: 'POST', body: { oldpassword, password } })
+  }
 }

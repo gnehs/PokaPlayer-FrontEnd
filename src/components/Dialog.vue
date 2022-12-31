@@ -47,7 +47,6 @@ export default {
   display: table
   transition: opacity var(--transition)
   font-size: 14px
-  color: #000
   cursor: pointer
 .modal-wrapper
   display: grid
