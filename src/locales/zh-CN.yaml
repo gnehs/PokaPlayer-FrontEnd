@@ -59,11 +59,7 @@ settings:
     themeAndColor: '主題與色彩'
     default: '預設'
     preview: '預覽'
-    preset:
-      light: '淺色'
-      dark: '深色'
-      red: '新年紅'
-      custom: '自訂'
+    custom: '自訂'
     color: '色彩'
     textColor: '文字色彩'
 

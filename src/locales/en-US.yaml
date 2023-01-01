@@ -59,11 +59,7 @@ settings:
     themeAndColor: 'Theme and Color'
     default: 'Default'
     preview: 'Preview'
-    preset:
-      light: 'Light'
-      dark: 'Dark'
-      red: 'New Year Red'
-      custom: 'Custom'
+    custom: 'Custom'
     color: 'Color'
     textColor: 'Text Color'
 

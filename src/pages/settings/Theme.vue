@@ -3,6 +3,28 @@ import { computed, watch, nextTick, ref } from 'vue'
 import { useStorage } from '@vueuse/core'
 
 const pokaTheme = useStorage('poka.theme', { theme: 'light', cssText: ``, })
+const themePresent = ref({
+  light: {
+    '--background-layer-1': `#ffffff`,
+    '--background-layer-2': `#f2f2f2`,
+    '--text-color-value': `51,51,51`
+  },
+  dark: {
+    '--background-layer-1': `#1e1e1e`,
+    '--background-layer-2': `#2e2e2e`,
+    '--text-color-value': `255,255,255`
+  },
+  black: {
+    '--background-layer-1': `#0b0b0b`,
+    '--background-layer-2': `#000000`,
+    '--text-color-value': `255,255,255`
+  },
+  ocean: {
+    '--background-layer-1': `#393644`,
+    '--background-layer-2': `#302e38`,
+    '--text-color-value': `230,230,255`
+  },
+})
 const cssVarTheme = ref({
   '--border-radius': '12px',
   '--padding': '8px',
@@ -16,29 +38,12 @@ for (let key in cssVarTheme.value) {
   cssVarTheme.value[key] = document.documentElement.style.getPropertyValue(key) || cssVarTheme.value[key]
 }
 
-watch(pokaTheme, (value) => {
-  let theme = {
-    light: {
-      backgroundLayer1: `#fff`,
-      backgroundLayer2: `#f2f2f2`,
-      textColorValue: `51,51,51`
-    },
-    dark: {
-      backgroundLayer1: `#1e1e1e`,
-      backgroundLayer2: `#2e2e2e`,
-      textColorValue: `255,255,255`
-    },
-    red: {
-      backgroundLayer1: `#f52547`,
-      backgroundLayer2: `#d61837`,
-      textColorValue: `255,255,255`
+watch(pokaTheme, (value, prevValue) => {
+  let theme = themePresent.value[value.theme]
+  if (theme) {
+    for (let [key, value] of Object.entries(theme)) {
+      cssVarTheme.value[key] = value
     }
-  }
-
-  if (Object.keys(theme).includes(value.theme)) {
-    cssVarTheme.value['--background-layer-1'] = theme[value.theme].backgroundLayer1
-    cssVarTheme.value['--background-layer-2'] = theme[value.theme].backgroundLayer2
-    cssVarTheme.value['--text-color-value'] = theme[value.theme].textColorValue
   }
 })
 watch(cssVarTheme, (value) => {
@@ -56,56 +61,59 @@ watch(cssVarTheme, (value) => {
     <p>{{ $t('settings.theme.title') }}</p>
   </Teleport>
   <h4 style="margin-bottom: var(--padding)">{{ $t('settings.theme.themeAndColor') }}</h4>
-  <div class="setting-item">
-    <div class="content">
-      <div class="title">{{ $t('settings.theme.title') }}</div>
+  <div class="theme-preview-items">
+    <div class="theme-preview-item"
+      v-for="[name, value] of Object.entries(themePresent)"
+      @click="pokaTheme.theme = name"
+      :style="Object.entries(value).map(([key, value]) => `${key}:${value}`).join(';')"
+      tabindex="0">
+      <div class="layer-1">
+        <i class='bx bx-check' v-show="pokaTheme.theme == name"></i>
+      </div>
+      <div class="layer-2">
+        Aa
+      </div>
     </div>
-    <div class="control">
-      <p-select v-model="pokaTheme.theme">
-        <option value="light">{{ $t('settings.theme.preset.light') }} </option>
-        <option value="dark">{{ $t('settings.theme.preset.dark') }} </option>
-        <option value="red">{{ $t('settings.theme.preset.red') }} </option>
-        <option value="custom">{{ $t('settings.theme.preset.custom') }} </option>
-      </p-select>
-    </div>
-  </div>
-  <div class="setting-item">
-    <div class="content">
-      <div class="title">{{ $t('settings.theme.textColor') }}</div>
-    </div>
-    <div class="control">
-      <p-select v-model="cssVarTheme['--text-color-value']">
-        <optgroup label="🌑"> </optgroup>
-        <option value="0,0,0">0 </option>
-        <option value="25,25,25">25 </option>
-        <option value="51,51,51">51 ({{ $t('settings.theme.default') }}) </option>
-        <option value="200,200,200">200</option>
-        <option value="230,230,230">230 </option>
-        <option value="255,255,255">255 </option>
-        <optgroup label="☀️"> </optgroup>
-      </p-select>
+    <div class="theme-preview-item"
+      @click="pokaTheme.theme = 'custom'"
+      tabindex="0">
+      <div class="layer-1">
+        <i class='bx bx-check' v-if="pokaTheme.theme == 'custom'"></i>
+      </div>
+      <div class="layer-2">
+        {{ $t('settings.theme.custom') }}
+      </div>
     </div>
   </div>
-  <div class="setting-item">
-    <div class="content">
-      <div class="title">{{ $t('settings.theme.color') }} </div>
+  <template v-if="pokaTheme.theme == 'custom'">
+    <div class="setting-item">
+      <div class="content">
+        <div class="title">{{ $t('settings.theme.textColor') }}</div>
+      </div>
+      <div class="control">
+        <p-select v-model="cssVarTheme['--text-color-value']">
+          <optgroup label="🌑"> </optgroup>
+          <option value="0,0,0">0 </option>
+          <option value="25,25,25">25 </option>
+          <option value="51,51,51">51 ({{ $t('settings.theme.default') }}) </option>
+          <option value="200,200,200">200</option>
+          <option value="230,230,230">230 </option>
+          <option value="255,255,255">255 </option>
+          <optgroup label="☀️"> </optgroup>
+        </p-select>
+      </div>
     </div>
-    <div class="control">
-      <input type="color" v-model="cssVarTheme['--primary-color']" />
-      <input type="color" v-model="cssVarTheme['--background-layer-1']" list="presetColors" />
-      <input type="color" v-model="cssVarTheme['--background-layer-2']" list="presetColors" />
-      <datalist id="presetColors">
-        <option>#ffffff</option>
-        <option>#f2f2f2</option>
-        <option>#eeeeee</option>
-        <option>#333333</option>
-        <option>#2e2e2e</option>
-        <option>#222222</option>
-        <option>#1e1e1e</option>
-        <option>#111111</option>
-      </datalist>
+    <div class="setting-item">
+      <div class="content">
+        <div class="title">{{ $t('settings.theme.color') }} </div>
+      </div>
+      <div class="control">
+        <input type="color" v-model="cssVarTheme['--primary-color']" />
+        <input type="color" v-model="cssVarTheme['--background-layer-1']" />
+        <input type="color" v-model="cssVarTheme['--background-layer-2']" />
+      </div>
     </div>
-  </div>
+  </template>
   <h4 style="margin-bottom: var(--padding)">{{ $t('settings.theme.preview') }}</h4>
 
   <p-cards style="margin: calc(var(--padding) * 2) 0">
@@ -195,5 +203,36 @@ input[type="color"]::-webkit-color-swatch-wrapper
 
 input[type="color"]::-webkit-color-swatch
   border: none
-
+.theme-preview-items
+  display: grid
+  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr))
+  grid-gap: var(--padding)
+  margin: calc(var(--padding) * 2) 0
+  .theme-preview-item
+    display: grid
+    grid-template-columns: 1fr 1fr
+    justify-content: center
+    border-radius: var(--border-radius)
+    overflow: hidden
+    background-color: var(--background-layer-2)
+    color: rgba(var(--text-color-value),1)
+    border: 1px solid var(--background-layer-2)
+    transition: transform var(--transition)
+    cursor: pointer
+    .layer-1,.layer-2
+      padding: var(--padding)
+      height: 64px
+      display: flex
+      align-items: center
+      justify-content: center
+      font-size: 18px
+    .layer-1
+      background-color: var(--background-layer-1)
+      font-size: 24px
+    .layer-2
+      background-color: var(--background-layer-2)
+    &:hover
+      transform: scale(1.05)
+    &:active
+      transform: scale(1)
 </style>
