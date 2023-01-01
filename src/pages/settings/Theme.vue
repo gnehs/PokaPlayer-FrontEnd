@@ -1,29 +1,20 @@
 <script setup>
-import { computed, watch, nextTick } from 'vue'
+import { computed, watch, nextTick, ref } from 'vue'
 import { useStorage } from '@vueuse/core'
 
 const pokaTheme = useStorage('poka.theme', { theme: 'light', cssText: `` })
-function computedCssVar(name, initialValue, unit = '') {
-  return computed({
-    get() {
-      if (unit)
-        return parseInt(document.documentElement.style.getPropertyValue(name)) || initialValue
-      else
-        return document.documentElement.style.getPropertyValue(name) || initialValue
-    },
-    set(value) {
-      document.documentElement.style.setProperty(name, value + unit)
-      pokaTheme.value.cssText = document.documentElement.style.cssText
-    }
-  })
+const cssVarTheme = ref({
+  '--border-radius': '12px',
+  '--padding': '8px',
+  '--min-card-width': '128px',
+  '--primary-color': '#007bff',
+  '--background-layer-1': '#ffffff',
+  '--background-layer-2': '#f8f9fa',
+  '--text-color-value': '51,51,51',
+})
+for (let key in cssVarTheme.value) {
+  cssVarTheme.value[key] = document.documentElement.style.getPropertyValue(key) || cssVarTheme.value[key]
 }
-const borderRadius = computedCssVar('--border-radius', 12, 'px')
-const padding = computedCssVar('--padding', 8, 'px')
-const minCardWidth = computedCssVar('--min-card-width', 128, 'px')
-const primaryColor = computedCssVar('--primary-color', '#007bff')
-const backgroundLayer1 = computedCssVar('--background-layer-1', '#ffffff')
-const backgroundLayer2 = computedCssVar('--background-layer-2', '#f2f2f2')
-const textColorValue = computedCssVar('--text-color-value', '51,51,51')
 
 watch(pokaTheme, (value) => {
   let theme = {
@@ -45,14 +36,19 @@ watch(pokaTheme, (value) => {
   }
 
   if (Object.keys(theme).includes(value.theme)) {
-    backgroundLayer1.value = theme[value.theme].backgroundLayer1
-    backgroundLayer2.value = theme[value.theme].backgroundLayer2
-    textColorValue.value = theme[value.theme].textColorValue
+    cssVarTheme.value['--background-layer-1'] = theme[value.theme].backgroundLayer1
+    cssVarTheme.value['--background-layer-2'] = theme[value.theme].backgroundLayer2
+    cssVarTheme.value['--text-color-value'] = theme[value.theme].textColorValue
+  }
+})
+watch(cssVarTheme, (value) => {
+  for (let key in value) {
+    document.documentElement.style.setProperty(key, value[key])
   }
   nextTick(() => {
     pokaTheme.value.cssText = document.documentElement.style.cssText
   })
-})
+}, { deep: true })
 
 </script>
 <template>
@@ -98,9 +94,9 @@ watch(pokaTheme, (value) => {
         <div class="title">{{ $t('settings.theme.color') }} </div>
       </div>
       <div class="control">
-        <input type="color" v-model="primaryColor" />
-        <input type="color" v-model="backgroundLayer1" list="presetColors" />
-        <input type="color" v-model="backgroundLayer2" list="presetColors" />
+        <input type="color" v-model="cssVarTheme['--primary-color']" />
+        <input type="color" v-model="cssVarTheme['--background-layer-1']" list="presetColors" />
+        <input type="color" v-model="cssVarTheme['--background-layer-2']" list="presetColors" />
         <datalist id="presetColors">
           <option>#ffffff</option>
           <option>#f2f2f2</option>
@@ -129,12 +125,12 @@ watch(pokaTheme, (value) => {
       <div class="title">{{ $t('settings.theme.cardWidth') }}</div>
     </div>
     <div class="control">
-      <select v-model="minCardWidth">
-        <option :value="72">72px </option>
-        <option :value="96">96px </option>
-        <option :value="128">128px ({{ $t('settings.theme.default') }}) </option>
-        <option :value="160">160px </option>
-        <option :value="192">192px </option>
+      <select v-model="cssVarTheme['--min-card-width']">
+        <option value="72px">72px </option>
+        <option value="96px">96px </option>
+        <option value="128px">128px ({{ $t('settings.theme.default') }}) </option>
+        <option value="160px">160px </option>
+        <option value="192px">192px </option>
       </select>
     </div>
   </div>
@@ -143,12 +139,12 @@ watch(pokaTheme, (value) => {
       <div class="title">{{ $t('settings.theme.borderRadius') }}</div>
     </div>
     <div class="control">
-      <select v-model="borderRadius">
-        <option :value="4">4px </option>
-        <option :value="8">8px </option>
-        <option :value="12">12px ({{ $t('settings.theme.default') }})</option>
-        <option :value="16">16px </option>
-        <option :value="24">24px </option>
+      <select v-model="cssVarTheme['--border-radius']">
+        <option value="4px">4px </option>
+        <option value="8px">8px </option>
+        <option value="12px">12px ({{ $t('settings.theme.default') }})</option>
+        <option value="16px">16px </option>
+        <option value="24px">24px </option>
       </select>
     </div>
   </div>
@@ -157,12 +153,12 @@ watch(pokaTheme, (value) => {
       <div class="title">{{ $t('settings.theme.padding') }}</div>
     </div>
     <div class="control">
-      <select v-model="padding">
-        <option :value="4">4px </option>
-        <option :value="8">8px ({{ $t('settings.theme.default') }})</option>
-        <option :value="10">10px </option>
-        <option :value="12">12px </option>
-        <option :value="16">16px </option>
+      <select v-model="cssVarTheme['--padding']">
+        <option value="4px">4px </option>
+        <option value="8px">8px ({{ $t('settings.theme.default') }})</option>
+        <option value="10px">10px </option>
+        <option value="12px">12px </option>
+        <option value="16px">16px </option>
       </select>
     </div>
   </div>
