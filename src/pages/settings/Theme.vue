@@ -75,16 +75,14 @@ watch(cssVarTheme, (value) => {
         <div class="title">{{ $t('settings.theme.textColor') }}</div>
       </div>
       <div class="control">
-        <select v-model="textColorValue">
+        <select v-model="cssVarTheme['--text-color-value']">
           <optgroup label="🌑"> </optgroup>
-
           <option value="0,0,0">0 </option>
           <option value="25,25,25">25 </option>
           <option value="51,51,51">51 ({{ $t('settings.theme.default') }}) </option>
           <option value="200,200,200">200</option>
           <option value="230,230,230">230 </option>
           <option value="255,255,255">255 </option>
-
           <optgroup label="☀️"> </optgroup>
         </select>
       </div>
