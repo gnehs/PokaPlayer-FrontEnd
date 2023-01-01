@@ -2,7 +2,7 @@
 import { computed, watch, nextTick, ref } from 'vue'
 import { useStorage } from '@vueuse/core'
 
-const pokaTheme = useStorage('poka.theme', { theme: 'light', cssText: `` })
+const pokaTheme = useStorage('poka.theme', { theme: 'light', cssText: ``, })
 const cssVarTheme = ref({
   '--border-radius': '12px',
   '--padding': '8px',
@@ -61,53 +61,51 @@ watch(cssVarTheme, (value) => {
       <div class="title">{{ $t('settings.theme.title') }}</div>
     </div>
     <div class="control">
-      <select v-model="pokaTheme.theme">
+      <p-select v-model="pokaTheme.theme">
         <option value="light">{{ $t('settings.theme.preset.light') }} </option>
         <option value="dark">{{ $t('settings.theme.preset.dark') }} </option>
         <option value="red">{{ $t('settings.theme.preset.red') }} </option>
         <option value="custom">{{ $t('settings.theme.preset.custom') }} </option>
-      </select>
+      </p-select>
     </div>
   </div>
-  <template v-if="pokaTheme.theme == 'custom'">
-    <div class="setting-item">
-      <div class="content">
-        <div class="title">{{ $t('settings.theme.textColor') }}</div>
-      </div>
-      <div class="control">
-        <select v-model="cssVarTheme['--text-color-value']">
-          <optgroup label="🌑"> </optgroup>
-          <option value="0,0,0">0 </option>
-          <option value="25,25,25">25 </option>
-          <option value="51,51,51">51 ({{ $t('settings.theme.default') }}) </option>
-          <option value="200,200,200">200</option>
-          <option value="230,230,230">230 </option>
-          <option value="255,255,255">255 </option>
-          <optgroup label="☀️"> </optgroup>
-        </select>
-      </div>
+  <div class="setting-item">
+    <div class="content">
+      <div class="title">{{ $t('settings.theme.textColor') }}</div>
     </div>
-    <div class="setting-item">
-      <div class="content">
-        <div class="title">{{ $t('settings.theme.color') }} </div>
-      </div>
-      <div class="control">
-        <input type="color" v-model="cssVarTheme['--primary-color']" />
-        <input type="color" v-model="cssVarTheme['--background-layer-1']" list="presetColors" />
-        <input type="color" v-model="cssVarTheme['--background-layer-2']" list="presetColors" />
-        <datalist id="presetColors">
-          <option>#ffffff</option>
-          <option>#f2f2f2</option>
-          <option>#eeeeee</option>
-          <option>#333333</option>
-          <option>#2e2e2e</option>
-          <option>#222222</option>
-          <option>#1e1e1e</option>
-          <option>#111111</option>
-        </datalist>
-      </div>
+    <div class="control">
+      <p-select v-model="cssVarTheme['--text-color-value']">
+        <optgroup label="🌑"> </optgroup>
+        <option value="0,0,0">0 </option>
+        <option value="25,25,25">25 </option>
+        <option value="51,51,51">51 ({{ $t('settings.theme.default') }}) </option>
+        <option value="200,200,200">200</option>
+        <option value="230,230,230">230 </option>
+        <option value="255,255,255">255 </option>
+        <optgroup label="☀️"> </optgroup>
+      </p-select>
     </div>
-  </template>
+  </div>
+  <div class="setting-item">
+    <div class="content">
+      <div class="title">{{ $t('settings.theme.color') }} </div>
+    </div>
+    <div class="control">
+      <input type="color" v-model="cssVarTheme['--primary-color']" />
+      <input type="color" v-model="cssVarTheme['--background-layer-1']" list="presetColors" />
+      <input type="color" v-model="cssVarTheme['--background-layer-2']" list="presetColors" />
+      <datalist id="presetColors">
+        <option>#ffffff</option>
+        <option>#f2f2f2</option>
+        <option>#eeeeee</option>
+        <option>#333333</option>
+        <option>#2e2e2e</option>
+        <option>#222222</option>
+        <option>#1e1e1e</option>
+        <option>#111111</option>
+      </datalist>
+    </div>
+  </div>
   <h4 style="margin-bottom: var(--padding)">{{ $t('settings.theme.preview') }}</h4>
 
   <p-cards style="margin: calc(var(--padding) * 2) 0">
@@ -123,13 +121,13 @@ watch(cssVarTheme, (value) => {
       <div class="title">{{ $t('settings.theme.cardWidth') }}</div>
     </div>
     <div class="control">
-      <select v-model="cssVarTheme['--min-card-width']">
+      <p-select v-model="cssVarTheme['--min-card-width']">
         <option value="72px">72px </option>
         <option value="96px">96px </option>
         <option value="128px">128px ({{ $t('settings.theme.default') }}) </option>
         <option value="160px">160px </option>
         <option value="192px">192px </option>
-      </select>
+      </p-select>
     </div>
   </div>
   <div class="setting-item">
@@ -137,13 +135,13 @@ watch(cssVarTheme, (value) => {
       <div class="title">{{ $t('settings.theme.borderRadius') }}</div>
     </div>
     <div class="control">
-      <select v-model="cssVarTheme['--border-radius']">
+      <p-select v-model="cssVarTheme['--border-radius']">
         <option value="4px">4px </option>
         <option value="8px">8px </option>
         <option value="12px">12px ({{ $t('settings.theme.default') }})</option>
         <option value="16px">16px </option>
         <option value="24px">24px </option>
-      </select>
+      </p-select>
     </div>
   </div>
   <div class="setting-item">
@@ -151,13 +149,13 @@ watch(cssVarTheme, (value) => {
       <div class="title">{{ $t('settings.theme.padding') }}</div>
     </div>
     <div class="control">
-      <select v-model="cssVarTheme['--padding']">
+      <p-select v-model="cssVarTheme['--padding']">
         <option value="4px">4px </option>
         <option value="8px">8px ({{ $t('settings.theme.default') }})</option>
         <option value="10px">10px </option>
         <option value="12px">12px </option>
         <option value="16px">16px </option>
-      </select>
+      </p-select>
     </div>
   </div>
 </template>

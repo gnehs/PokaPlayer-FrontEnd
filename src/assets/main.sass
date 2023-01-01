@@ -1,13 +1,19 @@
 \:root
   --background-layer-1: #fff
   --background-layer-2: #f2f2f2
+
   --text-color-value: 51,51,51
   --text-color: rgba(var(--text-color-value), 1)
   --border-color: rgba(var(--text-color-value), .1)
   --border-focus-color: rgba(var(--text-color-value), .2)
+
   --border-width: 1px
   --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05)
-  --transition: 0.15s ease
+
+  --transition-duration: 0.15s
+  --transition-timing-function: ease
+  --transition: var(--transition-duration) var(--transition-timing-function)
+
   --primary-color: #007bff
   // --pattern-color-1: #00abd0
   // --pattern-color-2: #f5b904
@@ -45,21 +51,3 @@ body,html
     align-items: center
     justify-content: flex-end
     gap: var(--padding)
-    select
-      width: 100%
-      height: 100%
-      border: none
-      background: transparent
-      font-size: 1rem
-      color: var(--text-color)
-      appearance: none
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="rgba(var(--text-color-value), .5)" d="M7 10l5 5 5-5z"/></svg>')
-      color: rgba(var(--text-color-value), 1)
-      background-repeat: no-repeat
-      background-position: right 0.5rem top 50%, 0 0
-      background-size: 1.5em auto, 100%
-      padding: var(--padding) calc(var(--padding) * 2)
-      border: 1px solid rgba(var(--text-color-value),.1)
-      border-radius: var(--border-radius)
-      &:focus
-        outline: none

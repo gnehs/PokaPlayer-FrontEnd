@@ -16,12 +16,12 @@ const { locale, availableLocales, getLocaleMessage } = useI18n({
       <div class="description"></div>
     </div>
     <div class="control">
-      <select v-model="locale">
+      <p-select v-model="locale">
         <!-- TODO: Wait for issue #1235 to be fixed https://github.com/intlify/vue-i18n-next/issues/1235 -->
         <option :value="locale" v-for="locale of availableLocales">
           {{ getLocaleMessage(locale).language_name({ normalize: (s) => s[0] }) }}
         </option>
-      </select>
+      </p-select>
     </div>
   </div>
   <div>
