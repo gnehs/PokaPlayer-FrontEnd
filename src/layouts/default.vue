@@ -180,6 +180,10 @@ export default {
         opacity: 1
         filter: blur(0)
         transform: none
+      .nav-item-icon
+        &.bx-cog
+          transform: rotate(60deg)
+          transition: all var(--transition)
     &:active
       background-color: rgba(var(--text-color-value),0.15)
       transform: scale(.95)
