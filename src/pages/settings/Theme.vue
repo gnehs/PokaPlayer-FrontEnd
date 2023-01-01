@@ -205,8 +205,8 @@ input[type="color"]::-webkit-color-swatch
   border: none
 .theme-preview-items
   display: grid
-  grid-template-columns: repeat(auto-fill, minmax(128px, 1fr))
-  grid-gap: var(--padding)
+  grid-template-columns: repeat(auto-fill, minmax(var(--min-card-width), 1fr))
+  grid-gap: calc(var(--padding) * 2)
   margin: calc(var(--padding) * 2) 0
   .theme-preview-item
     display: grid

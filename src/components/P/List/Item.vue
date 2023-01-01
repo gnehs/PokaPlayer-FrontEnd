@@ -21,7 +21,7 @@ const props = defineProps({
 </template>
 <style lang="sass">
 .p-list-item
-  padding: calc(var(--padding) * 1.5) var(--padding)
+  padding: calc(var(--padding) * 0.75) var(--padding)
   border-radius: var(--border-radius)
   display: flex
   transition: all var(--transition)

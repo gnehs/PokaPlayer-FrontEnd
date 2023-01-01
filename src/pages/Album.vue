@@ -63,6 +63,7 @@ function playAll(shuffle = false) {
   display: flex
   gap: calc(var(--padding) * 2)
   padding-bottom: calc(var(--padding) * 2)
+  margin-bottom: calc(var(--padding) * 2)
   border-bottom: 1px solid var(--background-layer-2)
   @media (max-width: 768px)
     flex-direction: column
