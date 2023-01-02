@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch, inject, onMounted } from 'vue'
+import { ref, inject } from 'vue'
 
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'

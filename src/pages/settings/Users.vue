@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch, inject, onMounted } from 'vue'
+import { ref, computed, inject, onMounted } from 'vue'
 const PokaAPI = inject('PokaAPI')
 const users = ref(null)
 const selectedUser = ref(null)

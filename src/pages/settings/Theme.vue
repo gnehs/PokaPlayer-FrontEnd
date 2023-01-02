@@ -1,5 +1,5 @@
 <script setup>
-import { computed, watch, nextTick, ref } from 'vue'
+import { watch, nextTick, ref } from 'vue'
 import { useStorage } from '@vueuse/core'
 
 const pokaTheme = useStorage('poka.theme', { theme: 'light', cssText: ``, })

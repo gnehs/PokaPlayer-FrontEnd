@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch, inject, onMounted } from 'vue'
+import { ref, inject, onMounted } from 'vue'
 const PokaAPI = inject('PokaAPI')
 const pins = ref(null)
 async function getData() {
