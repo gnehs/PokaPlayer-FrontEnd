@@ -116,7 +116,22 @@ const router = createRouter({
           {
             path: '/settings/user',
             name: 'SettingsUser',
-            component: () => import('../pages/settings/user.vue')
+            component: () => import('../pages/settings/User.vue')
+          },
+          {
+            path: '/settings/users',
+            name: 'SettingsUsers',
+            component: () => import('../pages/settings/Users.vue')
+          },
+          {
+            path: '/settings/log',
+            name: 'SettingsLog',
+            component: () => import('../pages/settings/Log.vue')
+          },
+          {
+            path: '/settings/System',
+            name: 'SettingsSystem',
+            component: () => import('../pages/settings/System.vue')
           },
           // 404
           {

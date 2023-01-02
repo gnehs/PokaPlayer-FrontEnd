@@ -313,4 +313,43 @@ export default class {
   async changeUserPassword(oldpassword, password) {
     return await this.#fetch({ url: `/pokaapi/v2/user/password`, method: 'POST', body: { oldpassword, password } })
   }
+  /**
+   * Get user list
+   * @return {Promise} Promise object represents user list
+   * @memberof PokaAPI
+   */
+  async getUserList() {
+    return await this.#fetch({ url: `/pokaapi/v2/users/list` })
+  }
+  /**
+   * Create user
+   * @param  {object} user
+   * @param  {string} user.username
+   * @param  {string} user.password
+   * @param  {string} user.name
+   * @param  {string} user.role
+   * @return {Promise} Promise object represents user
+   */
+  async createUser({ username, password, name, role }) {
+    return await this.#fetch({ url: `/pokaapi/v2/users/create`, method: 'POST', body: { username, password, name, role } })
+  }
+  /**
+   * Change user password
+   * @param  {string} _id
+   * @param  {string} password
+   * @return {Promise} Promise object represents result
+   * @memberof PokaAPI
+   */
+  async changeUserPasswordById(_id, password) {
+    return await this.#fetch({ url: `/pokaapi/v2/users/change-password`, method: 'POST', body: { _id, password } })
+  }
+  /**
+   * Delete user
+   * @param  {string} _id
+   * @return {Promise} Promise object represents result
+   * @memberof PokaAPI
+   */
+  async deleteUser(_id) {
+    return await this.#fetch({ url: `/pokaapi/v2/users/delete`, method: 'POST', body: { _id } })
+  }
 }

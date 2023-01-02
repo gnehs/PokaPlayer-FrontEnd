@@ -85,6 +85,15 @@ settings:
     oldPassword: 'Old Password'
     newPassword: 'New Password'
     confirmPassword: 'Confirm Password'
+  system:
+    title: 'System'
+    description: 'Modify configuration, update or restart system'
+  users:
+    title: 'Users'
+    description: 'View, add, modify or delete users'
+  log:
+    title: 'Log'
+    description: 'View system log, usually error messages will be displayed here'
 songDialog:
   addToPlaylist: 'Add to playlist'
   source: 'Source'

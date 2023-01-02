@@ -85,6 +85,15 @@ settings:
     oldPassword: '舊密碼'
     newPassword: '新密碼'
     confirmPassword: '確認密碼'
+  system:
+    title: '系統'
+    description: '修改設定檔、更新或重新啟動系統'
+  users:
+    title: '使用者管理'
+    description: '查看、新增、修改或刪除使用者'
+  log:
+    title: '日誌'
+    description: '查看系統日誌，通常發生錯誤時會在此顯示'
 songDialog:
   addToPlaylist: '添加到播放列表'
   source: '來源'
