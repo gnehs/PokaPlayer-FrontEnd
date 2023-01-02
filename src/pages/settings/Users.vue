@@ -11,7 +11,7 @@ const newUser = ref({
 })
 const userDialog = computed({
   get: () => !!selectedUser.value,
-  set: (value) => selectedUser.value = null
+  set: () => selectedUser.value = null
 })
 const createUserDialog = ref(false)
 async function getUserList() {

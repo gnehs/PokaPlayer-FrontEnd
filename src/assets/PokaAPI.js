@@ -352,4 +352,12 @@ export default class {
   async deleteUser(_id) {
     return await this.#fetch({ url: `/pokaapi/v2/users/delete`, method: 'POST', body: { _id } })
   }
+  /**
+   * Get log by page
+   * @param  {number} page = 0
+   * @return {Promise} Promise object represents log
+   */
+  async getLog(page = 0) {
+    return await this.#fetch({ url: `/pokaapi/v2/log?page=${page}` })
+  }
 }
