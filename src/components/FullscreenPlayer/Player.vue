@@ -2,6 +2,7 @@
 
 import { ref, inject, watch, onUnmounted } from 'vue'
 const player = inject('Player')
+const PokaAPI = inject('PokaAPI')
 
 const addToPlaylistDialog = ref(false)
 
@@ -14,6 +15,7 @@ const rawCurrentTime = ref(0)
 const duration = ref('0:00')
 const rawDuration = ref(0)
 const trackInfo = ref(null)
+const audioRecorded = ref(false)
 
 let playerInterval = setInterval(() => {
   updatePlayerInfo()
@@ -22,7 +24,7 @@ let playerTimeInterval = setInterval(() => {
   rawCurrentTime.value = player.rawCurrentTime
   rawDuration.value = player.rawDuration
 }, 1000 / 60)// 60fps
-function updatePlayerInfo() {
+async function updatePlayerInfo() {
   playerMode.value = player.audioOrder
   playerPaused.value = player.paused
   currentTime.value = player.currentTime
@@ -30,6 +32,12 @@ function updatePlayerInfo() {
   trackInfo.value = player.trackInfo
   rawCurrentTime.value = player.rawCurrentTime
   rawDuration.value = player.rawDuration
+  if (!audioRecorded.value) {
+    if (rawCurrentTime.value + 10 > rawDuration.value) {
+      await PokaAPI.addSongRecord(trackInfo.value.originalObject)
+      audioRecorded.value = true
+    }
+  }
 }
 updatePlayerInfo()
 onUnmounted(() => {

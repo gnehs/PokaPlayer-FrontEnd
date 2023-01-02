@@ -368,4 +368,13 @@ export default class {
   async getLog(page = 0) {
     return await this.#fetch({ url: `/pokaapi/v2/log?page=${page}` })
   }
+  /**
+   * Add song record
+   * @param  {object} song
+   * @return {Promise} Promise object represents result
+   * @memberof PokaAPI
+   */
+  async addSongRecord(song) {
+    return await this.#fetch({ url: `/pokaapi/v2/record/add`, method: 'POST', body: song })
+  }
 }
