@@ -33,7 +33,7 @@ async function updatePlayerInfo() {
   rawCurrentTime.value = player.rawCurrentTime
   rawDuration.value = player.rawDuration
   if (!audioRecorded.value) {
-    if (rawCurrentTime.value + 10 > rawDuration.value) {
+    if (rawCurrentTime.value + 10 > rawDuration.value && rawDuration.value > 0) {
       await PokaAPI.addSongRecord(trackInfo.value.originalObject)
       audioRecorded.value = true
     }
