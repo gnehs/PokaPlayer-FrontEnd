@@ -67,6 +67,14 @@ export default class {
     return await this.#fetch({ url: '/pokaapi/v2/user/' })
   }
   /**
+   * Get system info
+   * @return {Promise} Promise object represents system info
+   * @memberof PokaAPI
+   */
+  async getSystemInfo() {
+    return await this.#fetch({ url: '/pokaapi/v2/info/' })
+  }
+  /**
    * Get albums
    * @return {Promise} Promise object represents albums
    * @memberof PokaAPI

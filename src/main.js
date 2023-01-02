@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { createI18n } from 'vue-i18n'
+import { io } from "socket.io-client";
 import messages from '@intlify/unplugin-vue-i18n/messages'
 
 import App from './App.vue'
@@ -22,6 +23,10 @@ Object.entries(components).forEach(([path, definition]) => {
   // Register component on this Vue instance
   app.component(componentName, definition.default)
 })
+// Set socket.io to global
+const socket = io(location.origin)
+app.config.globalProperties.$socket = socket
+app.provide('socket', socket)
 
 // Set PokaAPI to global
 let pokaAPI = new PokaAPI()

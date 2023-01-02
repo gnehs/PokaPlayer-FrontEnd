@@ -1,7 +1,7 @@
 <template>
-  <button class="p-btn" :type="type" :class="{outline,text,icon,block}" :color="color" v-bind="$attrs">
+  <Component :is="href ? `a` : `button`" :href="href" class="p-btn" :type="type" :class="{outline,text,icon,block}" :color="color" v-bind="$attrs">
     <slot />
-  </button>
+  </Component>
 </template>
 <script>
 export default {
@@ -9,6 +9,10 @@ export default {
     type: {
       type: String,
       default: 'button'
+    },
+    href: {
+      type: String,
+      default: ''
     },
     color: {
       type: String,
@@ -50,6 +54,8 @@ export default {
   justify-content: center
   gap: var(--padding)
   box-shadow: inset 0 0 0 100px transparent
+  text-decoration: none
+  display: inline-flex
   &:hover
     box-shadow: inset 0 0 0 100px rgba(var(--text-color-value), .1)
     border: 1px solid rgba(var(--text-color-value), .1)

@@ -12,8 +12,15 @@
   </div>
 </template>
 <script>
+import { inject } from 'vue'
 export default {
   name: 'LoginDialog',
+  setup() {
+    const socket = inject('socket')
+    return {
+      socket
+    }
+  },
   data() {
     return {
       username: localStorage.getItem('username') || '',
@@ -23,6 +30,7 @@ export default {
   methods: {
     async login() {
       let res = await this.$PokaAPI.login(this.username, this.password)
+      this.socket.emit('login', { username: this.username, password: this.password })
       if (res.success) {
         this.$router.push('/')
       }

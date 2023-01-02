@@ -1,10 +1,10 @@
 <template>
   <Teleport to="body">
     <transition name="modal">
-      <div class="modal-mask" v-if="modelValue" @click="$emit('update:modelValue', false)">
+      <div class="modal-mask" v-if="modelValue" @click="closeable && $emit('update:modelValue', false)">
         <div class="modal-wrapper">
           <div class="modal-container" @click.stop="" :style="`--max-width: ${maxWidth}`">
-            <div class="close" @click="$emit('update:modelValue', false)" v-if="showClose">
+            <div class="close" @click="closeable && $emit('update:modelValue', false)" v-if="showClose">
               <i class="bx bx-x"></i>
             </div>
             <slot />
@@ -24,6 +24,10 @@ export default {
     showClose: {
       type: Boolean,
       default: false
+    },
+    closeable: {
+      type: Boolean,
+      default: true
     },
     maxWidth: {
       type: String,
