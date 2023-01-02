@@ -97,10 +97,6 @@ function notAvailable() {
   alert('Not available yet')
 }
 onMounted(async () => {
-  socket.emit('echo', { 'world': 'hello' })
-  socket.on('echo', (data) => {
-    console.log('echo', data)
-  })
   await checkUpdate()
 })
 
