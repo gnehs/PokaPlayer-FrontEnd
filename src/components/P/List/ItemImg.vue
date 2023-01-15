@@ -7,6 +7,6 @@ const props = defineProps({
 </script>
 <template>
   <div class="p-list-item__img">
-    <img :src="src" :alt="alt" />
+    <img :src="src" :alt="alt" loading="lazy" />
   </div>
 </template>
