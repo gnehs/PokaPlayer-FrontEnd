@@ -52,6 +52,11 @@ watch(cssVarTheme, (value) => {
   }
   nextTick(() => {
     pokaTheme.value.cssText = document.documentElement.style.cssText
+    // theme-color
+    let themeColor = document.querySelector('meta[name="theme-color"]')
+    if (themeColor) {
+      themeColor.setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--background-layer-1'))
+    }
   })
 }, { deep: true })
 

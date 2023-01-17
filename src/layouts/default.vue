@@ -12,14 +12,14 @@
         <div id="header-actions"></div>
         <router-link class="nav-item" v-for="item in actions" :to="item.to">
           <i class='nav-item-icon bx' :class="item.icon"></i>
-          <div class="nav-item-text">{{ $t(`nav.${item.text}`) }}</div>
+          <div class="nav-item-text">{{ $t(`nav.${item.text }`) }}</div>
         </router-link>
       </div>
     </div>
     <div class="nav">
       <router-link class="nav-item" v-for="item in nav" :to="item.to">
         <i class='nav-item-icon bx' :class="item.icon"></i>
-        <div class="nav-item-text">{{ $t(`nav.${item.text}`) }}</div>
+        <div class="nav-item-text">{{ $t(`nav.${ item.text }`) }}</div>
       </router-link>
     </div>
     <div class="main">
@@ -83,6 +83,11 @@ export default {
       let theme = localStorage.getItem('poka.theme')
       if (theme) {
         document.documentElement.style.cssText = JSON.parse(theme).cssText
+        // theme-color
+        let themeColor = document.querySelector('meta[name="theme-color"]')
+        if (themeColor) {
+          themeColor.setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--background-layer-1'))
+        }
       }
     }
   }
