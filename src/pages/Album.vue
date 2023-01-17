@@ -23,7 +23,7 @@ function playAll(shuffle = false) {
 <template>
   <div v-if="albumData">
     <Teleport to="#header-center">
-      <p> {{ albumData.name ?? albumData.playlists[0].name }} <br /><small style="opacity: 0.5">{{ $t(`nav.${$route.meta.type}s`) }}</small></p>
+      <p> {{ albumData.name ?? albumData.playlists[0].name }} <br /><small style="opacity: 0.5">{{ $t(`nav.${$route.meta.type }s`) }}</small></p>
     </Teleport>
     <div class="header">
       <div class="cover">
@@ -33,13 +33,13 @@ function playAll(shuffle = false) {
         <div class="title">
           {{ albumData.name ?? albumData.playlists[0].name }}
         </div>
-        <router-link class="artist" :to="`/artist/${$route.params.source}/${albumData.artistId}`">
+        <router-link class="artist" :to="`/ artist / ${ $route.params.source } /${albumData.artistId}`">
           {{ albumData.artist }}
         </router-link>
         <div class="meta">
-          <span>{{ $t(`nav.${$route.meta.type}s`) }}</span>
+          <span>{{ $t(`nav.${$route.meta.type }s`) }}</span>
           <span>{{ $t(`songs`, albumData.songs.length, { count: albumData.songs.length }) }}</span>
-          <span>{{ $t(`source.${$route.params.source}`) }}</span>
+          <span>{{ $t(`source.${ $route.params.source }`) }}</span>
         </div>
         <div class="actions">
           <p-btn @click="playAll()"><i class='bx bx-play'></i> {{ $t('album.playAll') }}</p-btn>
