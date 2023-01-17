@@ -52,6 +52,21 @@ lyric:
       title: '目前歌词来自已储存的歌词'
       description: '若要搜索歌词，请在上方输入关键词，并按下搜索按钮'
 settings:
+  quality:
+    title: '音质'
+    description: '设定音乐播放的音质'
+    low:
+      title: '低'
+      description: '低质量音质，能在网络状况不佳的环境下使用'
+    medium:
+      title: '中'
+      description: '中质量音质，能使用较少的流量聆听音乐，但音质相对普通'
+    high:
+      title: '高'
+      description: '高质量音质，在音质与档案大小之间取得平衡'
+    original:
+      title: '原始'
+      description: '载入原始档案，适合在网络状况良好的环境下使用'
   theme:
     title: '主题'
     description: '设定界面中的色彩与属性'

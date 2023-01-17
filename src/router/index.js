@@ -109,6 +109,11 @@ const router = createRouter({
             component: () => import('../pages/settings/Theme.vue')
           },
           {
+            path: '/settings/quality',
+            name: 'SettingsQuality',
+            component: () => import('../pages/settings/Quality.vue')
+          },
+          {
             path: '/settings/pins',
             name: 'SettingsPins',
             component: () => import('../pages/settings/Pins.vue')

@@ -29,6 +29,14 @@ const { userInfo } = storeToRefs(userStore)
   </div>
   <div>
     <p-list-items>
+      <p-list-item to="/settings/quality" tabindex="0">
+        <p-list-item-icon-btn>
+          <i class='bx bx-music'></i>
+        </p-list-item-icon-btn>
+        <p-list-item-content
+          :title="$t(`settings.quality.title`)"
+          :description="$t(`settings.quality.description`)" />
+      </p-list-item>
       <p-list-item to="/settings/theme" tabindex="0">
         <p-list-item-icon-btn>
           <i class='bx bx-brush-alt'></i>

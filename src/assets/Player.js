@@ -55,7 +55,7 @@ export default class {
     this.player.toggle();
   }
   addSongs({ songs = [], index = 0, clear = true }) {
-    let songRes = `original`
+    let songRes = localStorage[`poka.quality`] || `original`
     const playlist = songs.map(item => {
       const song = this.#deepcopy(item);
       song.originalObject = item;

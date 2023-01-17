@@ -52,6 +52,21 @@ lyric:
       title: 'The current lyric comes from the saved lyric'
       description: 'To search for lyrics, please enter a keyword in the box above and click the search button'
 settings:
+  quality:
+    title: 'Quality'
+    description: 'Set the quality of the music'
+    low:
+      title: 'Low quality'
+      description: '128K, similar to YouTube, can stream in poor network conditions'
+    medium:
+      title: 'Medium quality'
+      description: 'Quality is better than YouTube only a little, can stream be in 3G network'
+    high:
+      title: 'High quality'
+      description: 'High quality music, the quality is relatively high, but the file size is relatively large'
+    original:
+      title: 'Original quality'
+      description: 'Original quality music, the quality is the best, but the file size is the largest'
   theme:
     title: 'Theme'
     description: 'Set the color and attributes of the interface'
