@@ -151,16 +151,18 @@ export default {
       padding: 0 calc(var(--padding) * .25)
   .nav-item
     padding: calc(var(--padding) * 2)
-    display: block
     border-radius: var(--border-radius)
     color: var(--text-color)
     text-decoration: none
     display: flex
     align-items: center
+    justify-content: center
 
     position: relative
     transition: all var(--transition)
     z-index: 1
+    @media (max-height: 768px)
+      padding: calc(var(--padding) * 1.5)
     &:not(:first-child)
       margin-top: calc(var(--padding) / 2)
     .nav-item-icon
