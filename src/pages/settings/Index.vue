@@ -13,18 +13,20 @@ const { userInfo } = storeToRefs(userStore)
   <Teleport to="#header-center">
     <p>{{ $t('nav.settings') }}</p>
   </Teleport>
-  <div class="setting-item">
-    <div class="content">
-      <div class="title">{{ $t(`language`) }}</div>
-      <div class="description"></div>
-    </div>
-    <div class="control">
-      <p-select v-model="locale">
-        <!-- TODO: Wait for issue #1235 to be fixed https://github.com/intlify/vue-i18n-next/issues/1235 -->
-        <option :value="locale" v-for="locale of availableLocales">
-          {{ getLocaleMessage(locale).language_name({ normalize: (s) => s[0] }) }}
-        </option>
-      </p-select>
+  <div>
+    <div class="setting-item">
+      <div class="content">
+        <div class="title">{{ $t(`language`) }}</div>
+        <div class="description"></div>
+      </div>
+      <div class="control">
+        <p-select v-model="locale">
+          <!-- TODO: Wait for issue #1235 to be fixed https://github.com/intlify/vue-i18n-next/issues/1235 -->
+          <option :value="locale" v-for="locale of availableLocales">
+            {{ getLocaleMessage(locale).language_name({ normalize: (s) => s[0] }) }}
+          </option>
+        </p-select>
+      </div>
     </div>
   </div>
   <div>

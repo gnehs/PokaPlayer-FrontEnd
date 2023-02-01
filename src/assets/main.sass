@@ -32,13 +32,20 @@ body,html
     margin: .2em 0
 .setting-item
   padding: calc(var(--padding) * 2)
-  margin-bottom: calc(var(--padding) * 2)
-  border: 1px solid rgba(var(--text-color-value),.1)
+  border: 2px solid var(--border-color)
   box-shadow: var(--box-shadow)
-  border-radius: var(--border-radius)
   display: flex
   align-items: center
   gap: calc(var(--padding) * 2)
+  &:first-child
+    border-radius: var(--border-radius) var(--border-radius) 0 0
+  &:not(:last-child)
+    border-bottom: none
+  &:last-child
+    border-radius: 0 0 var(--border-radius) var(--border-radius)
+    margin-bottom: calc(var(--padding) * 2)
+  &:first-child:last-child
+    border-radius: var(--border-radius)
   .content
     flex: 1
     .title

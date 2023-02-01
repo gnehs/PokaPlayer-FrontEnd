@@ -129,46 +129,48 @@ watch(cssVarTheme, (value) => {
       :source="$t('settings.theme.preview')" />
   </p-cards>
   <h4 style="margin-bottom: var(--padding)">{{ $t('settings.theme.style') }}</h4>
-  <div class="setting-item">
-    <div class="content">
-      <div class="title">{{ $t('settings.theme.cardWidth') }}</div>
+  <div>
+    <div class="setting-item">
+      <div class="content">
+        <div class="title">{{ $t('settings.theme.cardWidth') }}</div>
+      </div>
+      <div class="control">
+        <p-select v-model="cssVarTheme['--min-card-width']">
+          <option value="72px">72px </option>
+          <option value="96px">96px </option>
+          <option value="128px">128px ({{ $t('settings.theme.default') }}) </option>
+          <option value="160px">160px </option>
+          <option value="192px">192px </option>
+        </p-select>
+      </div>
     </div>
-    <div class="control">
-      <p-select v-model="cssVarTheme['--min-card-width']">
-        <option value="72px">72px </option>
-        <option value="96px">96px </option>
-        <option value="128px">128px ({{ $t('settings.theme.default') }}) </option>
-        <option value="160px">160px </option>
-        <option value="192px">192px </option>
-      </p-select>
+    <div class="setting-item">
+      <div class="content">
+        <div class="title">{{ $t('settings.theme.borderRadius') }}</div>
+      </div>
+      <div class="control">
+        <p-select v-model="cssVarTheme['--border-radius']">
+          <option value="4px">4px </option>
+          <option value="8px">8px </option>
+          <option value="12px">12px ({{ $t('settings.theme.default') }})</option>
+          <option value="16px">16px </option>
+          <option value="24px">24px </option>
+        </p-select>
+      </div>
     </div>
-  </div>
-  <div class="setting-item">
-    <div class="content">
-      <div class="title">{{ $t('settings.theme.borderRadius') }}</div>
-    </div>
-    <div class="control">
-      <p-select v-model="cssVarTheme['--border-radius']">
-        <option value="4px">4px </option>
-        <option value="8px">8px </option>
-        <option value="12px">12px ({{ $t('settings.theme.default') }})</option>
-        <option value="16px">16px </option>
-        <option value="24px">24px </option>
-      </p-select>
-    </div>
-  </div>
-  <div class="setting-item">
-    <div class="content">
-      <div class="title">{{ $t('settings.theme.padding') }}</div>
-    </div>
-    <div class="control">
-      <p-select v-model="cssVarTheme['--padding']">
-        <option value="4px">4px </option>
-        <option value="8px">8px ({{ $t('settings.theme.default') }})</option>
-        <option value="10px">10px </option>
-        <option value="12px">12px </option>
-        <option value="16px">16px </option>
-      </p-select>
+    <div class="setting-item">
+      <div class="content">
+        <div class="title">{{ $t('settings.theme.padding') }}</div>
+      </div>
+      <div class="control">
+        <p-select v-model="cssVarTheme['--padding']">
+          <option value="4px">4px </option>
+          <option value="8px">8px ({{ $t('settings.theme.default') }})</option>
+          <option value="10px">10px </option>
+          <option value="12px">12px </option>
+          <option value="16px">16px </option>
+        </p-select>
+      </div>
     </div>
   </div>
 </template>
