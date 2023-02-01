@@ -1,6 +1,6 @@
 <script setup>
-
-import { ref, inject, watch, onUnmounted } from 'vue'
+import { useWindowSize } from '@vueuse/core'
+import { ref, inject, watch, onUnmounted, nextTick } from 'vue'
 const player = inject('Player')
 const PokaAPI = inject('PokaAPI')
 
@@ -16,6 +16,9 @@ const duration = ref('0:00')
 const rawDuration = ref(0)
 const trackInfo = ref(null)
 const audioRecorded = ref(false)
+
+const { width, height } = useWindowSize()
+const maxCoverSize = ref(400)
 
 let playerInterval = setInterval(() => {
   updatePlayerInfo()
@@ -39,7 +42,29 @@ async function updatePlayerInfo() {
     }
   }
 }
+function calcMaxCoverSize() {
+  let height = window.innerHeight
+  try {
+
+    let headerHeight = document.querySelector('.header').offsetHeight
+    let footerHeight = document.querySelector('.fullscreen-player__container .footer').offsetHeight
+    let padding = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--padding'))
+    let trackInfoHeight = document.querySelector('.fullscreen-player__player .track-info-text').offsetHeight
+    let seekControlHeight = document.querySelector('.fullscreen-player__player .seek-control').offsetHeight
+    let trackControlHeight = document.querySelector('.fullscreen-player__player .track-control').offsetHeight
+    height -= headerHeight + footerHeight + trackInfoHeight + seekControlHeight + trackControlHeight + padding * 5
+    maxCoverSize.value = Math.min(height, 400)
+  } catch (e) {
+    console.log(e)
+  }
+}
+watch(() => height.value, () => {
+  calcMaxCoverSize()
+})
 updatePlayerInfo()
+nextTick(() => {
+  calcMaxCoverSize()
+})
 onUnmounted(() => {
   clearInterval(playerTimeInterval)
   clearInterval(playerInterval)
@@ -50,7 +75,7 @@ function playerSeek(e) {
 </script>
 <template>
   <div class="fullscreen-player__player">
-    <div class="cover">
+    <div class="cover" :style="`--maxCoverSize: ${maxCoverSize}px;`">
       <img :src="trackInfo.cover" alt="cover" v-if="trackInfo" />
       <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Cpath d='M0 0h1v1H0' fill='%23fff'/%3E%3C/svg%3E"
         alt="cover" v-else />
@@ -93,6 +118,8 @@ function playerSeek(e) {
   flex-direction: column
   gap: var(--padding)
   .cover
+    display: flex
+    justify-content: center
     img
       width: 100%
       height: 100%
@@ -100,7 +127,8 @@ function playerSeek(e) {
       aspect-ratio: 1 / 1
       border-radius: var(--border-radius)
       border: 1px solid var(--background-layer-2)
-      max-width: 400px
+      max-width: var(--maxCoverSize)
+      max-height: var(--maxCoverSize)
       background-color: #fff
   .track-info-text
     .track-name,
